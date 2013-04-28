@@ -1,0 +1,23 @@
+{% extends "popup_layout.html" %}
+
+{% block begin_wrapper %}
+<form method="post" action="{% url drug_delete drug.id %}" name="drug_form">
+{% csrf_token %}
+{% endblock %}
+
+{% block text %}
+<p>Vous vous apprêtez à supprimer ce médicament :</p>
+<p><b>{{ drug.name }}</b> expirant le <b>{{ drug.exp_date|date:"d/m/Y" }}</b> (quantité : {{ drug.get_quantity }}).</p>
+{{ form }}
+{% endblock %}
+
+{% block action %}
+<ul>
+    <li class="b-close popup_action">Ne pas supprimer</li>
+    <li class="popup_action" onClick="document.forms['drug_form'].submit();">Supprimer ce médicament</li>
+</ul>
+{% endblock %}
+
+{% block END_wrapper %}
+</form>
+{% endblock %}

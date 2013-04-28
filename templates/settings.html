@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Personne responsable des soins</h2>
+<form method="post" action="settings/user">
+    {% csrf_token %}
+    {{ userformset }}
+    {{ userprofileformset }}
+    <input type="submit" value="Update User Information"/>
+</form>
+
+<h2>Vessel Information</h2>
+<form method="post" action="settings/vessel">
+    {% csrf_token %}
+    {{ vesselformset }}
+    <input type="submit" value="Update Vessel Information"/>
+</form>
+{% endblock %}

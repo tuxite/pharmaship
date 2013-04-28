@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Connexion - Onboard Assistant</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% get_static_prefix %}style/login.css" />
+</head>
+{% load url from future %}
+<body class="login">
+	<div id="login"><h1><a href="/" title="Onbard Assistant">Onbard Assistant</a></h1>
+		{% if form.errors %}
+		<div id="login_error">
+			<p>Your username and password didn't match. Please try again.</p>
+		</div>
+		{% endif %}
+		<form name="loginform" id="loginform" action="{% url 'django.contrib.auth.views.login' %}" method="post">
+		{% csrf_token %}
+			<p>
+				{{ form.username.label_tag }}<br />
+				{{ form.username }}
+			</p>
+			<p>
+				{{ form.password.label_tag }}<br />
+				{{ form.password }}
+			</p>
+			<p class="submit">
+				<input type="submit" value="Login" tabindex="100"/>
+				<input type="hidden" name="next" value="{{ next }}" />
+			</p>
+		</form>
+
+        <div class="button">
+                <a class="contact" href="/contact">Contacter le CCMM</a>
+        </div>	
+	</div>
+</body>
+</html>

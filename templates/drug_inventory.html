@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<script type="text/javascript">
+function collapse(identifiant) {
+      if (document.getElementById('inn-'+identifiant).className == "hidden") {
+        var divs = document.getElementsByClassName('visible');
+        for(var i=0; i<divs.length; i++) { 
+          divs[i].className = "hidden";
+        }
+        var divs = document.getElementsByClassName('drug_inn_header_active');
+        for(var i=0; i<divs.length; i++) { 
+          divs[i].className = "drug_inn_header";
+        }
+         document.getElementById('inn-'+identifiant).className = "visible";
+         document.getElementById('inn-head-'+identifiant).className = "drug_inn_header_active";
+      } else {
+         document.getElementById('inn-'+identifiant).className = "hidden";
+         document.getElementById('inn-head-'+identifiant).className = "drug_inn_header";
+      }
+   }
+
+// Semicolon (;) to ensure closing of earlier scripting
+    // Encapsulation
+    // $ is assigned to jQuery
+    ;(function($) {
+
+         // DOM Ready
+        $(function() {
+            // Binding a click event
+            $('.jquery_popup').on('click', function(e) {
+
+                // Prevents the default action to be triggered. 
+                e.preventDefault();
+                // Triggering bPopup when click event is fired
+                $('#drug_dialog').bPopup({
+                    contentContainer:'.content',
+                    loadUrl:e.target.href});
+            });
+        });
+    })(jQuery);
+</script>
+  
+<div id="drug_table">
+    <header id="drug_table_header">
+        <ul>
+            <li class="drug_li drug_inn">Principe actif (DC)</li>
+            <li class="drug_li drug_compo">Forme - Composition</li>
+            <li class="drug_li drug_qty">Dotation</li>
+            <li class="drug_li drug_qty">Quantité</li>
+            <li class="drug_li drug_qty">En demande</li>
+            <li class="drug_li drug_date">Date de péremption</li>
+        </ul>
+    </header>
+    {% for inn in inn_list %}
+    <article class="drug_item">
+        <header id='inn-head-{{ inn.id }}'  class="drug_inn_header"  onclick="collapse('{{ inn.id }}')">
+            <ul>
+                <li class="drug_li drug_inn">{{ inn.inn }}</li>
+                <li class="drug_li drug_compo">{{ inn.get_packaging_display }} - {{ inn.dose }} {{ inn.unit }}</li>
+                <li class="drug_li drug_qty">{{ inn.required_quantity }}</li>
+                <li class="drug_li drug_qty {% if inn.get_quantity < inn.required_quantity %}error{% endif %}">{{ inn.get_quantity }}</li>
+                <li class="drug_li drug_qty">0</li> <!-- TODO -->
+                {% with inn.get_not_null|dictsort:"exp_date"|first as item %}
+                <li class="drug_li drug_date {% if item.exp_date < today %}expired{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
+                {% endwith %}
+            </ul>
+        </header>
+        <div id='inn-{{ inn.id }}' class="hidden">
+            <div class="drug_wrapper">
+                <div class="drug_info">
+                    <p><b>Voie d'administration :</b> {{ inn.get_path_display }}</p>
+                    <p>{% if inn.group.all|length > 1 %}
+                        Groupes : 
+                        {% else %}
+                        Groupe :
+                        {% endif %}
+                        {% for group in inn.group.all %}<span class="group">{{ group.name }}</span> {% endfor %}</p>
+                </div>
+                {% if inn.drug_list > 0 %}
+                <div class="drug_list redborder">{{ inn.get_drug_list_display }}</div>
+                {% endif %}
+            </div>
+            <div class="drug_loc_rem">
+                <p class="drug_loc"><b>Emplacement : </b>{{ inn.location }}</p>
+                <p><b>Remarques : </b>{{ inn.remark }}</p>
+            </div>
+            <div class="drug_items">
+                <header class="drug_item_header">
+                    <ul>
+                        <li class="drug_li drug_inn">Dénomination commerciale</li>
+                        <li class="drug_li drug_qty">Quantité</li>
+                        <li class="drug_li drug_date">Date d'expiration</li>
+                    </ul>
+                </header>
+                {% for item in inn.get_not_null|dictsort:"exp_date" %}
+                <ul id="drug-item-{{ item.id }}">
+                    <li class="drug_li drug_inn">{{ item.name }}
+                    {% if item.nc_inn %}<span class="red">[ {{ item.nc_inn }} ]</span>{% endif %}
+                    {% if item.nc_dose %}<span class="red">({{ item.nc_dose }})</span>{% endif %}
+                    </li>
+                    <li class="drug_li drug_qty">{{ item.get_quantity }}</li>
+                    <li class="drug_li drug_date {% if item.exp_date < today %}expired{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
+                    <li class="drug_li drug_a">
+                        <a href='{% url drug_change item.id %}' title="Éditer ce médicament" class="jquery_popup drug_edit drug_link"></a>
+                    </li>
+                    <li class="drug_li drug_a">
+                        <a href='{% url drug_delete item.id %}' title="Supprimer ce médicament" class="jquery_popup drug_delete drug_link"></a>
+                    </li>
+                    {% if item.nc_inn != None %}
+                    <li class="drug_li red">DÉNOMINATION NON CONFORME !</li>
+                    {% elif item.nc_dose != None %}
+                    <li class="drug_li red">COMPOSITION NON CONFORME !</li>
+                    {% endif %}
+                </ul>
+                {% endfor %}
+            </div>
+            <nav class="drug_action">
+                <ul>
+                    <li><a href="{% url drug_add inn.id %}" class="jquery_popup drug_li green">Ajouter une dénomination</a></li>
+                    <li><a href="{% url drug_equivalent inn.id %}" class="jquery_popup drug_li violet">Ajouter un équivalent</a></li>
+                </ul>
+            </nav>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+<!-- jQuery Dialog Window -->
+<div id="drug_dialog">
+    <div class="content">
+    </div>
+</div>
+{% endblock %}

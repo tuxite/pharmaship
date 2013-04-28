@@ -1,0 +1,651 @@
+/*
+CSS Document
+
+(c) 2013 Association DSM, http://devmaretique.com
+
+This file is part of Pharmaship.
+
+Pharmaship is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+any later version.
+
+Pharmaship is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
+
+======================================================================
+Filename:    template/main.css
+Description: Main CSS for Pharmaship project
+Author:      Matthieu Morin
+Version:     0.1
+======================================================================
+*/
+
+/* Reset */
+* {
+	margin : 0;
+	padding : 0;
+	font-family : 'Droid Sans', sans-serif;
+	font-size : 12pt;
+	text-decoration : none;
+	}
+
+ul {
+	list-style : none;
+	}
+
+h1, h2, h3, h4 {
+	font-weight : normal;
+	}
+
+
+body {
+	background : #162d50 url(./bgnew.png);
+	min-width : 100%;
+    min-width: 1200px;
+	}
+
+a {
+	padding : 3px;
+	font-size : 90%;
+	}
+
+/* Common */
+.hidden {
+   display: none;
+}
+
+.visible {
+   display: block;
+}
+
+/* Main frame layout */
+div.document {
+    background-color : #2a5599;
+    }
+
+div.documentwrapper {
+    float : left;
+    width : 100%;
+    background: transparent url(./provider.png) bottom left no-repeat;
+    }
+
+div.bodywrapper {
+    margin : 0 0 0 215px;
+    }
+
+/* Side bar */
+div.sidebarwrapper {
+    padding : 0px 10px 0 10px;
+    }
+
+div.sidebar {
+    float : left;
+    width : 215px;
+    margin-left : -100%;
+    font-size : 90%;
+    min-height: 800px;
+    }
+
+div.sidebar h3 {
+    color : #ffffff;
+    font-size : 160%;
+    font-weight : normal;
+    margin : 0;
+    padding : 0;
+    }
+
+div.sidebar h3 a {
+    color : #ffffff;
+    }
+
+div.sidebar h4 {
+    color : #ffffff;
+    font-size : 1.3em;
+    font-weight : normal;
+    margin : 5px 0 0 0;
+    padding : 0;
+    }
+
+div.sidebar p {
+    color : #ffffff;
+    padding: 5px;
+    }
+
+div.sidebar p.topless {
+    margin : 5px 10px 10px 10px;
+    }
+
+div.sidebar ul {
+    list-style : none;
+    margin : 0px;
+    margin-top: 12px;
+    padding : 0;
+    color : #ffffff;
+    }
+
+ul.sidebar li a {
+    color : #ccc;
+    display:block;
+    padding: 5px;
+    }
+
+ul.sidebar li a:hover{
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(255, 255, 255);
+	/* RGBa with 0.2 opacity */
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 3px;
+	}
+
+
+div.sidebar ul li{
+    padding : 5px 0px;
+    color : #ffffff;
+    }
+
+.separator{
+    margin-bottom: 10px;
+    }
+
+/* Content layout */
+div.body {
+    background: white url(./icons/logo_gris.png) no-repeat bottom right;
+    color:  black;
+    padding: 10px 20px 50px 20px;
+    min-height: 800px;
+    }
+
+div#title{
+    background-color : #f2f2f2;
+    font-weight : normal;
+    color : #2a5599;
+    border-bottom : 1px solid #ccc;
+    padding : 3px 0 3px 10px;
+    margin: 0;
+    }
+
+div.body h1, #title h1 {
+    margin-top : 0;
+    font-size : 200%;
+    }
+
+div.body h2 {
+    font-size : 160%;
+    color: #2e3536;
+    margin-top: 20px;
+    }
+
+div.body h3 {
+    font-size : 140%;
+    }
+
+div.body h4 {
+    font-size : 120%;
+    }
+
+div.body h5 {
+    font-size : 110%;
+    }
+
+div.body h6 {
+    font-size : 100%;
+    }
+
+div.body p, div.body dd {
+    text-align : justify;
+    line-height : 130%;
+    }
+
+div.body a{
+	font-size: 100%;
+	color: #2a5599;
+	}
+
+div.body a:hover{
+	text-decoration:underline;
+	}
+
+/* Header */
+header#head {
+	display : block;
+	background : white;
+	height : 30px;
+	padding : 35px 35px;
+	clear : both;
+	border-bottom : 2px solid #2a5599;
+	}
+
+header#head h1 {
+	color : #2a5599;
+	float : left;
+	font-size : 160%;
+    margin-top: -8px;
+	}
+
+header#head h3 {
+	color : #4d4d4d;
+	background : transparent url(./icons/account.png) no-repeat 0px 1px;
+	padding-left : 24px;
+	font-size : 140%;
+    float: right;
+	}
+
+header#head h4 {
+    color : #bbb;
+    font-size : 80%;
+    clear:both;
+    }
+
+.account {
+	margin : -20px 0;
+	float : right;
+    text-align: right;
+	}
+
+header#head li {
+	background : #d4d4d4;
+	margin : 5px 0 5px 5px;
+	display : block;
+	float : left;
+	border-radius: 3px;
+	}
+
+header#head a {
+	color : #4d4d4d;
+	display : block;
+	}
+header#head a:hover {
+	color : #d4d4d4;
+	}
+
+header#head h1 a {
+    margin: 0;
+    padding: 0;
+    }
+a.logout {
+	padding-left : 20px;
+	background : transparent url(./icons/logout.png) no-repeat 2px;
+	}
+
+a.logout:hover {
+	background : transparent url(./icons/logout_hover.png) no-repeat 2px;
+	}
+
+a.settings {
+	padding-left : 20px;
+	background : transparent url(./icons/settings.png) no-repeat 2px;
+	}
+
+a.settings:hover {
+	background : transparent url(./icons/settings_hover.png) no-repeat 2px;
+	}
+
+header#head ul li:hover {
+	background : #4d4d4d;
+	color : #d4d4d4;
+	}
+
+/* Search box */
+input#search{
+	border: 1px solid #ccc;
+	padding: 3px;
+	padding-left: 24px;
+	float: right;
+	margin: 5px 10px 0 0;
+	background: white url(./icons/search.png) no-repeat 4px 4px;
+	}
+
+/* Contact Button */
+div.button {
+    margin-top: 50px;
+    text-align: center;
+    }
+
+a.button{
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 100%;
+    color: white;
+    }
+    
+a.red{
+    background-image: -webkit-linear-gradient(top, #D92B54 0px, #B31237 100%);
+    }
+
+a.red:hover{
+    background: #CC294F;
+    }
+
+a.blue {
+    background-image: -webkit-linear-gradient(top, #0064CD 0px, #015b9f 100%);
+}
+a.blue:hover{
+    background: #0064CD;
+    color:white;
+    }
+
+.shifthead {
+    margin-top: 15px;
+    }
+
+/* ********************************************************************/
+/* Table */
+table{
+	border-collapse: separate;
+	border-spacing: 4px;
+   }
+
+table td{
+    border: 1px solid #ccc;
+    padding: 5px;
+   }
+
+td.borderless{
+    border: none;
+    }
+    
+td.redborder{
+    border: 3px solid #cc0000;
+    color: #cc0000;
+    font-weight: 700;
+    text-align: center;
+    }
+    
+thead {
+    background:#2e3436;
+    color:#eeeeec;
+    }
+    
+tbody{
+    border: 1px solid #000;
+    }
+tr.inventory:hover{
+    background:#d3d7cf;
+    }
+
+table a.inlinebutton{
+    padding: 5px;
+    border-radius: 3px;
+    color: white;
+    text-decoration: none;
+    }
+table a.inlinebutton:hover{
+    text-decoration : none;
+    color: #2e3436;
+    }
+.green{
+    background:#4e9a06 url(./icons/add_light.png) no-repeat 3px 2px;
+    }
+.violet{
+    background:#5c3566 url(./icons/equivalent_light.png) no-repeat 3px 2px;
+    }
+.green:hover{
+    background:#8ae234 url(./icons/add_dark.png) no-repeat 3px 2px;
+    }
+.violet:hover{
+    background:#ad7fa8 url(./icons/equivalent_dark.png) no-repeat 3px 2px;
+    }
+th{
+    text-align: left;
+    font-size: 80%;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 400;
+    color:white;
+    background:#2e3436;
+    }
+
+.expired{
+    background:#f57900;
+    }
+.center{
+    text-align: center;
+    }
+/* Breadcrumb */
+nav.breadcrumb {
+    margin : 3px 0 -6px -10px;
+    border-top: 1px solid #ccc;
+    }
+
+nav.breadcrumb ul {
+    height: 40px;
+    }
+nav.breadcrumb > ul > li{
+    float: left;
+    }
+
+nav.breadcrumb > ul > li > a{
+    display: block;
+    margin: 5px;
+    padding: 5px;
+    color: white;
+    background: #2e3536;
+    border-radius: 3px;
+    }
+nav.breadcrumb > ul > li > a:hover{
+    background: #2a5599;
+    color: white;
+    }
+
+.done{
+    background: #4e9a06;
+    }
+.active{
+    background: #babdb6;
+    color: #2e3536;
+    }
+
+/* Forms */
+input, textarea, select {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid black;
+    }
+
+.mandatory {
+    background: #fce94f;
+    }
+
+/* Span */
+th span{
+    background:#729fcf;
+    color: white;
+    font-size: 100%;
+    border-radius: 3px;
+    padding: 3px;
+    margin: 10px 5px;
+    }
+
+b{
+    font-size: 100%;
+    }
+
+.name{
+    padding-left: 20px;
+    }
+.drug_bottom{
+    font-size:80%;
+    }
+.drug{
+    background:#eeeeec;
+    }
+tbody.visible{
+    }
+.upper{
+    background: transparent url(./icons/collapse.png) no-repeat center;
+    height: 24px;
+    }
+.upper:hover{
+    background: #eeeeec url(./icons/collapse.png) no-repeat center;
+    }
+
+
+/* Drug inventory */
+div#drug_table{
+    width: 100%;
+    }
+div#drug_table ul, div.drug_info, div.drug_loc_rem, article, nav.drug_action{
+    clear: both;
+    }
+div#drug_table ul{
+    width: 100%;
+    }
+    
+div#drug_table li{
+    display: block;
+    float: left;
+    }
+
+li.drug_li{
+    padding: 0.5em;
+    margin:  0.35em;
+    margin: 0.35em 0.5%;
+    }
+
+li.drug_qty {
+    width: 6.3%;
+    text-align: center;
+    }
+
+li.drug_inn {
+    width: 35%;
+    margin-left: 0;
+    }
+li.drug_compo {
+    width: 25%;
+    }
+li.drug_date{
+    width: 10%;
+    margin-right: 0;
+    text-align: center;
+    }
+
+div.drug_info{
+    float: left;
+    padding: 0.5em;
+    display: block;
+    }
+div.drug_list{
+    float: right;
+    padding: 0.5em;
+    padding-top: 0.8em;
+    padding-bottom: 0.5em;
+    width: 10%;
+    text-align: center;
+    background:white;
+    height: 3.5em;
+    box-sizing:border-box;
+    }
+
+div.drug_loc_rem p{
+    float: left;
+    padding: 0.5em;
+    }
+
+p.drug_loc{
+    width: 35%;
+    margin-right: 0.5%;
+    }
+div.redborder{
+    border: 5px solid #cc0000;
+    color: #cc0000;
+    font-weight: 700;
+    }
+header#drug_table_header > ul{
+    background: #2e3536;
+    color: white;
+    font-weight: 700;
+    }
+    
+header > ul{
+    height: 3em;
+    }
+.drug_inn_header:hover{
+    background: silver;
+    cursor: pointer;
+    }
+.drug_inn_header_active{
+    background: #fce94f;
+    }
+.drug_inn_header_active:hover{
+    background: #edd400;
+    cursor: pointer;
+    }
+article > div{
+    margin-left: 1.5%;
+    background:#eeeeec;
+    border: 1px solid silver;
+    }
+header.drug_item_header > ul{
+    background: #888a85;
+    color: white;
+    font-weight: 700;
+    width: inherit;
+    }   
+div.drug_wrapper{
+    background:#d3d7cf;
+    height: 3.5em;
+    }
+
+nav.drug_action > ul {
+    height: 3em;
+    background:white;
+    }
+nav.drug_action > ul > li  {
+    margin: 0.9em;
+    }
+nav.drug_action > ul > li > a{
+    border-radius: 3px;
+    padding : 5px 10px;
+    padding-left: 30px;
+    color: white;
+    text-decoration : none;
+    }
+nav.drug_action > ul > li > a:hover{
+    text-decoration : none;
+    color: #2e3436;
+    }
+
+li.drug_a {
+    padding: 0;
+    padding-top: 0.4em;
+    }
+
+.drug_link{
+    width: 24px;
+    height: 24px;
+    background:#729fcf;
+    display: block;
+    }
+.drug_edit{
+    background: url(./icons/edit.png) no-repeat;
+    }
+.drug_delete{
+    background: url(./icons/delete.png) no-repeat;
+    }
+.error{
+    background:#a40000;
+    color:#eeeeec;
+    }
+
+span.red, li.red{
+    color:#cc0000;
+    font-weight: 700;
+    }
+/* jQuery */
+div#drug_dialog{
+    display:none;
+    background:#729fcf;
+    padding: 5px;
+    }
+

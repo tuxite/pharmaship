@@ -1,0 +1,23 @@
+{% extends "popup_layout.html" %}
+
+{% block begin_wrapper %}
+<form method="post" action="{% url drug_add inn.id %}" name="drug_form">
+{% csrf_token %}
+{% endblock %}
+
+{% block text %}
+<p>Vous vous apprêtez à ajouter un médicament pour la dénomination suivante :</p>
+<p><b>{{ inn.inn }}</b></p>
+{{ form }}
+{% endblock %}
+
+{% block action %}
+<ul>
+    <li class="b-close popup_action">Ne pas ajouter</li>
+    <li class="popup_action" onClick="document.forms['drug_form'].submit();">Ajouter ce médicament</li>
+</ul>
+{% endblock %}
+
+{% block end_wrapper %}
+</form>
+{% endblock %}

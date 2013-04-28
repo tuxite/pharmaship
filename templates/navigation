@@ -1,0 +1,12 @@
+                <nav>
+                    <ul class="navleft">
+                        <li><a href="#" class="done">Informations</a></li>
+                        <li><a href="#" class="active">Circonstances</a></li>
+                        <li><a href="#">Fonctions vitales</a></li>
+                        <li><a href="#">Examen lésionnel</a></li>
+                        <li><a href="#">Observation clinique</a></li>
+                        <li><a href="#">Traitement prescrit</a></li>
+                        <li><a href="#">Évolution</a></li>
+                        <li><a href="#">Décision finale</a></li>
+                    </ul>
+                </nav>

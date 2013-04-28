@@ -1,0 +1,18 @@
+<div id="popup">
+    <h1>{{ title }}</h1>
+    {% block begin_wrapper %}
+    {% endblock %}
+    <div class="popup_text">
+        {% block text %}
+
+        {% endblock %}
+    </div>
+    <div class="popup_action">
+        {% block action %}
+
+        {% endblock %}
+    </div>
+    {% block end_wrapper %}
+    {% endblock %}
+    <div style="clear:both;"></div>
+</div>

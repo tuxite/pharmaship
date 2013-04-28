@@ -1,0 +1,133 @@
+/*
+CSS Document
+
+(c) 2013 Association DSM, http://devmaretique.com
+
+This file is part of Pharmaship.
+
+Pharmaship is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+any later version.
+
+Pharmaship is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
+
+======================================================================
+Filename:    template/popup.css
+Description: CSS for login view
+Author:      Matthieu Morin
+Version:     0.1
+======================================================================
+*/
+
+* {
+	margin : 0;
+	padding : 0;
+	font-family : 'Droid Sans', sans-serif;
+    font-size: 12pt;
+    text-decoration: none;
+	}
+body {
+	padding-top : 30px;
+	font-family : sans-serif;
+	font-size : 12px;
+	background : #eeeeec url(bg_login.png);
+	}
+#login {
+	width : 320px;
+	margin : 7em auto;
+	}
+form {
+	margin-left : 8px;
+	padding : 26px 24px 46px;
+	font-weight : normal;
+	background : #d3d7cf;
+	border : 1px solid #babdb6;
+	}
+input[type=submit]{
+	font-weight:bold;
+	color:#fff;
+	background:#729fcf;
+	font-family : sans-serif;
+	padding : 5px 10px;
+	font-size : 14px;
+	cursor : pointer;
+	text-decoration : none;
+	}
+input[type=submit]:hover{
+	background:#204a87;
+	}
+
+#login form p {
+	margin-bottom : 0;
+	}
+label {
+	color : #3465a4;
+	font-size : 14px;
+	}
+form .submit{
+	float : right;
+	}
+form p {
+	margin-bottom : 24px;
+	}
+h1 a {
+	background : url(icons/logo_color.png) no-repeat center top;
+	width : 326px;
+	height : 67px;
+	text-indent : -9999px;
+	overflow : hidden;
+	padding-bottom : 15px;
+	display : block;
+	}
+
+#login_error {
+	margin-left: 8px;
+	margin-bottom: 1em;
+	border: 2px solid #cc0000;
+	background: #fff;
+	padding : 12px;
+	color: #cc0000;
+	}
+input {
+	font-family : "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", sans-serif;
+	font-weight : 200;
+	font-size : 24px;
+	width : 97%;
+	padding : 3px;
+	margin-top : 2px;
+	margin-right : 6px;
+	margin-bottom : 16px;
+	border : 1px solid #babdb6;
+	background : #fff;
+	outline : none;
+	color : #2e3436;
+	}
+
+
+/* Contact Button */
+div.button {
+    margin-top: 50px;
+    text-align: center;
+    }
+
+a.contact{
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    background-image: -webkit-linear-gradient(top, #D92B54 0px, #B31237 100%);
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 100%;
+    color: white;
+    }
+
+a.contact:hover{
+    background: #CC294F;
+    }
