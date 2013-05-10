@@ -22,12 +22,13 @@
 # Description: Forms classes for Inventory application.
 # ======================================================================
 
-__author__ = "Django Project, Matthieu Morin"
+__author__ = "Matthieu Morin"
 __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
 __version__ = "0.1"
 
 from django import forms
+import models
 
 DELETE_REASON = (
         (4, 'Péremption'),
@@ -39,6 +40,7 @@ CHANGE_REASON = (
         (8, 'Physical Count'),
         (9, 'Other'),
     )
+
 class DeleteForm(forms.Form):
     """ Form used for deleting an objet in the list."""
     reason = forms.ChoiceField(choices=DELETE_REASON)
@@ -50,15 +52,21 @@ class QtyChangeForm(forms.Form):
 class AddForm(forms.Form):
     """ Form used for adding a drug to an INN in the list."""
     name = forms.CharField()
-    nc_dose = forms.CharField()
+    nc_composition = forms.CharField()
     quantity = forms.IntegerField()
     exp_date = forms.DateField()
 
 class AddEquivalentForm(forms.Form):
     """ Form used for adding an equivalent drug to an INN in the list."""
     name = forms.CharField()
-    nc_inn = forms.CharField()    
-    nc_dose = forms.CharField()
+    nc_inn = forms.CharField()
+    nc_composition = forms.CharField()
     quantity = forms.IntegerField()
     exp_date = forms.DateField()
-    
+
+class BaseDrugForm(forms.ModelForm):
+    """ Form used in Admin view."""
+    tag = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Tag.objects.all(), required=False)
+
+    class Meta:
+        model = models.BaseDrug
