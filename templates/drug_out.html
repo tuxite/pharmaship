@@ -1,12 +1,12 @@
 {% extends "popup_layout.html" %}
 
 {% block begin_wrapper %}
-<form method="post" action="{% url drug_change drug.id %}" name="drug_form">
+<form method="post" action="{% url drug_out drug.id %}" name="drug_form">
 {% csrf_token %}
 {% endblock %}
 
 {% block text %}
-<p>Vous vous apprêtez à modifier ce médicament :</p>
+<p>Vous vous apprêtez à utiliser ce médicament pour un traitement :</p>
 <p><b class="sky_blue">{{ drug.name }}</b> expirant le <b>{{ drug.exp_date|date:"d/m/Y" }}</b> (quantité : {{ drug.get_quantity }}).</p>
 <table>
     {{ form }}
@@ -16,7 +16,7 @@
 {% block action %}
 <ul>
     <li class="b-close popup_action">Ne pas modifier</li>
-    <li class="popup_action" onClick="document.forms['drug_form'].submit();">Mettre à jour la quantité</li>
+    <li class="popup_action" onClick="document.forms['drug_form'].submit();">Utiliser ce médicament</li>
 </ul>
 {% endblock %}
 

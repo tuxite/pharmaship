@@ -1,29 +1,26 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    {% load static %}
+    {% load staticfiles %}
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" >
-    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}style/main.css">
-    <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}style/popup.css">
-    <!--
-    <script type="text/javascript" src="style/component/jquery.js"></script>
-    -->
-    <script src="/static/js/jquery-1.9.1.min.js"></script>
-    <script src="/static/js/jquery.bpopup.min.js"></script>
-    
+
+    <link rel="stylesheet" type="text/css" href='{% static "style/layout.css" %}'>
+    {% block addon %}
+    {% endblock %}
+
     <title>{{title}} - Pharmaship</title>
 </head>
 
 <body>
 	<header id="head">
-		<h1><a href="/"><img src="{% get_static_prefix %}style/logo.png" alt="PharmaShip"/></a></h1>
-		<div class="account">
+		<h1><a href="/"><img src='{% static "style/logo.png" %}' alt="PharmaShip"/></a></h1>
+		<div id="account">
             {% if user %}
-            <h3>{{ user }}</h3>
-			<h4>{{ rank }}</h4>
+            <h1>{{ user }}</h2>
+			<h2>{{ rank }}</h3>
 			<ul>
 				<li><a href="/settings" class="settings">Paramètres</a></li>
-				<li><a href="/logout" class="logout">Déconnexion</a></li>	
+				<li><a href="/logout" class="logout">Déconnexion</a></li>
 			</ul>
             {% else %}
             <a class="button blue shifthead" href="/login/?next=/">Se connecter</a>
@@ -36,40 +33,43 @@
     <div class="documentwrapper">
         <div class="bodywrapper">
             <div id="title">
+                {% block print %}
                 <form action="." method="post">
                     <input id="search" type="text" name="search" placeholder="Rechercher"/>
                 </form>
+                {% endblock %}
                 <h1>{{ title }}</h1>
 
                 {% block navigation %}
 
-                {% endblock %}            
+                {% endblock %}
             </div>
             <div class="body">
                 {% block content %}
-                
+
                 {% endblock %}
             </div>
-            
+
         </div>
     </div>
 </div>
 <!-- #end content -->
 <!-- left sidebar -->
-	<div class="sidebar">
+	<div id="sidebar">
 		<div class="sidebarwrapper">
-            <ul class="sidebar">
-                <li><a href="/inventory/drugs">Registre des médicaments</a></li>
-                <li class="separator"><a href="/inventory/material">Registre du matériel</a></li>
-                <li class="separator"><a href="/logbook">Gestion du stock</a></li>
-                <li class="separator"><a href="#">Gestion des commandes</a></li>                
+            <ul>
+                <li><a href="{% url drug %}">Registre des médicaments</a></li>
+                <li class="separator"><a href="{% url material %}">Registre du matériel</a></li>
+<!--
+                <li class="separator"><a href="#">Gestion des commandes</a></li>
                 <li><a href="#">Téléconsultation</a></li>
                 <li class="separator"><a href="#">Dossiers en cours</a></li>
                 <li><a href="#">Guide des soins</a></li>
+-->
             </ul>
             <div class="button">
                  <a class="button red" href="/contact">Contacter le CCMM</a>
-            </div>	
+            </div>
 		</div>
 	</div>
 	<div class="clearer"></div>

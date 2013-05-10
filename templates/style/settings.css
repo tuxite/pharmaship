@@ -19,75 +19,47 @@ You should have received a copy of the GNU General Public License
 along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
 
 ======================================================================
-Filename:    template/popup.css
-Description: CSS for popups of Inventory application
+Filename:    template/settings.css
+Description: CSS for Settings view
 Author:      Matthieu Morin
 Version:     0.1
 ======================================================================
 */
 
-div#popup{
-    background: white;
-    padding: 10px;
-    min-width: 600px;
+div.body h2 {
+    font-size : 160%;
+    color: #2e3536;
+    margin-top: 20px;
+    padding-bottom: 10px;
     }
 
-/* Title */
-div#popup h1{
-    font-weight:700;
-    font-size: 130%;
-    margin: -10px -10px 20px -10px;
-    background: #204a87;
-    display: block;
-    width: 100%+20px;
-    color: #eeeeec;
-    padding: 15px;
+h2 > b{
+    font-weight: 700;
+    font-size : 100%;
     }
-
-/* Text */
-div#popup p{
-    margin-bottom: 10px;
-    }
-b.sky_blue{
-    color: #204a87;
-    font-size: 120%;
+b > a{
+    font-size: 100%;
     }
 
 /* Table */
-div.popup_text table{
+table{
 	border-collapse: separate;
     border-spacing: 2px;
     text-align: left;
    }
-div.popup_text th {
+th {
     background: #888a85;
     color: #eeeeec;
     padding: 5px 10px;
     font-weight:
     }
-div.popup_text td {
+td {
     background: #eeeeec;
     }
 
-/* action bar (bottom) */
-div.popup_action{
-    margin-top: 20px;
-    float:right;
-    }
-div.popup_action > ul > li{
-    display: block;
-    float: left;
-    }
-li.popup_action{
-    padding: 0.3em;
-    background: #2e3436;
-    cursor : pointer;
+/* Forms */
+input, textarea, select {
+    padding: 5px;
     margin: 5px;
-    color: white;
+    border: 1px solid black;
     }
-li.popup_action:hover{
-    background:#729fcf;
-    color: #2e3436;
-    }
-
-

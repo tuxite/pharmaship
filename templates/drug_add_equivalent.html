@@ -7,8 +7,10 @@
 
 {% block text %}
 <p>Vous vous apprêtez à ajouter un médicament équivalent pour la dénomination suivante :</p>
-<p><b>{{ inn.inn }}</b></p>
-{{ form }}
+<p><b class="sky_blue">{{ inn.inn }}</b></p>
+<table>
+    {{ form }}
+</table>
 {% endblock %}
 
 {% block action %}

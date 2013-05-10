@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    {% load staticfiles %}
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" >
+
+    <link rel="stylesheet" type="text/css" href='{% static "style/report.css" %}' media="screen, print">
+
+    <title>{{title}} - Pharmaship</title>
+    <style>
+    @page {
+        size: landscape;
+        margin: 0.5cm;
+        margin-bottom: 1cm;
+        @bottom-right {
+            content: "Page " counter(page) " sur " counter(pages);
+            margin: 5mm; }
+        @bottom-left {
+            content: "Généré par Pharmaship le {{ today|date:"d/m/Y" }}";
+            margin: 5mm; }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="title">{{ title }}</h1>
+    <div id="vessel">
+        <ul>
+            <li><b>Navire :</b> {{ vessel.name }}</li>
+            <li><b>Armement :</b> {{ vessel.shipowner }}</li>
+            <li><b>Pavillon :</b> {{ vessel.flag }}</li>
+            <li><b>Port d'attache :</b> {{ vessel.port_of_registry }}</li>
+        </ul>
+
+    </div>
+    <div id="dotation">
+        <p>
+            <b>Dotations médicales :</b>
+            {% for dotation in vessel.dotation.all %}
+            {% if not forloop.first %} - {% endif %}
+            {{ dotation.name }}
+            {% endfor %}
+       </p>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <td>Principe actif<br />Dénomination Commune Internationale</td>
+            <td>Nom de spécialité ou générique</td>
+            <td>Voie d'administration</td>
+            <td>Forme - Composition</td>
+            <td class="center">Quantité réglementaire</td>
+            <td class="center">Quantité existante</td>
+            <td class="center">Date de péremption</td>
+            <td class="center">Liste</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% regroup inn_list by group as group_list %}
+        {% for group in group_list %}
+            <tr class="group border"><td colspan="8">{{ group.grouper }}</td></tr>
+            {% for inn in group.list %}
+            <tr class="inn">
+                <td>{{ inn.inn }}</td>
+                <td></td>
+                <td class="small">{{ inn.get_roa_display }}</td>
+                <td class="small">{{ inn.get_dosage_form_display }} - {{ inn.composition }}</td>
+                <td class="center">{{ inn.get_required_quantity }}</td>
+                <td class="center">{{ inn.get_quantity }}</td>
+                <td></td>
+                <td class="center">{% if inn.drug_list > 0 %}{{ inn.get_drug_list_display }}{% endif %}</td>
+            </tr>
+            {% for item in inn.get_not_null|dictsort:"exp_date" %}
+            <tr>
+                {% if item.nc_inn %}
+                <td class="nc">{{ item.nc_inn }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                <td>{{ item.name }}</td>
+                <td></td>
+                {% if item.nc_compositon %}
+                <td>{{ item.nc_composition}}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                <td></td>
+                <td class="center">{{ item.get_quantity }}</td>
+                <td class="center">{{ item.exp_date|date:"d/m/Y" }}</td>
+                <td></td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

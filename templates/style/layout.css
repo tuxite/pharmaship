@@ -1,0 +1,251 @@
+/*
+CSS Document
+
+(c) 2013 Association DSM, http://devmaretique.com
+
+This file is part of Pharmaship.
+
+Pharmaship is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+any later version.
+
+Pharmaship is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
+
+======================================================================
+Filename:    template/layout.css
+Description: Layout CSS for Pharmaship project
+Author:      Matthieu Morin
+Version:     0.1
+======================================================================
+*/
+
+/* Reset */
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Droid Sans', sans-serif;
+	font-size: 12pt;
+	text-decoration: none;
+	}
+
+ul {
+	list-style: none;
+	}
+
+h1, h2, h3, h4 {
+	font-weight: normal;
+	}
+
+body {
+	background: #162d50 url(./bgnew.png);
+	min-width: 100%;
+    min-width: 1200px;
+	}
+
+/* Main frame layout */
+div.document {
+    background-color: #2a5599;
+    }
+
+div.documentwrapper {
+    float: left;
+    width: 100%;
+    background: transparent url(./provider.png) bottom left no-repeat;
+    }
+
+div.bodywrapper {
+    margin: 0 0 0 215px;
+    }
+
+/* Side bar */
+div#sidebar {
+    float: left;
+    width: 215px;
+    margin-left: -100%;
+    font-size: 90%;
+    min-height: 800px;
+    }
+
+div.sidebarwrapper {
+    padding: 0px 10px 0 10px;
+    }
+
+div#sidebar ul {
+    list-style: none;
+    margin: 0px;
+    margin-top: 12px;
+    padding: 0;
+    color: #ffffff;
+    }
+div#sidebar ul li{
+    padding: 5px 0px;
+    color: #ffffff;
+    }
+div#sidebar ul li a {
+    color: #ccc;
+    display:block;
+    padding: 5px;
+    font-size: 90%
+    }
+div#sidebar ul li a:hover{
+	/* Fallback for web browsers that doesn't support RGBa */
+	background: rgb(255, 255, 255);
+	/* RGBa with 0.2 opacity */
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 3px;
+	}
+
+.separator{
+    margin-bottom: 10px;
+    }
+
+/* Content layout */
+div.body {
+    background: white url(./icons/logo_gris.png) no-repeat bottom right;
+    color:  black;
+    padding: 10px 20px 50px 20px;
+    min-height: 800px;
+    }
+
+div#title{
+    background-color: #f2f2f2;
+    font-weight: normal;
+    color: #2a5599;
+    border-bottom: 1px solid #ccc;
+    padding: 3px 0 3px 10px;
+    margin: 0;
+    }
+
+#title h1 {
+    margin-top: 0;
+    font-size: 200%;
+    }
+
+/* Header */
+header#head {
+	display: block;
+	background: white;
+	height: 30px;
+	padding: 35px 20px;
+	clear: both;
+	border-bottom: 2px solid #2a5599;
+	}
+header#head > h1 {
+	color: #2a5599;
+	float: left;
+	font-size: 160%;
+    margin-top: -8px;
+	}
+header#head > h1 > a {
+    margin: 0;
+    padding: 0;
+    }
+
+/** Account right block **/
+div#account {
+	margin: -20px 0;
+	float: right;
+    text-align: right;
+	}
+div#account h1 {
+	color: #4d4d4d;
+	background: transparent url(./icons/account.png) no-repeat 0px 1px;
+	padding-left: 24px;
+	font-size: 140%;
+    float: right;
+	}
+div#account h2 {
+    color: #bbb;
+    font-size: 90%;
+    clear:both;
+    }
+div#account li {
+	background: #d4d4d4;
+	margin: 5px 0 5px 5px;
+	display: block;
+	float: left;
+	border-radius: 3px;
+	}
+div#account li:hover {
+	background: #4d4d4d;
+	color: #d4d4d4;
+	}
+div#account a {
+	color: #4d4d4d;
+	display: block;
+    font-size: 90%;
+    padding: 3px 3px 3px 20px;
+	}
+div#account a:hover {
+	color: #d4d4d4;
+	}
+
+/*** Account links ***/
+a.logout {
+	background: transparent url(./icons/logout.png) no-repeat 2px;
+	}
+a.logout:hover {
+	background: transparent url(./icons/logout_hover.png) no-repeat 2px;
+	}
+
+a.settings {
+	background: transparent url(./icons/settings.png) no-repeat 2px;
+	}
+a.settings:hover {
+	background: transparent url(./icons/settings_hover.png) no-repeat 2px;
+	}
+
+/* Search box */
+input#search{
+	border: 1px solid #ccc;
+	padding: 3px;
+	padding-left: 24px;
+	float: right;
+	margin: 5px 20px 0 0;
+    }
+input#search{
+	background: white url(./icons/search.png) no-repeat 4px 4px;
+	}
+
+/* Contact and login buttons */
+div.button {
+    margin-top: 50px;
+    text-align: center;
+    }
+
+a.button{
+    padding: 10px!important;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 100%!important;
+    color: white!important;
+    }
+
+/** Red button (contact) **/
+a.red{
+    background-image: -webkit-linear-gradient(top, #D92B54 0px, #B31237 100%);
+    }
+a.red:hover{
+    background: #CC294F;
+    }
+
+/** Blue button (login) **/
+a.blue {
+    background-image: -webkit-linear-gradient(top, #0064CD 0px, #015b9f 100%);
+    }
+a.blue:hover{
+    background: #0064CD;
+    color:white;
+    }
+.shifthead {
+    margin-top: 15px;
+    }

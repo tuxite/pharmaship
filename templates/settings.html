@@ -1,18 +1,36 @@
 {% extends "layout.html" %}
 
+{% block addon %}
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href='{% static "style/settings.css" %}'>
+{% endblock %}
+
 {% block content %}
 <h2>Personne responsable des soins</h2>
-<form method="post" action="settings/user">
+<form method="post" action="{% url user %}">
     {% csrf_token %}
-    {{ userformset }}
-    {{ userprofileformset }}
+    <table>
+    {{ userform }}
+    {{ userprofileform }}
+    </table>
     <input type="submit" value="Update User Information"/>
 </form>
 
 <h2>Vessel Information</h2>
-<form method="post" action="settings/vessel">
+<form method="post" action="{% url vessel %}">
     {% csrf_token %}
-    {{ vesselformset }}
+    <table>
+    {{ vesselform }}
+    </table>
     <input type="submit" value="Update Vessel Information"/>
+</form>
+
+<h2>Application Settings</h2>
+<form method="post" action="{% url application %}">
+    {% csrf_token %}
+    <table>
+    {{ applicationform }}
+    </table>
+    <input type="submit" value="Update Application Settings"/>
 </form>
 {% endblock %}

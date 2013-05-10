@@ -1,46 +1,47 @@
 {% extends "layout.html" %}
 
+{% block addon %}
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href='{% static "style/inventory.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "style/popup.css" %}'>
+    <script src='{% static "js/jquery-1.9.1.min.js" %}'></script>
+    <script src='{% static "js/jquery.bpopup.min.js" %}'></script>
+{% endblock %}
+
+{% block print %}
+<form action="{% url drug_print %}" method="post">
+    {% csrf_token %}
+    <input id="print" type="submit" value="Imprimer ce registre"/>
+</form>
+{% endblock %}
+
 {% block content %}
-<script type="text/javascript">
-function collapse(identifiant) {
-      if (document.getElementById('inn-'+identifiant).className == "hidden") {
-        var divs = document.getElementsByClassName('visible');
-        for(var i=0; i<divs.length; i++) { 
-          divs[i].className = "hidden";
-        }
-        var divs = document.getElementsByClassName('drug_inn_header_active');
-        for(var i=0; i<divs.length; i++) { 
-          divs[i].className = "drug_inn_header";
-        }
-         document.getElementById('inn-'+identifiant).className = "visible";
-         document.getElementById('inn-head-'+identifiant).className = "drug_inn_header_active";
-      } else {
-         document.getElementById('inn-'+identifiant).className = "hidden";
-         document.getElementById('inn-head-'+identifiant).className = "drug_inn_header";
-      }
-   }
+{% load static %}
+<script src="{% get_static_prefix %}js/drug_inventory.js"></script>
+<div id="filter_banner">
+    <form class="filterform" action="#">
+        <p><input type="text" id="filterinput" placeholder="Rechercher une DC ou un médicament" size="35"/></p>
 
-// Semicolon (;) to ensure closing of earlier scripting
-    // Encapsulation
-    // $ is assigned to jQuery
-    ;(function($) {
-
-         // DOM Ready
-        $(function() {
-            // Binding a click event
-            $('.jquery_popup').on('click', function(e) {
-
-                // Prevents the default action to be triggered. 
-                e.preventDefault();
-                // Triggering bPopup when click event is fired
-                $('#drug_dialog').bPopup({
-                    contentContainer:'.content',
-                    loadUrl:e.target.href});
-            });
-        });
-    })(jQuery);
-</script>
-  
+        <p>Filtrer par groupe :
+            <select id="filterselect">
+                <option value="">Tous</option>
+                {% for group in group_list %}
+                <option value="{{group.name}}">{{ group }}</option>
+                {% endfor %}
+            </select>
+            <label><input type="checkbox" id="filtertag" value="Usage courant"/> Usage courant</label>
+        </p>
+    </form>
+    <form action="{% url drug_filter %}" method="post" id="filterdotation">
+        {% csrf_token %}
+        <p>Filtrer par dotation :
+            <label><input type="checkbox" name="dotation-0" value="-1" {% if filter == None %}checked{% endif %} /> Toutes</label>
+            {% for dotation in dotation_list %}
+            <label><input type="checkbox" class="filtercheck" name="dotation-{{ dotation.id }}" value="{{ dotation.id }}" {% if dotation in filter%}checked{% endif %}/> {{ dotation.name }}</label>
+            {% endfor %}
+        </p>
+    </form>
+</div>
 <div id="drug_table">
     <header id="drug_table_header">
         <ul>
@@ -52,30 +53,36 @@ function collapse(identifiant) {
             <li class="drug_li drug_date">Date de péremption</li>
         </ul>
     </header>
-    {% for inn in inn_list %}
+
+    <div id="articles">
+    {% regroup inn_list by group as group_list %}
+    {% for group in group_list %}
+    <div class="group_div">
+    <h2 class="group">{{ group.grouper }}</h2>
+    {% for inn in group.list %}
     <article class="drug_item">
-        <header id='inn-head-{{ inn.id }}'  class="drug_inn_header"  onclick="collapse('{{ inn.id }}')">
-            <ul>
-                <li class="drug_li drug_inn">{{ inn.inn }}</li>
-                <li class="drug_li drug_compo">{{ inn.get_packaging_display }} - {{ inn.dose }} {{ inn.unit }}</li>
-                <li class="drug_li drug_qty">{{ inn.required_quantity }}</li>
-                <li class="drug_li drug_qty {% if inn.get_quantity < inn.required_quantity %}error{% endif %}">{{ inn.get_quantity }}</li>
-                <li class="drug_li drug_qty">0</li> <!-- TODO -->
+        <header id='inn-head-{{ inn.id }}' class="drug_inn_header">
+            <ul class="inn_list">
+                <li class="drug_li drug_inn">{{ inn.inn }}<br />
+                    <small class="brand">
+                        {% for item in inn.get_not_null|dictsort:"exp_date" %}{% if not forloop.first %}, {% endif %}{% if item.nc_composition or item.nc_inn %}<span class="red">{{ item.name }}</span>{% else %}{{ item.name }}{% endif %}{% endfor %}
+                    </small>
+                </li>
+                <li class="drug_li_h drug_compo">{{ inn.get_dosage_form_display }} - {{ inn.composition }}</li>
+                <li class="drug_li_h drug_qty">{{ inn.get_required_quantity }}</li>
+                <li class="drug_li_h drug_qty {% if inn.get_quantity < inn.get_required_quantity %}error{% endif %}">{{ inn.get_quantity }}</li>
+                <li class="drug_li_h drug_qty">0</li> <!-- TODO -->
                 {% with inn.get_not_null|dictsort:"exp_date"|first as item %}
-                <li class="drug_li drug_date {% if item.exp_date < today %}expired{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
+                <li class="drug_li_h drug_date {% if item.exp_date < today %}expired{% elif item.exp_date < delay %}warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
                 {% endwith %}
             </ul>
         </header>
-        <div id='inn-{{ inn.id }}' class="hidden">
+        <div id='inn-{{ inn.id }}' class="drug_more">
             <div class="drug_wrapper">
                 <div class="drug_info">
-                    <p><b>Voie d'administration :</b> {{ inn.get_path_display }}</p>
-                    <p>{% if inn.group.all|length > 1 %}
-                        Groupes : 
-                        {% else %}
-                        Groupe :
-                        {% endif %}
-                        {% for group in inn.group.all %}<span class="group">{{ group.name }}</span> {% endfor %}</p>
+                    <p><b>Voie d'administration :</b> {{ inn.get_roa_display }}</p>
+                    <p class="drug_group"><b>Groupe : </b>{{ inn.group.name }}
+                        {% if inn.tag.all|length > 0 %}<span class="tag"><b>Tags : </b>{% for tag in inn.tag.all %}{% if not forloop.first %}, {% endif %}{{ tag.name }}{% endfor %}</span>{% endif %}</p>
                 </div>
                 {% if inn.drug_list > 0 %}
                 <div class="drug_list redborder">{{ inn.get_drug_list_display }}</div>
@@ -97,10 +104,13 @@ function collapse(identifiant) {
                 <ul id="drug-item-{{ item.id }}">
                     <li class="drug_li drug_inn">{{ item.name }}
                     {% if item.nc_inn %}<span class="red">[ {{ item.nc_inn }} ]</span>{% endif %}
-                    {% if item.nc_dose %}<span class="red">({{ item.nc_dose }})</span>{% endif %}
+                    {% if item.nc_composition %}<span class="red">({{ item.nc_composition }})</span>{% endif %}
                     </li>
                     <li class="drug_li drug_qty">{{ item.get_quantity }}</li>
-                    <li class="drug_li drug_date {% if item.exp_date < today %}expired{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
+                    <li class="drug_li drug_date {% if item.exp_date < today %}error{% elif item.exp_date < delay %}warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
+                    <li class="drug_li drug_a">
+                        <a href='{% url drug_out item.id %}' title="Utiliser ce médicament" class="jquery_popup drug_out drug_link"></a>
+                    </li>
                     <li class="drug_li drug_a">
                         <a href='{% url drug_change item.id %}' title="Éditer ce médicament" class="jquery_popup drug_edit drug_link"></a>
                     </li>
@@ -109,7 +119,7 @@ function collapse(identifiant) {
                     </li>
                     {% if item.nc_inn != None %}
                     <li class="drug_li red">DÉNOMINATION NON CONFORME !</li>
-                    {% elif item.nc_dose != None %}
+                    {% elif item.nc_composition != None %}
                     <li class="drug_li red">COMPOSITION NON CONFORME !</li>
                     {% endif %}
                 </ul>
@@ -124,8 +134,12 @@ function collapse(identifiant) {
         </div>
     </article>
     {% endfor %}
+    </div>
+    {% endfor %}
+    </div>
+
 </div>
-<!-- jQuery Dialog Window -->
+<!-- Popup -->
 <div id="drug_dialog">
     <div class="content">
     </div>

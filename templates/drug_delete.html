@@ -7,8 +7,10 @@
 
 {% block text %}
 <p>Vous vous apprêtez à supprimer ce médicament :</p>
-<p><b>{{ drug.name }}</b> expirant le <b>{{ drug.exp_date|date:"d/m/Y" }}</b> (quantité : {{ drug.get_quantity }}).</p>
-{{ form }}
+<p><b class="sky_blue">{{ drug.name }}</b> expirant le <b>{{ drug.exp_date|date:"d/m/Y" }}</b> (quantité : {{ drug.get_quantity }}).</p>
+<table>
+    {{ form }}
+</table>
 {% endblock %}
 
 {% block action %}
