@@ -30,14 +30,16 @@ __version__ = "0.1"
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import ModelForm
-from django.forms.models import modelformset_factory
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
+from models import Vessel, Application
+from forms import VesselForm, ApplicationForm
 
-from models import Vessel
 from django.contrib.auth.models import User
 from users.models import UserProfile
+from users.forms import UserForm, UserProfileForm
+
 
 FUNCTIONS = (
 		(u'00', "Captain"),
@@ -50,37 +52,49 @@ FUNCTIONS = (
     
 @login_required
 def index(request):
-    # Creating the formsets with adequate filters
-    VesselFormSet = modelformset_factory(Vessel, max_num=1)
-    UserFormSet = modelformset_factory(User, fields=('first_name', 'last_name'), max_num=1)
-    UserProfileFormSet = modelformset_factory(UserProfile, fields=('function',), max_num=1)
-
-    # Checking the input data
-    if request.method == 'POST': # If the form has been submitted...
-        # What is the form? User or Vessel
-        if request.path.split("/")[-1] == "vessel":
-            validation(request, [VesselFormSet,])
-        else:
-            validation(request, [UserFormSet, UserProfileFormSet])
-        return HttpResponseRedirect('/settings') # Redirect after POST
-
+    """Displays differents forms to configure Pharmaship."""
     return render_to_response('settings.html', {
                         'user': (request.user.last_name + " " +request.user.first_name),
                         'rank': request.user.profile.get_rank(),
                         'title':"Paramètres du compte",
-                        'vesselformset':VesselFormSet(queryset=Vessel.objects.filter(id=6)).as_p(),
-                        'userformset':UserFormSet(queryset=User.objects.filter(id=request.user.id)),
-                        'userprofileformset':UserProfileFormSet(queryset=UserProfile.objects.filter(id=request.user.id)),
+                        'vesselform':VesselForm(instance=Vessel.objects.latest('id')).as_table(),
+                        'userform':UserForm(instance=User.objects.get(id=request.user.id)).as_table(),
+                        'userprofileform':UserProfileForm(instance=UserProfile.objects.get(id=request.user.id)).as_table(),
+                        'applicationform': ApplicationForm(instance=Application.objects.latest('id')).as_table(),
                         },
                         context_instance=RequestContext(request))
 
 @permission_required('settings')
-@login_required
-def validation(request, forms):
-    """Validates the forms in args."""
-    for form in forms:
-        f = form(request.POST) # A form bound to the POST data
-        if f.is_valid(): # All validation rules pass
-            f.save()
-        else:
-            return HttpResponseRedirect('/') # Redirect after POST   
+def validation(request, form, instance=None):
+    """Validates the form in args."""
+    f = form(request.POST, instance=instance)
+    if f.is_valid(): # All validation rules pass
+        f.save()
+    else:
+        # TODO: Error message
+        return False  
+
+@permission_required('users.user_profile.can_change')
+def user(request):
+    """Validation of the User and UserProfile forms."""
+    if request.method == 'POST':
+        validation(request, UserForm, User.objects.get(id=request.user.id))
+        validation(request, UserProfileForm, UserProfile.objects.get(id=request.user.id))
+
+    return HttpResponseRedirect('/settings') # Redirect after POST
+    
+@permission_required('settings.vessel.can_change')
+def vessel(request):
+    """Validation of the Vessel form."""
+    if request.method == 'POST':
+        validation(request, VesselForm, Vessel.objects.latest('id'))
+
+    return HttpResponseRedirect('/settings') # Redirect after POST    
+
+@permission_required('settings.application.can_change')
+def application(request):
+    """Validation of the Application form."""
+    if request.method == 'POST':
+        validation(request, ApplicationForm, Application.objects.latest('id'))
+
+    return HttpResponseRedirect('/settings') # Redirect after POST    
