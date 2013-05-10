@@ -28,43 +28,30 @@ __license__ = "GPL"
 __version__ = "0.1"
 
 from django.db import models
+from django import forms
 
-# Create your models here.
-class AdditionalDotation(models.Model):
-    """Addition dotation (not directly in the flag regulation)"""
-    name = models.CharField(max_length=30) # Example: GSMU
+from inventory.models import Dotation
 
-    def __unicode__(self):
-        return self.name
-
-
+# Models
 class Vessel(models.Model):
-    DOTATIONS = (
-        ('A', "Dotation A"),
-        ('B', "Dotation B"),
-        ('C', "Dotation C"),
-        )
-    SPECIAL = (
-        ('NA', "Sans complément"),
-        ('P1', "Complément P1"),
-        ('P2', "Complément P2"),
-        ('P3', "Complément P3"),
-        ('P4', "Complément P4"),
-    )
+    """Vessel information."""
     name = models.CharField(max_length=30)
     imo = models.IntegerField(max_length=7)
     call_sign = models.CharField(max_length=30)
     sat_phone = models.CharField(max_length=20)
     gsm_phone = models.CharField(max_length=20)
     flag = models.CharField(max_length=30)
-    shipowner = models.CharField(max_length=64)
+    port_of_registry = models.CharField(max_length=100)
+    shipowner = models.CharField(max_length=100)
     mmsi = models.IntegerField(max_length=9)
     fax = models.CharField(max_length=20)
     email = models.EmailField(max_length=64)
-    dotation = models.CharField(max_length=1, choices=DOTATIONS)
-    special = models.CharField('Complement', max_length=2, choices=SPECIAL)
-    additional_dotation = models.ManyToManyField(AdditionalDotation)
+    dotation = models.ManyToManyField(Dotation)
 
     def __unicode__(self):
         return self.name
- 
+
+
+class Application(models.Model):
+    """Application settings."""
+    expire_date_warning_delay = models.PositiveIntegerField()
