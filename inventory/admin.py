@@ -28,28 +28,38 @@ __license__ = "GPL"
 __version__ = "0.1"
 
 import models
+from forms import BaseDrugForm
 from django.contrib import admin
-from django.forms import CheckboxSelectMultiple
-
 
 class BaseDrugAdmin(admin.ModelAdmin):
-    list_display = ('inn', 'packaging', 'required_quantity')
-    form = models.BaseDrugForm
+    list_display = ('inn', 'dosage_form', 'composition')
+    ordering = ('inn',)
+    form = BaseDrugForm
+
+    class Meta:
+        ordering = ('inn', )
 
 class DrugAdmin(admin.ModelAdmin):
     list_display = ('name', 'basedrug_set', 'get_quantity')
 
 class DrugGroupAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    ordering = ('order',)
 
 class DrugTransactionAdmin(admin.ModelAdmin):
     list_display = ('drug', 'basedrug', 'date')
 
 class DrugQtyTransactionAdmin(admin.ModelAdmin):
     list_display = ('drug', 'value', 'transaction_type')
+
+class DrugReqQtyAdmin(admin.ModelAdmin):
+    list_display = ('inn', 'dotation', 'required_quantity')
+    ordering = ('inn', 'dotation',)
     
 admin.site.register(models.BaseDrug, BaseDrugAdmin)
 admin.site.register(models.Drug, DrugAdmin)
 admin.site.register(models.DrugGroup, DrugGroupAdmin)
 admin.site.register(models.DrugTransaction, DrugTransactionAdmin)
 admin.site.register(models.DrugQtyTransaction, DrugQtyTransactionAdmin)
+admin.site.register(models.DrugReqQty, DrugReqQtyAdmin)
+admin.site.register(models.Dotation)
+admin.site.register(models.Tag)

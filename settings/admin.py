@@ -27,8 +27,12 @@ __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
 __version__ = "0.1"
 
-import models
+import models, forms
 from django.contrib import admin
 
-admin.site.register(models.Vessel)
-admin.site.register(models.AdditionalDotation)
+
+class VesselAdmin(admin.ModelAdmin):
+    form = forms.VesselForm
+
+admin.site.register(models.Vessel, VesselAdmin)
+admin.site.register(models.Application)
