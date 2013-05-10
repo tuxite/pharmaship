@@ -22,7 +22,7 @@
 # Description: Django root urls for Pharmaship project.
 # ======================================================================
 
-__author__ = "Django Project, Matthieu Morin"
+__author__ = "Matthieu Morin"
 __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
 __version__ = "0.1"
@@ -36,13 +36,13 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'home.views.index'),
     url(r'^contact', 'home.views.contact'),
-    url(r'^settings', 'settings.views.index'),
 
-    # Load views of Inventory application
+    # Load urls of Settings application
+    url(r'^settings', include('settings.urls')),
+    # Load urls of Inventory application
     url(r'^inventory', include('inventory.urls')),
     
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
     url(r'^admin/', include(admin.site.urls)),
 
     # Login views

@@ -18,8 +18,8 @@
 # along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
 #
 # ======================================================================
-# Filename:    inventory/urls.py
-# Description: Urls for Inventory application.
+# Filename:    settings/urls.py
+# Description: Urls for Settings application.
 # ======================================================================
 
 __author__ = "Matthieu Morin"
@@ -32,19 +32,12 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('inventory.views',
+urlpatterns = patterns('settings.views',
     url(r'^$', 'index'),
-
-    # Drug Related
-    url(r'^/drug/index', 'drug', name="drug"),
-    url(r'^/drug/(?P<drug_id>\d+)/delete$', 'drug_delete', name="drug_delete"),
-    url(r'^/drug/(?P<inn_id>\d+)/add$', 'drug_add', name="drug_add"),
-    url(r'^/drug/(?P<drug_id>\d+)/change$', 'drug_change', name="drug_change"),
-    url(r'^/drug/(?P<drug_id>\d+)/out$', 'drug_out', name="drug_out"),
-    url(r'^/drug/(?P<inn_id>\d+)/equivalent$', 'drug_equivalent', name="drug_equivalent"),
-    url(r'^/drug/filter$', 'drug_filter', name="drug_filter"),
-    url(r'^/drug/print$', 'drug_print', name="drug_print"),
-
-    # Material Related
-    url(r'^/material', 'material', name="material"),
+    # Action for Vessel form
+    url(r'^/vessel$', 'vessel', name="vessel"),
+    # Action for User and UserProfile forms
+    url(r'^/user$', 'user', name="user"),
+    # Action for Application form
+    url(r'^/application$', 'application', name="application"),
 )
