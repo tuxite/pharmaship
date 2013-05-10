@@ -35,9 +35,15 @@ def index(request):
     return render_to_response('index.html', {'user': (request.user.last_name + " " +request.user.first_name), 'title':"Accueil", 'rank': request.user.profile.get_rank()})
 
 def contact(request):
+    """View with CCMM contact information. Available for all users."""
     title = "Contacter le CCMM"
     if request.user.is_authenticated():
-        variables = {'title': title, 'user':(request.user.last_name + " " +request.user.first_name), 'rank': request.user.profile.get_rank()}
+        variables = {
+                'title': title,
+                'user':(request.user.last_name + " " +request.user.first_name),
+                'rank': request.user.profile.get_rank(),
+                'css':['popup',],
+                }
     else:
         variables = {'title':title}
     return render_to_response('contact.html', variables)
