@@ -33,8 +33,9 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.db.models import Sum
 
-from models import BaseDrug, Drug, DrugQtyTransaction, DrugTransaction, DrugGroup, Dotation
+from models import BaseDrug, Drug, DrugQtyTransaction, DrugTransaction, DrugGroup, Dotation, DrugReqQty
 from forms import DeleteForm, QtyChangeForm, AddForm, AddEquivalentForm
 
 from settings.models import Vessel, Application
@@ -59,21 +60,6 @@ def delay(delta):
 def index(request):
     """Redirect to drugs inventory by default."""
     return HttpResponseRedirect(reverse('drug'))
-
-@login_required
-def drug(request):
-    """"Drugs inventory overview."""
-    return render_to_response('drug_inventory.html', {
-                        'user': (request.user.last_name + " " +request.user.first_name),
-                        'title':"Registre des médicaments",
-                        'rank': request.user.profile.get_rank(),
-                        'inn_list': BaseDrug.objects.filter(dotations__in=Vessel.objects.latest('id').dotation.all()).distinct().order_by('group'),
-                        'today': datetime.date.today(),
-                        'delay': delay(Application.objects.latest('id').expire_date_warning_delay),
-                        'group_list' : DrugGroup.objects.all().order_by('order'), #### TODO Filter by "links"
-                        'dotation_list': Vessel.objects.latest('id').dotation.all(),
-                        },
-                        context_instance=RequestContext(request))
 
 @login_required
 def material(request):
@@ -261,14 +247,16 @@ def drug_filter(request):
             for dotation_id in d.values():
                 dotation_filter.append(Dotation.objects.get(id=int(dotation_id)))
 
+        values, group_list = parser(dotation_filter)
+
         return render_to_response('drug_inventory.html', {
                         'user': (request.user.last_name + " " +request.user.first_name),
                         'title':"Registre des médicaments",
                         'rank': request.user.profile.get_rank(),
-                        'inn_list': BaseDrug.objects.filter(dotations__in=dotation_filter).distinct().order_by('group'),
+                        'values': values,
                         'today': datetime.date.today(),
                         'delay': delay(Application.objects.latest('id').expire_date_warning_delay),
-                        'group_list' : DrugGroup.objects.all().order_by('order'), #### TODO Filter by "links"
+                        'group_list' : group_list,
                         'dotation_list': Vessel.objects.latest('id').dotation.all(),
                         'filter': dotation_filter, # To know which checkbox to be checked
                         },
@@ -282,14 +270,17 @@ def drug_print(request):
     #if request.method == 'POST':
     if True:
         # Generating a HTTP response with HTML
+        dotation_list = Vessel.objects.latest('id').dotation.all()
+        values, group_list = parser(dotation_list)
+        
         rendered = render_to_response('drug_report.html', {
                         'vessel': Vessel.objects.latest('id'),
                         'title':"Registre des médicaments",
                         'rank': request.user.profile.get_rank(),
-                        'inn_list': BaseDrug.objects.filter(dotations__in=Vessel.objects.latest('id').dotation.all()).distinct().order_by('group'),
+                        'values': values,
                         'today': datetime.date.today(),
                         'delay': delay(Application.objects.latest('id').expire_date_warning_delay),
-                        'group_list' : DrugGroup.objects.all().order_by('order'), #### TODO Filter by "links"
+                        'dotation_list': dotation_list,
                         },
                         context_instance=RequestContext(request))
         # Creating the response
@@ -302,3 +293,117 @@ def drug_print(request):
         return response
     else:
         return HttpResponseRedirect(reverse('drug'))
+
+########################################################################
+@login_required
+def drug(request):
+    """"Drugs inventory overview."""
+    dotation_list = Vessel.objects.latest('id').dotation.all()
+    values, group_list = parser(dotation_list)
+
+    return render_to_response('drug_inventory.html', {
+                        'user': (request.user.last_name + " " +request.user.first_name),
+                        'title':"Registre des médicaments",
+                        'rank': request.user.profile.get_rank(),
+                        'values': values,
+                        'today': datetime.date.today(),
+                        'delay': delay(Application.objects.latest('id').expire_date_warning_delay),
+                        'group_list' : group_list,
+                        'dotation_list': dotation_list,
+                        },
+                        context_instance=RequestContext(request))
+
+def parser(dotation_list):
+    """Parses the database to render a list of
+    groups (DrugGroup) > inn (BaseDrug) > drug (Drug).
+
+    dotation_list: list of Dotation objects used as a filter.
+
+    Returns the list of value and the list of groups.
+    """
+
+    # Required quantities for listed dotations
+    req_qty_list = DrugReqQty.objects.filter(dotation__in=dotation_list).prefetch_related('inn', 'dotation')
+    # Inn list
+    inn_list = BaseDrug.objects.filter(dotations__in=dotation_list).distinct().prefetch_related('tag', 'drug_items').order_by('group')
+    # Drug list
+    drug_list = Drug.objects.filter(basedrug__in=inn_list, used=False).distinct()
+    # Drug quantity transaction list
+    drugqtytransaction_list = DrugQtyTransaction.objects.filter(drug__in=drug_list).prefetch_related('drug')
+    # Group list
+    group_list = DrugGroup.objects.all().order_by('order') #### TODO Filter by "links"
+
+    # Global dictionnary
+    values = []
+    # Adding groups (DrugGroup)
+    for group in group_list:
+        # Adding name
+        group_dict = {'name': group,}
+        # Finding attached inn (BaseDrug)
+        group_inn_list = []
+        for inn in inn_list:
+            # More elegant way to match id?
+            if inn.group_id == group.id:
+                group_inn_dict = {}
+                # ID
+                group_inn_dict['id'] = inn.id
+                # Name
+                group_inn_dict['name'] = inn.name
+                # Roa, Dosage_form, Composition
+                group_inn_dict['roa'] = inn.get_roa_display
+                group_inn_dict['dosage_form'] = inn.get_dosage_form_display
+                group_inn_dict['composition'] = inn.composition
+                # Drug_list
+                group_inn_dict['drug_list'] = inn.get_drug_list_display
+                # Location & Remark
+                group_inn_dict['location'] = inn.location
+                group_inn_dict['remark'] = inn.remark
+                # Tags
+                group_inn_dict['tag'] = inn.tag
+                # Quantity
+                group_inn_dict['quantity'] = 0
+
+                group_inn_dict['drug_items'] = []
+                # Finding attached drugs (Drug)
+                for drug in inn.drug_items.all():
+                    # Do not parse the used drugs (quantity = 0)
+                    if drug.used == True:
+                        continue
+                    group_inn_drug_dict = {}
+                    # ID
+                    group_inn_drug_dict['id'] = drug.id
+                    # Name
+                    group_inn_drug_dict['name'] = drug.name
+                    # Non conformity fields
+                    group_inn_drug_dict['nc_composition'] = drug.nc_composition
+                    group_inn_drug_dict['nc_inn'] = drug.nc_inn
+                    # Expiration data
+                    group_inn_drug_dict['exp_date'] = drug.exp_date
+                    # Quantity
+                    group_inn_drug_dict['quantity'] = 0
+                    for transaction in drugqtytransaction_list:
+                        if transaction.drug == drug:
+                            group_inn_drug_dict['quantity'] += transaction.value
+                    # Adding the drug quantity to the inn quantity
+                    group_inn_dict['quantity'] += group_inn_drug_dict['quantity']
+                    # Adding the drug dict to the list
+                    group_inn_dict['drug_items'].append(group_inn_drug_dict)
+
+                # Required quantity
+                maximum = [0,]
+                additional = 0
+                for item in req_qty_list:
+                    if item.inn == inn:
+                        if item.dotation.additional == True:
+                            additional += item.required_quantity
+                        else:
+                            maximum.append(item.required_quantity)
+                group_inn_dict['required_quantity'] = additional + max(maximum)
+                # Adding the inn dict to the list
+                group_inn_list.append(group_inn_dict)
+        group_dict['child'] = group_inn_list
+        values.append(group_dict)
+
+    return values, group_list
+
+
