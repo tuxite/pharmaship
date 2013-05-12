@@ -116,9 +116,9 @@
                     <li class="drug_li drug_a">
                         <a href='{% url drug_delete item.id %}' title="Supprimer ce médicament" class="jquery_popup drug_delete drug_link"></a>
                     </li>
-                    {% if item.nc_inn != None %}
+                    {% if item.nc_inn %}
                     <li class="drug_li red">DÉNOMINATION NON CONFORME !</li>
-                    {% elif item.nc_composition != None %}
+                    {% elif item.nc_composition %}
                     <li class="drug_li red">COMPOSITION NON CONFORME !</li>
                     {% endif %}
                 </ul>
