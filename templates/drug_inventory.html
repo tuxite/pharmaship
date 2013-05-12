@@ -72,7 +72,7 @@
                 <li class="drug_li_h drug_qty {% if inn.quantity < inn.required_quantity %}error{% endif %}">{{ inn.quantity }}</li>
                 <li class="drug_li_h drug_qty">0</li> <!-- TODO -->
                 {% with inn.drug_items|first as item %}
-                <li class="drug_li_h drug_date {% if item.exp_date < today %}expired{% elif item.exp_date < delay %}warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
+                <li class="drug_li_h drug_date {% if item.exp_date < today %}error{% elif item.exp_date < delay %}warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
                 {% endwith %}
             </ul>
         </header>
