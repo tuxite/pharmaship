@@ -40,6 +40,7 @@
         collapse();
         sticky_header();
         click_header();
+        reset_input();
 
         /* Hide all panels on load */
         $("div.drug_more").hide();
@@ -200,8 +201,9 @@
             if (this.checked == true) {
                 // Uncheck of the reset checkbox
                 $(reset_checkbox).prop('checked', false);
-                $(form).submit();
             }
+            // Submit the form anyway
+            $(form).submit();
         })
     }
 
@@ -265,6 +267,23 @@
             $("html, body").animate({
                 scrollTop: 0
             }, 600);
+        })
+    }
+
+    /* Function to clear the tex input when clicking on the image */
+
+    function reset_input(){
+        var input = $('#filterinput');
+        var link = $('#reset_input');
+
+        $(link).click(function (e){
+            // Setting the value
+            $(input).val('');
+            // Calling the filter function
+            var event = $.Event("change");
+            $(input).trigger(event);
+            // Prevents the default action to be triggered.
+            e.preventDefault();
         })
     }
 })(jQuery);

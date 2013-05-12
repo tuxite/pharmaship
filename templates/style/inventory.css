@@ -49,6 +49,9 @@ input, textarea, select {
     margin: 5px;
     border: 1px solid black;
     }
+a#reset_input > img{
+    vertical-align: text-bottom;
+    }
 
 /* Listing */
 /** Common **/

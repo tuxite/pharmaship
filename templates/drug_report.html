@@ -36,7 +36,7 @@
     <div id="dotation">
         <p>
             <b>Dotations médicales :</b>
-            {% for dotation in vessel.dotation.all %}
+            {% for dotation in dotation_list %}
             {% if not forloop.first %} - {% endif %}
             {{ dotation.name }}
             {% endfor %}
@@ -57,21 +57,20 @@
         </tr>
         </thead>
         <tbody>
-        {% regroup inn_list by group as group_list %}
-        {% for group in group_list %}
+        {% for group in values %}
             <tr class="group border"><td colspan="8">{{ group.grouper }}</td></tr>
-            {% for inn in group.list %}
+            {% for inn in group.child %}
             <tr class="inn">
-                <td>{{ inn.inn }}</td>
+                <td>{{ inn.name }}</td>
                 <td></td>
-                <td class="small">{{ inn.get_roa_display }}</td>
-                <td class="small">{{ inn.get_dosage_form_display }} - {{ inn.composition }}</td>
-                <td class="center">{{ inn.get_required_quantity }}</td>
-                <td class="center">{{ inn.get_quantity }}</td>
+                <td class="small">{{ inn.roa }}</td>
+                <td class="small">{{ inn.dosage_form }} - {{ inn.composition }}</td>
+                <td class="center">{{ inn.required_quantity }}</td>
+                <td class="center">{{ inn.quantity }}</td>
                 <td></td>
-                <td class="center">{% if inn.drug_list > 0 %}{{ inn.get_drug_list_display }}{% endif %}</td>
+                <td class="center">{% if inn.drug_list != "None" %}{{ inn.drug_list }}{% endif %}</td>
             </tr>
-            {% for item in inn.get_not_null|dictsort:"exp_date" %}
+            {% for item in inn.drug_items|dictsort:"exp_date" %}
             <tr>
                 {% if item.nc_inn %}
                 <td class="nc">{{ item.nc_inn }}</td>
@@ -86,7 +85,7 @@
                 <td></td>
                 {% endif %}
                 <td></td>
-                <td class="center">{{ item.get_quantity }}</td>
+                <td class="center">{{ item.quantity }}</td>
                 <td class="center">{{ item.exp_date|date:"d/m/Y" }}</td>
                 <td></td>
             </tr>
