@@ -32,12 +32,12 @@ from forms import BaseDrugForm
 from django.contrib import admin
 
 class BaseDrugAdmin(admin.ModelAdmin):
-    list_display = ('inn', 'dosage_form', 'composition')
-    ordering = ('inn',)
+    list_display = ('name', 'dosage_form', 'composition')
+    ordering = ('name',)
     form = BaseDrugForm
 
     class Meta:
-        ordering = ('inn', )
+        ordering = ('name', )
 
 class DrugAdmin(admin.ModelAdmin):
     list_display = ('name', 'basedrug_set', 'get_quantity')

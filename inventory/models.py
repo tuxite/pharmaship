@@ -28,6 +28,9 @@ __license__ = "GPL"
 __version__ = "0.1"
 
 from django.db import models
+
+import settings.models
+
 import datetime
 
 # Constants
@@ -137,7 +140,7 @@ class Tag(models.Model):
         return self.name
 
     class Meta:
-        ordering = ("name",)        
+        ordering = ("name",)
 
 class Drug(models.Model):
     """Drug model, "child" of BaseDrug."""
@@ -154,13 +157,13 @@ class Drug(models.Model):
 
     def get_quantity(self):
         """Computes the quantity according to the transactions attached to this drug."""
-        return DrugQtyTransaction.objects.filter(drug=self).aggregate(models.Sum('value'))['value__sum']
+        return self.drugqtytransaction_set.aggregate(sum=models.Sum('value'))['sum']
 
 
 class BaseDrug(models.Model):
     """Base drug model for all drugs.
     inn = International Nonproprietary Name (DC in French)"""
-    inn = models.CharField(max_length=100) # Example: Paracétamol
+    name = models.CharField(max_length=100) # Example: Paracétamol
     roa = models.PositiveIntegerField(choices=DRUG_ROA_CHOICES) # Example: dermal -- ROA: Route of Administration
     dosage_form = models.IntegerField(choices=DRUG_FORM_CHOICES) # Example: "pill"
     composition = models.CharField(max_length=100) # Example: 1000 mg
@@ -174,7 +177,7 @@ class BaseDrug(models.Model):
 
     # Operations
     def __unicode__(self):
-        return u"{0} ({2} - {1})".format(self.inn, self.composition, self.get_dosage_form_display())
+        return u"{0} ({2} - {1})".format(self.name, self.composition, self.get_dosage_form_display())
 
     def get_quantity(self):
         """Computes the total quantity of non-expired & non-equivalent drugs attached to this INN."""
@@ -191,17 +194,24 @@ class BaseDrug(models.Model):
 
     def get_required_quantity(self):
         """Computes the total required quantity of the INN."""
-        ## TODO Dynamic filter by dotation
-        maximum = self.dotations.filter(additional=False).aggregate(max=models.Max('drugreqqty__required_quantity'))['max']
+        # TODO: Dynamic filter by dotation
+        # Workaround: Use the Settings.Vessel.dotation to get the list
+        dotation_list = settings.models.Vessel.objects.latest('id').dotation.all();
+
+        # For non-additional dotations, the required quantity is a minimum, so we keep the highest required quantity in the set.
+        maximum = self.dotations.filter(additional=False, id__in=dotation_list).aggregate(max=models.Max('drugreqqty__required_quantity'))['max']
         if not maximum:
             maximum = 0
-        additional = self.dotations.filter(additional=True).aggregate(sum=models.Sum('drugreqqty__required_quantity'))['sum']
+
+        # Additional dotations, adds quantity to the inn. We keep the sum of the required quantities in the set.
+        additional = self.dotations.filter(additional=True, id__in=dotation_list).aggregate(sum=models.Sum('drugreqqty__required_quantity'))['sum']
         if not additional:
             additional = 0
+
         return maximum + additional
 
     class Meta:
-        ordering = ('inn', )
+        ordering = ('name', )
 
 
 class DrugQtyTransaction(models.Model):
@@ -212,6 +222,8 @@ class DrugQtyTransaction(models.Model):
     value = models.IntegerField()
     drug = models.ForeignKey('Drug')
 
+    def __unicode__(self):
+        return u"{0} ({1}: {2})".format(self.drug, self.get_transaction_type_display(), self.value)
 
 class DrugTransaction(models.Model):
     """Model which joins Drug and BaseDrug models."""
@@ -221,7 +233,7 @@ class DrugTransaction(models.Model):
     purchase_order = models.CharField(max_length=100, blank=True, null=True)
     remark = models.TextField(blank=True, null=True)
 
-
+        
 class DrugReqQty(models.Model):
     """Model for required quantity of a drug"""
     dotation = models.ForeignKey('Dotation')
