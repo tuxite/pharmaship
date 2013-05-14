@@ -144,8 +144,8 @@ class Tag(models.Model):
 
 class Drug(models.Model):
     """Drug model, "child" of BaseDrug."""
-    exp_date = models.DateField()
     name = models.CharField(max_length=100) # Brand Name. Example: Doliprane for INN Paracétamol
+    exp_date = models.DateField()
     # Fields for non-conformity compatibility
     nc_inn = models.CharField(max_length=100, blank=True, null=True)
     nc_composition = models.CharField(max_length=100, blank=True, null=True)

@@ -45,9 +45,15 @@ class DeleteForm(forms.Form):
     """ Form used for deleting an objet in the list."""
     reason = forms.ChoiceField(choices=DELETE_REASON)
 
-class QtyChangeForm(forms.Form):
-    """ Form used for changing the quantity of an objet in the list."""
+
+class QtyChangeForm(forms.ModelForm):
+    """ Form used for changing the quantity of an object in the list."""
     quantity = forms.IntegerField()
+
+    class Meta:
+        model = models.Drug
+        exclude = ('nc_composition', 'nc_inn', 'used')
+
 
 class AddForm(forms.Form):
     """ Form used for adding a drug to an INN in the list."""
@@ -56,6 +62,7 @@ class AddForm(forms.Form):
     quantity = forms.IntegerField()
     exp_date = forms.DateField()
 
+
 class AddEquivalentForm(forms.Form):
     """ Form used for adding an equivalent drug to an INN in the list."""
     name = forms.CharField()
@@ -63,6 +70,7 @@ class AddEquivalentForm(forms.Form):
     nc_composition = forms.CharField()
     quantity = forms.IntegerField()
     exp_date = forms.DateField()
+
 
 class BaseDrugForm(forms.ModelForm):
     """ Form used in Admin view."""

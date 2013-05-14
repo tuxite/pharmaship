@@ -109,7 +109,14 @@ def drug_change(request, drug_id):
         form = QtyChangeForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
+            name = form.cleaned_data['name']
+            exp_date = form.cleaned_data['exp_date']
             quantity = form.cleaned_data['quantity']
+            # Modifying the name
+            if name != drug.name:
+                drug.name = name
+            if exp_date != drug.exp_date:
+                drug.exp_date = exp_date
             # Adding a transaction
             drug_quantity = drug.get_quantity()
             if quantity != drug_quantity:
@@ -121,7 +128,7 @@ def drug_change(request, drug_id):
 
             return HttpResponseRedirect(reverse('drug')) # Redirect after POST
     else:
-        form = QtyChangeForm() # An unbound form
+        form = QtyChangeForm(instance=drug, initial={'quantity': drug.get_quantity()}) # An unbound form
 
     return render_to_response('drug_change.html', {
                         'title':"Modifier la quantité",
