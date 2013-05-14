@@ -138,6 +138,7 @@ small.brand{
 small.brand > span.red{
     font-size: 100%;
     font-weight: 400;
+    color: #c04040;
     }
 
 /*** inn details ***/
