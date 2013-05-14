@@ -166,6 +166,9 @@ div#account h2 {
     font-size: 90%;
     clear:both;
     }
+div#account ul {
+    float: right;
+    }
 div#account li {
 	background: #d4d4d4;
 	margin: 5px 0 5px 5px;
