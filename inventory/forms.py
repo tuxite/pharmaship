@@ -42,21 +42,24 @@ CHANGE_REASON = (
     )
 
 class DeleteForm(forms.Form):
-    """ Form used for deleting an objet in the list."""
+    """Form used for deleting an objet in the list."""
     reason = forms.ChoiceField(choices=DELETE_REASON)
 
 
-class QtyChangeForm(forms.ModelForm):
-    """ Form used for changing the quantity of an object in the list."""
+class InfoChangeForm(forms.ModelForm):
+    """Form used for changing the details and the quantity of an object in the list."""
     quantity = forms.IntegerField()
 
     class Meta:
         model = models.Drug
-        exclude = ('nc_composition', 'nc_inn', 'used')
+        exclude = ['nc_composition', 'nc_inn', 'used']
 
+class QtyChangeForm(forms.Form):
+    """Form used for changing the quantity of an object in the list."""
+    quantity = forms.IntegerField()
 
 class AddForm(forms.Form):
-    """ Form used for adding a drug to an INN in the list."""
+    """Form used for adding a drug to an INN in the list."""
     name = forms.CharField()
     nc_composition = forms.CharField()
     quantity = forms.IntegerField()
@@ -64,7 +67,7 @@ class AddForm(forms.Form):
 
 
 class AddEquivalentForm(forms.Form):
-    """ Form used for adding an equivalent drug to an INN in the list."""
+    """Form used for adding an equivalent drug to an INN in the list."""
     name = forms.CharField()
     nc_inn = forms.CharField()
     nc_composition = forms.CharField()
@@ -73,8 +76,14 @@ class AddEquivalentForm(forms.Form):
 
 
 class BaseDrugForm(forms.ModelForm):
-    """ Form used in Admin view."""
+    """Form used in Admin view."""
     tag = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Tag.objects.all(), required=False)
 
     class Meta:
         model = models.BaseDrug
+
+class BaseDrugLocRemForm(forms.ModelForm):
+    """Form to change the location and the remark of a BaseDrug in a view."""
+    class Meta:
+        model = models.BaseDrug
+        fields = ['location', 'remark']

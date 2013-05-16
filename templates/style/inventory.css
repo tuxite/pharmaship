@@ -164,7 +164,11 @@ p.drug_loc{
     width: 35%;
     margin-right: 0.5%;
     }
-
+div.drug_loc_rem > span{
+    float: right;
+    display: block;
+    margin: 5px 10px 0 0;
+    }
 /*** inn list ***/
 div.drug_list{
     float: right;

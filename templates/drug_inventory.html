@@ -88,6 +88,7 @@
                 {% endif %}
             </div>
             <div class="drug_loc_rem">
+                <span><a href='{% url drug_locrem inn.id %}' title="Éditer les champs" class="jquery_popup drug_edit drug_link"></a></span>
                 <p class="drug_loc"><b>Emplacement : </b>{{ inn.location }}</p>
                 <p><b>Remarques : </b>{{ inn.remark }}</p>
             </div>

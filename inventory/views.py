@@ -36,7 +36,7 @@ from django.core.urlresolvers import reverse
 from django.db.models import Sum
 
 from models import BaseDrug, Drug, DrugQtyTransaction, DrugTransaction, DrugGroup, Dotation, DrugReqQty
-from forms import DeleteForm, QtyChangeForm, AddForm, AddEquivalentForm
+from forms import DeleteForm, QtyChangeForm, AddForm, AddEquivalentForm, BaseDrugLocRemForm, InfoChangeForm
 
 from settings.models import Vessel, Application
 
@@ -106,7 +106,7 @@ def drug_change(request, drug_id):
     drug = get_object_or_404(Drug, pk=drug_id)
 
     if request.method == 'POST': # If the form has been submitted
-        form = QtyChangeForm(request.POST) # A form bound to the POST data
+        form = InfoChangeForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             name = form.cleaned_data['name']
@@ -115,6 +115,7 @@ def drug_change(request, drug_id):
             # Modifying the name
             if name != drug.name:
                 drug.name = name
+            # Modifying the data
             if exp_date != drug.exp_date:
                 drug.exp_date = exp_date
             # Adding a transaction
@@ -128,7 +129,7 @@ def drug_change(request, drug_id):
 
             return HttpResponseRedirect(reverse('drug')) # Redirect after POST
     else:
-        form = QtyChangeForm(instance=drug, initial={'quantity': drug.get_quantity()}) # An unbound form
+        form = InfoChangeForm(instance=drug, initial={'quantity': drug.get_quantity()}) # An unbound form
 
     return render_to_response('drug_change.html', {
                         'title':"Modifier la quantité",
@@ -271,6 +272,32 @@ def drug_filter(request):
     else:
         return HttpResponseRedirect(reverse('drug')) # Redirect after POST
 
+@permission_required('inventory.basedrug.can_change')
+def drug_locrem(request, inn_id):
+    """Change the location and remark fields of an INN."""
+    # Selecting the inn
+    inn = get_object_or_404(BaseDrug, pk=inn_id)
+
+    if request.method == 'POST': # If the form has been submitted
+        form = BaseDrugLocRemForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            location = form.cleaned_data['location']
+            remark = form.cleaned_data['remark']
+            inn.location = location
+            inn.remark = remark
+            inn.save()
+            return HttpResponseRedirect(reverse('drug')) # Redirect after POST
+    else:
+        form = BaseDrugLocRemForm(instance=inn) # An unbound form
+
+    return render_to_response('drug_locrem.html', {
+                        'title':"Modifier des champs",
+                        'inn':inn,
+                        'form': form.as_table(),
+                        },
+                        context_instance=RequestContext(request))
+                        
 @login_required
 def drug_print(request):
     """Exports the drug inventory in PDF."""
@@ -372,7 +399,7 @@ def parser(dotation_list):
 
                 group_inn_dict['drug_items'] = []
                 # Finding attached drugs (Drug)
-                for drug in inn.drug_items.all():
+                for drug in inn.drug_items.all().order_by('exp_date'):
                     # Do not parse the used drugs (quantity = 0)
                     if drug.used == True:
                         continue
