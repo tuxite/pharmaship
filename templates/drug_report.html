@@ -58,7 +58,7 @@
         </thead>
         <tbody>
         {% for group in values %}
-            <tr class="group border"><td colspan="8">{{ group.grouper }}</td></tr>
+            <tr class="group border"><td colspan="8">{{ group.name }}</td></tr>
             {% for inn in group.child %}
             <tr class="inn">
                 <td>{{ inn.name }}</td>
