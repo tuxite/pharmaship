@@ -130,10 +130,10 @@
 
             var filter = $(this).val();
             if (filter) {
-                $(list).find("li.drug_inn:not(:contains(" + filter + "))").parents('article').hide();
-                $(list).find("li.drug_inn:contains(" + filter + ")").parents('article').show();
+                $(list).find("small.brand:not(:contains(" + filter + "))").parents('article').hide();
+                $(list).find("small.brand:contains(" + filter + ")").parents('article').show();
             } else {
-                $(list).find("li.drug_inn").parents('article').show();
+                $(list).find("small.brand").parents('article').show();
             }
             return false;
         })
