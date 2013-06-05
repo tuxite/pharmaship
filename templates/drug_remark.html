@@ -1,0 +1,25 @@
+{% extends "popup_layout.html" %}
+
+{% block begin_wrapper %}
+<form method="post" action="{% url drug_remark inn.id %}" name="drug_form">
+{% csrf_token %}
+{% endblock %}
+
+{% block text %}
+<p>Vous vous apprêtez à modifier les remarques de ce principe actif :</p>
+<p><b class="sky_blue">{{ inn.name }}</b>.</p>
+<table>
+    {{ form }}
+</table>
+{% endblock %}
+
+{% block action %}
+<ul>
+    <li class="b-close popup_action">Ne pas modifier</li>
+    <li class="popup_action" onClick="document.forms['drug_form'].submit();">Changer les remarques</li>
+</ul>
+{% endblock %}
+
+{% block end_wrapper %}
+</form>
+{% endblock %}
