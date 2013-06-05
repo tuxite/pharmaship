@@ -36,6 +36,7 @@
         drugFilter_by_name($("#articles"));
         drugFilter_by_group($("#articles"));
         drugFilter_by_tag($("#articles"));
+        drugFilter_by_location($("#articles"));
         uncheck($("#filterdotation"));
         collapse();
         sticky_header();
@@ -127,13 +128,15 @@
             // Reset the tag filter
             $('#filtertag').prop("checked", false);
             $(list).find("p.drug_group").parents('article').show();
-
+            // Reset the location filter
+            $('#filterlocation').val(0);
+            
             var filter = $(this).val();
             if (filter) {
-                $(list).find("small.brand:not(:contains(" + filter + "))").parents('article').hide();
-                $(list).find("small.brand:contains(" + filter + ")").parents('article').show();
+                $(list).find("ul.inn_list>li:not(:contains(" + filter + "))").parents('article').hide();
+                $(list).find("ul.inn_list>li:contains(" + filter + ")").parents('article').show();
             } else {
-                $(list).find("small.brand").parents('article').show();
+                $(list).find("ul.inn_list>li").parents('article').show();
             }
             return false;
         })
@@ -183,6 +186,24 @@
         })
     }
 
+    /* Function to filter by location */
+
+    function drugFilter_by_location(list) {
+        var input = document.getElementById('filterlocation');
+
+        $(input)
+            .change(function () {
+            var filter = $(this).val();
+            if (filter) {
+                $(list).find("li.drug_location:not(:Contains(" + filter + "))").parents('article').hide();
+                $(list).find("li.drug_location:Contains(" + filter + ")").parents('article').show();
+            } else {
+                $(list).find("li.drug_location").parents('article').show();
+            }
+            return false;
+        })
+    }
+    
     /* Function to uncheck the "all" checkbox when others are checked */
 
     function uncheck(form) {

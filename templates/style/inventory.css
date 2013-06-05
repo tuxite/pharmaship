@@ -151,20 +151,21 @@ div.drug_wrapper{
     background:#d3d7cf;
     height: 3.5em;
     }
+
 div.drug_info{
-    float: left;
-    padding: 0.5em;
     display: block;
+    padding: 0.5em 0;
     }
-div.drug_loc_rem p{
+
+div.drug_rem p, div.drug_info p{
     float: left;
     padding: 0.5em;
     }
-p.drug_loc{
+p.drug_tag, p.drug_roa{
     width: 35%;
     margin-right: 0.5%;
     }
-div.drug_loc_rem > span{
+div.drug_rem > span{
     float: right;
     display: block;
     margin: 5px 10px 0 0;
@@ -172,6 +173,7 @@ div.drug_loc_rem > span{
 /*** inn list ***/
 div.drug_list{
     float: right;
+    margin-top: -1em;
     padding: 0.5em;
     padding-top: 0.8em;
     padding-bottom: 0.5em;
