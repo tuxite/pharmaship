@@ -120,6 +120,7 @@ class Dotation(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class DrugGroup(models.Model):
     """Model for groups attached to an INN (BaseDrug)."""
     name = models.CharField(max_length=100) # Example: Cardiology
@@ -130,6 +131,7 @@ class DrugGroup(models.Model):
 
     class Meta:
         ordering = ("order", "name",)
+
 
 class Tag(models.Model):
     """Model for tags attached to an INN."""
@@ -142,10 +144,25 @@ class Tag(models.Model):
     class Meta:
         ordering = ("name",)
 
+
+class Location(models.Model):
+    """Model for locations attached to a Drug."""
+    primary = models.CharField(max_length=100) # Example: Pharmacie
+    secondary = models.CharField(max_length=100,blank=True, null=True) # Example: Tiroir 2
+
+    def __unicode__(self):
+        if self.secondary:
+            return u"{0} > {1}".format(self.primary, self.secondary)
+        else:
+            return self.primary
+
+
 class Drug(models.Model):
     """Drug model, "child" of BaseDrug."""
     name = models.CharField(max_length=100) # Brand Name. Example: Doliprane for INN Paracétamol
     exp_date = models.DateField()
+    # Link to location
+    location = models.ForeignKey(Location)
     # Fields for non-conformity compatibility
     nc_inn = models.CharField(max_length=100, blank=True, null=True)
     nc_composition = models.CharField(max_length=100, blank=True, null=True)
@@ -168,8 +185,6 @@ class BaseDrug(models.Model):
     dosage_form = models.IntegerField(choices=DRUG_FORM_CHOICES) # Example: "pill"
     composition = models.CharField(max_length=100) # Example: 1000 mg
     drug_list = models.PositiveIntegerField(choices=DRUG_LIST_CHOICES) # Example: List I
-    location = models.CharField(max_length=100, blank=True, null=True) # Example: Pharmacy
-    remark = models.TextField(blank=True, null=True)
     group = models.ForeignKey(DrugGroup)
     tag = models.ManyToManyField(Tag, blank=True)
     drug_items = models.ManyToManyField(Drug, through='DrugTransaction')
@@ -194,7 +209,6 @@ class BaseDrug(models.Model):
 
     def get_required_quantity(self):
         """Computes the total required quantity of the INN."""
-        # TODO: Dynamic filter by dotation
         # Workaround: Use the Settings.Vessel.dotation to get the list
         dotation_list = settings.models.Vessel.objects.latest('id').dotation.all();
 
@@ -225,6 +239,7 @@ class DrugQtyTransaction(models.Model):
     def __unicode__(self):
         return u"{0} ({1}: {2})".format(self.drug, self.get_transaction_type_display(), self.value)
 
+
 class DrugTransaction(models.Model):
     """Model which joins Drug and BaseDrug models."""
     drug = models.ForeignKey(Drug)
@@ -233,10 +248,15 @@ class DrugTransaction(models.Model):
     purchase_order = models.CharField(max_length=100, blank=True, null=True)
     remark = models.TextField(blank=True, null=True)
 
-        
+
 class DrugReqQty(models.Model):
     """Model for required quantity of a drug"""
     dotation = models.ForeignKey('Dotation')
     inn = models.ForeignKey('BaseDrug')
     required_quantity = models.IntegerField()
 
+
+class Remark(models.Model):
+    """Model for remarks attached to an INN."""
+    text = models.TextField(blank=True, null=True)
+    basedrug = models.OneToOneField('BaseDrug')
