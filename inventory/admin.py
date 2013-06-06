@@ -40,7 +40,7 @@ class BaseDrugAdmin(admin.ModelAdmin):
         ordering = ('name', )
 
 class DrugAdmin(admin.ModelAdmin):
-    list_display = ('name', 'basedrug_set', 'get_quantity')
+    list_display = ('name', 'basedrug_set', 'get_quantity', 'location')
 
 class DrugGroupAdmin(admin.ModelAdmin):
     ordering = ('order',)
@@ -54,7 +54,13 @@ class DrugQtyTransactionAdmin(admin.ModelAdmin):
 class DrugReqQtyAdmin(admin.ModelAdmin):
     list_display = ('inn', 'dotation', 'required_quantity')
     ordering = ('inn', 'dotation',)
-    
+
+class LocationAdmin(admin.ModelAdmin):
+    list_display = ('primary', 'secondary')
+
+class RemarkAdmin(admin.ModelAdmin):
+    list_display = ('text', 'basedrug')
+            
 admin.site.register(models.BaseDrug, BaseDrugAdmin)
 admin.site.register(models.Drug, DrugAdmin)
 admin.site.register(models.DrugGroup, DrugGroupAdmin)
@@ -63,3 +69,5 @@ admin.site.register(models.DrugQtyTransaction, DrugQtyTransactionAdmin)
 admin.site.register(models.DrugReqQty, DrugReqQtyAdmin)
 admin.site.register(models.Dotation)
 admin.site.register(models.Tag)
+admin.site.register(models.Location, LocationAdmin)
+admin.site.register(models.Remark, RemarkAdmin)
