@@ -35,8 +35,8 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db.models import Sum
 
-from models import BaseDrug, Drug, DrugQtyTransaction, DrugTransaction, DrugGroup, Dotation, DrugReqQty
-from forms import DeleteForm, QtyChangeForm, AddForm, AddEquivalentForm, BaseDrugLocRemForm, InfoChangeForm
+import models
+import forms
 
 from settings.models import Vessel, Application
 
@@ -76,21 +76,21 @@ def material(request):
 def drug_delete(request, drug_id):
     """Deletes a drug attached to an INN."""
     # Selecting the drug
-    drug = get_object_or_404(Drug, pk=drug_id)
+    drug = get_object_or_404(models.Drug, pk=drug_id)
 
     if request.method == 'POST': # If the form has been submitted
-        form = DeleteForm(request.POST) # A form bound to the POST data
+        form = forms.DeleteForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             reason = form.cleaned_data['reason']
             # Adding a transaction
-            DrugQtyTransaction.objects.create(drug=drug, transaction_type=reason, value=-drug.get_quantity())
+            models.DrugQtyTransaction.objects.create(drug=drug, transaction_type=reason, value=-drug.get_quantity())
             drug.used = True
             drug.save()
 
             return HttpResponseRedirect(reverse('drug')) # Redirect after POST
     else:
-        form = DeleteForm() # An unbound form
+        form = forms.DeleteForm() # An unbound form
 
     return render_to_response('drug_delete.html', {
                         'title':"Supprimer un médicament",
@@ -103,10 +103,10 @@ def drug_delete(request, drug_id):
 def drug_change(request, drug_id):
     """Change the quantity of a drug attached to an INN."""
     # Selecting the drug
-    drug = get_object_or_404(Drug, pk=drug_id)
+    drug = get_object_or_404(models.Drug, pk=drug_id)
 
     if request.method == 'POST': # If the form has been submitted
-        form = InfoChangeForm(request.POST) # A form bound to the POST data
+        form = forms.InfoChangeForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             name = form.cleaned_data['name']
@@ -122,14 +122,14 @@ def drug_change(request, drug_id):
             drug_quantity = drug.get_quantity()
             if quantity != drug_quantity:
                 diff = quantity - drug_quantity # Computing the difference to add a transaction
-                DrugQtyTransaction.objects.create(drug=drug, transaction_type=8, value=diff) # 8: Physical Count
+                models.DrugQtyTransaction.objects.create(drug=drug, transaction_type=8, value=diff) # 8: Physical Count
             if quantity == 0:
                 drug.used = True
             drug.save()
 
             return HttpResponseRedirect(reverse('drug')) # Redirect after POST
     else:
-        form = InfoChangeForm(instance=drug, initial={'quantity': drug.get_quantity()}) # An unbound form
+        form = forms.InfoChangeForm(instance=drug, initial={'quantity': drug.get_quantity()}) # An unbound form
 
     return render_to_response('drug_change.html', {
                         'title':"Modifier la quantité",
@@ -137,28 +137,28 @@ def drug_change(request, drug_id):
                         'form': form.as_table(),
                         },
                         context_instance=RequestContext(request))
-
+                        
 @permission_required('inventory.drug.can_change')
 def drug_out(request, drug_id):
     """Change the quantity (for medical treatment reason) of a drug attached to an INN."""
     # Selecting the drug
-    drug = get_object_or_404(Drug, pk=drug_id)
+    drug = get_object_or_404(models.Drug, pk=drug_id)
 
     if request.method == 'POST': # If the form has been submitted
-        form = QtyChangeForm(request.POST) # A form bound to the POST data
+        form = forms.QtyChangeForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             quantity = form.cleaned_data['quantity']
             # Adding a transaction
             drug_quantity = drug.get_quantity()
-            DrugQtyTransaction.objects.create(drug=drug, transaction_type=2, value=-quantity) # 2: Used for a treatment
+            models.DrugQtyTransaction.objects.create(drug=drug, transaction_type=2, value=-quantity) # 2: Used for a treatment
             if drug_quantity - quantity == 0:
                 drug.used = True
             drug.save()
 
             return HttpResponseRedirect(reverse('drug')) # Redirect after POST
     else:
-        form = QtyChangeForm() # An unbound form
+        form = forms.QtyChangeForm() # An unbound form
 
     return render_to_response('drug_out.html', {
                         'title':"Utiliser un médicament",
@@ -171,30 +171,31 @@ def drug_out(request, drug_id):
 def drug_add(request, inn_id):
     """Add a drug to an INN."""
     # Selecting the inn
-    inn = get_object_or_404(BaseDrug, pk=inn_id)
+    inn = get_object_or_404(models.BaseDrug, pk=inn_id)
     default_composition = u"{1} - {0}".format(inn.composition, inn.get_dosage_form_display())
 
     if request.method == 'POST': # If the form has been submitted
-        form = AddForm(request.POST) # A form bound to the POST data
+        form = forms.AddForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             name = form.cleaned_data['name']
             nc_composition = form.cleaned_data['nc_composition']
             quantity = form.cleaned_data['quantity']
             exp_date = form.cleaned_data['exp_date']
+            location = form.cleaned_data['location']
             # Checking the conformity
             if nc_composition == default_composition:
                 nc_composition = None
 
             # Adding the new drug
-            drug = Drug.objects.create(name = name, exp_date = exp_date, nc_composition = nc_composition)
+            drug = models.Drug.objects.create(name = name, exp_date = exp_date, nc_composition = nc_composition, location=location)
             # Adding the link
-            DrugTransaction.objects.create(drug = drug, basedrug = inn)
+            models.DrugTransaction.objects.create(drug = drug, basedrug = inn)
             # Adding the transaction
-            DrugQtyTransaction.objects.create(drug=drug, transaction_type=1, value=quantity) # 1: In
+            models.DrugQtyTransaction.objects.create(drug=drug, transaction_type=1, value=quantity) # 1: In
             return HttpResponseRedirect(reverse('drug')) # Redirect after POST
     else:
-        form = AddForm(initial={'nc_composition':default_composition}) # An unbound form
+        form = forms.AddForm(instance=models.Drug(), initial={'nc_composition':default_composition}) # An unbound form
 
     return render_to_response('drug_add.html', {
                         'title':"Ajouter un médicament",
@@ -207,11 +208,11 @@ def drug_add(request, inn_id):
 def drug_equivalent(request, inn_id):
     """Add a drug with a different INN than the regulation."""
     # Selecting the inn
-    inn = get_object_or_404(BaseDrug, pk=inn_id)
+    inn = get_object_or_404(models.BaseDrug, pk=inn_id)
     default_composition = u"{1} - {0}".format(inn.composition, inn.get_dosage_form_display())
 
     if request.method == 'POST': # If the form has been submitted
-        form = AddEquivalentForm(request.POST) # A form bound to the POST data
+        form = forms.AddEquivalentForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             name = form.cleaned_data['name']
@@ -224,14 +225,14 @@ def drug_equivalent(request, inn_id):
                 nc_composition = None
 
             # Adding the new drug
-            drug = Drug.objects.create(name = name, exp_date = exp_date, nc_composition = nc_composition, nc_inn=nc_inn)
+            drug = models.Drug.objects.create(name = name, exp_date = exp_date, nc_composition = nc_composition, nc_inn=nc_inn)
             # Adding the link
-            DrugTransaction.objects.create(drug = drug, basedrug = inn)
+            models.DrugTransaction.objects.create(drug = drug, basedrug = inn)
             # Adding the transaction
-            DrugQtyTransaction.objects.create(drug=drug, transaction_type=1, value=quantity) # 1: In
+            models.DrugQtyTransaction.objects.create(drug=drug, transaction_type=1, value=quantity) # 1: In
             return HttpResponseRedirect(reverse('drug')) # Redirect after POST
     else:
-        form = AddEquivalentForm(initial={'nc_composition':default_composition}) # An unbound form
+        form = forms.AddEquivalentForm(instance=models.Drug(), initial={'nc_composition':default_composition}) # An unbound form
 
     return render_to_response('drug_add_equivalent.html', {
                         'title':"Ajouter un médicament équivalent",
@@ -253,9 +254,10 @@ def drug_filter(request):
         else:
             # Parsing all dotations id
             for dotation_id in d.values():
-                dotation_filter.append(Dotation.objects.get(id=int(dotation_id)))
+                dotation_filter.append(models.Dotation.objects.get(id=int(dotation_id)))
 
-        values, group_list = parser(dotation_filter)
+        location_list = models.Location.objects.all().order_by('primary', 'secondary')
+        values, group_list = parser(dotation_filter, location_list)
 
         return render_to_response('drug_inventory.html', {
                         'user': (request.user.last_name + " " +request.user.first_name),
@@ -266,33 +268,39 @@ def drug_filter(request):
                         'delay': delay(Application.objects.latest('id').expire_date_warning_delay),
                         'group_list' : group_list,
                         'dotation_list': Vessel.objects.latest('id').dotation.all(),
+                        'location_list': location_list,
                         'filter': dotation_filter, # To know which checkbox to be checked
                         },
                         context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect(reverse('drug')) # Redirect after POST
 
-@permission_required('inventory.basedrug.can_change')
-def drug_locrem(request, inn_id):
-    """Change the location and remark fields of an INN."""
+@permission_required('inventory.remark.can_change')
+def drug_remark(request, inn_id):
+    """Change the remark field of an INN."""
     # Selecting the inn
-    inn = get_object_or_404(BaseDrug, pk=inn_id)
+    inn = get_object_or_404(models.BaseDrug, pk=inn_id)
+    # Selecting the remark
+    try :
+        remark = inn.remark
+    except:
+        remark = models.Remark()
+        inn.remark = remark
+        inn.save()
 
     if request.method == 'POST': # If the form has been submitted
-        form = BaseDrugLocRemForm(request.POST) # A form bound to the POST data
+        form = forms.RemarkForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
-            location = form.cleaned_data['location']
-            remark = form.cleaned_data['remark']
-            inn.location = location
-            inn.remark = remark
-            inn.save()
+            text = form.cleaned_data['text']
+            remark.text = text
+            remark.save()
             return HttpResponseRedirect(reverse('drug')) # Redirect after POST
     else:
-        form = BaseDrugLocRemForm(instance=inn) # An unbound form
+        form = forms.RemarkForm(instance=remark) # An unbound form
 
-    return render_to_response('drug_locrem.html', {
-                        'title':"Modifier des champs",
+    return render_to_response('drug_remark.html', {
+                        'title':"Modifier les remarques",
                         'inn':inn,
                         'form': form.as_table(),
                         },
@@ -305,7 +313,8 @@ def drug_print(request):
     if True:
         # Generating a HTTP response with HTML
         dotation_list = Vessel.objects.latest('id').dotation.all()
-        values, group_list = parser(dotation_list)
+        location_list = models.Location.objects.all().order_by('primary', 'secondary')
+        values, group_list = parser(dotation_list, location_list)
         
         rendered = render_to_response('drug_report.html', {
                         'vessel': Vessel.objects.latest('id'),
@@ -333,7 +342,8 @@ def drug_print(request):
 def drug(request):
     """"Drugs inventory overview."""
     dotation_list = Vessel.objects.latest('id').dotation.all()
-    values, group_list = parser(dotation_list)
+    location_list = models.Location.objects.all().order_by('primary', 'secondary')
+    values, group_list = parser(dotation_list, location_list)
 
     return render_to_response('drug_inventory.html', {
                         'user': (request.user.last_name + " " +request.user.first_name),
@@ -344,29 +354,33 @@ def drug(request):
                         'delay': delay(Application.objects.latest('id').expire_date_warning_delay),
                         'group_list' : group_list,
                         'dotation_list': dotation_list,
+                        'location_list': location_list,
                         },
                         context_instance=RequestContext(request))
 
-def parser(dotation_list):
+def parser(dotation_list, location_list):
     """Parses the database to render a list of
     groups (DrugGroup) > inn (BaseDrug) > drug (Drug).
 
     dotation_list: list of Dotation objects used as a filter.
+    location_list: list of Location objects.
 
     Returns the list of value and the list of groups.
     """
 
     # Required quantities for listed dotations
-    req_qty_list = DrugReqQty.objects.filter(dotation__in=dotation_list).prefetch_related('inn', 'dotation')
+    req_qty_list = models.DrugReqQty.objects.filter(dotation__in=dotation_list).prefetch_related('inn', 'dotation')
     # Inn list
-    inn_list = BaseDrug.objects.filter(dotations__in=dotation_list).distinct().prefetch_related('tag', 'drug_items').order_by('group')
+    inn_list = models.BaseDrug.objects.filter(dotations__in=dotation_list).distinct().prefetch_related('tag', 'drug_items').order_by('group', 'name')
     # Drug list
-    drug_list = Drug.objects.filter(basedrug__in=inn_list, used=False).distinct()
+    drug_list = models.Drug.objects.filter(basedrug__in=inn_list, used=False).distinct().prefetch_related('location')
     # Drug quantity transaction list
-    drugqtytransaction_list = DrugQtyTransaction.objects.filter(drug__in=drug_list).prefetch_related('drug')
+    drugqtytransaction_list = models.DrugQtyTransaction.objects.filter(drug__in=drug_list).prefetch_related('drug')
     # Group list
-    group_list = DrugGroup.objects.all().order_by('order') #### TODO Filter by "links"
-
+    group_list = models.DrugGroup.objects.all().order_by('order') #### TODO Filter by "links"
+    # Remarks
+    remark_list = models.Remark.objects.filter(basedrug__in=inn_list).distinct().prefetch_related('basedrug')
+    
     # Global dictionnary
     values = []
     # Adding groups (DrugGroup)
@@ -389,9 +403,10 @@ def parser(dotation_list):
                 group_inn_dict['composition'] = inn.composition
                 # Drug_list
                 group_inn_dict['drug_list'] = inn.get_drug_list_display
-                # Location & Remark
-                group_inn_dict['location'] = inn.location
-                group_inn_dict['remark'] = inn.remark
+                # Remark
+                for remark in remark_list:
+                    if remark.basedrug == inn:
+                        group_inn_dict['remark'] = remark.text
                 # Tags
                 group_inn_dict['tag'] = inn.tag
                 # Quantity
@@ -399,7 +414,7 @@ def parser(dotation_list):
 
                 group_inn_dict['drug_items'] = []
                 # Finding attached drugs (Drug)
-                for drug in inn.drug_items.all().order_by('exp_date'):
+                for drug in inn.drug_items.all():#.order_by('exp_date'):
                     # Do not parse the used drugs (quantity = 0)
                     if drug.used == True:
                         continue
@@ -411,8 +426,12 @@ def parser(dotation_list):
                     # Non conformity fields
                     group_inn_drug_dict['nc_composition'] = drug.nc_composition
                     group_inn_drug_dict['nc_inn'] = drug.nc_inn
-                    # Expiration data
+                    # Expiration date
                     group_inn_drug_dict['exp_date'] = drug.exp_date
+                    # Location
+                    for location in location_list:
+                        if drug.location_id == location.id:
+                            group_inn_drug_dict['location'] = location
                     # Quantity
                     group_inn_drug_dict['quantity'] = 0
                     for transaction in drugqtytransaction_list:

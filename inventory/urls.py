@@ -42,7 +42,7 @@ urlpatterns = patterns('inventory.views',
     url(r'^/drug/(?P<drug_id>\d+)/change$', 'drug_change', name="drug_change"),
     url(r'^/drug/(?P<drug_id>\d+)/out$', 'drug_out', name="drug_out"),
     url(r'^/drug/(?P<inn_id>\d+)/equivalent$', 'drug_equivalent', name="drug_equivalent"),
-    url(r'^/drug/(?P<inn_id>\d+)/locrem$', 'drug_locrem', name="drug_locrem"),
+    url(r'^/drug/(?P<inn_id>\d+)/remark$', 'drug_remark', name="drug_remark"),
     url(r'^/drug/filter$', 'drug_filter', name="drug_filter"),
     url(r'^/drug/print$', 'drug_print', name="drug_print"),
 
