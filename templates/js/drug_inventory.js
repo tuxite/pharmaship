@@ -118,7 +118,7 @@
     /* Function to filter the drugs by name */
 
     function drugFilter_by_name(list) {
-        var input = document.getElementById('filterinput');
+        var input = $('#filterinput');
 
         $(input)
             .change(function () {
@@ -133,10 +133,10 @@
             
             var filter = $(this).val();
             if (filter) {
-                $(list).find("ul.inn_list>li:not(:contains(" + filter + "))").parents('article').hide();
-                $(list).find("ul.inn_list>li:contains(" + filter + ")").parents('article').show();
+                $(list).find("ul.inn_list>li.drug_inn:not(:contains(" + filter + "))").parents('article').hide();
+                $(list).find("ul.inn_list>li.drug_inn:contains(" + filter + ")").parents('article').show();
             } else {
-                $(list).find("ul.inn_list>li").parents('article').show();
+                $(list).find("ul.inn_list>li.drug_inn").parents('article').show();
             }
             return false;
         })
@@ -149,7 +149,7 @@
     /* Function to filter by group */
 
     function drugFilter_by_group(list) {
-        var input = document.getElementById('filterselect');
+        var input = $('#filterselect');
 
         $(input)
             .change(function () {
@@ -168,19 +168,19 @@
         })
     }
 
-    /* Function to filter by usage */
+    /* Function to filter by tag */
 
     function drugFilter_by_tag(list) {
-        var input = document.getElementById('filtertag');
+        var input = $('#filtertag');
 
         $(input)
             .change(function () {
             var filter = $(this).val();
-            if (input.checked == true) {
-                $(list).find("p.drug_group:not(:Contains(" + filter + "))").parents('article').hide();
-                $(list).find("p.drug_group:Contains(" + filter + ")").parents('article').show();
+            if (this.checked == true) {
+                $(list).find("div.drug_rem:not(:contains(" + filter + "))").parents('article').hide();
+                $(list).find("div.drug_rem:contains(" + filter + ")").parents('article').show();
             } else {
-                $(list).find("p.drug_group").parents('article').show();
+                $(list).find("div.drug_rem").parents('article').show();
             }
             return false;
         })
@@ -195,8 +195,8 @@
             .change(function () {
             var filter = $(this).val();
             if (filter) {
-                $(list).find("li.drug_location:not(:Contains(" + filter + "))").parents('article').hide();
-                $(list).find("li.drug_location:Contains(" + filter + ")").parents('article').show();
+                $(list).find("li.drug_location:not(:contains(" + filter + "))").parents('article').hide();
+                $(list).find("li.drug_location:contains(" + filter + ")").parents('article').show();
             } else {
                 $(list).find("li.drug_location").parents('article').show();
             }
@@ -212,7 +212,7 @@
 
         $(reset_checkbox).change(function () {
             if (this.checked == true) {
-                // Uncheck of the other checkboxes
+                // Uncheck the other checkboxes
                 $('.filtercheck:checkbox:checked').prop('checked', false);
                 $(form).submit();
             }

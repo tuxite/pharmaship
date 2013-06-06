@@ -26,7 +26,7 @@
             <select id="filterselect">
                 <option value="">Tous</option>
                 {% for group in group_list %}
-                <option value="{{group.name}}">{{ group }}</option>
+                <option value="{{ group.name }}">{{ group }}</option>
                 {% endfor %}
             </select>
             <label><input type="checkbox" id="filtertag" value="Usage courant"/> Usage courant</label>
