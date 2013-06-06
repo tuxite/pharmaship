@@ -58,21 +58,20 @@ class QtyChangeForm(forms.Form):
     """Form used for changing the quantity of an object in the list."""
     quantity = forms.IntegerField()
 
-class AddForm(forms.Form):
+class AddForm(forms.ModelForm):
     """Form used for adding a drug to an INN in the list."""
-    name = forms.CharField()
-    nc_composition = forms.CharField()
     quantity = forms.IntegerField()
-    exp_date = forms.DateField()
+    class Meta:
+        model = models.Drug
+        exclude = ['used', 'nc_inn']
 
 
-class AddEquivalentForm(forms.Form):
+class AddEquivalentForm(forms.ModelForm):
     """Form used for adding an equivalent drug to an INN in the list."""
-    name = forms.CharField()
-    nc_inn = forms.CharField()
-    nc_composition = forms.CharField()
     quantity = forms.IntegerField()
-    exp_date = forms.DateField()
+    class Meta:
+        model = models.Drug
+        exclude = ['used',]
 
 
 class BaseDrugForm(forms.ModelForm):
@@ -82,8 +81,8 @@ class BaseDrugForm(forms.ModelForm):
     class Meta:
         model = models.BaseDrug
 
-class BaseDrugLocRemForm(forms.ModelForm):
-    """Form to change the location and the remark of a BaseDrug in a view."""
+class RemarkForm(forms.ModelForm):
+    """Form to change the remark of an object in a view."""
     class Meta:
-        model = models.BaseDrug
-        fields = ['location', 'remark']
+        model = models.Remark
+        exclude = ['basedrug']
