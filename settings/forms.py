@@ -31,12 +31,20 @@ from django.forms.models import modelform_factory
 from django import forms
 
 import models
-from inventory.models import Dotation
+from inventory.models import Allowance
 
 ApplicationForm = modelform_factory(models.Application)
 
 class VesselForm(forms.ModelForm):
-    dotation = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=Dotation.objects.all())
+    allowance = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=Allowance.objects.all())
 
     class Meta:
         model = models.Vessel
+
+class ExportForm(forms.Form):
+    """Form for exporting a dotation (molecules, material and required quantities)."""
+    allowance = forms.ModelChoiceField(queryset=Allowance.objects.all())
+
+class ImportForm(forms.Form):
+    """Form for importing a dotation (molecules, material and required quantities)."""
+    import_file = forms.FileField()

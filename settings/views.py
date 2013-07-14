@@ -27,19 +27,22 @@ __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
 __version__ = "0.1"
 
+from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import ModelForm
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from models import Vessel, Application
-from forms import VesselForm, ApplicationForm
+from forms import VesselForm, ApplicationForm, ExportForm, ImportForm
+
+from allowance import create_archive, import_archive
 
 from django.contrib.auth.models import User
 from users.models import UserProfile
 from users.forms import UserForm, UserProfileForm
-
 
 FUNCTIONS = (
 		(u'00', "Captain"),
@@ -56,11 +59,13 @@ def index(request):
     return render_to_response('settings.html', {
                         'user': (request.user.last_name + " " +request.user.first_name),
                         'rank': request.user.profile.get_rank(),
-                        'title':"Paramètres du compte",
+                        'title':_("Account Settings"),
                         'vesselform':VesselForm(instance=Vessel.objects.latest('id')).as_table(),
                         'userform':UserForm(instance=User.objects.get(id=request.user.id)).as_table(),
                         'userprofileform':UserProfileForm(instance=UserProfile.objects.get(id=request.user.id)).as_table(),
                         'applicationform': ApplicationForm(instance=Application.objects.latest('id')).as_table(),
+                        'exportform': ExportForm().as_table(),
+                        'importform': ImportForm().as_table(),
                         },
                         context_instance=RequestContext(request))
 
@@ -98,3 +103,37 @@ def application(request):
         validation(request, ApplicationForm, Application.objects.latest('id'))
 
     return HttpResponseRedirect('/settings') # Redirect after POST    
+
+@permission_required('settings')
+def export_data(request):
+    """Exports an allowance in a tar.gz archive."""
+    if request.method == 'POST': # If the form has been submitted
+        form = ExportForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            allowance = form.cleaned_data['allowance']
+            return create_archive(allowance)
+        else:
+            return HttpResponseRedirect(reverse('settings'))
+    else:
+        return HttpResponseRedirect(reverse('settings'))
+
+@permission_required('settings.application.can_change')
+def import_data(request):
+    """Import data and do some checks."""
+    if request.method == 'POST': # If the form has been submitted
+        form = ImportForm(request.POST, request.FILES) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            import_file = request.FILES['import_file']
+            return render_to_response('settings_import.html', {
+                        'user': (request.user.last_name + " " +request.user.first_name),
+                        'rank': request.user.profile.get_rank(),
+                        'title':_("Allowance Settings"),
+                        'data': import_archive(import_file),
+                        },
+                        context_instance=RequestContext(request))
+        else:
+            return HttpResponseRedirect(reverse('settings'))
+    else:
+        return HttpResponseRedirect(reverse('settings'))

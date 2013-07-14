@@ -33,11 +33,15 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('settings.views',
-    url(r'^$', 'index'),
+    url(r'^$', 'index', name="settings"),
     # Action for Vessel form
     url(r'^/vessel$', 'vessel', name="vessel"),
     # Action for User and UserProfile forms
     url(r'^/user$', 'user', name="user"),
     # Action for Application form
     url(r'^/application$', 'application', name="application"),
+    # Export/import allowances
+    url(r'^/export$', 'export_data', name="export"),
+    url(r'^/import$', 'import_data', name="import"),
+    
 )

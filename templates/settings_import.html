@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block addon %}
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href='{% static "style/settings.css" %}'>
+{% endblock %}
+
+{% block content %}
+<h2>{% trans "Uploaded File Information" %}</h2>
+<p>Filename : {{ data.name }}</p>
+<p>Type: {{ data.type }}</p>
+<p>Size: {{ data.size }}</p>
+<h2>{% trans "Importation Status" %}</h2>
+<p>Allowance Name: {{ data.data.allowance_name }}</p>
+<p>PK Allowance: {{ data.data.allowance_pk }}</p>
+<p>New allowance? {{ data.data.allowance_new }}</p>
+<p>Molecules added: {{ data.data.molecules }}</p>
+<p>PK Molecules added: {{ data.data.molecules_pk }}</p>
+<p>ReqQty added: {{ data.data.reqqty_added }}</p>
+<p>Orphan: {{ data.data.orphan }}</p>
+{% endblock %}
