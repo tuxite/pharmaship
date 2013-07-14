@@ -8,6 +8,8 @@
     {% block addon %}
     {% endblock %}
 
+    {% load i18n %}
+
     <title>{{title}} - Pharmaship</title>
 </head>
 
@@ -19,11 +21,11 @@
             <h1>{{ user }}</h2>
 			<h2>{{ rank }}</h3>
 			<ul>
-				<li><a href="/settings" class="settings">Paramètres</a></li>
-				<li><a href="/logout" class="logout">Déconnexion</a></li>
+				<li><a href="/settings" class="settings">{% trans "Settings" %}</a></li>
+				<li><a href="/logout" class="logout">{% trans "Logout" %}</a></li>
 			</ul>
             {% else %}
-            <a class="button blue shifthead" href="/login/?next=/">Se connecter</a>
+            <a class="button blue shifthead" href="/login/?next=/">{% trans "Log In" %}</a>
             {% endif %}
 		</div>
 	</header>
@@ -35,7 +37,7 @@
             <div id="title">
                 {% block print %}
                 <form action="." method="post">
-                    <input id="search" type="text" name="search" placeholder="Rechercher"/>
+                    <input id="search" type="text" name="search" placeholder="{% trans 'Search' %}"/>
                 </form>
                 {% endblock %}
                 <h1>{{ title }}</h1>
@@ -58,8 +60,8 @@
 	<div id="sidebar">
 		<div class="sidebarwrapper">
             <ul>
-                <li><a href="{% url drug %}">Registre des médicaments</a></li>
-                <li class="separator"><a href="{% url material %}">Registre du matériel</a></li>
+                <li><a href="{% url medicine %}">{% trans "Medicine Inventory" %}</a></li>
+                <li class="separator"><a href="{% url material %}">{% trans "Material Inventory" %}</a></li>
 <!--
                 <li class="separator"><a href="#">Gestion des commandes</a></li>
                 <li><a href="#">Téléconsultation</a></li>
@@ -68,7 +70,7 @@
 -->
             </ul>
             <div class="button">
-                 <a class="button red" href="/contact">Contacter le CCMM</a>
+                 <a class="button red" href="/contact">{% trans "Contact the CCMM" %}</a>
             </div>
 		</div>
 	</div>

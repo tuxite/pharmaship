@@ -27,16 +27,17 @@ __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
 __version__ = "0.1"
 
+from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):
-    return render_to_response('index.html', {'user': (request.user.last_name + " " +request.user.first_name), 'title':"Accueil", 'rank': request.user.profile.get_rank()})
+    return render_to_response('index.html', {'user': (request.user.last_name + " " +request.user.first_name), 'title':_("Home"), 'rank': request.user.profile.get_rank()})
 
 def contact(request):
     """View with CCMM contact information. Available for all users."""
-    title = "Contacter le CCMM"
+    title = _("Contact the CCMM")
     if request.user.is_authenticated():
         variables = {
                 'title': title,

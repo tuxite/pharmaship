@@ -1,0 +1,247 @@
+# French translation for Pharmaship.
+# Copyright (C) 2013 Association DSM
+# This file is distributed under the same license as the Pharmaship package.
+# Matthieu Morin <morinmatthieu@gmail.com>, 2013.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Pharmaship\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-14 20:43+0200\n"
+"PO-Revision-Date: 2013-06-07 21:30+0200\n"
+"Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
+"Language-Team: Association DSM <contact@devmaretique.com>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: home/views.py:36
+msgid "Home"
+msgstr "Accueil"
+
+#: home/views.py:40 templates/layout.html:73
+msgid "Contact the CCMM"
+msgstr "Contacter le CCMM"
+
+#: inventory/views.py:71
+msgid "Medical material inventory"
+msgstr "Registre du matériel"
+
+#: inventory/views.py:97
+msgid "Delete a medicine"
+msgstr "Supprimer un médicament"
+
+#: inventory/views.py:136
+msgid "Modify the quantity"
+msgstr "Modifier la quantité"
+
+#: inventory/views.py:165
+msgid "Use a medicine"
+msgstr "Utiliser un médicament"
+
+#: inventory/views.py:202
+msgid "Add a medicine"
+msgstr "Ajouter un médicament"
+
+#: inventory/views.py:239
+msgid "Add an equivalent medicine"
+msgstr "Ajouter un médicament équivalent"
+
+#: inventory/views.py:265 inventory/views.py:320
+msgid "Medicine inventory"
+msgstr "Registre des médicaments"
+
+#: inventory/views.py:304
+msgid "Modify the remarks"
+msgstr "Modifier les remarques"
+
+#: inventory/views.py:370 templates/layout.html:63
+msgid "Medicine Inventory"
+msgstr "Registre des médicaments"
+
+#: settings/views.py:62
+msgid "Account Settings"
+msgstr "Paramètres du compte"
+
+#: settings/views.py:132
+msgid "Allowance Settings"
+msgstr "Paramètres de la dotation"
+
+#: templates/layout.html:24
+msgid "Settings"
+msgstr "Paramètres"
+
+#: templates/layout.html:25
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: templates/layout.html:28
+msgid "Log In"
+msgstr "Se connecter"
+
+#: templates/layout.html:40
+msgid "Search"
+msgstr "Rechercher"
+
+#: templates/layout.html:64
+msgid "Material Inventory"
+msgstr "Registre du matériel"
+
+#: templates/medicine_inventory.html:16
+msgid "Print this inventory"
+msgstr "Imprimer ce registre"
+
+#: templates/medicine_inventory.html:24
+msgid "Search for an INN or a medicine."
+msgstr "Rechercher une DC ou un médicament."
+
+#: templates/medicine_inventory.html:24
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: templates/medicine_inventory.html:26
+msgid "Filter by group:"
+msgstr "Filtrer par groupe :"
+
+#: templates/medicine_inventory.html:28 templates/medicine_inventory.html:39
+#: templates/medicine_inventory.html:46
+msgid "All"
+msgstr "Tous"
+
+#: templates/medicine_inventory.html:38
+msgid "Filter by allowance:"
+msgstr "Filtrer par dotation :"
+
+#: templates/medicine_inventory.html:44
+msgid "Filter by location:"
+msgstr "Filtrer par emplacement :"
+
+#: templates/medicine_inventory.html:58
+msgid "Form"
+msgstr "Forme"
+
+#: templates/medicine_inventory.html:58
+msgid "Composition"
+msgstr "Composition"
+
+#: templates/medicine_inventory.html:59
+msgid "Allowance"
+msgstr "Dotation"
+
+#: templates/medicine_inventory.html:60 templates/medicine_inventory.html:111
+msgid "Quantity"
+msgstr "Quantité"
+
+#: templates/medicine_inventory.html:61
+msgid "Requested"
+msgstr "En demande"
+
+#: templates/medicine_inventory.html:62 templates/medicine_inventory.html:112
+msgid "Expiration Date"
+msgstr "Date d'expiration"
+
+#: templates/medicine_inventory.html:91
+msgid "Route of Administration:"
+msgstr "Voie d'administration"
+
+#: templates/medicine_inventory.html:92
+msgid "Group:"
+msgstr "Groupe :"
+
+#: templates/medicine_inventory.html:101
+msgid "Tags:"
+msgstr "Tags :"
+
+#: templates/medicine_inventory.html:105
+msgid "Remarks:"
+msgstr "Remarques :"
+
+#: templates/medicine_inventory.html:110
+msgid "Brand Name"
+msgstr "Dénomination commerciale"
+
+#: templates/medicine_inventory.html:113
+msgid "Location"
+msgstr "Emplacement"
+
+#: templates/medicine_report.html:30
+msgid "Vessel:"
+msgstr "Navire :"
+
+#: templates/medicine_report.html:31
+msgid "Shipowner:"
+msgstr "Armateur :"
+
+#: templates/medicine_report.html:32
+msgid "Flag:"
+msgstr "Pavillon :"
+
+#: templates/medicine_report.html:33
+msgid "Port of Registry"
+msgstr "Port d'attache :"
+
+#: templates/medicine_report.html:39
+msgid "Medical Allowances:"
+msgstr "Dotations médicales :"
+
+#: templates/medicine_report.html:51
+msgid "Brand name or Generic"
+msgstr "Nom de spécialité ou générique"
+
+#: templates/medicine_report.html:52
+msgid "Route of Administration"
+msgstr "Voie d'administration"
+
+#: templates/medicine_report.html:57
+msgid "List"
+msgstr "Liste"
+
+#: templates/settings.html:10
+msgid "Medical Responsible"
+msgstr "Responsable des soins"
+
+#: templates/settings.html:17
+msgid "Update User Information"
+msgstr "Mettre à jour les informations"
+
+#: templates/settings.html:20
+msgid "Vessel Information"
+msgstr "Renseignements du navire"
+
+#: templates/settings.html:26
+msgid "Update Vessel Information"
+msgstr "Mettre à jour les informations"
+
+#: templates/settings.html:29
+msgid "Application Settings"
+msgstr "Paramètres de l'application"
+
+#: templates/settings.html:35
+msgid "Update Application Settings"
+msgstr "Mettre à jour les paramètres"
+
+#: templates/settings.html:58
+msgid "Update the Language"
+msgstr "Changer la langue"
+
+#: templates/settings.html:61
+msgid "Data Administration"
+msgstr "Voie d'administration"
+
+#: templates/settings.html:67
+msgid "Export Allowance"
+msgstr "Exporter une dotation"
+
+#: templates/settings.html:74
+msgid "Import Allowance"
+msgstr "Importer une dotation"
+
+#: templates/settings_import.html:10
+msgid "Uploaded File Information"
+msgstr "Informations sur le fichier téléversé"
+
+#: templates/settings_import.html:14
+msgid "Importation Status"
+msgstr "État de l'importation"
