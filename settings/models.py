@@ -30,7 +30,7 @@ __version__ = "0.1"
 from django.db import models
 from django import forms
 
-from inventory.models import Dotation
+from inventory.models import Allowance
 
 # Models
 class Vessel(models.Model):
@@ -46,7 +46,7 @@ class Vessel(models.Model):
     mmsi = models.IntegerField(max_length=9)
     fax = models.CharField(max_length=20)
     email = models.EmailField(max_length=64)
-    dotation = models.ManyToManyField(Dotation)
+    allowance = models.ManyToManyField(Allowance)
 
     def __unicode__(self):
         return self.name

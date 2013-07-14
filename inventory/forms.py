@@ -51,7 +51,7 @@ class InfoChangeForm(forms.ModelForm):
     quantity = forms.IntegerField()
 
     class Meta:
-        model = models.Drug
+        model = models.Medicine
         exclude = ['nc_composition', 'nc_inn', 'used']
 
 class QtyChangeForm(forms.Form):
@@ -59,30 +59,30 @@ class QtyChangeForm(forms.Form):
     quantity = forms.IntegerField()
 
 class AddForm(forms.ModelForm):
-    """Form used for adding a drug to an INN in the list."""
+    """Form used for adding a medicine to an INN in the list."""
     quantity = forms.IntegerField()
     class Meta:
-        model = models.Drug
+        model = models.Medicine
         exclude = ['used', 'nc_inn']
 
 
 class AddEquivalentForm(forms.ModelForm):
-    """Form used for adding an equivalent drug to an INN in the list."""
+    """Form used for adding an equivalent medicine to an INN in the list."""
     quantity = forms.IntegerField()
     class Meta:
-        model = models.Drug
+        model = models.Medicine
         exclude = ['used',]
 
 
-class BaseDrugForm(forms.ModelForm):
+class MoleculeForm(forms.ModelForm):
     """Form used in Admin view."""
     tag = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Tag.objects.all(), required=False)
 
     class Meta:
-        model = models.BaseDrug
+        model = models.Molecule
 
 class RemarkForm(forms.ModelForm):
     """Form to change the remark of an object in a view."""
     class Meta:
         model = models.Remark
-        exclude = ['basedrug']
+        exclude = ['molecule']

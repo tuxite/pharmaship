@@ -43,7 +43,7 @@ TYPE_CHOICES = (
         (9, 'Other'),
     )
 
-## Drug "dangerosity" list values
+## Medicine "dangerosity" list values
 DRUG_LIST_CHOICES = (
         (0, 'None'),
         (1, 'Liste I'),
@@ -112,17 +112,29 @@ DRUG_ROA_CHOICES = (
     )
 
 # Models
-class Dotation(models.Model):
-    """Model for articles and drugs dotations."""
+class Allowance(models.Model):
+    """Model for articles and medicines allowances."""
     name = models.CharField(max_length=100) # Example: Dotation A
     additional = models.BooleanField(default=False) # For use with complements. True will add quantity, false will be treated as an absolute quantity.
 
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        unique_together = ('name', )
 
-class DrugGroup(models.Model):
-    """Model for groups attached to an INN (BaseDrug)."""
+class MedicineGroupManager(models.Manager):
+    """
+    Manager for class MedicineGroup.
+    For deserialization purpose only.
+    """
+    def get_by_natural_key(self, name):
+        return self.get(name=name)
+        
+class MedicineGroup(models.Model):
+    """Model for groups attached to an INN (Molecule)."""
+    objects = MedicineGroupManager() # For deserialization
+    
     name = models.CharField(max_length=100) # Example: Cardiology
     order = models.IntegerField() # Example: 1
 
@@ -131,22 +143,40 @@ class DrugGroup(models.Model):
 
     class Meta:
         ordering = ("order", "name",)
+        unique_together = ('name', )
 
-
+    def natural_key(self):
+            return (self.name,)
+            
+class TagManager(models.Manager):
+    """
+    Manager for class Tag.
+    For deserialization purpose only.
+    """
+    def get_by_natural_key(self, name):
+        return self.get(name=name)
+        
 class Tag(models.Model):
     """Model for tags attached to an INN."""
+    objects =TagManager() # For deserialization
+    
     name = models.CharField(max_length=100) # Example: Common Use
     comment = models.TextField(blank=True, null=True) # Description of the tag, if any
 
     def __unicode__(self):
         return self.name
 
+    def natural_key(self):
+            return (self.name,)
+            
     class Meta:
         ordering = ("name",)
+        unique_together = ('name',)
+        
 
-
+            
 class Location(models.Model):
-    """Model for locations attached to a Drug."""
+    """Model for locations attached to a Medicine."""
     primary = models.CharField(max_length=100) # Example: Pharmacie
     secondary = models.CharField(max_length=100,blank=True, null=True) # Example: Tiroir 2
 
@@ -157,8 +187,8 @@ class Location(models.Model):
             return self.primary
 
 
-class Drug(models.Model):
-    """Drug model, "child" of BaseDrug."""
+class Medicine(models.Model):
+    """Medicine model, "child" of Molecule."""
     name = models.CharField(max_length=100) # Brand Name. Example: Doliprane for INN Paracétamol
     exp_date = models.DateField()
     # Link to location
@@ -173,90 +203,112 @@ class Drug(models.Model):
         return u"{0} (exp: {1})".format(self.name, self.exp_date)
 
     def get_quantity(self):
-        """Computes the quantity according to the transactions attached to this drug."""
-        return self.drugqtytransaction_set.aggregate(sum=models.Sum('value'))['sum']
+        """Computes the quantity according to the transactions attached to this medicine."""
+        return self.medicineqtytransaction_set.aggregate(sum=models.Sum('value'))['sum']
 
-
-class BaseDrug(models.Model):
-    """Base drug model for all drugs.
+class MoleculeManager(models.Manager):
+    """
+    Manager for class Molecule.
+    For deserialization purpose only.
+    """
+    def get_by_natural_key(self, name, roa, dosage_form, composition):
+        return self.get(name=name, roa=roa, dosage_form=dosage_form, composition=composition)
+        
+class Molecule(models.Model):
+    """Base medicine model for all medicines.
     inn = International Nonproprietary Name (DC in French)"""
+    objects = MoleculeManager() # For deserialization
+    
     name = models.CharField(max_length=100) # Example: Paracétamol
     roa = models.PositiveIntegerField(choices=DRUG_ROA_CHOICES) # Example: dermal -- ROA: Route of Administration
     dosage_form = models.IntegerField(choices=DRUG_FORM_CHOICES) # Example: "pill"
     composition = models.CharField(max_length=100) # Example: 1000 mg
-    drug_list = models.PositiveIntegerField(choices=DRUG_LIST_CHOICES) # Example: List I
-    group = models.ForeignKey(DrugGroup)
+    medicine_list = models.PositiveIntegerField(choices=DRUG_LIST_CHOICES) # Example: List I
+    group = models.ForeignKey(MedicineGroup)
     tag = models.ManyToManyField(Tag, blank=True)
-    drug_items = models.ManyToManyField(Drug, through='DrugTransaction')
-    dotations = models.ManyToManyField(Dotation, through='DrugReqQty')
+    medicine_items = models.ManyToManyField(Medicine, through='MedicineTransaction')
+    allowances = models.ManyToManyField(Allowance, through='MedicineReqQty')
 
     # Operations
     def __unicode__(self):
         return u"{0} ({2} - {1})".format(self.name, self.composition, self.get_dosage_form_display())
 
     def get_quantity(self):
-        """Computes the total quantity of non-expired & non-equivalent drugs attached to this INN."""
+        """Computes the total quantity of non-expired & non-equivalent medicines attached to this INN."""
         total = 0
-        for item in self.drug_items.filter(used=False):
+        for item in self.medicine_items.filter(used=False):
             if item.exp_date > datetime.date.today() and not item.nc_inn and not item.nc_composition: ## Kind of validation
                 total += item.get_quantity()
         return total
 
     def get_not_null(self):
-        """Returns all Drug items with .used=False (qty>0).
+        """Returns all Medicine items with .used=False (qty>0).
         Used in templates."""
-        return self.drug_items.filter(used=False)
+        return self.medicine_items.filter(used=False)
 
     def get_required_quantity(self):
         """Computes the total required quantity of the INN."""
-        # Workaround: Use the Settings.Vessel.dotation to get the list
-        dotation_list = settings.models.Vessel.objects.latest('id').dotation.all();
+        # Workaround: Use the Settings.Vessel.allowance to get the list
+        allowance_list = settings.models.Vessel.objects.latest('id').allowance.all();
 
-        # For non-additional dotations, the required quantity is a minimum, so we keep the highest required quantity in the set.
-        maximum = self.dotations.filter(additional=False, id__in=dotation_list).aggregate(max=models.Max('drugreqqty__required_quantity'))['max']
+        # For non-additional allowances, the required quantity is a minimum, so we keep the highest required quantity in the set.
+        maximum = self.allowances.filter(additional=False, id__in=allowance_list).aggregate(max=models.Max('medicinereqqty__required_quantity'))['max']
         if not maximum:
             maximum = 0
 
-        # Additional dotations, adds quantity to the inn. We keep the sum of the required quantities in the set.
-        additional = self.dotations.filter(additional=True, id__in=dotation_list).aggregate(sum=models.Sum('drugreqqty__required_quantity'))['sum']
+        # Additional allowances, adds quantity to the inn. We keep the sum of the required quantities in the set.
+        additional = self.allowances.filter(additional=True, id__in=allowance_list).aggregate(sum=models.Sum('medicinereqqty__required_quantity'))['sum']
         if not additional:
             additional = 0
 
         return maximum + additional
 
+    def natural_key(self):
+            return (self.name, self.roa, self.dosage_form, self.composition)
+        
     class Meta:
         ordering = ('name', )
+        unique_together = (('name', 'roa', 'dosage_form', 'composition'),)
 
+class MedicineQtyTransaction(models.Model):
+    """
+    Stores a quantity transaction related to :model:`inventory.Medicine`.
 
-class DrugQtyTransaction(models.Model):
-    """Model for all transactions (in, out, inventory count, ...)"""
+    There are 5 types of transactions :
+    * 1 IN: a medicine is added,
+    * 2 USED: the medicine is used for a treatment,
+    * 4 PERISHED: the medicine has expired,
+    * 8 PHYSICAL_COUNT: the stock is refreshed after a human count,
+    * 9 OTHER: other reason.
+    """
+
     transaction_type = models.PositiveIntegerField(choices=TYPE_CHOICES)
     date = models.DateTimeField(auto_now_add=True)
     remark = models.TextField(blank=True, null=True)
     value = models.IntegerField()
-    drug = models.ForeignKey('Drug')
+    medicine = models.ForeignKey('Medicine')
 
     def __unicode__(self):
-        return u"{0} ({1}: {2})".format(self.drug, self.get_transaction_type_display(), self.value)
+        return u"{0} ({1}: {2})".format(self.medicine, self.get_transaction_type_display(), self.value)
 
 
-class DrugTransaction(models.Model):
-    """Model which joins Drug and BaseDrug models."""
-    drug = models.ForeignKey(Drug)
-    basedrug = models.ForeignKey(BaseDrug)
+class MedicineTransaction(models.Model):
+    """Model which joins Medicine and Molecule models."""
+    medicine = models.ForeignKey(Medicine)
+    molecule = models.ForeignKey(Molecule)
     date = models.DateTimeField(auto_now_add=True)
     purchase_order = models.CharField(max_length=100, blank=True, null=True)
     remark = models.TextField(blank=True, null=True)
 
 
-class DrugReqQty(models.Model):
-    """Model for required quantity of a drug"""
-    dotation = models.ForeignKey('Dotation')
-    inn = models.ForeignKey('BaseDrug')
+class MedicineReqQty(models.Model):
+    """Model for required quantity of a medicine"""
+    allowance = models.ForeignKey('Allowance')
+    inn = models.ForeignKey('Molecule')
     required_quantity = models.IntegerField()
 
 
 class Remark(models.Model):
     """Model for remarks attached to an INN."""
     text = models.TextField(blank=True, null=True)
-    basedrug = models.OneToOneField('BaseDrug')
+    molecule = models.OneToOneField('Molecule')

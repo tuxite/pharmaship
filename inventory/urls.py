@@ -35,16 +35,16 @@ admin.autodiscover()
 urlpatterns = patterns('inventory.views',
     url(r'^$', 'index'),
 
-    # Drug Related
-    url(r'^/drug/index', 'drug', name="drug"),
-    url(r'^/drug/(?P<drug_id>\d+)/delete$', 'drug_delete', name="drug_delete"),
-    url(r'^/drug/(?P<inn_id>\d+)/add$', 'drug_add', name="drug_add"),
-    url(r'^/drug/(?P<drug_id>\d+)/change$', 'drug_change', name="drug_change"),
-    url(r'^/drug/(?P<drug_id>\d+)/out$', 'drug_out', name="drug_out"),
-    url(r'^/drug/(?P<inn_id>\d+)/equivalent$', 'drug_equivalent', name="drug_equivalent"),
-    url(r'^/drug/(?P<inn_id>\d+)/remark$', 'drug_remark', name="drug_remark"),
-    url(r'^/drug/filter$', 'drug_filter', name="drug_filter"),
-    url(r'^/drug/print$', 'drug_print', name="drug_print"),
+    # Medicine Related
+    url(r'^/medicine/index', 'medicine', name="medicine"),
+    url(r'^/medicine/(?P<medicine_id>\d+)/delete$', 'medicine_delete', name="medicine_delete"),
+    url(r'^/medicine/(?P<inn_id>\d+)/add$', 'medicine_add', name="medicine_add"),
+    url(r'^/medicine/(?P<medicine_id>\d+)/change$', 'medicine_change', name="medicine_change"),
+    url(r'^/medicine/(?P<medicine_id>\d+)/out$', 'medicine_out', name="medicine_out"),
+    url(r'^/medicine/(?P<inn_id>\d+)/equivalent$', 'medicine_equivalent', name="medicine_equivalent"),
+    url(r'^/medicine/(?P<inn_id>\d+)/remark$', 'medicine_remark', name="medicine_remark"),
+    url(r'^/medicine/filter$', 'medicine_filter', name="medicine_filter"),
+    url(r'^/medicine/print$', 'medicine_print', name="medicine_print"),
 
     # Material Related
     url(r'^/material', 'material', name="material"),

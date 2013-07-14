@@ -55,17 +55,17 @@ a#reset_input > img{
 
 /* Listing */
 /** Common **/
-div#drug_table{
+div#medicine_table{
     width: 100%;
     }
-div#drug_table ul, div.drug_info, div.drug_loc_rem, article, nav.drug_action, div.group_div{
+div#medicine_table ul, div.medicine_info, div.medicine_loc_rem, article, nav.medicine_action, div.group_div{
     clear: both;
     }
-div#drug_table ul{
+div#medicine_table ul{
     width: 100%;
     }
 
-div#drug_table li{
+div#medicine_table li{
     display: block;
     float: left;
     }
@@ -81,40 +81,40 @@ h2.group {
     margin: 10px;
     }
 
-header#drug_table_header > ul{
+header#medicine_table_header > ul{
     background: #2e3536;
     color: white;
     font-weight: 700;
     }
 
 /*** Common li ***/
-li.drug_li_h{
+li.medicine_li_h{
     padding: 0.95em 0.5em;
     margin: 0.35em 0.5%;
     }
-li.drug_li{
+li.medicine_li{
     padding: 0.5em;
     margin: 0.35em 0.5%;
     }
-li.drug_qty {
+li.medicine_qty {
     width: 6.3%;
     text-align: center;
     }
-li.drug_inn {
+li.medicine_inn {
     width: 35%;
     margin-left: 0;
     }
-li.drug_compo {
+li.medicine_compo {
     width: 25%;
     }
-li.drug_date{
+li.medicine_date{
     width: 10%;
     margin-right: 0;
     text-align: center;
     }
 
 /*** li inn name ***/
-.drug_inn_header:hover{
+.medicine_inn_header:hover{
     background: silver;
     cursor: pointer;
     }
@@ -147,31 +147,31 @@ article > div{
     background:#eeeeec;
     border: 1px solid silver;
     }
-div.drug_wrapper{
+div.medicine_wrapper{
     background:#d3d7cf;
     height: 3.5em;
     }
 
-div.drug_info{
+div.medicine_info{
     display: block;
     padding: 0.5em 0;
     }
 
-div.drug_rem p, div.drug_info p{
+div.medicine_rem p, div.medicine_info p{
     float: left;
     padding: 0.5em;
     }
-p.drug_tag, p.drug_roa{
+p.medicine_tag, p.medicine_roa{
     width: 35%;
     margin-right: 0.5%;
     }
-div.drug_rem > span{
+div.medicine_rem > span{
     float: right;
     display: block;
     margin: 5px 10px 0 0;
     }
 /*** inn list ***/
-div.drug_list{
+div.medicine_list{
     float: right;
     margin-top: -1em;
     padding: 0.5em;
@@ -190,21 +190,21 @@ div.redborder{
     }
 
 /*** inn actions ***/
-nav.drug_action > ul {
+nav.medicine_action > ul {
     height: 3em;
     background:white;
     }
-nav.drug_action > ul > li  {
+nav.medicine_action > ul > li  {
     margin: 0.9em;
     }
-nav.drug_action > ul > li > a{
+nav.medicine_action > ul > li > a{
     border-radius: 3px;
     padding : 5px 10px;
     padding-left: 30px;
     color: white;
     text-decoration : none;
     }
-nav.drug_action > ul > li > a:hover{
+nav.medicine_action > ul > li > a:hover{
     text-decoration : none;
     color: #2e3436;
     }
@@ -221,36 +221,36 @@ nav.drug_action > ul > li > a:hover{
     background:#ad7fa8 url(./icons/equivalent_dark.png) no-repeat 3px 2px;
     }
 
-/*** drug actions ***/
-li.drug_a {
+/*** medicine actions ***/
+li.medicine_a {
     padding: 0;
     padding-top: 0.4em;
     }
-.drug_link{
+.medicine_link{
     width: 24px;
     height: 24px;
     background:#729fcf;
     display: block;
     }
-.drug_edit{
+.medicine_edit{
     background: url(./icons/edit.png) no-repeat;
     }
-.drug_delete{
+.medicine_delete{
     background: url(./icons/delete.png) no-repeat;
     }
-.drug_out{
+.medicine_out{
     background: url(./icons/out.png) no-repeat;
     }
 
-/*** drug items header ***/
-header.drug_item_header > ul{
+/*** medicine items header ***/
+header.medicine_item_header > ul{
     background: #888a85;
     color: white;
     font-weight: 700;
     width: inherit;
     }
 
-/*** drug details ***/
+/*** medicine details ***/
 span.red, li.red{
     color:#cc0000;
     font-weight: 700;
@@ -266,7 +266,7 @@ span.red, li.red{
     }
 
 /* Popup */
-div#drug_dialog{
+div#medicine_dialog{
     display:none;
     background:#729fcf;
     padding: 5px;

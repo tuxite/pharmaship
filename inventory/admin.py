@@ -28,46 +28,46 @@ __license__ = "GPL"
 __version__ = "0.1"
 
 import models
-from forms import BaseDrugForm
+from forms import MoleculeForm
 from django.contrib import admin
 
-class BaseDrugAdmin(admin.ModelAdmin):
+class MoleculeAdmin(admin.ModelAdmin):
     list_display = ('name', 'dosage_form', 'composition')
     ordering = ('name',)
-    form = BaseDrugForm
+    form = MoleculeForm
 
     class Meta:
         ordering = ('name', )
 
-class DrugAdmin(admin.ModelAdmin):
-    list_display = ('name', 'basedrug_set', 'get_quantity', 'location')
+class MedicineAdmin(admin.ModelAdmin):
+    list_display = ('name', 'molecule_set', 'get_quantity', 'location')
 
-class DrugGroupAdmin(admin.ModelAdmin):
+class MedicineGroupAdmin(admin.ModelAdmin):
     ordering = ('order',)
 
-class DrugTransactionAdmin(admin.ModelAdmin):
-    list_display = ('drug', 'basedrug', 'date')
+class MedicineTransactionAdmin(admin.ModelAdmin):
+    list_display = ('medicine', 'molecule', 'date')
 
-class DrugQtyTransactionAdmin(admin.ModelAdmin):
-    list_display = ('drug', 'value', 'transaction_type')
+class MedicineQtyTransactionAdmin(admin.ModelAdmin):
+    list_display = ('medicine', 'value', 'transaction_type')
 
-class DrugReqQtyAdmin(admin.ModelAdmin):
-    list_display = ('inn', 'dotation', 'required_quantity')
-    ordering = ('inn', 'dotation',)
+class MedicineReqQtyAdmin(admin.ModelAdmin):
+    list_display = ('inn', 'allowance', 'required_quantity')
+    ordering = ('inn', 'allowance',)
 
 class LocationAdmin(admin.ModelAdmin):
     list_display = ('primary', 'secondary')
 
 class RemarkAdmin(admin.ModelAdmin):
-    list_display = ('text', 'basedrug')
+    list_display = ('text', 'molecule')
             
-admin.site.register(models.BaseDrug, BaseDrugAdmin)
-admin.site.register(models.Drug, DrugAdmin)
-admin.site.register(models.DrugGroup, DrugGroupAdmin)
-admin.site.register(models.DrugTransaction, DrugTransactionAdmin)
-admin.site.register(models.DrugQtyTransaction, DrugQtyTransactionAdmin)
-admin.site.register(models.DrugReqQty, DrugReqQtyAdmin)
-admin.site.register(models.Dotation)
+admin.site.register(models.Molecule, MoleculeAdmin)
+admin.site.register(models.Medicine, MedicineAdmin)
+admin.site.register(models.MedicineGroup, MedicineGroupAdmin)
+admin.site.register(models.MedicineTransaction, MedicineTransactionAdmin)
+admin.site.register(models.MedicineQtyTransaction, MedicineQtyTransactionAdmin)
+admin.site.register(models.MedicineReqQty, MedicineReqQtyAdmin)
+admin.site.register(models.Allowance)
 admin.site.register(models.Tag)
 admin.site.register(models.Location, LocationAdmin)
 admin.site.register(models.Remark, RemarkAdmin)

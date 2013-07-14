@@ -85,7 +85,7 @@ div#vessel{
     font-size: 12pt;
     }
 
-h1#title, div#dotation{
+h1#title, div#allowance{
     text-align: center;
     margin: 0 auto;
     }
@@ -108,6 +108,6 @@ h1#title{
     font-size: 16pt;
     margin-bottom: 5mm;
     }
-div#dotation{
+div#allowance{
     font-size: 14pt;
     }
