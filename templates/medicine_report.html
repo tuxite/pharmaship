@@ -2,6 +2,7 @@
 <html>
 <head>
     {% load staticfiles %}
+    {% load i18n %}
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" >
 
     <link rel="stylesheet" type="text/css" href='{% static "style/report.css" %}' media="screen, print">
@@ -26,19 +27,19 @@
     <h1 id="title">{{ title }}</h1>
     <div id="vessel">
         <ul>
-            <li><b>Navire :</b> {{ vessel.name }}</li>
-            <li><b>Armement :</b> {{ vessel.shipowner }}</li>
-            <li><b>Pavillon :</b> {{ vessel.flag }}</li>
-            <li><b>Port d'attache :</b> {{ vessel.port_of_registry }}</li>
+            <li><b>{% trans "Vessel:" %}</b> {{ vessel.name }}</li>
+            <li><b>{% trans "Shipowner:" %}</b> {{ vessel.shipowner }}</li>
+            <li><b>{% trans "Flag:" %}</b> {{ vessel.flag }}</li>
+            <li><b>{% trans "Port of Registry" %}</b> {{ vessel.port_of_registry }}</li>
         </ul>
 
     </div>
-    <div id="dotation">
+    <div id="allowance">
         <p>
-            <b>Dotations médicales :</b>
-            {% for dotation in dotation_list %}
+            <b>{% trans "Medical Allowances:" %}</b>
+            {% for allowance in allowance_list %}
             {% if not forloop.first %} - {% endif %}
-            {{ dotation.name }}
+            {{ allowance.name }}
             {% endfor %}
        </p>
     </div>
@@ -47,13 +48,13 @@
         <thead>
         <tr>
             <td>Principe actif<br />Dénomination Commune Internationale</td>
-            <td>Nom de spécialité ou générique</td>
-            <td>Voie d'administration</td>
+            <td>{% trans "Brand name or Generic" %}</td>
+            <td>{% trans "Route of Administration" %}</td>
             <td>Forme - Composition</td>
             <td class="center">Quantité réglementaire</td>
             <td class="center">Quantité existante</td>
             <td class="center">Date de péremption</td>
-            <td class="center">Liste</td>
+            <td class="center">{% trans "List" %}</td>
         </tr>
         </thead>
         <tbody>
@@ -68,9 +69,9 @@
                 <td class="center">{{ inn.required_quantity }}</td>
                 <td class="center">{{ inn.quantity }}</td>
                 <td></td>
-                <td class="center">{% if inn.drug_list != "None" %}{{ inn.drug_list }}{% endif %}</td>
+                <td class="center">{% if inn.medicine_list != "None" %}{{ inn.medicine_list }}{% endif %}</td>
             </tr>
-            {% for item in inn.drug_items|dictsort:"exp_date" %}
+            {% for item in inn.medicine_items|dictsort:"exp_date" %}
             <tr>
                 {% if item.nc_inn %}
                 <td class="nc">{{ item.nc_inn }}</td>

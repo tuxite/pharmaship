@@ -1,7 +1,7 @@
 {% extends "popup_layout.html" %}
 
 {% block begin_wrapper %}
-<form method="post" action="{% url drug_equivalent inn.id %}" name="drug_form">
+<form method="post" action="{% url medicine_equivalent inn.id %}" name="medicine_form">
 {% csrf_token %}
 {% endblock %}
 
@@ -14,10 +14,10 @@
 {% endblock %}
 
 {% block action %}
-<p>Avant d'ajouter ce médicament équivalent (dénomination différente de la dotation), assurez-vous d'avoir eu l'accord d'un médecin.</p>
+<p>Avant d'ajouter ce médicament équivalent (dénomination différente de la allowance), assurez-vous d'avoir eu l'accord d'un médecin.</p>
 <ul>
     <li class="b-close popup_action">Ne pas ajouter</li>
-    <li class="popup_action" onClick="document.forms['drug_form'].submit();">Ajouter ce médicament</li>
+    <li class="popup_action" onClick="document.forms['medicine_form'].submit();">Ajouter ce médicament</li>
 </ul>
 {% endblock %}
 

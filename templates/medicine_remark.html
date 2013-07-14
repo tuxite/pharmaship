@@ -1,7 +1,7 @@
 {% extends "popup_layout.html" %}
 
 {% block begin_wrapper %}
-<form method="post" action="{% url drug_remark inn.id %}" name="drug_form">
+<form method="post" action="{% url medicine_remark inn.id %}" name="medicine_form">
 {% csrf_token %}
 {% endblock %}
 
@@ -16,7 +16,7 @@
 {% block action %}
 <ul>
     <li class="b-close popup_action">Ne pas modifier</li>
-    <li class="popup_action" onClick="document.forms['drug_form'].submit();">Changer les remarques</li>
+    <li class="popup_action" onClick="document.forms['medicine_form'].submit();">Changer les remarques</li>
 </ul>
 {% endblock %}
 

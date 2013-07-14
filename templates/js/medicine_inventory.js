@@ -19,8 +19,8 @@
  * along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
  *
  * =====================================================================
- * Filename:    template/js/drug_inventory.js
- * Description: JS for drug inventory view
+ * Filename:    template/js/medicine_inventory.js
+ * Description: JS for medicine inventory view
  * Author:      Matthieu Morin
  * Version:     0.1
  * =====================================================================
@@ -33,18 +33,18 @@
     /* DOM ready */
     $(function () {
         /* List filters */
-        drugFilter_by_name($("#articles"));
-        drugFilter_by_group($("#articles"));
-        drugFilter_by_tag($("#articles"));
-        drugFilter_by_location($("#articles"));
-        uncheck($("#filterdotation"));
+        medicineFilter_by_name($("#articles"));
+        medicineFilter_by_group($("#articles"));
+        medicineFilter_by_tag($("#articles"));
+        medicineFilter_by_location($("#articles"));
+        uncheck($("#filterallowance"));
         collapse();
         sticky_header();
         click_header();
         reset_input();
 
         /* Hide all panels on load */
-        $("div.drug_more").hide();
+        $("div.medicine_more").hide();
 
         /* jQuery wrapper for handling clicks to open popups */
         $('.jquery_popup').on('click', function (e) {
@@ -52,7 +52,7 @@
             // Prevents the default action to be triggered.
             e.preventDefault();
             // Triggering bPopup when click event is fired
-            $('#drug_dialog').bPopup({
+            $('#medicine_dialog').bPopup({
                 contentContainer: '.content',
                 loadUrl: e.target.href
             });
@@ -115,28 +115,28 @@
             .indexOf(search.toUpperCase()) >= 0;
     };
 
-    /* Function to filter the drugs by name */
+    /* Function to filter the medicines by name */
 
-    function drugFilter_by_name(list) {
+    function medicineFilter_by_name(list) {
         var input = $('#filterinput');
 
         $(input)
             .change(function () {
             // Reset the group filter
             $('#filterselect').val(0);
-            $(list).find("p.drug_group").parents('div.group_div').show();
+            $(list).find("p.medicine_group").parents('div.group_div').show();
             // Reset the tag filter
             $('#filtertag').prop("checked", false);
-            $(list).find("p.drug_group").parents('article').show();
+            $(list).find("p.medicine_group").parents('article').show();
             // Reset the location filter
             $('#filterlocation').val(0);
             
             var filter = $(this).val();
             if (filter) {
-                $(list).find("ul.inn_list>li.drug_inn:not(:contains(" + filter + "))").parents('article').hide();
-                $(list).find("ul.inn_list>li.drug_inn:contains(" + filter + ")").parents('article').show();
+                $(list).find("ul.inn_list>li.medicine_inn:not(:contains(" + filter + "))").parents('article').hide();
+                $(list).find("ul.inn_list>li.medicine_inn:contains(" + filter + ")").parents('article').show();
             } else {
-                $(list).find("ul.inn_list>li.drug_inn").parents('article').show();
+                $(list).find("ul.inn_list>li.medicine_inn").parents('article').show();
             }
             return false;
         })
@@ -148,21 +148,21 @@
 
     /* Function to filter by group */
 
-    function drugFilter_by_group(list) {
+    function medicineFilter_by_group(list) {
         var input = $('#filterselect');
 
         $(input)
             .change(function () {
             // Reset the text filter
             $('#filterinput').val('');
-            $(list).find("li.drug_inn").parents('article').show();
+            $(list).find("li.medicine_inn").parents('article').show();
 
             var filter = $(this).val();
             if (filter) {
-                $(list).find("p.drug_group:not(:Contains(" + filter + "))").parents('div.group_div').hide();
-                $(list).find("p.drug_group:Contains(" + filter + ")").parents('div.group_div').show();
+                $(list).find("p.medicine_group:not(:Contains(" + filter + "))").parents('div.group_div').hide();
+                $(list).find("p.medicine_group:Contains(" + filter + ")").parents('div.group_div').show();
             } else {
-                $(list).find("p.drug_group").parents('div.group_div').show();
+                $(list).find("p.medicine_group").parents('div.group_div').show();
             }
             return false;
         })
@@ -170,17 +170,17 @@
 
     /* Function to filter by tag */
 
-    function drugFilter_by_tag(list) {
+    function medicineFilter_by_tag(list) {
         var input = $('#filtertag');
 
         $(input)
             .change(function () {
             var filter = $(this).val();
             if (this.checked == true) {
-                $(list).find("div.drug_rem:not(:contains(" + filter + "))").parents('article').hide();
-                $(list).find("div.drug_rem:contains(" + filter + ")").parents('article').show();
+                $(list).find("div.medicine_rem:not(:contains(" + filter + "))").parents('article').hide();
+                $(list).find("div.medicine_rem:contains(" + filter + ")").parents('article').show();
             } else {
-                $(list).find("div.drug_rem").parents('article').show();
+                $(list).find("div.medicine_rem").parents('article').show();
             }
             return false;
         })
@@ -188,17 +188,17 @@
 
     /* Function to filter by location */
 
-    function drugFilter_by_location(list) {
+    function medicineFilter_by_location(list) {
         var input = document.getElementById('filterlocation');
 
         $(input)
             .change(function () {
             var filter = $(this).val();
             if (filter) {
-                $(list).find("li.drug_location:not(:contains(" + filter + "))").parents('article').hide();
-                $(list).find("li.drug_location:contains(" + filter + ")").parents('article').show();
+                $(list).find("li.medicine_location:not(:contains(" + filter + "))").parents('article').hide();
+                $(list).find("li.medicine_location:contains(" + filter + ")").parents('article').show();
             } else {
-                $(list).find("li.drug_location").parents('article').show();
+                $(list).find("li.medicine_location").parents('article').show();
             }
             return false;
         })
@@ -207,8 +207,8 @@
     /* Function to uncheck the "all" checkbox when others are checked */
 
     function uncheck(form) {
-        var reset_checkbox = $("input[name=dotation-0]");
-        var dotation_checkbox = $("input.filtercheck");
+        var reset_checkbox = $("input[name=allowance-0]");
+        var allowance_checkbox = $("input.filtercheck");
 
         $(reset_checkbox).change(function () {
             if (this.checked == true) {
@@ -218,7 +218,7 @@
             }
         })
 
-        $(dotation_checkbox).change(function () {
+        $(allowance_checkbox).change(function () {
             if (this.checked == true) {
                 // Uncheck of the reset checkbox
                 $(reset_checkbox).prop('checked', false);
@@ -231,18 +231,18 @@
     /* Function to collapse INN in the list on a click event */
 
     function collapse() {
-        var header = $(".drug_inn_header")
+        var header = $(".medicine_inn_header")
 
         $(header).click(function () {
-            var panel = $(this).parents('article').find("div.drug_more");
+            var panel = $(this).parents('article').find("div.medicine_more");
             // Getting the previous state
             var state = panel.is(":hidden");
             // Resetting the display
-            $("div.drug_more").hide();
+            $("div.medicine_more").hide();
             $('article').find("header:first").removeClass("yellow");
             $('small.brand').show();
             $('ul.inn_list').height('4em');
-            $('li.drug_li_h').css("padding", "0.95em 0.5em");
+            $('li.medicine_li_h').css("padding", "0.95em 0.5em");
             // Any change?
             if (state == true) {
                 // Change the class
@@ -254,7 +254,7 @@
                 // Resize the ul element
                 $(this).parents('article').find('ul.inn_list').height('3em');
                 // Changing padding
-                $(this).parents('article').find('li.drug_li_h').css("padding", "0.5em");
+                $(this).parents('article').find('li.medicine_li_h').css("padding", "0.5em");
             }
         })
     }
@@ -262,17 +262,17 @@
     /* Function to fix the headers during scrolling */
 
     function sticky_header() {
-        var stickyHeader = $('#drug_table_header').offset().top + 0;
+        var stickyHeader = $('#medicine_table_header').offset().top + 0;
         $(window).scroll(function () {
             if ($(window).scrollTop() > stickyHeader) {
-                var width = $('#drug_table_header').width();
-                $('#drug_table_header').css({
+                var width = $('#medicine_table_header').width();
+                $('#medicine_table_header').css({
                     position: 'fixed',
                     top: '0px',
                     width: width
                 });
             } else {
-                $('#drug_table_header').css({
+                $('#medicine_table_header').css({
                     position: 'static',
                     top: '0px'
                 });
@@ -283,7 +283,7 @@
     /* Function to scroll up on click on the header */
 
     function click_header() {
-        var header = $('#drug_table_header');
+        var header = $('#medicine_table_header');
         $(header).click(function () {
             $("html, body").animate({
                 scrollTop: 0
