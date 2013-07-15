@@ -233,15 +233,23 @@ li.medicine_a {
     display: block;
     }
 .medicine_edit{
+    background: url(./icons/edit_mono.png) no-repeat;
+    }
+.medicine_edit:hover{
     background: url(./icons/edit.png) no-repeat;
     }
 .medicine_delete{
+    background: url(./icons/delete_mono.png) no-repeat;
+    }
+.medicine_delete:hover{
     background: url(./icons/delete.png) no-repeat;
     }
 .medicine_out{
+    background: url(./icons/out_mono.png) no-repeat;
+    }
+.medicine_out:hover{
     background: url(./icons/out.png) no-repeat;
     }
-
 /*** medicine items header ***/
 header.medicine_item_header > ul{
     background: #888a85;
