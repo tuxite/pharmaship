@@ -435,7 +435,7 @@ def parser(allowance_list, location_list):
 
                 group_inn_dict['medicine_items'] = []
                 # Finding attached medicines (Medicine)
-                for medicine in inn.medicine_items.all():#.order_by('exp_date'):
+                for medicine in inn.medicine_items.all():
                     # Do not parse the used medicines (quantity = 0)
                     if medicine.used == True:
                         continue

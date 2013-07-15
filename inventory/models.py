@@ -206,6 +206,9 @@ class Medicine(models.Model):
         """Computes the quantity according to the transactions attached to this medicine."""
         return self.medicineqtytransaction_set.aggregate(sum=models.Sum('value'))['sum']
 
+    class Meta:
+        ordering = ("nc_inn", "exp_date")
+
 class MoleculeManager(models.Manager):
     """
     Manager for class Molecule.

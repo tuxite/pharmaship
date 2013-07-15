@@ -71,7 +71,7 @@
                 <td></td>
                 <td class="center">{% if inn.medicine_list != "None" %}{{ inn.medicine_list }}{% endif %}</td>
             </tr>
-            {% for item in inn.medicine_items|dictsort:"exp_date" %}
+            {% for item in inn.medicine_items %}
             <tr>
                 {% if item.nc_inn %}
                 <td class="nc">{{ item.nc_inn }}</td>
