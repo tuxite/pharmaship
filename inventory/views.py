@@ -221,12 +221,13 @@ def medicine_equivalent(request, inn_id):
             nc_inn = form.cleaned_data['nc_inn']
             quantity = form.cleaned_data['quantity']
             exp_date = form.cleaned_data['exp_date']
+            location = form.cleaned_data['location']
             # Checking the conformity
             if nc_composition == default_composition:
                 nc_composition = None
 
             # Adding the new medicine
-            medicine = models.Medicine.objects.create(name = name, exp_date = exp_date, nc_composition = nc_composition, nc_inn=nc_inn)
+            medicine = models.Medicine.objects.create(name = name, exp_date = exp_date, nc_composition = nc_composition, nc_inn=nc_inn, location=location)
             # Adding the link
             models.MedicineTransaction.objects.create(medicine = medicine, molecule = inn)
             # Adding the transaction
@@ -458,7 +459,8 @@ def parser(allowance_list, location_list):
                         if transaction.medicine == medicine:
                             group_inn_medicine_dict['quantity'] += transaction.value
                     # Adding the medicine quantity to the inn quantity
-                    group_inn_dict['quantity'] += group_inn_medicine_dict['quantity']
+                    if not medicine.nc_inn:
+                        group_inn_dict['quantity'] += group_inn_medicine_dict['quantity']
                     # Adding the medicine dict to the list
                     group_inn_dict['medicine_items'].append(group_inn_medicine_dict)
 
