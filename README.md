@@ -11,7 +11,4 @@ This software is in active development!
 
 ## Installation
 *   Edit pharmaship/settings.py
-*   Modify values :
-    *   DATABASES
-    *   MEDIA_ROOT
-    *   STATIC_ROOT
+*   Modify in conf/mysql.conf
