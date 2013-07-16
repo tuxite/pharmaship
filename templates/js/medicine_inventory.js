@@ -239,14 +239,14 @@
             var state = panel.is(":hidden");
             // Resetting the display
             $("div.medicine_more").hide();
-            $('article').find("header:first").removeClass("yellow");
+            $('article').find("header:first").removeClass("active");
             $('small.brand').show();
             $('ul.inn_list').height('4em');
             $('li.medicine_li_h').css("padding", "0.95em 0.5em");
             // Any change?
             if (state == true) {
                 // Change the class
-                $(this).parents('article').find("header:first").addClass("yellow");
+                $(this).parents('article').find("header:first").addClass("active");
                 // Show the panel
                 panel.show();
                 // Hide the brands
