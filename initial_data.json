@@ -1,0 +1,157 @@
+[
+    {
+        "pk": 10, 
+        "model": "settings.vessel", 
+        "fields": {
+            "name": "Vessel Name", 
+            "imo": 0, 
+            "mmsi": 0,
+            "call_sign": "ZZZZ", 
+            "flag": "Flag",
+            "shipowner": "Owner", 
+            "port_of_registry": "Port",   
+            "sat_phone": "00...", 
+            "gsm_phone": "00...", 
+            "fax": "00...", 
+            "email": "contact@ship.com", 
+            "allowance": [
+                0
+            ]
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "settings.application", 
+        "fields": {
+            "expire_date_warning_delay": 60
+        }
+    }, 
+    {
+        "pk": 0, 
+        "model": "inventory.allowance", 
+        "fields": {
+            "name": "Hors dotation", 
+            "additional": false
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Cardiologie", 
+            "order": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Gastro-Ent\u00e9rologie", 
+            "order": 2
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Antalgiques Antipyr\u00e9tiques Antispasmodiques Anti-inflammatoires", 
+            "order": 3
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Psychatrie - Neurologie", 
+            "order": 4
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Allergologie", 
+            "order": 5
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Pneumologie", 
+            "order": 6
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Infectiologie - Parasitologie", 
+            "order": 7
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "R\u00e9animation", 
+            "order": 8
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Dermatologie", 
+            "order": 9
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Ophtalmologie", 
+            "order": 10
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "Oto-Rhino-Laryngologie - Stomatologie", 
+            "order": 11
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "inventory.medicinegroup", 
+        "fields": {
+            "name": "An\u00e9sth\u00e9siques locaux", 
+            "order": 12
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "inventory.tag", 
+        "fields": {
+            "comment": "", 
+            "name": "Usage courant"
+        }
+    },
+    {
+        "pk": 2, 
+        "model": "inventory.tag", 
+        "fields": {
+            "comment": "", 
+            "name": "Conservation au froid"
+        }
+    },  
+    {
+        "pk": 1, 
+        "model": "inventory.location", 
+        "fields": {
+            "primary": "Pharmacy", 
+            "secondary": ""
+        }
+    }
+]
