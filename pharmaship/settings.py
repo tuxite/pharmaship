@@ -135,7 +135,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.doc.XViewMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_middleware.DebugFooter',
 )
 
 ROOT_URLCONF = 'pharmaship.urls'
