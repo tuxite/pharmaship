@@ -36,7 +36,7 @@ from inventory.models import Allowance
 ApplicationForm = modelform_factory(models.Application)
 
 class VesselForm(forms.ModelForm):
-    allowance = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=Allowance.objects.all())
+    allowance = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=Allowance.objects.all().exclude(pk=0))
 
     class Meta:
         model = models.Vessel
