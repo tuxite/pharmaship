@@ -201,3 +201,7 @@ LOGIN_URL = "/login/?next=/"
 
 # ACCOUNTS APP
 AUTH_PROFILE_MODULE = 'users.UserProfile'
+
+# Trusted GPG Folder
+TRUSTED_GPG = os.path.abspath(".") + "/conf/trusted"
+KEYRING = os.path.abspath(".") + "/conf/keyring"

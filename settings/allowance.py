@@ -29,19 +29,22 @@ __version__ = "0.1"
 
 import tarfile, time, datetime
 import xml.dom.minidom
+import gpgme, os
+import io, ConfigParser
 
 from django.core import serializers
 from django.core.files.base import ContentFile
 from django.http import HttpResponse
+from django.conf import settings
 
 import inventory.models
 import forms
 
 MANIFEST = [
+    'info',
     'molecules.xml',
     'reqqty.xml',
     'allowance.xml',
-    #~ 'metadata',
     ]
 
 def remove_pk(xml_string):
@@ -68,10 +71,13 @@ def get_molecule_pk(deserialized_object):
 
 def get_allowance_pk(deserialized_object):
     """Returns the pk of an Allowance object with deserialized_object attributes."""
-    obj = inventory.models.Allowance.objects.get(
-        name = deserialized_object.object.name,
-        )
-    return obj.pk
+    try:
+        obj = inventory.models.Allowance.objects.get(
+            name = deserialized_object.object.name,
+            )
+        return obj.pk
+    except:
+        return None
 
 def get_reqqty_pk(deserialized_object):
     """Returns the pk of a ReqQty object with deserialized_object attributes."""
@@ -120,9 +126,30 @@ def create_archive(allowance):
 
     return response
 
-# Dirty
 def import_archive(import_file):
-    """Imports an archive with allowance data inside. Do some integrity/authencity checks."""
+    """
+    Imports an archive with allowance data inside.
+
+    This function will get first information about the uploaded file.
+    Then, it updates the trusted keys keyring.
+
+    Following the verification of the signature, it gets information
+    about the key.
+
+    If all is OK, the signed file is opened as a tarfile.
+    Infomation about the package (author, name and date) are parsed.
+    
+    Molecule objects with no allowance (orphan) are stored for further
+    treatment.
+    Molecules are updated or added (if their pk cannot be determined).
+    Allowance object is updated or created by the same process.
+    Required quantities are erased for the allowance and re-created.
+
+    Finally, the new orphan molecules are affected to a special
+    allowance with 0 as required quantity.
+
+    The function returns a dictionnary with information to be displayed.
+    """
     # Check the format of the file
     data = {}
     data['name'] = import_file.name
@@ -130,8 +157,45 @@ def import_archive(import_file):
     data['type'] = import_file.content_type
     data['data'] = ""
 
+    # Updating the keyring
+    if settings.KEYRING:
+        os.environ['GNUPGHOME'] = settings.KEYRING
+
+    gpg = gpgme.Context()
+
+    if settings.TRUSTED_GPG:
+        # Removing all keys in the keyring
+        try:
+            for key in gpg.keylist():
+                gpg.delete(key)
+        except:
+            pass
+        # Parsing the folder to import each key in the keyring
+        for item in os.listdir(settings.TRUSTED_GPG):
+            try:
+                with open(os.path.join(settings.TRUSTED_GPG, item), 'r') as fp:
+                    gpg.import_(fp)
+            except:
+                pass
+
+    # Verifying the signature
+    clear_tar = io.BytesIO()
+    verified = gpg.verify(import_file, None, clear_tar)
+
+    # Signature data
+    if verified[0].status:
+        # If it is different of 0 (GPG_ERR_NO_ERROR), abort the import process
+        data['error'] = "Signature not valid. Error:", verified[0].status
+        return data
+
+    fpr = verified[0].fpr
+    key_id = fpr[-8:]
+    key = gpg.get_key(key_id)
+    data['verified'] = u"{0} [{1}]".format(key.uids[0].uid, key_id)
+
+    # Opening the archive and processing
     try:
-        with tarfile.open(fileobj=import_file, mode="r") as tar:
+        with tarfile.open(fileobj=io.BytesIO(clear_tar.getvalue()), mode="r") as tar:
             for tarinfo in tar:
                 # Is it a file?
                 if not tarinfo.isreg():
@@ -143,11 +207,19 @@ def import_archive(import_file):
 
             # Now, parsing the files in the good order
             results = {}
-            # 0: Detecting molecules without allowance (orphan)
+
+            # Getting information from the information file
+            info = ConfigParser.ConfigParser()
+            info.readfp(tar.extractfile("info"))
+            data['info'] = {}
+            for item in info.items("package"):
+                data['info'][item[0]] = item[1]
+
+            # Detecting molecules without allowance (orphan)
             orphan_list_before = inventory.models.Molecule.objects.filter(allowances=None)
             print orphan_list_before
 
-            # 1: Molecules
+            # Molecules
             added_molecules = []
             # Deserialize the file
             deserialized_list = serializers.deserialize("xml", tar.extractfile("molecules.xml"))
@@ -156,11 +228,10 @@ def import_archive(import_file):
                     molecule.save()
                     pk = get_molecule_pk(molecule)
                     added_molecules.append(pk)
-            # Results :
             results['molecules'] = len(added_molecules)
             results['molecules_pk'] = added_molecules
 
-            # 2: Allowance
+            # Allowance
             deserialized_allowance = serializers.deserialize("xml", tar.extractfile("allowance.xml"))
             for allowance in deserialized_allowance:
                 results['allowance_name'] = allowance.object.name
@@ -170,16 +241,15 @@ def import_archive(import_file):
                 else:
                     allowance.save()
                     results['allowance_new'] = True
-                    allowance_pk = get_allowance_pk(molecule)
-                results['allowance_pk'] = allowance_pk
+                    allowance_pk = get_allowance_pk(allowance)
 
                 break # Only one allowance per file
 
-            # 3: Required Quantities
+            # Required Quantities
             deserialized_reqqty = serializers.deserialize("xml", tar.extractfile("reqqty.xml"))
             results['reqqty_added'] = 0
 
-            # Delete all required quantities entry
+            # Delete all required quantities entry and create new ones
             inventory.models.MedicineReqQty.objects.filter(allowance=allowance_pk).delete()
             allowance = inventory.models.Allowance.objects.get(pk=allowance_pk)
             for reqqty in deserialized_reqqty:
@@ -187,11 +257,11 @@ def import_archive(import_file):
                 reqqty.save()
                 results['reqqty_added'] += 1
 
-            # 4: Listing molecules with no reqqty
+            # Listing molecules with no reqqty
             orphan_list_after = inventory.models.Molecule.objects.filter(allowances=None)
             results['orphan'] = len(orphan_list_after) - len(orphan_list_before)
-            # Creating reqqty with special allowance (id=0)
-            no_allowance = inventory.models.Allowance.objects.get(pk=0)
+            # Creating reqqty with special allowance (id=1)
+            no_allowance = inventory.models.Allowance.objects.get(pk=1)
             for molecule in orphan_list_after:
                 inventory.models.MedicineReqQty.create(inn=molecule, allowance=no_allowance, required_quantity=0)
 
@@ -200,6 +270,5 @@ def import_archive(import_file):
 
     except tarfile.ReadError as e:
         data['data'] = "Not an archive: " + str(e)
-
 
     return data
