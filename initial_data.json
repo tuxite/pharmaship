@@ -1,6 +1,6 @@
 [
     {
-        "pk": 10, 
+        "pk": 1, 
         "model": "settings.vessel", 
         "fields": {
             "name": "Vessel Name", 
@@ -15,7 +15,7 @@
             "fax": "00...", 
             "email": "contact@ship.com", 
             "allowance": [
-                0
+                1
             ]
         }
     }, 
@@ -27,7 +27,7 @@
         }
     }, 
     {
-        "pk": 0, 
+        "pk": 1, 
         "model": "inventory.allowance", 
         "fields": {
             "name": "Hors dotation", 
