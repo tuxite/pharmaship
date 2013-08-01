@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block print %}
-<form action="{% url medicine_print %}" method="post">
+<form action="{% url 'medicine_print' %}" method="post">
     {% csrf_token %}
     <input id="print" type="submit" value="{% trans 'Print this inventory' %}"/>
 </form>
@@ -33,7 +33,7 @@
             <label><input type="checkbox" id="filtertag" value="Usage courant"/> Usage courant</label>
         </p>
     </form>
-    <form action="{% url medicine_filter %}" method="post" id="filterallowance">
+    <form action="{% url 'medicine_filter' %}" method="post" id="filterallowance">
         {% csrf_token %}
         <p>{% trans "Filter by allowance:" %}
             <label><input type="checkbox" name="allowance-0" value="-1" {% if filter == None %}checked{% endif %} /> {% trans "All" %}</label>
@@ -100,13 +100,14 @@
                     </p>
                     {% endif %}
                 <p class="medicine_rem">
-                    <a href='{% url medicine_remark inn.id %}' title="Éditer les remarques" class="jquery_popup remark_edit"><b>{% trans "Remarks:" %} </b></a>
+                    <a href="{% url 'medicine_remark' inn.id %}" title="Éditer les remarques" class="jquery_popup remark_edit">{% trans "Remarks:" %}</a>
                     {{ inn.remark }}
                 </p>
                 </div>
 
 
             </div>
+            {% if inn.medicine_items|length > 0 %}
             <table class="medicine_items">
                 <thead>
                 <tr>
@@ -135,17 +136,18 @@
                         {% endif %}
                     </td>
                     <td class="medicine_buttons">
-                        <a href='{% url medicine_out item.id %}' title="Utiliser ce médicament" class="jquery_popup medicine_out medicine_link"></a>
-                        <a href='{% url medicine_change item.id %}' title="Éditer ce médicament" class="jquery_popup medicine_edit medicine_link"></a>
-                        <a href='{% url medicine_delete item.id %}' title="Supprimer ce médicament" class="jquery_popup medicine_delete medicine_link"></a>
+                        <a href="{% url 'medicine_out' item.id %}" title="Utiliser ce médicament" class="jquery_popup medicine_out medicine_link"></a>
+                        <a href="{% url 'medicine_change' item.id %}" title="Éditer ce médicament" class="jquery_popup medicine_edit medicine_link"></a>
+                        <a href="{% url 'medicine_delete' item.id %}" title="Supprimer ce médicament" class="jquery_popup medicine_delete medicine_link"></a>
                     </td>
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            {% endif %}
             <nav class="medicine_action">
-                <a href='{% url medicine_add inn.id %}' class="medicine_submit green jquery_popup">{% trans 'Add a medicine' %}</a> 
-                <a href='{% url medicine_equivalent inn.id %}' class="medicine_submit violet jquery_popup">{% trans 'Add an equivalent' %}</a> 
+                <a href="{% url 'medicine_add' inn.id %}" class="medicine_submit green jquery_popup">{% trans 'Add a medicine' %}</a> 
+                <a href="{% url 'medicine_equivalent' inn.id %}" class="medicine_submit violet jquery_popup">{% trans 'Add an equivalent' %}</a> 
             </nav>
         </div>
     </article>

@@ -191,16 +191,16 @@ nav.medicine_action {
     padding: 10px 0;
     }
 .green{
-    background: #d3d7cf url(./icons/add_dark.png) no-repeat 3px 2px;
+    background: #d3d7cf url(./icons/add_dark.png) no-repeat 3px 3px;
     }
 .violet{
-    background: #d3d7cf  url(./icons/equivalent_dark.png) no-repeat 3px 2px;
+    background: #d3d7cf  url(./icons/equivalent_dark.png) no-repeat 3px 3px;
     }
 .green:hover{
-    background: silver url(./icons/add_dark.png) no-repeat 3px 2px;
+    background: silver url(./icons/add_dark.png) no-repeat 3px 3px;
     }
 .violet:hover{
-    background: silver url(./icons/equivalent_dark.png) no-repeat 3px 2px;
+    background: silver url(./icons/equivalent_dark.png) no-repeat 3px 3px;
     }
 
 /*** medicine actions ***/
@@ -214,6 +214,7 @@ li.medicine_a {
     display: inline-block;
     }
 .remark_edit{
+    font-weight: 700;
     padding-left: 24px;
     color: black;
     background: url(./icons/remark_mono.png) no-repeat 0px -3px;
