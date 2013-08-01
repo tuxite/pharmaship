@@ -1,7 +1,7 @@
 {% extends "popup_layout.html" %}
 
 {% block begin_wrapper %}
-<form method="post" action="{% url medicine_delete medicine.id %}" name="medicine_form">
+<form method="post" action="{% url 'medicine_delete' medicine.id %}" name="medicine_form">
 {% csrf_token %}
 {% endblock %}
 
