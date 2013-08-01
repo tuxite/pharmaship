@@ -8,7 +8,7 @@
 
 {% block content %}
 <h2>{% trans "Medical Responsible" %}</h2>
-<form method="post" action="{% url user %}">
+<form method="post" action="{% url 'user' %}">
     {% csrf_token %}
     <table>
     {{ userform }}
@@ -18,7 +18,7 @@
 </form>
 
 <h2>{% trans "Vessel Information" %}</h2>
-<form method="post" action="{% url vessel %}">
+<form method="post" action="{% url 'vessel' %}">
     {% csrf_token %}
     <table>
     {{ vesselform }}
@@ -27,7 +27,7 @@
 </form>
 
 <h2>{% trans "Application Settings" %}</h2>
-<form method="post" action="{% url application %}">
+<form method="post" action="{% url 'application' %}">
     {% csrf_token %}
     <table>
     {{ applicationform }}
@@ -38,7 +38,7 @@
 
 <form action="/i18n/setlang/" method="post">
     {% csrf_token %}
-    <input name="next" type="hidden" value="{% url settings %}" />
+    <input name="next" type="hidden" value="{% url 'settings' %}" />
     <table>
         <tbody>
         <tr>
@@ -59,14 +59,14 @@
 </form>
 
 <h2>{% trans "Data Administration" %}</h2>
-<form method="post" action="{% url export %}">
+<form method="post" action="{% url 'export' %}">
     {% csrf_token %}
     <table>
     {{ exportform }}
     </table>
     <input type="submit" value='{% trans "Export Allowance" %}'/>
 </form>
-<form method="post" enctype="multipart/form-data" action="{% url import %}">
+<form method="post" enctype="multipart/form-data" action="{% url 'import' %}">
     {% csrf_token %}
     <table>
     {{ importform }}
