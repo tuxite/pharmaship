@@ -56,7 +56,6 @@
         <ul>
             <li class="medicine_li medicine_inn">Principe actif (DC)</li>
             <li class="medicine_li medicine_compo">{% trans "Form" %} - {% trans "Composition" %}</li>
-            <li class="medicine_li medicine_qty">{% trans "Allowance" %}</li>
             <li class="medicine_li medicine_qty">{% trans "Quantity" %}</li>
             <li class="medicine_li medicine_qty">{% trans "Requested" %}</li>
             <li class="medicine_li medicine_date">{% trans "Expiration Date" %}</li>
@@ -77,7 +76,6 @@
                     </small>
                 </li>
                 <li class="medicine_li_h medicine_compo">{{ inn.dosage_form }} - {{ inn.composition }}</li>
-                <li class="medicine_li_h medicine_qty">{{ inn.required_quantity }}</li>
                 <li class="medicine_li_h medicine_qty {% if inn.quantity < inn.required_quantity %}error{% endif %}">{{ inn.quantity }}</li>
                 <li class="medicine_li_h medicine_qty">0</li> <!-- TODO -->
                 {% with inn.medicine_items|first as item %}
@@ -93,16 +91,16 @@
                 
                 <div class="medicine_info">
                     <p class="medicine_roa"><b>{% trans "Route of Administration:" %}</b> {{ inn.roa }}</p>
-                    <p class="medicine_group"><b>{% trans "Group:" %}</b> {{ group.name.name }}</p>
+                    <p class="medicine_allowance"><b>{% trans "Required Quantity:" %}</b> {{ inn.required_quantity }}</p>
                     {% if inn.tag.all|length > 0 %}
                     <p class="medicine_tag"><b>{% trans "Tags:" %} </b>
                         {% for tag in inn.tag.all %}{% if not forloop.first %}, {% endif %}{{ tag.name }}{% endfor %}
                     </p>
                     {% endif %}
-                <p class="medicine_rem">
-                    <a href="{% url 'medicine_remark' inn.id %}" title="Éditer les remarques" class="jquery_popup remark_edit">{% trans "Remarks:" %}</a>
-                    {{ inn.remark }}
-                </p>
+                    <p class="medicine_rem">
+                        <a href="{% url 'medicine_remark' inn.id %}" title="Éditer les remarques" class="jquery_popup remark_edit">{% trans "Remarks:" %}</a>
+                        {{ inn.remark }}
+                    </p>
                 </div>
 
 

@@ -153,8 +153,8 @@ div.medicine_info{
     padding: 10px 0;
     }
 
-p.medicine_group, p.medicine_roa{
-    width: 35%;
+p.medicine_roa, p.medicine_allowance {
+    width: 25%;
     margin-right: 10px;
     float: left;
     padding: 0 0 4px 0;
@@ -164,10 +164,12 @@ p.medicine_tag {
     float: left;
     padding: 0 0 4px 0;
     }  
+
 p.medicine_rem {
     clear: left;
     padding: 4px 0;
     }
+
 /*** inn list ***/
 div.medicine_list{
     float: right;
