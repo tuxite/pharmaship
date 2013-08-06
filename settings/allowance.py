@@ -48,7 +48,11 @@ MANIFEST = [
     ]
 
 def remove_pk(xml_string):
-    """Removes the PK attributes to the serialized objects."""
+    """Removes the PK attributes to the serialized objects.
+
+    This allows to import different alllowances with for instance the
+    same molecules without generating conflicts of primary key.
+    """
     dom = xml.dom.minidom.parseString(xml_string)
     for node in dom.getElementsByTagName('object'):
         if node.hasAttribute("pk"):
@@ -90,7 +94,7 @@ def get_reqqty_pk(deserialized_object):
     except:
         return None
 
-def serialiaze_allowance(allowance):
+def serialize_allowance(allowance):
     """Exports an allowance into the format used by the broadcaster."""
     # Molecules used by the allowance
     molecule_list = inventory.models.Molecule.objects.filter(allowances__in=[allowance,])
@@ -113,7 +117,7 @@ def create_archive(allowance):
 
     # Creating a tar.gz archive
     with tarfile.open(fileobj=response, mode='w') as tar:
-        for item in serialiaze_allowance(allowance):
+        for item in serialize_allowance(allowance):
             f = ContentFile(item[1])
             info = tarfile.TarInfo()
             info.name = item[0]
@@ -127,8 +131,7 @@ def create_archive(allowance):
     return response
 
 def import_archive(import_file):
-    """
-    Imports an archive with allowance data inside.
+    """Imports an archive with allowance data inside.
 
     This function will get first information about the uploaded file.
     Then, it updates the trusted keys keyring.
@@ -168,14 +171,14 @@ def import_archive(import_file):
         try:
             for key in gpg.keylist():
                 gpg.delete(key)
-        except:
+        except Exception:
             pass
         # Parsing the folder to import each key in the keyring
         for item in os.listdir(settings.TRUSTED_GPG):
             try:
                 with open(os.path.join(settings.TRUSTED_GPG, item), 'r') as fp:
                     gpg.import_(fp)
-            except:
+            except Exception:
                 pass
 
     # Verifying the signature
