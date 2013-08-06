@@ -1,2 +1,219 @@
 {% extends "layout.html" %}
+{% load i18n %}
 
+{% block addon %}
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href='{% static "style/home.css" %}'>
+    <script src='{% static "js/jquery-1.9.1.min.js" %}'></script>
+    <script src='{% static "js/home.js" %}'></script>
+{% endblock %}
+
+{% block content %}
+<h2>{% trans "Medical Inventory Status" %}</h2>
+<div class="line">
+    <ul class="home">
+        <li class="header {% if medicine.short_supply|length > 0 %}bold{% endif %}">{% trans "Medicines in short supply:" %}</li>
+        <li class="top {% if medicine.short_supply|length > 0 %}error{% else %}good{% endif %}">{{ medicine.short_supply|length }}</li>
+    </ul>
+    {% if medicine.short_supply|length > 0 %}
+    <div class="more">
+        <table>
+            <tr>
+                <th>{% trans "Molecule" %}</th>
+                <th class="center">{% trans "Required Quantity" %}</th>
+                <th class="center">{% trans "Current Quantity" %}</th>
+            </tr>
+            {% for item in medicine.short_supply %}
+            <tr>
+                <td>{{ item.molecule }}</td>
+                <td class="center">{{ item.reqqty }}</td>
+                <td class="center">{{ item.qty }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+<div class="line">
+    <ul class="home">
+        <li class="header {% if medicine.expired|length > 0 %}bold{% endif %}">{% trans "Expired medicines:" %}</li>
+        <li class="top {% if medicine.expired|length > 0 %}error{% else %}good{% endif %}">{{ medicine.expired|length }}</li>
+    </ul>
+    {% if medicine.expired|length > 0 %}
+    <div class="more">
+        <table>
+            <tr>
+                <th>{% trans "Medicine" %}</th>
+            </tr>
+            {% for item in medicine.expired %}
+            <tr>
+                <td>{{ item }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+<div class="line">
+    <ul class="home">
+        <li class="header {% if medicine.reaching_expiry|length > 0 %}bold{% endif %}">{% trans "Medicines reaching expiry:" %}</li>
+        <li class="top {% if medicine.reaching_expiry|length > 0 %}warning{% else %}good{% endif %}">{{ medicine.reaching_expiry|length }}</li>
+        {% if medicine.reaching_expiry|length > 0 %}
+        <li>({% with medicine.reaching_expiry|first as item %}{{ item.exp_date }}{% endwith %})</li>
+        {% endif %}
+    </ul>
+    {% if medicine.reaching_expiry|length > 0 %}
+    <div class="more">
+        <table>
+            <tr>
+                <th>{% trans "Medicine" %}</th>
+            </tr>
+            {% for item in medicine.reaching_expiry %}
+            <tr>
+                <td>{{ item }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+<div class="line">
+    <ul class="home">
+        <li class="header {% if medicine.nc|length > 0 %}bold{% endif %}">{% trans "Non conform medicines:" %}</li>
+        <li class="top {% if medicine.nc|length > 0 %}error{% else %}good{% endif %}">{{ medicine.nc|length }}</li>
+    </ul>
+    {% if medicine.nc|length > 0 %}
+    <div class="more">
+        <table>
+            <tr>
+                <th>{% trans "Medicine" %}</th>
+                <th>{% trans "Non Conformity" %}</th>
+            </tr>
+            {% for item in medicine.nc %}
+            <tr>
+                <td>{{ item }}</td>
+                <td>{% if item.nc_inn %}
+                {% trans "Molecule:" %} {{ item.nc_inn }}
+                {% endif %}
+                {% if item.nc_composition %}
+                {% trans "Composition:" %} {{ item.nc_composition }}
+                {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+<div class="line">
+    <ul class="home">
+        <li class="header {% if medicine.ordered|length > 0 %}bold{% endif %}">{% trans "Ordered medicines:" %}</li>
+        <li class="top {% if medicine.ordered|length > 0 %}warning{% else %}good{% endif %}">{{ medicine.ordered|length }}</li>
+        <li>{% trans "Last order:" %} 12 avril 2013, fully received</li>
+    </ul>
+</div>
+
+<h2>{% trans "Material Inventory Status" %}</h2>
+<div class="line">
+    <ul class="home">
+        <li class="header {% if material.short_supply|length > 0 %}bold{% endif %}">{% trans "Material in short supply:" %}</li>
+        <li class="top {% if material.short_supply|length > 0 %}error{% else %}good{% endif %}">{{ material.short_supply|length }}</li>
+    </ul>
+    {% if material.short_supply|length > 0 %}
+    <div class="more">
+        <table>
+            <tr>
+                <th>{% trans "Item" %}</th>
+                <th class="center">{% trans "Required Quantity" %}</th>
+                <th class="center">{% trans "Current Quantity" %}</th>
+            </tr>
+            {% for item in material.short_supply %}
+            <tr>
+                <td>{{ item.material }}</td>
+                <td class="center">{{ item.reqqty }}</td>
+                <td class="center">{{ item.qty }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+<div class="line">
+    <ul class="home">
+        <li class="header {% if material.expired|length > 0 %}bold{% endif %}">{% trans "Expired materials:" %}</li>
+        <li class="top {% if material.expired|length > 0 %}error{% else %}good{% endif %}">{{ material.expired|length }}</li>
+    </ul>
+    {% if material.expired|length > 0 %}
+    <div class="more">
+        <table>
+            <tr>
+                <th>{% trans "Material" %}</th>
+            </tr>
+            {% for item in material.expired %}
+            <tr>
+                <td>{{ item }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+<div class="line">
+    <ul class="home">
+        <li class="header {% if material.reaching_expiry|length > 0 %}bold{% endif %}">{% trans "Materials reaching expiry:" %}</li>
+        <li class="top {% if material.reaching_expiry|length > 0 %}warning{% else %}good{% endif %}">{{ material.reaching_expiry|length }}</li>
+        {% if material.reaching_expiry|length > 0 %}
+        <li>({% with material.reaching_expiry|first as item %}{{ item.exp_date }}{% endwith %})</li>
+        {% endif %}
+    </ul>
+    {% if material.reaching_expiry|length > 0 %}
+    <div class="more">
+        <table>
+            <tr>
+                <th>{% trans "Material" %}</th>
+            </tr>
+            {% for item in material.reaching_expiry %}
+            <tr>
+                <td>{{ item }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+<div class="line">
+    <ul class="home">
+        <li class="header {% if material.nc|length > 0 %}bold{% endif %}">{% trans "Non conform materials:" %}</li>
+        <li class="top {% if material.nc|length > 0 %}error{% else %}good{% endif %}">{{ mateiral.nc|length }}</li>
+    </ul>
+    {% if material.nc|length > 0 %}
+    <div class="more">
+        <table>
+            <tr>
+                <th>{% trans "Material" %}</th>
+                <th>{% trans "Non Conformity" %}</th>
+            </tr>
+            {% for item in material.nc %}
+            <tr>
+                <td>{{ item }}</td>
+                <td>{{ item.nc }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+</div>
+<div class="line">
+    <ul class="home">
+        <li class="header {% if material.ordered|length > 0 %}bold{% endif %}">{% trans "Ordered material:" %}</li>
+        <li class="top {% if material.ordered|length > 0 %}warning{% else %}good{% endif %}">{{ material.ordered|length }}</li>
+        <li>{% trans "Last order:" %} 12 avril 2013, waiting for reception</li>
+    </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+/*
+CSS Document
+
+(c) 2013 Association DSM, http://devmaretique.com
+
+This file is part of Pharmaship.
+
+Pharmaship is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+any later version.
+
+Pharmaship is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
+
+======================================================================
+Filename:    template/home.css
+Description: CSS for Home view
+Author:      Matthieu Morin
+Version:     0.1
+======================================================================
+*/
+
+div.body h2 {
+    font-size : 160%;
+    color: #2e3536;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    clear: both;
+    }
+
+h2 > b{
+    font-weight: 700;
+    font-size : 100%;
+    }
+b > a{
+    font-size: 100%;
+    }
+
+/* Table */
+table{
+	border-collapse: separate;
+    border-spacing: 2px;
+    text-align: left;
+    clear: both;
+    width: 100%;
+   }
+th {
+    background: #888a85;
+    color: #eeeeec;
+    padding: 5px 10px;
+    font-weight:
+    }
+td {
+    background: #eeeeec;
+    padding: 5px 10px;
+    }
+
+.center{
+    text-align: center;
+    }
+/* Forms */
+input, textarea, select {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid black;
+    }
+
+/* Div more */
+div.line{
+    display: table;
+    }
+
+/* UL */
+ul.home{
+    clear: both;
+    }
+    
+ul.home > li{
+    margin: 10px 0;
+    padding: 10px;
+    float: left;
+    font-size: 110%;
+    }
+
+li.header{
+    width: 250px;
+    }
+li.top{
+    padding: 10px;
+    border-radius: 5px;
+    }
+li.top:hover{
+    background: silver;
+    cursor: pointer;
+    color: black;
+    }
+
+.error{
+    background:#a40000;
+    color:#eeeeec;
+    }
+.warning{
+    background:#f57900;
+    }
+.good{
+    background: #4e9a06;
+    color:#eeeeec;
+    }
+
+.active{
+    border: 2px solid #888a85;
+    }
+.bold{
+    font-weight: 700;
+    }
