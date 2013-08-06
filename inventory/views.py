@@ -398,10 +398,11 @@ def parser(allowance_list, location_list):
     # Medicine quantity transaction list
     medicineqtytransaction_list = models.MedicineQtyTransaction.objects.filter(medicine__in=medicine_list).prefetch_related('medicine')
     # Group list
-    group_list = models.MedicineGroup.objects.all().order_by('order') #### TODO Filter by "links"
+    group_list = models.MedicineGroup.objects.all().order_by('order')
     # Remarks
     remark_list = models.Remark.objects.filter(molecule__in=inn_list).distinct().prefetch_related('molecule')
-    
+
+    today = datetime.date.today()
     # Global dictionnary
     values = []
     # Adding groups (MedicineGroup)
@@ -437,7 +438,7 @@ def parser(allowance_list, location_list):
                 # Finding attached medicines (Medicine)
                 for medicine in inn.medicine_items.all():
                     # Do not parse the used medicines (quantity = 0)
-                    if medicine.used == True:
+                    if medicine.used:
                         continue
                     group_inn_medicine_dict = {}
                     # ID
@@ -459,7 +460,7 @@ def parser(allowance_list, location_list):
                         if transaction.medicine == medicine:
                             group_inn_medicine_dict['quantity'] += transaction.value
                     # Adding the medicine quantity to the inn quantity
-                    if not medicine.nc_inn:
+                    if not medicine.nc_inn and not medicine.nc_composition and medicine.exp_date >= today:
                         group_inn_dict['quantity'] += group_inn_medicine_dict['quantity']
                     # Adding the medicine dict to the list
                     group_inn_dict['medicine_items'].append(group_inn_medicine_dict)
