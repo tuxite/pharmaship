@@ -378,7 +378,7 @@ def parser(allowance_list, location_list):
 
                 group_equipment_dict['article_items'] = []
                 # Finding attached articles (Article)
-                for article in equipment.article_set.all():
+                for article in equipment.article_set.all().order_by('exp_date'):
                     # Do not parse the used medicines (quantity = 0)
                     if article.used:
                         continue

@@ -417,7 +417,7 @@ def parser(allowance_list, location_list):
 
                 group_molecule_dict['medicine_items'] = []
                 # Finding attached medicines (Medicine)
-                for medicine in molecule.medicine_set.all():
+                for medicine in molecule.medicine_set.all().order_by('exp_date'):
                     # Do not parse the used medicines (quantity = 0)
                     if medicine.used:
                         continue
