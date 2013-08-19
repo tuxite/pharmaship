@@ -41,8 +41,8 @@ import models, forms
 from allowance import create_archive, import_archive
 
 from django.contrib.auth.models import User
-from users.models import UserProfile
-from users.forms import UserForm, UserProfileForm
+from settings.models import UserProfile
+from settings.forms import UserForm, UserProfileForm
 
 FUNCTIONS = (
 		(u'00', "Captain"),
