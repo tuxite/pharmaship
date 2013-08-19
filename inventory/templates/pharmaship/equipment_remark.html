@@ -1,0 +1,26 @@
+{% extends "pharmaship/popup.html" %}
+{% load i18n %}
+
+{% block begin_wrapper %}
+<form method="post" action="{% url 'equ_remark' equipment.id %}" name="equipment_form">
+{% csrf_token %}
+{% endblock %}
+
+{% block text %}
+<p>{% trans "You are going to modify the remarks of this equipment:" %}</p>
+<p><b class="sky_blue">{{ equipment.name }}</b>.</p>
+<table>
+    {{ form }}
+</table>
+{% endblock %}
+
+{% block action %}
+<ul>
+    <li class="b-close popup_action">{% trans "Do not modify" %}</li>
+    <li class="popup_action" onClick="document.forms['equipment_form'].submit();">{% trans "Update these remarks" %}</li>
+</ul>
+{% endblock %}
+
+{% block end_wrapper %}
+</form>
+{% endblock %}

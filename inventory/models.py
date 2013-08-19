@@ -28,10 +28,10 @@ __license__ = "GPL"
 __version__ = "0.1"
 
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
 
-import settings.models
-
-import datetime
+import ast
 
 # Constants
 ## Transaction type values
@@ -123,31 +123,51 @@ class Allowance(models.Model):
     class Meta:
         unique_together = ('name', )
 
-class MedicineGroupManager(models.Manager):
-    """
-    Manager for class MedicineGroup.
+
+class GroupManager(models.Manager):
+    """Manager for class MedicineGroup and MaterialGroup.
     For deserialization purpose only.
     """
     def get_by_natural_key(self, name):
-        return self.get(name=name)
+        return self.get(name = name, )
+
         
-class MedicineGroup(models.Model):
+class MoleculeGroup(models.Model):
     """Model for groups attached to an INN (Molecule)."""
-    objects = MedicineGroupManager() # For deserialization
-    
+    objects = GroupManager() # For deserialization
+
     name = models.CharField(max_length=100) # Example: Cardiology
     order = models.IntegerField() # Example: 1
 
     def __unicode__(self):
         return u"{0}. {1}".format(self.order, self.name)
 
+    def natural_key(self):
+            return (self.name,)
+
     class Meta:
         ordering = ("order", "name",)
         unique_together = ('name', )
 
+
+class EquipmentGroup(models.Model):
+    """Model for groups attached to a ReferenceMaterial."""
+    objects = GroupManager() # For deserialization
+
+    name = models.CharField(max_length=100) # Example: Reanimation
+    order = models.IntegerField() # Example: 1
+
+    def __unicode__(self):
+        return u"{0}. {1}".format(self.order, self.name)
+
     def natural_key(self):
             return (self.name,)
-            
+
+    class Meta:
+        ordering = ("order", "name",)
+        unique_together = ('name', )
+
+
 class TagManager(models.Manager):
     """
     Manager for class Tag.
@@ -155,11 +175,12 @@ class TagManager(models.Manager):
     """
     def get_by_natural_key(self, name):
         return self.get(name=name)
-        
+
+
 class Tag(models.Model):
     """Model for tags attached to an INN."""
     objects =TagManager() # For deserialization
-    
+
     name = models.CharField(max_length=100) # Example: Common Use
     comment = models.TextField(blank=True, null=True) # Description of the tag, if any
 
@@ -168,13 +189,12 @@ class Tag(models.Model):
 
     def natural_key(self):
             return (self.name,)
-            
+
     class Meta:
         ordering = ("name",)
         unique_together = ('name',)
-        
 
-            
+
 class Location(models.Model):
     """Model for locations attached to a Medicine."""
     primary = models.CharField(max_length=100) # Example: Pharmacie
@@ -187,100 +207,18 @@ class Location(models.Model):
             return self.primary
 
 
-class Medicine(models.Model):
-    """Medicine model, "child" of Molecule."""
-    name = models.CharField(max_length=100) # Brand Name. Example: Doliprane for INN Paracétamol
-    exp_date = models.DateField()
-    # Link to location
-    location = models.ForeignKey(Location)
-    # Fields for non-conformity compatibility
-    nc_inn = models.CharField(max_length=100, blank=True, null=True)
-    nc_composition = models.CharField(max_length=100, blank=True, null=True)
-    # Field to simplify SQL requests when qty=0
-    used = models.BooleanField(default=False)
-
-    def __unicode__(self):
-        return u"{0} (exp: {1})".format(self.name, self.exp_date)
-
-    def get_quantity(self):
-        """Computes the quantity according to the transactions attached to this medicine."""
-        return self.medicineqtytransaction_set.aggregate(sum=models.Sum('value'))['sum']
-
     class Meta:
-        ordering = ("nc_inn", "exp_date")
+        ordering = ("primary", "secondary")
 
-class MoleculeManager(models.Manager):
+
+class QtyTransaction(models.Model):
     """
-    Manager for class Molecule.
-    For deserialization purpose only.
-    """
-    def get_by_natural_key(self, name, roa, dosage_form, composition):
-        return self.get(name=name, roa=roa, dosage_form=dosage_form, composition=composition)
-        
-class Molecule(models.Model):
-    """Base medicine model for all medicines.
-    inn = International Nonproprietary Name (DC in French)"""
-    objects = MoleculeManager() # For deserialization
-    
-    name = models.CharField(max_length=100) # Example: Paracétamol
-    roa = models.PositiveIntegerField(choices=DRUG_ROA_CHOICES) # Example: dermal -- ROA: Route of Administration
-    dosage_form = models.IntegerField(choices=DRUG_FORM_CHOICES) # Example: "pill"
-    composition = models.CharField(max_length=100) # Example: 1000 mg
-    medicine_list = models.PositiveIntegerField(choices=DRUG_LIST_CHOICES) # Example: List I
-    group = models.ForeignKey(MedicineGroup)
-    tag = models.ManyToManyField(Tag, blank=True)
-    medicine_items = models.ManyToManyField(Medicine, through='MedicineTransaction')
-    allowances = models.ManyToManyField(Allowance, through='MedicineReqQty')
-
-    # Operations
-    def __unicode__(self):
-        return u"{0} ({2} - {1})".format(self.name, self.composition, self.get_dosage_form_display())
-
-    def get_quantity(self):
-        """Computes the total quantity of non-expired & non-equivalent medicines attached to this INN."""
-        total = 0
-        for item in self.medicine_items.filter(used=False):
-            if item.exp_date > datetime.date.today() and not item.nc_inn and not item.nc_composition: ## Kind of validation
-                total += item.get_quantity()
-        return total
-
-    def get_not_null(self):
-        """Returns all Medicine items with .used=False (qty>0).
-        Used in templates."""
-        return self.medicine_items.filter(used=False)
-
-    def get_required_quantity(self):
-        """Computes the total required quantity of the INN."""
-        # Workaround: Use the Settings.Vessel.allowance to get the list
-        allowance_list = settings.models.Vessel.objects.latest('id').allowance.all();
-
-        # For non-additional allowances, the required quantity is a minimum, so we keep the highest required quantity in the set.
-        maximum = self.allowances.filter(additional=False, id__in=allowance_list).aggregate(max=models.Max('medicinereqqty__required_quantity'))['max']
-        if not maximum:
-            maximum = 0
-
-        # Additional allowances, adds quantity to the inn. We keep the sum of the required quantities in the set.
-        additional = self.allowances.filter(additional=True, id__in=allowance_list).aggregate(sum=models.Sum('medicinereqqty__required_quantity'))['sum']
-        if not additional:
-            additional = 0
-
-        return maximum + additional
-
-    def natural_key(self):
-            return (self.name, self.roa, self.dosage_form, self.composition)
-        
-    class Meta:
-        ordering = ('name', )
-        unique_together = (('name', 'roa', 'dosage_form', 'composition'),)
-
-class MedicineQtyTransaction(models.Model):
-    """
-    Stores a quantity transaction related to :model:`inventory.Medicine`.
+    Stores a quantity transaction related to :model:`inventory.Article` or :model:`inventory.Medicine`.
 
     There are 5 types of transactions :
-    * 1 IN: a medicine is added,
-    * 2 USED: the medicine is used for a treatment,
-    * 4 PERISHED: the medicine has expired,
+    * 1 IN: a material is added,
+    * 2 USED: the material is used for a treatment,
+    * 4 PERISHED: the material has expired,
     * 8 PHYSICAL_COUNT: the stock is refreshed after a human count,
     * 9 OTHER: other reason.
     """
@@ -289,29 +227,169 @@ class MedicineQtyTransaction(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     remark = models.TextField(blank=True, null=True)
     value = models.IntegerField()
-    medicine = models.ForeignKey('Medicine')
+
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
 
     def __unicode__(self):
-        return u"{0} ({1}: {2})".format(self.medicine, self.get_transaction_type_display(), self.value)
-
-
-class MedicineTransaction(models.Model):
-    """Model which joins Medicine and Molecule models."""
-    medicine = models.ForeignKey(Medicine)
-    molecule = models.ForeignKey(Molecule)
-    date = models.DateTimeField(auto_now_add=True)
-    purchase_order = models.CharField(max_length=100, blank=True, null=True)
-    remark = models.TextField(blank=True, null=True)
-
-
-class MedicineReqQty(models.Model):
-    """Model for required quantity of a medicine"""
-    allowance = models.ForeignKey('Allowance')
-    inn = models.ForeignKey('Molecule')
-    required_quantity = models.IntegerField()
+        return u"{0} ({1}: {2})".format(self.content_object, self.get_transaction_type_display(), self.value)
 
 
 class Remark(models.Model):
     """Model for remarks attached to an INN."""
     text = models.TextField(blank=True, null=True)
-    molecule = models.OneToOneField('Molecule')
+
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+
+class MoleculeManager(models.Manager):
+    """
+    Manager for class Molecule.
+    For deserialization purpose only.
+    """
+    def get_by_natural_key(self, name, roa, dosage_form, composition):
+        return self.get(name=name, roa=roa, dosage_form=dosage_form, composition=composition)
+
+
+class Molecule(models.Model):
+    """Base medicine model for all medicines.
+    inn = International Nonproprietary Name (DC in French)"""
+    objects = MoleculeManager() # For deserialization
+
+    name = models.CharField(max_length=100) # Example: Paracétamol
+    roa = models.PositiveIntegerField(choices=DRUG_ROA_CHOICES) # Example: dermal -- ROA: Route of Administration
+    dosage_form = models.IntegerField(choices=DRUG_FORM_CHOICES) # Example: "pill"
+    composition = models.CharField(max_length=100) # Example: 1000 mg
+    medicine_list = models.PositiveIntegerField(choices=DRUG_LIST_CHOICES) # Example: List I
+    group = models.ForeignKey(MoleculeGroup)
+    tag = models.ManyToManyField(Tag, blank=True)
+    allowances = models.ManyToManyField(Allowance, through='MoleculeReqQty')
+    remark = generic.GenericRelation(Remark)
+
+    def __unicode__(self):
+        return u"{0} ({2} - {1})".format(self.name, self.composition, self.get_dosage_form_display())
+
+    def natural_key(self):
+            return (self.name, self.roa, self.dosage_form, self.composition)
+
+
+    class Meta:
+        ordering = ('name', )
+        unique_together = (('name', 'roa', 'dosage_form', 'composition'),)
+
+
+class Medicine(models.Model):
+    """Medicine model, "child" of Molecule."""
+    name = models.CharField(max_length=100) # Brand Name. Example: Doliprane for INN Paracétamol
+    exp_date = models.DateField()
+    # Link to location
+    location = models.ForeignKey(Location)
+    # Fields for non-conformity compatibility
+    nc_molecule = models.CharField(max_length=100, blank=True, null=True)
+    nc_composition = models.CharField(max_length=100, blank=True, null=True)
+    # Field to simplify SQL requests when qty=0
+    used = models.BooleanField(default=False)
+    # Common
+    transactions = generic.GenericRelation(QtyTransaction)
+    parent = models.ForeignKey(Molecule)
+
+    def __unicode__(self):
+        return u"{0} (exp: {1})".format(self.name, self.exp_date)
+
+    def get_quantity(self):
+        """Computes the quantity according to the transactions attached to this medicine."""
+        return self.transactions.aggregate(sum=models.Sum('value'))['sum']
+
+
+    class Meta:
+        ordering = ("nc_molecule", "exp_date")
+
+
+class MoleculeReqQty(models.Model):
+    """Model for required quantity of a medicine"""
+    allowance = models.ForeignKey('Allowance')
+    base = models.ForeignKey('Molecule')
+    required_quantity = models.IntegerField()
+
+
+class EquipmentManager(models.Manager):
+    """
+    Manager for class Equipment.
+    For deserialization purpose only.
+    """
+    def get_by_natural_key(self, name, packaging, consumable, perishable, group):
+        return self.get(
+            name = name,
+            packaging = packaging,
+            consumable = ast.literal_eval(consumable),
+            perishable = ast.literal_eval(perishable),
+            group = EquipmentGroup.objects.get_by_natural_key(ast.literal_eval(group)[0]),
+            )
+
+class Equipment(models.Model):
+    """Model for medical equipment."""
+    objects = EquipmentManager() # For deserialization
+
+    name = models.CharField(max_length=100) # Example: Nébulisateur
+    packaging = models.CharField(max_length=100) # Example: 1000 mg
+    group = models.ForeignKey(EquipmentGroup)
+    tag = models.ManyToManyField(Tag, blank=True)
+    consumable = models.BooleanField(default=False)
+    perishable = models.BooleanField(default=False)
+    allowances = models.ManyToManyField(Allowance, through='EquipmentReqQty')
+    remark = generic.GenericRelation(Remark)
+    picture = models.ImageField(upload_to="pictures", blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
+
+    def natural_key(self):
+            return (self.name, self.packaging, self.consumable, self.perishable, self.group.natural_key())
+
+
+    class Meta:
+        ordering = ('name', )
+        unique_together = (('name', 'packaging', 'consumable', 'perishable', 'group'),)
+
+
+class Article(models.Model):
+    """Article model, "child" of Equipment."""
+    name = models.CharField(max_length=100) # Brand Name. Example: Coalgan
+    exp_date = models.DateField(blank=True, null=True)
+    # Link to location
+    location = models.ForeignKey(Location)
+    # Fields for non-conformity compatibility
+    nc_packaging = models.CharField(max_length=100, blank=True, null=True)
+    # Field to simplify SQL requests when qty=0
+    used = models.BooleanField(default=False)
+    # Common
+    transactions = generic.GenericRelation(QtyTransaction)
+    parent = models.ForeignKey(Equipment)
+
+    def __unicode__(self):
+        return u"{0} (exp: {1})".format(self.name, self.exp_date)
+
+    def get_quantity(self):
+        """Computes the quantity according to the transactions attached to this medicine."""
+        return self.transactions.aggregate(sum=models.Sum('value'))['sum']
+
+
+    class Meta:
+        ordering = ("nc_packaging", "exp_date")
+
+
+class EquipmentReqQty(models.Model):
+    """Model for required quantity of a medical equipment"""
+    allowance = models.ForeignKey('Allowance')
+    base = models.ForeignKey('Equipment')
+    required_quantity = models.IntegerField()
+
+
+class Settings(models.Model):
+    """Application settings."""
+    allowance = models.ManyToManyField(Allowance)
+    expire_date_warning_delay = models.PositiveIntegerField()
+    

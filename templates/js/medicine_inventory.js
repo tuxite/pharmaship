@@ -42,6 +42,10 @@
         sticky_header();
         click_header();
         reset_input();
+        click_picture();
+        click_filter();
+        /* Give the focus to the filter input */
+        $('#filterinput').focus();
 
         /* Hide all panels on load */
         $("div.medicine_more").hide();
@@ -124,13 +128,13 @@
             .change(function () {
             // Reset the group filter
             $('#filterselect').val(0);
-            $(list).find("p.medicine_group").parents('div.group_div').show();
+            $(list).find('div.group_div').show();
             // Reset the tag filter
             $('#filtertag').prop("checked", false);
             $(list).find("p.medicine_group").parents('article').show();
             // Reset the location filter
             $('#filterlocation').val(0);
-            
+
             var filter = $(this).val();
             if (filter) {
                 $(list).find("ul.inn_list>li.medicine_inn:not(:contains(" + filter + "))").parents('article').hide();
@@ -155,14 +159,14 @@
             .change(function () {
             // Reset the text filter
             $('#filterinput').val('');
-            $(list).find("li.medicine_inn").parents('article').show();
+            $(list).find("div.group_div").show();
 
             var filter = $(this).val();
             if (filter) {
-                $(list).find("p.medicine_group:not(:Contains(" + filter + "))").parents('div.group_div').hide();
-                $(list).find("p.medicine_group:Contains(" + filter + ")").parents('div.group_div').show();
+                $(list).find("h2:not(:contains(" + filter + "))").parents('div.group_div').hide();
+                $(list).find("h2:contains(" + filter + ")").parents('div.group_div').show();
             } else {
-                $(list).find("p.medicine_group").parents('div.group_div').show();
+                $(list).find("h2").parents('div.group_div').show();
             }
             return false;
         })
@@ -177,10 +181,10 @@
             .change(function () {
             var filter = $(this).val();
             if (this.checked == true) {
-                $(list).find("div.medicine_rem:not(:contains(" + filter + "))").parents('article').hide();
-                $(list).find("div.medicine_rem:contains(" + filter + ")").parents('article').show();
+                $(list).find("article").hide();
+                $(list).find("p.medicine_tag:contains(" + filter + ")").parents('article').show();
             } else {
-                $(list).find("div.medicine_rem").parents('article').show();
+                $(list).find("article").show();
             }
             return false;
         })
@@ -195,15 +199,15 @@
             .change(function () {
             var filter = $(this).val();
             if (filter) {
-                $(list).find("li.medicine_location:not(:contains(" + filter + "))").parents('article').hide();
-                $(list).find("li.medicine_location:contains(" + filter + ")").parents('article').show();
+                $(list).find("td.location:not(:contains(" + filter + "))").parents('article').hide();
+                $(list).find("td.location:contains(" + filter + ")").parents('article').show();
             } else {
-                $(list).find("li.medicine_location").parents('article').show();
+                $(list).find("td.location").parents('article').show();
             }
             return false;
         })
     }
-    
+
     /* Function to uncheck the "all" checkbox when others are checked */
 
     function uncheck(form) {
@@ -305,6 +309,44 @@
             $(input).trigger(event);
             // Prevents the default action to be triggered.
             e.preventDefault();
+        })
+    }
+
+    /* Function to display pictures when clicking the picture button */
+    function click_picture() {
+        $('.picture_popup').click(function (e) {
+            // Prevents the default action to be triggered.
+            e.preventDefault();
+            // Triggering bPopup when click event is fired
+            $('#medicine_dialog').bPopup({
+                content:'image',
+                contentContainer: '.content',
+                loadUrl: e.target.href
+            });
+        });
+    }
+
+    /* Function to display advances filters */
+    function click_filter() {
+        var link = $("#advanced_filter");
+        var panel = $("div#filter_more");
+        panel.hide();
+
+        $(link).click(function (e) {
+            // Prevents the default action to be triggered.
+            e.preventDefault();
+            // Getting the previous state
+            var state = panel.is(":hidden");
+            // Resetting the display
+            panel.hide();
+            link.text("More filters");
+            // Any change?
+            if (state == true) {
+                // Show the panel
+                panel.show();
+                // Changing the text of the link
+                link.text("Less filters");
+            }
         })
     }
 })(jQuery);

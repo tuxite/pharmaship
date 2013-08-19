@@ -19,55 +19,81 @@
 #
 # ======================================================================
 # Filename:    inventory/admin.py
-# Description: Admin view configuration for Inventory application.
+# Description: Admin view configuration.
 # ======================================================================
 
 __author__ = "Matthieu Morin"
 __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
-__version__ = "0.1"
+__version__ = "0.2"
 
 import models
-from forms import MoleculeForm
+from forms import MoleculeForm, SettingsForm
 from django.contrib import admin
+
 
 class MoleculeAdmin(admin.ModelAdmin):
     list_display = ('name', 'dosage_form', 'composition')
     ordering = ('name',)
     form = MoleculeForm
 
+
     class Meta:
         ordering = ('name', )
 
-class MedicineAdmin(admin.ModelAdmin):
-    list_display = ('name', 'molecule_set', 'get_quantity', 'location')
 
-class MedicineGroupAdmin(admin.ModelAdmin):
+class EquipmentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'packaging', 'consumable', 'perishable')
+    ordering = ('name',)
+
+
+    class Meta:
+        ordering = ('name', )
+
+
+class ChildAdmin(admin.ModelAdmin):
+    list_display = ('name', 'parent', 'get_quantity', 'location')
+
+
+class GroupAdmin(admin.ModelAdmin):
     ordering = ('order',)
 
-class MedicineTransactionAdmin(admin.ModelAdmin):
-    list_display = ('medicine', 'molecule', 'date')
 
-class MedicineQtyTransactionAdmin(admin.ModelAdmin):
-    list_display = ('medicine', 'value', 'transaction_type')
+class QtyTransactionAdmin(admin.ModelAdmin):
+    list_display = ('content_object', 'content_type', 'value', 'transaction_type')
 
-class MedicineReqQtyAdmin(admin.ModelAdmin):
-    list_display = ('inn', 'allowance', 'required_quantity')
-    ordering = ('inn', 'allowance',)
+
+class ReqQtyAdmin(admin.ModelAdmin):
+    list_display = ('base', 'allowance', 'required_quantity')
+    ordering = ('base', 'allowance',)
+
 
 class LocationAdmin(admin.ModelAdmin):
     list_display = ('primary', 'secondary')
 
+
 class RemarkAdmin(admin.ModelAdmin):
-    list_display = ('text', 'molecule')
-            
-admin.site.register(models.Molecule, MoleculeAdmin)
-admin.site.register(models.Medicine, MedicineAdmin)
-admin.site.register(models.MedicineGroup, MedicineGroupAdmin)
-admin.site.register(models.MedicineTransaction, MedicineTransactionAdmin)
-admin.site.register(models.MedicineQtyTransaction, MedicineQtyTransactionAdmin)
-admin.site.register(models.MedicineReqQty, MedicineReqQtyAdmin)
+    list_display = ('text', 'content_object')
+
+class SettingsAdmin(admin.ModelAdmin):
+    form = SettingsForm
+
+
+# General
 admin.site.register(models.Allowance)
 admin.site.register(models.Tag)
 admin.site.register(models.Location, LocationAdmin)
 admin.site.register(models.Remark, RemarkAdmin)
+admin.site.register(models.QtyTransaction, QtyTransactionAdmin)
+admin.site.register(models.Settings, SettingsAdmin)
+
+# Molecule / Medicine
+admin.site.register(models.Molecule, MoleculeAdmin)
+admin.site.register(models.Medicine, ChildAdmin)
+admin.site.register(models.MoleculeReqQty, ReqQtyAdmin)
+admin.site.register(models.MoleculeGroup, GroupAdmin)
+# Equipment / Article
+admin.site.register(models.Equipment, EquipmentAdmin)
+admin.site.register(models.Article, ChildAdmin)
+admin.site.register(models.EquipmentGroup, GroupAdmin)
+admin.site.register(models.EquipmentReqQty, ReqQtyAdmin)

@@ -1,0 +1,26 @@
+{% extends "pharmaship/popup.html" %}
+{% load i18n %}
+
+{% block begin_wrapper %}
+<form method="post" action="{% url 'equ_out' article.id %}" name="article_form">
+{% csrf_token %}
+{% endblock %}
+
+{% block text %}
+<p>{% trans "You are going to use this article for a treatment:" %}</p>
+<p><b class="sky_blue">{{ article.name }}</b> {% trans "expiring" %} <b>{{ article.exp_date|date:"d/m/Y" }}</b> ({% trans "quantity:" %} {{ article.get_quantity }}).</p>
+<table>
+    {{ form }}
+</table>
+{% endblock %}
+
+{% block action %}
+<ul>
+    <li class="b-close popup_action">{% trans "Do not use" %}</li>
+    <li class="popup_action" onClick="document.forms['article_form'].submit();">{% trans "Use this article" %}</li>
+</ul>
+{% endblock %}
+
+{% block end_wrapper %}
+</form>
+{% endblock %}

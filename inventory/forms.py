@@ -28,6 +28,9 @@ __license__ = "GPL"
 __version__ = "0.1"
 
 from django import forms
+from django.forms.extras.widgets import SelectDateWidget
+from django.forms.models import modelform_factory
+
 import models
 
 DELETE_REASON = (
@@ -49,40 +52,100 @@ class DeleteForm(forms.Form):
 class InfoChangeForm(forms.ModelForm):
     """Form used for changing the details and the quantity of an object in the list."""
     quantity = forms.IntegerField()
+    exp_date = forms.DateField(widget=SelectDateWidget)
 
     class Meta:
         model = models.Medicine
-        exclude = ['nc_composition', 'nc_inn', 'used']
+        exclude = ['nc_composition', 'nc_molecule', 'used', 'parent']
+
 
 class QtyChangeForm(forms.Form):
     """Form used for changing the quantity of an object in the list."""
     quantity = forms.IntegerField()
 
+
 class AddForm(forms.ModelForm):
     """Form used for adding a medicine to an INN in the list."""
     quantity = forms.IntegerField()
+    exp_date = forms.DateField(widget=SelectDateWidget)
+
+    
     class Meta:
         model = models.Medicine
-        exclude = ['used', 'nc_inn']
+        exclude = ['used', 'nc_molecule', 'parent']
 
 
 class AddEquivalentForm(forms.ModelForm):
     """Form used for adding an equivalent medicine to an INN in the list."""
     quantity = forms.IntegerField()
+    exp_date = forms.DateField(widget=SelectDateWidget)
+    
+
     class Meta:
         model = models.Medicine
-        exclude = ['used',]
+        exclude = ['used', 'parent']
 
 
 class MoleculeForm(forms.ModelForm):
     """Form used in Admin view."""
     tag = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Tag.objects.all(), required=False)
 
+
     class Meta:
         model = models.Molecule
 
-class RemarkForm(forms.ModelForm):
+
+class RemarkForm(forms.Form):
     """Form to change the remark of an object in a view."""
+    text = forms.CharField(widget=forms.Textarea)
+
+
+class AddArticleForm(forms.ModelForm):
+    """Form used for adding a material to a reference material in the list."""
+    quantity = forms.IntegerField()
+    exp_date = forms.DateField(widget=SelectDateWidget)
+
+    
     class Meta:
-        model = models.Remark
-        exclude = ['molecule']
+        model = models.Article
+        exclude = ['used', 'parent']
+
+
+class ChangeArticleForm(forms.ModelForm):
+    """Form used for changing the details and the quantity of an object in the list."""
+    quantity = forms.IntegerField()
+    exp_date = forms.DateField(widget=SelectDateWidget)
+
+    
+    class Meta:
+        model = models.Article
+        exclude = ['nc_packaging', 'used', 'parent']
+
+
+class SettingsForm(forms.ModelForm):
+    allowance = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Allowance.objects.all())
+
+
+    class Meta:
+        model = models.Settings
+
+
+class ExportForm(forms.Form):
+    """Form for exporting a dotation (molecules, material and required quantities)."""
+    allowance = forms.ModelChoiceField(queryset=models.Allowance.objects.all())
+
+
+class ImportForm(forms.Form):
+    """Form for importing a dotation (molecules, material and required quantities)."""
+    import_file = forms.FileField()
+
+
+class LocationCreateForm(forms.ModelForm):
+    """Form for creating a new Location."""
+    class Meta:
+        model = models.Location
+
+
+class LocationDeleteForm(forms.Form):
+    """Form for deleting some Location objects."""
+    to_delete = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Location.objects.all().exclude(pk=1))

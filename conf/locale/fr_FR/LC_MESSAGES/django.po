@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pharmaship\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-14 20:43+0200\n"
+"POT-Creation-Date: 2013-08-19 15:22+0200\n"
 "PO-Revision-Date: 2013-06-07 21:30+0200\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: Association DSM <contact@devmaretique.com>\n"
@@ -17,231 +17,714 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: home/views.py:36
+#: inventory/views_common.py:55
 msgid "Home"
 msgstr "Accueil"
 
-#: home/views.py:40 templates/layout.html:73
+#: inventory/views_common.py:63 static/layout.html:73 templates/layout.html:75
 msgid "Contact the CCMM"
 msgstr "Contacter le CCMM"
 
-#: inventory/views.py:71
-msgid "Medical material inventory"
-msgstr "Registre du matériel"
+#: inventory/views_equipment.py:89 inventory/views_equipment.py:120
+msgid "Medical Article Inventory"
+msgstr "Registre du matériel médical"
 
-#: inventory/views.py:97
-msgid "Delete a medicine"
-msgstr "Supprimer un médicament"
+#: inventory/views_equipment.py:166
+msgid "Add a article"
+msgstr "Ajouter un élément"
 
-#: inventory/views.py:136
-msgid "Modify the quantity"
-msgstr "Modifier la quantité"
+#: inventory/views_equipment.py:193
+msgid "Delete an article"
+msgstr "Supprimer un élément"
 
-#: inventory/views.py:165
-msgid "Use a medicine"
-msgstr "Utiliser un médicament"
+#: inventory/views_equipment.py:230
+msgid "Update an article"
+msgstr "Mettre à jour un élément"
 
-#: inventory/views.py:202
-msgid "Add a medicine"
-msgstr "Ajouter un médicament"
+#: inventory/views_equipment.py:259
+msgid "Use an article"
+msgstr "Utiliser un élément"
 
-#: inventory/views.py:239
-msgid "Add an equivalent medicine"
-msgstr "Ajouter un médicament équivalent"
-
-#: inventory/views.py:265 inventory/views.py:320
-msgid "Medicine inventory"
-msgstr "Registre des médicaments"
-
-#: inventory/views.py:304
+#: inventory/views_equipment.py:288 inventory/views_medicine.py:329
 msgid "Modify the remarks"
 msgstr "Modifier les remarques"
 
-#: inventory/views.py:370 templates/layout.html:63
+#: inventory/views_equipment.py:304 inventory/views_medicine.py:89
+#: inventory/views_medicine.py:120 inventory/views_medicine.py:345
+#: static/layout.html:63 templates/layout.html:65
 msgid "Medicine Inventory"
 msgstr "Registre des médicaments"
 
-#: settings/views.py:62
-msgid "Account Settings"
-msgstr "Paramètres du compte"
+#: inventory/views_medicine.py:157
+msgid "Delete a medicine"
+msgstr "Supprimer un médicament"
 
-#: settings/views.py:132
-msgid "Allowance Settings"
-msgstr "Paramètres de la dotation"
+#: inventory/views_medicine.py:194
+msgid "Update a medicine"
+msgstr "Mettre à jour un médicament"
 
+#: inventory/views_medicine.py:223
+msgid "Use a medicine"
+msgstr "Utiliser un médicament"
+
+#: inventory/views_medicine.py:261
+#: inventory/templates/pharmaship/medicine_inventory.html:150
+#: static/medicine_inventory.html:147
+msgid "Add a medicine"
+msgstr "Ajouter un médicament"
+
+#: inventory/views_medicine.py:300
+msgid "Add an equivalent medicine"
+msgstr "Ajouter un médicament équivalent"
+
+#: inventory/views_settings.py:67 inventory/views_settings.py:86
+#: settings/views.py:63 settings/views.py:78 static/layout.html:24
 #: templates/layout.html:24
 msgid "Settings"
 msgstr "Paramètres"
 
-#: templates/layout.html:25
-msgid "Logout"
-msgstr "Déconnexion"
+#: inventory/views_settings.py:139
+msgid "Allowance Settings"
+msgstr "Paramètres de la dotation"
 
-#: templates/layout.html:28
-msgid "Log In"
-msgstr "Se connecter"
+#: inventory/templates/pharmaship/equipment_add.html:10
+msgid "You are going to add an article for this equipment:"
+msgstr "Vous vous apprêtez à ajouter un article pour ce matériel :"
 
-#: templates/layout.html:40
-msgid "Search"
-msgstr "Rechercher"
+#: inventory/templates/pharmaship/equipment_add.html:19
+#: inventory/templates/pharmaship/medicine_add.html:19
+#: inventory/templates/pharmaship/medicine_add_equivalent.html:20
+msgid "Do not add"
+msgstr "Ne pas ajouter"
 
-#: templates/layout.html:64
-msgid "Material Inventory"
-msgstr "Registre du matériel"
+#: inventory/templates/pharmaship/equipment_add.html:20
+msgid "Add this article"
+msgstr "Ajouter un élément"
 
-#: templates/medicine_inventory.html:16
+#: inventory/templates/pharmaship/equipment_change.html:10
+msgid "You are going to modify this article:"
+msgstr "Vous vous apprêtez à modifier cet élément :"
+
+#: inventory/templates/pharmaship/equipment_change.html:11
+#: inventory/templates/pharmaship/equipment_delete.html:11
+#: inventory/templates/pharmaship/equipment_out.html:11
+#: inventory/templates/pharmaship/medicine_change.html:11
+#: inventory/templates/pharmaship/medicine_delete.html:11
+#: inventory/templates/pharmaship/medicine_out.html:11
+msgid "expiring"
+msgstr "expirant le"
+
+#: inventory/templates/pharmaship/equipment_change.html:11
+#: inventory/templates/pharmaship/equipment_delete.html:11
+#: inventory/templates/pharmaship/equipment_out.html:11
+#: inventory/templates/pharmaship/medicine_change.html:11
+#: inventory/templates/pharmaship/medicine_delete.html:11
+#: inventory/templates/pharmaship/medicine_out.html:11
+msgid "quantity:"
+msgstr "quantité :"
+
+#: inventory/templates/pharmaship/equipment_change.html:19
+#: inventory/templates/pharmaship/equipment_remark.html:19
+#: inventory/templates/pharmaship/medicine_change.html:19
+#: inventory/templates/pharmaship/medicine_remark.html:19
+msgid "Do not modify"
+msgstr "Ne pas modifier"
+
+#: inventory/templates/pharmaship/equipment_change.html:20
+msgid "Update this article"
+msgstr "Mettre à jour l'article"
+
+#: inventory/templates/pharmaship/equipment_delete.html:10
+msgid "You are going to delete this article:"
+msgstr "Vous vous apprêtez à supprimer cet élément :"
+
+#: inventory/templates/pharmaship/equipment_delete.html:19
+#: inventory/templates/pharmaship/medicine_delete.html:19
+msgid "Do not delete"
+msgstr "Ne pas supprimer"
+
+#: inventory/templates/pharmaship/equipment_delete.html:20
+msgid "Delete this article"
+msgstr "Supprimer l'élément"
+
+#: inventory/templates/pharmaship/equipment_inventory.html:16
+#: inventory/templates/pharmaship/medicine_inventory.html:16
+#: static/material_inventory.html:16 static/medicine_inventory.html:16
 msgid "Print this inventory"
 msgstr "Imprimer ce registre"
 
-#: templates/medicine_inventory.html:24
-msgid "Search for an INN or a medicine."
-msgstr "Rechercher une DC ou un médicament."
+#: inventory/templates/pharmaship/equipment_inventory.html:24
+#: static/material_inventory.html:24
+msgid "Search for an object."
+msgstr "Rechercher un élément."
 
-#: templates/medicine_inventory.html:24
+#: inventory/templates/pharmaship/equipment_inventory.html:25
+#: inventory/templates/pharmaship/medicine_inventory.html:25
+#: static/material_inventory.html:24 static/medicine_inventory.html:24
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: templates/medicine_inventory.html:26
+#: inventory/templates/pharmaship/equipment_inventory.html:26
+#: inventory/templates/pharmaship/medicine_inventory.html:26
+msgid "More filters"
+msgstr "Plus de filtres"
+
+#: inventory/templates/pharmaship/equipment_inventory.html:29
+#: inventory/templates/pharmaship/medicine_inventory.html:29
+#: static/material_inventory.html:26 static/medicine_inventory.html:26
 msgid "Filter by group:"
 msgstr "Filtrer par groupe :"
 
-#: templates/medicine_inventory.html:28 templates/medicine_inventory.html:39
-#: templates/medicine_inventory.html:46
+#: inventory/templates/pharmaship/equipment_inventory.html:31
+#: inventory/templates/pharmaship/equipment_inventory.html:41
+#: inventory/templates/pharmaship/equipment_inventory.html:48
+#: inventory/templates/pharmaship/medicine_inventory.html:31
+#: inventory/templates/pharmaship/medicine_inventory.html:41
+#: inventory/templates/pharmaship/medicine_inventory.html:48
+#: static/material_inventory.html:28 static/material_inventory.html.py:39
+#: static/material_inventory.html:46 static/medicine_inventory.html:28
+#: static/medicine_inventory.html.py:39 static/medicine_inventory.html:46
 msgid "All"
 msgstr "Tous"
 
-#: templates/medicine_inventory.html:38
+#: inventory/templates/pharmaship/equipment_inventory.html:40
+#: inventory/templates/pharmaship/medicine_inventory.html:40
+#: static/material_inventory.html:38 static/medicine_inventory.html:38
 msgid "Filter by allowance:"
 msgstr "Filtrer par dotation :"
 
-#: templates/medicine_inventory.html:44
+#: inventory/templates/pharmaship/equipment_inventory.html:46
+#: inventory/templates/pharmaship/medicine_inventory.html:46
+#: static/material_inventory.html:44 static/medicine_inventory.html:44
 msgid "Filter by location:"
 msgstr "Filtrer par emplacement :"
 
-#: templates/medicine_inventory.html:58
-msgid "Form"
-msgstr "Forme"
+#: inventory/templates/pharmaship/equipment_inventory.html:60
+#: static/material_inventory.html:57
+msgid "Name"
+msgstr "Nom"
 
-#: templates/medicine_inventory.html:58
-msgid "Composition"
-msgstr "Composition"
+#: inventory/templates/pharmaship/equipment_inventory.html:61
+#: static/material_inventory.html:58
+msgid "Packaging"
+msgstr "Conditionnement"
 
-#: templates/medicine_inventory.html:59
-msgid "Allowance"
-msgstr "Dotation"
-
-#: templates/medicine_inventory.html:60 templates/medicine_inventory.html:111
+#: inventory/templates/pharmaship/equipment_inventory.html:62
+#: inventory/templates/pharmaship/equipment_inventory.html:113
+#: inventory/templates/pharmaship/medicine_inventory.html:62
+#: inventory/templates/pharmaship/medicine_inventory.html:116
+#: static/material_inventory.html:59 static/material_inventory.html.py:109
+#: static/medicine_inventory.html:59 static/medicine_inventory.html.py:113
 msgid "Quantity"
 msgstr "Quantité"
 
-#: templates/medicine_inventory.html:61
+#: inventory/templates/pharmaship/equipment_inventory.html:63
+#: inventory/templates/pharmaship/medicine_inventory.html:63
+#: static/material_inventory.html:60 static/medicine_inventory.html:60
 msgid "Requested"
 msgstr "En demande"
 
-#: templates/medicine_inventory.html:62 templates/medicine_inventory.html:112
+#: inventory/templates/pharmaship/equipment_inventory.html:64
+#: inventory/templates/pharmaship/equipment_inventory.html:114
+#: inventory/templates/pharmaship/medicine_inventory.html:64
+#: inventory/templates/pharmaship/medicine_inventory.html:117
+#: static/material_inventory.html:61 static/material_inventory.html.py:110
+#: static/medicine_inventory.html:61 static/medicine_inventory.html.py:114
 msgid "Expiration Date"
 msgstr "Date d'expiration"
 
-#: templates/medicine_inventory.html:91
-msgid "Route of Administration:"
-msgstr "Voie d'administration"
+#: inventory/templates/pharmaship/equipment_inventory.html:90
+msgid "Picture"
+msgstr "Photo"
 
-#: templates/medicine_inventory.html:92
-msgid "Group:"
-msgstr "Groupe :"
+#: inventory/templates/pharmaship/equipment_inventory.html:94
+#: inventory/templates/pharmaship/medicine_inventory.html:97
+#: static/material_inventory.html:90 static/medicine_inventory.html:94
+msgid "Required Quantity:"
+msgstr "Quantité requise :"
 
-#: templates/medicine_inventory.html:101
+#: inventory/templates/pharmaship/equipment_inventory.html:96
+#: inventory/templates/pharmaship/medicine_inventory.html:99
+#: static/material_inventory.html:92 static/medicine_inventory.html:96
 msgid "Tags:"
 msgstr "Tags :"
 
-#: templates/medicine_inventory.html:105
+#: inventory/templates/pharmaship/equipment_inventory.html:101
+#: inventory/templates/pharmaship/medicine_inventory.html:104
+#: static/material_inventory.html:97 static/medicine_inventory.html:101
 msgid "Remarks:"
 msgstr "Remarques :"
 
-#: templates/medicine_inventory.html:110
+#: inventory/templates/pharmaship/equipment_inventory.html:112
+#: inventory/templates/pharmaship/medicine_inventory.html:115
+#: static/material_inventory.html:108 static/medicine_inventory.html:112
 msgid "Brand Name"
 msgstr "Dénomination commerciale"
 
-#: templates/medicine_inventory.html:113
+#: inventory/templates/pharmaship/equipment_inventory.html:115
+#: inventory/templates/pharmaship/medicine_inventory.html:118
+#: static/material_inventory.html:111 static/medicine_inventory.html:115
 msgid "Location"
 msgstr "Emplacement"
 
-#: templates/medicine_report.html:30
+#: inventory/templates/pharmaship/equipment_inventory.html:144
+#: static/material_inventory.html:140
+msgid "Add an object"
+msgstr "Ajouter un objet"
+
+#: inventory/templates/pharmaship/equipment_out.html:10
+msgid "You are going to use this article for a treatment:"
+msgstr "Vous vous apprêtez à utiliser cet article pour un traitement :"
+
+#: inventory/templates/pharmaship/equipment_out.html:19
+#: inventory/templates/pharmaship/medicine_out.html:19
+msgid "Do not use"
+msgstr "Ne pas utiliser"
+
+#: inventory/templates/pharmaship/equipment_out.html:20
+msgid "Use this article"
+msgstr "Utiliser l'élément"
+
+#: inventory/templates/pharmaship/equipment_remark.html:10
+msgid "You are going to modify the remarks of this equipment:"
+msgstr "Vous vous apprêtez à modifier les remarques de cet équipement :"
+
+#: inventory/templates/pharmaship/equipment_remark.html:20
+#: inventory/templates/pharmaship/medicine_remark.html:20
+msgid "Update these remarks"
+msgstr "Modifier les remarques"
+
+#: inventory/templates/pharmaship/equipment_report.html:20
+#: inventory/templates/pharmaship/medicine_report.html:20
+msgid "Generated by Pharmaship on"
+msgstr "Généré par Pharmaship le"
+
+#: inventory/templates/pharmaship/equipment_report.html:30
+#: inventory/templates/pharmaship/medicine_report.html:30
+#: static/medicine_report.html:30
 msgid "Vessel:"
 msgstr "Navire :"
 
-#: templates/medicine_report.html:31
+#: inventory/templates/pharmaship/equipment_report.html:31
+#: inventory/templates/pharmaship/medicine_report.html:31
+#: static/medicine_report.html:31
 msgid "Shipowner:"
 msgstr "Armateur :"
 
-#: templates/medicine_report.html:32
+#: inventory/templates/pharmaship/equipment_report.html:32
+#: inventory/templates/pharmaship/medicine_report.html:32
+#: static/medicine_report.html:32
 msgid "Flag:"
 msgstr "Pavillon :"
 
-#: templates/medicine_report.html:33
+#: inventory/templates/pharmaship/equipment_report.html:33
+#: inventory/templates/pharmaship/medicine_report.html:33
+#: static/medicine_report.html:33
 msgid "Port of Registry"
 msgstr "Port d'attache :"
 
-#: templates/medicine_report.html:39
+#: inventory/templates/pharmaship/equipment_report.html:39
+#: inventory/templates/pharmaship/medicine_report.html:39
+#: static/medicine_report.html:39
 msgid "Medical Allowances:"
 msgstr "Dotations médicales :"
 
-#: templates/medicine_report.html:51
+#: inventory/templates/pharmaship/equipment_report.html:51
+#: inventory/templates/pharmaship/medicine_report.html:51
+#: static/medicine_report.html:51
 msgid "Brand name or Generic"
 msgstr "Nom de spécialité ou générique"
 
-#: templates/medicine_report.html:52
-msgid "Route of Administration"
-msgstr "Voie d'administration"
-
-#: templates/medicine_report.html:57
-msgid "List"
-msgstr "Liste"
-
-#: templates/settings.html:10
-msgid "Medical Responsible"
-msgstr "Responsable des soins"
-
-#: templates/settings.html:17
-msgid "Update User Information"
-msgstr "Mettre à jour les informations"
-
-#: templates/settings.html:20
-msgid "Vessel Information"
-msgstr "Renseignements du navire"
-
-#: templates/settings.html:26
-msgid "Update Vessel Information"
-msgstr "Mettre à jour les informations"
-
-#: templates/settings.html:29
-msgid "Application Settings"
-msgstr "Paramètres de l'application"
-
-#: templates/settings.html:35
-msgid "Update Application Settings"
-msgstr "Mettre à jour les paramètres"
-
-#: templates/settings.html:58
-msgid "Update the Language"
-msgstr "Changer la langue"
-
-#: templates/settings.html:61
-msgid "Data Administration"
-msgstr "Voie d'administration"
-
-#: templates/settings.html:67
-msgid "Export Allowance"
-msgstr "Exporter une dotation"
-
-#: templates/settings.html:74
-msgid "Import Allowance"
-msgstr "Importer une dotation"
-
-#: templates/settings_import.html:10
+#: inventory/templates/pharmaship/import.html:10
+#: static/settings_import.html:10
 msgid "Uploaded File Information"
 msgstr "Informations sur le fichier téléversé"
 
-#: templates/settings_import.html:14
+#: inventory/templates/pharmaship/import.html:13
+#: static/settings_import.html:13
+msgid "Filename:"
+msgstr "Nom du fichier :"
+
+#: inventory/templates/pharmaship/import.html:17
+#: static/settings_import.html:17
+msgid "Type:"
+msgstr "Type :"
+
+#: inventory/templates/pharmaship/import.html:21
+#: static/settings_import.html:21
+msgid "Size:"
+msgstr "Taille :"
+
+#: inventory/templates/pharmaship/import.html:26
+#: static/settings_import.html:26
+msgid "Error:"
+msgstr "Erreur :"
+
+#: inventory/templates/pharmaship/import.html:32
+#: static/settings_import.html:32
+msgid "Package Information"
+msgstr "Informations sur le paquet"
+
+#: inventory/templates/pharmaship/import.html:35
+#: static/settings_import.html:35
+msgid "Name:"
+msgstr "Nom :"
+
+#: inventory/templates/pharmaship/import.html:39
+#: static/settings_import.html:39
+msgid "Date:"
+msgstr "Date :"
+
+#: inventory/templates/pharmaship/import.html:43
+#: static/settings_import.html:43
+msgid "Created by:"
+msgstr "Créé par :"
+
+#: inventory/templates/pharmaship/import.html:47
+#: static/settings_import.html:47
+msgid "Signed by:"
+msgstr "Signé par :"
+
+#: inventory/templates/pharmaship/import.html:52
+#: static/settings_import.html:52
 msgid "Importation Status"
 msgstr "État de l'importation"
+
+#: inventory/templates/pharmaship/import.html:55
+#: static/settings_import.html:55
+msgid "Allowance Name:"
+msgstr "Nom de la dotation :"
+
+#: inventory/templates/pharmaship/import.html:59
+#: static/settings_import.html:59
+msgid "New Allowance:"
+msgstr "Nouvelle dotation :"
+
+#: inventory/templates/pharmaship/import.html:63
+#: static/settings_import.html:63
+msgid "Molecules added:"
+msgstr "Principes actifs ajoutés :"
+
+#: inventory/templates/pharmaship/import.html:67
+msgid "Equipement added:"
+msgstr "Équipement ajouté :"
+
+#: inventory/templates/pharmaship/import.html:71
+msgid "New molecule orphans:"
+msgstr "Nouvelles molécules hors dotation :"
+
+#: inventory/templates/pharmaship/import.html:75
+msgid "New equipment orphans:"
+msgstr "Nouveaux objets hors dotation :"
+
+#: inventory/templates/pharmaship/import.html:79
+#: static/settings_import.html:71
+msgid "Req. Quantities created:"
+msgstr "Quantités requises créées :"
+
+#: inventory/templates/pharmaship/index.html:12
+msgid "Medicines Inventory Status"
+msgstr "Statut des médicaments"
+
+#: inventory/templates/pharmaship/index.html:15 static/index.html:15
+msgid "Medicines in short supply:"
+msgstr "Médicaments en quantité insuffisante :"
+
+#: inventory/templates/pharmaship/index.html:22 static/index.html:22
+msgid "Molecule"
+msgstr "Principe actif"
+
+#: inventory/templates/pharmaship/index.html:23
+#: inventory/templates/pharmaship/index.html:131 static/index.html:23
+#: static/index.html.py:129
+msgid "Required Quantity"
+msgstr "Quantité requise"
+
+#: inventory/templates/pharmaship/index.html:24
+#: inventory/templates/pharmaship/index.html:132 static/index.html:24
+#: static/index.html.py:130
+msgid "Current Quantity"
+msgstr "Quantité"
+
+#: inventory/templates/pharmaship/index.html:40 static/index.html:40
+msgid "Expired medicines:"
+msgstr "Médicaments périmés :"
+
+#: inventory/templates/pharmaship/index.html:47
+#: inventory/templates/pharmaship/index.html:71
+#: inventory/templates/pharmaship/index.html:92 static/index.html:47
+#: static/index.html.py:71 static/index.html.py:92
+msgid "Medicine"
+msgstr "Médicament"
+
+#: inventory/templates/pharmaship/index.html:61 static/index.html:61
+msgid "Medicines reaching expiry:"
+msgstr "Médicaments arrivant à péremption :"
+
+#: inventory/templates/pharmaship/index.html:85 static/index.html:85
+msgid "Non conform medicines:"
+msgstr "Médicaments non-conformes :"
+
+#: inventory/templates/pharmaship/index.html:93
+#: inventory/templates/pharmaship/index.html:201 static/index.html:93
+#: static/index.html.py:199
+msgid "Non Conformity"
+msgstr "Non conformité"
+
+#: inventory/templates/pharmaship/index.html:99 static/index.html:99
+msgid "Molecule:"
+msgstr "Principe actif :"
+
+#: inventory/templates/pharmaship/index.html:102 static/index.html:102
+msgid "Composition:"
+msgstr "Composition :"
+
+#: inventory/templates/pharmaship/index.html:113 static/index.html:112
+msgid "Ordered medicines:"
+msgstr "Médicaments commandés :"
+
+#: inventory/templates/pharmaship/index.html:115
+#: inventory/templates/pharmaship/index.html:218 static/index.html:114
+#: static/index.html.py:215
+msgid "Last order:"
+msgstr "Dernière commande :"
+
+#: inventory/templates/pharmaship/index.html:120
+msgid "Medical Equipment Inventory Status"
+msgstr "Statut du matériel médical"
+
+#: inventory/templates/pharmaship/index.html:123
+msgid "Equipment in short supply:"
+msgstr "Équipement en quantité insuffisante :"
+
+#: inventory/templates/pharmaship/index.html:130 static/index.html:128
+msgid "Item"
+msgstr "Item"
+
+#: inventory/templates/pharmaship/index.html:148
+msgid "Expired articles:"
+msgstr "Articles périmés :"
+
+#: inventory/templates/pharmaship/index.html:155
+msgid "Equipment"
+msgstr "Matériel"
+
+#: inventory/templates/pharmaship/index.html:169
+msgid "Articles reaching expiry:"
+msgstr "Articles arrivant à péremption :"
+
+#: inventory/templates/pharmaship/index.html:179
+#: inventory/templates/pharmaship/index.html:200
+msgid "Article"
+msgstr "Article"
+
+#: inventory/templates/pharmaship/index.html:193
+msgid "Non conform articles:"
+msgstr "Matériel non-conforme :"
+
+#: inventory/templates/pharmaship/index.html:216
+msgid "Ordered equipments:"
+msgstr "Matériel médical commandé :"
+
+#: inventory/templates/pharmaship/medicine_add.html:10
+msgid "You are going to add a medicine for this molecule:"
+msgstr "Vous vous apprêtez à ajouter un médicament pour ce principe actif :"
+
+#: inventory/templates/pharmaship/medicine_add.html:20
+#: inventory/templates/pharmaship/medicine_add_equivalent.html:21
+msgid "Add this medicine"
+msgstr "Ajouter le médicament"
+
+#: inventory/templates/pharmaship/medicine_add_equivalent.html:10
+msgid "You are going to add an equivalent medicine for this molecule:"
+msgstr ""
+"Vous vous apprêtez à ajouter un médicament équivalent pour ce principe "
+"actif :"
+
+#: inventory/templates/pharmaship/medicine_add_equivalent.html:18
+msgid ""
+"Before adding this equivalent medicine (molecule different from the "
+"allowance), make sure you have had the approval of a doctor."
+msgstr ""
+"Avant d'ajouter ce médicament équivalent (principe actif différent de la "
+"dotation), assurez vous d'avoir eu l'accord d'un médecin."
+
+#: inventory/templates/pharmaship/medicine_change.html:10
+msgid "You are going to modify this medicine:"
+msgstr "Vous vous apprêtez à modifier ce médicament :"
+
+#: inventory/templates/pharmaship/medicine_change.html:20
+msgid "Update this medicine"
+msgstr "Mettre à jour ce médicament"
+
+#: inventory/templates/pharmaship/medicine_delete.html:10
+msgid "You are going to delete this medicine:"
+msgstr "Vous vous apprêtez à supprimer ce médicament :"
+
+#: inventory/templates/pharmaship/medicine_delete.html:20
+msgid "Delete this medicine"
+msgstr "Supprimer ce médicament"
+
+#: inventory/templates/pharmaship/medicine_inventory.html:24
+#: static/medicine_inventory.html:24
+msgid "Search for an INN or a medicine."
+msgstr "Rechercher un principe actif ou un médicament."
+
+#: inventory/templates/pharmaship/medicine_inventory.html:61
+#: static/medicine_inventory.html:58
+msgid "Form"
+msgstr "Forme"
+
+#: inventory/templates/pharmaship/medicine_inventory.html:61
+#: static/medicine_inventory.html:58
+msgid "Composition"
+msgstr "Composition"
+
+#: inventory/templates/pharmaship/medicine_inventory.html:96
+#: static/medicine_inventory.html:93
+msgid "Route of Administration:"
+msgstr "Voie d'administration :"
+
+#: inventory/templates/pharmaship/medicine_inventory.html:151
+#: static/medicine_inventory.html:148
+msgid "Add an equivalent"
+msgstr "Ajouter un médicament équivalent"
+
+#: inventory/templates/pharmaship/medicine_out.html:10
+msgid "You are going to use this medicine for a treatment:"
+msgstr "Vous vous apprêtez à utiliser ce médicament pour un traitement :"
+
+#: inventory/templates/pharmaship/medicine_out.html:20
+msgid "Use this medicine"
+msgstr "Utiliser ce médicament"
+
+#: inventory/templates/pharmaship/medicine_remark.html:10
+msgid "You are going to modify the remarks of this molecule:"
+msgstr "Vous vous apprêtez à modifier les remarques de ce principe actif :"
+
+#: inventory/templates/pharmaship/medicine_report.html:52
+#: static/medicine_report.html:52
+msgid "Route of Administration"
+msgstr "Voie d'administration"
+
+#: inventory/templates/pharmaship/medicine_report.html:57
+#: static/medicine_report.html:57
+msgid "List"
+msgstr "Liste"
+
+#: inventory/templates/pharmaship/settings.html:20
+msgid "Pharmaship Settings"
+msgstr "Paramètres de Pharmaship"
+
+#: inventory/templates/pharmaship/settings.html:26
+msgid "Update Pharmaship Settings"
+msgstr "Mettre à jour les paramètres de Pharmaship"
+
+#: inventory/templates/pharmaship/settings.html:29 static/settings.html:61
+msgid "Data Administration"
+msgstr "Gestion des données"
+
+#: inventory/templates/pharmaship/settings.html:35 static/settings.html:67
+msgid "Export Allowance"
+msgstr "Exporter une dotation"
+
+#: inventory/templates/pharmaship/settings.html:42 static/settings.html:74
+msgid "Import Allowance"
+msgstr "Importer une dotation"
+
+#: inventory/templates/pharmaship/settings.html:45
+msgid "Location Manager"
+msgstr "Gestionnaire d'emplacement"
+
+#: inventory/templates/pharmaship/settings.html:51
+msgid "Add a location"
+msgstr "Ajouter un emplacement"
+
+#: inventory/templates/pharmaship/settings.html:58
+msgid "Objects with these locations will be linked by default to Pharmacy."
+msgstr ""
+"Les objets avec ces emplacements seront associés par défaut à la pharmacie."
+
+#: inventory/templates/pharmaship/settings.html:59
+msgid "Delete selected locations"
+msgstr "Supprimer les emplacements sélectionnés"
+
+#: settings/templates/settings.html:20 static/settings.html:10
+msgid "Medical Responsible"
+msgstr "Responsable des soins"
+
+#: settings/templates/settings.html:27 static/settings.html:17
+msgid "Update User Information"
+msgstr "Mettre à jour les informations"
+
+#: settings/templates/settings.html:30 static/settings.html:20
+msgid "Vessel Information"
+msgstr "Renseignements du navire"
+
+#: settings/templates/settings.html:36 static/settings.html:26
+msgid "Update Vessel Information"
+msgstr "Mettre à jour les informations"
+
+#: settings/templates/settings.html:59 static/settings.html:58
+msgid "Update the Language"
+msgstr "Changer la langue"
+
+#: static/index.html:12
+msgid "Medical Inventory Status"
+msgstr "Statut des médicaments"
+
+#: static/index.html:118
+msgid "Material Inventory Status"
+msgstr "Statut du matériel médical"
+
+#: static/index.html:121
+msgid "Material in short supply:"
+msgstr "Matériel en quantité insuffisante :"
+
+#: static/index.html:146
+msgid "Expired materials:"
+msgstr "Matériel périmé :"
+
+#: static/index.html:153 static/index.html.py:177 static/index.html.py:198
+msgid "Material"
+msgstr "Matériel"
+
+#: static/index.html:167
+msgid "Materials reaching expiry:"
+msgstr "Matériels arrivant à péremption :"
+
+#: static/index.html:191
+msgid "Non conform materials:"
+msgstr "Matériel non-conform :"
+
+#: static/index.html:213
+msgid "Ordered material:"
+msgstr "Matériel commandé :"
+
+#: static/layout.html:25 templates/layout.html:25
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: static/layout.html:28 templates/layout.html:28
+msgid "Log In"
+msgstr "Se connecter"
+
+#: static/layout.html:40 templates/layout.html:41
+msgid "Search"
+msgstr "Rechercher"
+
+#: static/layout.html:64 templates/layout.html:66
+msgid "Material Inventory"
+msgstr "Registre du matériel"
+
+#: static/settings.html:29
+msgid "Application Settings"
+msgstr "Paramètres de l'application"
+
+#: static/settings.html:35
+msgid "Update Application Settings"
+msgstr "Mettre à jour les paramètres"
+
+#: static/settings_import.html:67
+msgid "New orphans:"
+msgstr "Nouveaux objets hors dotation :"

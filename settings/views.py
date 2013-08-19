@@ -34,15 +34,11 @@ from django.forms import ModelForm
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
-from models import Vessel, Application
-from forms import VesselForm, ApplicationForm, ExportForm, ImportForm
-
-from allowance import create_archive, import_archive
+import models, forms
 
 from django.contrib.auth.models import User
-from users.models import UserProfile
-from users.forms import UserForm, UserProfileForm
 
 FUNCTIONS = (
 		(u'00', "Captain"),
@@ -52,20 +48,38 @@ FUNCTIONS = (
 		(u'21', "Engineer"),
 		(u'99', "Ratings"),
 	)
-    
+
 @login_required
 def index(request):
     """Displays differents forms to configure Pharmaship."""
+    links = []
+    for application in settings.INSTALLED_APPS:
+        # Do not take in account Django's applications
+        if "django" in application:
+            continue
+        app_data = {}
+        # By default, adding the general settings application to the dict
+        if application == "settings":
+            app_data['name'] = _("Settings")
+            app_data['url'] = "settings"
+            app_data['active'] = True
+        # Looking if the applications has settings that can be imported
+        elif globals().get("{0}.settings.urls".format(application), True):
+            print "application"
+            app_data['name'] = _(application.capitalize())
+            app_data['url'] = "{0}_settings".format(application)
+        else:
+            continue
+        links.append(app_data)
+            
     return render_to_response('settings.html', {
                         'user': (request.user.last_name + " " +request.user.first_name),
                         'rank': request.user.profile.get_rank(),
-                        'title':_("Account Settings"),
-                        'vesselform':VesselForm(instance=Vessel.objects.latest('id')).as_table(),
-                        'userform':UserForm(instance=User.objects.get(id=request.user.id)).as_table(),
-                        'userprofileform':UserProfileForm(instance=UserProfile.objects.get(id=request.user.id)).as_table(),
-                        'applicationform': ApplicationForm(instance=Application.objects.latest('id')).as_table(),
-                        'exportform': ExportForm().as_table(),
-                        'importform': ImportForm().as_table(),
+                        'title': _("Settings"),
+                        'links': links,
+                        'vesselform': forms.VesselForm(instance = models.Vessel.objects.latest('id')).as_table(),
+                        'userform': forms.UserForm(instance = User.objects.get(id = request.user.id)).as_table(),
+                        'userprofileform': forms.UserProfileForm(instance = models.UserProfile.objects.get(id = request.user.id)).as_table(),
                         },
                         context_instance=RequestContext(request))
 
@@ -77,63 +91,22 @@ def validation(request, form, instance=None):
         f.save()
     else:
         # TODO: Error message
-        return False  
+        return False
 
-@permission_required('users.user_profile.can_change')
+@permission_required('settings.user_profile.can_change')
 def user(request):
     """Validation of the User and UserProfile forms."""
     if request.method == 'POST':
-        validation(request, UserForm, User.objects.get(id=request.user.id))
-        validation(request, UserProfileForm, UserProfile.objects.get(id=request.user.id))
+        validation(request, forms.UserForm, User.objects.get(id=request.user.id))
+        validation(request, forms.UserProfileForm, models.UserProfile.objects.get(id=request.user.id))
 
     return HttpResponseRedirect('/settings') # Redirect after POST
-    
+
 @permission_required('settings.vessel.can_change')
 def vessel(request):
     """Validation of the Vessel form."""
     if request.method == 'POST':
-        validation(request, VesselForm, Vessel.objects.latest('id'))
+        validation(request, forms.VesselForm, models.Vessel.objects.latest('id'))
 
-    return HttpResponseRedirect('/settings') # Redirect after POST    
+    return HttpResponseRedirect('/settings') # Redirect after POST
 
-@permission_required('settings.application.can_change')
-def application(request):
-    """Validation of the Application form."""
-    if request.method == 'POST':
-        validation(request, ApplicationForm, Application.objects.latest('id'))
-
-    return HttpResponseRedirect('/settings') # Redirect after POST    
-
-@permission_required('settings')
-def export_data(request):
-    """Exports an allowance in a tar.gz archive."""
-    if request.method == 'POST': # If the form has been submitted
-        form = ExportForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            # Process the data in form.cleaned_data
-            allowance = form.cleaned_data['allowance']
-            return create_archive(allowance)
-        else:
-            return HttpResponseRedirect(reverse('settings'))
-    else:
-        return HttpResponseRedirect(reverse('settings'))
-
-@permission_required('settings.application.can_change')
-def import_data(request):
-    """Import data and do some checks."""
-    if request.method == 'POST': # If the form has been submitted
-        form = ImportForm(request.POST, request.FILES) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            # Process the data in form.cleaned_data
-            import_file = request.FILES['import_file']
-            return render_to_response('settings_import.html', {
-                        'user': (request.user.last_name + " " +request.user.first_name),
-                        'rank': request.user.profile.get_rank(),
-                        'title':_("Allowance Settings"),
-                        'data': import_archive(import_file),
-                        },
-                        context_instance=RequestContext(request))
-        else:
-            return HttpResponseRedirect(reverse('settings'))
-    else:
-        return HttpResponseRedirect(reverse('settings'))

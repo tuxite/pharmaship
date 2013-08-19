@@ -25,11 +25,14 @@
 __author__ = "Matthieu Morin"
 __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
-__version__ = "0.1"
+__version__ = "0.2"
+
+import logging
 
 from django.conf.urls import patterns, include, url
-
 from django.contrib import admin
+from django.conf import settings
+
 admin.autodiscover()
 
 urlpatterns = patterns('settings.views',
@@ -38,10 +41,15 @@ urlpatterns = patterns('settings.views',
     url(r'^/vessel$', 'vessel', name="vessel"),
     # Action for User and UserProfile forms
     url(r'^/user$', 'user', name="user"),
-    # Action for Application form
-    url(r'^/application$', 'application', name="application"),
-    # Export/import allowances
-    url(r'^/export$', 'export_data', name="export"),
-    url(r'^/import$', 'import_data', name="import"),
-    
 )
+
+# Automatically adds settings url from applications
+logger = logging.getLogger(__name__)
+
+for application in settings.INSTALLED_APPS:
+    try:
+        urlpatterns += patterns('',
+            (r"^%s/" % application, include("%s.settings_urls" % application)),
+        )
+    except:
+        logger.debug ("Application %s does not provides urls" % application)

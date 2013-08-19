@@ -36,9 +36,11 @@
         <div class="bodywrapper">
             <div id="title">
                 {% block print %}
+<!--
                 <form action="." method="post">
                     <input id="search" type="text" name="search" placeholder="{% trans 'Search' %}"/>
                 </form>
+-->
                 {% endblock %}
                 <h1>{{ title }}</h1>
 
@@ -61,7 +63,7 @@
 		<div class="sidebarwrapper">
             <ul>
                 <li><a href="{% url 'medicine' %}">{% trans "Medicine Inventory" %}</a></li>
-                <li class="separator"><a href="{% url 'material' %}">{% trans "Material Inventory" %}</a></li>
+                <li class="separator"><a href="{% url 'equipment' %}">{% trans "Material Inventory" %}</a></li>
 <!--
                 <li class="separator"><a href="#">Gestion des commandes</a></li>
                 <li><a href="#">Téléconsultation</a></li>

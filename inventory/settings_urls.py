@@ -18,8 +18,8 @@
 # along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
 #
 # ======================================================================
-# Filename:    settings/forms.py
-# Description: Forms classes for Settings application.
+# Filename:    iventory/settings_urls.py
+# Description: Urls for the settings of the Inventory application.
 # ======================================================================
 
 __author__ = "Matthieu Morin"
@@ -27,13 +27,16 @@ __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
 __version__ = "0.2"
 
-from django.forms.models import modelform_factory
-from django import forms
-from django.contrib.auth.models import User
+from django.conf.urls import patterns, url
 
-import models
-
-UserForm = modelform_factory(User, fields=('first_name', 'last_name'))
-UserProfileForm = modelform_factory(models.UserProfile, fields=('function',))
-
-VesselForm = modelform_factory(models.Vessel)
+urlpatterns = patterns('inventory.views_settings',
+    url(r'^$', 'index', name="inventory_settings"),
+    # Action for Inventory settings form
+    url(r'^application$', 'application', name="application"),
+    # Export/import allowances
+    url(r'^export$', 'export_data', name="export"),
+    url(r'^import$', 'import_data', name="import"),
+    # Create/delete locations
+    url(r'^location/create$', 'create_location', name="create_location"),
+    url(r'^location/delete$', 'delete_location', name="delete_location"),
+)

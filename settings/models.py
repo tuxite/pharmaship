@@ -28,9 +28,45 @@ __license__ = "GPL"
 __version__ = "0.1"
 
 from django.db import models
-from django import forms
 
-from inventory.models import Allowance
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
+FUNCTIONS = (
+        (u'00', "Captain"),
+        (u'10', "Chief Officer"),
+        (u'11', "Deck Officer"),
+        (u'20', "Chief Engineer"),
+        (u'21', "Engineer"),
+        (u'99', "Ratings"),
+    )
+
+# User's related models
+class UserProfile(models.Model):
+    global FUNCTIONS
+    user = models.OneToOneField(User)
+    
+    function = models.CharField(max_length=2, choices=FUNCTIONS)
+
+
+    def __str__(self):
+        return "%s's profile" % self.user
+
+    def get_rank(self):
+        for item in FUNCTIONS:
+            if self.function == item[0]:
+                return item[1]
+        return self.function
+
+
+# This part is to connect both Django user model and our User profile.
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+    
+post_save.connect(create_user_profile, sender=User)
+
+User.profile = property(lambda u: u.get_profile() )
 
 # Models
 class Vessel(models.Model):
@@ -46,12 +82,7 @@ class Vessel(models.Model):
     mmsi = models.IntegerField(max_length=9)
     fax = models.CharField(max_length=20)
     email = models.EmailField(max_length=64)
-    allowance = models.ManyToManyField(Allowance)
 
     def __unicode__(self):
         return self.name
 
-
-class Application(models.Model):
-    """Application settings."""
-    expire_date_warning_delay = models.PositiveIntegerField()

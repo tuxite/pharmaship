@@ -32,20 +32,38 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('inventory.views',
+urlpatterns = patterns('inventory.views_common',
+    # General
     url(r'^$', 'index'),
+    url(r'^contact', 'contact'),
+)
 
+urlpatterns += patterns('inventory.views_medicine',
     # Medicine Related
-    url(r'^/medicine/index', 'medicine', name="medicine"),
-    url(r'^/medicine/(?P<medicine_id>\d+)/delete$', 'medicine_delete', name="medicine_delete"),
-    url(r'^/medicine/(?P<inn_id>\d+)/add$', 'medicine_add', name="medicine_add"),
-    url(r'^/medicine/(?P<medicine_id>\d+)/change$', 'medicine_change', name="medicine_change"),
-    url(r'^/medicine/(?P<medicine_id>\d+)/out$', 'medicine_out', name="medicine_out"),
-    url(r'^/medicine/(?P<inn_id>\d+)/equivalent$', 'medicine_equivalent', name="medicine_equivalent"),
-    url(r'^/medicine/(?P<inn_id>\d+)/remark$', 'medicine_remark', name="medicine_remark"),
-    url(r'^/medicine/filter$', 'medicine_filter', name="medicine_filter"),
-    url(r'^/medicine/print$', 'medicine_print', name="medicine_print"),
+    url(r'^medicine/$', 'index', name="medicine"),
+    url(r'^medicine/filter$', 'filter', name="med_filter"),
+    url(r'^medicine/print$', 'pdf_print', name="med_print"),
 
-    # Material Related
-    url(r'^/material', 'material', name="material"),
+    url(r'^medicine/(?P<molecule_id>\d+)/add$', 'add', name="med_add"),
+    url(r'^medicine/(?P<molecule_id>\d+)/equivalent$', 'equivalent', name="med_equivalent"),
+    url(r'^medicine/(?P<molecule_id>\d+)/remark$', 'remark', name="med_remark"),
+
+    url(r'^medicine/(?P<medicine_id>\d+)/delete$', 'delete', name="med_delete"),
+    url(r'^medicine/(?P<medicine_id>\d+)/change$', 'change', name="med_change"),
+    url(r'^medicine/(?P<medicine_id>\d+)/out$', 'out', name="med_out"),
+
+)
+urlpatterns += patterns('inventory.views_equipment',
+    # Equipment Related
+    url(r'^equipment/index', 'index', name="equipment"),
+    url(r'^equipment/print$', 'pdf_print', name="equ_print"),
+    url(r'^equipment/filter$', 'filter', name="equ_filter"),
+
+    url(r'^equipment/(?P<equipment_id>\d+)/add$', 'add', name="equ_add"),
+    url(r'^equipment/(?P<equipment_id>\d+)/remark$', 'remark', name="equ_remark"),
+
+    url(r'^equipment/(?P<article_id>\d+)/delete$', 'delete', name="equ_delete"),
+    url(r'^equipment/(?P<article_id>\d+)/change$', 'change', name="equ_change"),
+    url(r'^equipment/(?P<article_id>\d+)/out$', 'out', name="equ_out"),
+
 )

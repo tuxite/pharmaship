@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block addon %}
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href='{% static "settings.css" %}'>
+{% endblock %}
+
+{% block navigation %}
+<nav>
+    <ul class="navleft">
+        {% for item in links %}
+        <li><a href="{% url item.url %}" {% if item.active %}class="active"{% endif %}>{{ item.name }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h2>{% trans "Medical Responsible" %}</h2>
+<form method="post" action="{% url 'user' %}">
+    {% csrf_token %}
+    <table>
+    {{ userform }}
+    {{ userprofileform }}
+    </table>
+    <input type="submit" value='{% trans "Update User Information" %}'/>
+</form>
+
+<h2>{% trans "Vessel Information" %}</h2>
+<form method="post" action="{% url 'vessel' %}">
+    {% csrf_token %}
+    <table>
+    {{ vesselform }}
+    </table>
+    <input type="submit" value='{% trans "Update Vessel Information" %}'/>
+</form>
+
+
+<form action="/i18n/setlang/" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{% url 'settings' %}" />
+    <table>
+        <tbody>
+        <tr>
+            <th>Language:</th>
+            <td>
+                <select name="language">
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                    <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <input type="submit" value='{% trans "Update the Language" %}' />
+</form>
+{% endblock %}

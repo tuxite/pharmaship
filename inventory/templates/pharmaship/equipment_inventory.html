@@ -1,0 +1,159 @@
+{% extends "layout.html" %}
+{% load i18n %}
+
+{% block addon %}
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href='{% static "pharmaship/inventory.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "pharmaship/popup.css" %}'>
+    <script src='{% static "js/jquery-1.9.1.min.js" %}'></script>
+    <script src='{% static "js/jquery.bpopup.min.js" %}'></script>
+    <script src='{% static "js/medicine_inventory.js" %}'></script>
+{% endblock %}
+
+{% block print %}
+<form action="{% url 'equ_print' %}" method="post">
+    {% csrf_token %}
+    <input id="print" type="submit" value="{% trans 'Print this inventory' %}"/>
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="debug">{{ debug }}</div>
+<div id="filter_banner">
+    <form class="filterform" action="#">
+        <p><input type="text" id="filterinput" placeholder="{% trans 'Search for an object.' %}" size="35"/>
+        <a href="#" id="reset_input" title='{% trans "Reset" %}'> </a>
+        <a href="#" id="advanced_filter">{% trans "More filters" %}</a></p>
+    </form>
+    <div id="filter_more">
+        <p>{% trans "Filter by group:" %}
+            <select id="filterselect">
+                <option value="">{% trans "All" %}</option>
+                {% for group in group_list %}
+                <option value="{{ group.name }}">{{ group }}</option>
+                {% endfor %}
+            </select>
+            <label><input type="checkbox" id="filtertag" value="Usage courant"/> Usage courant</label>
+        </p>
+        <form action="{% url 'med_filter' %}" method="post" id="filterallowance">
+            {% csrf_token %}
+            <p>{% trans "Filter by allowance:" %}
+                <label><input type="checkbox" name="allowance-0" value="-1" {% if filter == None %}checked{% endif %} /> {% trans "All" %}</label>
+                {% for allowance in allowance_list %}
+                <label><input type="checkbox" class="filtercheck" name="allowance-{{ allowance.id }}" value="{{ allowance.id }}" {% if allowance in filter%}checked{% endif %}/> {{ allowance.name }}</label>
+                {% endfor %}
+            </p>
+            <p>{% trans "Filter by location:" %}
+                <select id="filterlocation">
+                    <option value="">{% trans "All" %}</option>
+                    {% for location in location_list %}
+                    <option value="{{ location }}">{{ location }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </form>
+        </div>
+</div>
+<div id="medicine_table">
+    <header id="medicine_table_header">
+        <ul>
+            <li class="medicine_li medicine_inn">{% trans "Name" %}</li>
+            <li class="medicine_li medicine_compo">{% trans "Packaging" %}</li>
+            <li class="medicine_li medicine_qty">{% trans "Quantity" %}</li>
+            <li class="medicine_li medicine_qty">{% trans "Requested" %}</li>
+            <li class="medicine_li medicine_date">{% trans "Expiration Date" %}</li>
+        </ul>
+    </header>
+
+    <div id="articles">
+    {% for group in values %}
+    <div class="group_div">
+    <h2 class="group">{{ group.name}}</h2>
+    {% for equipment in group.child %}
+    <article class="medicine_item">
+        <header id='inn-head-{{ equipment.id }}' class="medicine_inn_header">
+            <ul class="inn_list">
+                <li class="medicine_li medicine_inn">{{ equipment.name }}<br />
+                    <small class="brand">
+                        {% for item in equipment.article_items %}{% if not forloop.first %}, {% endif %}{% if item.nc_packaging %}<span class="red">{{ item.name }}</span>{% else %}{{ item.name }}{% endif %}{% endfor %}
+                    </small>
+                </li>
+                <li class="medicine_li_h medicine_compo">{{ equipment.packaging }}</li>
+                <li class="medicine_li_h medicine_qty {% if equipment.quantity < equipment.required_quantity %}error{% endif %}">{{ equipment.quantity }}</li>
+                <li class="medicine_li_h medicine_qty">0</li> <!-- TODO -->
+                {% with equipment.article_items|first as item %}
+                <li class="medicine_li_h medicine_date {% if item.exp_date < today %}error{% elif item.exp_date < delay %}warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
+                {% endwith %}
+            </ul>
+        </header>
+        <div id='inn-{{ equipment.id }}' class="medicine_more">
+            <div class="material_picture"><a href="{{ equipment.picture.url }}" class="picture_popup">{% trans "Picture" %}</a></div>
+            <div class="medicine_wrapper">
+                
+                <div class="medicine_info">
+                    <p class="medicine_allowance"><b>{% trans "Required Quantity:" %}</b> {{ equipment.required_quantity }}</p>
+                    {% if equipment.tag.all|length > 0 %}
+                    <p class="medicine_tag"><b>{% trans "Tags:" %} </b>
+                        {% for tag in equipment.tag.all %}{% if not forloop.first %}, {% endif %}{{ tag.name }}{% endfor %}
+                    </p>
+                    {% endif %}
+                    <p class="medicine_rem">
+                        <a href="{% url 'equ_remark' equipment.id %}" title="Éditer les remarques" class="jquery_popup remark_edit">{% trans "Remarks:" %}</a>
+                        {{ equipment.remark.text }}
+                    </p>
+                </div>
+
+
+            </div>
+            {% if equipment.article_items|length > 0 %}
+            <table class="medicine_items">
+                <thead>
+                <tr>
+                    <td class="medicine_inn">{% trans "Brand Name" %}</td>
+                    <td class="medicine_qty">{% trans "Quantity" %}</td>
+                    <td class="medicine_date">{% trans "Expiration Date" %}</td>
+                    <td class="medicine_location">{% trans "Location" %}</td>
+                    <td class=""></td>
+                    <td class="medicine_buttons"></td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in equipment.article_items %}
+                <tr class="border">
+                    <td>{{ item.name }}
+                {% if item.nc_packaging %}<span class="red">[ {{ item.nc_packaging }} ]</span>{% endif %}
+                    <td class="medicine_qty">{{ item.quantity }}</td>
+                    <td class="medicine_date {% if item.exp_date < today %}error{% elif item.exp_date < delay %}warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</td>
+                    <td class="location">{{ item.location }}</td>
+                    <td class="red">
+                        {% if item.nc_packaging %}
+                        CONDITIONNEMENT NON CONFORME !
+                        {% endif %}
+                    </td>
+                    <td class="medicine_buttons">
+                        <a href="{% url 'equ_out' item.id %}" title="Utiliser ce matériel" class="jquery_popup medicine_out medicine_link"></a>
+                        <a href="{% url 'equ_change' item.id %}" title="Éditer ce matériel" class="jquery_popup medicine_edit medicine_link"></a>
+                        <a href="{% url 'equ_delete' item.id %}" title="Supprimer ce matériel" class="jquery_popup medicine_delete medicine_link"></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            <nav class="medicine_action">
+                <a href="{% url 'equ_add' equipment.id %}" class="medicine_submit green jquery_popup">{% trans 'Add an object' %}</a> 
+            </nav>
+        </div>
+    </article>
+    {% endfor %}
+    </div>
+    {% endfor %}
+    </div>
+
+</div>
+<!-- Popup -->
+<div id="medicine_dialog">
+    <div class="content">
+    </div>
+</div>
+{% endblock %}

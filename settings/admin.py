@@ -25,14 +25,10 @@
 __author__ = "Matthieu Morin"
 __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
-__version__ = "0.1"
+__version__ = "0.2"
 
 import models, forms
 from django.contrib import admin
 
-
-class VesselAdmin(admin.ModelAdmin):
-    form = forms.VesselForm
-
-admin.site.register(models.Vessel, VesselAdmin)
-admin.site.register(models.Application)
+admin.site.register(models.UserProfile)
+admin.site.register(models.Vessel)

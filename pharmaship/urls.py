@@ -28,19 +28,19 @@ __license__ = "GPL"
 __version__ = "0.1"
 
 from django.conf.urls import patterns, include, url
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'home.views.index'),
-    url(r'^contact', 'home.views.contact'),
+    # Load urls of Inventory application
+    url(r'^', include('inventory.urls')),
 
     # Load urls of Settings application
-    url(r'^settings', include('settings.urls')),
-    # Load urls of Inventory application
-    url(r'^inventory', include('inventory.urls')),
+    url(r'^settings/', include('settings.urls')),
 
     # Admin views
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -52,4 +52,6 @@ urlpatterns = patterns('',
 
     # i18n
     url(r'^i18n/', include('django.conf.urls.i18n')),
+
 )
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
