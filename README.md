@@ -6,9 +6,13 @@ A pharmacy software for merchant ships.
 This software is in active development!
 
 ## Requirements
-*   Django 1.4.5+
-*   WeasyPrint (for printing PDF)
+*   Django 1.5
+*   MySQL Server
+*   python-mysqldb
+*   python-gpgme
+*   WeasyPrint (for printing PDF). Need python-lxml, python-cffi.
 
 ## Installation
-*   Edit pharmaship/settings.py
-*   Modify in conf/mysql.conf
+See: https://github.com/tuxite/pharmaship/wiki/Installation
+
+
