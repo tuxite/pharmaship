@@ -19,7 +19,7 @@
 #
 # ======================================================================
 # Filename:    inventory/models.py
-# Description: Models for Settings application.
+# Description: Models for Inventory application.
 # ======================================================================
 
 __author__ = "Matthieu Morin"
@@ -27,6 +27,7 @@ __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
 __version__ = "0.1"
 
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -197,8 +198,8 @@ class Tag(models.Model):
 
 class Location(models.Model):
     """Model for locations attached to a Medicine."""
-    primary = models.CharField(max_length=100) # Example: Pharmacie
-    secondary = models.CharField(max_length=100,blank=True, null=True) # Example: Tiroir 2
+    primary = models.CharField(_("Primary"), max_length=100) # Example: Pharmacie
+    secondary = models.CharField(_("Secondary"), max_length=100,blank=True, null=True) # Example: Tiroir 2
 
     def __unicode__(self):
         if self.secondary:
@@ -223,10 +224,10 @@ class QtyTransaction(models.Model):
     * 9 OTHER: other reason.
     """
 
-    transaction_type = models.PositiveIntegerField(choices=TYPE_CHOICES)
+    transaction_type = models.PositiveIntegerField(_("Type"), choices=TYPE_CHOICES)
     date = models.DateTimeField(auto_now_add=True)
     remark = models.TextField(blank=True, null=True)
-    value = models.IntegerField()
+    value = models.IntegerField(_("Value"), )
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
@@ -238,7 +239,7 @@ class QtyTransaction(models.Model):
 
 class Remark(models.Model):
     """Model for remarks attached to an INN."""
-    text = models.TextField(blank=True, null=True)
+    text = models.TextField(_("Text"), blank=True, null=True)
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
@@ -283,13 +284,13 @@ class Molecule(models.Model):
 
 class Medicine(models.Model):
     """Medicine model, "child" of Molecule."""
-    name = models.CharField(max_length=100) # Brand Name. Example: Doliprane for INN Paracétamol
-    exp_date = models.DateField()
+    name = models.CharField(_("Name"), max_length=100) # Brand Name. Example: Doliprane for INN Paracétamol
+    exp_date = models.DateField(_("Expiration Date"))
     # Link to location
     location = models.ForeignKey(Location)
     # Fields for non-conformity compatibility
-    nc_molecule = models.CharField(max_length=100, blank=True, null=True)
-    nc_composition = models.CharField(max_length=100, blank=True, null=True)
+    nc_molecule = models.CharField(_("Non-conform Molecule"), max_length=100, blank=True, null=True)
+    nc_composition = models.CharField(_("Non-conform Composition"), max_length=100, blank=True, null=True)
     # Field to simplify SQL requests when qty=0
     used = models.BooleanField(default=False)
     # Common
@@ -305,7 +306,7 @@ class Medicine(models.Model):
 
 
     class Meta:
-        ordering = ("nc_molecule", "exp_date")
+        ordering = ("exp_date", )
 
 
 class MoleculeReqQty(models.Model):
@@ -357,12 +358,12 @@ class Equipment(models.Model):
 
 class Article(models.Model):
     """Article model, "child" of Equipment."""
-    name = models.CharField(max_length=100) # Brand Name. Example: Coalgan
-    exp_date = models.DateField(blank=True, null=True)
+    name = models.CharField(_("Name"), max_length=100) # Brand Name. Example: Coalgan
+    exp_date = models.DateField(_("Expiration Date"), blank=True, null=True)
     # Link to location
     location = models.ForeignKey(Location)
     # Fields for non-conformity compatibility
-    nc_packaging = models.CharField(max_length=100, blank=True, null=True)
+    nc_packaging = models.CharField(_("Non-conform Packaging"), max_length=100, blank=True, null=True)
     # Field to simplify SQL requests when qty=0
     used = models.BooleanField(default=False)
     # Common
@@ -378,7 +379,7 @@ class Article(models.Model):
 
 
     class Meta:
-        ordering = ("nc_packaging", "exp_date")
+        ordering = ("exp_date", )
 
 
 class EquipmentReqQty(models.Model):
@@ -391,5 +392,5 @@ class EquipmentReqQty(models.Model):
 class Settings(models.Model):
     """Application settings."""
     allowance = models.ManyToManyField(Allowance)
-    expire_date_warning_delay = models.PositiveIntegerField()
+    expire_date_warning_delay = models.PositiveIntegerField(_("Warning Delay for Expiration Dates"))
     

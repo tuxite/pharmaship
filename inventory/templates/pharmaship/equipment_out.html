@@ -8,7 +8,7 @@
 
 {% block text %}
 <p>{% trans "You are going to use this article for a treatment:" %}</p>
-<p><b class="sky_blue">{{ article.name }}</b> {% trans "expiring" %} <b>{{ article.exp_date|date:"d/m/Y" }}</b> ({% trans "quantity:" %} {{ article.get_quantity }}).</p>
+<p><b class="sky_blue">{{ article.name }}</b> {% trans "expiring" %} <b>{{ article.exp_date|date:"d/m/Y" }}</b> ({% trans "quantity in stock:" %} {{ article.get_quantity }}).</p>
 <table>
     {{ form }}
 </table>

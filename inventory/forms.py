@@ -27,6 +27,7 @@ __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
 __version__ = "0.1"
 
+from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from django.forms.models import modelform_factory
@@ -46,13 +47,13 @@ CHANGE_REASON = (
 
 class DeleteForm(forms.Form):
     """Form used for deleting an objet in the list."""
-    reason = forms.ChoiceField(choices=DELETE_REASON)
+    reason = forms.ChoiceField(choices=DELETE_REASON, label=_("Reason"))
 
 
 class InfoChangeForm(forms.ModelForm):
     """Form used for changing the details and the quantity of an object in the list."""
-    quantity = forms.IntegerField()
-    exp_date = forms.DateField(widget=SelectDateWidget)
+    quantity = forms.IntegerField(label=_("Quantity in stock"))
+    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
 
     class Meta:
         model = models.Medicine
@@ -61,24 +62,24 @@ class InfoChangeForm(forms.ModelForm):
 
 class QtyChangeForm(forms.Form):
     """Form used for changing the quantity of an object in the list."""
-    quantity = forms.IntegerField()
+    quantity = forms.IntegerField(label=_("Quantity"))
 
 
 class AddForm(forms.ModelForm):
     """Form used for adding a medicine to an INN in the list."""
-    quantity = forms.IntegerField()
-    exp_date = forms.DateField(widget=SelectDateWidget)
+    quantity = forms.IntegerField(label=_("Quantity"))
+    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
 
     
     class Meta:
         model = models.Medicine
-        exclude = ['used', 'nc_molecule', 'parent']
+        exclude = ['used', 'nc_molecule', 'nc_composition', 'parent']
 
 
 class AddEquivalentForm(forms.ModelForm):
     """Form used for adding an equivalent medicine to an INN in the list."""
-    quantity = forms.IntegerField()
-    exp_date = forms.DateField(widget=SelectDateWidget)
+    quantity = forms.IntegerField(label=_("Quantity"))
+    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
     
 
     class Meta:
@@ -102,8 +103,8 @@ class RemarkForm(forms.Form):
 
 class AddArticleForm(forms.ModelForm):
     """Form used for adding a material to a reference material in the list."""
-    quantity = forms.IntegerField()
-    exp_date = forms.DateField(widget=SelectDateWidget)
+    quantity = forms.IntegerField(label=_("Quantity"))
+    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
 
     
     class Meta:
@@ -113,8 +114,8 @@ class AddArticleForm(forms.ModelForm):
 
 class ChangeArticleForm(forms.ModelForm):
     """Form used for changing the details and the quantity of an object in the list."""
-    quantity = forms.IntegerField()
-    exp_date = forms.DateField(widget=SelectDateWidget)
+    quantity = forms.IntegerField(label=_('Quantity in stock'))
+    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
 
     
     class Meta:
