@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the Pharmaship package.
 # Matthieu Morin <morinmatthieu@gmail.com>, 2013.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Pharmaship\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-19 15:22+0200\n"
+"POT-Creation-Date: 2013-08-31 13:59+0200\n"
 "PO-Revision-Date: 2013-06-07 21:30+0200\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: Association DSM <contact@devmaretique.com>\n"
@@ -17,11 +16,92 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: inventory/forms.py:50
+msgid "Reason"
+msgstr "Raison"
+
+#: inventory/forms.py:55 inventory/forms.py:117
+msgid "Quantity in stock"
+msgstr "Quantité en stock"
+
+#: inventory/forms.py:56 inventory/forms.py:71 inventory/forms.py:82
+#: inventory/forms.py:107 inventory/forms.py:118 inventory/models.py:288
+#: inventory/models.py:362
+#: inventory/templates/pharmaship/equipment_inventory.html:64
+#: inventory/templates/pharmaship/equipment_inventory.html:114
+#: inventory/templates/pharmaship/medicine_inventory.html:64
+#: inventory/templates/pharmaship/medicine_inventory.html:117
+#: static/material_inventory.html:61 static/material_inventory.html.py:110
+#: static/medicine_inventory.html:61 static/medicine_inventory.html.py:114
+msgid "Expiration Date"
+msgstr "Date d'expiration"
+
+#: inventory/forms.py:65 inventory/forms.py:70 inventory/forms.py:81
+#: inventory/forms.py:106
+#: inventory/templates/pharmaship/equipment_inventory.html:62
+#: inventory/templates/pharmaship/equipment_inventory.html:113
+#: inventory/templates/pharmaship/medicine_inventory.html:62
+#: inventory/templates/pharmaship/medicine_inventory.html:116
+#: static/material_inventory.html:59 static/material_inventory.html.py:109
+#: static/medicine_inventory.html:59 static/medicine_inventory.html.py:113
+msgid "Quantity"
+msgstr "Quantité"
+
+#: inventory/forms.py:127 inventory/forms.py:136 inventory/models.py:394
+msgid "Allowance"
+msgstr "Dotation"
+
+#: inventory/forms.py:152
+msgid "To Delete"
+msgstr "À supprimer"
+
+#: inventory/models.py:201
+msgid "Primary"
+msgstr "Principal"
+
+#: inventory/models.py:202
+msgid "Secondary"
+msgstr "Secondaire"
+
+#: inventory/models.py:227
+msgid "Type"
+msgstr "Type"
+
+#: inventory/models.py:230
+msgid "Value"
+msgstr "Valeur"
+
+#: inventory/models.py:242
+msgid "Text"
+msgstr "Texte"
+
+#: inventory/models.py:287 inventory/models.py:361
+#: inventory/templates/pharmaship/equipment_inventory.html:60
+#: settings/models.py:74 static/material_inventory.html:57
+msgid "Name"
+msgstr "Nom"
+
+#: inventory/models.py:292
+msgid "Non-conform Molecule"
+msgstr "Molécule non-conforme"
+
+#: inventory/models.py:293
+msgid "Non-conform Composition"
+msgstr "Composition non-conforme"
+
+#: inventory/models.py:366
+msgid "Non-conform Packaging"
+msgstr "Conditionnement non-conformes"
+
+#: inventory/models.py:395
+msgid "Warning Delay for Expiration Dates"
+msgstr "Délai d'avertissement avant expiration"
+
 #: inventory/views_common.py:55
 msgid "Home"
 msgstr "Accueil"
 
-#: inventory/views_common.py:63 static/layout.html:73 templates/layout.html:75
+#: inventory/views_common.py:63 static/layout.html:73 templates/layout.html:76
 msgid "Contact the CCMM"
 msgstr "Contacter le CCMM"
 
@@ -51,7 +131,7 @@ msgstr "Modifier les remarques"
 
 #: inventory/views_equipment.py:304 inventory/views_medicine.py:89
 #: inventory/views_medicine.py:120 inventory/views_medicine.py:345
-#: static/layout.html:63 templates/layout.html:65
+#: static/layout.html:63 templates/layout.html:66
 msgid "Medicine Inventory"
 msgstr "Registre des médicaments"
 
@@ -79,7 +159,7 @@ msgstr "Ajouter un médicament équivalent"
 
 #: inventory/views_settings.py:67 inventory/views_settings.py:86
 #: settings/views.py:63 settings/views.py:78 static/layout.html:24
-#: templates/layout.html:24
+#: templates/layout.html:25
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -116,10 +196,8 @@ msgstr "expirant le"
 
 #: inventory/templates/pharmaship/equipment_change.html:11
 #: inventory/templates/pharmaship/equipment_delete.html:11
-#: inventory/templates/pharmaship/equipment_out.html:11
 #: inventory/templates/pharmaship/medicine_change.html:11
 #: inventory/templates/pharmaship/medicine_delete.html:11
-#: inventory/templates/pharmaship/medicine_out.html:11
 msgid "quantity:"
 msgstr "quantité :"
 
@@ -199,39 +277,16 @@ msgstr "Filtrer par dotation :"
 msgid "Filter by location:"
 msgstr "Filtrer par emplacement :"
 
-#: inventory/templates/pharmaship/equipment_inventory.html:60
-#: static/material_inventory.html:57
-msgid "Name"
-msgstr "Nom"
-
 #: inventory/templates/pharmaship/equipment_inventory.html:61
 #: static/material_inventory.html:58
 msgid "Packaging"
 msgstr "Conditionnement"
-
-#: inventory/templates/pharmaship/equipment_inventory.html:62
-#: inventory/templates/pharmaship/equipment_inventory.html:113
-#: inventory/templates/pharmaship/medicine_inventory.html:62
-#: inventory/templates/pharmaship/medicine_inventory.html:116
-#: static/material_inventory.html:59 static/material_inventory.html.py:109
-#: static/medicine_inventory.html:59 static/medicine_inventory.html.py:113
-msgid "Quantity"
-msgstr "Quantité"
 
 #: inventory/templates/pharmaship/equipment_inventory.html:63
 #: inventory/templates/pharmaship/medicine_inventory.html:63
 #: static/material_inventory.html:60 static/medicine_inventory.html:60
 msgid "Requested"
 msgstr "En demande"
-
-#: inventory/templates/pharmaship/equipment_inventory.html:64
-#: inventory/templates/pharmaship/equipment_inventory.html:114
-#: inventory/templates/pharmaship/medicine_inventory.html:64
-#: inventory/templates/pharmaship/medicine_inventory.html:117
-#: static/material_inventory.html:61 static/material_inventory.html.py:110
-#: static/medicine_inventory.html:61 static/medicine_inventory.html.py:114
-msgid "Expiration Date"
-msgstr "Date d'expiration"
 
 #: inventory/templates/pharmaship/equipment_inventory.html:90
 msgid "Picture"
@@ -276,6 +331,11 @@ msgstr "Ajouter un objet"
 msgid "You are going to use this article for a treatment:"
 msgstr "Vous vous apprêtez à utiliser cet article pour un traitement :"
 
+#: inventory/templates/pharmaship/equipment_out.html:11
+#: inventory/templates/pharmaship/medicine_out.html:11
+msgid "quantity in stock:"
+msgstr "quantité en stock :"
+
 #: inventory/templates/pharmaship/equipment_out.html:19
 #: inventory/templates/pharmaship/medicine_out.html:19
 msgid "Do not use"
@@ -319,7 +379,7 @@ msgstr "Pavillon :"
 
 #: inventory/templates/pharmaship/equipment_report.html:33
 #: inventory/templates/pharmaship/medicine_report.html:33
-#: static/medicine_report.html:33
+#: settings/models.py:80 static/medicine_report.html:33
 msgid "Port of Registry"
 msgstr "Port d'attache :"
 
@@ -649,6 +709,22 @@ msgstr ""
 msgid "Delete selected locations"
 msgstr "Supprimer les emplacements sélectionnés"
 
+#: settings/models.py:49
+msgid "Function"
+msgstr "Fonction"
+
+#: settings/models.py:76
+msgid "Call Sign"
+msgstr "Indicatif"
+
+#: settings/models.py:79
+msgid "Flag"
+msgstr "Pavillon"
+
+#: settings/models.py:81
+msgid "Shipowner"
+msgstr "Armateur"
+
 #: settings/templates/settings.html:20 static/settings.html:10
 msgid "Medical Responsible"
 msgstr "Responsable des soins"
@@ -701,19 +777,19 @@ msgstr "Matériel non-conform :"
 msgid "Ordered material:"
 msgstr "Matériel commandé :"
 
-#: static/layout.html:25 templates/layout.html:25
+#: static/layout.html:25 templates/layout.html:26
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: static/layout.html:28 templates/layout.html:28
+#: static/layout.html:28 templates/layout.html:29
 msgid "Log In"
 msgstr "Se connecter"
 
-#: static/layout.html:40 templates/layout.html:41
+#: static/layout.html:40 templates/layout.html:42
 msgid "Search"
 msgstr "Rechercher"
 
-#: static/layout.html:64 templates/layout.html:66
+#: static/layout.html:64 templates/layout.html:67
 msgid "Material Inventory"
 msgstr "Registre du matériel"
 

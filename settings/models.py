@@ -28,7 +28,7 @@ __license__ = "GPL"
 __version__ = "0.1"
 
 from django.db import models
-
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
@@ -46,7 +46,7 @@ class UserProfile(models.Model):
     global FUNCTIONS
     user = models.OneToOneField(User)
     
-    function = models.CharField(max_length=2, choices=FUNCTIONS)
+    function = models.CharField(_("Function"), max_length=2, choices=FUNCTIONS)
 
 
     def __str__(self):
@@ -71,15 +71,15 @@ User.profile = property(lambda u: u.get_profile() )
 # Models
 class Vessel(models.Model):
     """Vessel information."""
-    name = models.CharField(max_length=30)
-    imo = models.IntegerField(max_length=7)
-    call_sign = models.CharField(max_length=30)
+    name = models.CharField(_("Name"), max_length=30)
+    imo = models.IntegerField("IMO", max_length=7)
+    call_sign = models.CharField(_("Call Sign"), max_length=30)
     sat_phone = models.CharField(max_length=20)
     gsm_phone = models.CharField(max_length=20)
-    flag = models.CharField(max_length=30)
-    port_of_registry = models.CharField(max_length=100)
-    shipowner = models.CharField(max_length=100)
-    mmsi = models.IntegerField(max_length=9)
+    flag = models.CharField(_("Flag"), max_length=30)
+    port_of_registry = models.CharField(_("Port of Registry"), max_length=100)
+    shipowner = models.CharField(_("Shipowner"), max_length=100)
+    mmsi = models.IntegerField("MMSI", max_length=9)
     fax = models.CharField(max_length=20)
     email = models.EmailField(max_length=64)
 

@@ -124,7 +124,7 @@ class ChangeArticleForm(forms.ModelForm):
 
 
 class SettingsForm(forms.ModelForm):
-    allowance = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Allowance.objects.all())
+    allowance = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Allowance.objects.all(), label=_("Allowance"))
 
 
     class Meta:
@@ -133,7 +133,7 @@ class SettingsForm(forms.ModelForm):
 
 class ExportForm(forms.Form):
     """Form for exporting a dotation (molecules, material and required quantities)."""
-    allowance = forms.ModelChoiceField(queryset=models.Allowance.objects.all())
+    allowance = forms.ModelChoiceField(queryset=models.Allowance.objects.all(), label=_("Allowance"))
 
 
 class ImportForm(forms.Form):
@@ -149,4 +149,4 @@ class LocationCreateForm(forms.ModelForm):
 
 class LocationDeleteForm(forms.Form):
     """Form for deleting some Location objects."""
-    to_delete = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Location.objects.all().exclude(pk=1))
+    to_delete = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Location.objects.all().exclude(pk=1), label=_("To Delete"))

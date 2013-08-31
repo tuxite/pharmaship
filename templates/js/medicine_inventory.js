@@ -339,13 +339,13 @@
             var state = panel.is(":hidden");
             // Resetting the display
             panel.hide();
-            link.text("More filters");
+            link.text(gettext("More filters"));
             // Any change?
             if (state == true) {
                 // Show the panel
                 panel.show();
                 // Changing the text of the link
-                link.text("Less filters");
+                link.text(gettext("Less filters"));
             }
         })
     }

@@ -391,6 +391,6 @@ class EquipmentReqQty(models.Model):
 
 class Settings(models.Model):
     """Application settings."""
-    allowance = models.ManyToManyField(Allowance)
+    allowance = models.ManyToManyField(Allowance, verbose_name=_('Allowance'))
     expire_date_warning_delay = models.PositiveIntegerField(_("Warning Delay for Expiration Dates"))
     

@@ -35,6 +35,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 admin.autodiscover()
 
+js_info_dict = {
+    'domain': 'djangojs',
+    'packages': ('inventory',),
+}
+
 urlpatterns = patterns('',
     # Load urls of Inventory application
     url(r'^', include('inventory.urls')),
@@ -52,6 +57,7 @@ urlpatterns = patterns('',
 
     # i18n
     url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 
 )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
