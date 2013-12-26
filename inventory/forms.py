@@ -69,19 +69,25 @@ class AddForm(forms.ModelForm):
     """Form used for adding a medicine to an INN in the list."""
     quantity = forms.IntegerField(label=_("Quantity"))
     exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
-
+    nc_composition = forms.CharField(label=_("Composition"))
     
     class Meta:
         model = models.Medicine
-        exclude = ['used', 'nc_molecule', 'nc_composition', 'parent']
+        exclude = ['used', 'nc_molecule', 'parent']
 
 
 class AddEquivalentForm(forms.ModelForm):
     """Form used for adding an equivalent medicine to an INN in the list."""
     quantity = forms.IntegerField(label=_("Quantity"))
     exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
+    nc_composition = forms.CharField(label=_("Composition"))
+    nc_molecule = forms.CharField(label=_("Molecule"))
     
-
+    def __init__(self, *args, **kwargs):
+        """Function to overrid requirement."""
+        super(AddEquivalentForm, self).__init__(*args, **kwargs)
+        self.fields["nc_molecule"].required = True
+        
     class Meta:
         model = models.Medicine
         exclude = ['used', 'parent']
@@ -105,6 +111,7 @@ class AddArticleForm(forms.ModelForm):
     """Form used for adding a material to a reference material in the list."""
     quantity = forms.IntegerField(label=_("Quantity"))
     exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
+    nc_packaging = forms.CharField(label=_("Packaging"))
 
     
     class Meta:

@@ -31,7 +31,7 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db.models import Sum
@@ -41,6 +41,7 @@ import models
 import forms
 from settings.models import Vessel
 
+import json
 import datetime, os.path
 
 from django.shortcuts import render
@@ -138,9 +139,9 @@ def add(request, equipment_id):
     # Selecting the equipment
     equipment = get_object_or_404(models.Equipment, pk=equipment_id)
 
-    if request.method == 'POST':
+    if request.method == "POST" and request.is_ajax():
         form = forms.AddArticleForm(request.POST)
-        if form.is_valid(): 
+        if form.is_valid():
             # Process the data in form.cleaned_data
             nc_packaging = form.cleaned_data['nc_packaging']
             quantity = form.cleaned_data['quantity']
@@ -158,16 +159,31 @@ def add(request, equipment_id):
                 )
             # Adding the transaction
             models.QtyTransaction.objects.create(content_object=article, transaction_type=1, value=quantity) # 1: In
-            return HttpResponseRedirect(reverse('equipment')) # Redirect after POST
+            data = json.dumps({'id': equipment_id, 'content': update_article(equipment_id)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.AddArticleForm(instance=models.Article(), initial={'nc_packaging':equipment.packaging}) # An unbound form
+        form = forms.AddArticleForm(instance=models.Article(), initial={'nc_packaging':equipment.packaging})
 
-    return render_to_response('pharmaship/equipment_add.html', {
-                        'title': _("Add a article"),
-                        'equipment':equipment,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Add a article"),
+        'form': form.as_table(),
+        'button_OK': _("Add this article"),
+        'button_KO': _("Do not add"),
+        'url': reverse('equ_add', args=(equipment_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b></p>
+            """.format(
+                _("You are going to add an article for this equipment:"),
+                equipment.name,
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @permission_required('inventory.article.can_delete')
 def delete(request, article_id):
@@ -175,7 +191,7 @@ def delete(request, article_id):
     # Selecting the article
     article = get_object_or_404(models.Article, pk=article_id)
 
-    if request.method == 'POST':
+    if request.method == "POST" and request.is_ajax():
         form = forms.DeleteForm(request.POST)
         if form.is_valid():
             # Process the data in form.cleaned_data
@@ -184,17 +200,35 @@ def delete(request, article_id):
             models.QtyTransaction.objects.create(content_object=article, transaction_type=reason, value=-article.get_quantity())
             article.used = True
             article.save()
-
-            return HttpResponseRedirect(reverse('equipment')) # Redirect after POST
+            data = json.dumps({'id': article.parent.pk, 'content': update_article(article.parent.pk)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.DeleteForm() # An unbound form
+        form = forms.DeleteForm()
 
-    return render_to_response('pharmaship/equipment_delete.html', {
-                        'title': _("Delete an article"),
-                        'article':article,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Delete an article"),
+        'form': form.as_table(),
+        'button_OK': _("Delete this article"),
+        'button_KO': _("Do not delete"),
+        'url': reverse('equ_delete', args=(article_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b> {2} {3} ({4} {5}).</p>
+            """.format(
+                _("You are going to delete this article:"),
+                article.name,
+                _("expiring"),
+                article.exp_date,
+                _("quantity in stock:"),
+                article.get_quantity(),
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @permission_required('inventory.article.can_change')
 def change(request, article_id):
@@ -202,7 +236,7 @@ def change(request, article_id):
     # Selecting the article
     article = get_object_or_404(models.Article, pk=article_id)
 
-    if request.method == 'POST':
+    if request.method == "POST" and request.is_ajax():
         form = forms.ChangeArticleForm(request.POST)
         if form.is_valid():
             # Process the data in form.cleaned_data
@@ -221,17 +255,35 @@ def change(request, article_id):
 
             # Updating
             article.save()
-
-            return HttpResponseRedirect(reverse('equipment')) # Redirect after POST
+            data = json.dumps({'id': article.parent.pk, 'content': update_article(article.parent.pk)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.ChangeArticleForm(instance=article, initial={'quantity': article.get_quantity()}) # An unbound form
+        form = forms.ChangeArticleForm(instance=article, initial={'quantity': article.get_quantity()})
 
-    return render_to_response('pharmaship/equipment_change.html', {
-                        'title': _("Update an article"),
-                        'article':article,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Update an article"),
+        'form': form.as_table(),
+        'button_OK': _("Update this article"),
+        'button_KO': _("Do not modify"),
+        'url': reverse('equ_change', args=(article_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b> {2} {3} ({4} {5}).</p>
+            """.format(
+                _("You are going to modify this article:"),
+                article.name,
+                _("expiring"),
+                article.exp_date,
+                _("quantity in stock:"),
+                article.get_quantity(),
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @permission_required('inventory.article.can_change')
 def out(request, article_id):
@@ -239,7 +291,7 @@ def out(request, article_id):
     # Selecting the article
     article = get_object_or_404(models.Article, pk=article_id)
 
-    if request.method == 'POST':
+    if request.method == "POST" and request.is_ajax():
         form = forms.QtyChangeForm(request.POST)
         if form.is_valid():
             # Process the data in form.cleaned_data
@@ -250,21 +302,39 @@ def out(request, article_id):
             if article_quantity - quantity == 0:
                 article.used = True
             article.save()
-
-            return HttpResponseRedirect(reverse('equipment')) # Redirect after POST
+            data = json.dumps({'id': article.parent.pk, 'content': update_article(article.parent.pk)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.QtyChangeForm() # An unbound form
+        form = forms.QtyChangeForm()
 
-    return render_to_response('pharmaship/equipment_out.html', {
-                        'title': _("Use an article"),
-                        'article':article,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Use an article"),
+        'form': form.as_table(),
+        'button_OK': _("Use this article"),
+        'button_KO': _("Do not use"),
+        'url': reverse('equ_out', args=(article_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b> {2} {3} ({4} {5}).</p>
+            """.format(
+                _("You are going to use this article for a treatment:"),
+                article.name,
+                _("expiring"),
+                article.exp_date,
+                _("quantity in stock:"),
+                article.get_quantity(),
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @permission_required('inventory.remark.can_change')
 def remark(request, equipment_id):
-    """Change the remark field of a reference article."""
+    """Change the remark field of an equipment."""
     # Selecting the equipment
     equipment = get_object_or_404(models.Equipment, pk=equipment_id)
     # Selecting the remark
@@ -273,24 +343,57 @@ def remark(request, equipment_id):
     except:
         remark = models.Remark(content_object=equipment)
 
-    if request.method == 'POST':
+    if request.method == "POST" and request.is_ajax():
         form = forms.RemarkForm(request.POST)
         if form.is_valid():
             # Process the data in form.cleaned_data
             text = form.cleaned_data['text']
             remark.text = text
             remark.save()
-            return HttpResponseRedirect(reverse('equipment')) # Redirect after POST
+            data = json.dumps({'id': equipment_id, 'content': update_article(equipment_id)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.RemarkForm(initial={'text':remark.text}) # An unbound form
+        form = forms.RemarkForm(initial={'text':remark.text})
 
-    return render_to_response('pharmaship/equipment_remark.html', {
-                        'title': _("Modify the remarks"),
-                        'equipment':equipment,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Modify the remarks"),
+        'form': form.as_table(),
+        'button_OK': _("Update these remarks"),
+        'button_KO': _("Do not modify"),
+        'url': reverse('equ_remark', args=(equipment_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b></p>
+            """.format(
+                _("You are going to modify the remarks of this equipment:"),
+                equipment.name,
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
+def update_article(equipment_id):
+    """Renders an Equipment <article> to be included in the inventory view after form submission."""
+    # Equipment
+    equipment = get_object_or_404(models.Equipment, pk=equipment_id)
+    # Calling the DB for different necessary lists
+    qty_transaction_list = models.QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(models.Article))
+    remark_list = models.Remark.objects.filter(content_type=ContentType.objects.get_for_model(models.Equipment), object_id=equipment_id)
+    location_list = models.Location.objects.all().order_by('primary', 'secondary')
+    allowance_list = models.Settings.objects.latest('id').allowance.all()
+    req_qty_list = models.EquipmentReqQty.objects.filter(allowance__in=allowance_list, base=equipment).prefetch_related('base', 'allowance')
+    # Parsing the equipment
+    result = parser_element(equipment, remark_list, qty_transaction_list, location_list)
+    result['required_quantity'] = req_qty_element(equipment, req_qty_list)
+
+    return render_to_response('pharmaship/equipment_article.html', {
+                    'object': result,
+                    }).content
+                    
 @login_required
 def pdf_print(request):
     """Exports the article inventory in PDF."""
@@ -350,76 +453,93 @@ def parser(allowance_list, location_list):
         # Adding name
         group_dict = {'name': group,}
         # Finding attached reference article
-        group_equipment_list = []
+        element_list = []
         for equipment in equipment_list:
             # More elegant way to match id?
             if equipment.group_id == group.id:
-                group_equipment_dict = {}
-                # ID
-                group_equipment_dict['id'] = equipment.id
-                # Name
-                group_equipment_dict['name'] = equipment.name
-                # Packaging, Consumable, Preishable
-                group_equipment_dict['packaging'] = equipment.packaging
-                group_equipment_dict['consumable'] = equipment.consumable
-                group_equipment_dict['perishable'] = equipment.perishable
-                # Remark
-                for remark in remark_list:
-                    if remark in equipment.remark.all():
-                        group_equipment_dict['remark'] = remark
-                # Tags
-                group_equipment_dict['tag'] = equipment.tag
-                # Picture
-                if not equipment.picture:
-                    equipment.picture = "no_picture.png"
-                group_equipment_dict['picture'] = equipment.picture
-                # Quantity
-                group_equipment_dict['quantity'] = 0
-
-                group_equipment_dict['article_items'] = []
-                # Finding attached articles (Article)
-                for article in equipment.article_set.all():
-                    # Do not parse the used medicines (quantity = 0)
-                    if article.used:
-                        continue
-                    group_equipment_article_dict = {}
-                    # ID
-                    group_equipment_article_dict['id'] = article.id
-                    # Name
-                    group_equipment_article_dict['name'] = article.name
-                    # Non conformity fields
-                    group_equipment_article_dict['nc_packaging'] = article.nc_packaging
-                    # Expiration date
-                    group_equipment_article_dict['exp_date'] = article.exp_date
-                    # Location
-                    for location in location_list:
-                        if article.location_id == location.id:
-                            group_equipment_article_dict['location'] = location
-                    # Quantity
-                    group_equipment_article_dict['quantity'] = 0
-                    for transaction in qty_transaction_list:
-                        if transaction.object_id == article.id:
-                            group_equipment_article_dict['quantity'] += transaction.value
-                    # Adding the article quantity to the equipment quantity
-                    if not article.nc_packaging and (not article.exp_date or article.exp_date >= today):
-                        group_equipment_dict['quantity'] += group_equipment_article_dict['quantity']
-                    # Adding the article dict to the list
-                    group_equipment_dict['article_items'].append(group_equipment_article_dict)
-
+                # Equipment parsing
+                element_dict = parser_element(equipment, remark_list, qty_transaction_list, location_list, today)
                 # Required quantity
-                maximum = [0,]
-                additional = 0
-                for item in req_qty_list:
-                    if item.base == equipment:
-                        if item.allowance.additional == True:
-                            additional += item.required_quantity
-                        else:
-                            maximum.append(item.required_quantity)
-                group_equipment_dict['required_quantity'] = additional + max(maximum)
+                element_dict['required_quantity'] = req_qty_element(equipment, req_qty_list)
                 # Adding the equipment dict to the list
-                group_equipment_list.append(group_equipment_dict)
-        group_dict['child'] = group_equipment_list
+                element_list.append(element_dict)
+        group_dict['child'] = element_list
         values.append(group_dict)
 
     return values, group_list
 
+def parser_element(equipment, remark_list, qty_transaction_list, location_list, today=datetime.date.today()):
+    """Parses the database to render a list of
+    Equipment > Article.
+
+    equipment: an Equipment object
+
+    Returns the formatted information with articles.
+    """
+    element_dict = {}
+    # ID
+    element_dict['id'] = equipment.id
+    # Name
+    element_dict['name'] = equipment.name
+    # Packaging, Consumable, Perishable
+    element_dict['packaging'] = equipment.packaging
+    element_dict['consumable'] = equipment.consumable
+    element_dict['perishable'] = equipment.perishable
+    # Remark
+    for remark in remark_list:
+        if remark in equipment.remark.all():
+            element_dict['remark'] = remark
+    # Tags
+    element_dict['tag'] = equipment.tag
+    # Picture
+    if not equipment.picture:
+        equipment.picture = "no_picture.png"
+    element_dict['picture'] = equipment.picture    
+    # Quantity
+    element_dict['quantity'] = 0
+
+    element_dict['article_items'] = []
+    # Finding attached articles (Article)
+    for article in equipment.article_set.all():
+        # Do not parse the used medicines (quantity = 0)
+        if article.used:
+            continue
+        item_dict = {}
+        # ID
+        item_dict['id'] = article.id
+        # Name
+        item_dict['name'] = article.name
+        # Non conformity fields
+        item_dict['nc_packaging'] = article.nc_packaging
+        # Expiration date
+        item_dict['exp_date'] = article.exp_date
+        # Location
+        for location in location_list:
+            if article.location_id == location.id:
+                item_dict['location'] = location
+        # Quantity
+        item_dict['quantity'] = 0
+        for transaction in qty_transaction_list:
+            if transaction.object_id == article.id:
+                item_dict['quantity'] += transaction.value
+        # Adding the article quantity to the equipment quantity
+        if not article.nc_packaging and (not article.exp_date or article.exp_date >= today):
+            element_dict['quantity'] += item_dict['quantity']
+        # Adding the article dict to the list
+        element_dict['article_items'].append(item_dict)
+
+    # Returning the result dictionnary
+    return element_dict
+
+def req_qty_element(equipment, req_qty_list):
+    """ Returns the required quantity of an element from the allowance list and required quantities list."""
+    # Required quantity
+    maximum = [0,]
+    additional = 0
+    for item in req_qty_list:
+        if item.base == equipment:
+            if item.allowance.additional == True:
+                additional += item.required_quantity
+            else:
+                maximum.append(item.required_quantity)
+    return additional + max(maximum)

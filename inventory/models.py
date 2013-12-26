@@ -276,6 +276,10 @@ class Molecule(models.Model):
     def natural_key(self):
             return (self.name, self.roa, self.dosage_form, self.composition)
 
+    def order_info(self):
+        """Outputs a string for Purchase application."""
+        s = u"{0} {1} - {2} {3}".format(_("Dosage Form:"), self.get_dosage_form_display(), _("Composition:"), self.composition)
+        return s
 
     class Meta:
         ordering = ('name', )
@@ -350,7 +354,11 @@ class Equipment(models.Model):
     def natural_key(self):
             return (self.name, self.packaging, self.consumable, self.perishable, self.group.natural_key())
 
-
+    def order_info(self):
+        """Outputs a string for Purchase application."""
+        s = u"{0} {1}".format(_("Packaging:"), self.packaging)
+        return s
+        
     class Meta:
         ordering = ('name', )
         unique_together = (('name', 'packaging', 'consumable', 'perishable', 'group'),)
@@ -394,3 +402,6 @@ class Settings(models.Model):
     allowance = models.ManyToManyField(Allowance, verbose_name=_('Allowance'))
     expire_date_warning_delay = models.PositiveIntegerField(_("Warning Delay for Expiration Dates"))
     
+
+# Orderable objects
+ORDERABLE = [Equipment, Molecule]

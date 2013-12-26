@@ -31,7 +31,7 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db.models import Sum
@@ -41,6 +41,7 @@ import models
 import forms
 from settings.models import Vessel
 
+import json
 import datetime, os.path
 
 from django.shortcuts import render
@@ -138,9 +139,9 @@ def delete(request, medicine_id):
     # Selecting the medicine
     medicine = get_object_or_404(models.Medicine, pk=medicine_id)
 
-    if request.method == 'POST': 
-        form = forms.DeleteForm(request.POST) 
-        if form.is_valid(): 
+    if request.method == "POST" and request.is_ajax():
+        form = forms.DeleteForm(request.POST)
+        if form.is_valid():
             # Process the data in form.cleaned_data
             reason = form.cleaned_data['reason']
             # Adding a transaction
@@ -148,17 +149,35 @@ def delete(request, medicine_id):
 
             medicine.used = True
             medicine.save()
-
-            return HttpResponseRedirect(reverse('medicine')) # Redirect after POST
+            data = json.dumps({'id': medicine.parent.pk, 'content': update_article(medicine.parent.pk)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.DeleteForm() # An unbound form
+        form = forms.DeleteForm()
 
-    return render_to_response('pharmaship/medicine_delete.html', {
-                        'title': _("Delete a medicine"),
-                        'medicine':medicine,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Delete a medicine"),
+        'form': form.as_table(),
+        'button_OK': _("Delete this medicine"),
+        'button_KO': _("Do not delete"),
+        'url': reverse('med_delete', args=(medicine_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b> {2} {3} ({4} {5}).</p>
+            """.format(
+                _("You are going to delete this medicine:"),
+                medicine.name,
+                _("expiring"),
+                medicine.exp_date,
+                _("quantity in stock:"),
+                medicine.get_quantity(),
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @permission_required('inventory.medicine.can_change')
 def change(request, medicine_id):
@@ -166,7 +185,7 @@ def change(request, medicine_id):
     # Selecting the medicine
     medicine = get_object_or_404(models.Medicine, pk=medicine_id)
 
-    if request.method == 'POST':
+    if request.method == "POST" and request.is_ajax():
         form = forms.InfoChangeForm(request.POST)
         if form.is_valid():
             # Process the data in form.cleaned_data
@@ -185,17 +204,35 @@ def change(request, medicine_id):
 
             # Updating
             medicine.save()
-
-            return HttpResponseRedirect(reverse('medicine')) # Redirect after POST
+            data = json.dumps({'id': medicine.parent.pk, 'content': update_article(medicine.parent.pk)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.InfoChangeForm(instance=medicine, initial={'quantity': medicine.get_quantity()}) # An unbound form
+        form = forms.InfoChangeForm(instance=medicine, initial={'quantity': medicine.get_quantity()})
 
-    return render_to_response('pharmaship/medicine_change.html', {
-                        'title': _("Update a medicine"),
-                        'medicine':medicine,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Update a medicine"),
+        'form': form.as_table(),
+        'button_OK': _("Update this medicine"),
+        'button_KO': _("Do not modify"),
+        'url': reverse('med_change', args=(medicine_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b> {2} {3} ({4} {5}).</p>
+            """.format(
+                _("You are going to modify this medicine:"),
+                medicine.name,
+                _("expiring"),
+                medicine.exp_date,
+                _("quantity in stock:"),
+                medicine.get_quantity(),
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @permission_required('inventory.medicine.can_change')
 def out(request, medicine_id):
@@ -203,9 +240,9 @@ def out(request, medicine_id):
     # Selecting the medicine
     medicine = get_object_or_404(models.Medicine, pk=medicine_id)
 
-    if request.method == 'POST': 
-        form = forms.QtyChangeForm(request.POST) 
-        if form.is_valid(): 
+    if request.method == "POST" and request.is_ajax():
+        form = forms.QtyChangeForm(request.POST)
+        if form.is_valid():
             # Process the data in form.cleaned_data
             quantity = form.cleaned_data['quantity']
             # Adding a transaction
@@ -214,17 +251,35 @@ def out(request, medicine_id):
             if medicine_quantity - quantity == 0:
                 medicine.used = True
             medicine.save()
-
-            return HttpResponseRedirect(reverse('medicine')) # Redirect after POST
+            data = json.dumps({'id': medicine.parent.pk, 'content': update_article(medicine.parent.pk)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
         form = forms.QtyChangeForm() # An unbound form
 
-    return render_to_response('pharmaship/medicine_out.html', {
-                        'title': _("Use a medicine"),
-                        'medicine':medicine,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Use a medicine"),
+        'form': form.as_table(),
+        'button_OK': _("Use this medicine"),
+        'button_KO': _("Do not use"),
+        'url': reverse('med_out', args=(medicine_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b> {2} {3} ({4} {5}).</p>
+            """.format(
+                _("You are going to use this medicine for a treatment:"),
+                medicine.name,
+                _("expiring"),
+                medicine.exp_date,
+                _("quantity in stock:"),
+                medicine.get_quantity(),
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @permission_required('inventory.medicine.can_add')
 def add(request, molecule_id):
@@ -233,9 +288,9 @@ def add(request, molecule_id):
     molecule = get_object_or_404(models.Molecule, pk=molecule_id)
     default_composition = u"{1} - {0}".format(molecule.composition, molecule.get_dosage_form_display())
 
-    if request.method == 'POST': 
-        form = forms.AddForm(request.POST) 
-        if form.is_valid(): 
+    if request.method == "POST" and request.is_ajax():
+        form = forms.AddForm(request.POST)
+        if form.is_valid():
             # Process the data in form.cleaned_data
             nc_composition = form.cleaned_data['nc_composition']
             quantity = form.cleaned_data['quantity']
@@ -253,16 +308,31 @@ def add(request, molecule_id):
                 )
             # Adding the transaction
             models.QtyTransaction.objects.create(content_object=medicine, transaction_type=1, value=quantity) # 1: In
-            return HttpResponseRedirect(reverse('medicine')) # Redirect after POST
+            data = json.dumps({'id': molecule_id, 'content': update_article(molecule_id)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.AddForm(instance=models.Medicine(), initial={'nc_composition':default_composition}) # An unbound form
+        form = forms.AddForm(instance=models.Medicine(), initial={'nc_composition':default_composition})
 
-    return render_to_response('pharmaship/medicine_add.html', {
-                        'title': _("Add a medicine"),
-                        'molecule':molecule,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Add a medicine"),
+        'form': form.as_table(),
+        'button_OK': _("Add this medicine"),
+        'button_KO': _("Do not add"),
+        'url': reverse('med_add', args=(molecule_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b></p>
+            """.format(
+                _("You are going to add a medicine for this molecule:"),
+                molecule.name,
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @permission_required('inventory.medicine.can_add')
 def equivalent(request, molecule_id):
@@ -271,9 +341,9 @@ def equivalent(request, molecule_id):
     molecule = get_object_or_404(models.Molecule, pk=molecule_id)
     default_composition = u"{1} - {0}".format(molecule.composition, molecule.get_dosage_form_display())
 
-    if request.method == 'POST':
+    if request.method == "POST" and request.is_ajax():
         form = forms.AddEquivalentForm(request.POST)
-        if form.is_valid(): 
+        if form.is_valid():
             # Process the data in form.cleaned_data
             nc_composition = form.cleaned_data['nc_composition']
             quantity = form.cleaned_data['quantity']
@@ -292,16 +362,31 @@ def equivalent(request, molecule_id):
                 )
             # Adding the transaction
             models.QtyTransaction.objects.create(content_object=medicine, transaction_type=1, value=quantity) # 1: In
-            return HttpResponseRedirect(reverse('medicine')) # Redirect after POST
+            data = json.dumps({'id': molecule_id, 'content': update_article(molecule_id)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.AddEquivalentForm(instance=models.Medicine(), initial={'nc_composition':default_composition}) # An unbound form
+        form = forms.AddEquivalentForm(instance=models.Medicine(), initial={'nc_composition':default_composition})
 
-    return render_to_response('pharmaship/medicine_add_equivalent.html', {
-                        'title': _("Add an equivalent medicine"),
-                        'molecule':molecule,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Add an equivalent medicine"),
+        'form': form.as_table(),
+        'button_OK': _("Add this medicine"),
+        'button_KO': _("Do not add"),
+        'url': reverse('med_add', args=(molecule_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b></p>
+            """.format(
+                _("You are going to add an equivalent medicine for this molecule:"),
+                molecule.name,
+                ),
+        'foot_text': _("Before adding this equivalent medicine (molecule different from the allowance), make sure you have had the approval of a doctor."),
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @permission_required('inventory.remark.can_change')
 def remark(request, molecule_id):
@@ -314,23 +399,56 @@ def remark(request, molecule_id):
     except:
         remark = models.Remark(content_object=molecule)
 
-    if request.method == 'POST': 
-        form = forms.RemarkForm(request.POST) 
-        if form.is_valid(): 
+    if request.method == "POST" and request.is_ajax():
+        form = forms.RemarkForm(request.POST)
+        if form.is_valid():
             # Process the data in form.cleaned_data
             text = form.cleaned_data['text']
             remark.text = text
             remark.save()
-            return HttpResponseRedirect(reverse('medicine')) # Redirect after POST
+            data = json.dumps({'id': molecule_id, 'content': update_article(molecule_id)})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
+            return HttpResponseBadRequest(data, content_type="application/json")
     else:
-        form = forms.RemarkForm(initial={'text':remark.text}) # An unbound form
+        form = forms.RemarkForm(initial={'text':remark.text})
 
-    return render_to_response('pharmaship/medicine_remark.html', {
-                        'title': _("Modify the remarks"),
-                        'molecule':molecule,
-                        'form': form.as_table(),
-                        },
-                        context_instance=RequestContext(request))
+    # Generating JSON data for AJAX
+    response_data = {
+        'title': _("Modify the remarks"),
+        'form': form.as_table(),
+        'button_OK': _("Update these remarks"),
+        'button_KO': _("Do not modify"),
+        'url': reverse('med_remark', args=(molecule_id,)),
+        'text': u"""
+            <p>{0}</p>
+            <p><b class='sky_blue'>{1}</b></p>
+            """.format(
+                _("You are going to modify the remarks of this molecule:"),
+                molecule.name,
+                ),
+        'foot_text': '',
+        }
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+def update_article(molecule_id):
+    """Renders a Molecule <article> to be included in the inventory view after form submission."""
+    # Molecule
+    molecule = get_object_or_404(models.Molecule, pk=molecule_id)
+    # Calling the DB for different necessary lists
+    qty_transaction_list = models.QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(models.Medicine))
+    remark_list = models.Remark.objects.filter(content_type=ContentType.objects.get_for_model(models.Molecule), object_id=molecule_id)
+    location_list = models.Location.objects.all().order_by('primary', 'secondary')
+    allowance_list = models.Settings.objects.latest('id').allowance.all()
+    req_qty_list = models.MoleculeReqQty.objects.filter(allowance__in=allowance_list, base=molecule).prefetch_related('base', 'allowance')
+    # Parsing the molecule
+    result = parser_element(molecule, remark_list, qty_transaction_list, location_list)
+    result['required_quantity'] = req_qty_element(molecule, req_qty_list)
+
+    return render_to_response('pharmaship/medicine_article.html', {
+                    'object': result,
+                    }).content
 
 @login_required
 def pdf_print(request):
@@ -395,70 +513,87 @@ def parser(allowance_list, location_list):
         for molecule in molecule_list:
             # More elegant way to match id?
             if molecule.group_id == group.id:
-                group_molecule_dict = {}
-                # ID
-                group_molecule_dict['id'] = molecule.id
-                # Name
-                group_molecule_dict['name'] = molecule.name
-                # Roa, Dosage_form, Composition
-                group_molecule_dict['roa'] = molecule.get_roa_display
-                group_molecule_dict['dosage_form'] = molecule.get_dosage_form_display
-                group_molecule_dict['composition'] = molecule.composition
-                # Medicine_list
-                group_molecule_dict['medicine_list'] = molecule.get_medicine_list_display
-                # Remark
-                for remark in remark_list:
-                    if remark in molecule.remark.all():
-                        group_molecule_dict['remark'] = remark
-                # Tags
-                group_molecule_dict['tag'] = molecule.tag
-                # Quantity
-                group_molecule_dict['quantity'] = 0
-
-                group_molecule_dict['medicine_items'] = []
-                # Finding attached medicines (Medicine)
-                for medicine in molecule.medicine_set.all():
-                    # Do not parse the used medicines (quantity = 0)
-                    if medicine.used:
-                        continue
-                    group_molecule_medicine_dict = {}
-                    # ID
-                    group_molecule_medicine_dict['id'] = medicine.id
-                    # Name
-                    group_molecule_medicine_dict['name'] = medicine.name
-                    # Non conformity fields
-                    group_molecule_medicine_dict['nc_composition'] = medicine.nc_composition
-                    group_molecule_medicine_dict['nc_molecule'] = medicine.nc_molecule
-                    # Expiration date
-                    group_molecule_medicine_dict['exp_date'] = medicine.exp_date
-                    # Location
-                    for location in location_list:
-                        if medicine.location_id == location.id:
-                            group_molecule_medicine_dict['location'] = location
-                    # Quantity
-                    group_molecule_medicine_dict['quantity'] = 0
-                    for transaction in qty_transaction_list:
-                        if transaction.object_id == medicine.id:
-                            group_molecule_medicine_dict['quantity'] += transaction.value
-                    # Adding the medicine quantity to the molecule quantity
-                    if not medicine.nc_molecule and not medicine.nc_composition and medicine.exp_date >= today:
-                        group_molecule_dict['quantity'] += group_molecule_medicine_dict['quantity']
-                    # Adding the medicine dict to the list
-                    group_molecule_dict['medicine_items'].append(group_molecule_medicine_dict)
-
+                # Molecule parsing
+                group_molecule_dict = parser_element(molecule, remark_list, qty_transaction_list, location_list, today)
                 # Required quantity
-                maximum = [0,]
-                additional = 0
-                for item in req_qty_list:
-                    if item.base == molecule:
-                        if item.allowance.additional == True:
-                            additional += item.required_quantity
-                        else:
-                            maximum.append(item.required_quantity)
-                group_molecule_dict['required_quantity'] = additional + max(maximum)
+                group_molecule_dict['required_quantity'] = req_qty_element(molecule, req_qty_list)
                 # Adding the molecule dict to the list
                 group_molecule_list.append(group_molecule_dict)
         group_dict['child'] = group_molecule_list
         values.append(group_dict)
 
     return values, group_list
+
+def parser_element(molecule, remark_list, qty_transaction_list, location_list, today=datetime.date.today()):
+    """Parses the database to render a list of
+    Molecule > Medicine.
+
+    molecule: a Molecule object
+
+    Returns the formatted information with medicines.
+    """
+    element_dict = {}
+    # ID
+    element_dict['id'] = molecule.id
+    # Name
+    element_dict['name'] = molecule.name
+    # Roa, Dosage_form, Composition
+    element_dict['roa'] = molecule.get_roa_display
+    element_dict['dosage_form'] = molecule.get_dosage_form_display
+    element_dict['composition'] = molecule.composition
+    # Medicine_list
+    element_dict['medicine_list'] = molecule.get_medicine_list_display
+    # Remark
+    for remark in remark_list:
+        if remark in molecule.remark.all():
+            element_dict['remark'] = remark
+    # Tags
+    element_dict['tag'] = molecule.tag
+    # Quantity
+    element_dict['quantity'] = 0
+
+    element_dict['medicine_items'] = []
+    # Finding attached medicines (Medicine)
+    for medicine in molecule.medicine_set.all():
+        # Do not parse the used medicines (quantity = 0)
+        if medicine.used:
+            continue
+        item_dict = {}
+        # ID
+        item_dict['id'] = medicine.id
+        # Name
+        item_dict['name'] = medicine.name
+        # Non conformity fields
+        item_dict['nc_composition'] = medicine.nc_composition
+        item_dict['nc_molecule'] = medicine.nc_molecule
+        # Expiration date
+        item_dict['exp_date'] = medicine.exp_date
+        # Location
+        for location in location_list:
+            if medicine.location_id == location.id:
+                item_dict['location'] = location
+        # Quantity
+        item_dict['quantity'] = 0
+        for transaction in qty_transaction_list:
+            if transaction.object_id == medicine.id:
+                item_dict['quantity'] += transaction.value
+        # Adding the medicine quantity to the molecule quantity
+        if not medicine.nc_molecule and not medicine.nc_composition and medicine.exp_date >= today:
+            element_dict['quantity'] += item_dict['quantity']
+        # Adding the medicine dict to the list
+        element_dict['medicine_items'].append(item_dict)
+    # Returning the result dictionnary
+    return element_dict
+
+def req_qty_element(molecule, req_qty_list):
+    """ Returns the required quantity of an element from the allowance list and required quantities list."""
+    # Required quantity
+    maximum = [0,]
+    additional = 0
+    for item in req_qty_list:
+        if item.base == molecule:
+            if item.allowance.additional == True:
+                additional += item.required_quantity
+            else:
+                maximum.append(item.required_quantity)
+    return additional + max(maximum)

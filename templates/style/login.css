@@ -121,7 +121,7 @@ a.contact{
     padding: 10px;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
-    background-image: -webkit-linear-gradient(top, #D92B54 0px, #B31237 100%);
+    background: #D92B54;
     box-sizing: border-box;
     font-weight: 700;
     font-size: 100%;

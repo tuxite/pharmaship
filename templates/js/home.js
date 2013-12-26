@@ -32,11 +32,17 @@
 
     /* DOM ready */
     $(function () {
-        collapse();
+        //collapse();
 
         /* Hide all panels on load */
         $("div.more").hide();
-
+        
+        /* Accordion jQuery UI */
+        $(".accordion").accordion({
+            collapsible: true,
+            active: false,
+            heightStyle: "content",
+        });
     });
 
 /* Function to collapse some details in the page on a click event */

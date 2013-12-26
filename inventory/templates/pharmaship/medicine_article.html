@@ -1,0 +1,83 @@
+{% load i18n %}
+
+<article class="medicine_item" id="item-{{ object.id }}">
+    <header id='inn-head-{{ object.id }}' class="medicine_inn_header">
+        <ul class="inn_list">
+            <li class="medicine_li medicine_inn">{{ object.name }}
+                <br />
+                <small class="brand">
+                    {% for item in object.medicine_items %}{% if not forloop.first %}, {% endif %}{% if item.nc_composition or item.nc_molecule %}
+                    <span class="red">{{ item.name }}</span>{% else %}{{ item.name }}{% endif %}{% endfor %}
+                </small>
+            </li>
+            <li class="medicine_li_h medicine_compo">{{ object.dosage_form }} - {{ object.composition }}</li>
+            <li class="medicine_li_h medicine_qty {% if object.quantity < object.required_quantity %}error{% endif %}">{{ object.quantity }}</li>
+            <li class="medicine_li_h medicine_qty">0</li>
+            <!-- TODO -->
+            {% with object.medicine_items|first as item %}
+            <li class="medicine_li_h medicine_date {% if item.exp_date < today %}error{% elif item.exp_date < delay %}warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</li>
+            {% endwith %}
+        </ul>
+    </header>
+    <div id='inn-{{ object.id }}' class="medicine_more">
+        {% if object.medicine_list != "None" %}
+        <div class="medicine_list redborder">{{ object.medicine_list }}</div>
+        {% endif %}
+        <div class="medicine_wrapper">
+            <div class="medicine_info">
+                <p class="medicine_roa">
+                    <b>{% trans "Route of Administration:" %}</b> {{ object.roa }}</p>
+                <p class="medicine_allowance">
+                    <b>{% trans "Required Quantity:" %}</b> {{ object.required_quantity }}</p>
+                {% if object.tag.all|length > 0 %}
+                <p class="medicine_tag">
+                    <b>{% trans "Tags:" %}</b>
+                    {% for tag in object.tag.all %}{% if not forloop.first %}, {% endif %}{{ tag.name }}{% endfor %}
+                </p>
+                {% endif %}
+                <p class="medicine_rem">
+                    <a href="{% url 'med_remark' object.id %}" title="Éditer les remarques" class="jquery_popup remark_edit">{% trans "Remarks:" %}</a>
+                    {{ object.remark.text }}
+                </p>
+            </div>
+        </div>
+        {% if object.medicine_items|length > 0 %}
+        <table class="medicine_items">
+            <thead>
+                <tr>
+                    <td class="medicine_inn">{% trans "Brand Name" %}</td>
+                    <td class="medicine_qty">{% trans "Quantity" %}</td>
+                    <td class="medicine_date">{% trans "Expiration Date" %}</td>
+                    <td class="medicine_location">{% trans "Location" %}</td>
+                    <td class=""></td>
+                    <td class="medicine_buttons"></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in object.medicine_items %}
+                <tr class="border">
+                    <td>{{ item.name }} {% if item.nc_molecule %}
+                        <span class="red">[ {{ item.nc_molecule }} ]</span>{% endif %} {% if item.nc_composition %}
+                        <span class="red">({{ item.nc_composition }})</span>{% endif %}</td>
+                    <td class="medicine_qty">{{ item.quantity }}</td>
+                    <td class="medicine_date {% if item.exp_date < today %}error{% elif item.exp_date < delay %}warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</td>
+                    <td class="location">{{ item.location }}</td>
+                    <td class="red">
+                        {% if item.nc_molecule %} DÉNOMINATION NON CONFORME ! {% elif item.nc_composition %} COMPOSITION NON CONFORME ! {% endif %}
+                    </td>
+                    <td class="medicine_buttons">
+                        <a href="{% url 'med_out' item.id %}" title="Utiliser ce médicament" class="jquery_popup medicine_out medicine_link"></a>
+                        <a href="{% url 'med_change' item.id %}" title="Éditer ce médicament" class="jquery_popup medicine_edit medicine_link"></a>
+                        <a href="{% url 'med_delete' item.id %}" title="Supprimer ce médicament" class="jquery_popup medicine_delete medicine_link"></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        <nav class="medicine_action">
+            <a href="{% url 'med_add' object.id %}" class="medicine_submit green jquery_popup">{% trans 'Add a medicine' %}</a>
+            <a href="{% url 'med_equivalent' object.id %}" class="medicine_submit violet jquery_popup">{% trans 'Add an equivalent' %}</a>
+        </nav>
+    </div>
+</article>

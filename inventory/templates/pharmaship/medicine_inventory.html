@@ -4,10 +4,7 @@
 {% block addon %}
 {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href='{% static "pharmaship/inventory.css" %}'>
-    <link rel="stylesheet" type="text/css" href='{% static "pharmaship/popup.css" %}'>
-    <script src='{% static "js/jquery-1.9.1.min.js" %}'></script>
-    <script src='{% static "js/jquery.bpopup.min.js" %}'></script>
-    <script src='{% static "js/medicine_inventory.js" %}'></script>
+    <script src='{% static "pharmaship/js/inventory.js" %}'></script>
 {% endblock %}
 
 {% block print %}
@@ -70,7 +67,7 @@
     <div class="group_div">
     <h2 class="group">{{ group.name}}</h2>
     {% for inn in group.child %}
-    <article class="medicine_item">
+    <article class="medicine_item" id="item-{{ inn.id }}">
         <header id='inn-head-{{ inn.id }}' class="medicine_inn_header">
             <ul class="inn_list">
                 <li class="medicine_li medicine_inn">{{ inn.name }}<br />
@@ -157,10 +154,5 @@
     {% endfor %}
     </div>
 
-</div>
-<!-- Popup -->
-<div id="medicine_dialog">
-    <div class="content">
-    </div>
 </div>
 {% endblock %}

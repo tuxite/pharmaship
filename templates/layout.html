@@ -1,87 +1,108 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
     {% load staticfiles %}
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" >
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
     <link rel="stylesheet" type="text/css" href='{% static "style/layout.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "style/ui.layout.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "style/jquery-ui.css" %}'>
+    <link rel="stylesheet" type="text/css" href='{% static "style/jquery.ui.theme.css" %}'>
+    <!-- jQuery + jQuery UI -->
+    <script src='{% static "js/jquery-2.0.3.min.js" %}'></script>
+    <script src='{% static "js/ui/jquery-ui.js" %}'></script>
+    <!-- Plugins -->
+    <script src='{% static "js/jquery-layout.js" %}'></script>
+    <script src='{% static "js/jquery.popupoverlay.js" %}'></script>
+    <!-- Common scripts -->
+    <script src='{% static "js/common.js" %}'></script>
+    <!-- i18n Django -->
     <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
-    {% block addon %}
-    {% endblock %}
-
-    {% load i18n %}
+    
+    {% block addon %} {% endblock %} {% load i18n %}
 
     <title>{{title}} - Pharmaship</title>
 </head>
 
 <body>
-	<header id="head">
-		<h1><a href="/"><img src='{% static "style/logo.png" %}' alt="PharmaShip"/></a></h1>
-		<div id="account">
+    <div class="ui-layout-north">
+        <h1>
+            <a href="/">
+                <img src='{% static "style/logo.png" %}' alt="PharmaShip" />
+            </a>
+        </h1>
+        <div id="account">
             {% if user %}
             <h1>{{ user }}</h1>
-			<h2>{{ rank }}</h2>
-			<ul>
-				<li><a href="/settings" class="settings">{% trans "Settings" %}</a></li>
-				<li><a href="/logout" class="logout">{% trans "Logout" %}</a></li>
-			</ul>
+            <h2>{{ rank }}</h2>
+            <ul>
+                <li>
+                    <a href="/settings" class="settings">{% trans "Settings" %}</a>
+                </li>
+                <li>
+                    <a href="/logout" class="logout">{% trans "Logout" %}</a>
+                </li>
+            </ul>
             {% else %}
             <a class="button blue shifthead" href="/login/?next=/">{% trans "Log In" %}</a>
             {% endif %}
-		</div>
-	</header>
-
-<!-- Corps -->
-<div class="document">
-    <div class="documentwrapper">
-        <div class="bodywrapper">
-            <div id="title">
-                {% block print %}
-<!--
-                <form action="." method="post">
-                    <input id="search" type="text" name="search" placeholder="{% trans 'Search' %}"/>
-                </form>
--->
-                {% endblock %}
-                <h1>{{ title }}</h1>
-
-                {% block navigation %}
-
-                {% endblock %}
-            </div>
-            <div class="body">
-                {% block content %}
-
-                {% endblock %}
-            </div>
-
         </div>
     </div>
-</div>
-<!-- #end content -->
-<!-- left sidebar -->
-	<div id="sidebar">
-		<div class="sidebarwrapper">
+    <!-- Corps -->
+    <div class="ui-layout-center">
+        <div id="title">
+            {% block print %}
+            <!--
+        <form action="." method="post">
+            <input id="search" type="text" name="search" placeholder="{% trans 'Search' %}"/>
+        </form>
+-->
+            {% endblock %}
+            <h1>{{ title }}</h1>
+
+            {% block navigation %} {% endblock %}
+        </div>
+        <div class="content ui-layout-content">
+            {% block content %} {% endblock %}
+        </div>
+    </div>
+    <!-- #end content -->
+    <!-- left sidebar -->
+    <div class="ui-layout-west">
+        <div class="sidebarwrapper">
             <ul>
-                <li><a href="{% url 'medicine' %}">{% trans "Medicine Inventory" %}</a></li>
-                <li class="separator"><a href="{% url 'equipment' %}">{% trans "Material Inventory" %}</a></li>
-<!--
-                <li class="separator"><a href="#">Gestion des commandes</a></li>
-                <li><a href="#">Téléconsultation</a></li>
-                <li class="separator"><a href="#">Dossiers en cours</a></li>
-                <li><a href="#">Guide des soins</a></li>
+                <li>
+                    <a href="{% url 'medicine' %}">{% trans "Medicine Inventory" %}</a>
+                </li>
+                <li class="separator">
+                    <a href="{% url 'equipment' %}">{% trans "Material Inventory" %}</a>
+                </li>
+                <li class="separator">
+                    <a href="{% url 'purchase' %}">{% trans "Requisition Overview" %}</a>
+                </li>
+                <!--
+            <li><a href="#">Téléconsultation</a></li>
+            <li class="separator"><a href="#">Dossiers en cours</a></li>
+            <li><a href="#">Guide des soins</a></li>
 -->
             </ul>
             <div class="button">
-                 <a class="button red" href="/contact">{% trans "Contact the CCMM" %}</a>
+                <a class="button red" href="/contact">{% trans "Contact the CCMM" %}</a>
             </div>
-		</div>
-	</div>
-	<div class="clearer"></div>
-<!-- #end left sidebar -->
+        </div>
+    </div>
+    <!-- #end left sidebar -->
 
-<footer>
-
-</footer>
+    <div id="dialog">
+        <div id="dialog-text"></div>
+        <div id="dialog-error"></div>
+        <form>
+            <div id="dialog-form"></div>
+        </form>
+        <div id="dialog-foot"></div>
+    </div>
+    <div id="picture"></div>
 </body>
+
 </html>

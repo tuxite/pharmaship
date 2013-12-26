@@ -1,22 +1,16 @@
-{% extends "layout.html" %}
-{% load i18n %}
-
-{% block addon %}
-{% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href='{% static "pharmaship/home.css" %}'>
-    <script src='{% static "js/jquery-1.9.1.min.js" %}'></script>
-    <script src='{% static "js/home.js" %}'></script>
-{% endblock %}
-
-{% block content %}
+{% extends "layout.html" %} {% load i18n %} {% block addon %} {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href='{% static "pharmaship/home.css" %}'>
+<script src='{% static "js/home.js" %}'></script>
+{% endblock %} {% block content %}
 <h2>{% trans "Medicines Inventory Status" %}</h2>
-<div class="line">
-    <ul class="home">
-        <li class="header {% if molecule.short_supply|length > 0 %}bold{% endif %}">{% trans "Medicines in short supply:" %}</li>
-        <li class="top {% if molecule.short_supply|length > 0 %}error{% else %}good{% endif %}">{{ molecule.short_supply|length }}</li>
-    </ul>
+
+<div class="accordion">
+    <h3>
+        <span class="title">{% trans "Medicines in short supply:" %}</span>
+        <span class="count {% if molecule.short_supply|length > 0 %}error{% else %}good{% endif %}">{{ molecule.short_supply|length }}</span>
+    </h3>
     {% if molecule.short_supply|length > 0 %}
-    <div class="more">
+    <div>
         <table>
             <tr>
                 <th>{% trans "Molecule" %}</th>
@@ -33,15 +27,12 @@
         </table>
     </div>
     {% endif %}
-</div>
-
-<div class="line">
-    <ul class="home">
-        <li class="header {% if molecule.expired|length > 0 %}bold{% endif %}">{% trans "Expired medicines:" %}</li>
-        <li class="top {% if molecule.expired|length > 0 %}error{% else %}good{% endif %}">{{ molecule.expired|length }}</li>
-    </ul>
+    <h3>
+        <span class="title">{% trans "Expired medicines:" %}</span>
+        <span class="count {% if molecule.expired|length > 0 %}error{% else %}good{% endif %}">{{ molecule.expired|length }}</span>
+    </h3>
     {% if molecule.expired|length > 0 %}
-    <div class="more">
+    <div>
         <table>
             <tr>
                 <th>{% trans "Medicine" %}</th>
@@ -54,18 +45,19 @@
         </table>
     </div>
     {% endif %}
-</div>
-
-<div class="line">
-    <ul class="home">
+    <h3>
+        <span class="title">{% trans "Medicines reaching expiry:" %}</span>
+        <span class="count {% if molecule.reaching_expiry|length > 0 %}warning{% else %}good{% endif %}">{{ molecule.reaching_expiry|length }}</span>
+    </h3>
+    <!--    <ul class="home">
         <li class="header {% if molecule.reaching_expiry|length > 0 %}bold{% endif %}">{% trans "Medicines reaching expiry:" %}</li>
         <li class="top {% if molecule.reaching_expiry|length > 0 %}warning{% else %}good{% endif %}">{{ molecule.reaching_expiry|length }}</li>
         {% if molecule.reaching_expiry|length > 0 %}
         <li>({% with molecule.reaching_expiry|first as item %}{{ item.exp_date }}{% endwith %})</li>
         {% endif %}
-    </ul>
+    </ul>-->
     {% if molecule.reaching_expiry|length > 0 %}
-    <div class="more">
+    <div>
         <table>
             <tr>
                 <th>{% trans "Medicine" %}</th>
@@ -78,15 +70,12 @@
         </table>
     </div>
     {% endif %}
-</div>
-
-<div class="line">
-    <ul class="home">
-        <li class="header {% if molecule.nc|length > 0 %}bold{% endif %}">{% trans "Non conform medicines:" %}</li>
-        <li class="top {% if molecule.nc|length > 0 %}error{% else %}good{% endif %}">{{ molecule.nc|length }}</li>
-    </ul>
+    <h3>
+        <span class="title">{% trans "Non conform medicines:" %}</span>
+        <span class="count {% if molecule.nc|length > 0 %}error{% else %}good{% endif %}">{{ molecule.nc|length }}</span>
+    </h3>
     {% if molecule.nc|length > 0 %}
-    <div class="more">
+    <div>
         <table>
             <tr>
                 <th>{% trans "Medicine" %}</th>
@@ -95,19 +84,13 @@
             {% for item in molecule.nc %}
             <tr>
                 <td>{{ item }}</td>
-                <td>{% if item.nc_molecule %}
-                {% trans "Molecule:" %} {{ item.nc_molecule }}
-                {% endif %}
-                {% if item.nc_composition %}
-                {% trans "Composition:" %} {{ item.nc_composition }}
-                {% endif %}</td>
+                <td>{% if item.nc_molecule %} {% trans "Molecule:" %} {{ item.nc_molecule }} {% endif %} {% if item.nc_composition %} {% trans "Composition:" %} {{ item.nc_composition }} {% endif %}</td>
             </tr>
             {% endfor %}
         </table>
     </div>
     {% endif %}
-</div>
-<!--
+    <!--
 <div class="line">
     <ul class="home">
         <li class="header {% if molecule.ordered|length > 0 %}bold{% endif %}">{% trans "Ordered medicines:" %}</li>
@@ -116,15 +99,15 @@
     </ul>
 </div>
 -->
-
+</div>
 <h2>{% trans "Medical Equipment Inventory Status" %}</h2>
-<div class="line">
-    <ul class="home">
-        <li class="header {% if equipment.short_supply|length > 0 %}bold{% endif %}">{% trans "Equipment in short supply:" %}</li>
-        <li class="top {% if equipment.short_supply|length > 0 %}error{% else %}good{% endif %}">{{ equipment.short_supply|length }}</li>
-    </ul>
-    {% if equipment.short_supply|length > 0 %}
-    <div class="more">
+<div class="accordion">
+    <h3>
+        <span class="title">{% trans "Equipment in short supply:" %}</span>
+        <span class="count {% if equipment.short_supply|length > 0 %}error{% else %}good{% endif %}">{{ equipment.short_supply|length }}</span>
+    </h3>
+    <div>
+        {% if equipment.short_supply|length > 0 %}
         <table>
             <tr>
                 <th>{% trans "Item" %}</th>
@@ -139,17 +122,15 @@
             </tr>
             {% endfor %}
         </table>
+        {% endif %}
     </div>
-    {% endif %}
-</div>
 
-<div class="line">
-    <ul class="home">
-        <li class="header {% if equipment.expired|length > 0 %}bold{% endif %}">{% trans "Expired articles:" %}</li>
-        <li class="top {% if equipment.expired|length > 0 %}error{% else %}good{% endif %}">{{ equipment.expired|length }}</li>
-    </ul>
-    {% if equipment.expired|length > 0 %}
-    <div class="more">
+    <h3>
+        <span class="title">{% trans "Expired articles:" %}</span>
+        <span class="count {% if equipment.expired|length > 0 %}error{% else %}good{% endif %}">{{ equipment.expired|length }}</span>
+    </h3>
+    <div>
+        {% if equipment.expired|length > 0 %}
         <table>
             <tr>
                 <th>{% trans "Equipment" %}</th>
@@ -160,20 +141,15 @@
             </tr>
             {% endfor %}
         </table>
-    </div>
-    {% endif %}
-</div>
-
-<div class="line">
-    <ul class="home">
-        <li class="header {% if equipment.reaching_expiry|length > 0 %}bold{% endif %}">{% trans "Articles reaching expiry:" %}</li>
-        <li class="top {% if equipment.reaching_expiry|length > 0 %}warning{% else %}good{% endif %}">{{ equipment.reaching_expiry|length }}</li>
-        {% if equipment.reaching_expiry|length > 0 %}
-        <li>({% with equipment.reaching_expiry|first as item %}{{ item.exp_date }}{% endwith %})</li>
         {% endif %}
-    </ul>
-    {% if equipment.reaching_expiry|length > 0 %}
-    <div class="more">
+    </div>
+
+    <h3>
+        <span class="title">{% trans "Articles reaching expiry:" %}</span>
+        <span class="count {% if equipment.reaching_expiry|length > 0 %}warning{% else %}good{% endif %}">{{ equipment.reaching_expiry|length }}</span>
+    </h3>
+    <div>
+        {% if equipment.reaching_expiry|length > 0 %}
         <table>
             <tr>
                 <th>{% trans "Article" %}</th>
@@ -184,17 +160,15 @@
             </tr>
             {% endfor %}
         </table>
+        {% endif %}
     </div>
-    {% endif %}
-</div>
 
-<div class="line">
-    <ul class="home">
-        <li class="header {% if equipment.nc|length > 0 %}bold{% endif %}">{% trans "Non conform articles:" %}</li>
-        <li class="top {% if equipment.nc|length > 0 %}error{% else %}good{% endif %}">{{ equipment.nc|length }}</li>
-    </ul>
-    {% if equipment.nc|length > 0 %}
-    <div class="more">
+    <h3>
+        <span class="title">{% trans "Non conform articles:" %}</span>
+        <span class="count {% if equipment.nc|length > 0 %}error{% else %}good{% endif %}">{{ equipment.nc|length }}</span>
+    </h3>
+    <div>
+        {% if equipment.nc|length > 0 %}
         <table>
             <tr>
                 <th>{% trans "Article" %}</th>
@@ -207,10 +181,9 @@
             </tr>
             {% endfor %}
         </table>
+        {% endif %}
     </div>
-    {% endif %}
-</div>
-<!--
+    <!--
 <div class="line">
     <ul class="home">
         <li class="header {% if equipment.ordered|length > 0 %}bold{% endif %}">{% trans "Ordered equipments:" %}</li>
@@ -219,5 +192,5 @@
     </ul>
 </div>
 -->
-
+</div>
 {% endblock %}
