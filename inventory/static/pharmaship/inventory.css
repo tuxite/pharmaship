@@ -1,0 +1,346 @@
+/*
+CSS Document
+
+(c) 2013 Association DSM, http://devmaretique.com
+
+This file is part of Pharmaship.
+
+Pharmaship is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+any later version.
+
+Pharmaship is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
+
+======================================================================
+Filename:    template/inventory.css
+Description: CSS for Inventory views
+Author:      Matthieu Morin
+Version:     0.1
+======================================================================
+*/
+
+/* Print button */
+input#print{
+    border: 1px solid #ccc;
+	background: white url(./icons/print.png) no-repeat 6px 4px;
+    padding: 6px;
+    padding-left: 30px;
+    margin: 2px 10px 0 0;
+	float: right;
+	}
+
+/* Filter banner */
+div#filter_banner{
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+    margin: 5px 0px 15px 0px;
+    padding: 5px;
+    }
+
+/* Forms */
+input, textarea, select {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid grey;
+    }
+a#reset_input{
+    margin-bottom: -6px;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background: transparent url(./icons/clear.png) no-repeat center;
+    }
+a#advanced_filter{
+    margin-left: 20px;
+    padding: 5px;
+    color: grey;
+}
+a#advanced_filter:hover{
+    border-radius: 5px;
+    background: #cdd;
+    }
+/* Listing */
+/** Common **/
+div#medicine_table{
+    width: 100%;
+    }
+div#medicine_table ul, article, nav.medicine_action, div.group_div{
+    clear: both;
+    }
+div#medicine_table ul{
+    width: 100%;
+    }
+
+div#medicine_table li{
+    display: block;
+    float: left;
+    }
+
+header > ul{
+    height: 3em;
+    }
+
+/** Header **/
+h2.group {
+    font-size: 140%;
+    font-weight: 700;
+    margin: 10px;
+    }
+header#medicine_table_header {
+    background: #2e3536;
+    margin: 0 -10px;
+    width: 100%;
+    }
+header#medicine_table_header > ul{
+    background: #2e3536;
+    color: white;
+    font-weight: 700;
+    margin: 0 0 0 10px;
+    }
+
+/*** Common li ***/
+li.medicine_li_h{
+    padding: 0.95em 0.5em;
+    margin: 0.35em 0.5%;
+    }
+li.medicine_li{
+    padding: 0.5em;
+    margin: 0.35em 0.5%;
+    }
+li.medicine_qty, td.medicine_qty {
+    width: 6.3%;
+    text-align: center;
+    }
+li.medicine_inn, td.medicine_inn {
+    width: 35%;
+    margin-left: 0;
+    }
+li.medicine_compo {
+    width: 25%;
+    }
+li.medicine_date, td.medicine_date {
+    width: 10%;
+    margin-right: 0;
+    text-align: center;
+    }
+
+/*** li inn name ***/
+.medicine_inn_header:hover{
+    background: silver;
+    cursor: pointer;
+    }
+.active{
+    background: #d3d7cf;
+    }
+ul.inn_list{
+    height: 4em;
+    }
+
+/*** inn small brand ***/
+small.brand{
+    margin-left: 15px;
+    font-size: 80%;
+    color: grey;
+    }
+small.brand > span.red{
+    font-size: 100%;
+    font-weight: 400;
+    color: #c04040;
+    }
+
+/*** inn details ***/
+.medicine_more {
+    background: white;
+    }
+article > div{
+    padding: 0 10px;
+    border: 1px solid silver;
+    }
+div.medicine_wrapper{
+    height: 3.5em;
+    }
+
+div.medicine_info{
+    padding: 10px 0;
+    }
+
+p.medicine_roa, p.medicine_allowance {
+    width: 25%;
+    margin-right: 10px;
+    float: left;
+    padding: 0 0 4px 0;
+    }
+p.medicine_tag {
+    margin-right: 10px;
+    float: left;
+    padding: 0 0 4px 0;
+    }  
+
+p.medicine_rem {
+    clear: left;
+    padding: 4px 0;
+    }
+
+/*** inn list ***/
+div.medicine_list{
+    float: right;
+    padding: 0.5em;
+    padding-top: 0.8em;
+    padding-bottom: 0.5em;
+    width: 10%;
+    text-align: center;
+    background:white;
+    height: 3.5em;
+    box-sizing:border-box;
+    }
+div.redborder{
+    border: 5px solid #cc0000;
+    color: #cc0000;
+    font-weight: 700;
+    }
+
+/*** inn actions ***/
+nav.medicine_action {
+    padding: 10px 0;
+    }
+.green{
+    background: #d3d7cf url(./icons/add_dark.png) no-repeat 3px 3px;
+    }
+.violet{
+    background: #d3d7cf  url(./icons/equivalent_dark.png) no-repeat 3px 3px;
+    }
+.green:hover{
+    background: silver url(./icons/add_dark.png) no-repeat 3px 3px;
+    }
+.violet:hover{
+    background: silver url(./icons/equivalent_dark.png) no-repeat 3px 3px;
+    }
+
+/*** medicine actions ***/
+li.medicine_a {
+    padding: 0;
+    padding-top: 0.4em;
+    }
+.medicine_link{
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    }
+.remark_edit{
+    font-weight: 700;
+    padding-left: 24px;
+    color: black;
+    background: url(./icons/remark_mono.png) no-repeat 0px -3px;
+    }
+.remark_edit:hover{
+    background: url(./icons/remark.png) no-repeat 0px -3px;
+    }
+.medicine_edit{
+    background: url(./icons/edit_mono.png) no-repeat;
+    }
+.medicine_edit:hover{
+    background: url(./icons/edit.png) no-repeat;
+    }
+.medicine_delete{
+    background: url(./icons/delete_mono.png) no-repeat;
+    }
+.medicine_delete:hover{
+    background: url(./icons/delete.png) no-repeat;
+    }
+.medicine_out{
+    background: url(./icons/out_mono.png) no-repeat;
+    }
+.medicine_out:hover{
+    background: url(./icons/out.png) no-repeat;
+    }
+/*** medicine items header ***/
+table.medicine_items {
+	border-width: medium;
+	border-spacing: 2px;
+	border-style: solid;
+	border-color: silver;
+	border-collapse: collapse;
+    clear:both;
+    width: 100%;
+    margin-top: 10px;
+}
+table.medicine_items tr.border td, table.medicine_items th {
+    border-bottom:thin solid silver;
+}
+
+table.medicine_items td{
+	padding: 5px;
+    }
+
+table.medicine_items thead{
+    font-weight: 700;
+    border-bottom:thin solid silver;
+    }
+
+header.medicine_item_header > ul{
+    color: black;
+    font-weight: 700;
+    width: inherit;
+    border: 1px solid red;
+    }
+
+td.medicine_buttons {
+    text-align: right;
+    }
+
+a.medicine_submit{
+    border: 1px solid #ccc;
+    padding: 6px;
+    padding-left: 30px;
+    color: black;
+    margin-right: 10px;
+    display: inline-block;
+	}
+/*** medicine details ***/
+span.red, td.red{
+    color:#cc0000;
+    font-weight: 700;
+    }
+
+/*** error - warning ***/
+.error{
+    background:#a40000;
+    color:#eeeeec;
+    }
+.warning{
+    background:#f57900;
+    }
+
+/* Popup */
+div#medicine_dialog{
+    display:none;
+    background:#729fcf;
+    padding: 5px;
+    }
+
+/* Picture */
+div.material_picture{
+    float: right;
+    padding: 10px;
+    margin-top: 10px;
+    text-align: left;
+    }
+div.material_picture > a{
+    color: grey;
+    background: transparent url(./icons/picture.png) no-repeat;
+    display: block;
+    padding-top: 2px;
+    padding-left: 28px;
+    height: 24px;
+    }
+div.material_picture > a:hover{
+    color: #a40000;
+    background: transparent url(./icons/picture_hover.png) no-repeat;
+    }

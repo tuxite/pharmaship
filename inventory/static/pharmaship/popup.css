@@ -1,0 +1,90 @@
+/*
+CSS Document
+
+(c) 2013 Association DSM, http://devmaretique.com
+
+This file is part of Pharmaship.
+
+Pharmaship is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+any later version.
+
+Pharmaship is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
+
+======================================================================
+Filename:    template/popup.css
+Description: CSS for popups of Inventory application
+Author:      Matthieu Morin
+Version:     0.1
+======================================================================
+*/
+
+div#popup{
+    background: white;
+    padding: 10px;
+    min-width: 600px;
+    }
+
+/* Title */
+div#popup h1{
+    font-weight:700;
+    font-size: 130%;
+    margin: -10px -10px 20px -10px;
+    background: #204a87;
+    display: block;
+    width: 100%+20px;
+    color: #eeeeec;
+    padding: 15px;
+    }
+
+/* Text */
+div#popup p{
+    margin-bottom: 10px;
+    }
+
+
+/* Table */
+div.popup_text table{
+	border-collapse: separate;
+    border-spacing: 2px;
+    text-align: left;
+   }
+div.popup_text th {
+    background: #888a85;
+    color: #eeeeec;
+    padding: 5px 10px;
+    font-weight:
+    }
+div.popup_text td {
+    background: #eeeeec;
+    }
+
+/* action bar (bottom) */
+div.popup_action{
+    margin-top: 20px;
+    float:right;
+    }
+div.popup_action > ul > li{
+    display: block;
+    float: left;
+    }
+li.popup_action{
+    padding: 0.3em;
+    background: #2e3436;
+    cursor : pointer;
+    margin: 5px;
+    color: white;
+    }
+li.popup_action:hover{
+    background:#729fcf;
+    color: #2e3436;
+    }
+
+

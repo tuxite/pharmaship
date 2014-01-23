@@ -1,0 +1,113 @@
+/*
+CSS Document
+
+(c) 2013 Association DSM, http://devmaretique.com
+
+This file is part of Pharmaship.
+
+Pharmaship is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+any later version.
+
+Pharmaship is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
+
+======================================================================
+Filename:    template/report.css
+Description: CSS for pdf reports
+Author:      Matthieu Morin
+Version:     0.1
+======================================================================
+*/
+
+* {
+	margin : 0;
+	padding : 0;
+	font-family : 'Droid Sans', sans-serif;
+    font-size: 11pt;
+    text-decoration: none;
+    list-style: none;
+	}
+
+
+body {
+/*
+    height: 210mm;
+    width: 297mm;
+*/
+    
+	padding-top : 30px;
+	font-family : sans-serif;
+	font-size : 12px;
+	}
+
+table {
+	border-width: medium;
+	border-spacing: 1mm;
+	border-style: solid;
+	border-color: black;
+	border-collapse: collapse;
+    clear:both;
+    margin-top: 0.5cm;
+}
+table tr.border td, table th {
+	border-width: thin;
+	border-style: solid;
+	border-color: black;
+}
+
+table td{
+    border-bottom: none;
+    border-top: none;
+    border-left: 1pt solid black;
+	padding: 2mm;
+    }
+    
+tr.group{
+    background:#FFFF00;
+    font-weight:700;
+    }
+
+thead{
+    font-weight:700;
+    }
+
+div#vessel{
+    position: absolute;
+    top: 5mm;
+    right: 5mm;
+    font-size: 12pt;
+    }
+
+h1#title, div#allowance{
+    text-align: center;
+    margin: 0 auto;
+    }
+
+.nc{
+    font-style: italic;
+    }
+.center{
+    text-align:center;
+    }
+.inn{
+    background: #eeeeec;
+    border-top: 0.5pt dashed black;
+    }
+.small{
+    font-size: 10pt;
+    }
+
+h1#title{
+    font-size: 16pt;
+    margin-bottom: 5mm;
+    }
+div#allowance{
+    font-size: 14pt;
+    }

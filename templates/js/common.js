@@ -159,7 +159,7 @@
 
             // Prevents the default action to be triggered.
             e.preventDefault();
-
+            
             // Ajax loader and parser for Dialog
             $.ajax({
                 url: e.target.href,
@@ -191,7 +191,7 @@
                                     success: function (data) {
                                         // Here, reload concerned part of the body
                                         // Note: the dialog_callback must be defined in the concerned JS file.
-                                        dialog_callback(data);
+                                        dialog_callback(data, e);
                                         // Then close the dialog
                                         $("#dialog").dialog("close");
                                     },

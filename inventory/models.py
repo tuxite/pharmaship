@@ -33,6 +33,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 import ast
+import datetime
+
+import utils
 
 # Constants
 ## Transaction type values
@@ -247,12 +250,43 @@ class Remark(models.Model):
 
 
 class MoleculeManager(models.Manager):
-    """
-    Manager for class Molecule.
-    For deserialization purpose only.
-    """
+    """Manager for class Molecule."""
     def get_by_natural_key(self, name, roa, dosage_form, composition):
         return self.get(name=name, roa=roa, dosage_form=dosage_form, composition=composition)
+    
+    def missing(self):
+        """Returns the quantity to order to meet the requirement."""
+        exp_delay = utils.delay(Settings.objects.latest('id').expire_date_warning_delay)
+        # Selection of available ReqQty
+        allowance_list = Settings.objects.latest('id').allowance.all()
+        req_qty_list = MoleculeReqQty.objects.filter(allowance__in=allowance_list).prefetch_related('base', 'allowance').order_by('base')
+        # Molecule list
+        molecule_list = Molecule.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('medicine_set').order_by('name')
+        # Medicine quantity transaction list
+        qty_transaction_list = QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(Medicine))
+        
+        result_list = []
+        # Selection of the current quantities
+        for molecule in molecule_list:
+            current_qty = 0
+            for medicine in molecule.medicine_set.all():
+                # Do not add quantity if any non-conformity of medicine (near) expired.
+                if medicine.nc_molecule or medicine.nc_composition or medicine.exp_date <= exp_delay:
+                    continue
+                # Add quantity for other ones
+                for transaction in qty_transaction_list:
+                    if transaction.object_id == medicine.id:
+                        current_qty += transaction.value
+            
+            # Then, parse required quantities
+            required_qty = utils.req_qty_element(molecule, req_qty_list)
+            
+            # Finally, add the molecule with new attribute if current < required
+            if current_qty < required_qty:
+                molecule.missing = (required_qty - current_qty)
+                result_list.append(molecule)
+                
+        return result_list
 
 
 class Molecule(models.Model):
@@ -280,7 +314,7 @@ class Molecule(models.Model):
         """Outputs a string for Purchase application."""
         s = u"{0} {1} - {2} {3}".format(_("Dosage Form:"), self.get_dosage_form_display(), _("Composition:"), self.composition)
         return s
-
+    
     class Meta:
         ordering = ('name', )
         unique_together = (('name', 'roa', 'dosage_form', 'composition'),)
@@ -333,6 +367,40 @@ class EquipmentManager(models.Manager):
             perishable = ast.literal_eval(perishable),
             group = EquipmentGroup.objects.get_by_natural_key(ast.literal_eval(group)[0]),
             )
+    
+    def missing(self):
+        """Returns the quantity to order to meet the requirement."""
+        exp_delay = utils.delay(Settings.objects.latest('id').expire_date_warning_delay)
+        # Selection of available ReqQty
+        allowance_list = Settings.objects.latest('id').allowance.all()
+        req_qty_list = EquipmentReqQty.objects.filter(allowance__in=allowance_list).prefetch_related('base', 'allowance').order_by('base')
+        # Equipement list
+        equipment_list = Equipment.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('article_set').order_by('name')
+        # Article quantity transaction list
+        qty_transaction_list = QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(Article))
+        
+        result_list = []
+        # Selection of the current quantities
+        for equipment in equipment_list:
+            current_qty = 0
+            for article in equipment.article_set.all():
+                # Do not add quantity if any non-conformity of article (near) expired.
+                if article.nc_packaging or article.exp_date <= exp_delay:
+                    continue
+                # Add quantity for other ones
+                for transaction in qty_transaction_list:
+                    if transaction.object_id == article.id:
+                        current_qty += transaction.value
+            
+            # Then, parse required quantities
+            required_qty = utils.req_qty_element(equipment, req_qty_list)
+            
+            # Finally, add the equipment with new attribute if current < required
+            if current_qty < required_qty:
+                equipment.missing = (required_qty - current_qty)
+                result_list.append(equipment)
+                
+        return result_list
 
 class Equipment(models.Model):
     """Model for medical equipment."""
@@ -404,4 +472,6 @@ class Settings(models.Model):
     
 
 # Orderable objects
-ORDERABLE = [Equipment, Molecule]
+def orderable():
+    """Returns a list of orderable elements."""
+    return [Equipment, Molecule]

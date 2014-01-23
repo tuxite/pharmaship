@@ -34,27 +34,17 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.db.models import Sum
 from django.contrib.contenttypes.models import ContentType
 
 import models
 import forms
+import utils
 from settings.models import Vessel
 
 import json
-import datetime, os.path
+import datetime
 
-from django.shortcuts import render
 from weasyprint import HTML, CSS
-from django.conf.global_settings import TEMPLATE_DIRS
-
-# Functions
-def slicedict(d, s):
-    return {k:v for k,v in d.iteritems() if k.startswith(s)}
-
-def delay(delta):
-    """Returns the date including a delay in days."""
-    return datetime.date.today() + datetime.timedelta(days=delta)
 
 # General views
 @login_required
@@ -91,7 +81,7 @@ def index(request):
                         'rank': _(request.user.profile.get_rank()),
                         'values': values,
                         'today': datetime.date.today(),
-                        'delay': delay(models.Settings.objects.latest('id').expire_date_warning_delay),
+                        'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
                         'group_list' : group_list,
                         'allowance_list': allowance_list,
                         'location_list': location_list,
@@ -104,7 +94,7 @@ def filter(request):
     if request.method == 'POST': # If the form has been submitted
         # Parsing the "allowance-*" keys.
         allowance_filter = []
-        d = slicedict(request.POST, "allowance-")
+        d = utilsslicedict(request.POST, "allowance-")
         if (u"-1" in d.values()) or (len(d) < 1):
             # All allowances linked to the vessel's settings
             return HttpResponseRedirect(reverse('equipment'))
@@ -122,7 +112,7 @@ def filter(request):
                         'rank': request.user.profile.get_rank(),
                         'values': values,
                         'today': datetime.date.today(),
-                        'delay': delay(models.Settings.objects.latest('id').expire_date_warning_delay),
+                        'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
                         'group_list' : group_list,
                         'allowance_list': models.Settings.objects.latest('id').allowance.all(),
                         'location_list': location_list,
@@ -388,7 +378,7 @@ def update_article(equipment_id):
     req_qty_list = models.EquipmentReqQty.objects.filter(allowance__in=allowance_list, base=equipment).prefetch_related('base', 'allowance')
     # Parsing the equipment
     result = parser_element(equipment, remark_list, qty_transaction_list, location_list)
-    result['required_quantity'] = req_qty_element(equipment, req_qty_list)
+    result['required_quantity'] = utils.req_qty_element(equipment, req_qty_list)
 
     return render_to_response('pharmaship/equipment_article.html', {
                     'object': result,
@@ -408,7 +398,7 @@ def pdf_print(request):
                     'rank': request.user.profile.get_rank(),
                     'values': values,
                     'today': datetime.date.today(),
-                    'delay': delay(models.Settings.objects.latest('id').expire_date_warning_delay),
+                    'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
                     'allowance_list': allowance_list,
                     },
                     context_instance=RequestContext(request))
@@ -437,7 +427,7 @@ def parser(allowance_list, location_list):
     # Equipment list
     equipment_list = models.Equipment.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('tag', 'article_set', 'remark').order_by('group', 'name')
     # Article list
-    article_list = models.Article.objects.filter(parent__in=equipment_list, used=False).distinct().prefetch_related('location')
+    #article_list = models.Article.objects.filter(parent__in=equipment_list, used=False).distinct().prefetch_related('location')
     # Article quantity transaction list
     qty_transaction_list = models.QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(models.Article))
     # Group list
@@ -460,7 +450,7 @@ def parser(allowance_list, location_list):
                 # Equipment parsing
                 element_dict = parser_element(equipment, remark_list, qty_transaction_list, location_list, today)
                 # Required quantity
-                element_dict['required_quantity'] = req_qty_element(equipment, req_qty_list)
+                element_dict['required_quantity'] = utils.req_qty_element(equipment, req_qty_list)
                 # Adding the equipment dict to the list
                 element_list.append(element_dict)
         group_dict['child'] = element_list
@@ -531,15 +521,4 @@ def parser_element(equipment, remark_list, qty_transaction_list, location_list, 
     # Returning the result dictionnary
     return element_dict
 
-def req_qty_element(equipment, req_qty_list):
-    """ Returns the required quantity of an element from the allowance list and required quantities list."""
-    # Required quantity
-    maximum = [0,]
-    additional = 0
-    for item in req_qty_list:
-        if item.base == equipment:
-            if item.allowance.additional == True:
-                additional += item.required_quantity
-            else:
-                maximum.append(item.required_quantity)
-    return additional + max(maximum)
+
