@@ -32,6 +32,7 @@ from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from django.forms.models import modelform_factory
 
+from core.forms import DateInput
 import models
 
 DELETE_REASON = (
@@ -44,16 +45,16 @@ CHANGE_REASON = (
         (8, 'Physical Count'),
         (9, 'Other'),
     )
-
+    
 class DeleteForm(forms.Form):
     """Form used for deleting an objet in the list."""
     reason = forms.ChoiceField(choices=DELETE_REASON, label=_("Reason"))
 
 
-class InfoChangeForm(forms.ModelForm):
+class ChangeMedicineForm(forms.ModelForm):
     """Form used for changing the details and the quantity of an object in the list."""
     quantity = forms.IntegerField(label=_("Quantity in stock"))
-    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
+    exp_date = forms.DateField(label=_("Expiration Date"), widget=DateInput())
 
     class Meta:
         model = models.Medicine
@@ -65,12 +66,13 @@ class QtyChangeForm(forms.Form):
     quantity = forms.IntegerField(label=_("Quantity"))
 
 
-class AddForm(forms.ModelForm):
+class AddMedicineForm(forms.ModelForm):
     """Form used for adding a medicine to an INN in the list."""
     quantity = forms.IntegerField(label=_("Quantity"))
-    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
+    exp_date = forms.DateField(label=_("Expiration Date"), widget=DateInput())
     nc_composition = forms.CharField(label=_("Composition"))
-    
+
+            
     class Meta:
         model = models.Medicine
         exclude = ['used', 'nc_molecule', 'parent']
@@ -79,14 +81,10 @@ class AddForm(forms.ModelForm):
 class AddEquivalentForm(forms.ModelForm):
     """Form used for adding an equivalent medicine to an INN in the list."""
     quantity = forms.IntegerField(label=_("Quantity"))
-    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
+    exp_date = forms.DateField(label=_("Expiration Date"), widget=DateInput())
     nc_composition = forms.CharField(label=_("Composition"))
     nc_molecule = forms.CharField(label=_("Molecule"))
-    
-    def __init__(self, *args, **kwargs):
-        """Function to overrid requirement."""
-        super(AddEquivalentForm, self).__init__(*args, **kwargs)
-        self.fields["nc_molecule"].required = True
+
         
     class Meta:
         model = models.Medicine
@@ -110,7 +108,7 @@ class RemarkForm(forms.Form):
 class AddArticleForm(forms.ModelForm):
     """Form used for adding a material to a reference material in the list."""
     quantity = forms.IntegerField(label=_("Quantity"))
-    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
+    exp_date = forms.DateField(label=_("Expiration Date"), widget=DateInput())
     nc_packaging = forms.CharField(label=_("Packaging"))
 
     
@@ -122,7 +120,7 @@ class AddArticleForm(forms.ModelForm):
 class ChangeArticleForm(forms.ModelForm):
     """Form used for changing the details and the quantity of an object in the list."""
     quantity = forms.IntegerField(label=_('Quantity in stock'))
-    exp_date = forms.DateField(widget=SelectDateWidget, label=_("Expiration Date"))
+    exp_date = forms.DateField(label=_("Expiration Date"), widget=DateInput())
 
     
     class Meta:
@@ -141,11 +139,6 @@ class SettingsForm(forms.ModelForm):
 class ExportForm(forms.Form):
     """Form for exporting a dotation (molecules, material and required quantities)."""
     allowance = forms.ModelChoiceField(queryset=models.Allowance.objects.all(), label=_("Allowance"))
-
-
-class ImportForm(forms.Form):
-    """Form for importing a dotation (molecules, material and required quantities)."""
-    import_file = forms.FileField()
 
 
 class LocationCreateForm(forms.ModelForm):

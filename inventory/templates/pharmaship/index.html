@@ -1,96 +1,148 @@
-{% extends "layout.html" %} {% load i18n %} {% block addon %} {% load staticfiles %}
+{% extends "html/layout.html" %}
+{% load i18n %}
+
+{% block addon %} {% load staticfiles %}
+<!--
 <link rel="stylesheet" type="text/css" href='{% static "pharmaship/home.css" %}'>
 <script src='{% static "js/home.js" %}'></script>
-{% endblock %} {% block content %}
-<h2>{% trans "Medicines Inventory Status" %}</h2>
+-->
+{% endblock %}
 
-<div class="accordion">
-    <h3>
-        <span class="title">{% trans "Medicines in short supply:" %}</span>
-        <span class="count {% if molecule.short_supply|length > 0 %}error{% else %}good{% endif %}">{{ molecule.short_supply|length }}</span>
-    </h3>
-    {% if molecule.short_supply|length > 0 %}
-    <div>
-        <table>
-            <tr>
-                <th>{% trans "Molecule" %}</th>
-                <th class="center">{% trans "Required Quantity" %}</th>
-                <th class="center">{% trans "Current Quantity" %}</th>
-            </tr>
-            {% for item in molecule.short_supply %}
-            <tr>
-                <td>{{ item.molecule }}</td>
-                <td class="center">{{ item.reqqty }}</td>
-                <td class="center">{{ item.qty }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+{% block content %}
+
+<h2 class="sub-header">{% trans "Medicines Inventory Status" %}</h2>
+
+<div class="panel-group" id="molecule_accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% if molecule.short_supply|length > 0 %}
+                <a data-toggle="collapse" data-parent="#molecule_accordion" href="#molecule_short_supply">{% trans "Medicines in short supply:" %}</a>
+                {% else %}
+                    {% trans "Medicines in short supply:" %}
+                {% endif %}
+                <span class="label label-{% if molecule.short_supply|length > 0 %}danger{% else %}success{% endif %}">
+                    {{ molecule.short_supply|length }}
+                </span>
+            </h4>
+        </div>
+        <div id="molecule_short_supply" class="panel-collapse collapse">
+            {% if molecule.short_supply|length > 0 %}
+            <table class="table table-striped">
+                <tr>
+                    <th>{% trans "Molecule" %}</th>
+                    <th class="text-center">{% trans "Required Quantity" %}</th>
+                    <th class="text-center">{% trans "Current Quantity" %}</th>
+                </tr>
+                {% for item in molecule.short_supply %}
+                <tr>
+                    <td>{{ item.molecule }}</td>
+                    <td class="text-center">{{ item.reqqty }}</td>
+                    <td class="text-center">{{ item.qty }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
-    <h3>
-        <span class="title">{% trans "Expired medicines:" %}</span>
-        <span class="count {% if molecule.expired|length > 0 %}error{% else %}good{% endif %}">{{ molecule.expired|length }}</span>
-    </h3>
-    {% if molecule.expired|length > 0 %}
-    <div>
-        <table>
-            <tr>
-                <th>{% trans "Medicine" %}</th>
-            </tr>
-            {% for item in molecule.expired %}
-            <tr>
-                <td>{{ item }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% if molecule.expired|length > 0 %}
+                <a data-toggle="collapse" data-parent="#molecule_accordion" href="#molecule_expired">{% trans "Expired medicines:" %}</a>
+                {% else %}
+                    {% trans "Expired medicines:" %}
+                {% endif %}
+                <span class="label label-{% if molecule.expired|length > 0 %}danger{% else %}success{% endif %}">
+                    {{ molecule.expired|length }}
+                </span>
+            </h4>
+        </div>
+        <div id="molecule_expired" class="panel-collapse collapse">
+            {% if molecule.expired|length > 0 %}
+            <table class="table table-striped">
+                <tr>
+                    <th>{% trans "Medicine" %}</th>
+                    <th>{% trans "Expiry"%}</th>
+                </tr>
+                {% for item in molecule.expired %}
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>{{ item.exp_date }} <small>({{ item.exp_date|timesince }})</small></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
-    <h3>
-        <span class="title">{% trans "Medicines reaching expiry:" %}</span>
-        <span class="count {% if molecule.reaching_expiry|length > 0 %}warning{% else %}good{% endif %}">{{ molecule.reaching_expiry|length }}</span>
-    </h3>
-    <!--    <ul class="home">
-        <li class="header {% if molecule.reaching_expiry|length > 0 %}bold{% endif %}">{% trans "Medicines reaching expiry:" %}</li>
-        <li class="top {% if molecule.reaching_expiry|length > 0 %}warning{% else %}good{% endif %}">{{ molecule.reaching_expiry|length }}</li>
-        {% if molecule.reaching_expiry|length > 0 %}
-        <li>({% with molecule.reaching_expiry|first as item %}{{ item.exp_date }}{% endwith %})</li>
-        {% endif %}
-    </ul>-->
-    {% if molecule.reaching_expiry|length > 0 %}
-    <div>
-        <table>
-            <tr>
-                <th>{% trans "Medicine" %}</th>
-            </tr>
-            {% for item in molecule.reaching_expiry %}
-            <tr>
-                <td>{{ item }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% if molecule.reaching_expiry|length > 0 %}
+                <a data-toggle="collapse" data-parent="#molecule_accordion" href="#molecule_reaching_expiry">{% trans "Medicines reaching expiry:" %}</a>
+                {% else %}
+                    {% trans "Medicines reaching expiry:" %}
+                {% endif %}
+                <span class="label label-{% if molecule.reaching_expiry|length > 0 %}danger{% else %}success{% endif %}">
+                    {{ molecule.reaching_expiry|length }}
+                </span>
+            </h4>
+        </div>
+        <div id="molecule_reaching_expiry" class="panel-collapse collapse">
+            {% if molecule.reaching_expiry|length > 0 %}
+            <table class="table table-striped">
+                <tr>
+                    <th>{% trans "Medicine" %}</th>
+                    <th>{% trans "Expiry" %}</th>
+                </tr>
+                {% for item in molecule.reaching_expiry %}
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>{{ item.exp_date }} <small>({{ item.exp_date|timeuntil }})</small></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
-    <h3>
-        <span class="title">{% trans "Non conform medicines:" %}</span>
-        <span class="count {% if molecule.nc|length > 0 %}error{% else %}good{% endif %}">{{ molecule.nc|length }}</span>
-    </h3>
-    {% if molecule.nc|length > 0 %}
-    <div>
-        <table>
-            <tr>
-                <th>{% trans "Medicine" %}</th>
-                <th>{% trans "Non Conformity" %}</th>
-            </tr>
-            {% for item in molecule.nc %}
-            <tr>
-                <td>{{ item }}</td>
-                <td>{% if item.nc_molecule %} {% trans "Molecule:" %} {{ item.nc_molecule }} {% endif %} {% if item.nc_composition %} {% trans "Composition:" %} {{ item.nc_composition }} {% endif %}</td>
-            </tr>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% if molecule.nc|length > 0 %}
+                <a data-toggle="collapse" data-parent="#molecule_accordion" href="#molecule_non_conform">{% trans "Non conform medicines:" %}</a>
+                {% else %}
+                    {% trans "Non conform medicines:" %}
+                {% endif %}
+                <span class="label label-{% if molecule.nc|length > 0 %}danger{% else %}success{% endif %}">
+                    {{ molecule.nc|length }}
+                </span>
+            </h4>
+        </div>
+        <div id="molecule_non_conform" class="panel-collapse collapse">
+            {% if molecule.nc|length > 0 %}
+            <table class="table table-striped">
+                <tr>
+                    <th>{% trans "Medicine" %}</th>
+                    <th>{% trans "Non Conformity" %}</th>
+                </tr>
+                {% for item in molecule.nc %}
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>{% if item.nc_molecule %} {% trans "Molecule:" %} {{ item.nc_molecule }} {% endif %} {% if item.nc_composition %} {% trans "Composition:" %} {{ item.nc_composition }} {% endif %}</td>
+                </tr>
             {% endfor %}
-        </table>
+            </table>
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
-    <!--
+
+</div>
+
+
+<!--
 <div class="line">
     <ul class="home">
         <li class="header {% if molecule.ordered|length > 0 %}bold{% endif %}">{% trans "Ordered medicines:" %}</li>
@@ -99,91 +151,138 @@
     </ul>
 </div>
 -->
+<h2 class="sub-header">{% trans "Medical Equipment Inventory Status" %}</h2>
+
+<div class="panel-group" id="equipment_accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% if equipment.short_supply|length > 0 %}
+                <a data-toggle="collapse" data-parent="#equipment_accordion" href="#equipment_short_supply">{% trans "Equipment in short supply:" %}</a>
+                {% else %}
+                    {% trans "Equipment in short supply:" %}
+                {% endif %}
+                <span class="label label-{% if equipment.short_supply|length > 0 %}danger{% else %}success{% endif %}">
+                    {{ equipment.short_supply|length }}
+                </span>
+            </h4>
+        </div>
+        <div id="equipment_short_supply" class="panel-collapse collapse">
+            {% if equipment.short_supply|length > 0 %}
+            <table class="table table-striped">
+                <tr>
+                    <th>{% trans "Item" %}</th>
+                    <th class="text-center">{% trans "Required Quantity" %}</th>
+                    <th class="text-center">{% trans "Current Quantity" %}</th>
+                </tr>
+                {% for item in equipment.short_supply %}
+                <tr>
+                    <td>{{ item.equipment }}</td>
+                    <td class="text-center">{{ item.reqqty }}</td>
+                    <td class="text-center">{{ item.qty }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% if equipment.expired|length > 0 %}
+                <a data-toggle="collapse" data-parent="#equipment_accordion" href="#equipment_expired">{% trans "Expired articles:" %}</a>
+                {% else %}
+                    {% trans "Expired articles:" %}
+                {% endif %}
+                <span class="label label-{% if equipment.expired|length > 0 %}danger{% else %}success{% endif %}">
+                    {{ equipment.expired|length }}
+                </span>
+            </h4>
+        </div>
+        <div id="equipment_expired" class="panel-collapse collapse">
+            {% if equipment.expired|length > 0 %}
+            <table class="table table-striped">
+                <tr>
+                    <th>{% trans "Equipment" %}</th>
+                    <th>{% trans "Expiry"%}</th>
+                </tr>
+                {% for item in equipment.expired %}
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>{{ item.exp_date }} <small>({{ item.exp_date|timesince }})</small></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% if equipment.reaching_expiry|length > 0 %}
+                <a data-toggle="collapse" data-parent="#equipment_accordion" href="#equipment_reaching_expiry">{% trans "Articles reaching expiry:" %}</a>
+                {% else %}
+                    {% trans "Articles reaching expiry:" %}
+                {% endif %}
+                <span class="label label-{% if equipment.reaching_expiry|length > 0 %}danger{% else %}success{% endif %}">
+                    {{ equipment.reaching_expiry|length }}
+                </span>
+            </h4>
+        </div>
+        <div id="equipment_reaching_expiry" class="panel-collapse collapse">
+            {% if equipment.reaching_expiry|length > 0 %}
+            <table class="table table-striped">
+                <tr>
+                    <th>{% trans "Article" %}</th>
+                    <th>{% trans "Expiry" %}</th>
+                </tr>
+                {% for item in equipment.reaching_expiry %}
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>{{ item.exp_date }} <small>({{ item.exp_date|timeuntil }})</small></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                {% if equipment.nc|length > 0 %}
+                <a data-toggle="collapse" data-parent="#equipment_accordion" href="#equipment_non_conform">{% trans "Non conform articles:" %}</a>
+                {% else %}
+                    {% trans "Non conform articles:" %}
+                {% endif %}
+                <span class="label label-{% if equipment.nc|length > 0 %}danger{% else %}success{% endif %}">
+                    {{ equipment.nc|length }}
+                </span>
+            </h4>
+        </div>
+        <div id="equipment_non_conform" class="panel-collapse collapse">
+            {% if equipment.nc|length > 0 %}
+            <table class="table table-striped">
+                <tr>
+                    <th>{% trans "Article" %}</th>
+                    <th>{% trans "Non Conformity" %}</th>
+                </tr>
+                {% for item in equipment.nc %}
+                <tr>
+                    <td>{{ item }}</td>
+                    <td>{{ item.nc_packaging }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+
 </div>
-<h2>{% trans "Medical Equipment Inventory Status" %}</h2>
-<div class="accordion">
-    <h3>
-        <span class="title">{% trans "Equipment in short supply:" %}</span>
-        <span class="count {% if equipment.short_supply|length > 0 %}error{% else %}good{% endif %}">{{ equipment.short_supply|length }}</span>
-    </h3>
-    <div>
-        {% if equipment.short_supply|length > 0 %}
-        <table>
-            <tr>
-                <th>{% trans "Item" %}</th>
-                <th class="center">{% trans "Required Quantity" %}</th>
-                <th class="center">{% trans "Current Quantity" %}</th>
-            </tr>
-            {% for item in equipment.short_supply %}
-            <tr>
-                <td>{{ item.equipment }}</td>
-                <td class="center">{{ item.reqqty }}</td>
-                <td class="center">{{ item.qty }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-    </div>
 
-    <h3>
-        <span class="title">{% trans "Expired articles:" %}</span>
-        <span class="count {% if equipment.expired|length > 0 %}error{% else %}good{% endif %}">{{ equipment.expired|length }}</span>
-    </h3>
-    <div>
-        {% if equipment.expired|length > 0 %}
-        <table>
-            <tr>
-                <th>{% trans "Equipment" %}</th>
-            </tr>
-            {% for item in equipment.expired %}
-            <tr>
-                <td>{{ item }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-    </div>
-
-    <h3>
-        <span class="title">{% trans "Articles reaching expiry:" %}</span>
-        <span class="count {% if equipment.reaching_expiry|length > 0 %}warning{% else %}good{% endif %}">{{ equipment.reaching_expiry|length }}</span>
-    </h3>
-    <div>
-        {% if equipment.reaching_expiry|length > 0 %}
-        <table>
-            <tr>
-                <th>{% trans "Article" %}</th>
-            </tr>
-            {% for item in equipment.reaching_expiry %}
-            <tr>
-                <td>{{ item }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-    </div>
-
-    <h3>
-        <span class="title">{% trans "Non conform articles:" %}</span>
-        <span class="count {% if equipment.nc|length > 0 %}error{% else %}good{% endif %}">{{ equipment.nc|length }}</span>
-    </h3>
-    <div>
-        {% if equipment.nc|length > 0 %}
-        <table>
-            <tr>
-                <th>{% trans "Article" %}</th>
-                <th>{% trans "Non Conformity" %}</th>
-            </tr>
-            {% for item in equipment.nc %}
-            <tr>
-                <td>{{ item }}</td>
-                <td>{{ item.nc_packaging }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-    </div>
-    <!--
+<!--
 <div class="line">
     <ul class="home">
         <li class="header {% if equipment.ordered|length > 0 %}bold{% endif %}">{% trans "Ordered equipments:" %}</li>
@@ -192,5 +291,4 @@
     </ul>
 </div>
 -->
-</div>
 {% endblock %}

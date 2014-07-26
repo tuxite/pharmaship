@@ -1,0 +1,116 @@
+{% load staticfiles %}
+{% load i18n %}
+<div class="row item-div" id="item-{{ object.id }}">
+    <div class="col-md-12">
+        <div class="row item-header" data-toggle="collapse" data-target="#item-{{ object.id }}-more" data-parent="#item-list">
+            <div class="col-md-5 vcenter">
+                <h4>{{ object.name }}
+                    <br/>
+                    <small class="brand">
+                        {% for item in object.article_items %}{% if not forloop.first %}, {% endif %}{% if item.nc_packaging %}
+                        <span class="text-danger">{{ item.name }}</span>{% else %}{{ item.name }}{% endif %}{% endfor %}
+                    </small>
+                </h4>
+            </div><!--
+        --><div class="col-md-3 vcenter">{{ object.packaging }}</div><!--
+        --><div class="col-md-1 vcenter text-center bt-tooltip {% if object.quantity < object.required_quantity %}bg-danger{% endif %}"  data-toggle="tooltip" data-placement="bottom" title='{% trans "Required Quantity:" %} {{ object.required_quantity }}'>{{ object.quantity }}</div><!--
+        --><div class="col-md-1 vcenter text-center">0</div><!--
+            {% with object.article_items|first as item %}
+        --><div class="col-md-2 vcenter text-center {% if item.exp_date < today %}bg-danger{% elif item.exp_date < delay %}bg-warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</div>
+            {% endwith %}
+        </div>
+
+        <div class="row item-more collapse" id="item-{{ object.id }}-more">
+            <div class="col-md-12">
+                {% if object.picture %}
+                <a class="pull-right btn btn-default" href="{{ object.picture.url }}" title="{% trans 'Picture' %}" data-toggle="lightbox" data-target="#lightbox">
+                    <span class="fa fa-picture-o"></span>
+                </a>
+                {% endif %}
+            <div class="item-info">
+
+                {% if object.tag.all|length > 0 %}
+                <p class="item-tag">
+                    <b>{% trans "Tags:" %}</b>
+                    {% for tag in object.tag.all %}
+                    <span class="label label-primary">{{ tag.name }}</span>{% endfor %}
+                </p>
+                {% endif %}
+                <p>
+                    <a href="{% url 'pharmaship_equ_remark' object.id %}"
+                       class="btn btn-link"
+                       title="Éditer les remarques"
+                       data-toggle="modal"
+                       data-target="#action_modal">
+                        <span class="fa fa-edit"></span> {% trans "Remarks:" %}</a>
+                    <span id="remark-{{ object.id }}">{{ object.remark.text }}</span>
+                </p>
+            </div>
+            {% if object.article_items|length > 0 %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>{% trans "Brand Name" %}</td>
+                        <td class="text-center">{% trans "Quantity" %}</td>
+                        <td class="text-center">{% trans "Expiration Date" %}</td>
+                        <td>{% trans "Location" %}</td>
+                        <td class=""></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in object.article_items %}
+                    <tr class="border">
+                        <td>{{ item.name }}
+                            {% if item.nc_packaging %}<span class="text-danger">[{{ item.nc_packaging }}]</span>{% endif %}
+                        </td>
+                            <td class="text-center">{{ item.quantity }}</td>
+                            <td class="text-center">
+                                <p class="{% if item.exp_date < today %}bg-danger{% elif item.exp_date < delay %}bg-warning{% endif %}">
+                                    {{ item.exp_date|date:"d/m/Y" }}
+                                </p>
+                            </td>
+                            <td class="location">{{ item.location }}</td>
+                            <td class="text-center">
+                                {% if item.nc_packaging %}
+                                <span class="label label-danger bt-tooltip"
+                                      title= '{% trans "Non-conform packaging" %}'
+                                      data-toggle="tooltip"
+                                      data-placement="bottom">
+                                        {% trans "Non-conform!" %}
+                                </span>
+                                {% endif %}
+                            </td>
+                            <td class="medicine_buttons">
+                                <a href="{% url 'pharmaship_equ_out' item.id %}"
+                                   title="Utiliser ce matériel"
+                                   class="btn btn-primary btn-sm"
+                                   data-toggle="modal"
+                                   data-target="#action_modal">
+                                    <span class="fa fa-upload"></span>
+                                </a>
+                                <a href="{% url 'pharmaship_equ_change' item.id %}"
+                                   title="Éditer ce matériel"
+                                   class="btn btn-default btn-sm"
+                                   data-toggle="modal"
+                                   data-target="#action_modal">
+                                    <span class="fa fa-edit"></span>
+                                </a>
+                                <a href="{% url 'pharmaship_equ_delete' item.id %}"
+                                   title="Supprimer ce matériel"
+                                   class="btn btn-danger btn-sm"
+                                   data-toggle="modal"
+                                   data-target="#action_modal">
+                                    <span class="fa fa-trash-o"></span>
+                                </a>
+                            </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            <a href="{% url 'pharmaship_equ_add' object.id %}" class="btn btn-success" data-toggle="modal" data-target="#action_modal">
+                <span class="fa fa-plus"></span> {% trans 'Add an object' %}</a>
+        </div>
+    </div></div>
+</div>

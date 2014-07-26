@@ -1,15 +1,13 @@
-{% extends "layout.html" %}
-
-{% block addon %}
+{% extends "html/layout.html" %}
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href='{% static "pharmaship/contact.css" %}'>
-{% endblock %}
+{% load i18n %}
 
 {% block content %}
-<h2>Par VHF, MF/HF : <b>en relai avec les CROSS et MRCC.</b></h2>
-<h2>Par Inmarsat : <b>code 32 ou 38, LES Aussaguel</b></h2>
-<h2>Par téléphone : <b>+33 5 34 39 33 33</b></h2>
-<h2>Par mail : <b><a href="mailto:ccmm@chu-toulouse.fr">ccmm@chu-toulouse.fr</a></b></h2>
+<h1>{{ title }}</h1>
+<h3>Par VHF, MF/HF : <b>en relai avec les CROSS et MRCC.</b></h3>
+<h3>Par Inmarsat : <b>code 32 ou 38, LES Aussaguel</b></h3>
+<h3>Par téléphone : <b>+33 5 34 39 33 33</b></h3>
+<h3>Par mail : <b><a href="mailto:ccmm@chu-toulouse.fr">ccmm@chu-toulouse.fr</a></b></h3>
 <p>Le mail ne doit pas être utilisé comme premier moyen de communication en cas de consultation d'urgence.</p>
 <p>Pour une consultation médicale non urgente le CCMM est ouvert du lundi au vendredi de 8h00 à 18h00 et le samedi matin de 8h00 à 13h00 (heure locale française).</p>
 {% endblock %}

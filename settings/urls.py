@@ -37,10 +37,11 @@ admin.autodiscover()
 
 urlpatterns = patterns('settings.views',
     url(r'^$', 'index', name="settings"),
+    url(r'^import$', 'import_data', name="import"),
     # Action for Vessel form
-    url(r'^/vessel$', 'vessel', name="vessel"),
-    # Action for User and UserProfile forms
-    url(r'^/user$', 'user', name="user"),
+    url(r'^vessel$', 'vessel', name="vessel"),
+    # Action for User forms
+    url(r'^user$', 'user', name="user"),
 )
 
 # Automatically adds settings url from applications

@@ -31,6 +31,8 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
+from django.template import RequestContext
+
 
 import models
 
@@ -51,26 +53,21 @@ def index(request):
     
     
     return render_to_response('pharmaship/index.html', {
-                'user': (request.user.last_name + " " +request.user.first_name),
+                'user': request.user,
                 'title':_("Home"),
-                'rank': request.user.profile.get_rank(),
                 'molecule': molecule_parser(allowance_list, delay_date, today),
                 'equipment': equipment_parser(allowance_list, delay_date, today),
-                })
+                },
+                context_instance=RequestContext(request))
 
 def contact(request):
     """View with CCMM contact information. Available for all users."""
     title = _("Contact the CCMM")
-    if request.user.is_authenticated():
-        variables = {
-                'title': title,
-                'user':(request.user.last_name + " " +request.user.first_name),
-                'rank': request.user.profile.get_rank(),
-                'css':['popup',],
-                }
-    else:
-        variables = {'title':title}
-    return render_to_response('pharmaship/contact.html', variables)
+    return render_to_response('pharmaship/contact.html', {
+        'user': request.user,
+        'title': title,
+    },
+    context_instance=RequestContext(request))
 
 # Pre-treatment functions
 def molecule_parser(allowance_list, delay_date, today):

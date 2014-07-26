@@ -27,13 +27,23 @@ __copyright__ = "Copyright 2013, Association DSM"
 __license__ = "GPL"
 __version__ = "0.2"
 
-from django.forms.models import modelform_factory
+from django.utils.translation import ugettext as _
 from django import forms
-from django.contrib.auth.models import User
 
 import models
+    
+class UserForm(forms.ModelForm):
+    """Form used to customize User parameters."""
+    class Meta:
+        model = models.User
+        fields = ['last_name', 'first_name', 'function']
 
-UserForm = modelform_factory(User, fields=('first_name', 'last_name'))
-UserProfileForm = modelform_factory(models.UserProfile, fields=('function',))
+class VesselForm(forms.ModelForm):
+    """Form used to input Vessel data."""
+    class Meta:
+        model = models.Vessel
+        
 
-VesselForm = modelform_factory(models.Vessel)
+class ImportForm(forms.Form):
+    """Form used to import data into Onboard Assistant."""
+    file_obj = forms.FileField(label=_("File"))

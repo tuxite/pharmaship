@@ -76,15 +76,15 @@ def index(request):
     values, group_list = parser(allowance_list, location_list)
 
     return render_to_response('pharmaship/equipment_inventory.html', {
-                        'user': (request.user.last_name + " " +request.user.first_name),
+                        'user': request.user,
                         'title': _("Medical Article Inventory"),
-                        'rank': _(request.user.profile.get_rank()),
                         'values': values,
                         'today': datetime.date.today(),
                         'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
                         'group_list' : group_list,
                         'allowance_list': allowance_list,
                         'location_list': location_list,
+                        'print': reverse('pharmaship_equ_print'),
                         },
                         context_instance=RequestContext(request))
 
@@ -107,9 +107,8 @@ def filter(request):
         values, group_list = parser(allowance_filter, location_list)
 
         return render_to_response('pharmaship/equipment_inventory.html', {
-                        'user': (request.user.last_name + " " +request.user.first_name),
+                        'user': request.user,
                         'title': _("Medical Article Inventory"),
-                        'rank': request.user.profile.get_rank(),
                         'values': values,
                         'today': datetime.date.today(),
                         'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
@@ -149,31 +148,33 @@ def add(request, equipment_id):
                 )
             # Adding the transaction
             models.QtyTransaction.objects.create(content_object=article, transaction_type=1, value=quantity) # 1: In
-            data = json.dumps({'id': equipment_id, 'content': update_article(equipment_id)})
+            data = json.dumps({'success':_('Data updated'), 'id': equipment_id, 'content': update_article(equipment_id)})
             return HttpResponse(data, content_type="application/json")
         else:
-            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
-            return HttpResponseBadRequest(data, content_type="application/json")
+            errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
+            data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
+            return HttpResponseBadRequest(data, content_type = "application/json")            
     else:
         form = forms.AddArticleForm(instance=models.Article(), initial={'nc_packaging':equipment.packaging})
 
-    # Generating JSON data for AJAX
-    response_data = {
-        'title': _("Add a article"),
-        'form': form.as_table(),
-        'button_OK': _("Add this article"),
-        'button_KO': _("Do not add"),
-        'url': reverse('equ_add', args=(equipment_id,)),
-        'text': u"""
-            <p>{0}</p>
-            <p><b class='sky_blue'>{1}</b></p>
-            """.format(
-                _("You are going to add an article for this equipment:"),
-                equipment.name,
-                ),
-        'foot_text': '',
-        }
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    # Generating the form in HTML for Bootstrap layout
+    return render_to_response('html/modal.html', {
+                        'title': _("Add an article"),
+                        'form': form,
+                        'action': _("Add this article"),
+                        'close': _("Do not add"),
+                        'url': reverse('pharmaship_equ_add', args=(equipment_id,)),
+                        'text': u"""
+                            <p>{0}</p>
+                            <h3  class="text-info">{1}</h3>
+                            """.format(
+                                _("You are going to add an article for this equipment:"),
+                                equipment.name,
+                                ),
+                        'foot_text': '',
+                        'callback': 'updateArticle',
+                        },
+                        context_instance=RequestContext(request))
 
 @permission_required('inventory.article.can_delete')
 def delete(request, article_id):
@@ -190,35 +191,39 @@ def delete(request, article_id):
             models.QtyTransaction.objects.create(content_object=article, transaction_type=reason, value=-article.get_quantity())
             article.used = True
             article.save()
-            data = json.dumps({'id': article.parent.pk, 'content': update_article(article.parent.pk)})
+            data = json.dumps({'success':_('Data updated'), 'id': article.parent.pk, 'content': update_article(article.parent.pk)})
             return HttpResponse(data, content_type="application/json")
         else:
-            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
-            return HttpResponseBadRequest(data, content_type="application/json")
+            errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
+            data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
+            return HttpResponseBadRequest(data, content_type = "application/json")    
     else:
         form = forms.DeleteForm()
 
-    # Generating JSON data for AJAX
-    response_data = {
-        'title': _("Delete an article"),
-        'form': form.as_table(),
-        'button_OK': _("Delete this article"),
-        'button_KO': _("Do not delete"),
-        'url': reverse('equ_delete', args=(article_id,)),
-        'text': u"""
-            <p>{0}</p>
-            <p><b class='sky_blue'>{1}</b> {2} {3} ({4} {5}).</p>
-            """.format(
-                _("You are going to delete this article:"),
-                article.name,
-                _("expiring"),
-                article.exp_date,
-                _("quantity in stock:"),
-                article.get_quantity(),
-                ),
-        'foot_text': '',
-        }
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    # Generating the form in HTML for Bootstrap layout
+    return render_to_response('html/modal.html', {
+                        'title': _("Delete an article"),
+                        'form': form,
+                        'action': _("Delete this article"),
+                        'close': _("Do not delete"),
+                        'url': reverse('pharmaship_equ_delete', args=(article_id,)),
+                        'text': u"""
+                            <p>{0}</p>
+                            <h3  class="text-info">{1}</h3>
+                            <p>{2} {3} ({4} {5}).</p>
+                            """.format(
+                                _("You are going to delete this article:"),
+                                article.name,
+                                _("expiring"),
+                                article.exp_date,
+                                _("quantity in stock:"),
+                                article.get_quantity(),
+                                ),
+                        'foot_text': '',
+                        'callback': 'updateArticle',
+                        },
+                        context_instance=RequestContext(request))    
+
 
 @permission_required('inventory.article.can_change')
 def change(request, article_id):
@@ -245,35 +250,38 @@ def change(request, article_id):
 
             # Updating
             article.save()
-            data = json.dumps({'id': article.parent.pk, 'content': update_article(article.parent.pk)})
+            data = json.dumps({'success':_('Data updated'), 'id': article.parent.pk, 'content': update_article(article.parent.pk)})
             return HttpResponse(data, content_type="application/json")
         else:
-            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
-            return HttpResponseBadRequest(data, content_type="application/json")
+            errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
+            data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
+            return HttpResponseBadRequest(data, content_type = "application/json")    
     else:
         form = forms.ChangeArticleForm(instance=article, initial={'quantity': article.get_quantity()})
 
-    # Generating JSON data for AJAX
-    response_data = {
-        'title': _("Update an article"),
-        'form': form.as_table(),
-        'button_OK': _("Update this article"),
-        'button_KO': _("Do not modify"),
-        'url': reverse('equ_change', args=(article_id,)),
-        'text': u"""
-            <p>{0}</p>
-            <p><b class='sky_blue'>{1}</b> {2} {3} ({4} {5}).</p>
-            """.format(
-                _("You are going to modify this article:"),
-                article.name,
-                _("expiring"),
-                article.exp_date,
-                _("quantity in stock:"),
-                article.get_quantity(),
-                ),
-        'foot_text': '',
-        }
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    # Generating the form in HTML for Bootstrap layout
+    return render_to_response('html/modal.html', {
+                        'title': _("Update an article"),
+                        'form': form,
+                        'action': _("Update this article"),
+                        'close': _("Do not modify"),
+                        'url': reverse('pharmaship_equ_change', args=(article_id,)),
+                        'text': u"""
+                            <p>{0}</p>
+                            <h3  class="text-info">{1}</h3>
+                            <p>{2} {3} ({4} {5}).</p>
+                            """.format(
+                                _("You are going to modify this article:"),
+                                article.name,
+                                _("expiring"),
+                                article.exp_date,
+                                _("quantity in stock:"),
+                                article.get_quantity(),
+                                ),
+                        'foot_text': '',
+                        'callback': 'updateArticle',
+                        },
+                        context_instance=RequestContext(request))
 
 @permission_required('inventory.article.can_change')
 def out(request, article_id):
@@ -292,36 +300,39 @@ def out(request, article_id):
             if article_quantity - quantity == 0:
                 article.used = True
             article.save()
-            data = json.dumps({'id': article.parent.pk, 'content': update_article(article.parent.pk)})
+            data = json.dumps({'success':_('Data updated'), 'id': article.parent.pk, 'content': update_article(article.parent.pk)})
             return HttpResponse(data, content_type="application/json")
         else:
-            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
-            return HttpResponseBadRequest(data, content_type="application/json")
+            errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
+            data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
+            return HttpResponseBadRequest(data, content_type = "application/json")    
     else:
         form = forms.QtyChangeForm()
 
-    # Generating JSON data for AJAX
-    response_data = {
-        'title': _("Use an article"),
-        'form': form.as_table(),
-        'button_OK': _("Use this article"),
-        'button_KO': _("Do not use"),
-        'url': reverse('equ_out', args=(article_id,)),
-        'text': u"""
-            <p>{0}</p>
-            <p><b class='sky_blue'>{1}</b> {2} {3} ({4} {5}).</p>
-            """.format(
-                _("You are going to use this article for a treatment:"),
-                article.name,
-                _("expiring"),
-                article.exp_date,
-                _("quantity in stock:"),
-                article.get_quantity(),
-                ),
-        'foot_text': '',
-        }
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
-
+    # Generating the form in HTML for Bootstrap layout
+    return render_to_response('html/modal.html', {
+                        'title': _("Use an article"),
+                        'form': form,
+                        'action': _("Use this article"),
+                        'close': _("Do not use"),
+                        'url': reverse('pharmaship_equ_out', args=(article_id,)),
+                        'text': u"""
+                            <p>{0}</p>
+                            <h3  class="text-info">{1}</h3>
+                            <p>{2} {3} ({4} {5}).</p>
+                            """.format(
+                                _("You are going to use this article for a treatment:"),
+                                article.name,
+                                _("expiring"),
+                                article.exp_date,
+                                _("quantity in stock:"),
+                                article.get_quantity(),
+                                ),
+                        'foot_text': '',
+                        'callback': 'updateArticle',
+                        },
+                        context_instance=RequestContext(request))
+                        
 @permission_required('inventory.remark.can_change')
 def remark(request, equipment_id):
     """Change the remark field of an equipment."""
@@ -340,34 +351,36 @@ def remark(request, equipment_id):
             text = form.cleaned_data['text']
             remark.text = text
             remark.save()
-            data = json.dumps({'id': equipment_id, 'content': update_article(equipment_id)})
+            data = json.dumps({'success':_('Data updated'), 'id': equipment_id, 'content': remark.text})
             return HttpResponse(data, content_type="application/json")
         else:
-            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()]))
-            return HttpResponseBadRequest(data, content_type="application/json")
+            errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
+            data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
+            return HttpResponseBadRequest(data, content_type = "application/json")    
     else:
         form = forms.RemarkForm(initial={'text':remark.text})
 
-    # Generating JSON data for AJAX
-    response_data = {
-        'title': _("Modify the remarks"),
-        'form': form.as_table(),
-        'button_OK': _("Update these remarks"),
-        'button_KO': _("Do not modify"),
-        'url': reverse('equ_remark', args=(equipment_id,)),
-        'text': u"""
-            <p>{0}</p>
-            <p><b class='sky_blue'>{1}</b></p>
-            """.format(
-                _("You are going to modify the remarks of this equipment:"),
-                equipment.name,
-                ),
-        'foot_text': '',
-        }
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    # Generating the form in HTML for Bootstrap layout
+    return render_to_response('html/modal.html', {
+                        'title': _("Modify the remarks"),
+                        'form': form,
+                        'action': _("Update these remarks"),
+                        'close': _("Do not modify"),
+                        'url': reverse('pharmaship_equ_remark', args=(equipment_id,)),
+                        'text': u"""
+                            <p>{0}</p>
+                            <h3  class="text-info">{1}</h3>
+                            """.format(
+                                _("You are going to modify the remarks of this equipment:"),
+                                equipment.name,
+                                ),
+                        'foot_text': '',
+                        'callback': 'updateRemark',
+                        },
+                        context_instance=RequestContext(request))
 
 def update_article(equipment_id):
-    """Renders an Equipment <article> to be included in the inventory view after form submission."""
+    """Renders an Equipment article to be included in the inventory view after form submission."""
     # Equipment
     equipment = get_object_or_404(models.Equipment, pk=equipment_id)
     # Calling the DB for different necessary lists
@@ -380,10 +393,10 @@ def update_article(equipment_id):
     result = parser_element(equipment, remark_list, qty_transaction_list, location_list)
     result['required_quantity'] = utils.req_qty_element(equipment, req_qty_list)
 
-    return render_to_response('pharmaship/equipment_article.html', {
+    return render_to_response('pharmaship/article_single.inc.html', {
                     'object': result,
                     }).content
-                    
+                     
 @login_required
 def pdf_print(request):
     """Exports the article inventory in PDF."""
@@ -395,7 +408,7 @@ def pdf_print(request):
     rendered = render_to_response('pharmaship/equipment_report.html', {
                     'vessel': Vessel.objects.latest('id'),
                     'title': _("Medicine Inventory"),
-                    'rank': request.user.profile.get_rank(),
+                    'user': request.user,
                     'values': values,
                     'today': datetime.date.today(),
                     'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
@@ -408,7 +421,7 @@ def pdf_print(request):
     response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
 
     # Converting it into PDF
-    HTML(string=rendered.content).write_pdf(response, stylesheets=[CSS(settings.STATIC_ROOT + '/style/report.css')])
+    HTML(string=rendered.content).write_pdf(response, stylesheets=[CSS(settings.BASE_DIR + '/inventory/static/pharmaship/css/report.css')])
     return response
 
 # Pre-treatment function
@@ -483,7 +496,7 @@ def parser_element(equipment, remark_list, qty_transaction_list, location_list, 
     element_dict['tag'] = equipment.tag
     # Picture
     if not equipment.picture:
-        equipment.picture = "no_picture.png"
+        equipment.picture = None
     element_dict['picture'] = equipment.picture    
     # Quantity
     element_dict['quantity'] = 0

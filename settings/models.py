@@ -29,9 +29,9 @@ __version__ = "0.1"
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
-
+   
 FUNCTIONS = (
         (u'00', "Captain"),
         (u'10', "Chief Officer"),
@@ -40,34 +40,15 @@ FUNCTIONS = (
         (u'21', "Engineer"),
         (u'99', "Ratings"),
     )
+DEPARTMENTS = (
+    (u'D', "Deck"),
+    (u'E', "Engine"),
+    (u'C', "Civil"),
+)
 
-# User's related models
-class UserProfile(models.Model):
-    global FUNCTIONS
-    user = models.OneToOneField(User)
+class User(AbstractUser):    
+    function = models.CharField(_("Function"), max_length=2, choices=FUNCTIONS, blank=True, null=True)
     
-    function = models.CharField(_("Function"), max_length=2, choices=FUNCTIONS)
-
-
-    def __str__(self):
-        return "%s's profile" % self.user
-
-    def get_rank(self):
-        for item in FUNCTIONS:
-            if self.function == item[0]:
-                return item[1]
-        return self.function
-
-
-# This part is to connect both Django user model and our User profile.
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        profile, created = UserProfile.objects.get_or_create(user=instance)
-    
-post_save.connect(create_user_profile, sender=User)
-
-User.profile = property(lambda u: u.get_profile() )
-
 # Models
 class Vessel(models.Model):
     """Vessel information."""
@@ -86,3 +67,8 @@ class Vessel(models.Model):
     def __unicode__(self):
         return self.name
 
+class Rank(models.Model):
+    """Rank model."""
+    name = models.CharField(_("Name"), max_length=30)
+    department = models.CharField(_("Department"), max_length=1, choices=DEPARTMENTS, blank=True, null=True)
+    #default_group = models.ForeignKey()

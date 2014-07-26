@@ -30,5 +30,5 @@ __version__ = "0.2"
 import models, forms
 from django.contrib import admin
 
-admin.site.register(models.UserProfile)
+admin.site.register(models.User)
 admin.site.register(models.Vessel)

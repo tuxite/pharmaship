@@ -32,13 +32,15 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import ModelForm
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
-import models, forms
+import json
 
-from django.contrib.auth.models import User
+import models, forms
+from core.import_data import BaseImport
+from core.views import settings_links, settings_validation
 
 FUNCTIONS = (
 		(u'00', "Captain"),
@@ -52,61 +54,57 @@ FUNCTIONS = (
 @login_required
 def index(request):
     """Displays differents forms to configure Pharmaship."""
-    links = []
-    for application in settings.INSTALLED_APPS:
-        # Do not take in account Django's applications
-        if "django" in application:
-            continue
-        app_data = {}
-        # By default, adding the general settings application to the dict
-        if application == "settings":
-            app_data['name'] = _("Settings")
-            app_data['url'] = "settings"
-            app_data['active'] = True
-        # Looking if the applications has settings that can be imported
-        elif globals().get("{0}.settings.urls".format(application), True):
-            print "application"
-            app_data['name'] = _(application.capitalize())
-            app_data['url'] = "{0}_settings".format(application)
-        else:
-            continue
-        links.append(app_data)
-            
     return render_to_response('settings.html', {
-                        'user': (request.user.last_name + " " +request.user.first_name),
-                        'rank': request.user.profile.get_rank(),
+                        'user': request.user,
                         'title': _("Settings"),
-                        'links': links,
-                        'vesselform': forms.VesselForm(instance = models.Vessel.objects.latest('id')).as_table(),
-                        'userform': forms.UserForm(instance = User.objects.get(id = request.user.id)).as_table(),
-                        'userprofileform': forms.UserProfileForm(instance = models.UserProfile.objects.get(id = request.user.id)).as_table(),
+                        'links': settings_links(),
+                        'vesselform': forms.VesselForm(instance = models.Vessel.objects.latest('id')),
+                        'userform': forms.UserForm(instance = models.User.objects.get(id = request.user.id)),
                         },
                         context_instance=RequestContext(request))
 
-@permission_required('settings')
-def validation(request, form, instance=None):
-    """Validates the form in args."""
-    f = form(request.POST, instance=instance)
-    if f.is_valid(): # All validation rules pass
-        f.save()
-    else:
-        # TODO: Error message
-        return False
+def import_data(request):
+    """Displays a form to import data to Onboard Assistant."""
+    if request.method == 'POST': # TODO: and request.is_ajax():
+        f = forms.ImportForm(request.POST, request.FILES) # A form bound to the POST data
+        print f
+        if f.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            import_file = request.FILES['file_obj']
+            # Passing the file to the core function
+            importation = BaseImport(import_file)
+            log = importation.launch()
+            return log
+            #~ # Returning the result of the operation
+            #~ data = json.dumps({'success':_('Data imported with success, see log below.'), 'log':log})
+            #~ return HttpResponse(data, content_type="application/json")
+        else:
+            # Returning errors
+            print "ERROR", request
+            errors = dict([(k, [unicode(e) for e in v]) for k,v in f.errors.items()])
+            data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
+            return HttpResponseBadRequest(data, content_type = "application/json")
+    return render_to_response('settings/import.html', {
+                        'user': request.user,
+                        'title': _("Import"),
+                        'importform': forms.ImportForm,
+                        'links': settings_links(),
+                        },
+                        context_instance=RequestContext(request))
 
 @permission_required('settings.user_profile.can_change')
 def user(request):
-    """Validation of the User and UserProfile forms."""
-    if request.method == 'POST':
-        validation(request, forms.UserForm, User.objects.get(id=request.user.id))
-        validation(request, forms.UserProfileForm, models.UserProfile.objects.get(id=request.user.id))
+    """Validation of the User form."""
+    if request.method == 'POST' and request.is_ajax():
+        return settings_validation(request, forms.UserForm, models.User.objects.get(id=request.user.id))
 
-    return HttpResponseRedirect('/settings') # Redirect after POST
+    return HttpResponseNotAllowed(['POST',])
 
 @permission_required('settings.vessel.can_change')
 def vessel(request):
     """Validation of the Vessel form."""
-    if request.method == 'POST':
-        validation(request, forms.VesselForm, models.Vessel.objects.latest('id'))
+    if request.method == 'POST' and request.is_ajax():
+        return settings_validation(request, forms.VesselForm, models.Vessel.objects.latest('id'))
 
-    return HttpResponseRedirect('/settings') # Redirect after POST
+    return HttpResponseNotAllowed(['POST',])
 

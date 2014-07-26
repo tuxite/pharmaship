@@ -1,0 +1,15 @@
+<div id="item-list">
+    {% for group in values %}
+    <div class="group-div row">
+        <div class="col-md-12">
+            <div class="row">
+                <h3 class="group">{{ group.name}}</h3>
+            </div>
+
+            {% for object in group.child %}
+                {% include "pharmaship/medicine_single.inc.html" %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>

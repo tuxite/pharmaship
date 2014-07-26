@@ -1,61 +1,44 @@
-{% extends "layout.html" %}
+{% extends "html/layout.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
 {% load i18n %}
 
-{% block addon %}
-{% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href='{% static "settings.css" %}'>
-{% endblock %}
-
-{% block navigation %}
-<nav>
-    <ul class="navleft">
+{% block sidebar %}
+    <ul class="nav nav-sidebar">
         {% for item in links %}
-        <li><a href="{% url item.url %}" {% if item.active %}class="active"{% endif %}>{{ item.name }}</a></li>
+        <li>
+            <a href="{% url item.url %}" {% if item.active %}class="active" {% endif %}>{{ item.name }}</a>
+        </li>
         {% endfor %}
     </ul>
-</nav>
 {% endblock %}
 
 {% block content %}
-<h2>{% trans "Medical Responsible" %}</h2>
-<form method="post" action="{% url 'user' %}">
-    {% csrf_token %}
-    <table>
-    {{ userform }}
-    {{ userprofileform }}
-    </table>
-    <input type="submit" value='{% trans "Update User Information" %}'/>
-</form>
+<h1 class="page-header">{{ title }}</h1>
 
-<h2>{% trans "Vessel Information" %}</h2>
-<form method="post" action="{% url 'vessel' %}">
-    {% csrf_token %}
-    <table>
-    {{ vesselform }}
-    </table>
-    <input type="submit" value='{% trans "Update Vessel Information" %}'/>
-</form>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Medical Responsible" %}</h3>
+    </div>
+    <div class="panel-body">
+        <form role="form" id="user_form" method="post" action="{% url 'user' %}" data-form-callback="updateUser">
+            {% csrf_token %}
+            {{ userform|bootstrap }}
+            <button type="submit" class="btn btn-primary">{% trans "Update User Information" %}</button>
+        </form>
+    </div>
+</div>
 
-
-<form action="/i18n/setlang/" method="post">
-    {% csrf_token %}
-    <input name="next" type="hidden" value="{% url 'settings' %}" />
-    <table>
-        <tbody>
-        <tr>
-            <th>Language:</th>
-            <td>
-                <select name="language">
-                    {% get_language_info_list for LANGUAGES as languages %}
-                    {% for language in languages %}
-                    <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <input type="submit" value='{% trans "Update the Language" %}' />
-</form>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Vessel Particulars" %}</h3>
+    </div>
+    <div class="panel-body">
+        <form role="form" id="vessel_form" method="post" action="{% url 'vessel' %}">
+            {% csrf_token %}
+            {{ vesselform|bootstrap }}
+            <button type="submit" class="btn btn-primary">{% trans "Update Vessel Information" %}</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

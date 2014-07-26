@@ -41,9 +41,14 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    # Load urls of Core application
+    url(r'^', include('core.urls')),
     # Load urls of Inventory application
-    url(r'^', include('inventory.urls')),
+    url(r'^pharmaship/', include('inventory.urls')),
 
+    # Load urls of Purchase application
+    url(r'^purchase/', include('purchase.urls')),
+    
     # Load urls of Settings application
     url(r'^settings/', include('settings.urls')),
 
@@ -52,9 +57,12 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # Login views
-    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'html/login.html'}),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
 
+    # Comment Framework Urls
+    url(r'^comments/', include('django.contrib.comments.urls')),
+    
     # i18n
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),

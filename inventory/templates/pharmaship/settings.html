@@ -1,61 +1,73 @@
-{% extends "layout.html" %}
+{% extends "html/layout.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
 {% load i18n %}
 
-{% block addon %}
-{% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href='{% static "settings.css" %}'>
+{% block js_addon %}
+<script src='{% static "js/pharmaship/callbacks.js" %}'></script>
 {% endblock %}
 
-{% block navigation %}
-<nav>
-    <ul class="navleft">
+{% block sidebar %}
+    <ul class="nav nav-sidebar">
         {% for item in links %}
-        <li><a href="{% url item.url %}" {% if item.active %}class="active"{% endif %}>{{ item.name }}</a></li>
+        <li>
+            <a href="{% url item.url %}" {% if item.active %}class="active" {% endif %}>{{ item.name }}</a>
+        </li>
         {% endfor %}
     </ul>
-</nav>
 {% endblock %}
 
 {% block content %}
-<h2>{% trans "Pharmaship Settings" %}</h2>
-<form method="post" action="{% url 'application' %}">
-    {% csrf_token %}
-    <table>
-    {{ settingsform }}
-    </table>
-    <input type="submit" value='{% trans "Update Pharmaship Settings" %}'/>
-</form>
+<h1 class="page-header">{{ title }}</h1>
 
-<h2>{% trans "Data Administration" %}</h2>
-<form method="post" action="{% url 'export' %}">
-    {% csrf_token %}
-    <table>
-    {{ exportform }}
-    </table>
-    <input type="submit" value='{% trans "Export Allowance" %}'/>
-</form>
-<form method="post" enctype="multipart/form-data" action="{% url 'import' %}">
-    {% csrf_token %}
-    <table>
-    {{ importform }}
-    </table>
-    <input type="submit" value='{% trans "Import Allowance" %}'/>
-</form>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Application Settings" %}</h3>
+    </div>
+    <div class="panel-body">
+        <form role="form" id="pharmaship_settings_form" method="post" action="{% url 'application' %}">
+            {% csrf_token %}
+            {{ settingsform|bootstrap }}
+            <button type="submit" class="btn btn-primary">{% trans "Update Pharmaship Settings" %}</button>
+        </form>
+    </div>
+</div>
 
-<h2>{% trans "Location Manager" %}</h2>
-<form method="post" action="{% url 'create_location' %}">
-    {% csrf_token %}
-    <table>
-    {{ locationcreateform }}
-    </table>
-    <input type="submit" value='{% trans "Add a location" %}'/>
-</form>
-<form method="post" action="{% url 'delete_location' %}">
-    {% csrf_token %}
-    <table>
-    {{ locationdeleteform }}
-    </table>
-    <p>{% trans "Objects with these locations will be linked by default to Pharmacy." %}</p>
-    <input type="submit" value='{% trans "Delete selected locations" %}'/>
-</form>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{% trans "Location Manager" %}</h3>
+    </div>
+    <div class="panel-body">
+
+        <form role="form" id="pharmaship_location_delete_form" method="post" action="{% url 'delete_location' %}" data-form-callback="locationManagerUpdate">
+            {% csrf_token %}
+            {{ locationdeleteform|bootstrap }}
+            <p class="help-block">{% trans "Objects with these locations will be linked by default to Pharmacy." %}</p>
+            <button type="submit" class="btn btn-danger"><span class="fa fa-trash-o"></span> {% trans "Delete selected locations" %}</button>
+            <a class="btn btn-success pull-right" data-toggle="modal" data-target="#location_add_modal" title='{% trans "Add a location" %}' href="#"><span class="fa fa-plus"></span></a>
+        </form>
+
+    </div>
+</div>
+
+<div class="modal fade" id="location_add_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{% trans "New location" %}</h4>
+      </div>
+    <form role="form" id="pharmaship_location_add_form" method="post" action="{% url 'create_location' %}" data-form-callback="locationManagerUpdate">
+      <div class="modal-body">
+        {% csrf_token %}
+            {{ locationcreateform|bootstrap }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">{% trans "Add a location" %}</button>
+      </div>
+    </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {% endblock %}
