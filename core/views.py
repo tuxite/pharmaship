@@ -89,8 +89,7 @@ def index(request):
 
     return render_to_response('core/index.html', {
                     'user': request.user,
-                    'title': _("Requisition Overview"),
-                    'requisition_list': models.Requisition.objects.all(),
+                    'title': _("Home"),
                     },
                     context_instance=RequestContext(request))
 
