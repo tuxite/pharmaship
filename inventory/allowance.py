@@ -34,11 +34,9 @@ import io, ConfigParser
 
 from django.core import serializers
 from django.http import HttpResponse
-from django.http import HttpResponse
 from django.conf import settings
 
 import models
-import forms
 
 MANIFEST = [
     'info',

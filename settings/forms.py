@@ -42,6 +42,7 @@ class VesselForm(forms.ModelForm):
     """Form used to input Vessel data."""
     class Meta:
         model = models.Vessel
+        exclude = []
         
 
 class ImportForm(forms.Form):

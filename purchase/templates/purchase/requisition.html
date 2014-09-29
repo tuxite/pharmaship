@@ -1,6 +1,5 @@
 {% extends "html/layout.html" %}
 {% load i18n %}
-{% load comments %}
 {% load staticfiles %}
 
 {% block css_addon %}
@@ -33,9 +32,13 @@
         <span id="requisition-name">{{ requisition.name }}</span>
         <small>{{ requisition.reference }}</small>
         <div class="btn-group">
-            <button type="button" class="btn btn-default" id="requisition-status">
+            <a href="{% url 'purchase_req_status' requisition.id %}"
+               class="btn btn-default"
+               id="requisition-status"
+               data-toggle="modal"
+               data-target="#action_modal">
                 {{ requisition.get_status_display }}
-            </button>
+            </a>
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
@@ -71,22 +74,11 @@
     <nav>
         <ul class="nav nav-tabs">
             <li>
-                <a href="#items" class="active" data-toggle="tab">Items ({{ requisition.content.all|length }})</a>
+                <a href="#items" class="active" data-toggle="tab">Items ({{ requisition.item_set.all|length }})</a>
             </li>
             <li>
                 <a href="#instructions" data-toggle="tab">Instructions</a>
             </li>
-<!--
-            {% get_comment_count for requisition as comment_count %}
-            <li>
-                <a href="#comments" data-toggle="tab">Comments ({{ comment_count }})</a>
-            </li>
--->
-<!--
-            <li>
-                <a href="#relpo" data-toggle="tab">Related PO</a>
-            </li>
--->
         </ul>
     </nav>
 </div>
@@ -94,7 +86,7 @@
     <div id="items" class="tab-pane">
         <div class="row list-headers">
             <div class="col-md-6">{% trans "Item Description" %}</div>
-            <div class="col-md-1">{% trans "Quantity" %}</div>
+            <div class="col-md-1 text-center">{% trans "Quantity" %}</div>
         </div>
         <form action="{% url 'purchase_item_add' requisition.id %}" method="POST" name="new_item">
             {% csrf_token %}
@@ -102,10 +94,10 @@
             <input type="hidden" name="new_item_id" value="" />
             <div class="row ps-item-add">
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="new_item_name" placeholder="{% trans 'Item Name' %}">
+                    <input name="new_item_name" class="form-control select2" placeholder="{% trans 'Item Name' %}">
                 </div>
                 <div class="col-md-1 ps-table-cell">
-                    <input type="text" class="form-control" name="new_item_qty" value="0">
+                    <input type="number" class="form-control text-center" name="new_item_qty" value="0" step="1" min="1">
                 </div>
                 <div class="col-md-4 ps-table-cell">
                     <button type="submit" class="btn btn-success item_submit" title="{% trans 'Add item' %}">
@@ -115,22 +107,37 @@
             </div>
         </form>
         <div class="ps-scroll-items">
+            <form class="form-horizontal"
+                  role="form"
+                  action='{% url "purchase_item_update" %}'
+                  method="post"
+                  id='update-form'
+                  data-form-callback='quantityFeedback'>
+                <input type="hidden" name="item_id">
+                <input type="hidden" name="item_qty">
+            </form>
+
             {% for item in requisition.item_set.all %}
-            <div class="row">
+            <div class="row" id="item-{{ item.id }}">
                 <div class="col-md-6">
                     <h4 class="form-control-static">{{ item }}</h4>
                     <p class="text-muted">{{ item.additional }}</p>
                 </div>
                 <div class="col-md-1">
-                    <input type="text" class="form-control update-on-focus" name="item_qty-{{ item.id }}" value="{{ item.quantity }}">
+                        <input type="number" class="form-control text-center update-on-focus" name="item_qty-{{ item.id }}" value="{{ item.quantity }}" min="1">
                 </div>
-                <div class="col-md-4">
-                    <a class="btn btn-danger btn-delete" href="{% url 'purchase_item_delete' item.id requisition.id %}" title="{% trans 'Delete this item' %}">
+                <div class="col-md-4 actions">
+                    <a class="btn btn-danger btn-delete"
+                       href="{% url 'purchase_item_delete' item.id requisition.id %}"
+                       title="{% trans 'Delete this item' %}"
+                       data-loading-text="<span class='fa fa-spinner fa-spin'></span>">
                         <span class="fa fa-trash-o"></span>
                     </a>
                 </div>
             </div>
             {% endfor %}
+
+
         </div>
     </div>
     <div id="instructions" class="tab-pane container-fluid">
@@ -145,35 +152,4 @@
             </div>
         </form>
     </div>
-<!--
-    <div id="comments" class="tab-pane container-fluid">
-        <div id="comments-list">
-            {% get_comment_list for requisition as comment_list %}
-            {% for comment in comment_list %}
-            <div id="comment-{{ comment.id }}" class="well">
-                <div class="comment_head">{{ comment.user.first_name }} {{ comment.user.last_name }} on
-                    <b>{{ comment.submit_date }}</b>
-                </div>
-                <div class="comment_text">{{ comment.comment }}</div>
-            </div>
-            {% endfor %}
-        </div>
-        {% get_comment_form for requisition as form %}
-        <form action="{% comment_form_target %}" method="POST" class="comment_form" data-form-callback="addComment">
-            {% csrf_token %}
-            {{ form.honeypot }}
-            {{ form.content_type }}
-            {{ form.object_pk }}
-            {{ form.timestamp }}
-            {{ form.security_hash }}
-            <input type="hidden" name="next" value="{% url 'purchase_req_view' requisition.id %}" />
-            <div class="form-group">
-                <label for="id_comment">{% trans "New Comment" %}</label>
-                <textarea class="form-control" id="id_comment" rows="6" placeholder="Your comment here..." name="comment"></textarea>
-            </div>
-            <button type="submit" id="id_submit" class="btn btn-primary">
-                <span class="fa fa-check"></span> {% trans 'Add Comment' %}</button>
-        </form>
-    </div>
--->
 {% endblock %}

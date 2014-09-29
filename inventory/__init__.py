@@ -1,7 +1,1 @@
-import models
-
-PURCHASE = ["Medical", [
-                    [models.Molecule, "Molecule"],
-                    [models.Equipment, "Equipment"],
-                ],
-            ]
+default_app_config = 'inventory.apps.InventoryConfig'

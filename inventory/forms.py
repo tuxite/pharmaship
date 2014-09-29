@@ -98,6 +98,7 @@ class MoleculeForm(forms.ModelForm):
 
     class Meta:
         model = models.Molecule
+        exclude = []
 
 
 class RemarkForm(forms.Form):
@@ -134,6 +135,7 @@ class SettingsForm(forms.ModelForm):
 
     class Meta:
         model = models.Settings
+        exclude = []
 
 
 class ExportForm(forms.Form):
@@ -145,6 +147,7 @@ class LocationCreateForm(forms.ModelForm):
     """Form for creating a new Location."""
     class Meta:
         model = models.Location
+        exclude = []
 
 
 class LocationDeleteForm(forms.Form):

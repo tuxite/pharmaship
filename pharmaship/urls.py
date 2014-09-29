@@ -33,7 +33,6 @@ from django.conf.urls.static import static
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-admin.autodiscover()
 
 js_info_dict = {
     'domain': 'djangojs',
@@ -59,9 +58,6 @@ urlpatterns = patterns('',
     # Login views
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'html/login.html'}),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
-
-    # Comment Framework Urls
-    url(r'^comments/', include('django.contrib.comments.urls')),
     
     # i18n
     url(r'^i18n/', include('django.conf.urls.i18n')),

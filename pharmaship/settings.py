@@ -132,11 +132,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # For documentation
-    'django.middleware.doc.XViewMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_middleware.DebugFooter',
 )
 
 ROOT_URLCONF = 'pharmaship.urls'
@@ -162,8 +157,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    # Uncomment the next line to enable the comment framework:
-    'django.contrib.comments',
     # Bootstrap add-in
     'bootstrapform',
     # Pharmaship apps
@@ -201,6 +194,9 @@ LOGGING = {
         },
     }
 }
+
+# TEST RUNNER
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 # LOGIN URL
 LOGIN_URL = "/login/?next=/"

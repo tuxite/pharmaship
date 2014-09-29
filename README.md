@@ -6,7 +6,7 @@ A pharmacy software for merchant ships.
 This software is in active development!
 
 ## Requirements
-*   Django 1.5
+*   Django 1.7
 *   MySQL Server
 *   python-mysqldb
 *   python-gpgme

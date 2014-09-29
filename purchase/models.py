@@ -31,8 +31,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-from django.conf import settings as ds
-
+#from django.apps import apps
 
 STATUS_CHOICES = (
         (0, 'Draft'),
@@ -45,25 +44,27 @@ STATUS_CHOICES = (
         (99, 'Cancelled'),
     )
 
-def get_model_choices():
-    """Function to parse all installed modules to get the subclass tuples."""
-    result = []
-    for application in ds.INSTALLED_APPS:
-        if "django" in application:
-            continue
-
-        try:
-            app = __import__('{0}'.format(application))
-            obj = getattr(app, 'PURCHASE')
-            result += [obj,]
-        except:
-            continue
-
-    # Now parse with ContentType to get the model's id.
-    for item in result:
-        for i in item[1]:
-            i[0] = ContentType.objects.get_for_model(i[0]).id
-    return result
+#def get_model_choices():
+#    """Function to parse all installed modules to get the subclass tuples."""
+#    result = []
+#    for application in apps.get_app_configs():
+#        try:
+#            obj = application.orderable()
+#            result.append({'application' : application.name, 'orderable': obj})
+#        except AttributeError, e:
+#            #print "Error", application, e
+#            continue
+#        
+#    print "MATT", result
+#    
+#    # Now parse with ContentType to get the model's id.
+#    for application in result:
+#        for element in application['orderable']:
+#            element['id'] = element['object'].__dict__
+#            print ContentType.objects.get_for_model(element['object'])
+#    
+#    print "MATT2", result
+#    return result
 
 class Item(models.Model):
     """Model of object that can be ordered.
@@ -100,7 +101,7 @@ class Requisition(models.Model):
     status = models.PositiveIntegerField(_("Status"), choices=STATUS_CHOICES)
     instructions = models.TextField(blank=True, null=True)
     port_of_delivery = models.CharField(max_length=5)
-    item_type = models.PositiveIntegerField(choices=get_model_choices())
+    item_type = models.PositiveIntegerField()#(choices=get_model_choices())
 
     def __unicode__(self):
         return self.name

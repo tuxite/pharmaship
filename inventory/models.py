@@ -33,7 +33,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 import ast
-import datetime
 
 import utils
 
@@ -469,9 +468,3 @@ class Settings(models.Model):
     """Application settings."""
     allowance = models.ManyToManyField(Allowance, verbose_name=_('Allowance'))
     expire_date_warning_delay = models.PositiveIntegerField(_("Warning Delay for Expiration Dates"))
-    
-
-# Orderable objects
-def orderable():
-    """Returns a list of orderable elements."""
-    return [Equipment, Molecule]
