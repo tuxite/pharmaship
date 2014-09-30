@@ -471,7 +471,7 @@ def pdf_print(request):
     response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
 
     # Converting it into PDF
-    HTML(string=rendered.content).write_pdf(response, stylesheets=[CSS(settings.BASE_DIR + '/inventory/static/pharmaship/css/report.css')])
+    HTML(string=rendered.content).write_pdf(response, stylesheets=[CSS(settings.BASE_DIR + '/inventory/static/css/pharmaship/report.css')])
     return response
 
 # Pre-treatment function

@@ -11,13 +11,6 @@
 <script src='{% static "js/purchase/callbacks.js" %}'></script>
 
 <script>
-//    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-//        var height = $(window).height();
-//        var bottom_height = $(".ps-item-add").height();
-//        var div_y = $(".ps-scroll-items").offset().top;
-//        var scroll_height = height - div_y;
-//        $(".ps-scroll-items").height(scroll_height -10);
-//    })
     $('a[href="#items"]').tab('show');
 </script>
 {% endblock %}
@@ -88,16 +81,16 @@
             <div class="col-md-6">{% trans "Item Description" %}</div>
             <div class="col-md-1 text-center">{% trans "Quantity" %}</div>
         </div>
-        <form action="{% url 'purchase_item_add' requisition.id %}" method="POST" name="new_item">
+        <form action="{% url 'purchase_item_add' requisition.id %}" method="POST" name="new_item" data-form-callback="itemAdd">
             {% csrf_token %}
             <input type="hidden" name="name_search_url" value="{% url 'purchase_name_search' requisition.id %}" />
-            <input type="hidden" name="new_item_id" value="" />
+            <input type="hidden" name="object_id" value="" />
             <div class="row ps-item-add">
                 <div class="col-md-6">
                     <input name="new_item_name" class="form-control select2" placeholder="{% trans 'Item Name' %}">
                 </div>
                 <div class="col-md-1 ps-table-cell">
-                    <input type="number" class="form-control text-center" name="new_item_qty" value="0" step="1" min="1">
+                    <input type="number" class="form-control text-center" name="quantity" value="0" step="1" min="1">
                 </div>
                 <div class="col-md-4 ps-table-cell">
                     <button type="submit" class="btn btn-success item_submit" title="{% trans 'Add item' %}">
@@ -118,23 +111,7 @@
             </form>
 
             {% for item in requisition.item_set.all %}
-            <div class="row" id="item-{{ item.id }}">
-                <div class="col-md-6">
-                    <h4 class="form-control-static">{{ item }}</h4>
-                    <p class="text-muted">{{ item.additional }}</p>
-                </div>
-                <div class="col-md-1">
-                        <input type="number" class="form-control text-center update-on-focus" name="item_qty-{{ item.id }}" value="{{ item.quantity }}" min="1">
-                </div>
-                <div class="col-md-4 actions">
-                    <a class="btn btn-danger btn-delete"
-                       href="{% url 'purchase_item_delete' item.id requisition.id %}"
-                       title="{% trans 'Delete this item' %}"
-                       data-loading-text="<span class='fa fa-spinner fa-spin'></span>">
-                        <span class="fa fa-trash-o"></span>
-                    </a>
-                </div>
-            </div>
+                {% include "purchase/item.inc.html" %}
             {% endfor %}
 
 

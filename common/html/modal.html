@@ -9,8 +9,10 @@
             {{ text|safe }}
             {% csrf_token %}
             {{ form|bootstrap }}
+            {{ foot_text|safe }}
         </div>
         <div class="modal-footer">
+
             <button type="button" class="btn btn-default" data-dismiss="modal">{{ close }}</button>
             <button type="submit" class="btn btn-primary">{{ action }}</button>
         </div>

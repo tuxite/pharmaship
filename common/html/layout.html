@@ -10,6 +10,8 @@
 
     <!-- Bootstrap -->
     <link href='{% static "css/bootstrap.min.css" %}' rel="stylesheet">
+    <link href='{% static "css/select2.css" %}' rel="stylesheet">
+    <link href='{% static "css/select2-bootstrap.css" %}' rel="stylesheet">
     <!-- Font Awesome icons -->
     <link rel="stylesheet" href='{% static "css/font-awesome.min.css" %}'>
     <!-- Onboard Assistant general layout -->
@@ -46,7 +48,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Onboard Assistant</a>
+                <a class="navbar-brand" href="/">Onboard Assistant</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -82,7 +84,7 @@
                         </a>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Language">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" title='{% trans "My Account" %}'>
                             <span class="fa fa-user"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -97,12 +99,12 @@
                                     <i class="fa fa-shield"></i> Administration
                                 </a>
                             </li>
-                            <li>
-                                <a href="/logout" title="Logout">
-                                    <i class="fa fa-power-off"></i> Logout
-                                </a>
-                            </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="/logout" title="Logout">
+                            <span class="fa fa-power-off"></span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -138,6 +140,7 @@
         <script src='{% static "js/bootstrap.js" %}'></script>
         <script src='{% static "js/bootstrap-lightbox-dsm.js" %}'></script>
         <script src='{% static "js/typeahead.bundle.js" %}'></script>
+        <script src='{% static "js/select2.js" %}'></script>
         <!-- Pharmaship JS -->
         <script src='{% static "js/common.js" %}'></script>
         {% block js_addon %} {% endblock %}

@@ -31,7 +31,7 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 from django.core.urlresolvers import reverse
 
 from django.contrib.contenttypes.models import ContentType
@@ -40,6 +40,11 @@ import models
 import forms
 
 import json, time
+
+from weasyprint import HTML, CSS
+from django.conf import settings
+from settings.models import Vessel
+import datetime 
 
 @login_required
 def index(request):
@@ -72,8 +77,29 @@ def item_delete(request, item_id, requisition_id):
     # Selecting the item
     item = get_object_or_404(models.Item, pk=item_id)
     item.delete()
-    return HttpResponseRedirect(reverse('req_view', args=(requisition_id,)))
+    return HttpResponse('')
 
+@permission_required('purchase.item.can_change')
+def item_update(request):
+    """Updates an item quantity."""
+    # Parsing the form
+    if request.method == 'POST' and request.is_ajax():
+        form = forms.UpdateItemQty(request.POST) 
+        if form.is_valid(): 
+            # Process the data in form.cleaned_data
+            item_id = form.cleaned_data['item_id']
+            item = get_object_or_404(models.Item, pk=item_id)
+            item.quantity = form.cleaned_data['item_qty']
+            item.save()
+            data = json.dumps({'success':_('Data updated'), 'id': item_id})
+            return HttpResponse(data, content_type="application/json")
+        else:
+            errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
+            data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
+            return HttpResponseBadRequest(data, content_type = "application/json")
+    else:
+        return HttpResponseNotAllowed(['POST',])
+        
 @permission_required('purchase.requisition.can_change')
 def instructions(request, requisition_id):
     """Updates the instructions of a requisition."""
@@ -154,15 +180,16 @@ def item_add(request, requisition_id):
             item.requisition = requisition
             item.save()
             # Return item
-            content = render_to_response('purchase/item.html', {
+            content = render_to_response('purchase/item.inc.html', {
                     'item': item,
                     'requisition':requisition,
                     }).content             
-            data = json.dumps({'content': content})
+            data = json.dumps({'success':_('Item added'), 'content': content})
             return HttpResponse(data, content_type="application/json")
         else:
-            data = json.dumps(dict([(k, [unicode(e) for e in v]) for k, v in form.errors.items()]))
-            return HttpResponseBadRequest(data, content_type="application/json")
+            errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
+            data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
+            return HttpResponseBadRequest(data, content_type = "application/json")    
 
 
 
@@ -191,7 +218,7 @@ def delete(request, requisition_id):
                                 _("You are going to delete the requisition:"),
                                 requisition.name,
                                 ),
-                        'foot_text': '',
+                        'foot_text': '<h4 class=\'text-danger\'>{0}</h4>'.format(_('The deletion is permanent!')),
                         'callback': 'redirect',
                         },
                         context_instance=RequestContext(request))    
@@ -311,7 +338,7 @@ def name_search(request, requisition_id):
             response_data = []
             for item in objects:
                 item_dict = {}
-                item_dict['name'] = unicode(item)
+                item_dict['text'] = unicode(item)
                 item_dict['id'] = item.pk
                 response_data.append(item_dict)
                 
@@ -353,22 +380,22 @@ def pdf_print(request, requisition_id):
     # Selecting the requisition
     requisition = get_object_or_404(models.Requisition, pk=requisition_id)
 
-    rendered = render_to_response('planner/pdf.html', {
+    rendered = render_to_response('purchase/requisition_report.html', {
                     'vessel': Vessel.objects.latest('id'),
                     'title': _("Requisition"),
                     'user': request.user,
-                    'values': values,
+                    'requisition': requisition,
                     'today': datetime.date.today(),
-
                     },
                     context_instance=RequestContext(request))
+
     # Creating the response
-    filename = "pharmaship_medicine_{0}.pdf".format(datetime.date.today())
+    filename = "pharmaship_requisition_{0}.pdf".format(requisition.reference)
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
 
     # Converting it into PDF
-    HTML(string=rendered.content).write_pdf(response, stylesheets=[CSS(settings.STATIC_ROOT + '/style/report.css')])
+    HTML(string=rendered.content, base_url=request.build_absolute_uri()).write_pdf(response, stylesheets=[CSS(settings.BASE_DIR + '/purchase/static/css/purchase/report.css')])
     return response
     
 def test(request, requisition_id):
