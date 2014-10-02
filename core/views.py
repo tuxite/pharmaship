@@ -42,13 +42,12 @@ SYSTEM_APPS = ['core', 'bootstrapform']
 
 def settings_links():
     """Returns a list of links for settings views."""
+    # TODO: Update with Djan 1.7 AppConfig
     links = []
     for application in settings.INSTALLED_APPS:
-        print "Application:", application
         # Do not take in account Django's applications
         if "django" in application or application in SYSTEM_APPS:
             continue
-        app_data = {}
         # By default, adding the general settings application to the dict
         if application == "settings":
             links.append({
@@ -58,7 +57,6 @@ def settings_links():
             })  
         # Looking if the applications has settings that can be imported
         elif globals().get("{0}.settings_urls".format(application), True):
-            print "MM", application
             links.append({
                 'name': _(application.capitalize()),
                 'url': "{0}_settings".format(application),

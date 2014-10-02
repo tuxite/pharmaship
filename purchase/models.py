@@ -44,28 +44,6 @@ STATUS_CHOICES = (
         (99, 'Cancelled'),
     )
 
-#def get_model_choices():
-#    """Function to parse all installed modules to get the subclass tuples."""
-#    result = []
-#    for application in apps.get_app_configs():
-#        try:
-#            obj = application.orderable()
-#            result.append({'application' : application.name, 'orderable': obj})
-#        except AttributeError, e:
-#            #print "Error", application, e
-#            continue
-#        
-#    print "MATT", result
-#    
-#    # Now parse with ContentType to get the model's id.
-#    for application in result:
-#        for element in application['orderable']:
-#            element['id'] = element['object'].__dict__
-#            print ContentType.objects.get_for_model(element['object'])
-#    
-#    print "MATT2", result
-#    return result
-
 class Item(models.Model):
     """Model of object that can be ordered.
 

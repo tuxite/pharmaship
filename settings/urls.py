@@ -30,14 +30,15 @@ __version__ = "0.2"
 import logging
 
 from django.conf.urls import patterns, include, url
-from django.contrib import admin
 from django.conf import settings
-
-admin.autodiscover()
 
 urlpatterns = patterns('settings.views',
     url(r'^$', 'index', name="settings"),
+    # Action and view for general data import
     url(r'^import$', 'import_data', name="import"),
+    # Action for PGP Key import
+    url(r'^key/add$', 'import_key', name="import_key"),
+    url(r'^key/(?P<key_id>[0-9a-fA-F]{8})/delete$', 'delete_key', name="settings_delete_key"),
     # Action for Vessel form
     url(r'^vessel$', 'vessel', name="vessel"),
     # Action for User forms

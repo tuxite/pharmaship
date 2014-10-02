@@ -1,6 +1,6 @@
 from django.utils.translation import ugettext as _
 
-import tarfile, time, datetime
+import tarfile
 import xml.dom.minidom
 import gpgme, os
 import io, ConfigParser
@@ -8,8 +8,7 @@ import json
 import hashlib
 import importlib
 
-from django.core import serializers
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.conf import settings
 
 # TODO: Logging using Django Logging module. Then call the log content in the template.
@@ -48,28 +47,6 @@ class BaseImport:
         self.log = []
         self.core_log = []
 
-    def update_keyring(self):
-        """Updates the keyring with trusted keys."""
-        if settings.KEYRING:
-            os.environ['GNUPGHOME'] = settings.KEYRING
-            
-        if settings.TRUSTED_GPG:
-            # Removing all keys in the keyring
-            try:
-                for key in self.gpg.keylist():
-                    self.gpg.delete(key)
-            except Exception: # TODO: Precise the exception
-                pass
-            # Parsing the folder to import each key in the keyring
-            for item in os.listdir(settings.TRUSTED_GPG):
-                try:
-                    with open(os.path.join(settings.TRUSTED_GPG, item), 'r') as fp:
-                        self.gpg.import_(fp)
-                except Exception: # TODO: Precise the exception
-                    pass
-
-        return True
-        
     def check_signature(self):
         # Verifying the signature
         try:
@@ -91,6 +68,11 @@ class BaseImport:
         key_id = fpr[-8:]
         key = self.gpg.get_key(key_id)
         
+        # Is trusted?
+        if not key in self.gpg.keylist():
+            self.error = _("Key used for signature not trusted. Untrusted key:") + " {0} ({1})".format(key.uids[0].uid, key_id)
+            return False
+            
         # LOG
         self.core_log.append({'name': _('Package Signature'), 'value': u"Verified, {0} [{1}]".format(key.uids[0].uid, key_id)})
         return True
@@ -149,9 +131,9 @@ class BaseImport:
         
     def launch(self):
         """Launches the importation."""
-        # 1. Update the keyring
-        self.update_keyring()
-        self.core_log.append({'name': _("Trusted Keys"), 'value': _("Database updated")})
+#        # 1. Update the keyring
+#        self.update_keyring()
+#        self.core_log.append({'name': _("Trusted Keys"), 'value': _("Database updated")})
         # 2. Check the signature
         if not self.check_signature():
             self.core_log.append({'name': _("Signature Error"), 'value': self.error, 'type': 'error'})

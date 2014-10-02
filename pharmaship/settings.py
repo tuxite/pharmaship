@@ -205,5 +205,5 @@ LOGIN_URL = "/login/?next=/"
 AUTH_USER_MODEL = 'settings.User'
 
 # Trusted GPG Folder
-TRUSTED_GPG = BASE_DIR + "/conf/trusted"
+#TRUSTED_GPG = BASE_DIR + "/conf/trusted"
 KEYRING = BASE_DIR + "/conf/keyring"

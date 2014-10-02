@@ -48,3 +48,7 @@ class VesselForm(forms.ModelForm):
 class ImportForm(forms.Form):
     """Form used to import data into Onboard Assistant."""
     file_obj = forms.FileField(label=_("File"))
+
+class ImportKeyForm(forms.Form):
+    """Form used to import PGP key into Onboard Assistant."""
+    file_obj = forms.FileField(label=_("Key"))

@@ -29,9 +29,6 @@ __version__ = "0.1"
 
 from django.conf.urls import patterns, url
 
-from django.contrib import admin
-admin.autodiscover()
-
 urlpatterns = patterns('purchase.views',
     # General
     url(r'^$', 'index', name="purchase"),
