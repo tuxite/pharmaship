@@ -81,7 +81,10 @@
             <td></td>
         </tr>
     </table>
-
+    <div class="purchase-metadata">
+        <p><b>Date de livraison :</b> {{ requisition.requested_date|date:"d/m/Y" }}</p>
+        <p><b>Port de livraison :</b> {{requisition.port_of_delivery }}</p>
+    </div>
     <table>
         <thead>
             <tr class="blue">
@@ -122,10 +125,7 @@
         {{ requisition.instructions }}
     </div>
 
-    <div class="purchase-metadata">
-        <p><b>Date de livraison :</b> {{ requisition.requested_date|date:"d/m/Y" }}</p>
-        <p><b>Port de livraison :</b> {{requisition.port_of_delivery }}</p>
-    </div>
+
     <div class="purchase-signature">
         <table class="purchase-signature">
             <tr>
