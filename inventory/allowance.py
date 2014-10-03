@@ -1,32 +1,4 @@
 # -*- coding: utf-8; -*-
-#
-# (c) 2013 Association DSM, http://devmaretique.com
-#
-# This file is part of Pharmaship.
-#
-# Pharmaship is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# any later version.
-#
-# Pharmaship is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
-#
-# ======================================================================
-# Filename:    settings/allowance.py
-# Description: Functions dedicated to Allowances checks and integration.
-# ======================================================================
-
-__author__ = "Matthieu Morin"
-__copyright__ = "Copyright 2013, Association DSM"
-__license__ = "GPL"
-__version__ = "0.1"
-
 import tarfile, time, datetime
 import xml.dom.minidom
 import gpgme, os
@@ -145,7 +117,7 @@ def create_archive(allowance):
     response['Content-Disposition'] = 'attachment; filename="pharmaship_{0}.tar.gz"'.format(datetime.date.today())
 
     # Creating the information file
-    pack_info = u"[package]\nname = {0}\nauthor = {1}\ndate = {2}".format(allowance.name, "Export Pharmaship " + __version__, datetime.datetime.utcnow().isoformat())
+    pack_info = u"[package]\nname = {0}\nauthor = {1}\ndate = {2}".format(allowance.name, "Export Pharmaship ", datetime.datetime.utcnow().isoformat())
     
     # Creating a tar.gz archive
     with tarfile.open(fileobj=response, mode='w') as tar:

@@ -1,49 +1,16 @@
 # -*- coding: utf-8; -*-
-#
-# (c) 2013 Association DSM, http://devmaretique.com
-#
-# This file is part of Pharmaship.
-#
-# Pharmaship is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# any later version.
-#
-# Pharmaship is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
-#
-# ======================================================================
-# Filename:    inventory/views_settings.py
-# Description: Views for Inventory application (settings).
-# ======================================================================
-
-__author__ = "Matthieu Morin"
-__copyright__ = "Copyright 2013, Association DSM"
-__license__ = "GPL"
-__version__ = "0.1"
-
 from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required, permission_required
-from django.forms import ModelForm
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 from django.core.urlresolvers import reverse
-from django.conf import settings
 
 from django.template.loader import render_to_string
 
 import models, forms
 
-from allowance import create_archive, import_archive
-
-from settings.models import User
-from settings.forms import UserForm
+from allowance import create_archive
 
 from core.views import settings_links, settings_validation
 

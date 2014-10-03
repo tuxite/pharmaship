@@ -1,32 +1,4 @@
 # -*- coding: utf-8; -*-
-#
-# (c) 2013 Association DSM, http://devmaretique.com
-#
-# This file is part of Pharmaship.
-#
-# Pharmaship is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# any later version.
-#
-# Pharmaship is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Pharmaship.  If not, see <http://www.gnu.org/licenses/>.
-#
-# ======================================================================
-# Filename:    inventory/views_common.py
-# Description: Views for Inventory application (general content).
-# ======================================================================
-
-__author__ = "Matthieu Morin"
-__copyright__ = "Copyright 2013, Association DSM"
-__license__ = "GPL"
-__version__ = "0.2"
-
 from django.utils.translation import ugettext as _
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
@@ -78,7 +50,7 @@ def molecule_parser(allowance_list, delay_date, today):
     # Molecule list
     molecule_list = models.Molecule.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('tag', 'medicine_set').order_by('group', 'name')
     # Medicine list
-    medicine_list = models.Medicine.objects.filter(parent__in=molecule_list, used=False).distinct().prefetch_related('location', 'transactions', 'parent')
+    #medicine_list = models.Medicine.objects.filter(parent__in=molecule_list, used=False).distinct().prefetch_related('location', 'transactions', 'parent')
     # Medicine quantity transaction list
     qty_transaction_list = models.QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(models.Medicine))
     
@@ -143,7 +115,7 @@ def equipment_parser(allowance_list, delay_date, today):
     # Equipment list
     equipment_list = models.Equipment.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('tag', 'article_set').order_by('group', 'name')
     # Article list
-    article_list = models.Article.objects.filter(parent__in=equipment_list, used=False).distinct().prefetch_related('location', 'transactions')
+    #article_list = models.Article.objects.filter(parent__in=equipment_list, used=False).distinct().prefetch_related('location', 'transactions')
     # Material quantity transaction list
     qty_transaction_list = models.QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(models.Article))
     
