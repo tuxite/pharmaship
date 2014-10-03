@@ -46,7 +46,18 @@ class BaseImport:
         self.error = ''
         self.log = []
         self.core_log = []
-
+        
+        # Select the keyring
+        if settings.KEYRING:
+            os.environ['GNUPGHOME'] = settings.KEYRING
+        # Then, check the keyring
+        self.check_keyring()
+        
+    def check_keyring(self):
+        """Checks if the keyring exists or creates a folder."""
+        if not os.path.exists(settings.KEYRING):
+            os.mkdir(settings.KEYRING)
+            
     def check_signature(self):
         # Verifying the signature
         try:
@@ -57,20 +68,21 @@ class BaseImport:
         if not verified:
             self.error = _("No signature found.")
             return False
-            
+
         # Signature data
         if verified[0].status:
             # If it is different of 0 (GPG_ERR_NO_ERROR), abort the import process
-            self.error = _("Signature not valid. Error:"), verified[0].status
+            # In case of key not trusted, this error is raised.
+            self.error = _("Signature not valid. Error:") + " " + verified[0].status[-1]
             return False
 
         fpr = verified[0].fpr
         key_id = fpr[-8:]
-        key = self.gpg.get_key(key_id)
         
-        # Is trusted?
-        if not key in self.gpg.keylist():
-            self.error = _("Key used for signature not trusted. Untrusted key:") + " {0} ({1})".format(key.uids[0].uid, key_id)
+        try:
+            key = self.gpg.get_key(key_id)
+        except gpgme.GpgmeError as e:
+            self.error = _("Signature not valid. Error:") + " " + str(e)
             return False
             
         # LOG
