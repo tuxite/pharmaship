@@ -104,7 +104,7 @@ class GroupManager(models.Manager):
     For deserialization purpose only.
     """
     def get_by_natural_key(self, name):
-        return self.get(name = name, )
+        return self.get(name = name)
 
         
 class MoleculeGroup(models.Model):
@@ -334,9 +334,9 @@ class EquipmentManager(models.Manager):
         return self.get(
             name = name,
             packaging = packaging,
-            consumable = ast.literal_eval(consumable),
-            perishable = ast.literal_eval(perishable),
-            group = EquipmentGroup.objects.get_by_natural_key(ast.literal_eval(group)[0]),
+            consumable = consumable,
+            perishable = perishable,
+            group = EquipmentGroup.objects.get_by_natural_key(name=group[0],),
             )
     
     def missing(self):

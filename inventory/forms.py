@@ -108,11 +108,6 @@ class SettingsForm(forms.ModelForm):
         exclude = []
 
 
-class ExportForm(forms.Form):
-    """Form for exporting a dotation (molecules, material and required quantities)."""
-    allowance = forms.ModelChoiceField(queryset=models.Allowance.objects.all(), label=_("Allowance"))
-
-
 class LocationCreateForm(forms.ModelForm):
     """Form for creating a new Location."""
     class Meta:

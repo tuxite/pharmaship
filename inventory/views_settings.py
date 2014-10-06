@@ -1,16 +1,15 @@
 # -*- coding: utf-8; -*-
 from django.utils.translation import ugettext as _
-from django.shortcuts import render_to_response
+from django.shortcuts import get_object_or_404, render_to_response
 from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
-from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 
 from django.template.loader import render_to_string
 
 import models, forms
 
-from allowance import create_archive
+from import_data import create_archive
 
 from core.views import settings_links, settings_validation
 
@@ -48,18 +47,10 @@ def application(request):
     return HttpResponseNotAllowed(['POST',])
 
 @permission_required('inventory')
-def export_data(request):
+def export_data(request, allowance_id):
     """Exports an allowance in a tar.gz archive."""
-    if request.method == 'POST' and request.is_ajax(): 
-        form = forms.ExportForm(request.POST) # A form bound to the POST data
-        if form.is_valid(): # All validation rules pass
-            # Process the data in form.cleaned_data
-            allowance = form.cleaned_data['allowance']
-            return create_archive(allowance)
-        else:
-            return HttpResponseRedirect(reverse('inventory_settings'))
-    else:
-        return HttpResponseNotAllowed(['POST',])
+    allowance = get_object_or_404(models.Allowance, pk=allowance_id)
+    return create_archive(allowance)
 
 @permission_required('inventory.location.can_add')
 def create_location(request):

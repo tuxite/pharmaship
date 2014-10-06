@@ -8,7 +8,7 @@ from django.http import HttpResponse
 
 import models
 
-from core.import_data import remove_pk
+from core.import_data import remove_pk, remove_yaml_pk
 
 def get_molecule_pk(deserialized_object):
     """Returns the pk of a Molecule object with deserialized_object attributes."""
@@ -64,30 +64,30 @@ def serialize_allowance(allowance):
     """Exports an allowance into the format used by the broadcaster."""
     # Molecules used by the allowance
     molecule_list = models.Molecule.objects.filter(allowances__in=[allowance,])
-    molecule_data = serializers.serialize("xml", molecule_list, use_natural_keys=True)
+    molecule_data = serializers.serialize("yaml", molecule_list, use_natural_foreign_keys=True)
 
     # Required quantities for molecules
     molecule_reqqty_list = models.MoleculeReqQty.objects.filter(allowance__in=[allowance,])
-    molecule_reqqty_data = serializers.serialize("xml", molecule_reqqty_list, fields=('base','required_quantity'), use_natural_keys=True)
+    molecule_reqqty_data = serializers.serialize("yaml", molecule_reqqty_list, fields=('base','required_quantity'), use_natural_foreign_keys=True)
 
     # Equipment used by the allowance
     equipment_list = models.Equipment.objects.filter(allowances__in=[allowance,])
-    equipment_data = serializers.serialize("xml", equipment_list, use_natural_keys=True)
+    equipment_data = serializers.serialize("yaml", equipment_list, use_natural_foreign_keys=True)
 
     # Required quantities for equipments
     equipment_reqqty_list = models.EquipmentReqQty.objects.filter(allowance__in=[allowance,])
-    equipment_reqqty_data = serializers.serialize("xml", equipment_reqqty_list, fields=('base','required_quantity'), use_natural_keys=True)
+    equipment_reqqty_data = serializers.serialize("yaml", equipment_reqqty_list, fields=('base','required_quantity'), use_natural_foreign_keys=True)
     
     # Allowance record
-    allowance_data = serializers.serialize("xml", (allowance,), use_natural_keys=True)
+    allowance_data = serializers.serialize("yaml", (allowance,), use_natural_foreign_keys=True)
 
     # Returning a list with tuples: (filename, data)
     return [
-        ('molecule_obj.xml', remove_pk(molecule_data)),
-        ('molecule_reqqty.xml', remove_pk(molecule_reqqty_data)),
-        ('equipment_obj.xml', remove_pk(equipment_data)),
-        ('equipment_reqqty.xml', remove_pk(equipment_reqqty_data)),
-        ('allowance.xml', remove_pk(allowance_data)),
+        ('molecule_obj.yaml', remove_yaml_pk(molecule_data)),
+        ('molecule_reqqty.yaml', remove_yaml_pk(molecule_reqqty_data)),
+        ('equipment_obj.yaml', remove_yaml_pk(equipment_data)),
+        ('equipment_reqqty.yaml', remove_yaml_pk(equipment_reqqty_data)),
+        ('allowance.yaml', remove_yaml_pk(allowance_data)),
         ]
 
 def create_archive(allowance):
@@ -150,7 +150,7 @@ class DataImport:
         
         # Allowance
         try:
-            deserialized_allowance = serializers.deserialize("xml", self.tar.extractfile(self.module_name + "allowance.xml"))
+            deserialized_allowance = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "allowance.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e) 
             return False
@@ -173,7 +173,7 @@ class DataImport:
         
         # Deserialize the file
         try:
-            deserialized_list = serializers.deserialize("xml", self.tar.extractfile(self.module_name + "molecule_obj.xml"))
+            deserialized_list = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "molecule_obj.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e) 
             return False
@@ -187,7 +187,7 @@ class DataImport:
 
         # Required Quantities
         try:
-            deserialized_reqqty = serializers.deserialize("xml", self.tar.extractfile(self.module_name + "molecule_reqqty.xml"))
+            deserialized_reqqty = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "molecule_reqqty.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e) 
             return False
@@ -206,7 +206,7 @@ class DataImport:
         added_equipment = []
         # Deserialize the file
         try:
-            deserialized_list = serializers.deserialize("xml", self.tar.extractfile(self.module_name + "equipment_obj.xml"))
+            deserialized_list = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "equipment_obj.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e) 
             return False
@@ -220,17 +220,16 @@ class DataImport:
 
         # Required Quantities
         try:
-            deserialized_reqqty = serializers.deserialize("xml", self.tar.extractfile(self.module_name + "equipment_reqqty.xml"))
+            deserialized_reqqty = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "equipment_reqqty.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e) 
             return False
-                    
+        
         equipment_reqqty_added = 0
 
         # Delete all required quantities entry and create new ones
         models.EquipmentReqQty.objects.filter(allowance__in = (allowance_pk, self.no_allowance)).delete()
         for reqqty in deserialized_reqqty:
-            print reqqty
             reqqty.object.allowance = allowance
             reqqty.save()
             equipment_reqqty_added += 1

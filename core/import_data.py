@@ -12,6 +12,12 @@ import importlib
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.conf import settings
 
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
+    
 # TODO: Logging using Django Logging module. Then call the log content in the template.
 def extract_manifest(manifest_descriptor):
     """Extracts the MANIFEST information and puts it into a list of dict."""
@@ -36,6 +42,21 @@ def remove_pk(xml_string):
             node.removeAttribute("pk")
     return dom.toxml("utf-8")
 
+def remove_yaml_pk(yaml_string):
+    """Removes the PK attributes to the serialized objects. YAML Version.
+
+    This allows to import different alllowances with for instance the
+    same molecules without generating conflicts of primary key.
+    """
+    data = load(yaml_string, Loader=Loader)
+    for item in data:
+        try:
+            del item['pk']
+        except KeyError:
+            pass
+    print data
+    output = dump(data, Dumper=Dumper)
+    return output
 
 class BaseImport:
     """Class used to import a data file in Onboard Assistant."""
