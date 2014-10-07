@@ -5,18 +5,19 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 from django.core.urlresolvers import reverse
-
 from django.contrib.contenttypes.models import ContentType
+from django.conf import settings
+
+import datetime 
+import json, time
+from weasyprint import HTML, CSS
 
 import models
 import forms
 
-import json, time
-
-from weasyprint import HTML, CSS
-from django.conf import settings
+from core.views import app_links
 from settings.models import Vessel
-import datetime 
+
 
 @login_required
 def index(request):
@@ -25,6 +26,7 @@ def index(request):
     return render_to_response('purchase/index.html', {
                     'user': request.user,
                     'title': _("Requisition Overview"),
+                    'head_links': app_links(request.resolver_match.namespace),
                     'requisition_list': models.Requisition.objects.all(),
                     },
                     context_instance=RequestContext(request))
@@ -38,8 +40,9 @@ def requisition(request, requisition_id):
     return render_to_response('purchase/requisition.html', {
                     'user': request.user,
                     'title': _("Requisition Details"),
+                    'head_links': app_links(request.resolver_match.namespace),
                     'requisition': requisition,
-                    'print': reverse('purchase_req_print', args=(requisition_id,)),
+                    'print': reverse('purchase:requisition:print', args=(requisition_id,)),
                     },
                     context_instance=RequestContext(request))
 
@@ -122,7 +125,7 @@ def status(request, requisition_id):
                         'form': form,
                         'action': _("Update the status"),
                         'close': _("Do not modify"),
-                        'url': reverse('purchase_req_status', args=(requisition_id,)),
+                        'url': reverse('purchase:requisition:status', args=(requisition_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -173,7 +176,7 @@ def delete(request, requisition_id):
     # Parsing the form
     if request.method == 'POST' and request.is_ajax():
         requisition.delete()
-        data = json.dumps({'success':_('Data updated'), 'url': reverse('purchase')})
+        data = json.dumps({'success':_('Data updated'), 'url': reverse('purchase:index')})
         return HttpResponse(data, content_type="application/json")
 
     # Generating the form in HTML for Bootstrap layout
@@ -182,7 +185,7 @@ def delete(request, requisition_id):
                         'form': forms.RequistionDeleteForm(),
                         'action': _("Delete this requisition"),
                         'close': _("Do not delete"),
-                        'url': reverse('purchase_req_delete', args=(requisition_id,)),
+                        'url': reverse('purchase:requisition:delete', args=(requisition_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -217,7 +220,7 @@ def create(request):
                 
             requisition.reference = "{0}R-{1:0>4d}".format(time.strftime('%Y'), requisition.pk)
             requisition.save()
-            data = json.dumps({'success':_('Data updated'), 'url': reverse('purchase_req_view', args=(requisition.pk,))})
+            data = json.dumps({'success':_('Data updated'), 'url': reverse('purchase:requisition:view', args=(requisition.pk,))})
             return HttpResponse(data, content_type="application/json")
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
@@ -231,7 +234,7 @@ def create(request):
                         'form': form,
                         'action': _("Create this requisition"),
                         'close': _("Do not create"),
-                        'url': reverse('purchase_req_create'),
+                        'url': reverse('purchase:requisition:create'),
                         'text': '',
                         'foot_text': '',
                         'callback': 'redirect',
@@ -280,7 +283,7 @@ def edit(request, requisition_id):
                         'form': form,
                         'action': _("Change the name"),
                         'close': _("Do not modify"),
-                        'url': reverse('purchase_req_edit', args=(requisition_id,)),
+                        'url': reverse('purchase:requisition:edit', args=(requisition_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>

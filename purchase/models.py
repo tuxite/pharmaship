@@ -50,10 +50,14 @@ class Requisition(models.Model):
     status = models.PositiveIntegerField(_("Status"), choices=STATUS_CHOICES)
     instructions = models.TextField(blank=True, null=True)
     port_of_delivery = models.CharField(max_length=5)
-    item_type = models.PositiveIntegerField()#(choices=get_model_choices())
+    item_type = models.PositiveIntegerField()
 
     def __unicode__(self):
         return self.name
+        
+    def item_name(self):
+        return _(ContentType.objects.get(pk=self.item_type).name.capitalize())
+        
 
 
 class Settings(models.Model):

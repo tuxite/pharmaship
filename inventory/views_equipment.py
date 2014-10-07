@@ -8,15 +8,17 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 
+import json
+import datetime
+from weasyprint import HTML, CSS
+
 import models
 import forms
 import utils
+
 from settings.models import Vessel
-
-import json
-import datetime
-
-from weasyprint import HTML, CSS
+from core.views import app_links
+from purchase.models import Item
 
 # General views
 @login_required
@@ -50,13 +52,15 @@ def index(request):
     return render_to_response('pharmaship/equipment_inventory.html', {
                         'user': request.user,
                         'title': _("Medical Article Inventory"),
+                        'head_links': app_links(request.resolver_match.namespace),
                         'values': values,
                         'today': datetime.date.today(),
                         'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
                         'group_list' : group_list,
                         'allowance_list': allowance_list,
                         'location_list': location_list,
-                        'print': reverse('pharmaship_equ_print'),
+                        'print': reverse('pharmaship:equipment:print'),
+                        'filter': reverse('pharmaship:equipment:filter'),
                         },
                         context_instance=RequestContext(request))
 
@@ -69,7 +73,7 @@ def filter(request):
         d = utils.slicedict(request.POST, "allowance-")
         if (u"-1" in d.values()) or (len(d) < 1):
             # All allowances linked to the vessel's settings
-            return HttpResponseRedirect(reverse('equipment'))
+            return HttpResponseRedirect(reverse('pharmaship:equipment:index'))
         else:
             # Parsing all allowances id
             for allowance_id in d.values():
@@ -91,7 +95,7 @@ def filter(request):
                         },
                         context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect(reverse('equipment')) # Redirect after POST
+        return HttpResponseRedirect(reverse('pharmaship:equipment:index')) # Redirect after POST
 
 # Action views
 @permission_required('inventory.article.can_add')
@@ -135,7 +139,7 @@ def add(request, equipment_id):
                         'form': form,
                         'action': _("Add this article"),
                         'close': _("Do not add"),
-                        'url': reverse('pharmaship_equ_add', args=(equipment_id,)),
+                        'url': reverse('pharmaship:equipment:add', args=(equipment_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -178,7 +182,7 @@ def delete(request, article_id):
                         'form': form,
                         'action': _("Delete this article"),
                         'close': _("Do not delete"),
-                        'url': reverse('pharmaship_equ_delete', args=(article_id,)),
+                        'url': reverse('pharmaship:equipment:delete', args=(article_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -237,7 +241,7 @@ def change(request, article_id):
                         'form': form,
                         'action': _("Update this article"),
                         'close': _("Do not modify"),
-                        'url': reverse('pharmaship_equ_change', args=(article_id,)),
+                        'url': reverse('pharmaship:equipment:change', args=(article_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -287,7 +291,7 @@ def out(request, article_id):
                         'form': form,
                         'action': _("Use this article"),
                         'close': _("Do not use"),
-                        'url': reverse('pharmaship_equ_out', args=(article_id,)),
+                        'url': reverse('pharmaship:equipment:out', args=(article_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -338,7 +342,7 @@ def remark(request, equipment_id):
                         'form': form,
                         'action': _("Update these remarks"),
                         'close': _("Do not modify"),
-                        'url': reverse('pharmaship_equ_remark', args=(equipment_id,)),
+                        'url': reverse('pharmaship:equipment:remark', args=(equipment_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -419,6 +423,10 @@ def parser(allowance_list, location_list):
     group_list = models.EquipmentGroup.objects.all().order_by('order')
     # Remarks
     remark_list = models.Remark.objects.filter(content_type=ContentType.objects.get_for_model(models.Equipment))
+    # Ordered items
+    ordered_list = Item.objects.filter(
+        content_type=ContentType.objects.get_for_model(models.Equipment),
+        requisition__status__in=[4,5])
 
     today = datetime.date.today()
     # Global dictionnary
@@ -433,7 +441,7 @@ def parser(allowance_list, location_list):
             # More elegant way to match id?
             if equipment.group_id == group.id:
                 # Equipment parsing
-                element_dict = parser_element(equipment, remark_list, qty_transaction_list, location_list, today)
+                element_dict = parser_element(equipment, remark_list, ordered_list, qty_transaction_list, location_list, today)
                 # Required quantity
                 element_dict['required_quantity'] = utils.req_qty_element(equipment, req_qty_list)
                 # Adding the equipment dict to the list
@@ -443,7 +451,7 @@ def parser(allowance_list, location_list):
 
     return values, group_list
 
-def parser_element(equipment, remark_list, qty_transaction_list, location_list, today=datetime.date.today()):
+def parser_element(equipment, remark_list, ordered_list, qty_transaction_list, location_list, today=datetime.date.today()):
     """Parses the database to render a list of
     Equipment > Article.
 
@@ -464,6 +472,11 @@ def parser_element(equipment, remark_list, qty_transaction_list, location_list, 
     for remark in remark_list:
         if remark in equipment.remark.all():
             element_dict['remark'] = remark
+    # Ordered
+    element_dict['ordered'] = 0
+    for ordered in ordered_list:
+        if ordered.object_id == equipment.id:
+            element_dict['ordered'] += ordered.quantity
     # Tags
     element_dict['tag'] = equipment.tag
     # Picture

@@ -13,15 +13,15 @@ js_info_dict = {
 
 urlpatterns = patterns('',
     # Load urls of Core application
-    url(r'^', include('core.urls')),
+    url(r'^', include('core.urls', namespace="core", app_name="core")),
     # Load urls of Inventory application
-    url(r'^pharmaship/', include('inventory.urls')),
+    url(r'^pharmaship/', include('inventory.urls', namespace='pharmaship', app_name='inventory')),
 
     # Load urls of Purchase application
-    url(r'^purchase/', include('purchase.urls')),
+    url(r'^purchase/', include('purchase.urls', namespace='purchase', app_name='purchase')),
     
     # Load urls of Settings application
-    url(r'^settings/', include('settings.urls')),
+    url(r'^settings/', include('settings.urls', namespace='settings', app_name='settings')),
 
     # Admin views
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

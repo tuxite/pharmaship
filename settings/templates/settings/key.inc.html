@@ -1,9 +1,9 @@
-{% load i18n %}            
+{% load i18n %}
             <tr>
                 <td>{{ item.name }}</td>
                 <td>{{ item.id }}</td>
                 <td><a class="text-danger btn-delete"
-                       href="{% url 'settings_delete_key' item.id %}"
+                       href="{% url 'settings:key:delete' item.id %}"
                        data-loading-text="<span class='fa fa-spinner fa-spin'></span>">
                         <span class="fa fa-trash-o"></span> {% trans "Remove" %}
                     </a></td>

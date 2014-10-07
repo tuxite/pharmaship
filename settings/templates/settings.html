@@ -7,7 +7,7 @@
     <ul class="nav nav-sidebar">
         {% for item in links %}
         <li>
-            <a href="{% url item.url %}" {% if item.active %}class="active" {% endif %}>{{ item.name }}</a>
+            <a href="{{ item.url }}" {% if item.active %}class="active" {% endif %}>{{ item.name }}</a>
         </li>
         {% endfor %}
     </ul>
@@ -21,7 +21,7 @@
         <h3 class="panel-title">{% trans "Medical Responsible" %}</h3>
     </div>
     <div class="panel-body">
-        <form role="form" id="user_form" method="post" action="{% url 'user' %}" data-form-callback="updateUser">
+        <form role="form" id="user_form" method="post" action="{% url 'settings:user' %}" data-form-callback="updateUser">
             {% csrf_token %}
             {{ userform|bootstrap }}
             <button type="submit" class="btn btn-primary">{% trans "Update User Information" %}</button>
@@ -34,7 +34,7 @@
         <h3 class="panel-title">{% trans "Vessel Particulars" %}</h3>
     </div>
     <div class="panel-body">
-        <form role="form" id="vessel_form" method="post" action="{% url 'vessel' %}">
+        <form role="form" id="vessel_form" method="post" action="{% url 'settings:vessel' %}">
             {% csrf_token %}
             {{ vesselform|bootstrap }}
             <button type="submit" class="btn btn-primary">{% trans "Update Vessel Information" %}</button>

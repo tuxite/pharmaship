@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-4 actions">
                     <a class="btn btn-danger btn-delete"
-                       href="{% url 'purchase_item_delete' item.id requisition.id %}"
+                       href="{% url 'purchase:item:delete' item.id requisition.id %}"
                        title="{% trans 'Delete this item' %}"
                        data-loading-text="<span class='fa fa-spinner fa-spin'></span>">
                         <span class="fa fa-trash-o"></span>

@@ -1,20 +1,10 @@
-{% extends "html/layout.html" %}
+{% extends "settings.html" %}
 {% load staticfiles %}
 {% load bootstrap %}
 {% load i18n %}
 
 {% block js_addon %}
 <script src='{% static "js/pharmaship/callbacks.js" %}'></script>
-{% endblock %}
-
-{% block sidebar %}
-    <ul class="nav nav-sidebar">
-        {% for item in links %}
-        <li>
-            <a href="{% url item.url %}" {% if item.active %}class="active" {% endif %}>{{ item.name }}</a>
-        </li>
-        {% endfor %}
-    </ul>
 {% endblock %}
 
 {% block content %}
@@ -25,7 +15,7 @@
         <h3 class="panel-title">{% trans "Application Settings" %}</h3>
     </div>
     <div class="panel-body">
-        <form role="form" id="pharmaship_settings_form" method="post" action="{% url 'application' %}">
+        <form role="form" id="pharmaship_settings_form" method="post" action="{% url 'settings:inventory:application' %}">
             {% csrf_token %}
             {{ settingsform|bootstrap }}
             <button type="submit" class="btn btn-primary">{% trans "Update Pharmaship Settings" %}</button>
@@ -39,7 +29,7 @@
     </div>
     <div class="panel-body">
 
-        <form role="form" id="pharmaship_location_delete_form" method="post" action="{% url 'delete_location' %}" data-form-callback="locationManagerUpdate">
+        <form role="form" id="pharmaship_location_delete_form" method="post" action="{% url 'settings:inventory:delete_location' %}" data-form-callback="locationManagerUpdate">
             {% csrf_token %}
             {{ locationdeleteform|bootstrap }}
             <p class="help-block">{% trans "Objects with these locations will be linked by default to Pharmacy." %}</p>
@@ -57,7 +47,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">{% trans "New location" %}</h4>
       </div>
-    <form role="form" id="pharmaship_location_add_form" method="post" action="{% url 'create_location' %}" data-form-callback="locationManagerUpdate">
+    <form role="form" id="pharmaship_location_add_form" method="post" action="{% url 'settings:inventory:create_location' %}" data-form-callback="locationManagerUpdate">
       <div class="modal-body">
         {% csrf_token %}
             {{ locationcreateform|bootstrap }}

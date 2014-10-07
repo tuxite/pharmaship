@@ -8,15 +8,17 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes.models import ContentType
 
+import json
+import datetime
+from weasyprint import HTML, CSS
+
 import models
 import forms
 import utils
+
 from settings.models import Vessel
-
-import json
-import datetime
-
-from weasyprint import HTML, CSS
+from core.views import app_links
+from purchase.models import Item
 
 # General views
 @login_required
@@ -50,13 +52,15 @@ def index(request):
     return render_to_response('pharmaship/medicine_inventory.html', {
                         'user': request.user,
                         'title': _("Medicine Inventory"),
+                        'head_links': app_links(request.resolver_match.namespace),
                         'values': values,
                         'today': datetime.date.today(),
                         'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
                         'group_list' : group_list,
                         'allowance_list': allowance_list,
                         'location_list': location_list,
-                        'print': reverse('pharmaship_med_print'),
+                        'print': reverse('pharmaship:medicine:print'),
+                        'filter': reverse('pharmaship:medicine:filter'),
                         },
                         context_instance=RequestContext(request))
 
@@ -118,7 +122,7 @@ def delete(request, medicine_id):
                         'form': form,
                         'action': _("Delete this medicine"),
                         'close': _("Do not delete"),
-                        'url': reverse('pharmaship_med_delete', args=(medicine_id,)),
+                        'url': reverse('pharmaship:medicine:delete', args=(medicine_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -176,7 +180,7 @@ def change(request, medicine_id):
                         'form': form,
                         'action': _("Update this medicine"),
                         'close': _("Do not modify"),
-                        'url': reverse('pharmaship_med_change', args=(medicine_id,)),
+                        'url': reverse('pharmaship:medicine:change', args=(medicine_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -226,7 +230,7 @@ def out(request, medicine_id):
                         'form': form,
                         'action': _("Use this medicine"),
                         'close': _("Do not use"),
-                        'url': reverse('pharmaship_med_out', args=(medicine_id,)),
+                        'url': reverse('pharmaship:medicine:out', args=(medicine_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -286,7 +290,7 @@ def add(request, molecule_id):
                         'form': form,
                         'action': _("Add this medicine"),
                         'close': _("Do not add"),
-                        'url': reverse('pharmaship_med_add', args=(molecule_id,)),
+                        'url': reverse('pharmaship:medicine:add', args=(molecule_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -342,7 +346,7 @@ def equivalent(request, molecule_id):
                         'form': form,
                         'action': _("Add this medicine"),
                         'close': _("Do not add"),
-                        'url': reverse('pharmaship_med_add', args=(molecule_id,)),
+                        'url': reverse('pharmaship:medicine:add', args=(molecule_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -388,7 +392,7 @@ def remark(request, molecule_id):
                         'form': form,
                         'action': _("Update these remarks"),
                         'close': _("Do not modify"),
-                        'url': reverse('pharmaship_med_remark', args=(molecule_id,)),
+                        'url': reverse('pharmaship:medicine:remark', args=(molecule_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
@@ -469,6 +473,10 @@ def parser(allowance_list, location_list):
     group_list = models.MoleculeGroup.objects.all().order_by('order')
     # Remarks
     remark_list = models.Remark.objects.filter(content_type=ContentType.objects.get_for_model(models.Molecule))
+    # Ordered items
+    ordered_list = Item.objects.filter(
+        content_type=ContentType.objects.get_for_model(models.Molecule),
+        requisition__status__in=[4,5])
 
     today = datetime.date.today()
     # Global dictionnary
@@ -483,7 +491,7 @@ def parser(allowance_list, location_list):
             # More elegant way to match id?
             if molecule.group_id == group.id:
                 # Molecule parsing
-                group_molecule_dict = parser_element(molecule, remark_list, qty_transaction_list, location_list, today)
+                group_molecule_dict = parser_element(molecule, remark_list, ordered_list, qty_transaction_list, location_list, today)
                 # Required quantity
                 group_molecule_dict['required_quantity'] = utils.req_qty_element(molecule, req_qty_list)
                 # Adding the molecule dict to the list
@@ -493,7 +501,7 @@ def parser(allowance_list, location_list):
 
     return values, group_list
 
-def parser_element(molecule, remark_list, qty_transaction_list, location_list, today=datetime.date.today()):
+def parser_element(molecule, remark_list, ordered_list, qty_transaction_list, location_list, today=datetime.date.today()):
     """Parses the database to render a list of
     Molecule > Medicine.
 
@@ -517,6 +525,11 @@ def parser_element(molecule, remark_list, qty_transaction_list, location_list, t
     for remark in remark_list:
         if remark in molecule.remark.all():
             element_dict['remark'] = remark
+    # Ordered
+    element_dict['ordered'] = 0
+    for ordered in ordered_list:
+        if ordered.object_id == molecule.id:
+            element_dict['ordered'] += ordered.quantity
     # Tags
     element_dict['tag'] = molecule.tag
     # Quantity

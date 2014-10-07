@@ -25,7 +25,7 @@
         <span id="requisition-name">{{ requisition.name }}</span>
         <small>{{ requisition.reference }}</small>
         <div class="btn-group">
-            <a href="{% url 'purchase_req_status' requisition.id %}"
+            <a href="{% url 'purchase:requisition:status' requisition.id %}"
                class="btn btn-default"
                id="requisition-status"
                data-toggle="modal"
@@ -38,14 +38,14 @@
             </button>
             <ul class="dropdown-menu" role="menu">
                 <li>
-                    <a href="{% url 'purchase_req_status' requisition.id %}"
+                    <a href="{% url 'purchase:requisition:status' requisition.id %}"
                        data-toggle="modal"
                        data-target="#action_modal">
                         {% trans "Change Status" %}
                     </a>
                 </li>
                 <li>
-                    <a href="{% url 'purchase_req_edit' requisition.id %}"
+                    <a href="{% url 'purchase:requisition:edit' requisition.id %}"
                        data-toggle="modal"
                        data-target="#action_modal">
                         {% trans "Change Name" %}
@@ -53,7 +53,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="{% url 'purchase_req_delete' requisition.id %}"
+                    <a href="{% url 'purchase:requisition:delete' requisition.id %}"
                        data-toggle="modal"
                        data-target="#action_modal">
                         {% trans "Delete this requisition" %}
@@ -61,7 +61,7 @@
                 </li>
             </ul>
         </div>
-        <span class="badge">{{ requisition.get_item_type_display }}</span>
+        <span class="badge">{{ requisition.item_name }}</span>
     </h2>
 
     <nav>
@@ -81,9 +81,9 @@
             <div class="col-md-6">{% trans "Item Description" %}</div>
             <div class="col-md-1 text-center">{% trans "Quantity" %}</div>
         </div>
-        <form action="{% url 'purchase_item_add' requisition.id %}" method="POST" name="new_item" data-form-callback="itemAdd">
+        <form action="{% url 'purchase:item:add' requisition.id %}" method="POST" name="new_item" data-form-callback="itemAdd">
             {% csrf_token %}
-            <input type="hidden" name="name_search_url" value="{% url 'purchase_name_search' requisition.id %}" />
+            <input type="hidden" name="name_search_url" value="{% url 'purchase:requisition:name_search' requisition.id %}" />
             <input type="hidden" name="object_id" value="" />
             <div class="row ps-item-add">
                 <div class="col-md-6">
@@ -102,7 +102,7 @@
         <div class="ps-scroll-items">
             <form class="form-horizontal"
                   role="form"
-                  action='{% url "purchase_item_update" %}'
+                  action='{% url "purchase:item:update" %}'
                   method="post"
                   id='update-form'
                   data-form-callback='quantityFeedback'>
@@ -118,7 +118,7 @@
         </div>
     </div>
     <div id="instructions" class="tab-pane container-fluid">
-        <form role="form" action="{% url 'purchase_instructions' requisition.id %}" method="POST">
+        <form role="form" action="{% url 'purchase:requisition:instructions' requisition.id %}" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <textarea name="text" class="form-control" rows="10">{{ requisition.instructions }}</textarea>

@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('inventory.views_settings',
-    url(r'^$', 'index', name="inventory_settings"),
+    url(r'^$', 'index', name="index"),
     # Action for Inventory settings form
     url(r'^application$', 'application', name="application"),
     # Export/import allowances

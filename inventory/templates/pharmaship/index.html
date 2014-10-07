@@ -1,15 +1,7 @@
 {% extends "html/layout.html" %}
 {% load i18n %}
 
-{% block addon %} {% load staticfiles %}
-<!--
-<link rel="stylesheet" type="text/css" href='{% static "pharmaship/home.css" %}'>
-<script src='{% static "js/home.js" %}'></script>
--->
-{% endblock %}
-
 {% block content %}
-
 <h2 class="sub-header">{% trans "Medicines Inventory Status" %}</h2>
 
 <div class="panel-group" id="molecule_accordion">

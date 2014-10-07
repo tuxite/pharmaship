@@ -16,9 +16,8 @@
                 </span>
             </div>
         </div>
-    </form><!--
-    <div  class="collapse">
- --><form id="filter-more" class="form-horizontal collapse" action="{% url 'pharmaship_med_filter' %}" role="form" data-form-callback="updateList">
+    </form>
+    <form id="filter-more" class="form-horizontal collapse" action="{{ filter }}" role="form" data-form-callback="updateList">
             <div class="form-group">
                 <label for="filter-group-select" class="col-md-3 control-label">{% trans "Filter by group:" %}</label>
                 <div class="col-md-9">
@@ -59,11 +58,6 @@
                     {% endfor %}
                 </div>
             </div>
-        </form><!--
-
-            <form action="" method="post" id="filterallowance" class="form">
-            </form>
--->
-<!--    </div>
---></div>
+        </form>
+</div>
 <!-- END Filter -->

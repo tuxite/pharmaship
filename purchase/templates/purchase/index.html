@@ -20,14 +20,14 @@
     <tr>
         <td>{{ item.reference }}</td>
         <td>{{ item.name }}</td>
-        <td>{{ item.get_item_type_display }}</td>
+        <td>{{ item.item_name }}</td>
         <td>{{ item.get_status_display }}</td>
-        <td><a class="btn btn-default btn-sm" href="{% url "purchase_req_view" item.pk %}" title='{% trans "View this requisition" %}'><span class="fa fa-eye"></span></a></td>
+        <td><a class="btn btn-default btn-sm" href="{% url 'purchase:requisition:view' item.pk %}" title='{% trans "View this requisition" %}'><span class="fa fa-eye"></span></a></td>
     </tr>
     {% endfor %}
 </table>
 <a class="btn btn-primary"
-   href="{% url 'purchase_req_create' %}"
+   href="{% url 'purchase:requisition:create' %}"
    data-toggle="modal"
    data-target="#action_modal">
     {% trans "New Requisition" %}

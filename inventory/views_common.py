@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.template import RequestContext
 
-
+from core.views import app_links
 import models
 
 import datetime
@@ -27,6 +27,7 @@ def index(request):
     return render_to_response('pharmaship/index.html', {
                 'user': request.user,
                 'title':_("Home"),
+                'head_links': app_links(request.resolver_match.namespace),
                 'molecule': molecule_parser(allowance_list, delay_date, today),
                 'equipment': equipment_parser(allowance_list, delay_date, today),
                 },
@@ -171,3 +172,4 @@ def equipment_parser(allowance_list, delay_date, today):
             result['short_supply'].append(t)
 
     return result
+    

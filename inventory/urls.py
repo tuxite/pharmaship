@@ -1,38 +1,38 @@
 # -*- coding: utf-8; -*-
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
+
+medicine_patterns = patterns('inventory.views_medicine',
+    url(r'^$', 'index', name="index"),
+    url(r'^print$', 'pdf_print', name="print"),
+    url(r'^filter$', 'filter', name="filter"),
+
+    url(r'^(?P<molecule_id>\d+)/add$', 'add', name="add"),
+    url(r'^(?P<molecule_id>\d+)/equivalent$', 'equivalent', name="equivalent"),
+    url(r'^(?P<molecule_id>\d+)/remark$', 'remark', name="remark"),
+
+    url(r'^(?P<medicine_id>\d+)/delete$', 'delete', name="delete"),
+    url(r'^(?P<medicine_id>\d+)/change$', 'change', name="change"),
+    url(r'^(?P<medicine_id>\d+)/out$', 'out', name="out"),
+)
+
+equipment_patterns = patterns('inventory.views_equipment',
+    url(r'^$', 'index', name="index"),
+    url(r'^print$', 'pdf_print', name="print"),
+    url(r'^filter$', 'filter', name="filter"),
+
+    url(r'^(?P<equipment_id>\d+)/add$', 'add', name="add"),
+    url(r'^(?P<equipment_id>\d+)/remark$', 'remark', name="remark"),
+
+    url(r'^(?P<article_id>\d+)/delete$', 'delete', name="delete"),
+    url(r'^(?P<article_id>\d+)/change$', 'change', name="change"),
+    url(r'^(?P<article_id>\d+)/out$', 'out', name="out"),
+)
 
 urlpatterns = patterns('inventory.views_common',
     # General
-    url(r'^$', 'index', name="pharmaship"),
+    url(r'^$', 'index', name="index"),
     url(r'^contact', 'contact'),
-)
-
-urlpatterns += patterns('inventory.views_medicine',
-    # Medicine Related
-    url(r'^medicine/$', 'index', name="medicine"),
-    url(r'^medicine/filter$', 'filter', name="pharmaship_med_filter"),
-    url(r'^medicine/print$', 'pdf_print', name="pharmaship_med_print"),
-
-    url(r'^medicine/(?P<molecule_id>\d+)/add$', 'add', name="pharmaship_med_add"),
-    url(r'^medicine/(?P<molecule_id>\d+)/equivalent$', 'equivalent', name="pharmaship_med_equivalent"),
-    url(r'^medicine/(?P<molecule_id>\d+)/remark$', 'remark', name="pharmaship_med_remark"),
-
-    url(r'^medicine/(?P<medicine_id>\d+)/delete$', 'delete', name="pharmaship_med_delete"),
-    url(r'^medicine/(?P<medicine_id>\d+)/change$', 'change', name="pharmaship_med_change"),
-    url(r'^medicine/(?P<medicine_id>\d+)/out$', 'out', name="pharmaship_med_out"),
-
-)
-urlpatterns += patterns('inventory.views_equipment',
-    # Equipment Related
-    url(r'^equipment/index', 'index', name="equipment"),
-    url(r'^equipment/print$', 'pdf_print', name="pharmaship_equ_print"),
-    url(r'^equipment/filter$', 'filter', name="pharmaship_equ_filter"),
-
-    url(r'^equipment/(?P<equipment_id>\d+)/add$', 'add', name="pharmaship_equ_add"),
-    url(r'^equipment/(?P<equipment_id>\d+)/remark$', 'remark', name="pharmaship_equ_remark"),
-
-    url(r'^equipment/(?P<article_id>\d+)/delete$', 'delete', name="pharmaship_equ_delete"),
-    url(r'^equipment/(?P<article_id>\d+)/change$', 'change', name="pharmaship_equ_change"),
-    url(r'^equipment/(?P<article_id>\d+)/out$', 'out', name="pharmaship_equ_out"),
-
+    # We use namespaces to add the medicine and equipment related patterns
+    url(r'^medicine/', include(medicine_patterns, namespace='medicine')),
+    url(r'^equipment/', include(equipment_patterns, namespace='equipment')),
 )

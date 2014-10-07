@@ -11,7 +11,7 @@ import models, forms
 
 from import_data import create_archive
 
-from core.views import settings_links, settings_validation
+from core.views import settings_links, settings_validation, app_links
 
 import json
 
@@ -31,6 +31,7 @@ def index(request):
     return render_to_response('pharmaship/settings.html', {
                         'user': request.user,
                         'title':_("Settings"),
+                        'head_links': app_links(request.resolver_match.namespace),
                         'links': settings_links(),
                         'settingsform': forms.SettingsForm(instance=models.Settings.objects.latest('id')),
                         'locationcreateform' : forms.LocationCreateForm(),

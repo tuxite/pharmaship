@@ -6,6 +6,8 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.utils import translation
 from django.conf import settings
+from django.core.urlresolvers import reverse, NoReverseMatch
+
 
 import json
 
@@ -23,19 +25,42 @@ def settings_links():
         if application == "settings":
             links.append({
                 'name': _("Settings"),
-                'url': 'settings',
+                'url': reverse("settings:index"),
                 'active': True
             })  
         # Looking if the applications has settings that can be imported
-        elif globals().get("{0}.settings_urls".format(application), True):
-            links.append({
-                'name': _(application.capitalize()),
-                'url': "{0}_settings".format(application),
-            })              
         else:
+            try:
+                links.append({
+                    'name': _(application.capitalize()),
+                    'url': reverse("settings:{0}:index".format(application)),
+                })              
+            except NoReverseMatch:
+                pass
+        
+    links.append({'name': _('Import'), 'url': reverse("settings:import")})
+    return links
+    
+def app_links(namespace):
+    """Returns a list of links for application views."""
+    links = []
+    for application in settings.INSTALLED_APPS:
+        # Do not take in account Django's applications
+        if "django" in application or application in SYSTEM_APPS:
+            continue
+        # By default, adding the general settings application to the dict
+        if application == "settings":
+            # Settings application already taken in account in the layout
             continue
         
-    links.append({'name': _('Import'), 'url': 'import'})
+        if application == "inventory":
+            a = "pharmaship"
+        else:
+            a = application
+        if a == namespace.split(":")[0]:
+            links.append({"name": a.capitalize(), "url_name": a + ":index", 'active': True})
+        else:
+            links.append({"name": a.capitalize(), "url_name": a + ":index"})
     return links
 
 @permission_required('settings')
@@ -59,6 +84,7 @@ def index(request):
     return render_to_response('core/index.html', {
                     'user': request.user,
                     'title': _("Home"),
+                    'head_links': app_links(request.resolver_match.namespace),
                     },
                     context_instance=RequestContext(request))
 
