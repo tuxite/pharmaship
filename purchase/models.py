@@ -5,14 +5,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 STATUS_CHOICES = (
-        (0, 'Draft'),
-        (1, 'Pending Approval'),
-        (2, 'Approved'),
-        (3, 'Quoted'),
-        (4, 'Ordered'),
-        (5, 'Partially Received'),
-        (6, 'Fully Received'),
-        (99, 'Cancelled'),
+        (0, _('Draft')),
+        (1, _('Pending Approval')),
+        (2, _('Approved')),
+        (3, _('Quoted')),
+        (4, _('Ordered')),
+        (5, _('Partially Received')),
+        (6, _('Fully Received')),
+        (99, _('Cancelled')),
     )
 
 class Item(models.Model):
@@ -56,7 +56,8 @@ class Requisition(models.Model):
         return self.name
         
     def item_name(self):
-        return _(ContentType.objects.get(pk=self.item_type).name.capitalize())
+        ct = ContentType.objects.get(pk=self.item_type)
+        return unicode(_(ct.app_label.capitalize())) + " > " + unicode(_(ct.name.capitalize()))
         
 
 

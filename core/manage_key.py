@@ -74,5 +74,5 @@ class KeyManager:
             return HttpResponseBadRequest(data, content_type = "application/json")
         
         self.gpg.delete(key)
-        data = json.dumps({'success': _('Key successfully removed'), 'log': self.log})
+        data = json.dumps({'success': _('Key removed'), 'log': self.log})
         return HttpResponse(data, content_type = "application/json")
