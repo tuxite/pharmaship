@@ -1,0 +1,10 @@
+{% load i18n %}
+            <tr>
+                <td>{{ item.primary }}</td>
+                <td>{{ item.secondary }}</td>
+                <td><a class="text-danger btn-delete"
+                       href="{% url 'settings:pharmaship:location:delete' item.id %}"
+                       data-loading-text="<span class='fa fa-spinner fa-spin'></span>">
+                        <span class="fa fa-trash-o"></span> {% trans "Remove" %}
+                    </a></td>
+            </tr>

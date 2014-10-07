@@ -30,10 +30,14 @@ for application in settings.INSTALLED_APPS:
     if "django" in application or application in SYSTEM_APPS:
         continue
     print "Settings", application
-
+    
+    if application == "inventory":
+        ns = "pharmaship"
+    else:
+        ns = application
     try:
         urlpatterns += patterns('',
-            url(r"^{0}/".format(application), include("{0}.settings_urls".format(application), namespace=application, app_name=application)),
+            url(r"^{0}/".format(ns), include("{0}.settings_urls".format(application), namespace=ns, app_name=application)),
         )
     except ImportError:
         logger.debug ("Application %s does not provides urls" % application)

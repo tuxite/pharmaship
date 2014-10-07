@@ -3,6 +3,10 @@
 {% load bootstrap %}
 {% load i18n %}
 
+{% block js_addon %}
+<script src='{% static "js/settings/callbacks.js" %}'></script>
+{% endblock %}
+
 {% block sidebar %}
     <ul class="nav nav-sidebar">
         {% for item in links %}

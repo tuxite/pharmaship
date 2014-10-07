@@ -201,9 +201,4 @@
     /* Global variable to set different callback prototypes for the forms. */
     document.formCallback = function(){};
 
-    // Test, to be moved
-    document.formCallback.prototype.updateUser = function(data){
-        console.log("Callback User", data);
-    };
-
 })(jQuery);

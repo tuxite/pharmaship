@@ -35,7 +35,7 @@ def index(request):
                         'links': settings_links(),
                         'settingsform': forms.SettingsForm(instance=models.Settings.objects.latest('id')),
                         'locationcreateform' : forms.LocationCreateForm(),
-                        'locationdeleteform' : forms.LocationDeleteForm(),
+                        'locations' : models.Location.objects.all().exclude(pk=1),
                         },
                         context_instance=RequestContext(request))
 
@@ -65,8 +65,10 @@ def create_location(request):
             added = models.Location(primary=primary, secondary=secondary)
             added.save()
             # Returning the html element added in order to update the list client-side
-            updated_form = render_to_string('html/form.html', {'form': forms.LocationDeleteForm()})
-            data = json.dumps({'success':_('Data updated'), 'form': updated_form})
+            content = render_to_response('pharmaship/location.inc.html', {
+                    'item': added,
+                    }).content 
+            data = json.dumps({'success': _('Data updated'), 'location': content})
             return HttpResponse(data, content_type="application/json")
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
@@ -77,30 +79,23 @@ def create_location(request):
 
 
 @permission_required('inventory.location.can_delete')
-def delete_location(request):
+def delete_location(request, location_id):
     """Deletes selected Location objects for items in Inventory application."""
-    if request.method == 'POST' and request.is_ajax():
-        form = forms.LocationDeleteForm(request.POST)
-        if form.is_valid():
-            obj = form.cleaned_data['to_delete']
-            # Changing values for objects with location in obj
-            default = models.Location.objects.get(pk=1)
-            models.Medicine.objects.filter(location__in=obj).update(location = default)
-            models.Article.objects.filter(location__in=obj).update(location = default)
-            # Get the list of ids to be deleted in order to update the list client-side
-            obj_id = []
-            for item in obj:
-                obj_id.append(item.pk)
-            # Delete
-            obj.delete()
-            # Returning the updated list of locations
-            print "OBJ", obj_id
-
-            data = json.dumps({'success':_('Data updated'), 'deleted': obj_id})
-            return HttpResponse(data, content_type="application/json")
-        else:
-            errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
-            data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")
+    if location_id == 0:
+        data = json.dumps({'error': _('Something went wrong!'), 'details':_("You can't delete this location.")})
+        return HttpResponseBadRequest(data, content_type = "application/json")
+    
+    if request.is_ajax():
+        location = get_object_or_404(models.Location, pk=location_id)
+        
+        # Changing values for objects with location in obj
+        default = models.Location.objects.get(pk=1)
+        models.Medicine.objects.filter(location=location).update(location = default)
+        models.Article.objects.filter(location=location).update(location = default)
+        # Delete
+        location.delete()
+        # Returns the location id deleted to remove it from the DOM
+        data = json.dumps({'success':_('Data updated'), 'deleted': location_id})
+        return HttpResponse(data, content_type="application/json")
     else:
-        return HttpResponseNotAllowed(['POST',])
+        return HttpResponseNotAllowed(['GET',])

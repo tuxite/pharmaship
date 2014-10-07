@@ -77,7 +77,6 @@ def import_key(request):
             return log
         else:
             # Returning errors
-            print "ERROR", request
             errors = dict([(k, [unicode(e) for e in v]) for k,v in f.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
             return HttpResponseBadRequest(data, content_type = "application/json")

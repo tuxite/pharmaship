@@ -412,11 +412,15 @@ def update_article(molecule_id):
     # Calling the DB for different necessary lists
     qty_transaction_list = models.QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(models.Medicine))
     remark_list = models.Remark.objects.filter(content_type=ContentType.objects.get_for_model(models.Molecule), object_id=molecule_id)
+    ordered_list = Item.objects.filter(
+        content_type=ContentType.objects.get_for_model(models.Molecule),
+        object_id=molecule_id,
+        requisition__status__in=[4,5])
     location_list = models.Location.objects.all().order_by('primary', 'secondary')
     allowance_list = models.Settings.objects.latest('id').allowance.all()
     req_qty_list = models.MoleculeReqQty.objects.filter(allowance__in=allowance_list, base=molecule).prefetch_related('base', 'allowance')
     # Parsing the molecule
-    result = parser_element(molecule, remark_list, qty_transaction_list, location_list)
+    result = parser_element(molecule, remark_list, ordered_list, qty_transaction_list, location_list)
     result['required_quantity'] = utils.req_qty_element(molecule, req_qty_list)
 
     return render_to_response('pharmaship/medicine_single.inc.html', {
