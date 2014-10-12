@@ -176,9 +176,9 @@ class Location(models.Model):
 
     def __unicode__(self):
         if self.secondary:
-            return u"{0} > {1}".format(self.primary, self.secondary)
+            return u"{0} > {1}".format(_(self.primary), _(self.secondary))
         else:
-            return self.primary
+            return unicode(_(self.primary))
 
 
     class Meta:
