@@ -76,6 +76,7 @@ class AddItemForm(forms.Form):
     quantity = forms.IntegerField()
 
 class UpdateItemQty(forms.Form):
-    """Form to update thr item quantity."""
+    """Form to update the item quantity."""
     item_id = forms.IntegerField()
     item_qty = forms.IntegerField()
+    requisition_id = forms.IntegerField()
