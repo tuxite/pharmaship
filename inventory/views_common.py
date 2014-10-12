@@ -17,11 +17,12 @@ def delay(delta):
 @login_required
 def index(request):
     """Default view. Displays information about upcoming events."""
-    delay_date = delay(models.Settings.objects.latest('id').expire_date_warning_delay)
+    inventory_settings = models.Settings.objects.latest('id')
+    delay_date = delay(inventory_settings.expire_date_warning_delay)
     today = datetime.date.today()
     
     # Get the required quantity of a molecule and compare it to the current quantity.
-    allowance_list = models.Settings.objects.latest('id').allowance.all()
+    allowance_list = inventory_settings.allowance.all()
     
     
     return render_to_response('pharmaship/index.html', {

@@ -45,7 +45,8 @@ def index(request):
     :template:`inventory/medicine_inventory.html`
 
     """
-    allowance_list = models.Settings.objects.latest('id').allowance.all()
+    inventory_settings = models.Settings.objects.latest('id')
+    allowance_list = inventory_settings.allowance.all()
     location_list = models.Location.objects.all().order_by('primary', 'secondary')
     values, group_list = parser(allowance_list, location_list)
 
@@ -55,7 +56,7 @@ def index(request):
                         'head_links': app_links(request.resolver_match.namespace),
                         'values': values,
                         'today': datetime.date.today(),
-                        'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
+                        'delay': utils.delay(inventory_settings.expire_date_warning_delay),
                         'group_list' : group_list,
                         'allowance_list': allowance_list,
                         'location_list': location_list,
@@ -431,7 +432,8 @@ def update_article(molecule_id):
 def pdf_print(request):
     """Exports the medicine inventory in PDF."""
     # Generating a HTTP response with HTML
-    allowance_list = models.Settings.objects.latest('id').allowance.all()
+    inventory_settings = models.Settings.objects.latest('id')
+    allowance_list = inventory_settings.allowance.all()
     location_list = models.Location.objects.all().order_by('primary', 'secondary')
     values, group_list = parser(allowance_list, location_list)
 
@@ -441,7 +443,7 @@ def pdf_print(request):
                     'user': request.user,
                     'values': values,
                     'today': datetime.date.today(),
-                    'delay': utils.delay(models.Settings.objects.latest('id').expire_date_warning_delay),
+                    'delay': utils.delay(inventory_settings.expire_date_warning_delay),
                     'allowance_list': allowance_list,
                     },
                     context_instance=RequestContext(request))
