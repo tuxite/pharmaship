@@ -31,7 +31,7 @@
             .keyup(function () {
                 // fire the above change event after every letter
                 $(this).change();
-            })
+            });
     }
 
     /* Function to filter by group */
@@ -46,7 +46,7 @@
                 $(list).find(".group-div").show();
 
                 var filter = $(this).val();
-                if (filter != 0) {
+                if (filter !== 0) {
                     $(list).find("h3.group:not(:contains(" + filter + "))").parents('.group-div').hide();
                     $(list).find("h3.group:contains(" + filter + ")").parents('.group-div').show();
                 }
@@ -78,7 +78,7 @@
             .change(function () {
                 var filter = $(this).val(),
                     list = $(document).find('#item-list');
-                if (filter != 0) {
+                if (filter !== 0) {
                     $(list).find(".location:not(:contains(" + filter + "))").parents('.item-div').hide();
                     // Also hide empty objects (with no table)
                     $(list).find(":not(:has(.location))").parents('.item-div').hide();
@@ -100,7 +100,7 @@
             .change(function () {
                 // Reset the other filters
                 $('#filter-reset').trigger("click");
-                if (this.checked == true) {
+                if (this.checked === true) {
                     // Uncheck the other checkboxes
                     $('.filter-check:checkbox:checked').prop('checked', false);
                     $(form).submit();
@@ -115,7 +115,9 @@
                 $(reset_checkbox).prop('checked', false);
                 // Check the reset checkbox if no allowance checkbox checked or all allowances checked.
                 // Could be weird...
-                if ($('.filter-check:checkbox:checked').length == 0 || $('.filter-check:checkbox:checked').length == $('.filter-check:checkbox').length) {
+                if ($('.filter-check:checkbox:checked').length === 0 ||
+                        $('.filter-check:checkbox:checked').length === $('.filter-check:checkbox').length
+                        ) {
                     $(reset_checkbox).prop('checked', true);
                     $('.filter-check').prop('checked', false);
                 }
@@ -147,11 +149,11 @@
 
     /* DOM ready */
     $(function () {
-        filter_reset(); // OK --
-        filter_by_name(); // OK--
-        filter_by_group(); // OK
-        filter_by_tag(); // OK
-        filter_by_location(); //OK
+        filter_reset();
+        filter_by_name();
+        filter_by_group();
+        filter_by_tag();
+        filter_by_location();
         filter_by_allowance();
     });
-})(jQuery);
+}(jQuery));
