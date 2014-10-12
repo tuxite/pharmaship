@@ -8,8 +8,11 @@ This software is in active development!
 ## Requirements
 *   Django 1.7
 *   MySQL Server
-*   python-mysqldb
+*   python-mysqldb (for using MySQL engine)
 *   python-gpgme
+*   python-yaml
+*   python-pil
+*   gettext
 *   WeasyPrint (for printing PDF). Need python-lxml, python-cffi.
 
 ## Installation
