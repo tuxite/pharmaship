@@ -2,24 +2,31 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser
-   
+
 FUNCTIONS = (
-        (u'00', _("Captain")),
-        (u'10', _("Chief Officer")),
-        (u'11', _("Deck Officer")),
-        (u'20', _("Chief Engineer")),
-        (u'21', _("Engineer")),
-        (u'99', _("Ratings")),
-    )
+    (u'00', _("Captain")),
+    (u'10', _("Chief Officer")),
+    (u'11', _("Deck Officer")),
+    (u'20', _("Chief Engineer")),
+    (u'21', _("Engineer")),
+    (u'99', _("Ratings")),
+)
 DEPARTMENTS = (
     (u'D', _("Deck")),
     (u'E', _("Engine")),
     (u'C', _("Civil")),
 )
 
-class User(AbstractUser):    
-    function = models.CharField(_("Function"), max_length=2, choices=FUNCTIONS, blank=True, null=True)
-    
+
+class User(AbstractUser):
+    function = models.CharField(_("Function"),
+                                max_length=2,
+                                choices=FUNCTIONS,
+                                blank=True,
+                                null=True
+                                )
+
+
 # Models
 class Vessel(models.Model):
     """Vessel information."""
@@ -38,8 +45,14 @@ class Vessel(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Rank(models.Model):
     """Rank model."""
     name = models.CharField(_("Name"), max_length=30)
-    department = models.CharField(_("Department"), max_length=1, choices=DEPARTMENTS, blank=True, null=True)
-    #default_group = models.ForeignKey()
+    department = models.CharField(_("Department"),
+                                  max_length=1,
+                                  choices=DEPARTMENTS,
+                                  blank=True,
+                                  null=True
+                                  )
+    # default_group = models.ForeignKey()
