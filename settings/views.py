@@ -10,7 +10,7 @@ import json
 import models, forms
 from core.import_data import BaseImport
 from core.manage_key import KeyManager
-from core.views import settings_links, settings_validation
+from core.views import settings_links, settings_validation, app_links
 
 @login_required
 def index(request):
@@ -19,6 +19,7 @@ def index(request):
                         'user': request.user,
                         'title': _("Settings"),
                         'links': settings_links(),
+                        'head_links': app_links(request.resolver_match.namespace),
                         'vesselform': forms.VesselForm(instance = models.Vessel.objects.latest('id')),
                         'userform': forms.UserForm(instance = models.User.objects.get(id = request.user.id)),
                         },
@@ -41,7 +42,7 @@ def import_data(request):
             errors = dict([(k, [unicode(e) for e in v]) for k,v in f.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
             return HttpResponseBadRequest(data, content_type = "application/json")
-    
+
     km = KeyManager()
     return render_to_response('settings/import.html', {
                         'user': request.user,
@@ -70,9 +71,9 @@ def import_key(request):
             errors = dict([(k, [unicode(e) for e in v]) for k,v in f.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
             return HttpResponseBadRequest(data, content_type = "application/json")
-    
+
     return HttpResponseNotAllowed(['POST',])
-    
+
 @login_required
 def delete_key(request, key_id):
     """Deletes a trusted key from the keyring."""
@@ -81,7 +82,7 @@ def delete_key(request, key_id):
         log = km.delete_key(key_id)
         return log
     return HttpResponseNotAllowed(['POST',])
-        
+
 @permission_required('settings.user_profile.can_change')
 def user(request):
     """Validation of the User form."""

@@ -20,11 +20,10 @@ def index(request):
     inventory_settings = models.Settings.objects.latest('id')
     delay_date = delay(inventory_settings.expire_date_warning_delay)
     today = datetime.date.today()
-    
+
     # Get the required quantity of a molecule and compare it to the current quantity.
     allowance_list = inventory_settings.allowance.all()
-    
-    
+
     return render_to_response('pharmaship/index.html', {
                 'user': request.user,
                 'title':_("Home"),
@@ -40,6 +39,7 @@ def contact(request):
     return render_to_response('pharmaship/contact.html', {
         'user': request.user,
         'title': title,
+        'head_links': app_links(request.resolver_match.namespace),
     },
     context_instance=RequestContext(request))
 
@@ -55,7 +55,7 @@ def molecule_parser(allowance_list, delay_date, today):
     #medicine_list = models.Medicine.objects.filter(parent__in=molecule_list, used=False).distinct().prefetch_related('location', 'transactions', 'parent')
     # Medicine quantity transaction list
     qty_transaction_list = models.QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(models.Medicine))
-    
+
     # Global dictionnary
     result = {}
     result['nc'] = []
@@ -63,7 +63,7 @@ def molecule_parser(allowance_list, delay_date, today):
     result['reaching_expiry'] = []
     result['short_supply'] = []
     result['ordered'] = []
-    
+
     for molecule in molecule_list:
         # Get the total quantity of attached medicines
         quantity = 0
@@ -99,7 +99,7 @@ def molecule_parser(allowance_list, delay_date, today):
                     additional += item.required_quantity
                 else:
                     maximum.append(item.required_quantity)
- 
+
         req_qty = additional + max(maximum)
 
         # If the req_qty > quantity, we add the equipment to the list
@@ -120,7 +120,7 @@ def equipment_parser(allowance_list, delay_date, today):
     #article_list = models.Article.objects.filter(parent__in=equipment_list, used=False).distinct().prefetch_related('location', 'transactions')
     # Material quantity transaction list
     qty_transaction_list = models.QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(models.Article))
-    
+
     # Global dictionnary
     result = {}
     result['nc'] = []
@@ -128,7 +128,7 @@ def equipment_parser(allowance_list, delay_date, today):
     result['reaching_expiry'] = []
     result['short_supply'] = []
     result['ordered'] = []
-    
+
     for equipment in equipment_list:
         # Get the total quantity of attached materials
         quantity = 0
@@ -164,7 +164,7 @@ def equipment_parser(allowance_list, delay_date, today):
                     additional += item.required_quantity
                 else:
                     maximum.append(item.required_quantity)
- 
+
         req_qty = additional + max(maximum)
 
         # If the req_qty > quantity, we add the equipment to the list
@@ -173,4 +173,3 @@ def equipment_parser(allowance_list, delay_date, today):
             result['short_supply'].append(t)
 
     return result
-    

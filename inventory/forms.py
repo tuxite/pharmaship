@@ -15,7 +15,7 @@ CHANGE_REASON = (
         (8, 'Physical Count'),
         (9, 'Other'),
     )
-    
+
 class DeleteForm(forms.Form):
     """Form used for deleting an objet in the list."""
     reason = forms.ChoiceField(choices=DELETE_REASON, label=_("Reason"))
@@ -42,7 +42,7 @@ class AddMedicineForm(forms.ModelForm):
     exp_date = forms.DateField(label=_("Expiration Date"), widget=DateInput())
     nc_composition = forms.CharField(label=_("Composition"))
 
-            
+
     class Meta:
         model = models.Medicine
         exclude = ['used', 'nc_molecule', 'parent']
@@ -55,7 +55,7 @@ class AddEquivalentForm(forms.ModelForm):
     nc_composition = forms.CharField(label=_("Composition"))
     nc_molecule = forms.CharField(label=_("Molecule"))
 
-        
+
     class Meta:
         model = models.Medicine
         exclude = ['used', 'parent']
@@ -82,7 +82,7 @@ class AddArticleForm(forms.ModelForm):
     exp_date = forms.DateField(label=_("Expiration Date"), widget=DateInput())
     nc_packaging = forms.CharField(label=_("Packaging"))
 
-    
+
     class Meta:
         model = models.Article
         exclude = ['used', 'parent']
@@ -93,7 +93,7 @@ class ChangeArticleForm(forms.ModelForm):
     quantity = forms.IntegerField(label=_('Quantity in stock'))
     exp_date = forms.DateField(label=_("Expiration Date"), widget=DateInput())
 
-    
+
     class Meta:
         model = models.Article
         exclude = ['nc_packaging', 'used', 'parent']
@@ -111,8 +111,3 @@ class LocationCreateForm(forms.ModelForm):
     class Meta:
         model = models.Location
         exclude = []
-
-
-class LocationDeleteForm(forms.Form):
-    """Form for deleting some Location objects."""
-    to_delete = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Location.objects.all().exclude(pk=1), label=_("To Delete"))

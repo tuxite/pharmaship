@@ -6,7 +6,7 @@ import models
 class InventoryConfig(AppConfig):
     name = 'inventory'
     verbose_name = "Medical"
-    
+
     # Orderable objects
     def orderable(self):
         """Returns a list of orderable elements."""
