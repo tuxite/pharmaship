@@ -5,6 +5,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 BASE_DIR = os.path.abspath(".")
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -15,7 +16,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': os.path.abspath(".") + "/conf/mysql.conf",
+            'read_default_file': BASE_DIR + "/conf/mysql.conf",
         },
     }
 }
@@ -36,7 +37,7 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (
-      BASE_DIR + "/conf/locale",
+    BASE_DIR + "/conf/locale",
 )
 
 SITE_ID = 1
@@ -177,5 +178,4 @@ LOGIN_URL = "/login/?next=/"
 AUTH_USER_MODEL = 'settings.User'
 
 # Trusted GPG Folder
-#TRUSTED_GPG = BASE_DIR + "/conf/trusted"
 KEYRING = BASE_DIR + "/conf/keyring"
