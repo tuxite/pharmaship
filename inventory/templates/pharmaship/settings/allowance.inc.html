@@ -1,0 +1,20 @@
+{% load i18n %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.additional|yesno }}</td>
+                <td>
+                    {% if item.active %}
+                    <a class="btn-toggle"
+                       href="{% url 'settings:pharmaship:allowance:disable' item.id %}"
+                       data-loading-text="<span class='fa fa-spinner fa-spin'></span>">
+                        {% trans "Disable" %}
+                    </a>
+                    {% else %}
+                    <a class="btn-toggle"
+                       href="{% url 'settings:pharmaship:allowance:enable' item.id %}"
+                       data-loading-text="<span class='fa fa-spinner fa-spin'></span>">
+                        {% trans "Enable" %}
+                    </a>
+                    {% endif %}
+                    </td>
+            </tr>
