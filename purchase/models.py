@@ -43,14 +43,14 @@ class Item(models.Model):
 
 class Requisition(models.Model):
     """Model of Requisition."""
-    name = models.CharField(max_length=100)
-    reference = models.CharField(max_length=20)
-    date_of_creation = models.DateTimeField(auto_now_add=True)
-    requested_date = models.DateField(blank=True, null=True)
+    name = models.CharField(_("Name"), max_length=100)
+    reference = models.CharField(_("Reference"), max_length=20)
+    date_of_creation = models.DateTimeField(_("Date of Creation"), auto_now_add=True)
+    requested_date = models.DateField(_("Requested Date"), blank=True, null=True)
     status = models.PositiveIntegerField(_("Status"), choices=STATUS_CHOICES)
-    instructions = models.TextField(blank=True, null=True)
-    port_of_delivery = models.CharField(max_length=5)
-    item_type = models.PositiveIntegerField()
+    instructions = models.TextField(_("Instructions"), blank=True, null=True)
+    port_of_delivery = models.CharField(_("Port of Delivery"), max_length=5)
+    item_type = models.PositiveIntegerField(_("Item Type"))
 
     def __unicode__(self):
         return self.name

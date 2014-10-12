@@ -17,7 +17,7 @@ def get_model_choices():
         except AttributeError, e:
             #print "Error", application, e
             continue
-            
+
         r = []
         for element in obj:
             # Parse with ContentType to get the model's id.
@@ -31,11 +31,11 @@ class CreateRequisitionForm(forms.ModelForm):
     """Form for the creation of a new requisition."""
     auto_add = forms.BooleanField(label=_("Populate automatically"), required=False)
     requested_date = forms.DateField(label=_("Requested Date"), widget=DateInput())
-    
+
     def __init__(self, *args, **kwargs):
        super(CreateRequisitionForm, self).__init__(*args, **kwargs)
-       self.fields["item_type"] = forms.ChoiceField(choices=get_model_choices())
-       
+       self.fields["item_type"] = forms.ChoiceField(label=_("Item Type"), choices=get_model_choices())
+
     class Meta:
         model = models.Requisition
         fields = ['name', 'requested_date', 'port_of_delivery', 'item_type']
@@ -53,8 +53,8 @@ class RequisitionNameForm(forms.ModelForm):
     class Meta:
         model = models.Requisition
         fields = ['name',]
-    
-    
+
+
 class StatusForm(forms.ModelForm):
     """Form for editing instructions of a Requisition."""
     status = forms.ChoiceField(choices=models.STATUS_CHOICES)
@@ -66,10 +66,10 @@ class StatusForm(forms.ModelForm):
 class NameSearchForm(forms.Form):
     """Form to sanitize the name search of an item."""
     name = forms.CharField()
-    
+
 class RequistionDeleteForm(forms.Form):
     """Form for deleting a requisition."""
-    
+
 class AddItemForm(forms.Form):
     """Form to add an item to a requisition."""
     object_id = forms.IntegerField()

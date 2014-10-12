@@ -4,36 +4,34 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
-import ast
-
 import utils
 
 # Constants
 ## Transaction type values
 TYPE_CHOICES = (
-        (1, 'In'),
-        (2, 'Utilisé'),
-        (4, 'Périmé'),
-        (8, 'Physical Count'),
-        (9, 'Other'),
+        (1, _('In')),
+        (2, _('Used')),
+        (4, _('Perished')),
+        (8, _('Physical Count')),
+        (9, _('Other')),
     )
 
 ## Medicine "dangerosity" list values
 DRUG_LIST_CHOICES = (
-        (0, 'None'),
-        (1, 'Liste I'),
-        (2, 'Liste II'),
-        (9, 'Stupéfiants'),
+        (0, _('None')),
+        (1, _('List I')),
+        (2, _('List II')),
+        (9, _('Narcotics')),
     )
 
 ## Dosage form possible values
 DRUG_FORM_CHOICES = (
-        (1, 'Comprimé'),
-        (2, 'Ampoule'),
-        (3, 'Gélule'),
+        (1, _('Tablet')),
+        (2, _('Ampoule')),
+        (3, _('Capsule')),
         (5, 'Lyophilisat oral'),
         (6, 'Sachet'),
-        (7, 'Suppositoire'),
+        (7, _('Suppository')),
         (8, 'Capsule'),
 
         (10, 'Tube pommade'),
@@ -65,10 +63,10 @@ DRUG_FORM_CHOICES = (
 
 ## Route of administration possible values
 DRUG_ROA_CHOICES = (
-        (1, 'Orale'),
+        (1, _('Oral')),
 
-        (5, 'Parentérale'),
-        (6, 'Sous-cutannée'),
+        (5, _('Parenteral')),
+        (6, _('Subcutaneous')),
 
         (10, 'Locale'),
         (11, 'Transdermique'),

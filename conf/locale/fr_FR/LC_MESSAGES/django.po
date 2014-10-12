@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pharmaship\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-07 23:51+0200\n"
+"POT-Creation-Date: 2014-10-12 16:01+0200\n"
 "PO-Revision-Date: 2013-06-07 21:30+0200\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: Association DSM <contact@devmaretique.com>\n"
@@ -16,32 +16,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: common/html/layout.html:86 common/html/layout.html.py:92
+#: common/html/layout.html:83 common/html/layout.html.py:89
 msgid "My Account"
 msgstr "Mon compte"
 
-#: common/html/layout.html:97
+#: common/html/layout.html:94
 msgid "Administration"
 msgstr "Administration"
 
-#: common/html/layout.html:118 inventory/views_equipment.py:390
-#: inventory/views_medicine.py:54 inventory/views_medicine.py:440
+#: common/html/layout.html:115 inventory/views_equipment.py:392
+#: inventory/views_medicine.py:55 inventory/views_medicine.py:442
 msgid "Medicine Inventory"
 msgstr "Registre des médicaments"
 
-#: common/html/layout.html:119
+#: common/html/layout.html:116
 msgid "Material Inventory"
 msgstr "Registre du matériel"
 
-#: common/html/layout.html:120 purchase/views.py:28
+#: common/html/layout.html:117 purchase/views.py:28
 msgid "Requisition Overview"
 msgstr "Aperçu des commandes"
 
-#: common/html/layout.html:124
+#: common/html/layout.html:121
 msgid "Print"
 msgstr "Imprimer"
 
-#: common/html/layout.html:127
+#: common/html/layout.html:124
 msgid "Emergency Contact"
 msgstr "Contact d'urgence"
 
@@ -92,15 +92,15 @@ msgstr "Erreur de signature"
 #: core/import_data.py:175 core/import_data.py:184 core/import_data.py:190
 #: core/import_data.py:200 core/import_data.py:207 core/import_data.py:214
 #: core/manage_key.py:42 core/manage_key.py:73 core/views.py:77
-#: inventory/views_equipment.py:131 inventory/views_equipment.py:174
-#: inventory/views_equipment.py:233 inventory/views_equipment.py:283
-#: inventory/views_equipment.py:334 inventory/views_medicine.py:114
-#: inventory/views_medicine.py:172 inventory/views_medicine.py:222
-#: inventory/views_medicine.py:282 inventory/views_medicine.py:338
-#: inventory/views_medicine.py:384 inventory/views_settings.py:75
-#: inventory/views_settings.py:85 purchase/views.py:73 purchase/views.py:95
-#: purchase/views.py:117 purchase/views.py:166 purchase/views.py:227
-#: purchase/views.py:275 settings/views.py:51 settings/views.py:81
+#: inventory/views_equipment.py:132 inventory/views_equipment.py:175
+#: inventory/views_equipment.py:234 inventory/views_equipment.py:284
+#: inventory/views_equipment.py:335 inventory/views_medicine.py:115
+#: inventory/views_medicine.py:173 inventory/views_medicine.py:223
+#: inventory/views_medicine.py:283 inventory/views_medicine.py:339
+#: inventory/views_medicine.py:385 inventory/views_settings.py:99
+#: inventory/views_settings.py:109 purchase/views.py:86 purchase/views.py:108
+#: purchase/views.py:130 purchase/views.py:179 purchase/views.py:240
+#: purchase/views.py:288 settings/views.py:42 settings/views.py:71
 msgid "Something went wrong!"
 msgstr "Une erreur est survenue !"
 
@@ -149,27 +149,28 @@ msgstr "Clé introuvable."
 msgid "Key removed"
 msgstr "Clé supprimée"
 
-#: core/views.py:27 inventory/views_settings.py:33 settings/views.py:29
+#: core/views.py:27 inventory/views_settings.py:32 settings/views.py:20
 msgid "Settings"
 msgstr "Paramètres"
 
-#: core/views.py:41 settings/views.py:57
+#: core/views.py:41 settings/views.py:48
 msgid "Import"
 msgstr "Importation"
 
-#: core/views.py:73 inventory/views_equipment.py:127
-#: inventory/views_equipment.py:170 inventory/views_equipment.py:229
-#: inventory/views_equipment.py:279 inventory/views_equipment.py:330
-#: inventory/views_medicine.py:110 inventory/views_medicine.py:168
-#: inventory/views_medicine.py:218 inventory/views_medicine.py:278
-#: inventory/views_medicine.py:334 inventory/views_medicine.py:380
-#: inventory/views_settings.py:71 inventory/views_settings.py:98
-#: purchase/views.py:69 purchase/views.py:91 purchase/views.py:113
-#: purchase/views.py:179 purchase/views.py:223 purchase/views.py:271
+#: core/views.py:73 inventory/views_equipment.py:128
+#: inventory/views_equipment.py:171 inventory/views_equipment.py:230
+#: inventory/views_equipment.py:280 inventory/views_equipment.py:331
+#: inventory/views_medicine.py:111 inventory/views_medicine.py:169
+#: inventory/views_medicine.py:219 inventory/views_medicine.py:279
+#: inventory/views_medicine.py:335 inventory/views_medicine.py:381
+#: inventory/views_settings.py:69 inventory/views_settings.py:95
+#: inventory/views_settings.py:122 purchase/views.py:82 purchase/views.py:104
+#: purchase/views.py:126 purchase/views.py:192 purchase/views.py:236
+#: purchase/views.py:284
 msgid "Data updated"
 msgstr "Données mises à jour"
 
-#: core/views.py:86 inventory/views_common.py:29
+#: core/views.py:85 inventory/views_common.py:30
 msgid "Home"
 msgstr "Accueil"
 
@@ -215,11 +216,7 @@ msgstr "Principe actif"
 msgid "Packaging"
 msgstr "Conditionnement"
 
-#: inventory/forms.py:103 inventory/models.py:441
-msgid "Allowance"
-msgstr "Dotation"
-
-#: inventory/forms.py:120
+#: inventory/forms.py:118
 msgid "To Delete"
 msgstr "À supprimer"
 
@@ -261,11 +258,77 @@ msgstr "Principes actifs hors dotation"
 msgid "Equipement Orphans"
 msgstr "Matériels hors dotation"
 
-#: inventory/models.py:175 inventory/templates/pharmaship/settings.html:34
+#: inventory/models.py:14
+msgid "In"
+msgstr "Entrée"
+
+#: inventory/models.py:15
+msgid "Used"
+msgstr "Utilisé"
+
+#: inventory/models.py:16
+msgid "Perished"
+msgstr "Périmé"
+
+#: inventory/models.py:17
+msgid "Physical Count"
+msgstr "Comptage"
+
+#: inventory/models.py:18
+msgid "Other"
+msgstr "Autre"
+
+#: inventory/models.py:23
+msgid "None"
+msgstr "Aucun"
+
+#: inventory/models.py:24
+msgid "List I"
+msgstr "Liste I"
+
+#: inventory/models.py:25
+msgid "List II"
+msgstr "Liste II"
+
+#: inventory/models.py:26
+msgid "Narcotics"
+msgstr "Stupéfiants"
+
+#: inventory/models.py:31
+msgid "Tablet"
+msgstr "Comprimé"
+
+#: inventory/models.py:32
+msgid "Ampoule"
+msgstr "Ampoule"
+
+#: inventory/models.py:33
+msgid "Capsule"
+msgstr ""
+
+#: inventory/models.py:36
+msgid "Suppository"
+msgstr "Gélule"
+
+#: inventory/models.py:68
+msgid "Oral"
+msgstr "Orale"
+
+#: inventory/models.py:70
+msgid "Parenteral"
+msgstr "Parentérale"
+
+#: inventory/models.py:71
+msgid "Subcutaneous"
+msgstr "Sous-cutanée"
+
+#: inventory/models.py:175
+#: inventory/templates/pharmaship/settings/index.html:61
 msgid "Primary"
 msgstr "Principal"
 
-#: inventory/models.py:176 inventory/templates/pharmaship/settings.html:35
+#: inventory/models.py:176
+#: inventory/templates/pharmaship/settings/index.html:62
 msgid "Secondary"
 msgstr "Secondaire"
 
@@ -292,7 +355,8 @@ msgstr "Composition :"
 #: inventory/models.py:296 inventory/models.py:408
 #: inventory/templates/pharmaship/equipment_inventory.html:20
 #: inventory/templates/pharmaship/medicine_inventory.html:20
-#: purchase/forms.py:51 purchase/templates/purchase/index.html:14
+#: inventory/templates/pharmaship/settings/index.html:34 purchase/forms.py:51
+#: purchase/models.py:46 purchase/templates/purchase/index.html:14
 #: settings/models.py:26 settings/models.py:43
 msgid "Name"
 msgstr "Nom"
@@ -312,6 +376,10 @@ msgstr "Conditionnement :"
 #: inventory/models.py:413
 msgid "Non-conform Packaging"
 msgstr "Conditionnement non-conforme"
+
+#: inventory/models.py:441
+msgid "Allowance"
+msgstr "Dotation"
 
 #: inventory/models.py:442
 msgid "Warning Delay for Expiration Dates"
@@ -618,11 +686,6 @@ msgstr "Matériel non-conforme :"
 msgid "Ordered equipments:"
 msgstr "Matériel médical commandé :"
 
-#: inventory/templates/pharmaship/location.inc.html:8
-#: settings/templates/settings/key.inc.html:8
-msgid "Remove"
-msgstr "Supprimer"
-
 #: inventory/templates/pharmaship/medicine_inventory.html:21
 msgid "Form"
 msgstr "Forme"
@@ -653,7 +716,7 @@ msgid "Non-conform composition"
 msgstr "Composition non-conforme"
 
 #: inventory/templates/pharmaship/medicine_single.inc.html:120
-#: inventory/views_medicine.py:289
+#: inventory/views_medicine.py:290
 msgid "Add a medicine"
 msgstr "Ajouter un médicament"
 
@@ -661,191 +724,216 @@ msgstr "Ajouter un médicament"
 msgid "Add an equivalent"
 msgstr "Ajouter un médicament équivalent"
 
-#: inventory/templates/pharmaship/settings.html:16
+#: inventory/templates/pharmaship/settings/allowance.inc.html:10
+msgid "Disable"
+msgstr "Désactiver"
+
+#: inventory/templates/pharmaship/settings/allowance.inc.html:16
+msgid "Enable"
+msgstr "Activer"
+
+#: inventory/templates/pharmaship/settings/index.html:16
 msgid "Application Settings"
 msgstr "Paramètres de l'application"
 
-#: inventory/templates/pharmaship/settings.html:22
+#: inventory/templates/pharmaship/settings/index.html:22
 #: purchase/templates/purchase/settings.html:26
 msgid "Update Pharmaship Settings"
 msgstr "Mettre à jour les paramètres de Pharmaship"
 
-#: inventory/templates/pharmaship/settings.html:29
+#: inventory/templates/pharmaship/settings/index.html:29
+msgid "Allowances"
+msgstr "Dotations"
+
+#: inventory/templates/pharmaship/settings/index.html:35
+msgid "Additionnal"
+msgstr "Additionnelle"
+
+#: inventory/templates/pharmaship/settings/index.html:47
+msgid "To add an allowance, use the import function."
+msgstr "Pour ajouter une dotation, utilisez la fonction d'importation."
+
+#: inventory/templates/pharmaship/settings/index.html:56
 #: purchase/templates/purchase/settings.html:45
 msgid "Location Manager"
 msgstr "Gestionnaire d'emplacement"
 
-#: inventory/templates/pharmaship/settings.html:36
-#: inventory/templates/pharmaship/settings.html:68
+#: inventory/templates/pharmaship/settings/index.html:63
+#: inventory/templates/pharmaship/settings/index.html:95
 #: purchase/templates/purchase/settings.html:51
 msgid "Add a location"
 msgstr "Ajouter un emplacement"
 
-#: inventory/templates/pharmaship/settings.html:47
+#: inventory/templates/pharmaship/settings/index.html:74
 #: purchase/templates/purchase/settings.html:58
 msgid "Objects with these locations will be linked by default to Pharmacy."
 msgstr ""
 "Les objets avec ces emplacements seront associés par défaut à la pharmacie."
 
-#: inventory/templates/pharmaship/settings.html:59
+#: inventory/templates/pharmaship/settings/index.html:86
 msgid "New location"
 msgstr "Nouvel emplacement"
 
-#: inventory/views_common.py:38
+#: inventory/templates/pharmaship/settings/location.inc.html:8
+#: settings/templates/settings/key.inc.html:8
+msgid "Remove"
+msgstr "Supprimer"
+
+#: inventory/views_common.py:39
 msgid "Contact the CCMM"
 msgstr "Contacter le CCMM"
 
-#: inventory/views_equipment.py:54 inventory/views_equipment.py:87
+#: inventory/views_equipment.py:55 inventory/views_equipment.py:88
 msgid "Medical Article Inventory"
 msgstr "Registre du matériel médical"
 
-#: inventory/views_equipment.py:138
+#: inventory/views_equipment.py:139
 msgid "Add an article"
 msgstr "Ajouter un élément"
 
-#: inventory/views_equipment.py:140
+#: inventory/views_equipment.py:141
 msgid "Add this article"
 msgstr "Ajouter un élément"
 
-#: inventory/views_equipment.py:141 inventory/views_medicine.py:292
-#: inventory/views_medicine.py:348
+#: inventory/views_equipment.py:142 inventory/views_medicine.py:293
+#: inventory/views_medicine.py:349
 msgid "Do not add"
 msgstr "Ne pas ajouter"
 
-#: inventory/views_equipment.py:147
+#: inventory/views_equipment.py:148
 msgid "You are going to add an article for this equipment:"
 msgstr "Vous vous apprêtez à ajouter un article pour ce matériel :"
 
-#: inventory/views_equipment.py:181
+#: inventory/views_equipment.py:182
 msgid "Delete an article"
 msgstr "Supprimer un élément"
 
-#: inventory/views_equipment.py:183
+#: inventory/views_equipment.py:184
 msgid "Delete this article"
 msgstr "Supprimer l'élément"
 
-#: inventory/views_equipment.py:184 inventory/views_medicine.py:124
-#: purchase/views.py:187
+#: inventory/views_equipment.py:185 inventory/views_medicine.py:125
+#: purchase/views.py:200
 msgid "Do not delete"
 msgstr "Ne pas supprimer"
 
-#: inventory/views_equipment.py:191
+#: inventory/views_equipment.py:192
 msgid "You are going to delete this article:"
 msgstr "Vous vous apprêtez à supprimer cet élément :"
 
-#: inventory/views_equipment.py:193 inventory/views_equipment.py:252
-#: inventory/views_equipment.py:302 inventory/views_medicine.py:133
-#: inventory/views_medicine.py:191 inventory/views_medicine.py:241
+#: inventory/views_equipment.py:194 inventory/views_equipment.py:253
+#: inventory/views_equipment.py:303 inventory/views_medicine.py:134
+#: inventory/views_medicine.py:192 inventory/views_medicine.py:242
 msgid "expiring"
 msgstr "expirant le"
 
-#: inventory/views_equipment.py:195 inventory/views_equipment.py:254
-#: inventory/views_equipment.py:304 inventory/views_medicine.py:135
-#: inventory/views_medicine.py:193 inventory/views_medicine.py:243
+#: inventory/views_equipment.py:196 inventory/views_equipment.py:255
+#: inventory/views_equipment.py:305 inventory/views_medicine.py:136
+#: inventory/views_medicine.py:194 inventory/views_medicine.py:244
 msgid "quantity in stock:"
 msgstr "quantité en stock :"
 
-#: inventory/views_equipment.py:240
+#: inventory/views_equipment.py:241
 msgid "Update an article"
 msgstr "Mettre à jour un élément"
 
-#: inventory/views_equipment.py:242
+#: inventory/views_equipment.py:243
 msgid "Update this article"
 msgstr "Mettre à jour l'article"
 
-#: inventory/views_equipment.py:243 inventory/views_equipment.py:344
-#: inventory/views_medicine.py:182 inventory/views_medicine.py:394
-#: purchase/views.py:127 purchase/views.py:285
+#: inventory/views_equipment.py:244 inventory/views_equipment.py:345
+#: inventory/views_medicine.py:183 inventory/views_medicine.py:395
+#: purchase/views.py:140 purchase/views.py:298
 msgid "Do not modify"
 msgstr "Ne pas modifier"
 
-#: inventory/views_equipment.py:250
+#: inventory/views_equipment.py:251
 msgid "You are going to modify this article:"
 msgstr "Vous vous apprêtez à modifier cet élément :"
 
-#: inventory/views_equipment.py:290
+#: inventory/views_equipment.py:291
 msgid "Use an article"
 msgstr "Utiliser un élément"
 
-#: inventory/views_equipment.py:292
+#: inventory/views_equipment.py:293
 msgid "Use this article"
 msgstr "Utiliser l'élément"
 
-#: inventory/views_equipment.py:293 inventory/views_medicine.py:232
+#: inventory/views_equipment.py:294 inventory/views_medicine.py:233
 msgid "Do not use"
 msgstr "Ne pas utiliser"
 
-#: inventory/views_equipment.py:300
+#: inventory/views_equipment.py:301
 msgid "You are going to use this article for a treatment:"
 msgstr "Vous vous apprêtez à utiliser cet article pour un traitement :"
 
-#: inventory/views_equipment.py:341 inventory/views_medicine.py:391
+#: inventory/views_equipment.py:342 inventory/views_medicine.py:392
 msgid "Modify the remarks"
 msgstr "Modifier les remarques"
 
-#: inventory/views_equipment.py:343 inventory/views_medicine.py:393
+#: inventory/views_equipment.py:344 inventory/views_medicine.py:394
 msgid "Update these remarks"
 msgstr "Modifier les remarques"
 
-#: inventory/views_equipment.py:350
+#: inventory/views_equipment.py:351
 msgid "You are going to modify the remarks of this equipment:"
 msgstr "Vous vous apprêtez à modifier les remarques de cet équipement :"
 
-#: inventory/views_medicine.py:121
+#: inventory/views_medicine.py:122
 msgid "Delete a medicine"
 msgstr "Supprimer un médicament"
 
-#: inventory/views_medicine.py:123
+#: inventory/views_medicine.py:124
 msgid "Delete this medicine"
 msgstr "Supprimer ce médicament"
 
-#: inventory/views_medicine.py:131
+#: inventory/views_medicine.py:132
 msgid "You are going to delete this medicine:"
 msgstr "Vous vous apprêtez à supprimer ce médicament :"
 
-#: inventory/views_medicine.py:179
+#: inventory/views_medicine.py:180
 msgid "Update a medicine"
 msgstr "Mettre à jour un médicament"
 
-#: inventory/views_medicine.py:181
+#: inventory/views_medicine.py:182
 msgid "Update this medicine"
 msgstr "Mettre à jour ce médicament"
 
-#: inventory/views_medicine.py:189
+#: inventory/views_medicine.py:190
 msgid "You are going to modify this medicine:"
 msgstr "Vous vous apprêtez à modifier ce médicament :"
 
-#: inventory/views_medicine.py:229
+#: inventory/views_medicine.py:230
 msgid "Use a medicine"
 msgstr "Utiliser un médicament"
 
-#: inventory/views_medicine.py:231
+#: inventory/views_medicine.py:232
 msgid "Use this medicine"
 msgstr "Utiliser ce médicament"
 
-#: inventory/views_medicine.py:239
+#: inventory/views_medicine.py:240
 msgid "You are going to use this medicine for a treatment:"
 msgstr "Vous vous apprêtez à utiliser ce médicament pour un traitement :"
 
-#: inventory/views_medicine.py:291 inventory/views_medicine.py:347
+#: inventory/views_medicine.py:292 inventory/views_medicine.py:348
 msgid "Add this medicine"
 msgstr "Ajouter le médicament"
 
-#: inventory/views_medicine.py:298
+#: inventory/views_medicine.py:299
 msgid "You are going to add a medicine for this molecule:"
 msgstr "Vous vous apprêtez à ajouter un médicament pour ce principe actif :"
 
-#: inventory/views_medicine.py:345
+#: inventory/views_medicine.py:346
 msgid "Add an equivalent medicine"
 msgstr "Ajouter un médicament équivalent"
 
-#: inventory/views_medicine.py:354
+#: inventory/views_medicine.py:355
 msgid "You are going to add an equivalent medicine for this molecule:"
 msgstr ""
 "Vous vous apprêtez à ajouter un médicament équivalent pour ce principe "
 "actif :"
 
-#: inventory/views_medicine.py:357
+#: inventory/views_medicine.py:358
 msgid ""
 "Before adding this equivalent medicine (molecule different from the "
 "allowance), make sure you have had the approval of a doctor."
@@ -853,11 +941,11 @@ msgstr ""
 "Avant d'ajouter ce médicament équivalent (principe actif différent de la "
 "dotation), assurez vous d'avoir eu l'accord d'un médecin."
 
-#: inventory/views_medicine.py:400
+#: inventory/views_medicine.py:401
 msgid "You are going to modify the remarks of this molecule:"
 msgstr "Vous vous apprêtez à modifier les remarques de ce principe actif :"
 
-#: inventory/views_settings.py:85
+#: inventory/views_settings.py:109
 msgid "You can't delete this location."
 msgstr "Vous ne pouvez pas supprimer cet emplacement."
 
@@ -865,7 +953,7 @@ msgstr "Vous ne pouvez pas supprimer cet emplacement."
 msgid "Populate automatically"
 msgstr "Remplir automatiquement"
 
-#: purchase/forms.py:33
+#: purchase/forms.py:33 purchase/models.py:49
 msgid "Requested Date"
 msgstr "Date souhaitée"
 
@@ -901,13 +989,29 @@ msgstr "Entièrement reçu"
 msgid "Cancelled"
 msgstr "Annulé"
 
+#: purchase/models.py:47 purchase/templates/purchase/index.html:13
+msgid "Reference"
+msgstr "Référence"
+
+#: purchase/models.py:48
+msgid "Date of Creation"
+msgstr "Date de création"
+
 #: purchase/models.py:50 purchase/templates/purchase/index.html:16
 msgid "Status"
 msgstr "Statut"
 
-#: purchase/templates/purchase/index.html:13
-msgid "Reference"
-msgstr "Référence"
+#: purchase/models.py:51
+msgid "Instructions"
+msgstr "Instructions"
+
+#: purchase/models.py:52
+msgid "Port of Delivery"
+msgstr "Port de livraison"
+
+#: purchase/models.py:53
+msgid "Item Type"
+msgstr "Type d'objet"
 
 #: purchase/templates/purchase/index.html:25
 msgid "View this requisition"
@@ -917,7 +1021,7 @@ msgstr "Consulter cette commande"
 msgid "New Requisition"
 msgstr "Nouvelle commande"
 
-#: purchase/templates/purchase/item.inc.html:13
+#: purchase/templates/purchase/item.inc.html:18
 msgid "Delete this item"
 msgstr "Supprimer cet élément"
 
@@ -929,7 +1033,7 @@ msgstr "Modifier le statut"
 msgid "Change Name"
 msgstr "Modifier le nom"
 
-#: purchase/templates/purchase/requisition.html:59 purchase/views.py:186
+#: purchase/templates/purchase/requisition.html:59 purchase/views.py:199
 msgid "Delete this requisition"
 msgstr "Supprimer cette commande"
 
@@ -937,15 +1041,15 @@ msgstr "Supprimer cette commande"
 msgid "Item Description"
 msgstr "Description de l'item"
 
-#: purchase/templates/purchase/requisition.html:90
+#: purchase/templates/purchase/requisition.html:91
 msgid "Item Name"
 msgstr "Nom de l'item"
 
-#: purchase/templates/purchase/requisition.html:96
+#: purchase/templates/purchase/requisition.html:97
 msgid "Add item"
 msgstr "Ajouter un item"
 
-#: purchase/templates/purchase/requisition.html:128
+#: purchase/templates/purchase/requisition.html:132
 msgid "Save instructions"
 msgstr "Enregistrer les instructions"
 
@@ -977,7 +1081,7 @@ msgstr "Vous vous apprêtez à modifier le statut de la commande :"
 msgid "Do not change"
 msgstr "Ne pas modifier"
 
-#: purchase/templates/purchase/status.html:20 purchase/views.py:126
+#: purchase/templates/purchase/status.html:20 purchase/views.py:139
 msgid "Update the status"
 msgstr "Mettre à jour le statut"
 
@@ -985,51 +1089,55 @@ msgstr "Mettre à jour le statut"
 msgid "Requisition Details"
 msgstr "Détails de la commande"
 
-#: purchase/views.py:124
+#: purchase/views.py:60 purchase/views.py:75
+msgid "Requisition already sent!"
+msgstr "Commande déjà envoyée !"
+
+#: purchase/views.py:137
 msgid "Modify the status"
 msgstr "Modifier le statut"
 
-#: purchase/views.py:133
+#: purchase/views.py:146
 msgid "You are going to modify the status this requisition:"
 msgstr "Vous vous apprêtez à modifier les remarques de cette commande :"
 
-#: purchase/views.py:162
+#: purchase/views.py:175
 msgid "Item added"
 msgstr "Élément ajouté"
 
-#: purchase/views.py:184
+#: purchase/views.py:197
 msgid "Delete a requisition"
 msgstr "Supprimer une commande"
 
-#: purchase/views.py:193
+#: purchase/views.py:206
 msgid "You are going to delete the requisition:"
 msgstr "Vous vous apprêtez à supprimer cette commande :"
 
-#: purchase/views.py:196
+#: purchase/views.py:209
 msgid "The deletion is permanent!"
 msgstr "La suppression est définitive !"
 
-#: purchase/views.py:233
+#: purchase/views.py:246
 msgid "Create a requisition"
 msgstr "Créer une commande"
 
-#: purchase/views.py:235
+#: purchase/views.py:248
 msgid "Create this requisition"
 msgstr "Créer cette commande"
 
-#: purchase/views.py:236
+#: purchase/views.py:249
 msgid "Do not create"
 msgstr "Ne pas créer"
 
-#: purchase/views.py:282 purchase/views.py:284
+#: purchase/views.py:295 purchase/views.py:297
 msgid "Change the name"
 msgstr "Modifier le nom"
 
-#: purchase/views.py:291
+#: purchase/views.py:304
 msgid "You are going to modify the name of the requisition:"
 msgstr "Vous vous apprêtez à modifier le nom de cette commande :"
 
-#: purchase/views.py:360
+#: purchase/views.py:373
 msgid "Requisition"
 msgstr "Commande"
 
@@ -1040,6 +1148,42 @@ msgstr "Fichier"
 #: settings/forms.py:26
 msgid "Key"
 msgstr "Clé"
+
+#: settings/models.py:7
+msgid "Captain"
+msgstr "Commandant"
+
+#: settings/models.py:8
+msgid "Chief Officer"
+msgstr "Second capitaine"
+
+#: settings/models.py:9
+msgid "Deck Officer"
+msgstr "Officier pont"
+
+#: settings/models.py:10
+msgid "Chief Engineer"
+msgstr "Chef mécanicien"
+
+#: settings/models.py:11
+msgid "Engineer"
+msgstr "Mécanicien"
+
+#: settings/models.py:12
+msgid "Ratings"
+msgstr "Équipage"
+
+#: settings/models.py:15
+msgid "Deck"
+msgstr "Pont"
+
+#: settings/models.py:16
+msgid "Engine"
+msgstr "Machine"
+
+#: settings/models.py:17
+msgid "Civil"
+msgstr "Civil"
 
 #: settings/models.py:21
 msgid "Function"

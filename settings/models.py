@@ -4,17 +4,17 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser
    
 FUNCTIONS = (
-        (u'00', "Captain"),
-        (u'10', "Chief Officer"),
-        (u'11', "Deck Officer"),
-        (u'20', "Chief Engineer"),
-        (u'21', "Engineer"),
-        (u'99', "Ratings"),
+        (u'00', _("Captain")),
+        (u'10', _("Chief Officer")),
+        (u'11', _("Deck Officer")),
+        (u'20', _("Chief Engineer")),
+        (u'21', _("Engineer")),
+        (u'99', _("Ratings")),
     )
 DEPARTMENTS = (
-    (u'D', "Deck"),
-    (u'E', "Engine"),
-    (u'C', "Civil"),
+    (u'D', _("Deck")),
+    (u'E', _("Engine")),
+    (u'C', _("Civil")),
 )
 
 class User(AbstractUser):    
