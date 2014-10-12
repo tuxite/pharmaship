@@ -32,7 +32,7 @@
                 <p class="item-tag">
                     <b>{% trans "Tags:" %}</b>
                     {% for tag in object.tag.all %}
-                    <span class="label label-primary">{{ tag.name }}</span>{% endfor %}
+                    <span class="label label-primary">{{ tag }}</span>{% endfor %}
                 </p>
                 {% endif %}
                 <p>

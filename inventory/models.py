@@ -7,88 +7,89 @@ from django.contrib.contenttypes import generic
 import utils
 
 # Constants
-## Transaction type values
+# Transaction type values
 TYPE_CHOICES = (
-        (1, _('In')),
-        (2, _('Used')),
-        (4, _('Perished')),
-        (8, _('Physical Count')),
-        (9, _('Other')),
-    )
+    (1, _('In')),
+    (2, _('Used')),
+    (4, _('Perished')),
+    (8, _('Physical Count')),
+    (9, _('Other')),
+)
 
-## Medicine "dangerosity" list values
+# Medicine "dangerosity" list values
 DRUG_LIST_CHOICES = (
-        (0, _('None')),
-        (1, _('List I')),
-        (2, _('List II')),
-        (9, _('Narcotics')),
-    )
+    (0, _('None')),
+    (1, _('List I')),
+    (2, _('List II')),
+    (9, _('Narcotics')),
+)
 
-## Dosage form possible values
+# Dosage form possible values
 DRUG_FORM_CHOICES = (
-        (1, _('Tablet')),
-        (2, _('Ampoule')),
-        (3, _('Capsule')),
-        (5, 'Lyophilisat oral'),
-        (6, 'Sachet'),
-        (7, _('Suppository')),
-        (8, 'Capsule'),
+    (1, _('Tablet')),
+    (2, _('Ampoule')),
+    (3, _('Capsule')),
+    (5, 'Lyophilisat oral'),
+    (6, 'Sachet'),
+    (7, _('Suppository')),
+    (8, 'Capsule'),
 
-        (10, 'Tube pommade'),
-        (11, 'Tube crème'),
-        (12, 'Gel buccal'),
-        (13, 'Unidose gel'),
+    (10, 'Tube pommade'),
+    (11, 'Tube crème'),
+    (12, 'Gel buccal'),
+    (13, 'Unidose gel'),
 
-        (40, 'Seringue pré-remplie'),
+    (40, 'Seringue pré-remplie'),
 
-        (50, 'Solution pour perfusion'),
-        (51, 'Solution injectable'),
-        (52, 'Solution acqueuse'),
-        (53, 'Solution moussante'),
-        (54, 'Solution alcoolisée'),
-        (55, 'Solution auriculaire'),
-        (56, 'Solution'),
+    (50, 'Solution pour perfusion'),
+    (51, 'Solution injectable'),
+    (52, 'Solution acqueuse'),
+    (53, 'Solution moussante'),
+    (54, 'Solution alcoolisée'),
+    (55, 'Solution auriculaire'),
+    (56, 'Solution'),
 
-        (90, 'Bouteille'),
-        (91, 'Flacon'),
-        (92, 'Dispositif'),
-        (93, 'Pansement adhésif cutané'),
-        (94, 'Unidose'),
+    (90, 'Bouteille'),
+    (91, 'Flacon'),
+    (92, 'Dispositif'),
+    (93, 'Pansement adhésif cutané'),
+    (94, 'Unidose'),
 
-        (100, 'Collyre unidose'),
-        (101, 'Collyre flacon'),
-        (102, 'Collutoire'),
-        (103, 'Pommade ophtalmique'),
-    )
+    (100, 'Collyre unidose'),
+    (101, 'Collyre flacon'),
+    (102, 'Collutoire'),
+    (103, 'Pommade ophtalmique'),
+)
 
-## Route of administration possible values
+# Route of administration possible values
 DRUG_ROA_CHOICES = (
-        (1, _('Oral')),
+    (1, _('Oral')),
 
-        (5, _('Parenteral')),
-        (6, _('Subcutaneous')),
+    (5, _('Parenteral')),
+    (6, _('Subcutaneous')),
 
-        (10, 'Locale'),
-        (11, 'Transdermique'),
+    (10, 'Locale'),
+    (11, 'Transdermique'),
 
-        (20, 'Inhalation'),
-        (21, 'Nébulisation'),
+    (20, 'Inhalation'),
+    (21, 'Nébulisation'),
 
-        (30, 'Buccale'),
-        (31, 'Sublinguale'),
-        (32, 'Bain de bouche'),
+    (30, 'Buccale'),
+    (31, 'Sublinguale'),
+    (32, 'Bain de bouche'),
 
-        (40, 'Rectale'),
-        (41, 'Vaginale'),
+    (40, 'Rectale'),
+    (41, 'Vaginale'),
 
-        (50, 'Oculaire'),
-    )
+    (50, 'Oculaire'),
+)
+
 
 # Models
 class Allowance(models.Model):
     """Model for articles and medicines allowances."""
-    name = models.CharField(max_length=100) # Example: Dotation A
-    additional = models.BooleanField(default=False) # For use with complements. True will add quantity, false will be treated as an absolute quantity.
+    name = models.CharField(max_length=100)  # Example: Dotation A
+    additional = models.BooleanField(default=False)  # For use with complements. True will add quantity, false will be treated as an absolute quantity.
 
     def __unicode__(self):
         return self.name
@@ -102,18 +103,18 @@ class GroupManager(models.Manager):
     For deserialization purpose only.
     """
     def get_by_natural_key(self, name):
-        return self.get(name = name)
+        return self.get(name=name)
 
-        
+
 class MoleculeGroup(models.Model):
     """Model for groups attached to an INN (Molecule)."""
-    objects = GroupManager() # For deserialization
+    objects = GroupManager()  # For deserialization
 
     name = models.CharField(max_length=100) # Example: Cardiology
     order = models.IntegerField() # Example: 1
 
     def __unicode__(self):
-        return u"{0}. {1}".format(self.order, self.name)
+        return u"{0}. {1}".format(self.order, _(self.name))
 
     def natural_key(self):
             return (self.name,)
@@ -131,7 +132,7 @@ class EquipmentGroup(models.Model):
     order = models.IntegerField() # Example: 1
 
     def __unicode__(self):
-        return u"{0}. {1}".format(self.order, self.name)
+        return u"{0}. {1}".format(self.order, _(self.name))
 
     def natural_key(self):
             return (self.name,)
@@ -158,7 +159,7 @@ class Tag(models.Model):
     comment = models.TextField(blank=True, null=True) # Description of the tag, if any
 
     def __unicode__(self):
-        return self.name
+        return unicode(_(self.name))
 
     def natural_key(self):
             return (self.name,)
@@ -222,7 +223,7 @@ class MoleculeManager(models.Manager):
     """Manager for class Molecule."""
     def get_by_natural_key(self, name, roa, dosage_form, composition):
         return self.get(name=name, roa=roa, dosage_form=dosage_form, composition=composition)
-    
+
     def missing(self):
         """Returns the quantity to order to meet the requirement."""
         exp_delay = utils.delay(Settings.objects.latest('id').expire_date_warning_delay)
@@ -233,7 +234,7 @@ class MoleculeManager(models.Manager):
         molecule_list = Molecule.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('medicine_set').order_by('name')
         # Medicine quantity transaction list
         qty_transaction_list = QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(Medicine))
-        
+
         result_list = []
         # Selection of the current quantities
         for molecule in molecule_list:
@@ -246,15 +247,15 @@ class MoleculeManager(models.Manager):
                 for transaction in qty_transaction_list:
                     if transaction.object_id == medicine.id:
                         current_qty += transaction.value
-            
+
             # Then, parse required quantities
             required_qty = utils.req_qty_element(molecule, req_qty_list)
-            
+
             # Finally, add the molecule with new attribute if current < required
             if current_qty < required_qty:
                 molecule.missing = (required_qty - current_qty)
                 result_list.append(molecule)
-                
+
         return result_list
 
 
@@ -283,7 +284,7 @@ class Molecule(models.Model):
         """Outputs a string for Purchase application."""
         s = u"{0} {1} - {2} {3}".format(_("Dosage Form:"), self.get_dosage_form_display(), _("Composition:"), self.composition)
         return s
-    
+
     class Meta:
         ordering = ('name', )
         unique_together = (('name', 'roa', 'dosage_form', 'composition'),)
@@ -336,7 +337,7 @@ class EquipmentManager(models.Manager):
             perishable = perishable,
             group = EquipmentGroup.objects.get_by_natural_key(name=group[0],),
             )
-    
+
     def missing(self):
         """Returns the quantity to order to meet the requirement."""
         exp_delay = utils.delay(Settings.objects.latest('id').expire_date_warning_delay)
@@ -347,7 +348,7 @@ class EquipmentManager(models.Manager):
         equipment_list = Equipment.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('article_set').order_by('name')
         # Article quantity transaction list
         qty_transaction_list = QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(Article))
-        
+
         result_list = []
         # Selection of the current quantities
         for equipment in equipment_list:
@@ -360,15 +361,15 @@ class EquipmentManager(models.Manager):
                 for transaction in qty_transaction_list:
                     if transaction.object_id == article.id:
                         current_qty += transaction.value
-            
+
             # Then, parse required quantities
             required_qty = utils.req_qty_element(equipment, req_qty_list)
-            
+
             # Finally, add the equipment with new attribute if current < required
             if current_qty < required_qty:
                 equipment.missing = (required_qty - current_qty)
                 result_list.append(equipment)
-                
+
         return result_list
 
 class Equipment(models.Model):
@@ -395,7 +396,7 @@ class Equipment(models.Model):
         """Outputs a string for Purchase application."""
         s = u"{0} {1}".format(_("Packaging:"), self.packaging)
         return s
-        
+
     class Meta:
         ordering = ('name', )
         unique_together = (('name', 'packaging', 'consumable', 'perishable', 'group'),)

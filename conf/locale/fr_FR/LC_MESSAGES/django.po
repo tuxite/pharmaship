@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pharmaship\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-12 16:01+0200\n"
+"POT-Creation-Date: 2014-10-12 19:05+0200\n"
 "PO-Revision-Date: 2013-06-07 21:30+0200\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: Association DSM <contact@devmaretique.com>\n"
@@ -100,7 +100,7 @@ msgstr "Erreur de signature"
 #: inventory/views_medicine.py:385 inventory/views_settings.py:99
 #: inventory/views_settings.py:109 purchase/views.py:86 purchase/views.py:108
 #: purchase/views.py:130 purchase/views.py:179 purchase/views.py:240
-#: purchase/views.py:288 settings/views.py:42 settings/views.py:71
+#: purchase/views.py:288 settings/views.py:43 settings/views.py:72
 msgid "Something went wrong!"
 msgstr "Une erreur est survenue !"
 
@@ -153,7 +153,7 @@ msgstr "Clé supprimée"
 msgid "Settings"
 msgstr "Paramètres"
 
-#: core/views.py:41 settings/views.py:48
+#: core/views.py:41 settings/views.py:49
 msgid "Import"
 msgstr "Importation"
 
@@ -170,7 +170,7 @@ msgstr "Importation"
 msgid "Data updated"
 msgstr "Données mises à jour"
 
-#: core/views.py:85 inventory/views_common.py:30
+#: core/views.py:85 inventory/views_common.py:29
 msgid "Home"
 msgstr "Accueil"
 
@@ -183,8 +183,8 @@ msgid "Quantity in stock"
 msgstr "Quantité en stock"
 
 #: inventory/forms.py:27 inventory/forms.py:42 inventory/forms.py:54
-#: inventory/forms.py:82 inventory/forms.py:94 inventory/models.py:297
-#: inventory/models.py:409
+#: inventory/forms.py:82 inventory/forms.py:94 inventory/models.py:295
+#: inventory/models.py:407
 #: inventory/templates/pharmaship/article_single.inc.html:54
 #: inventory/templates/pharmaship/equipment_inventory.html:24
 #: inventory/templates/pharmaship/medicine_inventory.html:24
@@ -215,10 +215,6 @@ msgstr "Principe actif"
 #: inventory/templates/pharmaship/equipment_inventory.html:21
 msgid "Packaging"
 msgstr "Conditionnement"
-
-#: inventory/forms.py:118
-msgid "To Delete"
-msgstr "À supprimer"
 
 #: inventory/import_data.py:155 inventory/import_data.py:178
 #: inventory/import_data.py:192 inventory/import_data.py:211
@@ -258,101 +254,101 @@ msgstr "Principes actifs hors dotation"
 msgid "Equipement Orphans"
 msgstr "Matériels hors dotation"
 
-#: inventory/models.py:14
+#: inventory/models.py:12
 msgid "In"
 msgstr "Entrée"
 
-#: inventory/models.py:15
+#: inventory/models.py:13
 msgid "Used"
 msgstr "Utilisé"
 
-#: inventory/models.py:16
+#: inventory/models.py:14
 msgid "Perished"
 msgstr "Périmé"
 
-#: inventory/models.py:17
+#: inventory/models.py:15
 msgid "Physical Count"
 msgstr "Comptage"
 
-#: inventory/models.py:18
+#: inventory/models.py:16
 msgid "Other"
 msgstr "Autre"
 
-#: inventory/models.py:23
+#: inventory/models.py:21
 msgid "None"
 msgstr "Aucun"
 
-#: inventory/models.py:24
+#: inventory/models.py:22
 msgid "List I"
 msgstr "Liste I"
 
-#: inventory/models.py:25
+#: inventory/models.py:23
 msgid "List II"
 msgstr "Liste II"
 
-#: inventory/models.py:26
+#: inventory/models.py:24
 msgid "Narcotics"
 msgstr "Stupéfiants"
 
-#: inventory/models.py:31
+#: inventory/models.py:29
 msgid "Tablet"
 msgstr "Comprimé"
 
-#: inventory/models.py:32
+#: inventory/models.py:30
 msgid "Ampoule"
 msgstr "Ampoule"
 
-#: inventory/models.py:33
+#: inventory/models.py:31
 msgid "Capsule"
 msgstr ""
 
-#: inventory/models.py:36
+#: inventory/models.py:34
 msgid "Suppository"
 msgstr "Gélule"
 
-#: inventory/models.py:68
+#: inventory/models.py:66
 msgid "Oral"
 msgstr "Orale"
 
-#: inventory/models.py:70
+#: inventory/models.py:68
 msgid "Parenteral"
 msgstr "Parentérale"
 
-#: inventory/models.py:71
+#: inventory/models.py:69
 msgid "Subcutaneous"
 msgstr "Sous-cutanée"
 
-#: inventory/models.py:175
+#: inventory/models.py:173
 #: inventory/templates/pharmaship/settings/index.html:61
 msgid "Primary"
 msgstr "Principal"
 
-#: inventory/models.py:176
+#: inventory/models.py:174
 #: inventory/templates/pharmaship/settings/index.html:62
 msgid "Secondary"
 msgstr "Secondaire"
 
-#: inventory/models.py:201 purchase/templates/purchase/index.html:15
+#: inventory/models.py:199 purchase/templates/purchase/index.html:15
 msgid "Type"
 msgstr "Type"
 
-#: inventory/models.py:204
+#: inventory/models.py:202
 msgid "Value"
 msgstr "Valeur"
 
-#: inventory/models.py:216
+#: inventory/models.py:214
 msgid "Text"
 msgstr "Texte"
 
-#: inventory/models.py:286
+#: inventory/models.py:284
 msgid "Dosage Form:"
 msgstr "Forme :"
 
-#: inventory/models.py:286 inventory/templates/pharmaship/index.html:126
+#: inventory/models.py:284 inventory/templates/pharmaship/index.html:126
 msgid "Composition:"
 msgstr "Composition :"
 
-#: inventory/models.py:296 inventory/models.py:408
+#: inventory/models.py:294 inventory/models.py:406
 #: inventory/templates/pharmaship/equipment_inventory.html:20
 #: inventory/templates/pharmaship/medicine_inventory.html:20
 #: inventory/templates/pharmaship/settings/index.html:34 purchase/forms.py:51
@@ -361,27 +357,27 @@ msgstr "Composition :"
 msgid "Name"
 msgstr "Nom"
 
-#: inventory/models.py:301
+#: inventory/models.py:299
 msgid "Non-conform Molecule"
 msgstr "Molécule non-conforme"
 
-#: inventory/models.py:302
+#: inventory/models.py:300
 msgid "Non-conform Composition"
 msgstr "Composition non-conforme"
 
-#: inventory/models.py:398
+#: inventory/models.py:396
 msgid "Packaging:"
 msgstr "Conditionnement :"
 
-#: inventory/models.py:413
+#: inventory/models.py:411
 msgid "Non-conform Packaging"
 msgstr "Conditionnement non-conforme"
 
-#: inventory/models.py:441
+#: inventory/models.py:439
 msgid "Allowance"
 msgstr "Dotation"
 
-#: inventory/models.py:442
+#: inventory/models.py:440
 msgid "Warning Delay for Expiration Dates"
 msgstr "Délai d'avertissement avant expiration"
 
@@ -779,7 +775,7 @@ msgstr "Nouvel emplacement"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: inventory/views_common.py:39
+#: inventory/views_common.py:38
 msgid "Contact the CCMM"
 msgstr "Contacter le CCMM"
 
@@ -957,6 +953,10 @@ msgstr "Remplir automatiquement"
 msgid "Requested Date"
 msgstr "Date souhaitée"
 
+#: purchase/forms.py:37 purchase/models.py:53
+msgid "Item Type"
+msgstr "Type d'objet"
+
 #: purchase/models.py:8
 msgid "Draft"
 msgstr "Brouillon"
@@ -1008,10 +1008,6 @@ msgstr "Instructions"
 #: purchase/models.py:52
 msgid "Port of Delivery"
 msgstr "Port de livraison"
-
-#: purchase/models.py:53
-msgid "Item Type"
-msgstr "Type d'objet"
 
 #: purchase/templates/purchase/index.html:25
 msgid "View this requisition"
@@ -1253,6 +1249,9 @@ msgstr "Propriétaire"
 msgid "Key ID"
 msgstr "Identifiant de clé"
 
+#~ msgid "To Delete"
+#~ msgstr "À supprimer"
+
 #~ msgid "Database updated"
 #~ msgstr "Base de données mise à jour"
 
@@ -1327,3 +1326,78 @@ msgstr "Identifiant de clé"
 
 #~ msgid "New orphans:"
 #~ msgstr "Nouveaux objets hors dotation :"
+
+# Added manually
+
+## Tags
+msgid "Cold Storage"
+msgstr "Conservation au froid"
+
+## Molecule groups
+msgid "Cardiology"
+msgstr "Cardiologie"
+
+msgid "Gastroenterology"
+msgstr "Gastro-entérologie"
+
+msgid "Antipyretics Analgesics Anti-inflammatory Antispasmodics"
+msgstr "Antalgiques Antipyrétiques Antispasmodiques Anti-inflammatoires"
+
+msgid "Psychiatry - Neurology"
+msgstr "Psychiatrie - Neurologie"
+
+msgid "Allergology"
+msgstr "Allergologie"
+
+msgid "Pneumonology"
+msgstr "Pneumologie"
+
+msgid "Infectiology - Parasitology"
+msgstr "Infectiologie - Parasitologie"
+
+msgid "Resuscitation"
+msgstr "Réanimation"
+
+msgid "Dermatology"
+msgstr "Dermatologie"
+
+msgid "Ophthalmology"
+msgstr "Ophtalmologie"
+
+msgid "Oto-Rhino-Laryngology - Stomatology"
+msgstr "Oto-Rhino-Laryngologie - Stomatologie"
+
+msgid "Local Anesthetics"
+msgstr "Anésthésiques locaux"
+
+## Equipment groups
+
+msgid "Resuscitation equipment"
+msgstr "Matériel de réanimation"
+
+msgid "Dressings and sutures"
+msgstr "Pansements et matériel de suture"
+
+msgid "Instruments"
+msgstr "Instruments"
+
+msgid "Examination equipment, medical surveillance"
+msgstr "Matériel d'examen et de surveillance médicale"
+
+msgid "Equipment for injection, perfusion, puncture and catheterization"
+msgstr "Matériel d'injection, de perfusion, de ponction et de sondage"
+
+msgid "General medical equipment"
+msgstr "Matériel médical général"
+
+msgid "Immobilization and containment equipment"
+msgstr "Matériel d'immobilisation et de contention"
+
+msgid "Disinfection - Disinfestation - Protection"
+msgstr "Désinfection - Désinsectisation - Protection"
+
+msgid "Material for telecardiology"
+msgstr "Matériel de téléconsultation cardiologique"
+
+msgid "First Aid Kit"
+msgstr "Trousse de Premiers Secours"

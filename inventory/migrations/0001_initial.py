@@ -8,8 +8,8 @@ def addTags(apps, schema_editor):
     Tag = apps.get_model("inventory", "Tag")
     db_alias = schema_editor.connection.alias
     Tag.objects.using(db_alias).bulk_create([
-        Tag(pk=1, name="Usage courant"),
-        Tag(pk=2, name="Conservation au froid")
+        Tag(pk=1, name="Common Use"),
+        Tag(pk=2, name="Cold Storage")
     ])
 
 def addGroups(apps, schema_editor):
@@ -18,30 +18,30 @@ def addGroups(apps, schema_editor):
     EquipmentGroup = apps.get_model("inventory", "EquipmentGroup")
     db_alias = schema_editor.connection.alias
     MoleculeGroup.objects.using(db_alias).bulk_create([
-        MoleculeGroup(pk=1, name="Cardiologie", order=1),
-        MoleculeGroup(pk=2, name="Gastro-Entérologie", order=2),
-        MoleculeGroup(pk=3, name="Antalgiques Antipyrétiques Antispasmodiques Anti-inflammatoires", order=3),
-        MoleculeGroup(pk=4, name="Psychatrie - Neurologie", order=4),
-        MoleculeGroup(pk=5, name="Allergologie", order=5),
-        MoleculeGroup(pk=6, name="Pneumologie", order=6),
-        MoleculeGroup(pk=7, name="Infectiologie - Parasitologie", order=7),
-        MoleculeGroup(pk=8, name="Réanimation", order=8),
-        MoleculeGroup(pk=9, name="Dermatologie", order=9),
-        MoleculeGroup(pk=10, name="Ophtalmologie", order=10),
-        MoleculeGroup(pk=11, name="Oto-Rhino-Laryngologie - Stomatologie", order=11),
-        MoleculeGroup(pk=12, name="Anésthésiques locaux", order=12),
+        MoleculeGroup(pk=1, name="Cardiology", order=1),
+        MoleculeGroup(pk=2, name="Gastroenterology", order=2),
+        MoleculeGroup(pk=3, name="Antipyretics Analgesics Anti-inflammatory Antispasmodics", order=3),
+        MoleculeGroup(pk=4, name="Psychiatry - Neurology", order=4),
+        MoleculeGroup(pk=5, name="Allergology", order=5),
+        MoleculeGroup(pk=6, name="Pneumonology", order=6),
+        MoleculeGroup(pk=7, name="Infectiology - Parasitology", order=7),
+        MoleculeGroup(pk=8, name="Resuscitation", order=8),
+        MoleculeGroup(pk=9, name="Dermatology", order=9),
+        MoleculeGroup(pk=10, name="Ophthalmology", order=10),
+        MoleculeGroup(pk=11, name="Oto-Rhino-Laryngology - Stomatology", order=11),
+        MoleculeGroup(pk=12, name="Local Anesthetics", order=12),
     ])
     EquipmentGroup.objects.using(db_alias).bulk_create([
-        EquipmentGroup(pk=1, name="Matériel de réanimation", order=1),
-        EquipmentGroup(pk=2, name="Pansements et matériel de suture", order=2),
+        EquipmentGroup(pk=1, name="Resuscitation equipment", order=1),
+        EquipmentGroup(pk=2, name="Dressings and sutures", order=2),
         EquipmentGroup(pk=3, name="Instruments", order=3),
-        EquipmentGroup(pk=4, name="Matériel d'examen et de surveillance médicale", order=4),
-        EquipmentGroup(pk=5, name="Matériel d'injection, de perfusion, de ponction et de sondage", order=5),
-        EquipmentGroup(pk=6, name="Matériel médical général", order=6),
-        EquipmentGroup(pk=7, name="Matériel d'immobilisation et de contention", order=7),
-        EquipmentGroup(pk=8, name="Désinfection  - Désinsectisation - Protection", order=8),
-        EquipmentGroup(pk=9, name="Matériel de téléconsultation cardiologique", order=9),
-        EquipmentGroup(pk=10, name="Trousse de Premiers Secours", order=10),
+        EquipmentGroup(pk=4, name="Examination equipment, medical surveillance", order=4),
+        EquipmentGroup(pk=5, name="Equipment for injection, perfusion, puncture and catheterization", order=5),
+        EquipmentGroup(pk=6, name="General medical equipment", order=6),
+        EquipmentGroup(pk=7, name="Immobilization and containment equipment", order=7),
+        EquipmentGroup(pk=8, name="Disinfection - Disinfestation - Protection", order=8),
+        EquipmentGroup(pk=9, name="Material for telecardiology", order=9),
+        EquipmentGroup(pk=10, name="First Aid Kit", order=10),
     ])
 
 def addAllowance(apps, schema_editor):
@@ -51,7 +51,7 @@ def addAllowance(apps, schema_editor):
     Allowance.objects.using(db_alias).bulk_create([
         Allowance(pk=1, name="Hors dotation", additional=False),
     ])
-    
+
 def addLocation(apps, schema_editor):
     # Adds default locations to the database
     Location = apps.get_model("inventory", "Location")
@@ -59,7 +59,7 @@ def addLocation(apps, schema_editor):
     Location.objects.using(db_alias).bulk_create([
         Location(pk=1, primary="Pharmacy", secondary=""),
     ])
-     
+
 def addSettings(apps, schema_editor):
     # Adds default locations to the database
     Settings = apps.get_model("inventory", "Settings")
@@ -67,9 +67,9 @@ def addSettings(apps, schema_editor):
     db_alias = schema_editor.connection.alias
     Settings.objects.using(db_alias).bulk_create([
         Settings(pk=1, expire_date_warning_delay=70),
-    ]) 
+    ])
     Settings.objects.get(pk=1).allowance.add(Allowance.objects.get(pk=1))
-    
+
 class Migration(migrations.Migration):
 
     dependencies = [
