@@ -51,8 +51,14 @@ def item_delete(request, item_id, requisition_id):
     """Deletes an item from a requisition."""
     # Selecting the item
     item = get_object_or_404(models.Item, pk=item_id)
-    item.delete()
-    return HttpResponse('')
+    # Selecting the requisition
+    requisition = get_object_or_404(models.Requisition, pk=requisition_id)
+    if requisition.status == 0:
+        item.delete()
+        return HttpResponse('')
+    else:
+        data = json.dumps({'error': _('Requisition already sent!')})
+        return HttpResponseBadRequest(data, content_type = "application/json")
 
 @permission_required('purchase.item.can_change')
 def item_update(request):
@@ -62,8 +68,15 @@ def item_update(request):
         form = forms.UpdateItemQty(request.POST) 
         if form.is_valid(): 
             # Process the data in form.cleaned_data
+            requisition_id = form.cleaned_data['requisition_id']
+            requisition = get_object_or_404(models.Requisition, pk=requisition_id)
+            if requisition.status > 0:
+                # The requisition as already been sent
+                data = json.dumps({'error': _('Requisition already sent!')})
+                return HttpResponseBadRequest(data, content_type = "application/json")
+                
             item_id = form.cleaned_data['item_id']
-            item = get_object_or_404(models.Item, pk=item_id)
+            item = get_object_or_404(models.Item, pk=item_id)            
             item.quantity = form.cleaned_data['item_qty']
             item.save()
             data = json.dumps({'success':_('Data updated'), 'id': item_id})

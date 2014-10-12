@@ -16,9 +16,10 @@ requisition_patterns = patterns('purchase.views',
 )
 
 item_patterns = patterns('purchase.views',    
-    url(r'^(?P<requisition_id>\d+)/add$', 'item_add', name="add"),
-    url(r'^(?P<requisition_id>\d+)/item/(?P<item_id>\d+)/delete$', 'item_delete', name="delete"), 
-    url(r'^update$', 'item_update', name="update"),  
+    # Item related
+    url(r'^requisition/(?P<requisition_id>\d+)/add$', 'item_add', name="add"),
+    url(r'^requisition/(?P<requisition_id>\d+)/item/(?P<item_id>\d+)/delete$', 'item_delete', name="delete"),
+    url(r'^item/update$', 'item_update', name="update"),  
 )
 
 urlpatterns = patterns('purchase.views',
@@ -28,6 +29,6 @@ urlpatterns = patterns('purchase.views',
     url(r'^$', 'index', name="settings"),
     # Requisition
     url(r'requisition/', include(requisition_patterns, namespace="requisition")),
-    url(r'item/', include(item_patterns, namespace="item")),
+    url(r'^', include(item_patterns, namespace="item")),
 )
 
