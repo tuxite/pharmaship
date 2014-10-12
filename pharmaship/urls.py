@@ -14,6 +14,7 @@ js_info_dict = {
 urlpatterns = patterns('',
     # Load urls of Core application
     url(r'^', include('core.urls', namespace="core", app_name="core")),
+    
     # Load urls of Inventory application
     url(r'^pharmaship/', include('inventory.urls', namespace='pharmaship', app_name='inventory')),
 

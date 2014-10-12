@@ -12,15 +12,6 @@ from core.import_data import BaseImport
 from core.manage_key import KeyManager
 from core.views import settings_links, settings_validation
 
-FUNCTIONS = (
-		(u'00', "Captain"),
-		(u'10', "Chief Officer"),
-		(u'11', "Deck Officer"),
-		(u'20', "Chief Engineer"),
-		(u'21', "Engineer"),
-		(u'99', "Ratings"),
-	)
-
 @login_required
 def index(request):
     """Displays differents forms to configure Pharmaship."""
@@ -67,7 +58,6 @@ def import_key(request):
     """Displays a form to import a PGP key to Onboard Assistant."""
     if request.method == 'POST' and request.is_ajax():
         f = forms.ImportKeyForm(request.POST, request.FILES) # A form bound to the POST data
-        print f
         if f.is_valid(): # All validation rules pass
             # Process the data in form.cleaned_data
             import_file = request.FILES['file_obj']

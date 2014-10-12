@@ -29,7 +29,6 @@ logger = logging.getLogger(__name__)
 for application in settings.INSTALLED_APPS:
     if "django" in application or application in SYSTEM_APPS:
         continue
-    print "Settings", application
     
     if application == "inventory":
         ns = "pharmaship"
