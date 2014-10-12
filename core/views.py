@@ -80,7 +80,6 @@ def settings_validation(request, form, instance=None):
 @login_required
 def index(request):
     """Default view. Displays an overview of the requisitions."""
-
     return render_to_response('core/index.html', {
                     'user': request.user,
                     'title': _("Home"),
@@ -92,7 +91,7 @@ def index(request):
 def set_language(request, language_code):
     if translation.check_for_language(language_code):
         if hasattr(request, 'session'):
-                request.session['django_language'] = language_code
+                request.session[translation.LANGUAGE_SESSION_KEY] = language_code
         else:
             request.set_cookie(settings.LANGUAGE_COOKIE_NAME, language_code)
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
