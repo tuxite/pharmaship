@@ -100,12 +100,10 @@ class ChangeArticleForm(forms.ModelForm):
 
 
 class SettingsForm(forms.ModelForm):
-    allowance = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=models.Allowance.objects.all(), label=_("Allowance"))
-
-
+    """Form to modify Pharmaship dedicated settings."""
     class Meta:
         model = models.Settings
-        exclude = []
+        exclude = ['allowance',]
 
 
 class LocationCreateForm(forms.ModelForm):

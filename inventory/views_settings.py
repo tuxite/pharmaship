@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
 
-from django.template.loader import render_to_string
+import logging
+logger = logging.getLogger(__name__)
 
 import models, forms
 
@@ -15,25 +16,24 @@ from core.views import settings_links, settings_validation, app_links
 
 import json
 
-FUNCTIONS = (
-		(u'00', "Captain"),
-		(u'10', "Chief Officer"),
-		(u'11', "Deck Officer"),
-		(u'20', "Chief Engineer"),
-		(u'21', "Engineer"),
-		(u'99', "Ratings"),
-	)
-
 @login_required
 def index(request):
     """Displays differents forms to configure Pharmaship."""
-
-    return render_to_response('pharmaship/settings.html', {
+    inventory_settings = models.Settings.objects.latest('id')
+    
+    allowances = models.Allowance.objects.all().exclude(pk=1)
+    
+    for allowance in allowances:
+        if allowance in inventory_settings.allowance.all():
+            allowance.active = True
+    
+    return render_to_response('pharmaship/settings/index.html', {
                         'user': request.user,
                         'title':_("Settings"),
                         'head_links': app_links(request.resolver_match.namespace),
                         'links': settings_links(),
-                        'settingsform': forms.SettingsForm(instance=models.Settings.objects.latest('id')),
+                        'allowances': allowances,
+                        'settingsform': forms.SettingsForm(instance=inventory_settings),
                         'locationcreateform' : forms.LocationCreateForm(),
                         'locations' : models.Location.objects.all().exclude(pk=1),
                         },
@@ -46,6 +46,30 @@ def application(request):
         return settings_validation(request, forms.SettingsForm, models.Settings.objects.latest('id'))
 
     return HttpResponseNotAllowed(['POST',])
+
+@permission_required('inventory.settings.can_change')
+def allowance_toggle(request, allowance_id, active):
+    """Enables or disables one allowance."""
+    if request.is_ajax():
+        allowance = get_object_or_404(models.Allowance, pk=allowance_id)
+        inventory_settings = models.Settings.objects.latest('id')
+        
+        if active:
+            # The allowance must be enabled
+            inventory_settings.allowance.add(allowance)
+            allowance.active = True
+        else:
+            # The allowance must be disabled
+            inventory_settings.allowance.remove(allowance)
+            allowance.active = False
+        # Returning the html element added in order to update the list client-side
+        content = render_to_response('pharmaship/settings/allowance.inc.html', {
+                'item': allowance,
+                }).content 
+        data = json.dumps({'success': _('Data updated'), 'content': content})
+        return HttpResponse(data, content_type="application/json")
+    else:
+        return HttpResponseNotAllowed(['GET',])        
 
 @permission_required('inventory')
 def export_data(request, allowance_id):
@@ -65,7 +89,7 @@ def create_location(request):
             added = models.Location(primary=primary, secondary=secondary)
             added.save()
             # Returning the html element added in order to update the list client-side
-            content = render_to_response('pharmaship/location.inc.html', {
+            content = render_to_response('pharmaship/settings/location.inc.html', {
                     'item': added,
                     }).content 
             data = json.dumps({'success': _('Data updated'), 'location': content})
