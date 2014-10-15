@@ -59,6 +59,7 @@ def import_data(request):
     km = KeyManager()
     return render_to_response('settings/import.html', {
         'user': request.user,
+        'head_links': app_links(request.resolver_match.namespace),
         'title': _("Import"),
         'importform': forms.ImportForm,
         'importkeyform': forms.ImportKeyForm,
