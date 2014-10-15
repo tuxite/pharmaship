@@ -20,5 +20,6 @@ setup(
         'python-gnupg',
         'MySQL-python',
         'PyYAML',
+        'Pillow',
         ],
 )
