@@ -95,11 +95,11 @@ def import_key(request):
 
 
 @login_required
-def delete_key(request, key_id):
+def delete_key(request, fingerprint):
     """Deletes a trusted key from the keyring."""
     if request.is_ajax():
         km = KeyManager()
-        log = km.delete_key(key_id)
+        log = km.delete_key(fingerprint)
         return log
     return HttpResponseNotAllowed(['POST'])
 

@@ -17,7 +17,7 @@ setup(
     install_requires=[
         'django',
         'weasyprint',
-        'pygpgme',
+        'python-gnupg',
         'MySQL-python',
         'PyYAML',
         ],

@@ -9,7 +9,7 @@ SYSTEM_APPS = ['core', 'bootstrapform']
 key_patterns = patterns(
     'settings.views',
     url(r'^add$', 'import_key', name="import"),
-    url(r'^(?P<key_id>[0-9a-fA-F]{8})/delete$', 'delete_key', name="delete"),
+    url(r'^(?P<fingerprint>[0-9a-fA-F]{40})/delete$', 'delete_key', name="delete"),
 )
 
 urlpatterns = patterns(
