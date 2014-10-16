@@ -38,7 +38,7 @@ def get_equipment_pk(deserialized_object):
         return obj.pk
     except:
         return None
-        
+
 def get_allowance_pk(deserialized_object):
     """Returns the pk of an Allowance object with deserialized_object attributes."""
     try:
@@ -77,7 +77,7 @@ def serialize_allowance(allowance):
     # Required quantities for equipments
     equipment_reqqty_list = models.EquipmentReqQty.objects.filter(allowance__in=[allowance,])
     equipment_reqqty_data = serializers.serialize("yaml", equipment_reqqty_list, fields=('base','required_quantity'), use_natural_foreign_keys=True)
-    
+
     # Allowance record
     allowance_data = serializers.serialize("yaml", (allowance,), use_natural_foreign_keys=True)
 
@@ -95,9 +95,6 @@ def create_archive(allowance):
     response = HttpResponse(content_type="application/x-compressed-tar")
     response['Content-Disposition'] = 'attachment; filename="pharmaship_{0}.tar.gz"'.format(datetime.date.today())
 
-    # Creating the information file
-    pack_info = u"[package]\nname = {0}\nauthor = {1}\ndate = {2}".format(allowance.name, "Export Pharmaship ", datetime.datetime.utcnow().isoformat())
-    
     # Creating a tar.gz archive
     with tarfile.open(fileobj=response, mode='w') as tar:
         # Processing the database
@@ -111,26 +108,16 @@ def create_archive(allowance):
             info.mtime = time.time()
             info.size = len(f.getvalue())
             tar.addfile(info, f)
-        # Adding the information file
-        f = io.StringIO(pack_info)
-        info = tarfile.TarInfo()
-        info.name = "info"
-        info.type = tarfile.REGTYPE
-        info.uid = info.gid = 0
-        info.uname = info.gname = "root"
-        info.mtime = time.time()
-        info.size = len(f.getvalue())
-        tar.addfile(info, f)
     return response
 
 
 class DataImport:
-    """Class to import allowance inside the inventory module."""    
+    """Class to import allowance inside the inventory module."""
     def __init__(self, tar):
         self.tar = tar
         self.data = []
         self.module_name = __name__.split('.')[-2] + "/"
-        
+
     def launch(self):
         """Launches the importation.
 
@@ -142,19 +129,19 @@ class DataImport:
 
         Finally, the new orphan molecules are affected to a special
         allowance with 0 as required quantity.
-        """ 
+        """
         # Detecting objects without allowance (orphan)
         self.no_allowance = models.Allowance.objects.get(pk=1)
         self.molecule_orphan_before = models.Molecule.objects.filter(allowances=self.no_allowance)
         self.equipment_orphan_before = models.Equipment.objects.filter(allowances=self.no_allowance)
-        
+
         # Allowance
         try:
             deserialized_allowance = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "allowance.yaml"))
         except KeyError as e:
-            self.error = _("File not found.") + str(e) 
+            self.error = _("File not found.") + str(e)
             return False
-            
+
         for allowance in deserialized_allowance:
             self.data.append({'name': _('Allowance name'), 'value': allowance.object.name})
             allowance_pk = get_allowance_pk(allowance)
@@ -170,14 +157,14 @@ class DataImport:
 
         # Molecules
         added_molecule = []
-        
+
         # Deserialize the file
         try:
             deserialized_list = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "molecule_obj.yaml"))
         except KeyError as e:
-            self.error = _("File not found.") + str(e) 
+            self.error = _("File not found.") + str(e)
             return False
-             
+
         for molecule in deserialized_list:
             if not get_molecule_pk(molecule):
                 molecule.save()
@@ -189,9 +176,9 @@ class DataImport:
         try:
             deserialized_reqqty = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "molecule_reqqty.yaml"))
         except KeyError as e:
-            self.error = _("File not found.") + str(e) 
+            self.error = _("File not found.") + str(e)
             return False
-                        
+
         molecule_reqqty_added = 0
 
         # Delete all required quantities entry and create new ones
@@ -208,9 +195,9 @@ class DataImport:
         try:
             deserialized_list = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "equipment_obj.yaml"))
         except KeyError as e:
-            self.error = _("File not found.") + str(e) 
+            self.error = _("File not found.") + str(e)
             return False
-                    
+
         for equipment in deserialized_list:
             if not get_equipment_pk(equipment):
                 equipment.save()
@@ -222,9 +209,9 @@ class DataImport:
         try:
             deserialized_reqqty = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "equipment_reqqty.yaml"))
         except KeyError as e:
-            self.error = _("File not found.") + str(e) 
+            self.error = _("File not found.") + str(e)
             return False
-        
+
         equipment_reqqty_added = 0
 
         # Delete all required quantities entry and create new ones
