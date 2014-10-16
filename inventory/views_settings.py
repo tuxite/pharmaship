@@ -20,13 +20,13 @@ import json
 def index(request):
     """Displays differents forms to configure Pharmaship."""
     inventory_settings = models.Settings.objects.latest('id')
-    
+
     allowances = models.Allowance.objects.all().exclude(pk=1)
-    
+
     for allowance in allowances:
         if allowance in inventory_settings.allowance.all():
             allowance.active = True
-    
+
     return render_to_response('pharmaship/settings/index.html', {
                         'user': request.user,
                         'title':_("Settings"),
@@ -53,23 +53,25 @@ def allowance_toggle(request, allowance_id, active):
     if request.is_ajax():
         allowance = get_object_or_404(models.Allowance, pk=allowance_id)
         inventory_settings = models.Settings.objects.latest('id')
-        
+
         if active:
             # The allowance must be enabled
             inventory_settings.allowance.add(allowance)
+            inventory_settings.save()
             allowance.active = True
         else:
             # The allowance must be disabled
             inventory_settings.allowance.remove(allowance)
+            inventory_settings.save()
             allowance.active = False
         # Returning the html element added in order to update the list client-side
         content = render_to_response('pharmaship/settings/allowance.inc.html', {
                 'item': allowance,
-                }).content 
+                }).content
         data = json.dumps({'success': _('Data updated'), 'content': content})
         return HttpResponse(data, content_type="application/json")
     else:
-        return HttpResponseNotAllowed(['GET',])        
+        return HttpResponseNotAllowed(['GET',])
 
 @permission_required('inventory')
 def export_data(request, allowance_id):
@@ -80,7 +82,7 @@ def export_data(request, allowance_id):
 @permission_required('inventory.location.can_add')
 def create_location(request):
     """Creates a new Location for items in Inventory application."""
-    if request.method == 'POST' and request.is_ajax(): 
+    if request.method == 'POST' and request.is_ajax():
         form = forms.LocationCreateForm(request.POST)
         if form.is_valid():
             primary = form.cleaned_data['primary']
@@ -91,7 +93,7 @@ def create_location(request):
             # Returning the html element added in order to update the list client-side
             content = render_to_response('pharmaship/settings/location.inc.html', {
                     'item': added,
-                    }).content 
+                    }).content
             data = json.dumps({'success': _('Data updated'), 'location': content})
             return HttpResponse(data, content_type="application/json")
         else:
@@ -108,10 +110,10 @@ def delete_location(request, location_id):
     if location_id == 0:
         data = json.dumps({'error': _('Something went wrong!'), 'details':_("You can't delete this location.")})
         return HttpResponseBadRequest(data, content_type = "application/json")
-    
+
     if request.is_ajax():
         location = get_object_or_404(models.Location, pk=location_id)
-        
+
         # Changing values for objects with location in obj
         default = models.Location.objects.get(pk=1)
         models.Medicine.objects.filter(location=location).update(location = default)
