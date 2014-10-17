@@ -19,7 +19,7 @@ Welcome to PharmaShip's documentation!
 * manage and edit medicine and material requisition;
 * page of contact of *Purpan*.
 
-In the next version, you will have also documentation and easy to use cheat shit for medicines and materials.
+In the next version, you will have also documentation and easy to use cheat sheet for medicines and materials.
 
 Please, find below the user manual for this application:
 

@@ -48,8 +48,6 @@ Now, you might go through a terminal to the location of your newly uncompressed 
 
 My advice is to give there a login as root, then a strong password (multiple characters, numbers, and special chars) in order to preserve your application in the future.
 
-**TO BE CONFIRMED:**
-
 Then, in order to be allowed to change the language of the application, run::
 
 	> python manage.py collectstatic
