@@ -8,6 +8,15 @@
         /* Activation of the tooltips */
         $('.bt-tooltip').tooltip();
 
+        /* Activation of the fileinputs */
+        $("input[type=file]").fileinput({
+            'showUpload': false,
+            'showPreview': false,
+            'browseLabel': '',
+            'removeLabel': '',
+            maxFileCount: 1
+        });
+
         /* Reset of the modals on hiding. */
         $('#action_modal').on('hidden.bs.modal', function (e) {
             // Reset the modal
@@ -145,16 +154,26 @@
                     }
                 },
                 error: function (data) {
-                    console.log(data.responseText);
+                    console.log(data);
+                    // Reset first the button
+                    button.button('reset');
+                    // Check if this is a server error
+                    if (data.status >= 500) {
+                        button.parent().append("<span class='text-danger form-feedback'><b>Internal Server Error</b></span>");
+                        return false;
+                    }
                     // Process the error message
                     var errors = JSON.parse(data.responseText);
                     for (field in errors.details) {
-                        var input = form.find("[name*='" + field + "']");
                         // Cosmetics
-                        input.parent("div").addClass("has-error");
-                        input.parent("div").append('<p class="text-danger form-feedback">'+errors.details[field]+'</p>');
+                        // Use the selector class=' ' to match bootstrap-forms input parent
+                        // even with some plugins modifying the appearance of the input.
+                        var input = form.find("[name*='" + field + "']"),
+                            parent = input.parents("div[class=' ']:first");
+                        parent.addClass("has-error");
+                        parent.append('<p class="text-danger form-feedback">'+errors.details[field]+'</p>');
                     };
-                    button.button('reset');
+
                     // Return an error message
                     button.parent().append("<span class='text-danger form-feedback'><b>"+errors.error+"</b></span>");
                     // Get the error callback
