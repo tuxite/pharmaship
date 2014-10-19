@@ -19,3 +19,6 @@ This software is in active development!
 See: https://github.com/tuxite/pharmaship/wiki/Installation
 
 
+## Documentation
+Documentation, installation and usage, is available on 
+http://pharmaship.rtfd.org or directly on ``docs/build/html/index.html``.
