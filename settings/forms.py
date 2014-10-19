@@ -21,7 +21,7 @@ class VesselForm(forms.ModelForm):
 
 class ImportForm(forms.Form):
     """Form used to import data into Onboard Assistant."""
-    file_obj = forms.CharField(label=_("Signed archive to import"))
+    file_obj = forms.FileField(label=_("Signed archive to import"))
 
 
 class ImportKeyForm(forms.Form):
