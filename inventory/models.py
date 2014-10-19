@@ -68,20 +68,20 @@ DRUG_ROA_CHOICES = (
     (5, _('Parenteral')),
     (6, _('Subcutaneous')),
 
-    (10, 'Locale'),
-    (11, 'Transdermique'),
+    (10, _('Topical')),
+    (11, _('Transdermal')),
 
-    (20, 'Inhalation'),
-    (21, 'Nébulisation'),
+    (20, _('Inhalation')),
+    (21, _('Nebulization')),
 
-    (30, 'Buccale'),
-    (31, 'Sublinguale'),
-    (32, 'Bain de bouche'),
+    (30, _('Buccal')),
+    (31, _('Sublingual')),
+    (32, _('Mouthwash')),
 
-    (40, 'Rectale'),
-    (41, 'Vaginale'),
+    (40, _('Rectal')),
+    (41, _('Vaginal')),
 
-    (50, 'Oculaire'),
+    (50, _('Ocular')),
 )
 
 
@@ -89,7 +89,9 @@ DRUG_ROA_CHOICES = (
 class Allowance(models.Model):
     """Model for articles and medicines allowances."""
     name = models.CharField(max_length=100)  # Example: Dotation A
-    additional = models.BooleanField(default=False)  # For use with complements. True will add quantity, false will be treated as an absolute quantity.
+    # For use with complements.
+    # True will add quantity, false will be treated as an absolute quantity.
+    additional = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.name
@@ -107,11 +109,11 @@ class GroupManager(models.Manager):
 
 
 class MoleculeGroup(models.Model):
-    """Model for groups attached to an INN (Molecule)."""
+    """Model for groups attached to a :model:`inventory.Molecule` instance."""
     objects = GroupManager()  # For deserialization
 
-    name = models.CharField(max_length=100) # Example: Cardiology
-    order = models.IntegerField() # Example: 1
+    name = models.CharField(max_length=100)  # Example: Cardiology
+    order = models.IntegerField()  # Example: 1
 
     def __unicode__(self):
         return u"{0}. {1}".format(self.order, _(self.name))
@@ -125,11 +127,11 @@ class MoleculeGroup(models.Model):
 
 
 class EquipmentGroup(models.Model):
-    """Model for groups attached to a ReferenceMaterial."""
-    objects = GroupManager() # For deserialization
+    """Model for groups attached to a :model:`inventory.Equipment` instance."""
+    objects = GroupManager()  # For deserialization
 
-    name = models.CharField(max_length=100) # Example: Reanimation
-    order = models.IntegerField() # Example: 1
+    name = models.CharField(max_length=100)  # Example: Reanimation
+    order = models.IntegerField()  # Example: 1
 
     def __unicode__(self):
         return u"{0}. {1}".format(self.order, _(self.name))
@@ -152,11 +154,13 @@ class TagManager(models.Manager):
 
 
 class Tag(models.Model):
-    """Model for tags attached to an INN."""
-    objects =TagManager() # For deserialization
+    """Stores tags attached to a :model:`inventory.Equipment` or
+    model:`inventory.Molecule` instance.
+    """
+    objects = TagManager()  # For deserialization
 
-    name = models.CharField(max_length=100) # Example: Common Use
-    comment = models.TextField(blank=True, null=True) # Description of the tag, if any
+    name = models.CharField(max_length=100)  # Example: Common Use
+    comment = models.TextField(blank=True, null=True)  # Description of the tag
 
     def __unicode__(self):
         return unicode(_(self.name))
@@ -170,9 +174,11 @@ class Tag(models.Model):
 
 
 class Location(models.Model):
-    """Model for locations attached to a Medicine."""
-    primary = models.CharField(_("Primary"), max_length=100) # Example: Pharmacie
-    secondary = models.CharField(_("Secondary"), max_length=100,blank=True, null=True) # Example: Tiroir 2
+    """Stores locations attached to a :model:`inventory.Equipment` or
+    model:`inventory.Molecule` instance.
+    """
+    primary = models.CharField(_("Primary"), max_length=100)  # Ex: Pharmacie
+    secondary = models.CharField(_("Secondary"), max_length=100, blank=True, null=True)  # Example: Tiroir 2
 
     def __unicode__(self):
         if self.secondary:
@@ -180,16 +186,16 @@ class Location(models.Model):
         else:
             return unicode(_(self.primary))
 
-
     class Meta:
         ordering = ("primary", "secondary")
 
 
 class QtyTransaction(models.Model):
     """
-    Stores a quantity transaction related to :model:`inventory.Article` or :model:`inventory.Medicine`.
+    Stores a quantity transaction related to :model:`inventory.Article`
+    or :model:`inventory.Medicine`.
 
-    There are 5 types of transactions :
+    There are 5 types of transactions:
     * 1 IN: a material is added,
     * 2 USED: the material is used for a treatment,
     * 4 PERISHED: the material has expired,
@@ -211,7 +217,9 @@ class QtyTransaction(models.Model):
 
 
 class Remark(models.Model):
-    """Model for remarks attached to an INN."""
+    """Stores remarks attached to a :model:`inventory.Equipment` or
+    model:`inventory.Molecule` instance.
+    """
     text = models.TextField(_("Text"), blank=True, null=True)
 
     content_type = models.ForeignKey(ContentType)
@@ -226,9 +234,10 @@ class MoleculeManager(models.Manager):
 
     def missing(self):
         """Returns the quantity to order to meet the requirement."""
-        exp_delay = utils.delay(Settings.objects.latest('id').expire_date_warning_delay)
+        inventory_settings = Settings.objects.latest('id')
+        exp_delay = utils.delay(inventory_settings.expire_date_warning_delay)
         # Selection of available ReqQty
-        allowance_list = Settings.objects.latest('id').allowance.all()
+        allowance_list = inventory_settings.allowance.all()
         req_qty_list = MoleculeReqQty.objects.filter(allowance__in=allowance_list).prefetch_related('base', 'allowance').order_by('base')
         # Molecule list
         molecule_list = Molecule.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('medicine_set').order_by('name')
@@ -262,13 +271,13 @@ class MoleculeManager(models.Manager):
 class Molecule(models.Model):
     """Base medicine model for all medicines.
     inn = International Nonproprietary Name (DC in French)"""
-    objects = MoleculeManager() # For deserialization
+    objects = MoleculeManager()  # For deserialization
 
-    name = models.CharField(max_length=100) # Example: Paracétamol
-    roa = models.PositiveIntegerField(choices=DRUG_ROA_CHOICES) # Example: dermal -- ROA: Route of Administration
-    dosage_form = models.IntegerField(choices=DRUG_FORM_CHOICES) # Example: "pill"
-    composition = models.CharField(max_length=100) # Example: 1000 mg
-    medicine_list = models.PositiveIntegerField(choices=DRUG_LIST_CHOICES) # Example: List I
+    name = models.CharField(max_length=100)  # Example: Paracétamol
+    roa = models.PositiveIntegerField(choices=DRUG_ROA_CHOICES)  # Example: dermal -- ROA: Route of Administration
+    dosage_form = models.IntegerField(choices=DRUG_FORM_CHOICES)  # Example: "pill"
+    composition = models.CharField(max_length=100)  # Example: 1000 mg
+    medicine_list = models.PositiveIntegerField(choices=DRUG_LIST_CHOICES)  # Example: List I
     group = models.ForeignKey(MoleculeGroup)
     tag = models.ManyToManyField(Tag, blank=True)
     allowances = models.ManyToManyField(Allowance, through='MoleculeReqQty')
@@ -292,7 +301,7 @@ class Molecule(models.Model):
 
 class Medicine(models.Model):
     """Medicine model, "child" of Molecule."""
-    name = models.CharField(_("Name"), max_length=100) # Brand Name. Example: Doliprane for INN Paracétamol
+    name = models.CharField(_("Name"), max_length=100)  # Brand Name. Example: Doliprane for INN Paracétamol
     exp_date = models.DateField(_("Expiration Date"))
     # Link to location
     location = models.ForeignKey(Location)
@@ -312,7 +321,6 @@ class Medicine(models.Model):
         """Computes the quantity according to the transactions attached to this medicine."""
         return self.transactions.aggregate(sum=models.Sum('value'))['sum']
 
-
     class Meta:
         ordering = ("exp_date", )
 
@@ -331,18 +339,19 @@ class EquipmentManager(models.Manager):
     """
     def get_by_natural_key(self, name, packaging, consumable, perishable, group):
         return self.get(
-            name = name,
-            packaging = packaging,
-            consumable = consumable,
-            perishable = perishable,
-            group = EquipmentGroup.objects.get_by_natural_key(name=group[0],),
+            name=name,
+            packaging=packaging,
+            consumable=consumable,
+            perishable=perishable,
+            group=EquipmentGroup.objects.get_by_natural_key(name=group[0],),
             )
 
     def missing(self):
         """Returns the quantity to order to meet the requirement."""
-        exp_delay = utils.delay(Settings.objects.latest('id').expire_date_warning_delay)
+        inventory_settings = Settings.objects.latest('id')
+        exp_delay = utils.delay(inventory_settings.expire_date_warning_delay)
         # Selection of available ReqQty
-        allowance_list = Settings.objects.latest('id').allowance.all()
+        allowance_list = inventory_settings.allowance.all()
         req_qty_list = EquipmentReqQty.objects.filter(allowance__in=allowance_list).prefetch_related('base', 'allowance').order_by('base')
         # Equipement list
         equipment_list = Equipment.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('article_set').order_by('name')
@@ -372,12 +381,13 @@ class EquipmentManager(models.Manager):
 
         return result_list
 
+
 class Equipment(models.Model):
     """Model for medical equipment."""
-    objects = EquipmentManager() # For deserialization
+    objects = EquipmentManager()  # For deserialization
 
-    name = models.CharField(max_length=100) # Example: Nébulisateur
-    packaging = models.CharField(max_length=100) # Example: 1000 mg
+    name = models.CharField(max_length=100)  # Example: Nébulisateur
+    packaging = models.CharField(max_length=100)  # Example: 1000 mg
     group = models.ForeignKey(EquipmentGroup)
     tag = models.ManyToManyField(Tag, blank=True)
     consumable = models.BooleanField(default=False)
@@ -404,7 +414,7 @@ class Equipment(models.Model):
 
 class Article(models.Model):
     """Article model, "child" of Equipment."""
-    name = models.CharField(_("Name"), max_length=100) # Brand Name. Example: Coalgan
+    name = models.CharField(_("Name"), max_length=100)  # Brand Name. Example: Coalgan
     exp_date = models.DateField(_("Expiration Date"), blank=True, null=True)
     # Link to location
     location = models.ForeignKey(Location)
@@ -422,7 +432,6 @@ class Article(models.Model):
     def get_quantity(self):
         """Computes the quantity according to the transactions attached to this medicine."""
         return self.transactions.aggregate(sum=models.Sum('value'))['sum']
-
 
     class Meta:
         ordering = ("exp_date", )

@@ -1,5 +1,5 @@
 # -*- coding: utf-8; -*-
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django import forms
 
 import models
@@ -21,7 +21,7 @@ class VesselForm(forms.ModelForm):
 
 class ImportForm(forms.Form):
     """Form used to import data into Onboard Assistant."""
-    file_obj = forms.FileField(label=_("File"))
+    file_obj = forms.CharField(label=_("Signed archive to import"))
 
 
 class ImportKeyForm(forms.Form):

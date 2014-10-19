@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pharmaship\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-12 19:05+0200\n"
+"POT-Creation-Date: 2014-10-19 14:25+0200\n"
 "PO-Revision-Date: 2013-06-07 21:30+0200\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: Association DSM <contact@devmaretique.com>\n"
@@ -16,144 +16,154 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: common/html/layout.html:83 common/html/layout.html.py:89
+#: common/html/layout.html:84
+msgid "User"
+msgstr "Utilisateur"
+
+#: common/html/layout.html:90
 msgid "My Account"
 msgstr "Mon compte"
 
-#: common/html/layout.html:94
+#: common/html/layout.html:95
 msgid "Administration"
 msgstr "Administration"
 
-#: common/html/layout.html:115 inventory/views_equipment.py:392
+#: common/html/layout.html:116 inventory/views_equipment.py:392
 #: inventory/views_medicine.py:55 inventory/views_medicine.py:442
 msgid "Medicine Inventory"
 msgstr "Registre des médicaments"
 
-#: common/html/layout.html:116
+#: common/html/layout.html:117
 msgid "Material Inventory"
 msgstr "Registre du matériel"
 
-#: common/html/layout.html:117 purchase/views.py:28
+#: common/html/layout.html:118 purchase/views.py:29
 msgid "Requisition Overview"
 msgstr "Aperçu des commandes"
 
-#: common/html/layout.html:121
+#: common/html/layout.html:122
 msgid "Print"
 msgstr "Imprimer"
 
-#: common/html/layout.html:124
+#: common/html/layout.html:125
 msgid "Emergency Contact"
 msgstr "Contact d'urgence"
 
-#: core/import_data.py:88 core/import_data.py:91 core/manage_key.py:39
+#: core/import_data.py:79
 msgid "No signature found."
 msgstr "Pas de signature détectée."
 
-#: core/import_data.py:98 core/import_data.py:107
-msgid "Signature not valid. Error:"
-msgstr "Signature non valide. Erreur :"
+#: core/import_data.py:88
+#| msgid "Signature not valid. Error:"
+msgid "Signature not in the keyring."
+msgstr "Signature absente du porte-clé."
 
-#: core/import_data.py:111
+#: core/import_data.py:95
 msgid "Package Signature"
 msgstr "Signature du paquet"
 
-#: core/import_data.py:128
+#: core/import_data.py:112
 msgid "File corrupted: "
 msgstr "Fichier corrompu : "
 
-#: core/import_data.py:138
+#: core/import_data.py:122
 msgid "Configuration not found. Details: "
 msgstr "Pas de configuration trouvée. Détails : "
 
-#: core/import_data.py:146
+#: core/import_data.py:130
 msgid "Package Author"
 msgstr "Auteur du paquet"
 
-#: core/import_data.py:147
+#: core/import_data.py:131
 msgid "Package Version"
 msgstr "Version du paquet"
 
-#: core/import_data.py:148
+#: core/import_data.py:132
 msgid "Package Date"
 msgstr "Date du paquet"
 
-#: core/import_data.py:151 core/import_data.py:154 core/import_data.py:162
+#: core/import_data.py:135 core/import_data.py:138 core/import_data.py:146
 msgid "Configuration file incorrect. "
 msgstr "Fichier de configuration incorrect. "
 
-#: core/import_data.py:162
+#: core/import_data.py:146
 msgid "This module is not installed: "
 msgstr "Ce module n'est pas installé : "
 
-#: core/import_data.py:173 core/manage_key.py:40 core/manage_key.py:71
+#: core/import_data.py:157 core/manage_key.py:29 core/manage_key.py:69
 msgid "Signature Error"
 msgstr "Erreur de signature"
 
-#: core/import_data.py:175 core/import_data.py:184 core/import_data.py:190
-#: core/import_data.py:200 core/import_data.py:207 core/import_data.py:214
-#: core/manage_key.py:42 core/manage_key.py:73 core/views.py:77
+#: core/import_data.py:159 core/import_data.py:168 core/import_data.py:174
+#: core/import_data.py:184 core/import_data.py:191 core/import_data.py:198
+#: core/manage_key.py:31 core/manage_key.py:71 core/views.py:77
 #: inventory/views_equipment.py:132 inventory/views_equipment.py:175
 #: inventory/views_equipment.py:234 inventory/views_equipment.py:284
 #: inventory/views_equipment.py:335 inventory/views_medicine.py:115
 #: inventory/views_medicine.py:173 inventory/views_medicine.py:223
 #: inventory/views_medicine.py:283 inventory/views_medicine.py:339
-#: inventory/views_medicine.py:385 inventory/views_settings.py:99
-#: inventory/views_settings.py:109 purchase/views.py:86 purchase/views.py:108
-#: purchase/views.py:130 purchase/views.py:179 purchase/views.py:240
-#: purchase/views.py:288 settings/views.py:43 settings/views.py:72
+#: inventory/views_medicine.py:385 inventory/views_settings.py:101
+#: inventory/views_settings.py:111 purchase/views.py:94 purchase/views.py:121
+#: purchase/views.py:150 purchase/views.py:204 purchase/views.py:276
+#: purchase/views.py:334 settings/views.py:52 settings/views.py:89
 msgid "Something went wrong!"
 msgstr "Une erreur est survenue !"
 
-#: core/import_data.py:182
+#: core/import_data.py:166
 msgid "Integrity Error"
 msgstr "Erreur d'intégrité"
 
-#: core/import_data.py:188
+#: core/import_data.py:172
 msgid "Conformity Error"
 msgstr "Erreur de conformité"
 
-#: core/import_data.py:205
+#: core/import_data.py:189
 #, python-format
 msgid "Module %s has no import function."
 msgstr "Le module %s n'a pas de fonction d'importation."
 
-#: core/import_data.py:206
+#: core/import_data.py:190
 msgid "Import Error"
 msgstr "Erreur d'importation"
 
-#: core/import_data.py:211
+#: core/import_data.py:195
 msgid "Not a valid archive: "
 msgstr "Archive non valide : "
 
-#: core/import_data.py:212
+#: core/import_data.py:196
 msgid "Archive Error"
 msgstr "Erreur d'archive"
 
-#: core/import_data.py:219
+#: core/import_data.py:203
 msgid "Data successfully imported"
 msgstr "Données importées avec succès"
 
-#: core/manage_key.py:46
+#: core/manage_key.py:28
+#| msgid "No signature found."
+msgid "No signature imported."
+msgstr "Pas de signature importée."
+
+#: core/manage_key.py:35
 msgid "Key already added"
 msgstr "Clé déjà présente"
 
-#: core/manage_key.py:53
+#: core/manage_key.py:42
 msgid "Key successfully added"
 msgstr "Clé importée avec succès"
 
-#: core/manage_key.py:70
+#: core/manage_key.py:68
 msgid "Key not found."
 msgstr "Clé introuvable."
 
-#: core/manage_key.py:77
+#: core/manage_key.py:74
 msgid "Key removed"
 msgstr "Clé supprimée"
 
-#: core/views.py:27 inventory/views_settings.py:32 settings/views.py:20
+#: core/views.py:27 inventory/views_settings.py:32 settings/views.py:22
 msgid "Settings"
 msgstr "Paramètres"
 
-#: core/views.py:41 settings/views.py:49
+#: core/views.py:41 settings/views.py:63
 msgid "Import"
 msgstr "Importation"
 
@@ -163,10 +173,10 @@ msgstr "Importation"
 #: inventory/views_medicine.py:111 inventory/views_medicine.py:169
 #: inventory/views_medicine.py:219 inventory/views_medicine.py:279
 #: inventory/views_medicine.py:335 inventory/views_medicine.py:381
-#: inventory/views_settings.py:69 inventory/views_settings.py:95
-#: inventory/views_settings.py:122 purchase/views.py:82 purchase/views.py:104
-#: purchase/views.py:126 purchase/views.py:192 purchase/views.py:236
-#: purchase/views.py:284
+#: inventory/views_settings.py:71 inventory/views_settings.py:97
+#: inventory/views_settings.py:124 purchase/views.py:88 purchase/views.py:115
+#: purchase/views.py:142 purchase/views.py:218 purchase/views.py:266
+#: purchase/views.py:326
 msgid "Data updated"
 msgstr "Données mises à jour"
 
@@ -183,8 +193,8 @@ msgid "Quantity in stock"
 msgstr "Quantité en stock"
 
 #: inventory/forms.py:27 inventory/forms.py:42 inventory/forms.py:54
-#: inventory/forms.py:82 inventory/forms.py:94 inventory/models.py:295
-#: inventory/models.py:407
+#: inventory/forms.py:82 inventory/forms.py:94 inventory/models.py:305
+#: inventory/models.py:418
 #: inventory/templates/pharmaship/article_single.inc.html:54
 #: inventory/templates/pharmaship/equipment_inventory.html:24
 #: inventory/templates/pharmaship/medicine_inventory.html:24
@@ -216,41 +226,41 @@ msgstr "Principe actif"
 msgid "Packaging"
 msgstr "Conditionnement"
 
-#: inventory/import_data.py:155 inventory/import_data.py:178
-#: inventory/import_data.py:192 inventory/import_data.py:211
-#: inventory/import_data.py:225
+#: inventory/import_data.py:94 inventory/import_data.py:121
+#: inventory/import_data.py:160 inventory/import_data.py:180
+#: inventory/import_data.py:219
 msgid "File not found."
 msgstr "Fichier introuvable."
 
-#: inventory/import_data.py:159
+#: inventory/import_data.py:98
 msgid "Allowance name"
 msgstr "Nom de la dotation"
 
-#: inventory/import_data.py:162 inventory/import_data.py:165
+#: inventory/import_data.py:108 inventory/import_data.py:110
 msgid "New Allowance"
 msgstr "Nouvelle dotation"
 
-#: inventory/import_data.py:186
+#: inventory/import_data.py:154
 msgid "Added Molecules"
 msgstr "Principes actifs ajoutés"
 
-#: inventory/import_data.py:204
+#: inventory/import_data.py:173
 msgid "Molecule Required Quantities Added"
 msgstr "Quantités requises ajoutées (principes actifs)"
 
-#: inventory/import_data.py:219
+#: inventory/import_data.py:213
 msgid "Added Equipments"
 msgstr "Matériel ajouté"
 
-#: inventory/import_data.py:236
+#: inventory/import_data.py:232
 msgid "Equipment Required Quantities Added"
 msgstr "Quantités requises ajoutées (matériel)"
 
-#: inventory/import_data.py:241
+#: inventory/import_data.py:237
 msgid "Molecule Orphans"
 msgstr "Principes actifs hors dotation"
 
-#: inventory/import_data.py:242
+#: inventory/import_data.py:238
 msgid "Equipement Orphans"
 msgstr "Matériels hors dotation"
 
@@ -300,11 +310,11 @@ msgstr "Ampoule"
 
 #: inventory/models.py:31
 msgid "Capsule"
-msgstr ""
+msgstr "Gélule"
 
 #: inventory/models.py:34
 msgid "Suppository"
-msgstr "Gélule"
+msgstr "Suppositoire"
 
 #: inventory/models.py:66
 msgid "Oral"
@@ -318,66 +328,107 @@ msgstr "Parentérale"
 msgid "Subcutaneous"
 msgstr "Sous-cutanée"
 
-#: inventory/models.py:173
+#: inventory/models.py:71
+msgid "Topical"
+msgstr "Local"
+
+#: inventory/models.py:72
+msgid "Transdermal"
+msgstr "Transdermique"
+
+#: inventory/models.py:74
+msgid "Inhalation"
+msgstr "Inhalation"
+
+#: inventory/models.py:75
+#| msgid "New location"
+msgid "Nebulization"
+msgstr "Nébulisation"
+
+#: inventory/models.py:77
+msgid "Buccal"
+msgstr "Buccale"
+
+#: inventory/models.py:78
+msgid "Sublingual"
+msgstr "Sublinguale"
+
+#: inventory/models.py:79
+msgid "Mouthwash"
+msgstr "Bain de bouche"
+
+#: inventory/models.py:81
+msgid "Rectal"
+msgstr "Rectale"
+
+#: inventory/models.py:82
+msgid "Vaginal"
+msgstr "Vaginale"
+
+#: inventory/models.py:84
+msgid "Ocular"
+msgstr "Occulaire"
+
+#: inventory/models.py:180
 #: inventory/templates/pharmaship/settings/index.html:61
 msgid "Primary"
 msgstr "Principal"
 
-#: inventory/models.py:174
+#: inventory/models.py:181
 #: inventory/templates/pharmaship/settings/index.html:62
 msgid "Secondary"
 msgstr "Secondaire"
 
-#: inventory/models.py:199 purchase/templates/purchase/index.html:15
+#: inventory/models.py:206 purchase/templates/purchase/index.html:15
 msgid "Type"
 msgstr "Type"
 
-#: inventory/models.py:202
+#: inventory/models.py:209
 msgid "Value"
 msgstr "Valeur"
 
-#: inventory/models.py:214
+#: inventory/models.py:223
 msgid "Text"
 msgstr "Texte"
 
-#: inventory/models.py:284
+#: inventory/models.py:294
 msgid "Dosage Form:"
 msgstr "Forme :"
 
-#: inventory/models.py:284 inventory/templates/pharmaship/index.html:126
+#: inventory/models.py:294 inventory/templates/pharmaship/index.html:126
 msgid "Composition:"
 msgstr "Composition :"
 
-#: inventory/models.py:294 inventory/models.py:406
+#: inventory/models.py:304 inventory/models.py:417
 #: inventory/templates/pharmaship/equipment_inventory.html:20
 #: inventory/templates/pharmaship/medicine_inventory.html:20
 #: inventory/templates/pharmaship/settings/index.html:34 purchase/forms.py:51
 #: purchase/models.py:46 purchase/templates/purchase/index.html:14
-#: settings/models.py:26 settings/models.py:43
+#: settings/models.py:33 settings/models.py:51
 msgid "Name"
 msgstr "Nom"
 
-#: inventory/models.py:299
+#: inventory/models.py:309
 msgid "Non-conform Molecule"
 msgstr "Molécule non-conforme"
 
-#: inventory/models.py:300
+#: inventory/models.py:310
 msgid "Non-conform Composition"
 msgstr "Composition non-conforme"
 
-#: inventory/models.py:396
+#: inventory/models.py:407
 msgid "Packaging:"
 msgstr "Conditionnement :"
 
-#: inventory/models.py:411
+#: inventory/models.py:422
 msgid "Non-conform Packaging"
 msgstr "Conditionnement non-conforme"
 
-#: inventory/models.py:439
+#: inventory/models.py:449
 msgid "Allowance"
 msgstr "Dotation"
 
-#: inventory/models.py:440
+#: inventory/models.py:450
 msgid "Warning Delay for Expiration Dates"
 msgstr "Délai d'avertissement avant expiration"
 
@@ -687,7 +738,7 @@ msgid "Form"
 msgstr "Forme"
 
 #: inventory/templates/pharmaship/medicine_report.html:33
-#: purchase/templates/purchase/pdf.html:33 settings/models.py:32
+#: purchase/templates/purchase/pdf.html:33 settings/models.py:39
 msgid "Port of Registry"
 msgstr "Port d'attache"
 
@@ -809,7 +860,7 @@ msgid "Delete this article"
 msgstr "Supprimer l'élément"
 
 #: inventory/views_equipment.py:185 inventory/views_medicine.py:125
-#: purchase/views.py:200
+#: purchase/views.py:227
 msgid "Do not delete"
 msgstr "Ne pas supprimer"
 
@@ -839,7 +890,7 @@ msgstr "Mettre à jour l'article"
 
 #: inventory/views_equipment.py:244 inventory/views_equipment.py:345
 #: inventory/views_medicine.py:183 inventory/views_medicine.py:395
-#: purchase/views.py:140 purchase/views.py:298
+#: purchase/views.py:162 purchase/views.py:346
 msgid "Do not modify"
 msgstr "Ne pas modifier"
 
@@ -941,7 +992,7 @@ msgstr ""
 msgid "You are going to modify the remarks of this molecule:"
 msgstr "Vous vous apprêtez à modifier les remarques de ce principe actif :"
 
-#: inventory/views_settings.py:109
+#: inventory/views_settings.py:111
 msgid "You can't delete this location."
 msgstr "Vous ne pouvez pas supprimer cet emplacement."
 
@@ -1029,7 +1080,7 @@ msgstr "Modifier le statut"
 msgid "Change Name"
 msgstr "Modifier le nom"
 
-#: purchase/templates/purchase/requisition.html:59 purchase/views.py:199
+#: purchase/templates/purchase/requisition.html:59 purchase/views.py:226
 msgid "Delete this requisition"
 msgstr "Supprimer cette commande"
 
@@ -1077,71 +1128,75 @@ msgstr "Vous vous apprêtez à modifier le statut de la commande :"
 msgid "Do not change"
 msgstr "Ne pas modifier"
 
-#: purchase/templates/purchase/status.html:20 purchase/views.py:139
+#: purchase/templates/purchase/status.html:20 purchase/views.py:161
 msgid "Update the status"
 msgstr "Mettre à jour le statut"
 
-#: purchase/views.py:42
+#: purchase/views.py:44
 msgid "Requisition Details"
 msgstr "Détails de la commande"
 
-#: purchase/views.py:60 purchase/views.py:75
+#: purchase/views.py:63 purchase/views.py:80
 msgid "Requisition already sent!"
 msgstr "Commande déjà envoyée !"
 
-#: purchase/views.py:137
+#: purchase/views.py:159
 msgid "Modify the status"
 msgstr "Modifier le statut"
 
-#: purchase/views.py:146
+#: purchase/views.py:168
 msgid "You are going to modify the status this requisition:"
 msgstr "Vous vous apprêtez à modifier les remarques de cette commande :"
 
-#: purchase/views.py:175
+#: purchase/views.py:198
 msgid "Item added"
 msgstr "Élément ajouté"
 
-#: purchase/views.py:197
+#: purchase/views.py:224
 msgid "Delete a requisition"
 msgstr "Supprimer une commande"
 
-#: purchase/views.py:206
+#: purchase/views.py:233
 msgid "You are going to delete the requisition:"
 msgstr "Vous vous apprêtez à supprimer cette commande :"
 
-#: purchase/views.py:209
+#: purchase/views.py:237
 msgid "The deletion is permanent!"
 msgstr "La suppression est définitive !"
 
-#: purchase/views.py:246
+#: purchase/views.py:284
 msgid "Create a requisition"
 msgstr "Créer une commande"
 
-#: purchase/views.py:248
+#: purchase/views.py:286
 msgid "Create this requisition"
 msgstr "Créer cette commande"
 
-#: purchase/views.py:249
+#: purchase/views.py:287
 msgid "Do not create"
 msgstr "Ne pas créer"
 
-#: purchase/views.py:295 purchase/views.py:297
+#: purchase/views.py:343 purchase/views.py:345
 msgid "Change the name"
 msgstr "Modifier le nom"
 
-#: purchase/views.py:304
+#: purchase/views.py:352
 msgid "You are going to modify the name of the requisition:"
 msgstr "Vous vous apprêtez à modifier le nom de cette commande :"
 
-#: purchase/views.py:373
+#: purchase/views.py:386
+msgid "Not available."
+msgstr ""
+
+#: purchase/views.py:429
 msgid "Requisition"
 msgstr "Commande"
 
-#: settings/forms.py:22
-msgid "File"
-msgstr "Fichier"
+#: settings/forms.py:24
+msgid "Signed archive to import"
+msgstr "Archive signée à importer"
 
-#: settings/forms.py:26
+#: settings/forms.py:29
 msgid "Key"
 msgstr "Clé"
 
@@ -1181,23 +1236,23 @@ msgstr "Machine"
 msgid "Civil"
 msgstr "Civil"
 
-#: settings/models.py:21
+#: settings/models.py:22
 msgid "Function"
 msgstr "Fonction"
 
-#: settings/models.py:28
+#: settings/models.py:35
 msgid "Call Sign"
 msgstr "Indicatif"
 
-#: settings/models.py:31
+#: settings/models.py:38
 msgid "Flag"
 msgstr "Pavillon"
 
-#: settings/models.py:33
+#: settings/models.py:40
 msgid "Shipowner"
 msgstr "Armateur"
 
-#: settings/models.py:44
+#: settings/models.py:52
 msgid "Department"
 msgstr "Département"
 
@@ -1249,85 +1304,10 @@ msgstr "Propriétaire"
 msgid "Key ID"
 msgstr "Identifiant de clé"
 
-#~ msgid "To Delete"
-#~ msgstr "À supprimer"
-
-#~ msgid "Database updated"
-#~ msgstr "Base de données mise à jour"
-
-#~ msgid "Route of Administration:"
-#~ msgstr "Voie d'administration :"
-
-#~ msgid "Print this inventory"
-#~ msgstr "Imprimer ce registre"
-
-#~ msgid "Search for an INN or a medicine."
-#~ msgstr "Rechercher un principe actif ou un médicament."
-
-#~ msgid "Edit a requisition"
-#~ msgstr "Modifier une commande"
-
-#~ msgid "Modify this requisition"
-#~ msgstr "Modifier cette commande"
-
-#~ msgid "This action cannot be cancelled."
-#~ msgstr "Cette action ne peut être annulée."
-
-#~ msgid "New Comment"
-#~ msgstr "Nouveau commentaire"
-
-#~ msgid "Add Comment"
-#~ msgstr "Ajouter un commentaire"
-
-#~ msgid "Logout"
-#~ msgstr "Déconnexion"
-
-#~ msgid "Log In"
-#~ msgstr "Se connecter"
-
-#~ msgid "Search"
-#~ msgstr "Rechercher"
-
-#~ msgid "Allowance Settings"
-#~ msgstr "Paramètres de la dotation"
-
-#~ msgid "quantity:"
-#~ msgstr "quantité :"
-
-#~ msgid "Vessel Information"
-#~ msgstr "Renseignements du navire"
-
-#~ msgid "Medical Inventory Status"
-#~ msgstr "Statut des médicaments"
-
-#~ msgid "Material Inventory Status"
-#~ msgstr "Statut du matériel médical"
-
-#~ msgid "Material in short supply:"
-#~ msgstr "Matériel en quantité insuffisante :"
-
-#~ msgid "Expired materials:"
-#~ msgstr "Matériel périmé :"
-
-#~ msgid "Material"
-#~ msgstr "Matériel"
-
-#~ msgid "Materials reaching expiry:"
-#~ msgstr "Matériels arrivant à péremption :"
-
-#~ msgid "Non conform materials:"
-#~ msgstr "Matériel non-conform :"
-
-#~ msgid "Ordered material:"
-#~ msgstr "Matériel commandé :"
-
-#~ msgid "Update Application Settings"
-#~ msgstr "Mettre à jour les paramètres"
-
-#~ msgid "New orphans:"
-#~ msgstr "Nouveaux objets hors dotation :"
-
 # Added manually
+## Locations
+msgid "Pharmacy"
+msgstr "Pharmacie"
 
 ## Tags
 msgid "Cold Storage"
@@ -1371,7 +1351,6 @@ msgid "Local Anesthetics"
 msgstr "Anésthésiques locaux"
 
 ## Equipment groups
-
 msgid "Resuscitation equipment"
 msgstr "Matériel de réanimation"
 
