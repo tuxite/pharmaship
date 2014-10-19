@@ -18,4 +18,9 @@ Instead of that, click on ``Medicine Inventory`` on the left menu bar, you will 
 
 .. image:: img/inventory0.png
 
+You might now click on each molecule line (ie: ``Acide acétyl salicylique`` in order to develop it at to add medicines & remarks.
 
+.. image:: img/inventory1.png
+
+* Click on ``Remarks`` to add any remark concerning that molecule, if any (then apply or discard your changes).
+* 

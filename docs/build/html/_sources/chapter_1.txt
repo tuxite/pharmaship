@@ -1,8 +1,9 @@
+.. |ps| replace:: *PharmaShip*
+
 ******************
 Installation steps
 ******************
 
-.. |ps| replace:: *PharmaShip*
 
 Software Requirement
 ====================
@@ -36,7 +37,7 @@ Just before starting
 
 In MySQL, you have to create a dedicated DataBase. To do so, follow the next steps in MySQL console::
 
-	> CREATE DATABASE pharmaship;``
+	> CREATE DATABASE pharmaship;
 	> GRANT ALL PRIVILEGES ON pharmaship.* TO 'pharmaship'@'%' IDENTIFIED BY 'pharmaship';
 
 That makes a DataBase called pharmaship and then a user with full access on it (password is also pharmaship, so you won't have to modify ~/conf/mysql.conf, but you should personalised it for security reasons.
@@ -139,7 +140,7 @@ Dotation in force
 
 Once this is done, you have to activate the imported allowance. To do so, using the left menu, go to ``inventory`` page. Once there, adapt the value of ``Warning Delay for Expiration Dates`` in number of days and click to ``Update Pharmaship Settings``.
 
-Then, on Allowances fieldset, you might see the dotation you import on the previous paragraph. Click on disable in order to enable it.
+Then, on Allowances fieldset, you might see the dotation you import on the previous paragraph. Click on *enable* in order to enable it. This toogles the link to *disable* value, meaning you might disable it, if you click on it.
 
 .. image:: img/inventory.png
 
