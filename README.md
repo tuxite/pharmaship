@@ -15,10 +15,8 @@ This software is in active development!
 *   gettext
 *   WeasyPrint (for printing PDF). Needs python-lxml, python-cffi.
 
-## Installation
-See: https://github.com/tuxite/pharmaship/wiki/Installation
 
 
-## Documentation
+## Documentation & Installation
 Documentation, installation and usage, is available on 
 http://pharmaship.rtfd.org or directly on ``docs/build/html/index.html``.
