@@ -13,9 +13,9 @@ This software is in active development!
 *   python-yaml
 *   python-pil
 *   gettext
-*   WeasyPrint (for printing PDF). Needs python-lxml, python-cffi.
-
-
+*   WeasyPrint (for printing PDF)
+	* python-lxml
+	* python-cffi
 
 ## Documentation & Installation
 Documentation, installation and usage, is available on 
