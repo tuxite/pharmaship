@@ -16,6 +16,9 @@ This software is in active development!
 *   WeasyPrint (for printing PDF)
 	* python-lxml
 	* python-cffi
+    
+Most of the python-* packages will be automatically installed.
+See documentation.
 
 ## Documentation & Installation
 Documentation, installation and usage, is available on 
