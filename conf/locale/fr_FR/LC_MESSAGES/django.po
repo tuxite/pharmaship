@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pharmaship\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-19 14:25+0200\n"
+"POT-Creation-Date: 2014-10-22 11:50+0200\n"
 "PO-Revision-Date: 2013-06-07 21:30+0200\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: Association DSM <contact@devmaretique.com>\n"
@@ -15,6 +15,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: common/html/layout.html:79 core/views.py:27 inventory/views_settings.py:32
+#: settings/views.py:22
+msgid "Settings"
+msgstr "Paramètres"
 
 #: common/html/layout.html:84
 msgid "User"
@@ -27,6 +32,10 @@ msgstr "Mon compte"
 #: common/html/layout.html:95
 msgid "Administration"
 msgstr "Administration"
+
+#: common/html/layout.html:102
+msgid "Logout"
+msgstr "Déconnexion"
 
 #: common/html/layout.html:116 inventory/views_equipment.py:392
 #: inventory/views_medicine.py:55 inventory/views_medicine.py:442
@@ -54,7 +63,6 @@ msgid "No signature found."
 msgstr "Pas de signature détectée."
 
 #: core/import_data.py:88
-#| msgid "Signature not valid. Error:"
 msgid "Signature not in the keyring."
 msgstr "Signature absente du porte-clé."
 
@@ -139,7 +147,6 @@ msgid "Data successfully imported"
 msgstr "Données importées avec succès"
 
 #: core/manage_key.py:28
-#| msgid "No signature found."
 msgid "No signature imported."
 msgstr "Pas de signature importée."
 
@@ -158,10 +165,6 @@ msgstr "Clé introuvable."
 #: core/manage_key.py:74
 msgid "Key removed"
 msgstr "Clé supprimée"
-
-#: core/views.py:27 inventory/views_settings.py:32 settings/views.py:22
-msgid "Settings"
-msgstr "Paramètres"
 
 #: core/views.py:41 settings/views.py:63
 msgid "Import"
@@ -193,8 +196,8 @@ msgid "Quantity in stock"
 msgstr "Quantité en stock"
 
 #: inventory/forms.py:27 inventory/forms.py:42 inventory/forms.py:54
-#: inventory/forms.py:82 inventory/forms.py:94 inventory/models.py:305
-#: inventory/models.py:418
+#: inventory/forms.py:82 inventory/forms.py:94 inventory/models.py:304
+#: inventory/models.py:417
 #: inventory/templates/pharmaship/article_single.inc.html:54
 #: inventory/templates/pharmaship/equipment_inventory.html:24
 #: inventory/templates/pharmaship/medicine_inventory.html:24
@@ -226,41 +229,41 @@ msgstr "Principe actif"
 msgid "Packaging"
 msgstr "Conditionnement"
 
-#: inventory/import_data.py:94 inventory/import_data.py:121
-#: inventory/import_data.py:160 inventory/import_data.py:180
-#: inventory/import_data.py:219
+#: inventory/import_data.py:117 inventory/import_data.py:144
+#: inventory/import_data.py:183 inventory/import_data.py:203
+#: inventory/import_data.py:242
 msgid "File not found."
 msgstr "Fichier introuvable."
 
-#: inventory/import_data.py:98
+#: inventory/import_data.py:121
 msgid "Allowance name"
 msgstr "Nom de la dotation"
 
-#: inventory/import_data.py:108 inventory/import_data.py:110
+#: inventory/import_data.py:131 inventory/import_data.py:133
 msgid "New Allowance"
 msgstr "Nouvelle dotation"
 
-#: inventory/import_data.py:154
+#: inventory/import_data.py:177
 msgid "Added Molecules"
 msgstr "Principes actifs ajoutés"
 
-#: inventory/import_data.py:173
+#: inventory/import_data.py:196
 msgid "Molecule Required Quantities Added"
 msgstr "Quantités requises ajoutées (principes actifs)"
 
-#: inventory/import_data.py:213
+#: inventory/import_data.py:236
 msgid "Added Equipments"
 msgstr "Matériel ajouté"
 
-#: inventory/import_data.py:232
+#: inventory/import_data.py:255
 msgid "Equipment Required Quantities Added"
 msgstr "Quantités requises ajoutées (matériel)"
 
-#: inventory/import_data.py:237
+#: inventory/import_data.py:260
 msgid "Molecule Orphans"
 msgstr "Principes actifs hors dotation"
 
-#: inventory/import_data.py:238
+#: inventory/import_data.py:261
 msgid "Equipement Orphans"
 msgstr "Matériels hors dotation"
 
@@ -341,7 +344,6 @@ msgid "Inhalation"
 msgstr "Inhalation"
 
 #: inventory/models.py:75
-#| msgid "New location"
 msgid "Nebulization"
 msgstr "Nébulisation"
 
@@ -391,15 +393,15 @@ msgstr "Valeur"
 msgid "Text"
 msgstr "Texte"
 
-#: inventory/models.py:294
+#: inventory/models.py:293
 msgid "Dosage Form:"
 msgstr "Forme :"
 
-#: inventory/models.py:294 inventory/templates/pharmaship/index.html:126
+#: inventory/models.py:293 inventory/templates/pharmaship/index.html:126
 msgid "Composition:"
 msgstr "Composition :"
 
-#: inventory/models.py:304 inventory/models.py:417
+#: inventory/models.py:303 inventory/models.py:416
 #: inventory/templates/pharmaship/equipment_inventory.html:20
 #: inventory/templates/pharmaship/medicine_inventory.html:20
 #: inventory/templates/pharmaship/settings/index.html:34 purchase/forms.py:51
@@ -408,27 +410,27 @@ msgstr "Composition :"
 msgid "Name"
 msgstr "Nom"
 
-#: inventory/models.py:309
+#: inventory/models.py:308
 msgid "Non-conform Molecule"
 msgstr "Molécule non-conforme"
 
-#: inventory/models.py:310
+#: inventory/models.py:309
 msgid "Non-conform Composition"
 msgstr "Composition non-conforme"
 
-#: inventory/models.py:407
+#: inventory/models.py:406
 msgid "Packaging:"
 msgstr "Conditionnement :"
 
-#: inventory/models.py:422
+#: inventory/models.py:421
 msgid "Non-conform Packaging"
 msgstr "Conditionnement non-conforme"
 
-#: inventory/models.py:449
+#: inventory/models.py:448
 msgid "Allowance"
 msgstr "Dotation"
 
-#: inventory/models.py:450
+#: inventory/models.py:449
 msgid "Warning Delay for Expiration Dates"
 msgstr "Délai d'avertissement avant expiration"
 
@@ -445,6 +447,12 @@ msgstr "Photo"
 #: inventory/templates/pharmaship/medicine_single.inc.html:33
 msgid "Tags:"
 msgstr "Tags :"
+
+#: inventory/templates/pharmaship/article_single.inc.html:41
+#: inventory/templates/pharmaship/medicine_single.inc.html:41
+#| msgid "Modify the remarks"
+msgid "Edit the remarks"
+msgstr "Modifier les remarques"
 
 #: inventory/templates/pharmaship/article_single.inc.html:44
 #: inventory/templates/pharmaship/medicine_single.inc.html:44
@@ -469,6 +477,21 @@ msgstr "Conditionnement non-conforme"
 #: inventory/templates/pharmaship/medicine_single.inc.html:83
 msgid "Non-conform!"
 msgstr "Non conforme !"
+
+#: inventory/templates/pharmaship/article_single.inc.html:85
+#: inventory/views_equipment.py:293
+msgid "Use this article"
+msgstr "Utiliser l'élément"
+
+#: inventory/templates/pharmaship/article_single.inc.html:92
+#| msgid "Add this article"
+msgid "Edit this article"
+msgstr "Éditer cet élément"
+
+#: inventory/templates/pharmaship/article_single.inc.html:99
+#: inventory/views_equipment.py:184
+msgid "Delete this article"
+msgstr "Supprimer l'élément"
 
 #: inventory/templates/pharmaship/article_single.inc.html:112
 msgid "Add an object"
@@ -554,78 +577,6 @@ msgstr "Filtrer par emplacement :"
 #: inventory/templates/pharmaship/filter.inc.html:46
 msgid "Filter by allowance:"
 msgstr "Filtrer par dotation :"
-
-#: inventory/templates/pharmaship/import.html:10
-msgid "Uploaded File Information"
-msgstr "Informations sur le fichier téléversé"
-
-#: inventory/templates/pharmaship/import.html:13
-msgid "Filename:"
-msgstr "Nom du fichier :"
-
-#: inventory/templates/pharmaship/import.html:17
-msgid "Type:"
-msgstr "Type :"
-
-#: inventory/templates/pharmaship/import.html:21
-msgid "Size:"
-msgstr "Taille :"
-
-#: inventory/templates/pharmaship/import.html:26
-msgid "Error:"
-msgstr "Erreur :"
-
-#: inventory/templates/pharmaship/import.html:32
-msgid "Package Information"
-msgstr "Informations sur le paquet"
-
-#: inventory/templates/pharmaship/import.html:35
-msgid "Name:"
-msgstr "Nom :"
-
-#: inventory/templates/pharmaship/import.html:39
-msgid "Date:"
-msgstr "Date :"
-
-#: inventory/templates/pharmaship/import.html:43
-msgid "Created by:"
-msgstr "Créé par :"
-
-#: inventory/templates/pharmaship/import.html:47
-msgid "Signed by:"
-msgstr "Signé par :"
-
-#: inventory/templates/pharmaship/import.html:52
-msgid "Importation Status"
-msgstr "État de l'importation"
-
-#: inventory/templates/pharmaship/import.html:55
-msgid "Allowance Name:"
-msgstr "Nom de la dotation :"
-
-#: inventory/templates/pharmaship/import.html:59
-msgid "New Allowance:"
-msgstr "Nouvelle dotation :"
-
-#: inventory/templates/pharmaship/import.html:63
-msgid "Molecules added:"
-msgstr "Principes actifs ajoutés :"
-
-#: inventory/templates/pharmaship/import.html:67
-msgid "Equipement added:"
-msgstr "Équipement ajouté :"
-
-#: inventory/templates/pharmaship/import.html:71
-msgid "New molecule orphans:"
-msgstr "Nouvelles molécules hors dotation :"
-
-#: inventory/templates/pharmaship/import.html:75
-msgid "New equipment orphans:"
-msgstr "Nouveaux objets hors dotation :"
-
-#: inventory/templates/pharmaship/import.html:79
-msgid "Req. Quantities created:"
-msgstr "Quantités requises créées :"
 
 #: inventory/templates/pharmaship/index.html:5
 msgid "Medicines Inventory Status"
@@ -762,6 +713,21 @@ msgstr "Molécule non-conforme"
 msgid "Non-conform composition"
 msgstr "Composition non-conforme"
 
+#: inventory/templates/pharmaship/medicine_single.inc.html:89
+#: inventory/views_medicine.py:232
+msgid "Use this medicine"
+msgstr "Utiliser ce médicament"
+
+#: inventory/templates/pharmaship/medicine_single.inc.html:96
+#| msgid "Add this medicine"
+msgid "Edit this medicine"
+msgstr "Éditer ce médicament"
+
+#: inventory/templates/pharmaship/medicine_single.inc.html:103
+#: inventory/views_medicine.py:124
+msgid "Delete this medicine"
+msgstr "Supprimer ce médicament"
+
 #: inventory/templates/pharmaship/medicine_single.inc.html:120
 #: inventory/views_medicine.py:290
 msgid "Add a medicine"
@@ -855,10 +821,6 @@ msgstr "Vous vous apprêtez à ajouter un article pour ce matériel :"
 msgid "Delete an article"
 msgstr "Supprimer un élément"
 
-#: inventory/views_equipment.py:184
-msgid "Delete this article"
-msgstr "Supprimer l'élément"
-
 #: inventory/views_equipment.py:185 inventory/views_medicine.py:125
 #: purchase/views.py:227
 msgid "Do not delete"
@@ -902,10 +864,6 @@ msgstr "Vous vous apprêtez à modifier cet élément :"
 msgid "Use an article"
 msgstr "Utiliser un élément"
 
-#: inventory/views_equipment.py:293
-msgid "Use this article"
-msgstr "Utiliser l'élément"
-
 #: inventory/views_equipment.py:294 inventory/views_medicine.py:233
 msgid "Do not use"
 msgstr "Ne pas utiliser"
@@ -930,10 +888,6 @@ msgstr "Vous vous apprêtez à modifier les remarques de cet équipement :"
 msgid "Delete a medicine"
 msgstr "Supprimer un médicament"
 
-#: inventory/views_medicine.py:124
-msgid "Delete this medicine"
-msgstr "Supprimer ce médicament"
-
 #: inventory/views_medicine.py:132
 msgid "You are going to delete this medicine:"
 msgstr "Vous vous apprêtez à supprimer ce médicament :"
@@ -953,10 +907,6 @@ msgstr "Vous vous apprêtez à modifier ce médicament :"
 #: inventory/views_medicine.py:230
 msgid "Use a medicine"
 msgstr "Utiliser un médicament"
-
-#: inventory/views_medicine.py:232
-msgid "Use this medicine"
-msgstr "Utiliser ce médicament"
 
 #: inventory/views_medicine.py:240
 msgid "You are going to use this medicine for a treatment:"
@@ -1186,7 +1136,7 @@ msgstr "Vous vous apprêtez à modifier le nom de cette commande :"
 
 #: purchase/views.py:386
 msgid "Not available."
-msgstr ""
+msgstr "Non disponible."
 
 #: purchase/views.py:429
 msgid "Requisition"
@@ -1303,6 +1253,60 @@ msgstr "Propriétaire"
 #: settings/templates/settings/import.html:56
 msgid "Key ID"
 msgstr "Identifiant de clé"
+
+#~ msgid "Uploaded File Information"
+#~ msgstr "Informations sur le fichier téléversé"
+
+#~ msgid "Filename:"
+#~ msgstr "Nom du fichier :"
+
+#~ msgid "Type:"
+#~ msgstr "Type :"
+
+#~ msgid "Size:"
+#~ msgstr "Taille :"
+
+#~ msgid "Error:"
+#~ msgstr "Erreur :"
+
+#~ msgid "Package Information"
+#~ msgstr "Informations sur le paquet"
+
+#~ msgid "Name:"
+#~ msgstr "Nom :"
+
+#~ msgid "Date:"
+#~ msgstr "Date :"
+
+#~ msgid "Created by:"
+#~ msgstr "Créé par :"
+
+#~ msgid "Signed by:"
+#~ msgstr "Signé par :"
+
+#~ msgid "Importation Status"
+#~ msgstr "État de l'importation"
+
+#~ msgid "Allowance Name:"
+#~ msgstr "Nom de la dotation :"
+
+#~ msgid "New Allowance:"
+#~ msgstr "Nouvelle dotation :"
+
+#~ msgid "Molecules added:"
+#~ msgstr "Principes actifs ajoutés :"
+
+#~ msgid "Equipement added:"
+#~ msgstr "Équipement ajouté :"
+
+#~ msgid "New molecule orphans:"
+#~ msgstr "Nouvelles molécules hors dotation :"
+
+#~ msgid "New equipment orphans:"
+#~ msgstr "Nouveaux objets hors dotation :"
+
+#~ msgid "Req. Quantities created:"
+#~ msgstr "Quantités requises créées :"
 
 # Added manually
 ## Locations

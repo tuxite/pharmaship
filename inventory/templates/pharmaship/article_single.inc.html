@@ -38,7 +38,7 @@
                 <p>
                     <a href="{% url 'pharmaship:equipment:remark' object.id %}"
                        class="btn btn-link"
-                       title="Éditer les remarques"
+                       title="{% trans 'Edit the remarks' %}"
                        data-toggle="modal"
                        data-target="#action_modal">
                         <span class="fa fa-edit"></span> {% trans "Remarks:" %}</a>
@@ -82,21 +82,21 @@
                             </td>
                             <td class="medicine_buttons">
                                 <a href="{% url 'pharmaship:equipment:out' item.id %}"
-                                   title="Utiliser ce matériel"
+                                   title="{% trans 'Use this article' %}"
                                    class="btn btn-primary btn-sm"
                                    data-toggle="modal"
                                    data-target="#action_modal">
                                     <span class="fa fa-upload"></span>
                                 </a>
                                 <a href="{% url 'pharmaship:equipment:change' item.id %}"
-                                   title="Éditer ce matériel"
+                                   title="{% trans 'Edit this article' %}"
                                    class="btn btn-default btn-sm"
                                    data-toggle="modal"
                                    data-target="#action_modal">
                                     <span class="fa fa-edit"></span>
                                 </a>
                                 <a href="{% url 'pharmaship:equipment:delete' item.id %}"
-                                   title="Supprimer ce matériel"
+                                   title="{% trans 'Delete this article' %}"
                                    class="btn btn-danger btn-sm"
                                    data-toggle="modal"
                                    data-target="#action_modal">
