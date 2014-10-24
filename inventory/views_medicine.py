@@ -347,7 +347,7 @@ def equivalent(request, molecule_id):
                         'form': form,
                         'action': _("Add this medicine"),
                         'close': _("Do not add"),
-                        'url': reverse('pharmaship:medicine:add', args=(molecule_id,)),
+                        'url': reverse('pharmaship:medicine:equivalent', args=(molecule_id,)),
                         'text': u"""
                             <p>{0}</p>
                             <h3  class="text-info">{1}</h3>
