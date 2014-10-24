@@ -55,7 +55,7 @@ def remove_yaml_pk(yaml_string):
             del item['pk']
         except KeyError:
             pass
-    print data
+
     output = dump(data, Dumper=Dumper)
     return output
 
@@ -90,7 +90,6 @@ class BaseImport:
 
         # Decrypt the file
         self.clear_tar = self.gpg.decrypt(self.signed).data
-        print "Décrypté", len(self.clear_tar)
 
         # LOG
         self.core_log.append({'name': _('Package Signature'), 'value': u"Verified, {0} [{1}]".format(verified.username, verified.key_id[-8:])})
