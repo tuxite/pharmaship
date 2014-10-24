@@ -33,7 +33,7 @@ class Item(models.Model):
         return self.content_object.name
 
     def save(self, *args, **kwargs):
-        """Retrieves additional information from the object choosen. 
+        """Retrieves additional information from the object choosen.
         If the attribute is already set, no change.
         """
         if not self.additional:
@@ -54,11 +54,11 @@ class Requisition(models.Model):
 
     def __unicode__(self):
         return self.name
-        
+
     def item_name(self):
         ct = ContentType.objects.get(pk=self.item_type)
         return unicode(_(ct.app_label.capitalize())) + " > " + unicode(_(ct.name.capitalize()))
-        
+
 
 
 class Settings(models.Model):
