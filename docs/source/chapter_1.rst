@@ -128,9 +128,11 @@ Once imported, you will find the following view:
 
 .. image:: img/trusted_key.png
 
-Look at that great bug in translation... Whaooooo! :-)
+Now you can add the first set of data you need to |ps| in the import data fieldset. You will have to wait a little:
 
-Now you can add the first set of data you need to |ps| in the import data fieldset.
+.. image:: img/import_data_processing.png
+
+And finally:
 
 .. image:: img/import_data.png
 
