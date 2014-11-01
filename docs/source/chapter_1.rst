@@ -136,6 +136,8 @@ And finally:
 
 .. image:: img/import_data.png
 
+Please note that when you receive a new allowance file, it has to be loaded in order to keep your stock in accordance with regulation/company.
+
 
 Dotation in force
 =================
