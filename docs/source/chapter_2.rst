@@ -39,9 +39,10 @@ By Clicking on the arrow close to ``Add a medicine`` you might also ``Add an equ
 .. image:: img/inventory4.png
  
 By doing so, you will find a new line in your inventory - as shown in image below - with the equivalent added. But, there, please note that :
+
 * there is a "non-conform!" label raised;
 * in our example, composition is the non-valid part, so it appears in red;
-* finally, as you may already have notice, quantity in inventory (or inventory summary) did not updated as that medicine is not a valid one.
+* finally, as you may already have noticed, quantity in inventory (or inventory summary) did not updated as that medicine is not a valid one.
 
 .. image:: img/inventory5.png
 
