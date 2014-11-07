@@ -447,6 +447,7 @@ def pdf_print(request):
                     'allowance_list': allowance_list,
                     },
                     context_instance=RequestContext(request))
+
     # Creating the response
     filename = "pharmaship_medicine_{0}.pdf".format(datetime.date.today())
     response = HttpResponse(content_type='application/pdf')

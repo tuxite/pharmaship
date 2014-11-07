@@ -113,7 +113,7 @@
 
         return element.toUpperCase()
             .indexOf(search.toUpperCase()) >= 0;
-    }
+    };
 
     /* Function to set the controls of the forms */
     function forms_controls() {
