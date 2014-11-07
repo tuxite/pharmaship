@@ -31,8 +31,8 @@ def extract_manifest(manifest_descriptor):
 
     return result
 
-def remove_pk(xml_string):
-    """Removes the PK attributes to the serialized objects.
+def remove_xml_pk(xml_string):
+    """Removes the PK attributes to the serialized objects. XML Version.
 
     This allows to import different alllowances with for instance the
     same molecules without generating conflicts of primary key.
@@ -62,7 +62,7 @@ def remove_yaml_pk(yaml_string):
 class BaseImport:
     """Class used to import a data file in Onboard Assistant."""
     def __init__(self, import_file):
-        """Saves the file and create a GPG context."""
+        """Reads the file and creates a gnupg.GPG instance."""
         self.signed = import_file.read()
         self.gpg = gnupg.GPG(gnupghome=settings.KEYRING)
         self.clear_tar = None

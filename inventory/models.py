@@ -218,7 +218,7 @@ class QtyTransaction(models.Model):
 
 class Remark(models.Model):
     """Stores remarks attached to a :model:`inventory.Equipment` or
-    model:`inventory.Molecule` instance.
+    :model:`inventory.Molecule` instance.
     """
     text = models.TextField(_("Text"), blank=True, null=True)
 
@@ -228,7 +228,7 @@ class Remark(models.Model):
 
 
 class MoleculeManager(models.Manager):
-    """Manager for class Molecule."""
+    """Manager for :model:`inventory.Molecule`."""
     def get_by_natural_key(self, name, roa, dosage_form, composition):
         return self.get(name=name, roa=roa, dosage_form=dosage_form, composition=composition)
 
@@ -269,8 +269,7 @@ class MoleculeManager(models.Manager):
 
 
 class Molecule(models.Model):
-    """Base medicine model for all medicines.
-    inn = International Nonproprietary Name (DC in French)"""
+    """Stores molecule objects used as referent in an :model:`inventory.Allowance`."""
     objects = MoleculeManager()  # For deserialization
 
     name = models.CharField(max_length=100)  # Example: Paracétamol
@@ -300,7 +299,7 @@ class Molecule(models.Model):
 
 
 class Medicine(models.Model):
-    """Medicine model, "child" of Molecule."""
+    """Stores a medicine object, "child" of :model:`inventory.Molecule`."""
     name = models.CharField(_("Name"), max_length=100)  # Brand Name. Example: Doliprane for INN Paracétamol
     exp_date = models.DateField(_("Expiration Date"))
     # Link to location
