@@ -393,7 +393,7 @@ class Equipment(models.Model):
     perishable = models.BooleanField(default=False)
     allowances = models.ManyToManyField(Allowance, through='EquipmentReqQty')
     remark = generic.GenericRelation(Remark)
-    picture = models.ImageField(upload_to="pictures", blank=True, null=True)
+    picture = models.ImageField(upload_to=utils.filepath, blank=True, null=True)
 
     def __unicode__(self):
         return self.name

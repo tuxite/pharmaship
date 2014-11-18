@@ -1,5 +1,6 @@
 # -*- coding: utf-8; -*-
 import datetime
+import django.utils.text
 
 def req_qty_element(element, req_qty_list):
     """ Returns the required quantity of an element from the allowance list and required quantities list."""
@@ -21,3 +22,15 @@ def delay(delta):
 # Functions
 def slicedict(d, s):
     return {k:v for k,v in d.iteritems() if k.startswith(s)}
+    
+def filepath(instance, filename):
+    """Returns a file path using the instance name.
+    
+    Used in :model:`inventory.Equipment`.
+    """
+    # Keeps the extension of the uploaded file
+    # TODO: Find a better way to detect the extension.
+    extension = filename.split('.')[-1]
+    
+    name = django.utils.text.slugify(instance.name)  # Safer
+    return "pictures/pharmaship/{0}.{1}".format(name, extension)
