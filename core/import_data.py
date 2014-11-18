@@ -84,6 +84,14 @@ class BaseImport:
         for k in self.gpg.list_keys():
             if k['keyid'] == verified.key_id:
                 key = k
+                break
+            
+            # Also check in the subkeys
+            for sk in k['subkeys']:
+                if sk[0] == verified.key_id:
+                    key = k
+                    break
+                
         if not key:
             self.error = _("Signature not in the keyring.")
             return False
