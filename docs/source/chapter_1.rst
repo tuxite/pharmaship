@@ -119,6 +119,17 @@ Once data are updated, you will find ``Data updated`` close to the button, in gr
 .. image:: img/vessel_particular.png
 
 
+Company logo
+============
+
+To display your company logo, change the image located in :
+
+.. image:: common/compagnie.png
+
+by your own company logo! But don't rename it.
+That's easy, isn't it ?
+
+
 Trusted key & inventory
 =======================
 
