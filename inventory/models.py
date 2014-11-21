@@ -89,6 +89,10 @@ DRUG_ROA_CHOICES = (
 class Allowance(models.Model):
     """Model for articles and medicines allowances."""
     name = models.CharField(max_length=100)  # Example: Dotation A
+    author = models.CharField(max_length=100)  # Example: CCMM Purpan
+    signature = models.CharField(max_length=200)
+    date = models.DateField()
+    version = models.CharField(max_length=20)
     # For use with complements.
     # True will add quantity, false will be treated as an absolute quantity.
     additional = models.BooleanField(default=False)

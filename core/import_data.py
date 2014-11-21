@@ -65,6 +65,7 @@ class BaseImport:
         """Reads the file and creates a gnupg.GPG instance."""
         self.signed = import_file.read()
         self.gpg = gnupg.GPG(gnupghome=settings.KEYRING)
+        self.key = None
         self.clear_tar = None
         self.error = ''
         self.log = []
@@ -80,19 +81,19 @@ class BaseImport:
             return False
 
         # Then check that it is in the keyring
-        key = None
+        self.key = None
         for k in self.gpg.list_keys():
             if k['keyid'] == verified.key_id:
-                key = k
+                self.key = k
                 break
             
             # Also check in the subkeys
             for sk in k['subkeys']:
                 if sk[0] == verified.key_id:
-                    key = k
+                    self.key = k
                     break
                 
-        if not key:
+        if not self.key:
             self.error = _("Signature not in the keyring.")
             return False
 
@@ -187,7 +188,8 @@ class BaseImport:
                 for module in self.modules:
                     try:
                         module_pkg = importlib.import_module(module + ".import_data")
-                        module_fn = module_pkg.DataImport(tar)
+                        # The module can access to the configuration file and also to the key used to sign the archive
+                        module_fn = module_pkg.DataImport(tar, self.conf, self.key)
                         if not module_fn.launch():
                             data = json.dumps({'error': _('Something went wrong!'), 'log': {module: module_fn.error}})
                             return HttpResponseBadRequest(data, content_type = "application/json")

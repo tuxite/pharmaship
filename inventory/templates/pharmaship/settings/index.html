@@ -32,6 +32,10 @@
         <thead>
             <tr>
                 <th>{% trans "Name" %}</th>
+                <th>{% trans "Author" %}</th>
+                <th>{% trans "Signature" %}</th>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Version" %}</th>
                 <th>{% trans "Additionnal" %}</th>
                 <th></th>
             </tr>
@@ -42,11 +46,11 @@
             {% endfor %}
         </tbody>
         <tfoot>
-        <tr>
-            <td colspan="3">
-                <p class="help-block">{% trans "To add an allowance, use the import function." %}</p>
-            </td>
-        </tr>
+            <tr>
+                <td colspan="7">
+                    <p class="help-block">{% trans "To add an allowance, use the import function." %}</p>
+                </td>
+            </tr>
         </tfoot>
     </table>
 </div>

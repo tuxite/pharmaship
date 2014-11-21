@@ -1,6 +1,10 @@
 {% load i18n %}
             <tr>
                 <td>{{ item.name }}</td>
+                <td>{{ item.author }}</td>
+                <td>{{ item.signature }}</td>
+                <td>{{ item.date }}</td>
+                <td>{{ item.version }}</td>
                 <td>{{ item.additional|yesno }}</td>
                 <td>
                     {% if item.active %}

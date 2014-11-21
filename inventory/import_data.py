@@ -14,7 +14,11 @@ import models
 
 from core.import_data import remove_yaml_pk
 
-
+def iso_string_to_date(string):
+    """Converts a string representing the date and time in ISO 8601 format, 
+    YYYY-MM-DDTHH:MM:SS to a datetime object."""
+    return datetime.datetime.strptime(string, '%Y-%m-%dT%H:%M:%S')
+    
 def serialize_allowance(allowance):
     """Exports an allowance using the YAML format.
 
@@ -122,8 +126,10 @@ class DataImport:
 
     """Class to import allowance inside the inventory module."""
 
-    def __init__(self, tar):
+    def __init__(self, tar, conf, key):
         self.tar = tar
+        self.conf = conf
+        self.key = key
         self.data = []
         self.module_name = __name__.split('.')[-2] + "/"
 
@@ -167,6 +173,10 @@ class DataImport:
             allowance_dict = allowance.object.__dict__
             allowance_dict.pop('id', None)
             allowance_dict.pop('_state', None)
+            allowance_dict['author'] = self.conf.get('info', 'author')
+            allowance_dict['version'] = self.conf.get('info', 'version')
+            allowance_dict['date'] = iso_string_to_date(self.conf.get('info', 'date'))
+            allowance_dict['signature'] = self.key['keyid'][-8:]
             # Unique: (name, )
             obj, created = models.Allowance.objects.update_or_create(
                 name=allowance.object.name,
@@ -330,6 +340,7 @@ class DataImport:
         # Copying pictures
         self.tar.extractall(members=pictures_files(self.tar), 
                             path=os.path.join(settings.MEDIA_ROOT, "pictures/pharmaship"))
+        
         
         # Exporting results' values for display
         return self.data
