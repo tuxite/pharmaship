@@ -183,6 +183,12 @@ def item_add(request, requisition_id):
     if request.method == 'POST':
         form = forms.AddItemForm(request.POST)
         if form.is_valid():
+            # Check if there is an existing item
+            if len(requisition.item_set.filter(object_id=form.cleaned_data['object_id'])) > 0:
+                # The item already exists
+                data = json.dumps({'error': _('This item is already in the requisition.')})
+                return HttpResponseBadRequest(data, content_type="application/json")
+                
             # Create a new requisition item
             item = models.Item()
             item.content_type = ContentType.objects.get_for_id(requisition.item_type)
@@ -201,8 +207,8 @@ def item_add(request, requisition_id):
             errors = dict(
                 [(k, [unicode(e) for e in v]) for k, v in form.errors.items()]
             )
-            data = json.dumps({'error': _('Something went wrong!'),
-                               'details': errors})
+            # Return only the first error to be displayed inline
+            data = json.dumps({'error': errors[errors.keys()[0]]})
             return HttpResponseBadRequest(data,
                                           content_type="application/json")
 
