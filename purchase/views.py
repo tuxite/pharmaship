@@ -141,7 +141,8 @@ def status(request, requisition_id):
             requisition.save()
             data = json.dumps({'success': _('Data updated'),
                                'id': requisition_id,
-                               'status': requisition.get_status_display()})
+                               'status': requisition.get_status_display(),
+                               'code': requisition.status})
             return HttpResponse(data, content_type="application/json")
         else:
             errors = dict(
@@ -220,6 +221,12 @@ def delete(request, requisition_id):
     requisition = get_object_or_404(models.Requisition, pk=requisition_id)
     # Parsing the form
     if request.method == 'POST' and request.is_ajax():
+        if requisition.status > 0:
+            # The requisition as already been sent
+            data = json.dumps({'error': _('Requisition already sent!')})
+            return HttpResponseBadRequest(data,
+                                          content_type="application/json")
+            
         requisition.delete()
         data = json.dumps({'success': _('Data updated'),
                            'url': reverse('purchase:index')})
@@ -239,7 +246,7 @@ def delete(request, requisition_id):
                 _("You are going to delete the requisition:"),
                 requisition.name,
             ),
-        'foot_text': '<h4 class=\'text-danger\'>{0}</h4>'.format(
+        'foot_text': u'<h4 class=\'text-danger\'>{0}</h4>'.format(
             _('The deletion is permanent!')),
         'callback': 'redirect',
         },
