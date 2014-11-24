@@ -113,7 +113,7 @@
                 <input type="hidden" name="requisition_id" value="{{ requisition.id }}">
             </form>
 
-            {% for item in requisition.item_set.all %}
+            {% for item in requisition.item_set.all|dictsort:"content_object.name" %}
                 {% include "purchase/item.inc.html" %}
             {% endfor %}
 
