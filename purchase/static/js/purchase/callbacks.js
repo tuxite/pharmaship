@@ -38,7 +38,12 @@
     /* Callback after adding an item in a requisition */
     document.formCallback.prototype.itemAdd = function (data) {
         if (data.success) {
-            $('.ps-scroll-items').append(data.content); // NOTE: Use preprend to add first?
+            // Add first the item
+            $('.ps-scroll-items').append(data.content);
+            // Then sort alphabetically
+            $(".ps-item").sort(function(a,b){
+                return $(a).find(".ps-item-name:first")[0].innerText > $(b).find(".ps-item-name:first")[0].innerText ? 1 : -1;
+            }).remove().appendTo('.ps-scroll-items');
         }
     };
 }(jQuery));
