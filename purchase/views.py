@@ -189,7 +189,7 @@ def item_add(request, requisition_id):
                 # The item already exists
                 data = json.dumps({'error': _('This item is already in the requisition.')})
                 return HttpResponseBadRequest(data, content_type="application/json")
-                
+
             # Create a new requisition item
             item = models.Item()
             item.content_type = ContentType.objects.get_for_id(requisition.item_type)
@@ -226,7 +226,7 @@ def delete(request, requisition_id):
             data = json.dumps({'error': _('Requisition already sent!')})
             return HttpResponseBadRequest(data,
                                           content_type="application/json")
-            
+
         requisition.delete()
         data = json.dumps({'success': _('Data updated'),
                            'url': reverse('purchase:index')})
@@ -330,6 +330,12 @@ def edit(request, requisition_id):
     requisition = get_object_or_404(models.Requisition, pk=requisition_id)
 
     if request.method == "POST" and request.is_ajax():
+        if requisition.status > 0:
+            # The requisition as already been sent
+            data = json.dumps({'error': _('Requisition already sent!')})
+            return HttpResponseBadRequest(data,
+                                          content_type="application/json")
+
         form = forms.RequisitionNameForm(request.POST)
         if form.is_valid():
             # Process the data in form.cleaned_data
