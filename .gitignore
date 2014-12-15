@@ -53,9 +53,9 @@ coverage.xml
 *.log
 
 # Sphinx documentation
-#docs/_build/
+docs/_build/
 # Compiled folder for Sphinx documentation. (navugo)
-#docs/build/
+docs/build/
 
 # PyBuilder
 target/
