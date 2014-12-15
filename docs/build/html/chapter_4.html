@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4. Requisition &mdash; Pharmaship 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Pharmaship 1.0 documentation" href="index.html" />
+    <link rel="next" title="5. Common errors" href="chapter_5.html" />
+    <link rel="prev" title="3. Search Panel" href="chapter_3.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="chapter_5.html" title="5. Common errors"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="chapter_3.html" title="3. Search Panel"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Pharmaship 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="requisition">
+<h1>4. Requisition<a class="headerlink" href="#requisition" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="requisition-overview">
+<h2>4.1. Requisition overview<a class="headerlink" href="#requisition-overview" title="Permalink to this headline">¶</a></h2>
+<p>That page opens an other Onboard Assistant module, the purchase one. In that module - so far - you can manage Pharmaship requisition(s) by creating, editing and deleting ones. Empty after the installation process, we will create our first requisition.</p>
+</div>
+<div class="section" id="new-requisition">
+<h2>4.2. New Requisition<a class="headerlink" href="#new-requisition" title="Permalink to this headline">¶</a></h2>
+<p>Once you complete your inventory, you should create your first requisition. That is an important point to fulfil the inventory before to prepare the first requisition, as we will use the &#8220;populate function&#8221;.</p>
+<p>By clicking on the &#8220;new requisition&#8221; button, you will access to the following window:</p>
+<img alt="_images/new_req.png" src="_images/new_req.png" />
+<p>There, you have to fill the requisition name, the date where you want to receive your requisition as well as the port of delivery. There you can use as well a port code on 5 characters, or a full name of the port. There is no verification at that step (follow your company procedure).</p>
+<p>Finally, choose the range of application of your requisition: molecule or equipment. And choose &#8220;Populate automatically&#8221;, in order for Pharmaship to find the molecule or the equipment missing in your stock inventory compared to the allowance needed by regulation.</p>
+<p>Now, click on &#8220;create&#8221; and wait... as shown below, this will generate the requisition with all quantity missing in regard to your stock and expiry dates.</p>
+<img alt="_images/new_req2.png" src="_images/new_req2.png" />
+<p>On that window, you can find:</p>
+<ul class="simple">
+<li>the requisition title,</li>
+<li>its reference code,</li>
+<li>the status of the requisition,</li>
+<li>and the type of requisition (there, it is molecule requisition).</li>
+</ul>
+<p>Below, you have two tabs: items and instructions. Instructions is the tab where you might instruct your purchaser about what you are exactly asking for.</p>
+<p>Then on items tab, you have a text-box where you can search or just add new items, quantity and then validate. It will be added at the end of your requisition.</p>
+<p>Also, line by line, you can modify the quantity or delete the line. This is confirmed by a green tick, on the right side of the delete button as soon as you quit the quantity box.</p>
+<p>Once your requisition is ready, you might go back to Requisition Overview, and you will find a short resume of your newly added requisition. In order to re-open it, just click on the eye.</p>
+<p>Additional note: As you can see, there is a print button, allow you to print the requisition and when you receive it, to write on it the quantity of medicine received... (See below how to update your stock.)</p>
+</div>
+<div class="section" id="requisition-status">
+<h2>4.3. Requisition Status<a class="headerlink" href="#requisition-status" title="Permalink to this headline">¶</a></h2>
+<p>When you want to update the status of a requisition, you have to re-open it, then close to its reference, you might select the status you want to drop this requisition to.</p>
+<p>On this button, you might click on the name (left side) what will show you that following screen, where you could change the requisition status.</p>
+<img alt="_images/status.png" src="_images/status.png" />
+<p>Or you might click on the right side, where you can:</p>
+<ul class="simple">
+<li>change the status - same window as previously,</li>
+<li>change name of requisition,</li>
+<li>or delete the requisition.</li>
+</ul>
+<p>The different status are:</p>
+<ul class="simple">
+<li>Draft - only for local requisition, when working on it.</li>
+<li>Pending approval - when draft is ready, but requisition is not yet approved. At that stage, it is still possible to re-edit it if needed.</li>
+<li>Approved - when approved, there is only the possibility to cancel it.</li>
+<li>Quoted - when you received the quotation.</li>
+<li>Ordered - when requisition has been ordered (quotation approved).</li>
+<li>Partially received - if you received only some parts from that requisition.</li>
+<li>Fully received - all is received.</li>
+<li>Cancelled - if you have to cancel the requisition after it has been approved (not to delete it).</li>
+</ul>
+<p>Please note that on this version of Pharmaship, whatever is the status, there is no change in your inventory. In other terms, even if you mark a requisition as fully received, you still have to update manually your stock.</p>
+</div>
+<div class="section" id="update-modify-items">
+<h2>4.4. Update/Modify items<a class="headerlink" href="#update-modify-items" title="Permalink to this headline">¶</a></h2>
+<p>Once you print the requisition and inventoried what you received on board, you might change the status to &#8220;partially received&#8221; or &#8220;fully received&#8221; ; and then change the current page to &#8220;Medicine inventory&#8221; or &#8220;Material inventory&#8221;.</p>
+<p>Open the molecule where you want to add a medicine.
+and on the right side, click on the middle button: &#8220;Edit this medicine&#8221;.</p>
+<img alt="_images/update_med.png" src="_images/update_med.png" />
+<p>There you can modify data from this medicine, as well as its quantity.</p>
+<div class="section" id="consumption-of-items">
+<h3>4.4.1. Consumption of items<a class="headerlink" href="#consumption-of-items" title="Permalink to this headline">¶</a></h3>
+<p>In case that you have to consume some medicine, do not update the stock as above but click on the blue button instead of.
+That button called &#8220;use this medicine&#8221; will open the following sub window, where you just have to enter the number of medicine you used:</p>
+<img alt="_images/consume.png" src="_images/consume.png" />
+</div>
+<div class="section" id="remove-items">
+<h3>4.4.2. Remove items<a class="headerlink" href="#remove-items" title="Permalink to this headline">¶</a></h3>
+<p>The last icon there - the red one - is to delete completely the medicine. This should be done if the medicine is outdated for example.</p>
+<p>At that stage, you are able to install Pharmaship, to set it up, to fill Pharmaship inventory and to make a requisition, and finally you know how to update your stock in the software database when you receive it.</p>
+<p>The next chapter will show you how to add another allowance.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4. Requisition</a><ul>
+<li><a class="reference internal" href="#requisition-overview">4.1. Requisition overview</a></li>
+<li><a class="reference internal" href="#new-requisition">4.2. New Requisition</a></li>
+<li><a class="reference internal" href="#requisition-status">4.3. Requisition Status</a></li>
+<li><a class="reference internal" href="#update-modify-items">4.4. Update/Modify items</a><ul>
+<li><a class="reference internal" href="#consumption-of-items">4.4.1. Consumption of items</a></li>
+<li><a class="reference internal" href="#remove-items">4.4.2. Remove items</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="chapter_3.html"
+                        title="previous chapter">3. Search Panel</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="chapter_5.html"
+                        title="next chapter">5. Common errors</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/chapter_4.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="chapter_5.html" title="5. Common errors"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="chapter_3.html" title="3. Search Panel"
+             >previous</a> |</li>
+        <li><a href="index.html">Pharmaship 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, DSM.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3b1.
+    </div>
+  </body>
+</html>
