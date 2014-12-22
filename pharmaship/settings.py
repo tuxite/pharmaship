@@ -179,3 +179,7 @@ AUTH_USER_MODEL = 'settings.User'
 
 # Trusted GPG Folder
 KEYRING = BASE_DIR + "/conf/keyring"
+
+# Documentation
+DOCS_URL = "/help"
+DOCS_ROOT = BASE_DIR + "/docs/build/html"

@@ -44,21 +44,23 @@
                         {% trans "Change Status" %}
                     </a>
                 </li>
-                <li>
+                {% if requisition.status == 0 %}
+                <li class="requisition-dropdown">
                     <a href="{% url 'purchase:requisition:edit' requisition.id %}"
                        data-toggle="modal"
                        data-target="#action_modal">
                         {% trans "Change Name" %}
                     </a>
                 </li>
-                <li class="divider"></li>
-                <li>
+                <li class="divider requisition-dropdown"></li>
+                <li class="requisition-dropdown">
                     <a href="{% url 'purchase:requisition:delete' requisition.id %}"
                        data-toggle="modal"
                        data-target="#action_modal">
                         {% trans "Delete this requisition" %}
                     </a>
                 </li>
+                {% endif %}
             </ul>
         </div>
         <span class="badge">{{ requisition.item_name }}</span>
@@ -113,7 +115,7 @@
                 <input type="hidden" name="requisition_id" value="{{ requisition.id }}">
             </form>
 
-            {% for item in requisition.item_set.all %}
+            {% for item in requisition.item_set.all|dictsort:"content_object.name" %}
                 {% include "purchase/item.inc.html" %}
             {% endfor %}
 

@@ -1,13 +1,14 @@
 # -*- coding: utf-8; -*-
 from django.utils.translation import ugettext_lazy as _
 from django import forms
+from django.core.exceptions import ValidationError
 
 from django.contrib.contenttypes.models import ContentType
 from django.apps import apps
 
 from core.forms import DateInput
 import models
-
+            
 def get_model_choices():
     """Function to parse all installed applications to get the orderables models."""
     result = [] # Using model choices format.
@@ -27,6 +28,11 @@ def get_model_choices():
         result.append([application.verbose_name, r])
     return result
 
+def validate_quantity(value):
+    """Validates quantity in `forms.AddItemForm` to block 0-quantity items."""
+    if value == 0:
+        raise ValidationError(_("Quantity must be not null"))
+        
 class CreateRequisitionForm(forms.ModelForm):
     """Form for the creation of a new requisition."""
     auto_add = forms.BooleanField(label=_("Populate automatically"), required=False)
@@ -63,17 +69,21 @@ class StatusForm(forms.ModelForm):
         model = models.Requisition
         fields = ['status',]
 
+
 class NameSearchForm(forms.Form):
     """Form to sanitize the name search of an item."""
     name = forms.CharField()
 
+
 class RequistionDeleteForm(forms.Form):
     """Form for deleting a requisition."""
+
 
 class AddItemForm(forms.Form):
     """Form to add an item to a requisition."""
     object_id = forms.IntegerField()
-    quantity = forms.IntegerField()
+    quantity = forms.IntegerField(validators=[validate_quantity])
+    
 
 class UpdateItemQty(forms.Form):
     """Form to update the item quantity."""

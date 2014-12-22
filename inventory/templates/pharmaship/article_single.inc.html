@@ -81,13 +81,6 @@
                                 {% endif %}
                             </td>
                             <td class="medicine_buttons">
-                                <a href="{% url 'pharmaship:equipment:out' item.id %}"
-                                   title="{% trans 'Use this article' %}"
-                                   class="btn btn-primary btn-sm"
-                                   data-toggle="modal"
-                                   data-target="#action_modal">
-                                    <span class="fa fa-upload"></span>
-                                </a>
                                 <a href="{% url 'pharmaship:equipment:change' item.id %}"
                                    title="{% trans 'Edit this article' %}"
                                    class="btn btn-default btn-sm"
@@ -95,12 +88,19 @@
                                    data-target="#action_modal">
                                     <span class="fa fa-edit"></span>
                                 </a>
-                                <a href="{% url 'pharmaship:equipment:delete' item.id %}"
-                                   title="{% trans 'Delete this article' %}"
-                                   class="btn btn-danger btn-sm"
+                                <a href="{% url 'pharmaship:equipment:out' item.id %}"
+                                   title="{% trans 'Use this article' %}"
+                                   class="btn btn-default btn-sm"
                                    data-toggle="modal"
                                    data-target="#action_modal">
-                                    <span class="fa fa-trash-o"></span>
+                                    <span class="fa fa-upload text-primary"></span>
+                                </a>
+                                <a href="{% url 'pharmaship:equipment:delete' item.id %}"
+                                   title="{% trans 'Delete this article' %}"
+                                   class="btn btn-default btn-sm"
+                                   data-toggle="modal"
+                                   data-target="#action_modal">
+                                    <span class="fa fa-trash-o text-danger"></span>
                                 </a>
                             </td>
                     </tr>

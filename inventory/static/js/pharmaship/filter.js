@@ -6,6 +6,12 @@
 
     /* Function to filter the objects by name */
     function filter_by_name() {
+        // Issue #10:
+        //  - added :visible selector to match only visible items.
+        //  - fires the filter-tag event when no filter set..
+        //  - move 'filter-tag' reset before firing filter-tag event
+        //  Matthieu Morin 2014-11-07
+
         var input = $('#filter-input');
 
         $(input)
@@ -14,17 +20,22 @@
                 // Reset the group filter
                 $('#filter-select').val(0);
                 $(list).find('div.group-div').show();
-                // Reset the tag filter
-                $('#filter-tag').prop("checked", false);
                 // Reset the location filter
                 $('#filter-location').val(0);
 
                 var filter = $(this).val();
                 if (filter) {
-                    $(list).find("h4:not(:contains(" + filter + "))").parents('.item-div').hide();
-                    $(list).find("h4:contains(" + filter + ")").parents('.item-div').show();
+                    $(list).find("h4:visible:not(:contains(" + filter + "))").parents('.item-div').hide();
+                    $(list).find("h4:visible:contains(" + filter + ")").parents('.item-div').show();
                 } else {
+                    // Show all the items, and apply tag filter if any
                     $(list).find("h4").parents('.item-div').show();
+                    // Fire the filter-tag event
+                    if ($('#filter-tag').hasClass("active") === true) {
+                        // Reset the tag filter
+                        $('#filter-tag').removeClass('active');
+                        $('#filter-tag').click();
+                    }
                 }
                 return false;
             })

@@ -27,13 +27,13 @@ Version:     0.1
 */
 
 * {
-	margin : 0;
-	padding : 0;
-	font-family : 'Droid Sans', sans-serif;
+    margin : 0;
+    padding : 0;
+    font-family : 'Droid Sans', sans-serif;
     font-size: 11pt;
     text-decoration: none;
     list-style: none;
-	}
+    }
 
 
 body {
@@ -41,34 +41,34 @@ body {
     height: 210mm;
     width: 297mm;
 */
-    
-	padding-top : 30px;
-	font-family : sans-serif;
-	font-size : 12px;
-	}
+
+    padding-top : 30px;
+    font-family : sans-serif;
+    font-size : 12px;
+    }
 
 table {
-	border-width: medium;
-	border-spacing: 1mm;
-	border-style: solid;
-	border-color: black;
-	border-collapse: collapse;
+    border-width: medium;
+    border-spacing: 1mm;
+    border-style: solid;
+    border-color: black;
+    border-collapse: collapse;
     clear:both;
     margin-top: 0.5cm;
 }
 table tr.border td, table th {
-	border-width: thin;
-	border-style: solid;
-	border-color: black;
+    border-width: thin;
+    border-style: solid;
+    border-color: black;
 }
 
 table td{
     border-bottom: none;
     border-top: none;
     border-left: 1pt solid black;
-	padding: 2mm;
+    padding: 2mm;
     }
-    
+
 tr.group{
     background:#FFFF00;
     font-weight:700;

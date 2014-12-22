@@ -31,8 +31,8 @@ def extract_manifest(manifest_descriptor):
 
     return result
 
-def remove_pk(xml_string):
-    """Removes the PK attributes to the serialized objects.
+def remove_xml_pk(xml_string):
+    """Removes the PK attributes to the serialized objects. XML Version.
 
     This allows to import different alllowances with for instance the
     same molecules without generating conflicts of primary key.
@@ -55,16 +55,17 @@ def remove_yaml_pk(yaml_string):
             del item['pk']
         except KeyError:
             pass
-    print data
+
     output = dump(data, Dumper=Dumper)
     return output
 
 class BaseImport:
     """Class used to import a data file in Onboard Assistant."""
     def __init__(self, import_file):
-        """Saves the file and create a GPG context."""
+        """Reads the file and creates a gnupg.GPG instance."""
         self.signed = import_file.read()
         self.gpg = gnupg.GPG(gnupghome=settings.KEYRING)
+        self.key = None
         self.clear_tar = None
         self.error = ''
         self.log = []
@@ -80,17 +81,24 @@ class BaseImport:
             return False
 
         # Then check that it is in the keyring
-        key = None
+        self.key = None
         for k in self.gpg.list_keys():
             if k['keyid'] == verified.key_id:
-                key = k
-        if not key:
+                self.key = k
+                break
+            
+            # Also check in the subkeys
+            for sk in k['subkeys']:
+                if sk[0] == verified.key_id:
+                    self.key = k
+                    break
+                
+        if not self.key:
             self.error = _("Signature not in the keyring.")
             return False
 
         # Decrypt the file
         self.clear_tar = self.gpg.decrypt(self.signed).data
-        print "Décrypté", len(self.clear_tar)
 
         # LOG
         self.core_log.append({'name': _('Package Signature'), 'value': u"Verified, {0} [{1}]".format(verified.username, verified.key_id[-8:])})
@@ -180,7 +188,8 @@ class BaseImport:
                 for module in self.modules:
                     try:
                         module_pkg = importlib.import_module(module + ".import_data")
-                        module_fn = module_pkg.DataImport(tar)
+                        # The module can access to the configuration file and also to the key used to sign the archive
+                        module_fn = module_pkg.DataImport(tar, self.conf, self.key)
                         if not module_fn.launch():
                             data = json.dumps({'error': _('Something went wrong!'), 'log': {module: module_fn.error}})
                             return HttpResponseBadRequest(data, content_type = "application/json")

@@ -1,85 +1,64 @@
 # -*- coding: utf-8; -*-
-import tarfile, time, datetime
+import tarfile
+import time
+import datetime
 import io
+import os.path
 
 from django.utils.translation import ugettext as _
 from django.core import serializers
 from django.http import HttpResponse
+from django.conf import settings
 
 import models
 
-from core.import_data import remove_pk, remove_yaml_pk
+from core.import_data import remove_yaml_pk
 
-def get_molecule_pk(deserialized_object):
-    """Returns the pk of a Molecule object with deserialized_object attributes."""
-    # Unique: (name, roa, dosage_form, composition)
-    try:
-        obj = models.Molecule.objects.get(
-            name = deserialized_object.object.name,
-            roa = deserialized_object.object.roa,
-            dosage_form = deserialized_object.object.dosage_form,
-            composition = deserialized_object.object.composition,
-            )
-        return obj.pk
-    except:
-        return None
-
-def get_equipment_pk(deserialized_object):
-    """Returns the pk of an Equipment object with deserialized_object attributes."""
-    # Unique: (name, packaging, perishable, consumable, group)
-    try:
-        obj = models.Equipment.objects.get(
-            name = deserialized_object.object.name,
-            packaging = deserialized_object.object.packaging,
-            perishable = deserialized_object.object.perishable,
-            consumable = deserialized_object.object.consumable,
-            group = deserialized_object.object.group,
-            )
-        return obj.pk
-    except:
-        return None
-
-def get_allowance_pk(deserialized_object):
-    """Returns the pk of an Allowance object with deserialized_object attributes."""
-    try:
-        obj = models.Allowance.objects.get(
-            name = deserialized_object.object.name,
-            )
-        return obj.pk
-    except:
-        return None
-
-def get_reqqty_pk(deserialized_object, model):
-    """Returns the pk of a ReqQty object with deserialized_object attributes."""
-    try:
-        obj = model.objects.get(
-            allowance_id = deserialized_object.object.allowance.pk,
-            base_id = deserialized_object.object.base.pk,
-            )
-        return obj.pk
-    except:
-        return None
-
+def iso_string_to_date(string):
+    """Converts a string representing the date and time in ISO 8601 format, 
+    YYYY-MM-DDTHH:MM:SS to a datetime object."""
+    return datetime.datetime.strptime(string, '%Y-%m-%dT%H:%M:%S')
+    
 def serialize_allowance(allowance):
-    """Exports an allowance into the format used by the broadcaster."""
+    """Exports an allowance using the YAML format.
+
+    To have an usable export, the broadcaster needs:
+        - the :model:`inventory.Allowance` selected instance,
+    And related to this instance:
+        - the :model:`inventory.Molecule` objects list,
+        - the :model:`inventory.MoleculeReqQty` objects list,
+        - the :model:`inventory.Equipment` objects list,
+        - the :model:`inventory.EquipmentReqQty` objects list.
+
+    Returns a list of filenames and streams.
+    """
     # Molecules used by the allowance
-    molecule_list = models.Molecule.objects.filter(allowances__in=[allowance,])
-    molecule_data = serializers.serialize("yaml", molecule_list, use_natural_foreign_keys=True)
+    molecule_list = models.Molecule.objects.filter(
+        allowances__in=[allowance, ])
+    molecule_data = serializers.serialize(
+        "yaml", molecule_list, use_natural_foreign_keys=True)
 
     # Required quantities for molecules
-    molecule_reqqty_list = models.MoleculeReqQty.objects.filter(allowance__in=[allowance,])
-    molecule_reqqty_data = serializers.serialize("yaml", molecule_reqqty_list, fields=('base','required_quantity'), use_natural_foreign_keys=True)
+    molecule_reqqty_list = models.MoleculeReqQty.objects.filter(
+        allowance__in=[allowance, ])
+    molecule_reqqty_data = serializers.serialize(
+        "yaml", molecule_reqqty_list, fields=('base', 'required_quantity'), use_natural_foreign_keys=True)
 
     # Equipment used by the allowance
-    equipment_list = models.Equipment.objects.filter(allowances__in=[allowance,])
-    equipment_data = serializers.serialize("yaml", equipment_list, use_natural_foreign_keys=True)
+    equipment_list = models.Equipment.objects.filter(
+        allowances__in=[allowance, ])
+    equipment_data = serializers.serialize(
+        "yaml", equipment_list, use_natural_foreign_keys=True)
 
     # Required quantities for equipments
-    equipment_reqqty_list = models.EquipmentReqQty.objects.filter(allowance__in=[allowance,])
-    equipment_reqqty_data = serializers.serialize("yaml", equipment_reqqty_list, fields=('base','required_quantity'), use_natural_foreign_keys=True)
-
+    equipment_reqqty_list = models.EquipmentReqQty.objects.filter(
+        allowance__in=[allowance, ])
+    equipment_reqqty_data = serializers.serialize(
+        "yaml", equipment_reqqty_list, fields=('base', 'required_quantity'), use_natural_foreign_keys=True)
+        
     # Allowance record
-    allowance_data = serializers.serialize("yaml", (allowance,), use_natural_foreign_keys=True)
+    allowance_data = serializers.serialize(
+        "yaml", (allowance,), use_natural_foreign_keys=True)
 
     # Returning a list with tuples: (filename, data)
     return [
@@ -88,12 +67,27 @@ def serialize_allowance(allowance):
         ('equipment_obj.yaml', remove_yaml_pk(equipment_data)),
         ('equipment_reqqty.yaml', remove_yaml_pk(equipment_reqqty_data)),
         ('allowance.yaml', remove_yaml_pk(allowance_data)),
-        ]
+    ]
 
+def get_pictures(allowance):
+    """Returns a list of picture paths to include in the archive."""
+    # Pictures attached to equipments
+    pictures = models.Equipment.objects.filter(
+        allowances__in=[allowance, ]).exclude(picture='').values_list('picture', flat=True)
+    
+    return pictures
+    
 def create_archive(allowance):
+    """Creates an archive from the given :model:`inventory.Allowance`
+    instance.
+
+    The response is a tar.gz file containing YAML files generated by the
+    function `serialize_allowance`.
+    """
     # Creating the response (used as a file-like object)
     response = HttpResponse(content_type="application/x-compressed-tar")
-    response['Content-Disposition'] = 'attachment; filename="pharmaship_{0}.tar.gz"'.format(datetime.date.today())
+    response['Content-Disposition'] = 'attachment; filename="pharmaship_{0}.tar.gz"'.format(
+        datetime.date.today())
 
     # Creating a tar.gz archive
     with tarfile.open(fileobj=response, mode='w') as tar:
@@ -108,131 +102,245 @@ def create_archive(allowance):
             info.mtime = time.time()
             info.size = len(f.getvalue())
             tar.addfile(info, f)
+        
+        # Adding the pictures of Equipment
+        for item in get_pictures(allowance):
+            try:
+                print os.path.join(settings.MEDIA_ROOT, item)
+                tar.add(os.path.join(settings.MEDIA_ROOT, item), arcname=item)
+            # TODO: Detail Exception
+            except Exception as e:
+                print "Error", e
     return response
+
+def pictures_files(members):
+    for tarinfo in members:
+        path_strings = os.path.split(tarinfo.name)
+        if path_strings[0] == "inventory/pictures/pharmaship":
+            # Modify the path of the picture to manage later the full path
+            tarinfo.name = path_strings[1]
+            yield tarinfo
 
 
 class DataImport:
+
     """Class to import allowance inside the inventory module."""
-    def __init__(self, tar):
+
+    def __init__(self, tar, conf, key):
         self.tar = tar
+        self.conf = conf
+        self.key = key
         self.data = []
         self.module_name = __name__.split('.')[-2] + "/"
 
     def launch(self):
         """Launches the importation.
 
-        Molecule objects with no allowance (orphan) are stored for further
-        treatment.
-        Molecules are updated or added (if their pk cannot be determined).
-        Allowance object is updated or created by the same process.
-        Required quantities are erased for the allowance and re-created.
+        :model:`inventory.Molecule` and :mod:`inventory.Equipment` objects with
+        no allowance (orphan) are stored for further treatment.
+        :model:`inventory.Molecule` and :mod:`inventory.Equipment` are updated
+        or added (if their pk cannot be determined).
+
+        :model:`inventory.Allowance` object is updated or created by the
+        same process.
+
+        :model:`inventory.MoleculeReqQty` and
+        :model:`inventory.EquipmentReqQty` are erased for the allowance
+        and re-created.
 
         Finally, the new orphan molecules are affected to a special
         allowance with 0 as required quantity.
         """
+
         # Detecting objects without allowance (orphan)
         self.no_allowance = models.Allowance.objects.get(pk=1)
-        self.molecule_orphan_before = models.Molecule.objects.filter(allowances=self.no_allowance)
-        self.equipment_orphan_before = models.Equipment.objects.filter(allowances=self.no_allowance)
+        self.molecule_orphan_before = models.Molecule.objects.filter(
+            allowances=self.no_allowance)
+        self.equipment_orphan_before = models.Equipment.objects.filter(
+            allowances=self.no_allowance)
 
         # Allowance
         try:
-            deserialized_allowance = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "allowance.yaml"))
+            deserialized_allowance = serializers.deserialize(
+                "yaml", self.tar.extractfile(self.module_name + "allowance.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e)
             return False
 
         for allowance in deserialized_allowance:
-            self.data.append({'name': _('Allowance name'), 'value': allowance.object.name})
-            allowance_pk = get_allowance_pk(allowance)
-            if allowance_pk:
+            self.data.append(
+                {'name': _('Allowance name'), 'value': allowance.object.name})
+            allowance_dict = allowance.object.__dict__
+            allowance_dict.pop('id', None)
+            allowance_dict.pop('_state', None)
+            allowance_dict['author'] = self.conf.get('info', 'author')
+            allowance_dict['version'] = self.conf.get('info', 'version')
+            allowance_dict['date'] = iso_string_to_date(self.conf.get('info', 'date'))
+            allowance_dict['signature'] = self.key['keyid'][-8:]
+            # Unique: (name, )
+            obj, created = models.Allowance.objects.update_or_create(
+                name=allowance.object.name,
+                defaults=allowance_dict
+            )
+            if not created:
                 self.data.append({'name': _('New Allowance'), 'value': False})
             else:
-                allowance.save()
                 self.data.append({'name': _('New Allowance'), 'value': True})
-                allowance_pk = get_allowance_pk(allowance)
 
-            break # TODO: Only one allowance per file?
-        allowance = models.Allowance.objects.get(pk=allowance_pk)
+            break  # FUTURE: Only one allowance per file?
+        allowance = obj
 
         # Molecules
         added_molecule = []
-
         # Deserialize the file
         try:
-            deserialized_list = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "molecule_obj.yaml"))
+            deserialized_list = serializers.deserialize(
+                "yaml", self.tar.extractfile(self.module_name + "molecule_obj.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e)
             return False
 
         for molecule in deserialized_list:
-            if not get_molecule_pk(molecule):
-                molecule.save()
-                pk = get_molecule_pk(molecule)
-                added_molecule.append(pk)
-        self.data.append({'name': _('Added Molecules'), 'value': added_molecule})
+            # Unique: (name, roa, dosage_form, composition)
+            unique_values = {
+                'name': molecule.object.name,
+                'roa': molecule.object.roa,
+                'dosage_form': molecule.object.dosage_form,
+                'composition': molecule.object.composition,
+            }
+            molecule_dict = dict(unique_values)  # Hard copy
+            molecule_dict['medicine_list'] = molecule.object.medicine_list
+            molecule_dict['group'] = molecule.object.group
+
+            obj, created = models.Molecule.objects.update_or_create(
+                defaults=molecule_dict,
+                **unique_values
+            )
+            # Add M2M relations
+            try:
+                if molecule.m2m_data['tag']:
+                    obj.tag = molecule.m2m_data['tag']
+            except KeyError:
+                pass
+            try:
+                if molecule.m2m_data['remark']:
+                    obj.remark = molecule.m2m_data['remark']
+            except KeyError:
+                pass
+
+            if created:
+                added_molecule.append(obj)
+        self.data.append(
+            {'name': _('Added Molecules'), 'value': len(added_molecule)})
 
         # Required Quantities
         try:
-            deserialized_reqqty = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "molecule_reqqty.yaml"))
+            deserialized_reqqty = serializers.deserialize(
+                "yaml", self.tar.extractfile(self.module_name + "molecule_reqqty.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e)
             return False
 
-        molecule_reqqty_added = 0
+        molecule_reqqty_added = []
 
         # Delete all required quantities entry and create new ones
-        models.MoleculeReqQty.objects.filter(allowance__in = (allowance_pk, self.no_allowance)).delete()
+        models.MoleculeReqQty.objects.filter(
+            allowance__in=(allowance.pk, self.no_allowance)).delete()
         for reqqty in deserialized_reqqty:
             reqqty.object.allowance = allowance
-            reqqty.save()
-            molecule_reqqty_added += 1
+            molecule_reqqty_added.append(reqqty.object)
+        # Bulk create these ReqQty
+        models.MoleculeReqQty.objects.bulk_create(molecule_reqqty_added)
 
-        self.data.append({'name': _('Molecule Required Quantities Added'), 'value': molecule_reqqty_added})
+        self.data.append(
+            {'name': _('Molecule Required Quantities Added'), 'value': len(molecule_reqqty_added)})
         # Equipments
         added_equipment = []
         # Deserialize the file
         try:
-            deserialized_list = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "equipment_obj.yaml"))
+            deserialized_list = serializers.deserialize(
+                "yaml", self.tar.extractfile(self.module_name + "equipment_obj.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e)
             return False
 
         for equipment in deserialized_list:
-            if not get_equipment_pk(equipment):
-                equipment.save()
-                pk = get_equipment_pk(equipment)
-                added_equipment.append(pk)
-        self.data.append({'name': _('Added Equipments'), 'value': added_equipment})
+            # Unique: (name, packaging, perishable, consumable, group)
+            unique_values = {
+                'name': equipment.object.name,
+                'packaging': equipment.object.packaging,
+                'perishable': equipment.object.perishable,
+                'consumable': equipment.object.consumable,
+                'group': equipment.object.group,
+            }
+            equipment_dict = dict(unique_values)  # Hard copy
+            equipment_dict['picture'] = equipment.object.picture
+
+            obj, created = models.Equipment.objects.update_or_create(
+                defaults=equipment_dict,
+                **unique_values
+            )
+            # Add M2M relations
+            try:
+                if equipment.m2m_data['tag']:
+                    obj.tag = equipment.m2m_data['tag']
+            except KeyError:
+                pass
+            try:
+                if equipment.m2m_data['remark']:
+                    obj.remark = equipment.m2m_data['remark']
+            except KeyError:
+                pass
+
+            if created:
+                added_equipment.append(obj)
+        self.data.append(
+            {'name': _('Added Equipments'), 'value': len(added_equipment)})
 
         # Required Quantities
         try:
-            deserialized_reqqty = serializers.deserialize("yaml", self.tar.extractfile(self.module_name + "equipment_reqqty.yaml"))
+            deserialized_reqqty = serializers.deserialize(
+                "yaml", self.tar.extractfile(self.module_name + "equipment_reqqty.yaml"))
         except KeyError as e:
             self.error = _("File not found.") + str(e)
             return False
 
-        equipment_reqqty_added = 0
+        equipment_reqqty_added = []
 
         # Delete all required quantities entry and create new ones
-        models.EquipmentReqQty.objects.filter(allowance__in = (allowance_pk, self.no_allowance)).delete()
+        models.EquipmentReqQty.objects.filter(
+            allowance__in=(allowance.pk, self.no_allowance)).delete()
         for reqqty in deserialized_reqqty:
             reqqty.object.allowance = allowance
-            reqqty.save()
-            equipment_reqqty_added += 1
-        self.data.append({'name': _('Equipment Required Quantities Added'), 'value': equipment_reqqty_added})
+            equipment_reqqty_added.append(reqqty.object)
+
+        # Bulk create these ReqQty
+        models.EquipmentReqQty.objects.bulk_create(equipment_reqqty_added)
+        self.data.append(
+            {'name': _('Equipment Required Quantities Added'), 'value': len(equipment_reqqty_added)})
 
         # Listing molecules with no reqqty
-        self.molecule_orphan_after = models.Molecule.objects.filter(allowances = None)
-        self.equipment_orphan_after = models.Equipment.objects.filter(allowances = None)
-        self.data.append({'name': _('Molecule Orphans'), 'value': len(self.molecule_orphan_after) - len(self.molecule_orphan_before)})
-        self.data.append({'name': _('Equipement Orphans'), 'value': len(self.equipment_orphan_after) - len(self.equipment_orphan_before)})
+        self.molecule_orphan_after = models.Molecule.objects.filter(
+            allowances=None)
+        self.equipment_orphan_after = models.Equipment.objects.filter(
+            allowances=None)
+        self.data.append({'name': _('Molecule Orphans'), 'value': len(
+            self.molecule_orphan_after) - len(self.molecule_orphan_before)})
+        self.data.append({'name': _('Equipement Orphans'), 'value': len(
+            self.equipment_orphan_after) - len(self.equipment_orphan_before)})
 
         # Creating reqqty with special allowance (id=1)
         for molecule in self.molecule_orphan_after:
-            models.MoleculeReqQty.objects.create(base=molecule, allowance=self.no_allowance, required_quantity=0)
+            models.MoleculeReqQty.objects.create(
+                base=molecule, allowance=self.no_allowance, required_quantity=0)
         for equipment in self.equipment_orphan_after:
-            models.EquipmentReqQty.objects.create(base=equipment, allowance=self.no_allowance, required_quantity=0)
-
+            models.EquipmentReqQty.objects.create(
+                base=equipment, allowance=self.no_allowance, required_quantity=0)
+        
+        # Copying pictures
+        self.tar.extractall(members=pictures_files(self.tar), 
+                            path=os.path.join(settings.MEDIA_ROOT, "pictures/pharmaship"))
+        
+        
         # Exporting results' values for display
         return self.data
