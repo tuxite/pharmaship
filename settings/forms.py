@@ -9,7 +9,7 @@ class UserForm(forms.ModelForm):
     """Form used to customize User parameters."""
     class Meta:
         model = models.User
-        fields = ['last_name', 'first_name', 'function']
+        fields = ['last_name', 'first_name', 'rank']
 
 
 class VesselForm(forms.ModelForm):

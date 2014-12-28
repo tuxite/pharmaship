@@ -13,7 +13,6 @@ from core.import_data import BaseImport
 from core.manage_key import KeyManager
 from core.views import settings_links, settings_validation, app_links
 
-
 @login_required
 def index(request):
     """Displays differents forms to configure Pharmaship."""

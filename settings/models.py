@@ -3,28 +3,66 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 
-FUNCTIONS = (
-    (u'00', _("Captain")),
-    (u'10', _("Chief Officer")),
-    (u'11', _("Deck Officer")),
-    (u'20', _("Chief Engineer")),
-    (u'21', _("Engineer")),
-    (u'99', _("Ratings")),
-)
+import datetime
+
+import utils
+
 DEPARTMENTS = (
     (u'D', _("Deck")),
     (u'E', _("Engine")),
     (u'C', _("Civil")),
 )
 
+SEX = (
+    (u'M', _("Male")),
+    (u'F', _("Female")),
+)
+
+class Rank(models.Model):
+    """Rank model."""
+    name = models.CharField(_("Name"), max_length=30)
+    priority = models.PositiveIntegerField()
+    department = models.CharField(_("Department"),
+                                  max_length=1,
+                                  choices=DEPARTMENTS,
+                                  blank=True,
+                                  null=True
+                                  )
+    groups = models.CharField(max_length=128)
+
+    def __unicode__(self):
+        return self.name
+
 
 class User(AbstractUser):
-    function = models.CharField(_("Function"),
-                                max_length=2,
-                                choices=FUNCTIONS,
-                                blank=True,
-                                null=True
-                                )
+    birth_date = models.DateField()
+    birth_place = models.CharField(max_length=128)
+    nationality = models.CharField(max_length=128)
+    sex = models.CharField(max_length=1, choices=SEX)
+
+    passport_number = models.CharField(max_length=10)
+    passport_expiry = models.DateField()
+
+    # For permanent seaman books, leave the date empty.
+    seaman_book_number = models.CharField(max_length=50)
+    seaman_book_expiry = models.DateField(blank=True, null=True)
+
+    picture = models.ImageField(upload_to=utils.filepath, blank=True, null=True)
+
+    company_id = models.CharField(max_length=64,blank=True, null=True)
+
+    rank = models.ForeignKey('Rank')
+
+
+class Mouvement(models.Model):
+    """Model to store crew mouvements signing-on/off.
+
+    For signing-on/off at sea, use the code 'ATSEA'.
+    Position: true when signing-in, false when signing off."""
+    date = models.DateField(default=datetime.date.today())
+    port = models.CharField(max_length=5),
+    position = models.BooleanField(default=None)
+    user = models.ForeignKey('User')
 
 
 # Models
@@ -46,13 +84,4 @@ class Vessel(models.Model):
         return self.name
 
 
-class Rank(models.Model):
-    """Rank model."""
-    name = models.CharField(_("Name"), max_length=30)
-    department = models.CharField(_("Department"),
-                                  max_length=1,
-                                  choices=DEPARTMENTS,
-                                  blank=True,
-                                  null=True
-                                  )
-    # default_group = models.ForeignKey()
+
