@@ -11,7 +11,7 @@ from django.conf import settings
 import datetime
 import json
 import time
-from weasyprint import HTML, CSS
+#from weasyprint import HTML, CSS
 
 import models
 import forms
@@ -452,21 +452,21 @@ def pdf_print(request, requisition_id):
         },
         context_instance=RequestContext(request))
 
-    # Creating the response
-    filename = "pharmaship_requisition_{0}.pdf".format(requisition.reference)
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
-
-    # Converting it into PDF
-    html = HTML(string=rendered.content,
-                base_url=request.build_absolute_uri()
-                )
-    html.write_pdf(response,
-                   stylesheets=[
-                       CSS(settings.BASE_DIR + '/purchase/static/css/purchase/report.css')
-                       ])
-    return response
-
+#    # Creating the response
+#    filename = "pharmaship_requisition_{0}.pdf".format(requisition.reference)
+#    response = HttpResponse(content_type='application/pdf')
+#    response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+#
+#    # Converting it into PDF
+#    html = HTML(string=rendered.content,
+#                base_url=request.build_absolute_uri()
+#                )
+#    html.write_pdf(response,
+#                   stylesheets=[
+#                       CSS(settings.BASE_DIR + '/purchase/static/css/purchase/report.css')
+#                       ])
+#    return response
+    return rendered
 
 def test(request, requisition_id):
     # Selecting the requisition

@@ -10,7 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 
 import json
 import datetime
-from weasyprint import HTML, CSS
+#from weasyprint import HTML, CSS
 
 import models
 import forms
@@ -113,7 +113,7 @@ def delete(request, medicine_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")    
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.DeleteForm()
 
@@ -140,7 +140,7 @@ def delete(request, medicine_id):
                         'callback': 'updateArticle',
                         },
                         context_instance=RequestContext(request))
-                        
+
 @permission_required('inventory.medicine.can_change')
 def change(request, medicine_id):
     """Change the quantity of a medicine attached to an INN."""
@@ -171,7 +171,7 @@ def change(request, medicine_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")    
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.ChangeMedicineForm(instance=medicine, initial={'quantity': medicine.get_quantity()})
 
@@ -198,7 +198,7 @@ def change(request, medicine_id):
                         'callback': 'updateArticle',
                         },
                         context_instance=RequestContext(request))
-                        
+
 @permission_required('inventory.medicine.can_change')
 def out(request, medicine_id):
     """Change the quantity (for medical treatment reason) of a medicine attached to an INN."""
@@ -221,7 +221,7 @@ def out(request, medicine_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")    
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.QtyChangeForm()
 
@@ -248,7 +248,7 @@ def out(request, medicine_id):
                         'callback': 'updateArticle',
                         },
                         context_instance=RequestContext(request))
-                        
+
 @permission_required('inventory.medicine.can_add')
 def add(request, molecule_id):
     """Add a medicine to a molecule."""
@@ -281,7 +281,7 @@ def add(request, molecule_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")            
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.AddMedicineForm(instance=models.Medicine(), initial={'nc_composition':default_composition})
 
@@ -303,7 +303,7 @@ def add(request, molecule_id):
                         'callback': 'updateArticle',
                         },
                         context_instance=RequestContext(request))
-                        
+
 @permission_required('inventory.medicine.can_add')
 def equivalent(request, molecule_id):
     """Add a medicine with a different molecule than the allowance."""
@@ -337,7 +337,7 @@ def equivalent(request, molecule_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")            
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.AddEquivalentForm(instance=models.Medicine(), initial={'nc_composition':default_composition})
 
@@ -383,7 +383,7 @@ def remark(request, molecule_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")    
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.RemarkForm(initial={'text':remark.text})
 
@@ -448,14 +448,15 @@ def pdf_print(request):
                     },
                     context_instance=RequestContext(request))
 
-    # Creating the response
-    filename = "pharmaship_medicine_{0}.pdf".format(datetime.date.today())
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
-
-    # Converting it into PDF
-    HTML(string=rendered.content).write_pdf(response, stylesheets=[CSS(settings.BASE_DIR + '/inventory/static/css/pharmaship/report.css')])
-    return response
+#    # Creating the response
+#    filename = "pharmaship_medicine_{0}.pdf".format(datetime.date.today())
+#    response = HttpResponse(content_type='application/pdf')
+#    response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+#
+#    # Converting it into PDF
+#    HTML(string=rendered.content).write_pdf(response, stylesheets=[CSS(settings.BASE_DIR + '/inventory/static/css/pharmaship/report.css')])
+#    return response
+    return rendered
 
 # Pre-treatment function
 def parser(allowance_list, location_list):

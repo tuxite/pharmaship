@@ -10,7 +10,7 @@ from django.contrib.contenttypes.models import ContentType
 
 import json
 import datetime
-from weasyprint import HTML, CSS
+#from weasyprint import HTML, CSS
 
 import models
 import forms
@@ -130,7 +130,7 @@ def add(request, equipment_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")            
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.AddArticleForm(instance=models.Article(), initial={'nc_packaging':equipment.packaging})
 
@@ -173,7 +173,7 @@ def delete(request, article_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")    
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.DeleteForm()
 
@@ -199,7 +199,7 @@ def delete(request, article_id):
                         'foot_text': '',
                         'callback': 'updateArticle',
                         },
-                        context_instance=RequestContext(request))    
+                        context_instance=RequestContext(request))
 
 
 @permission_required('inventory.article.can_change')
@@ -232,7 +232,7 @@ def change(request, article_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")    
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.ChangeArticleForm(instance=article, initial={'quantity': article.get_quantity()})
 
@@ -282,7 +282,7 @@ def out(request, article_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")    
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.QtyChangeForm()
 
@@ -309,7 +309,7 @@ def out(request, article_id):
                         'callback': 'updateArticle',
                         },
                         context_instance=RequestContext(request))
-                        
+
 @permission_required('inventory.remark.can_change')
 def remark(request, equipment_id):
     """Change the remark field of an equipment."""
@@ -333,7 +333,7 @@ def remark(request, equipment_id):
         else:
             errors = dict([(k, [unicode(e) for e in v]) for k,v in form.errors.items()])
             data = json.dumps({'error': _('Something went wrong!'), 'details':errors})
-            return HttpResponseBadRequest(data, content_type = "application/json")    
+            return HttpResponseBadRequest(data, content_type = "application/json")
     else:
         form = forms.RemarkForm(initial={'text':remark.text})
 
@@ -377,7 +377,7 @@ def update_article(equipment_id):
     return render_to_response('pharmaship/article_single.inc.html', {
                     'object': result,
                     }).content
-                     
+
 @login_required
 def pdf_print(request):
     """Exports the article inventory in PDF."""
@@ -397,14 +397,15 @@ def pdf_print(request):
                     'allowance_list': allowance_list,
                     },
                     context_instance=RequestContext(request))
-    # Creating the response
-    filename = "pharmaship_equipment_{0}.pdf".format(datetime.date.today())
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
-
-    # Converting it into PDF
-    HTML(string=rendered.content).write_pdf(response, stylesheets=[CSS(settings.BASE_DIR + '/inventory/static/css/pharmaship/report.css')])
-    return response
+#    # Creating the response
+#    filename = "pharmaship_equipment_{0}.pdf".format(datetime.date.today())
+#    response = HttpResponse(content_type='application/pdf')
+#    response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+#
+#    # Converting it into PDF
+#    HTML(string=rendered.content).write_pdf(response, stylesheets=[CSS(settings.BASE_DIR + '/inventory/static/css/pharmaship/report.css')])
+#    return response
+    return rendered
 
 # Pre-treatment function
 def parser(allowance_list, location_list):
@@ -488,7 +489,7 @@ def parser_element(equipment, remark_list, ordered_list, qty_transaction_list, l
     # Picture
     if not equipment.picture:
         equipment.picture = None
-    element_dict['picture'] = equipment.picture    
+    element_dict['picture'] = equipment.picture
     # Quantity
     element_dict['quantity'] = 0
 
