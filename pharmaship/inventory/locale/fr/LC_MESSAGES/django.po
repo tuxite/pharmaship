@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Matthieu Morin <morinmatthieu@gmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Pharmaship-MM-01\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-25 08:43+0000\n"
+"PO-Revision-Date: 2020-05-04 18:33+0200\n"
+"Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
+"Language-Team: French - France <pharmaship@devmaretique.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 3.36.0\n"
+
+#: pharmaship/inventory/constants.py:9
+msgid "In"
+msgstr "Reçu"
+
+#: pharmaship/inventory/constants.py:10
+msgid "Used"
+msgstr "Utilisé"
+
+#: pharmaship/inventory/constants.py:11
+msgid "Perished"
+msgstr "Périmé"
+
+#: pharmaship/inventory/constants.py:12
+msgid "Physical Count"
+msgstr "Comptage"
+
+#: pharmaship/inventory/constants.py:13
+msgid "Other"
+msgstr "Autre"
+
+#: pharmaship/inventory/constants.py:14
+#, fuzzy
+#| msgid "Send to a First Aid Kit"
+msgid "Sent to First Aid Kit"
+msgstr "Vers une trousse de secours"
+
+#: pharmaship/inventory/constants.py:19
+msgid "None"
+msgstr "Aucun"
+
+#: pharmaship/inventory/constants.py:20
+msgid "List I"
+msgstr "Liste I"
+
+#: pharmaship/inventory/constants.py:21
+msgid "List II"
+msgstr "Liste II"
+
+#: pharmaship/inventory/constants.py:22
+msgid "Narcotics"
+msgstr "Stupéfiants"
+
+#: pharmaship/inventory/constants.py:27
+msgid "Tablet"
+msgstr "Comprimé"
+
+#: pharmaship/inventory/constants.py:28
+msgid "Ampoule"
+msgstr "Ampoule"
+
+#: pharmaship/inventory/constants.py:29
+msgid "Capsule"
+msgstr "Gélule"
+
+#: pharmaship/inventory/constants.py:32
+msgid "Suppository"
+msgstr "Suppositoire"
+
+#: pharmaship/inventory/constants.py:34
+msgid "Powder"
+msgstr "Poudre"
+
+#: pharmaship/inventory/constants.py:65
+msgid "Oral"
+msgstr "Oral"
+
+#: pharmaship/inventory/constants.py:67
+msgid "Parenteral"
+msgstr "Parentérale"
+
+#: pharmaship/inventory/constants.py:68
+msgid "Subcutaneous"
+msgstr "Sous-cutanée"
+
+#: pharmaship/inventory/constants.py:70
+msgid "Topical"
+msgstr "Locale"
+
+#: pharmaship/inventory/constants.py:71
+msgid "Transdermal"
+msgstr "Transdermique"
+
+#: pharmaship/inventory/constants.py:73
+msgid "Inhalation"
+msgstr "Inhalation"
+
+#: pharmaship/inventory/constants.py:74
+msgid "Nebulization"
+msgstr "Nébulisation"
+
+#: pharmaship/inventory/constants.py:76
+msgid "Buccal"
+msgstr "Buccale"
+
+#: pharmaship/inventory/constants.py:77
+msgid "Sublingual"
+msgstr "Sublinguale"
+
+#: pharmaship/inventory/constants.py:78
+msgid "Mouthwash"
+msgstr "Bain de bouche"
+
+#: pharmaship/inventory/constants.py:79
+msgid "Dental"
+msgstr "Dentaire"
+
+#: pharmaship/inventory/constants.py:81
+msgid "Rectal"
+msgstr "Rectale"
+
+#: pharmaship/inventory/constants.py:82
+msgid "Vaginal"
+msgstr "Vaginale"
+
+#: pharmaship/inventory/constants.py:84
+msgid "Ocular"
+msgstr "Occulaire"
+
+#: pharmaship/inventory/forms.py:79 pharmaship/inventory/forms.py:176
+#: pharmaship/inventory/models.py:308
+msgid "Expiry date must be provided."
+msgstr "La date d'expiration doit être renseignée"
+
+#: pharmaship/inventory/models.py:123 pharmaship/inventory/models.py:160
+#: pharmaship/inventory/models.py:421 pharmaship/inventory/models.py:464
+msgid "Name"
+msgstr "Nom"
+
+#: pharmaship/inventory/models.py:146
+msgid "Type"
+msgstr "Type"
+
+#: pharmaship/inventory/models.py:149
+msgid "Value"
+msgstr "Valeur"
+
+#: pharmaship/inventory/models.py:161
+msgid "Expiration Date"
+msgstr "Date d'expiration"
+
+#: pharmaship/inventory/models.py:164
+msgid "Remark"
+msgstr "Remarque"
+
+#: pharmaship/inventory/models.py:288
+msgid "Dosage Form:"
+msgstr "Forme :"
+
+#: pharmaship/inventory/models.py:288
+msgid "Composition:"
+msgstr "Composition "
+
+#: pharmaship/inventory/models.py:301
+msgid "Non-conform Molecule"
+msgstr "Principe actif non conforme"
+
+#: pharmaship/inventory/models.py:302
+msgid "Non-conform Composition"
+msgstr "Composition non conforme"
+
+#: pharmaship/inventory/models.py:389
+msgid "Packaging:"
+msgstr "Conditionnement :"
+
+#: pharmaship/inventory/models.py:401
+msgid "Non-conform Packaging"
+msgstr "Conditionnement non conforme"
+
+#: pharmaship/inventory/models.py:442
+msgid "Non conformity"
+msgstr "Non-conformité"
+
+#: pharmaship/inventory/parsers/equipment.py:134
+#: pharmaship/inventory/parsers/equipment.py:138
+#: pharmaship/inventory/parsers/laboratory.py:129
+#: pharmaship/inventory/parsers/laboratory.py:133
+#: pharmaship/inventory/parsers/medicines.py:146
+#: pharmaship/inventory/parsers/medicines.py:150
+#: pharmaship/inventory/parsers/telemedical.py:128
+#: pharmaship/inventory/parsers/telemedical.py:132
+msgid "Unassigned"
+msgstr "Non assigné"
+
+#: pharmaship/inventory/parsers/rescue_bag.py:16
+msgid "All Rescue Bags"
+msgstr "Tous les sacs d'intervention"

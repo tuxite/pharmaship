@@ -1,19 +1,35 @@
 include LICENSE
 include README.md
-include conf/mysql.conf
+include INSTALL.md
+include TODO.md
 
-recursive-include common *
-recursive-include conf/locale *
+include Makefile
 
-recursive-include core/static *
-recursive-include core/templates *
+recursive-include pharmaship/data *.yaml
+recursive-include pharmaship/data *.pub
 
-recursive-include inventory/static *
-recursive-include inventory/templates *
+recursive-include pharmaship/gui *.py
+recursive-include pharmaship/gui *.html
+recursive-include pharmaship/gui *.css
+recursive-include pharmaship/gui *.png
+recursive-include pharmaship/gui *.svg
+recursive-include pharmaship/gui *.glade
+recursive-include pharmaship/gui *.xml
+recursive-include pharmaship/gui *.po
+recursive-include pharmaship/gui *.mo
+recursive-include pharmaship/gui *.gresource
 
-recursive-include purchase/static *
-recursive-include purchase/templates *
+recursive-include pharmaship/schemas *.json
 
-recursive-include settings/static *
-recursive-include settings/templates *
+# Installer
+recursive-include bin *.nsi
+recursive-include bin *.nsh
+recursive-include bin *.sh
+recursive-include bin *.exe
+recursive-include bin *.py
 
+include bin/pharmaship_installer.bmp
+include bin/pharmaship-sign
+include bin/pharmaship.ico
+include bin/launcher.py
+include bin/manage.py

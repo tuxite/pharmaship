@@ -1,0 +1,54 @@
+<file preprocess="xml-stripblanks">icons/error-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/document-edit-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/edit-delete-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/document-save-as-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/document-open-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/open-menu-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/object-select-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/value-increase-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/value-decrease-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/image-x-generic-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/system-search-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/edit-find-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/edit-clear-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/edit-redo-symbolic.svg</file>
+
+
+<file preprocess="xml-stripblanks">icons/window-close-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/window-maximize-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/window-minimize-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/window-restore-symbolic.svg</file>
+
+<file preprocess="xml-stripblanks">icons/checkbox-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/checkbox-checked-symbolic.svg</file>
+
+<file preprocess="xml-stripblanks">icons/radio-checked-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/radio-symbolic.svg</file>
+	
+<file preprocess="xml-stripblanks">icons/pan-down-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/pan-end-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/pan-start-symbolic.svg</file>
+<file preprocess="xml-stripblanks">icons/pan-up-symbolic.svg</file>
+
+
+<file preprocess="xml-stripblanks">icons/radio-symbolic.svg</file>
+
+
+import os
+from gi.repository import Gio
+
+if __name__ == "__main__":
+    resource = Gio.resource_load(os.path.join('@PKGDATA_DIR@', 'resources.gresource'))
+    Gio.Resource._register(resource)
+    
+    
+    
+gnome = import('gnome')
+resources = gnome.compile_resources(
+  'resources',
+  'resources.gresource.xml',
+  gresource_bundle: true,
+  source_dir: meson.current_build_dir(),
+  install: true,
+  install_dir: get_option('datadir') / meson.project_name(),
+)

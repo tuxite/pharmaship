@@ -1,0 +1,75 @@
+- model: inventory.moleculegroup
+  pk: 1
+  fields:
+    name: Cardiologie
+    order: 1
+- model: inventory.moleculegroup
+  pk: 2
+  fields:
+    name: "Gastro-ent\xE9rologie"
+    order: 2
+- model: inventory.moleculegroup
+  pk: 3
+  fields:
+    name: "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    order: 3
+- model: inventory.moleculegroup
+  pk: 4
+  fields:
+    name: Psychiatrie - Neurologie
+    order: 4
+- model: inventory.moleculegroup
+  pk: 5
+  fields:
+    name: Allergologie
+    order: 5
+- model: inventory.moleculegroup
+  pk: 6
+  fields:
+    name: Pneumologie
+    order: 6
+- model: inventory.moleculegroup
+  pk: 7
+  fields:
+    name: Infectiologie - Parasitologie
+    order: 7
+- model: inventory.moleculegroup
+  pk: 8
+  fields:
+    name: "Gyn\xE9cologie"
+    order: 8
+- model: inventory.moleculegroup
+  pk: 9
+  fields:
+    name: "R\xE9animation"
+    order: 9
+- model: inventory.moleculegroup
+  pk: 10
+  fields:
+    name: Dermatologie
+    order: 10
+- model: inventory.moleculegroup
+  pk: 11
+  fields:
+    name: Ophtalmologie
+    order: 11
+- model: inventory.moleculegroup
+  pk: 12
+  fields:
+    name: Oto-rhino-Laryngologie - Stomatologie
+    order: 12
+- model: inventory.moleculegroup
+  pk: 13
+  fields:
+    name: "Anesth\xE9siques locaux"
+    order: 13
+- model: inventory.moleculegroup
+  pk: 14
+  fields:
+    name: "Pr\xE9vention et traitement du paludisme"
+    order: 14
+- model: inventory.moleculegroup
+  pk: 15
+  fields:
+    name: Accidents d'exposition au sang
+    order: 15

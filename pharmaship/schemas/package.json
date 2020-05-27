@@ -1,0 +1,32 @@
+{
+  "info": {
+    "type": "dict",
+    "require_all": true,
+    "schema": {
+      "author": {
+        "type": "string"
+      },
+      "date": {
+        "type": "date"
+      },
+      "version": {
+        "type": "string"
+      }
+    }
+  },
+  "modules": {
+    "type": "dict",
+    "keysrules": {
+      "type": "string",
+      "regex": "[a-z]+"
+    },
+    "valuesrules": {
+      "type": "dict",
+      "schema": {
+        "install_file": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

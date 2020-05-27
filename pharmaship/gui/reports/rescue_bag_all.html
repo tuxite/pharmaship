@@ -1,0 +1,28 @@
+{% load i18n %}
+{% block full_list %}
+    <h2 class="bag-title">{{ bag.name }}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td>{% trans "Name" %}</td>
+            <td>{% trans "Remark" %}</td>
+            <td class="center">{% trans "Min. Quantity" %}</td>
+            <td class="center">{% trans "Quantity" %}</td>
+            <td class="center">{% trans "Expiry" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for element in bag.elements %}
+            <tr class="equipment">
+                <td class="fill">{{ element.name }}</td>
+                <td class="small fill">
+                  {% if element.remark %}{{ element.remark }}{% endif %}
+                </td>
+                <td class="center nowrap mono">{{ element.required_quantity }}</td>
+                <td class="center nowrap mono {% if element.quantity < element.required_quantity %}nc-bg{% endif %}">{{ element.quantity }}</td>
+                <td class="center nowrap mono {% if element.has_date_expired %}article-expired{% elif element.has_date_warning %}article-warning{% endif %}">{{ element.exp_dates|first|date:"d/m/Y" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "header.html" %}
+{% load i18n %}
+{% block content %}
+    <h2 class="kit-title section">{% trans "Missing medicines" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 60%;">{% trans "Name" %}</td>
+            <td>{% trans "Route of Administration" %}</td>
+            <td style="white-space:nowrap;">{% trans "Form - Dosage" %}</td>
+            <td style="width: 40%;">{% trans "Remark" %}</td>
+            <td class="center">{% trans "List" %}</td>
+            <td class="center">{% trans "Requested Quantity" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+          {% for group,molecules in data.molecules.items %}
+              <tr class="subsection border group"><td colspan="8">{{ group }}</td></tr>
+
+            {% for molecule in molecules %}
+            <tr class="molecule">
+                <td>{{ molecule.name }}</td>
+                <td>{{ molecule.roa }}</td>
+                <td>{{ molecule.dosage_form }} - {{ molecule.composition }}</td>
+                <td class="small">{% if molecule.remark %}{{ molecule.remark }}{% endif %}</td>
+                <td class="center small">{{ molecule.medicine_list }}</td>
+                <td class="center mono">{{ molecule.missing_quantity }}</td>
+            </tr>
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h2 class="kit-title section">{% trans "Missing equipment" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 60%;">{% trans "Name" %}</td>
+            <td>{% trans "Packaging" %}</td>
+            <td style="width: 40%;">{% trans "Remark" %}</td>
+            <td class="center">{% trans "Requested Quantity" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+          {% for group,equipments in data.equipment.items %}
+              <tr class="subsection border group"><td colspan="8">{{ group }}</td></tr>
+
+            {% for equipment in equipments %}
+            <tr class="molecule">
+                <td>{{ equipment.name }}</td>
+                <td>{{ equipment.packaging }}</td>
+                <td class="small">{% if equipment.remark %}{{ equipment.remark }}{% endif %}</td>
+                <td class="center mono">{{ equipment.missing_quantity }}</td>
+            </tr>
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h2 class="kit-title section">{% trans "Missing first aid kits items" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 100%;">{% trans "Item" %}</td>
+            <td>{% trans "Remark" %}</td>
+            <td class="center">{% trans "Requested Quantity" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for k,item in data.first_aid_kit.items %}
+            <tr class="molecule">
+                <td>{{ item.name }}</td>
+                <td class="small">{% if item.remark %}{{ item.remark }}{% endif %}</td>
+                <td class="center mono">{{ item.missing_quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if laboratory %}
+    <div class="page-break"></div>
+    <h2 class="kit-title section">{% trans "Missing laboratory equipment" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 60%;">{% trans "Name" %}</td>
+            <td>{% trans "Packaging" %}</td>
+            <td style="width: 40%;">{% trans "Remark" %}</td>
+            <td class="center">{% trans "Requested Quantity" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for equipment in data.laboratory %}
+            <tr class="molecule">
+                <td>{{ equipment.name }}</td>
+                <td>{{ equipment.packaging }}</td>
+                <td class="small">{% if equipment.remark %}{{ equipment.remark }}{% endif %}</td>
+                <td class="center mono">{{ equipment.missing_quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if telemedical %}
+    <div class="page-break"></div>
+    <h2 class="kit-title section">{% trans "Missing telemedical equipment" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 60%;">{% trans "Name" %}</td>
+            <td>{% trans "Packaging" %}</td>
+            <td style="width: 40%;">{% trans "Remark" %}</td>
+            <td class="center">{% trans "Requested Quantity" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for equipment in data.telemedical %}
+            <tr class="molecule">
+                <td>{{ equipment.name }}</td>
+                <td>{{ equipment.packaging }}</td>
+                <td class="small">{% if equipment.remark %}{{ equipment.remark }}{% endif %}</td>
+                <td class="center mono">{{ equipment.missing_quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

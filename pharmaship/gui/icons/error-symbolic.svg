@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="16"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="svg7384"
+   height="16">
+  <metadata
+     id="metadata90">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Gnome Symbolic Icon Theme</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <title
+     id="title9167">Gnome Symbolic Icon Theme</title>
+  <defs
+     id="defs7386">
+    <linearGradient
+       osb:paint="solid"
+       id="linearGradient7212">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop7214" />
+    </linearGradient>
+  </defs>
+  <g
+     transform="translate(-59.9997,39.98872)"
+     style="display:inline"
+     id="layer1" />
+  <g
+     transform="translate(-300.9999,406.98872)"
+     style="display:inline"
+     id="layer9" />
+  <g
+     transform="translate(-300.9999,406.98872)"
+     style="display:inline"
+     id="g7628" />
+  <g
+     transform="translate(-59.9997,39.98872)"
+     style="display:inline"
+     id="g6387" />
+  <g
+     transform="translate(-59.9997,39.98872)"
+     style="display:inline"
+     id="layer10" />
+  <g
+     transform="translate(-59.9997,39.98872)"
+     id="layer12">
+    <path
+       d="m 67.9999,-38.98872 c -3.870549,0 -7,3.12944 -7,7 0,3.87055 3.129451,7 7,7 3.870549,0 7,-3.12945 7,-7 0,-3.87056 -3.129451,-7 -7,-7 z m -4,6 h 8 v 2 h -8 z"
+       id="path10839-3"
+       style="color:#bebebe;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:'Andale Mono';-inkscape-font-specification:'Andale Mono';text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#2e3436;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.78124988;marker:none;enable-background:new" />
+  </g>
+  <g
+     transform="translate(-59.9997,39.98872)"
+     style="display:inline"
+     id="layer11" />
+</svg>

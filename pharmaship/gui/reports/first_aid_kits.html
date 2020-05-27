@@ -1,0 +1,44 @@
+{% extends "header.html" %}
+{% load i18n %}
+{% block content %}
+    {% for kit in data %}
+    {% if not forloop.first %}<div class="page-break"></div>{% endif %}
+    <h2 class="kit-title">{{ kit.name }}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td>{% trans "Name" %}</td>
+            <td>{% trans "Remark" %}</td>
+            <td class="center">{% trans "Min. Quantity" %}</td>
+            <td class="center">{% trans "Quantity" %}</td>
+            <td class="center">{% trans "Expiry" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for element in kit.elements %}
+            <tr class="equipment">
+                <td>{{ element.name }}</td>
+                <td class="small">{% if element.remark %}{{ element.remark }}{% endif %}</td>
+                <td class="center mono">{{ element.required_quantity }}</td>
+                <td class="center mono {% if element.quantity < element.required_quantity %}nc-bg{% endif %}">{{ element.quantity }}</td>
+                <td></td>
+            </tr>
+            {% for item in element.contents %}
+            <tr class="item">
+                <td class="article-name" colspan="1">{{ item.name }}</td>
+                {% if item.nc %}
+                <td class="nc" colspan="2">{{ item.nc }}</td>
+                {% elif item.remark %}
+                <td class="remark small" colspan="2">{{ item.remark }}</td>
+                {% else %}
+                <td colspan="2"></td>
+                {% endif %}
+                <td class="center mono">{{ item.quantity }}</td>
+                <td class="center mono {% if item.expired %}article-expired{% elif item.warning %}article-warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+{% endblock %}

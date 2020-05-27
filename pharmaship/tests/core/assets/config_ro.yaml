@@ -1,0 +1,22 @@
+application:
+  lang: fr
+inventory:
+  expire_date_warning_delay: 80a
+  first_aid_kit: 3
+  has_laboratory: true
+  has_telemedical: true
+  rescue_bag: 1
+vessel:
+  address: 'La Rochelle
+
+    France'
+  call_sign: FRDSM
+  email: ship.one@devmaretique.com
+  flag: France
+  gsm_phone: '+33607080910'
+  imo: 9897967
+  mmsi: 226225224
+  name: DSM Ship One
+  port_of_registry: La Rochelle
+  sat_phone: '+87012345678910'
+  shipowner: Association DSM
