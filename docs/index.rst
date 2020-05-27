@@ -12,18 +12,8 @@ Welcome to Pharmaship's documentation!
    
    manual/index
    install/index
+   dev/index
    reference/index
-
-
-Development
-===========
-
-
-Build on Windows
-----------------
-
-Translate
----------
 
 
 Indices and tables

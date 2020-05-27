@@ -8,4 +8,6 @@ Reference
    core/utils
    core/gpg
    core/config
-
+   
+   inventory/models
+   inventory/utils
