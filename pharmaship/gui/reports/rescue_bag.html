@@ -1,0 +1,46 @@
+{% extends "header.html" %}
+{% load i18n %}
+{% block content %}
+  {% for key, bag in data.items %}
+    {% if forloop.first %}
+      {% include "rescue_bag_all.html" %}
+    {% else %}
+    <div class="page-break"></div>
+    <h2 class="bag-title">{{ bag.name }}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td>{% trans "Name" %}</td>
+            <td>{% trans "Remark" %}</td>
+            <td class="center">{% trans "Quantity" %}</td>
+            <td class="center">{% trans "Expiry" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for element in bag.elements %}
+            <tr class="equipment">
+                <td>{{ element.name }}</td>
+                <td class="small">{% if element.remark %}{{ element.remark }}{% endif %}</td>
+                <td class="center mono">{{ element.quantity }}</td>
+                <td></td>
+            </tr>
+            {% for item in element.contents %}
+            <tr class="item">
+                <td class="article-name fill">{{ item.name }}</td>
+                {% if item.nc_packaging %}
+                <td class="nc fill">{{ item.nc_packaging}}</td>
+                {% elif item.remark %}
+                <td class="remark small fill">{{ item.remark }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+                <td class="center nowrap mono">{{ item.quantity }}</td>
+                <td class="center nowrap mono {% if item.expired %}article-expired{% elif item.warning %}article-warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% endfor %}
+{% endblock %}

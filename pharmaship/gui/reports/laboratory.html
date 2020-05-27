@@ -1,0 +1,48 @@
+{% extends "header.html" %}
+{% load i18n %}
+{% block content %}
+    <table>
+        <thead>
+        <tr>
+            <td>{% trans "Name" %}</td>
+            <td>{% trans "Remark" %}</td>
+            <td class="center">{% trans "Min. Quantity" %}</td>
+            <td class="center">{% trans "Quantity" %}</td>
+            <td class="center">{% trans "Expiry" %}</td>
+            <td>{% trans "Location" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for equipment in data %}
+            <tr class="equipment">
+                <td>{{ equipment.name }}</td>
+                <td class="small">{{ equipment.remark }}</td>
+                <td class="center mono">{{ equipment.required_quantity }}</td>
+                <td class="center mono {% if equipment.quantity < equipment.required_quantity %}nc-bg{% endif %}">{{ equipment.quantity }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% for item in equipment.articles %}
+            <tr class="item">
+                <td class="article-name" colspan="1">{{ item.name }}</td>
+                {% if item.nc_packaging %}
+                <td class="nc" colspan="2">{{ item.nc_packaging}}</td>
+                {% elif item.remark %}
+                <td class="remark small" colspan="2">{{ item.remark }}</td>
+                {% else %}
+                <td colspan="2"></td>
+                {% endif %}
+                <td class="center mono">{{ item.quantity }}</td>
+                <td class="center mono {% if item.expired %}article-expired{% elif item.warning %}article-warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</td>
+                <td class="small">
+                  {% for element in item.location.sequence|slice:":-1" %}
+                    <span class="article-location-parent">{{ element }} > </span>
+                  {% endfor %}
+                  {{ item.location.sequence|last }}
+                </td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

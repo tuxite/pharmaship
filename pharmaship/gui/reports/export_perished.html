@@ -1,0 +1,163 @@
+{% extends "header.html" %}
+{% load i18n %}
+{% block content %}
+    <h2 class="kit-title section">{% trans "Perished medicines" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 100%;">{% trans "Name" %}</td>
+            <td>{% trans "Route of Administration" %}</td>
+            <td style="white-space:nowrap;">{% trans "Form - Dosage" %}</td>
+            <td class="center">{% trans "List" %}</td>
+            <td class="center">{% trans "Quantity" %}</td>
+            <td class="center">{% trans "Expiry" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+          {% for group,molecules in data.molecules.items %}
+            <tr class="subsection border group"><td colspan="6">{{ group }}</td></tr>
+            {% for molecule in molecules %}
+            {% for item in molecule.medicines %}
+            {% if item.expired %}
+            <tr class="molecule">
+                <td>{{ item.name }} {% if item.nc_molecule %}<span class="nc">{{ item.nc_molecule }}</span>{% endif %}</td>
+                <td>{{ molecule.roa }}</td>
+                {% if item.nc_composition %}
+                <td >{{ item.nc_composition}}</td>
+                {% else %}
+                <td>{{ molecule.dosage_form }} - {{ molecule.composition }}</td>
+                {% endif %}
+                <td class="center small">{{ molecule.medicine_list }}</td>
+                <td class="center mono">{{ item.quantity }}</td>
+                <td class="center mono">{{ item.exp_date|date:"d/m/Y" }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h2 class="kit-title section">{% trans "Perished equipment" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 100%;">{% trans "Name" %}</td>
+            <td>{% trans "Packaging" %}</td>
+            <td class="center"">{% trans "Quantity" %}</td>
+            <td class="center">{% trans "Expiry" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+          {% for group,equipments in data.equipment.items %}
+            <tr class="subsection border group"><td colspan="4">{{ group }}</td></tr>
+            {% for equipment in equipments %}
+            {% for item in equipment.articles %}
+            {% if item.expired %}
+            <tr class="molecule">
+                <td>{{ item.name }}</td>
+                {% if item.nc_packaging %}
+                <td class="nc">{{ item.nc_packaging}}</td>
+                {% else %}
+                <td>{{ equipment.packaging }}</td>
+                {% endif %}
+                <td class="center mono">{{ item.quantity }}</td>
+                <td class="center mono">{{ item.exp_date|date:"d/m/Y" }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+    <h2 class="kit-title section">{% trans "Perished first aid kits items" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 100%;">{% trans "Item" %}</td>
+            <td class="center">{% trans "Quantity" %}</td>
+            <td class="center">{% trans "Expiry" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for k,item in data.first_aid_kit.items %}
+            {% for subitem in item %}
+            <tr class="molecule">
+                <td>{{ subitem.name }}</td>
+                <td class="center mono">{{ subitem.quantity }}</td>
+                <td class="center mono">{{ subitem.exp_date|date:"d/m/Y" }}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if laboratory %}
+    <div class="page-break"></div>
+    <h2 class="kit-title section">{% trans "Perished laboratory equipment" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 100%;">{% trans "Name" %}</td>
+            <td>{% trans "Packaging" %}</td>
+            <td class="center">{% trans "Quantity" %}</td>
+            <td class="center">{% trans "Expiry" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for equipment in data.laboratory %}
+            {% for item in equipment.articles %}
+            {% if item.expired %}
+            <tr class="molecule">
+                <td>{{ item.name }}</td>
+                {% if item.nc_packaging %}
+                <td class="nc">{{ item.nc_packaging}}</td>
+                {% else %}
+                <td>{{ equipment.packaging }}</td>
+                {% endif %}
+                <td class="center mono">{{ item.quantity }}</td>
+                <td class="center mono">{{ item.exp_date|date:"d/m/Y" }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if telemedical %}
+    <div class="page-break"></div>
+    <h2 class="kit-title section">{% trans "Perished telemedical equipment" %}</h2>
+    <table>
+        <thead>
+        <tr>
+            <td style="width: 100%;">{% trans "Name" %}</td>
+            <td>{% trans "Packaging" %}</td>
+            <td class="center">{% trans "Quantity" %}</td>
+            <td class="center">{% trans "Expiry" %}</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for equipment in data.telemedical %}
+            {% for item in equipment.articles %}
+            {% if item.expired %}
+            <tr class="molecule">
+                <td>{{ item.name }}</td>
+                {% if item.nc_packaging %}
+                <td class="nc">{{ item.nc_packaging}}</td>
+                {% else %}
+                <td>{{ equipment.packaging }}</td>
+                {% endif %}
+                <td class="center mono">{{ item.quantity }}</td>
+                <td class="center mono">{{ item.exp_date|date:"d/m/Y" }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

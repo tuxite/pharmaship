@@ -1,0 +1,159 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 10pt;
+  text-decoration: none;
+  list-style: none;
+}
+
+.footer {
+  font-size: 8pt;
+}
+
+body {
+  padding-top: 30px;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+table {
+  border-width: .5mm;
+  border-spacing: .5mm;
+  border-style: solid;
+  border-color: black;
+  border-collapse: collapse;
+  clear: both;
+  margin-top: 0.5cm;
+  font-size: 10pt;
+  width: 100%
+}
+
+table tr.border td, table th {
+  border-width: thin;
+  border-style: solid;
+  border-color: #aaf;
+}
+
+table td {
+  border-bottom: none;
+  border-top: none;
+  border-left: 1pt solid #aaa;
+  padding: .5em;
+}
+
+tr.group {
+  background: #FFFF00;
+  font-weight: 700;
+}
+
+tr.item {
+  border-top: #ccc 1pt dotted;
+}
+
+thead {
+  font-weight: 700;
+}
+
+div#vessel {
+  position: absolute;
+  top: 5mm;
+  right: 5mm;
+  font-size: 12pt;
+}
+
+h1#title {
+  text-align: center;
+  margin: 0 auto;
+  bookmark-level: none;
+  font-size: 16pt;
+  margin-bottom: 5mm;
+}
+
+div#allowance {
+  text-align: left;
+  margin: 0 auto;
+  bookmark-level: none;
+}
+
+.nc {
+  font-style: italic;
+  color: darkred;
+}
+
+.nc-bg,
+.medicine-expired,
+.article-expired {
+  background-color: darkred;
+  color: white;
+  font-weight: 700;
+}
+
+.medicine-warning,
+.article-warning {
+  color: black;
+  background-color: orange;
+  font-weight: 700;
+}
+
+.center {
+  text-align: center;
+}
+
+.small {
+  font-size: 80%;
+}
+
+.molecule,
+.equipment {
+  background: #eeeeec;
+  border-top: 0.5pt dashed black;
+}
+
+.remark {
+  color: dimgrey;
+  font-style: italic;
+}
+
+.medicine-name,
+.article-name {
+  padding-left: 2em;
+}
+
+.medicine-location-parent,
+.article-location-parent {
+  font-size: 80%;
+  color: #555;
+}
+
+div.page-break {
+  page-break-before: always;
+}
+
+h2.bag-title,
+h2.kit-title {
+  margin-top: 1cm;
+  color: darkblue;
+}
+
+td.fill {
+  width: 60%;
+}
+
+td.nowrap {
+  white-space: nowrap;
+}
+
+.mono {
+  font-family: monospace;
+}
+
+.section {
+  bookmark-level: 1;
+  bookmark-label: content(text);
+}
+
+.subsection {
+  bookmark-level: 2;
+  bookmark-label: content(text);
+}

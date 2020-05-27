@@ -1,0 +1,197 @@
+
+.medicine-btn-delete,
+.article-btn-delete {
+  color: darkred;
+}
+
+.medicine-btn-add,
+.article-btn-add {
+  color: darkgreen;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.header-cell {
+  font-weight: bold;
+  padding: .5em;
+  color: #eee;
+  background-color: #333;
+  border-bottom: solid 1px white;
+}
+
+.group-cell {
+  font-weight: bold;
+  padding: .5em;
+  color: #fff;
+  background-color: #555;
+}
+
+
+.item-cell {
+  padding: .5em;
+  border-bottom: 1px solid #aaa;
+}
+
+.item-cell-name {
+  border-bottom: 1px solid #aaa;
+}
+
+.item-cell-btn {
+  padding: .5em;
+}
+
+.medicine-item-cell,
+.article-item-cell {
+  padding: .5em;
+  border-bottom: 1px solid #ddd;
+}
+
+.medicine-item-buttons,
+.article-item-buttons {
+  padding-left: .5em;
+  padding-right: .5em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #ddd;
+}
+
+.equipment-item-buttons {
+  padding-left: .5em;
+  padding-right: .5em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #aaa;
+}
+
+.medicine-item-cell-name,
+.article-item-cell-name {
+  padding-left: 1em;
+}
+
+.medicine-item-nc,
+.article-item-nc {
+  color: darkred;
+  font-weight: bold;
+}
+
+.medicine-header-cell,
+.article-header-cell {
+  color: #000;
+  background-color: #ccc;
+  font-weight: bold;
+  padding: .5em;
+  border-top: 1px solid black;
+}
+
+
+.text-mono {
+  font-family: monospace;
+}
+
+.medicine-item-cell-add,
+.article-item-cell-add {
+  border-bottom: 2px solid black;
+}
+
+.medicine-expired,
+.article-expired {
+  color: white;
+  font-weight: bold;
+  background-color: darkred;
+}
+
+.medicine-warning,
+.article-warning {
+  color: black;
+  font-weight: bold;
+  background-color: orange;
+}
+
+.medicine-remark,
+.article-remark {
+  color: dimgrey;
+  font-style: italic;
+}
+
+.item-small-quantity{
+  color: white;
+  font-weight: bold;
+  background-color: darkred;
+}
+
+.item-nc-quantity {
+  color: black;
+  font-weight: bold;
+  background-color: lightblue;
+}
+
+.invalid-input {
+  border-color: darkred;
+}
+
+.error-combobox {
+  border: 1px solid red;
+  border-radius: 5px;
+}
+
+.action-helper {
+  font-style: italic;
+}
+
+.medicine-name-dialog {
+  font-weight: bold;
+  font-size: 140%;
+}
+
+
+.popover-calendar {
+  padding: 1em;
+}
+
+.calendar {
+  /* padding: 4px 4px 4px 4px; */
+}
+.calendar.view {
+  /* border-width: 0; */
+}
+
+
+.address-textview view border{
+  border-color: #aaa;
+  border-width: 10px;
+}
+
+.error-textview {
+  border: 1px solid red;
+  border-radius: 5px;
+}
+
+.location-cell-padded {
+  padding-left: 2em;
+}
+
+.location-parent {
+  font-weight: bold;
+}
+
+.location-btn-add {
+  color: darkgreen;
+}
+
+.rescue-bag-item {
+  color: royalblue;
+  font-weight: bold;
+}
+
+.location-reserved-item {
+  color: darkorange;
+  font-weight: bold;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.dashboard-section {
+  color: royalblue;
+}

@@ -1,0 +1,65 @@
+- model: inventory.equipmentgroup
+  pk: 1
+  fields:
+    name: "Mat\xE9riel de r\xE9animation"
+    order: 1
+- model: inventory.equipmentgroup
+  pk: 2
+  fields:
+    name: "Pansements et mat\xE9riel de suture"
+    order: 2
+- model: inventory.equipmentgroup
+  pk: 3
+  fields:
+    name: Instruments
+    order: 3
+- model: inventory.equipmentgroup
+  pk: 4
+  fields:
+    name: "Mat\xE9riel d'examen et de surveillance m\xE9dicale"
+    order: 4
+- model: inventory.equipmentgroup
+  pk: 5
+  fields:
+    name: "Mat\xE9riel d'injection, de perfusion, de ponction et de sondage"
+    order: 5
+- model: inventory.equipmentgroup
+  pk: 6
+  fields:
+    name: "Mat\xE9riel m\xE9dical g\xE9n\xE9ral"
+    order: 6
+- model: inventory.equipmentgroup
+  pk: 7
+  fields:
+    name: "Mat\xE9riel d'immobilisation et de contention"
+    order: 7
+- model: inventory.equipmentgroup
+  pk: 8
+  fields:
+    name: Documentation
+    order: 8
+- model: inventory.equipmentgroup
+  pk: 9
+  fields:
+    name: Trousse de premiers secours
+    order: 9
+- model: inventory.equipmentgroup
+  pk: 10
+  fields:
+    name: "Mat\xE9riel de t\xE9l\xE9consultation cardiologique"
+    order: 10
+- model: inventory.equipmentgroup
+  pk: 11
+  fields:
+    name: "D\xE9sinfection - D\xE9sinsectisation - Protection"
+    order: 11
+- model: inventory.equipmentgroup
+  pk: 12
+  fields:
+    name: Lutte antiparasitaire
+    order: 12
+- model: inventory.equipmentgroup
+  pk: 13
+  fields:
+    name: Autre
+    order: 13

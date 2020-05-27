@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface domain="com.devmaretique.pharmaship">
+  <menu id="app-menu">
+    <section>
+        <item>
+            <attribute name="label" translatable="yes">Dashboard</attribute>
+            <attribute name="action">app.dashboard</attribute>
+        </item>
+    </section>
+    <section>
+        <item>
+            <attribute name="label" translatable="yes">Medicines</attribute>
+            <attribute name="action">app.medicines</attribute>
+        </item>
+        <item>
+            <attribute name="label" translatable="yes">Equipment</attribute>
+            <attribute name="action">app.equipment</attribute>
+        </item>
+        <item>
+            <attribute name="label" translatable="yes">First Aid Kits</attribute>
+            <attribute name="action">app.first_aid_kits</attribute>
+        </item>
+        <item>
+            <attribute name="label" translatable="yes">Rescue Bags</attribute>
+            <attribute name="action">app.rescue_bags</attribute>
+        </item>
+        <item>
+            <attribute name="label" translatable="yes">Laboratory</attribute>
+            <attribute name="action">app.laboratory</attribute>
+        </item>
+        <item>
+            <attribute name="label" translatable="yes">Telemedical</attribute>
+            <attribute name="action">app.telemedical</attribute>
+        </item>
+    </section>
+    <!-- <section>
+        <item>
+            <attribute name="label" translatable="yes">Editor</attribute>
+            <attribute name="action">app.quit</attribute>
+        </item>
+    </section> -->
+  </menu>
+</interface>

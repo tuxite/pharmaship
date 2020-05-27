@@ -1,0 +1,85 @@
+{
+  "application": {
+    "type": "dict",
+    "require_all": true,
+    "schema": {
+      "lang": {
+        "type": "string",
+        "allowed": ["fr", "en"]
+      }
+    },
+  },
+  "vessel": {
+    "type": "dict",
+    "require_all": true,
+    "schema": {
+      "name": {
+        "type": "string"
+      },
+      "call_sign": {
+        "type": "string"
+      },
+      "imo": {
+        "type": "integer",
+        "min": 0,
+        "max": 9999999
+      },
+      "mmsi": {
+        "type": "integer",
+        "min": 0,
+        "max": 999999999
+      },
+      "sat_phone": {
+        "type": "string"
+      },
+      "gsm_phone": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string",
+        "regex": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
+      },
+      "flag": {
+        "type": "string"
+      },
+      "port_of_registry": {
+        "type": "string"
+      },
+      "address": {
+        "type": "string"
+      },
+      "shipowner": {
+        "type": "string"
+      }
+    }
+  },
+  "inventory": {
+    "type": "dict",
+    "schema": {
+      "expire_date_warning_delay": {
+        "type": "integer",
+        "default": 80,
+        "min": 7,
+        "max": 180
+      },
+      "has_laboratory": {
+        "type": "boolean",
+        "default": "false"
+      },
+      "has_telemedical": {
+        "type": "boolean",
+        "default": "false"
+      },
+      "first_aid_kit": {
+        "type": "integer",
+        "min": 1,
+        "default": 3
+      },
+      "rescue_bag": {
+        "type": "integer",
+        "min": 1,
+        "default": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/com/devmaretique/pharmaship/">
+    <file preprocess="xml-stripblanks">icons/error-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/document-edit-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/edit-delete-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/document-save-as-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/document-open-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/open-menu-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/object-select-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/value-increase-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/value-decrease-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/image-x-generic-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/system-search-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/edit-find-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/edit-clear-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/edit-redo-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/window-close-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/window-maximize-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/window-minimize-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/window-restore-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/checkbox-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/checkbox-checked-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/radio-checked-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/radio-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/pan-down-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/pan-end-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/pan-start-symbolic.svg</file>
+	<file preprocess="xml-stripblanks">icons/pan-up-symbolic.svg</file>
+  </gresource>
+</gresources>

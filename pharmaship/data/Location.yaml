@@ -1,0 +1,20 @@
+- model: inventory.location
+  pk: 0
+  fields:
+    name: Unassigned
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 2
+    tree_id: 0
+    level: 0
+- model: inventory.location
+  pk: 100
+  fields:
+    name: Hospital
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 2
+    tree_id: 0
+    level: 0

@@ -1,0 +1,9 @@
+- model: inventory.allowance
+  pk: 0
+  fields:
+    name: Orphan
+    author: Pharmaship
+    signature: system
+    date: 2020-04-21
+    version: '1'
+    additional: false

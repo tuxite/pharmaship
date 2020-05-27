@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Script to sign the Pharmaship TAR file
+
+display_usage() {
+	echo "This script signs tar file from Pharmaship export function."
+  echo "Requires GPG."
+	echo -e "\nUsage:\npharmaship-sign <input_files>\n"
+	}
+
+for file in "$@"
+do
+		echo "Processing file: ${file}"
+    if [ ! -r "$file" ]
+    then
+			echo -e "\e[1m\e[91mFilename not readable!\e[0m"
+			exit 0
+    fi
+
+		DIR=$(dirname "${file}")
+		if [ ! -w "$DIR" ]
+		then
+			echo -e "\e[1m\e[91mDirectory not writable!\e[0m"
+			exit 0
+		fi
+
+		gpg -s -a --batch --yes --homedir . -o "${file}.asc" $file
+
+done
+exit 1

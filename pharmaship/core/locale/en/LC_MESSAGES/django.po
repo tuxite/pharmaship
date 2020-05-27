@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-25 08:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: pharmaship/core/gpg.py:28
+msgid "Something went wrong! See detailed logs."
+msgstr ""
+
+#: pharmaship/core/gpg.py:33
+msgid "Key already added"
+msgstr ""
+
+#: pharmaship/core/gpg.py:38
+msgid "Key successfully added"
+msgstr ""
+
+#: pharmaship/core/gpg.py:68
+msgid "Key not found!"
+msgstr ""
+
+#: pharmaship/core/gpg.py:71
+msgid "Key removed"
+msgstr ""
+
+#: pharmaship/core/gpg.py:81
+msgid "No signature found."
+msgstr ""
+
+#: pharmaship/core/gpg.py:98
+msgid "Signature not in the keyring."
+msgstr ""
+
+#: pharmaship/core/import_data.py:115 pharmaship/core/import_data.py:119
+#: pharmaship/core/import_data.py:126 pharmaship/core/import_data.py:130
+msgid "File impossible to read. See detailled log."
+msgstr ""
+
+#: pharmaship/core/import_data.py:138
+msgid "Signature not validated. See detailled log."
+msgstr ""
+
+#: pharmaship/core/import_data.py:150
+msgid "Signed data is not a valid Tar file. Check logs."
+msgstr ""
+
+#: pharmaship/core/import_data.py:158
+msgid "Integrity check failed. Check logs."
+msgstr ""
+
+#: pharmaship/core/import_data.py:163
+msgid "Configuration not found."
+msgstr ""
+
+#: pharmaship/core/import_data.py:171
+msgid "Configuration file incorrect. "
+msgstr ""
+
+#: pharmaship/core/import_data.py:174
+msgid "Package Author"
+msgstr ""
+
+#: pharmaship/core/import_data.py:175
+msgid "Package Version"
+msgstr ""
+
+#: pharmaship/core/import_data.py:176
+msgid "Package Date"
+msgstr ""
+
+#: pharmaship/core/import_data.py:184
+msgid "A module to update is not installed. Check logs for details."
+msgstr ""
+
+#: pharmaship/core/import_data.py:194
+msgid "Module import error. See detailed log."
+msgstr ""
+
+#: pharmaship/core/import_data.py:204
+msgid "Target module has no update method. See detailed log."
+msgstr ""
+
+#: pharmaship/core/import_data.py:209
+#, python-brace-format
+msgid "Import of module {0} failed. See detailed logs."
+msgstr ""
+
+#: pharmaship/core/import_data.py:212
+#, python-brace-format
+msgid "Import of module {0} succeeded."
+msgstr ""
+
+#: pharmaship/core/import_data.py:217
+msgid "Import success."
+msgstr ""
