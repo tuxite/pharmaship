@@ -160,11 +160,11 @@ def end_of_month(date_obj):
 def get_content_types(app_label="inventory"):
     """Return the dict of content_types id for selected `app_label`.
 
-    :param: app_label: Application name to get content_types for.
+    :param: app_label: Application name to get content_types for. \
     Default: "inventory"
     :type: app_label: string
 
-    :return: dictionary with model names as keys and related content_type ID
+    :return: dictionary with model names as keys and related content_type ID \
     as values.
     :rtype: dict
 
@@ -177,6 +177,7 @@ def get_content_types(app_label="inventory"):
     'medicine': 19, 'molecule': 11, 'moleculegroup': 18, 'moleculereqqty': 17,
     'qtytransaction': 16, 'rescuebag': 15, 'rescuebagreqqty': 14, 'tag': 13,
     'telemedicalreqqty': 12}
+
     """
     content_types = {}
     for item in ContentType.objects.filter(app_label=app_label):

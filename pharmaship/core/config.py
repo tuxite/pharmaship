@@ -34,7 +34,7 @@ def load_config(content, schema):
 
     :Example:
 
-    load_config(my_content, "config.json")
+    >>> load_config(my_content, "config.json")
     """
     try:
         # config = json.loads(content)
@@ -79,7 +79,7 @@ def read_config():
 
     :Example:
 
-    read_config()
+    >>> read_config()
     """
     filename = settings.PHARMASHIP_CONF
 
@@ -111,7 +111,7 @@ def write_config(data):
 
     :Example:
 
-    write_config(my_data)
+    >>> write_config(my_data)
     """
     filename = settings.PHARMASHIP_CONF
 
