@@ -115,6 +115,8 @@ class ConfigTestCase(TestCase):
         data.vessel.name = "Dummy"
 
         settings.PHARMASHIP_CONF = self.assets / "config_ro.yaml"
+        # Force it read-only to get write failure
+        settings.PHARMASHIP_CONF.chmod(0o444)
         with self.assertLogs(log, level='ERROR') as cm:
             self.assertFalse(config.write_config(data))
         for item in cm.output:

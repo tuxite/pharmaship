@@ -1,4 +1,5 @@
 # -*- coding: utf-8; -*-
+"""Import package utilities."""
 from django.utils.translation import ugettext as _
 
 import tarfile
@@ -18,20 +19,35 @@ from pharmaship.core.config import load_config
 
 
 def extract_manifest(manifest_descriptor):
-    """Extract the MANIFEST information and put it into a list of dict."""
+    """Extract the ``MANIFEST`` information and put it into a list of dict.
+
+    :param file-object manifest_descriptor: File object containing MANIFEST\
+    data. Must be opened in "read binary".
+
+    :return: List of dictionary (hash, filename).
+    :rtype: list(dict)
+    """
     data = manifest_descriptor.readlines()
     result = []
     for item in data:
         f = {}
-        f['hash'], f['filename'] = item.decode("ascii").strip().split("  ")
+        try:
+            f['hash'], f['filename'] = item.decode("ascii").strip().split("  ")
+        except ValueError as error:
+            log.error("Unable to read MANIFEST: %s", error)
+            return []
         result.append(f)
 
     return result
 
 
 def check_integrity(tar_file):
-    """Open the archive and check that the files inside are listed in the
-    MANIFEST and the checksum is correct.
+    """Check the files listed in the ``MANIFEST`` and their checksum.
+
+    :param tarfile.Tarfile tar_file: The tar file to check
+
+    :return: ``True`` if the content is conform to the MANIFEST.
+    :rtype: bool
     """
     # Open the MANIFEST
     names = tar_file.getnames()
@@ -60,7 +76,14 @@ def check_integrity(tar_file):
 
 
 def check_tarfile(data):
-    """Check that the data input is a valid Tar file."""
+    """Check that the data input is a valid Tar file.
+
+    :param bytes data: binary string issued from GPG armor decoding containing\
+    a tar file.
+
+    :return: A Tarfile object.
+    :rtype: tarfile.TarFile
+    """
     try:
         tar = tarfile.open(fileobj=io.BytesIO(data), mode="r")
         return tar
@@ -70,11 +93,19 @@ def check_tarfile(data):
 
 
 def load_module(module):
+    """Load import_data submodule if existing.
+
+    :param str module: parent module for importing ``import_data``.
+
+    :return: The DataImport class of the selected module if any, \
+    ``False`` otherwise.
+    :rtype: DataImport or bool
+    """
     try:
         module_pkg = importlib.import_module("pharmaship." + module + ".import_data")
     except ImportError as error:
         log.error("Module %s has no import_data function.", module)
-        log.error(error)
+        log.debug(error)
         return False
 
     if not hasattr(module_pkg, "DataImport"):
@@ -85,12 +116,40 @@ def load_module(module):
     return module_class
 
 
-def load_function(module):
-    pass
-
-
 class Importer:
-    """Class used to import a data file in Onboard Assistant."""
+    """Class used to import a data file in Pharmaship.
+
+    The modules available for importation must have:
+        * an ``import_data.py`` file (ie: ``pharmaship.inventory.import_data``)
+        * inside this file, a ``DataImport`` class
+        * this class must have an ``update`` method
+
+    The package to import must:
+        * be an armored GPG-signed file
+        * be a tar file
+        * a ``package.yaml`` file conform to the ``schemas/package.json``\
+        schema
+        * a ``MANIFEST`` file with ``sha256`` checksums of all files inside\
+        the package
+
+    ``DataImport`` class must have the follwing arguments:
+        * ``tar`` - the tar file of the package
+        * ``conf`` - the configuration of the package (from ``package.yaml``)
+        * ``key`` - for the GPG key ID used to sign the package
+
+    :Example:
+
+    >>> from pharmaship.core.import_data import Importer
+    >>> my_importer = Importer()
+    >>> my_importer.read_package("my/path/archive.tar.asc")
+    True
+    >>> my_importer.check_signature()
+    True
+    >>> my_importer.check_conformity()
+    True
+    >>> my_importer.deploy()
+    True
+    """
 
     def __init__(self):
         self.km = KeyManager()
@@ -101,9 +160,18 @@ class Importer:
         self.modules = []
 
     def read_package(self, filename):
-        """Read the file content.
+        """Read the package content.
 
-        It is normally an armored PGP file with signature.
+        It is normally an armored PGP file with signature. The signed file
+        contains a Tar file.
+
+        Content is stored in ``self.content`` property.
+
+        :param filename: path of the file to read.
+        :type filename: path-like or str or bytes
+
+        :return: ``True`` if file is read properly, ``False`` otherwise
+        :rtype: bool
         """
         if isinstance(filename, (str, bytes, os.PathLike)):
             try:
@@ -132,6 +200,13 @@ class Importer:
         return True
 
     def check_signature(self):
+        """Check the signature of the package.
+
+        Decoded data is stored in ``self.data`` property.
+
+        :return: ``True`` if the signature is correct, ``False`` otherwise.
+        :rtype: bool
+        """
         res = self.km.check_signature(self.content)
         if not res:
             log.error("Error during signature check: %s", self.km.status)
@@ -143,7 +218,22 @@ class Importer:
         return True
 
     def check_conformity(self):
-        """Check that the package has a 'package.conf' file and that it is readable."""
+        """Check the package is importable in Pharmaship.
+
+        What is checked:
+            * The package is a valid tar file
+            * The package has a ``package.yaml`` file
+            * The ``package.yaml`` file is conform to the schema
+            * The modules concerned by the update are installed in Pharmaship
+
+        Tar file is stored in ``self.archive`` property.
+
+        Configuration from ``package.yaml`` is stored in ``self.conf``\
+        property.
+
+        :return: ``True`` if the package is conform, ``False`` otherwise.
+        :rtype: bool
+        """
         # Check if the `self.data` data is a real tar file
         res = check_tarfile(self.data)
         if not res:
@@ -161,6 +251,7 @@ class Importer:
         # Check the configuration file is present
         if "package.yaml" not in self.archive.getnames():
             self.status = _("Configuration not found.")
+            log.error("File `package.yaml` not found.")
             return False
 
         # Getting information from the package.conf file
@@ -186,9 +277,16 @@ class Importer:
         return True
 
     def deploy(self):
-        """Propagate the import to concerned modules."""
-        for module in self.modules:
+        """Propagate the import to concerned modules.
 
+        For each module listed in the configuration, the import class
+        ``update()`` method is called.
+
+        :return: ``True`` if all updates are applied correctly, ``False``\
+        otherwise
+        :rtype: bool
+        """
+        for module in self.modules:
             import_class = load_module(module)
             if not import_class:
                 self.status = _("Module import error. See detailed log.")

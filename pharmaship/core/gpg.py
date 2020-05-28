@@ -20,8 +20,20 @@ class KeyManager:
     def add_key(self, import_file):
         """Add a key to the keyring.
 
-        :param: import_file: File object containing the key data.
-        :type: import_file: file-like object"""
+        :param file-object import_file: File object containing the key data.
+
+        :return: True if the key is successfully added.
+        :rtype: bool
+
+        :Example:
+
+        >>> from pathlib import Path
+        >>> my_key_file = Path("pharmaship.pub").open()
+        >>> km = KeyManager()
+        >>> km.add_key(my_key_file)
+        True
+
+        """
         key_data = import_file.read()
         r = self.gpg.import_keys(key_data)
 
@@ -42,7 +54,19 @@ class KeyManager:
         return True
 
     def key_list(self):
-        """List trusted keys present in the keyring."""
+        """List trusted keys present in the keyring.
+
+        :return: List of available keys in the keyring.
+        :rtype: list(dict)
+
+        :Example:
+
+        >>> km = KeyManager()
+        >>> km.key_list()
+        [{'name': 'Pharmaship 2020 <pharmaship@devmaretique.com>',
+        'fingerprint': '86A7CC93CA482E093C28E5C236A33034D31E80F6'
+        }]
+        """
         result = []
         for key in self.gpg.list_keys():
             result.append({
@@ -53,14 +77,33 @@ class KeyManager:
         return result
 
     def get_key(self, fingerprint):
-        """Return a key of the keyring from its fingerprint."""
+        """Return a key of the keyring from its fingerprint.
+
+        :param str fingerprint: The fingerprint of the key to get.
+
+        :return: key data in a dictionary object if found, None otherwise.
+        :rtype: dict or None
+
+        """
         for item in self.gpg.list_keys():
             if item['fingerprint'] == fingerprint:
                 return item
         return None
 
     def delete_key(self, fingerprint):
-        """Delete key from the keyring."""
+        """Delete key from the keyring.
+
+        :param str fingerprint: The fingerprint of the key to delete.
+
+        :return: True if the key is successfully deleted.
+        :rtype: bool
+
+        :Example:
+
+        >>> km = KeyManager()
+        >>> km.delete_key("0123456789ABCDEF0123456789ABCDEF01234567")
+        True
+        """
         try:
             r = self.gpg.delete_keys(fingerprint)
             if r.status != 'ok':
@@ -75,7 +118,13 @@ class KeyManager:
         return True
 
     def check_signature(self, signed_data):
-        """Check signed data has a valid known signature."""
+        """Check signed data has a valid known signature.
+
+        :param str signed_data: GPG signed content to verify (armored).
+
+        :return: validated data if the signature is valide, False otherwise.
+        :rtype: bytes or False.
+        """
         # Verifying the signature
         verified = self.gpg.verify(signed_data)
 

@@ -24,13 +24,11 @@ from pharmaship.core.utils import log
 def load_config(content, schema):
     """Load the configuration from a YAML file.
 
-    :param content: string containing YAML data (from a config file)
-    :param schema: schema filename, not path for validating the content
-    :type content: string or bytes
-    :type schema: string or Path
+    :param str content: string containing YAML data (from a config file)
+    :param str schema: schema filename, not path for validating the content
 
     :return: validated config dictionary or False
-    :rtype: dict or boolean
+    :rtype: dict or bool
 
     :Example:
 
@@ -75,7 +73,7 @@ def read_config():
     a schema and then convert it to Munch instance.
 
     :return: validated config Munch instance or False
-    :rtype: Munch or boolean
+    :rtype: Munch or bool
 
     :Example:
 
@@ -107,7 +105,7 @@ def write_config(data):
     :type data: Munch instance
 
     :return: True is written with success.
-    :rtype: boolean
+    :rtype: bool
 
     :Example:
 

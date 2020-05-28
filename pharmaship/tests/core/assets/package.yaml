@@ -1,0 +1,7 @@
+info:
+  author: Pharmaship
+  date: 2020-04-24
+  version: '2018'
+modules:
+  wronginventory:
+    install_file: false

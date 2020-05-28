@@ -98,6 +98,11 @@ def remove_yaml_pk(yaml_string):
 
     This allows to import different alllowances with for instance the
     same molecules without generating conflicts of primary key.
+
+    :param str yaml_string: YAML string to parse.
+
+    :return: YAML string without "pk" attributes.
+    :rtype: str
     """
     data = load(yaml_string, Loader=Loader)
     for item in data:
@@ -112,10 +117,8 @@ def add_months(sourcedate: datetime.date, months: int) -> datetime.date:
 
     Only add n-months to a date without changing the day.
 
-    :param: sourcedate: A datetime.date instance
-    :param: months: number of months to add to sourcedate.
-    :type: sourcedate: datetime.date
-    :type: months: int
+    :param datetime.date sourcedate: A datetime.date instance
+    :param int months: number of months to add to sourcedate.
 
     :return: A datetime.date increased by n months.
     :rtype: datetime.date
@@ -139,8 +142,7 @@ def end_of_month(date_obj):
 
     The returned date corresponds to the last day of the date_obj's month.
 
-    :param: date_obj: A datetime.date instance.
-    :type: date_obj: datetime.date
+    :param datetime.date date_obj: A datetime.date instance.
 
     :return: The corresponding end-of-month date.
     :rtype: datetime.date
@@ -160,9 +162,8 @@ def end_of_month(date_obj):
 def get_content_types(app_label="inventory"):
     """Return the dict of content_types id for selected `app_label`.
 
-    :param: app_label: Application name to get content_types for. \
+    :param str app_label: Application name to get content_types for. \
     Default: "inventory"
-    :type: app_label: string
 
     :return: dictionary with model names as keys and related content_type ID \
     as values.
