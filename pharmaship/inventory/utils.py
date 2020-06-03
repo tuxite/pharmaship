@@ -39,19 +39,16 @@ def req_qty_element(element, req_qty_list):
     return (additional + max(maximum)), allowance_list
 
 
-def delay(delta):
-    """Return the date including a delay in days."""
-    return datetime.date.today() + datetime.timedelta(days=delta)
-
-# Functions
-# def slicedict(d, s):
-#     return {k:v for k,v in d.iteritems() if k.startswith(s)}
-
-
 def filepath(instance, filename):
-    """Return a file path using the instance name.
+    """Return a "slugified" filename using the instance name.
 
-    Used in :model:`inventory.Equipment`.
+    The extension of the original filename is preserved.
+
+    :param models.Equipment instance: Equipment instance
+    :param str filename: Name of the file
+
+    :return: Slugified filename from instance name and file extension.
+    :rtype: str
     """
     # Keep the extension of the uploaded file
     extension = PurePath(filename).suffix
@@ -84,7 +81,7 @@ def get_location_list(show_reserved=True):
         locations.append({
             "sequence": [root.name],
             "id": root.id,
-            "parent": root,
+            "parent": None,
             "rescue_bag": root.is_rescue_bag
         })
 

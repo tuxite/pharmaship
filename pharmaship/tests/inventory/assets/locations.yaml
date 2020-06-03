@@ -1,0 +1,110 @@
+- model: inventory.location
+  pk: 1
+  fields:
+    name: Location A
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 14
+    tree_id: 1
+    level: 0
+- model: inventory.location
+  pk: 2
+  fields:
+    name: Location B
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 8
+    tree_id: 2
+    level: 0
+- model: inventory.location
+  pk: 3
+  fields:
+    name: Location C
+    parent: 1
+    is_rescue_bag: false
+    lft: 8
+    rght: 13
+    tree_id: 1
+    level: 1
+- model: inventory.location
+  pk: 4
+  fields:
+    name: Location 1a
+    parent: 1
+    is_rescue_bag: false
+    lft: 2
+    rght: 3
+    tree_id: 1
+    level: 1
+- model: inventory.location
+  pk: 5
+  fields:
+    name: Location 2a
+    parent: 1
+    is_rescue_bag: false
+    lft: 4
+    rght: 5
+    tree_id: 1
+    level: 1
+- model: inventory.location
+  pk: 6
+  fields:
+    name: Location 3a
+    parent: 1
+    is_rescue_bag: false
+    lft: 6
+    rght: 7
+    tree_id: 1
+    level: 1
+- model: inventory.location
+  pk: 7
+  fields:
+    name: Location 1b
+    parent: 2
+    is_rescue_bag: false
+    lft: 2
+    rght: 3
+    tree_id: 2
+    level: 1
+- model: inventory.location
+  pk: 8
+  fields:
+    name: Location 2b
+    parent: 2
+    is_rescue_bag: false
+    lft: 4
+    rght: 5
+    tree_id: 2
+    level: 1
+- model: inventory.location
+  pk: 9
+  fields:
+    name: Location 3b
+    parent: 2
+    is_rescue_bag: false
+    lft: 6
+    rght: 7
+    tree_id: 2
+    level: 1
+- model: inventory.location
+  pk: 10
+  fields:
+    name: Bag One
+    parent: 3
+    is_rescue_bag: true
+    lft: 9
+    rght: 10
+    tree_id: 1
+    level: 2
+- model: inventory.location
+  pk: 11
+  fields:
+    name: Bag Two
+    parent: 3
+    is_rescue_bag: true
+    lft: 11
+    rght: 12
+    tree_id: 1
+    level: 2

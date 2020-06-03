@@ -1,0 +1,129 @@
+- model: inventory.location
+  pk: 1
+  fields:
+    name: Location A
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 14
+    tree_id: 1
+    level: 0
+- model: inventory.moleculegroup
+  pk: 1
+  fields:
+    name: Cardiologie
+    order: 1
+- model: inventory.allowance
+  pk: 0
+  fields:
+    name: Orphan
+    author: Pharmaship
+    signature: system
+    date: 2020-04-21
+    version: '1'
+    additional: false
+    active: false
+- model: inventory.allowance
+  pk: 1
+  fields:
+    name: Dotation A
+    author: Pharmaship
+    signature: D31E80F6
+    date: 2020-04-20
+    version: test
+    additional: false
+    active: true
+- model: inventory.allowance
+  pk: 2
+  fields:
+    name: Datation B
+    author: Pharmaship
+    signature: D31E80F6
+    date: 2020-04-24
+    version: test
+    additional: false
+    active: true
+- model: inventory.allowance
+  pk: 3
+  fields:
+    name: Dotation C
+    author: Pharmaship
+    signature: D31E80F6
+    date: 2020-04-24
+    version: test
+    additional: true
+    active: true
+- model: inventory.molecule
+  pk: 1
+  fields:
+    name: "Acide ac\xE9tylsalicylique"
+    roa: 1
+    dosage_form: 6
+    composition: 300 mg
+    medicine_list: 0
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.medicine
+  pk: 1
+  fields:
+    name: "Acide ac\xE9tylsalicylique"
+    exp_date: 2020-07-31
+    used: false
+    remark: ''
+    location: 1
+    parent: 1
+    nc_molecule: ''
+    nc_composition: ''
+- model: inventory.molecule
+  pk: 2
+  fields:
+    name: "Amiodarone"
+    roa: 1
+    dosage_form: 1
+    composition: 200 mg
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 3
+  fields:
+    name: "Nitrendipine"
+    roa: 1
+    dosage_form: 1
+    composition: 10 mg
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.moleculereqqty
+  pk: 1
+  fields:
+    allowance: 1
+    required_quantity: 100
+    base: 1
+- model: inventory.moleculereqqty
+  pk: 2
+  fields:
+    allowance: 2
+    required_quantity: 60
+    base: 1
+- model: inventory.moleculereqqty
+  pk: 3
+  fields:
+    allowance: 3
+    required_quantity: 50
+    base: 1
+- model: inventory.moleculereqqty
+  pk: 4
+  fields:
+    allowance: 3
+    required_quantity: 25
+    base: 2
+- model: inventory.moleculereqqty
+  pk: 5
+  fields:
+    allowance: 0
+    required_quantity: 777
+    base: 1

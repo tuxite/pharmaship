@@ -1,0 +1,26 @@
+{
+  "data": {
+    "type": "list",
+    "schema": {
+      "type": "dict",
+      "schema": {
+        "sequence": {
+          "type": "list",
+          "schema": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "integer"
+        },
+        "parent": {
+          "type": "integer",
+          "nullable": true
+        },
+        "rescue_bag": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
