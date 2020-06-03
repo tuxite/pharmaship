@@ -226,7 +226,7 @@ def collect_icons():
     # Specific for "spinner"
     name = "scalable-up-to-32/status/process-working-symbolic.svg"
     files.append((path / name, dest / name))
-    
+
     return files
 
 
@@ -316,6 +316,23 @@ build_exe_options = {
     "optimize": 2
     }
 
+REQUIRED_PACKAGES = [
+    "Django",
+    "django-mptt",
+    "djangorestframework",
+    "rest-framework-generic-relations",
+    "munch",
+    "Cerberus",
+    "coloredlogs",
+    "PyGObject",
+    "WeasyPrint",
+    "python-gnupg",
+    "PyYAML",
+    "PyPDF2"
+]
+if sys.platform == "win32":
+    REQUIRED_PACKAGES.append("winpaths")
+    build_exe_options["packages"].append("winpaths")
 
 setup(
     name="pharmaship",
@@ -325,20 +342,7 @@ setup(
     version="0.1",
     packages=find_packages(),
     include_package_data=True,
-    install_requires=[
-        "Django",
-        "django-mptt",
-        "djangorestframework",
-        "rest-framework-generic-relations",
-        "munch",
-        "Cerberus",
-        "coloredlogs",
-        "PyGObject",
-        "WeasyPrint",
-        "python-gnupg",
-        "PyYAML",
-        "PyPDF2"
-    ],
+    install_requires=REQUIRED_PACKAGES,
     scripts=[
         "bin/pharmaship-sign"
     ],
