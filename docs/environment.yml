@@ -1,6 +1,6 @@
 name: docs
 channels:
-  - defaults
+  - conda-forge
 dependencies:
   - pygobject
   - weasyprint
