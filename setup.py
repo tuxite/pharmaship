@@ -40,18 +40,14 @@ cairosvg/__init__.py:
 
 """
 import sys
-# import platform
 import pkg_resources
 import os
-import os.path
+
 from pathlib import Path, PurePath
 
-# from setuptools import setup, find_packages
 from setuptools import find_packages
 from cx_Freeze import setup, Executable
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
 
 SEARCH_PATHS = os.getenv("PATH", os.defpath).split(os.pathsep)
 
@@ -86,13 +82,13 @@ GDBUS_WIN = [
 
 EXECUTABLE_WIN = [
     Executable(
-        script="bin/launcher.py",
+        script="launcher.py",
         targetName="pharmaship.exe",
         base="Win32GUI",
         icon="bin/pharmaship.ico"
     ),
     Executable(
-        script="bin/manage.py",
+        script="manage.py",
         targetName="pharmaship-admin.exe",
         base="Console",
     )
@@ -100,13 +96,13 @@ EXECUTABLE_WIN = [
 
 EXECUTABLE = [
     Executable(
-        script="bin/launcher.py",
+        script="launcher.py",
         targetName="pharmaship",
         base=None,
         icon="bin/pharmaship.ico"
     ),
     Executable(
-        script="bin/manage.py",
+        script="manage.py",
         targetName="pharmaship-admin",
         base="Console",
     )
@@ -119,6 +115,7 @@ EXCLUDE_ICONS = [
     "legacy",
     "status"
 ]
+
 
 def collect_dist_info(packages):
     """Recursively collects the path to the packages' dist-info."""
@@ -160,17 +157,14 @@ def pillow_libs_files():
     __module_name = "Pillow.libs"
     distrib = pkg_resources.get_distribution("Pillow")
     module_path = Path(distrib.location) / __module_name
-    print(module_path)
     files = []
     dest_path = PurePath("lib") / __module_name
 
     for file in module_path.glob('**/*'):
-        filename = module_path / file
-        if not filename.is_file():
+        if not file.is_file():
             continue
-        print(filename)
-        print(file)
-        files.append((filename, dest_path / file))
+
+        files.append((file, dest_path / file.name))
 
     return files
 
@@ -178,8 +172,8 @@ def pillow_libs_files():
 def get_file(filename):
     """Return full path for filename."""
     for p in SEARCH_PATHS:
-        p = os.path.join(p, filename)
-        if os.path.isfile(p):
+        p = Path(p) / filename
+        if p.is_file():
             return p
 
     return None
@@ -313,7 +307,7 @@ build_exe_options = {
         ],
     "include_files": get_collected_files(),
     "build_exe": get_build_path(),
-    "optimize": 2
+    "optimize": 0
     }
 
 REQUIRED_PACKAGES = [
