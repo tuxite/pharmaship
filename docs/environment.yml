@@ -1,7 +1,11 @@
 name: docs
 channels:
   - conda-forge
+  - defaults
 dependencies:
   - pygobject
   - weasyprint
   - cairosvg
+  - pip
+  - pip:
+    - -r file:../requirements.txt
