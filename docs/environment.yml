@@ -6,6 +6,7 @@ dependencies:
   - pygobject
   - weasyprint
   - cairosvg
+  - cx_freeze
   - pip
   - pip:
     - -r file:../requirements.txt
