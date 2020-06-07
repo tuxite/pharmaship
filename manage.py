@@ -3,8 +3,6 @@
 import os
 import sys
 
-import django
-
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pharmaship.app.settings')

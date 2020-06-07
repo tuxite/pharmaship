@@ -15,6 +15,15 @@ def main():
     # Need to setup Django first to register our Apps
     django.setup()
 
+    from django.contrib.contenttypes.models import ContentType
+    from django.db.utils import OperationalError
+    # Check if first run
+    try:
+        ContentType.objects.all().count()
+    except OperationalError:
+        call_command("migrate")
+        call_command("populate")
+
     # Launch the Pharmaship GUI
     call_command("gui")
 
