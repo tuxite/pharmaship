@@ -328,6 +328,13 @@ if sys.platform == "win32":
     REQUIRED_PACKAGES.append("winpaths")
     build_exe_options["packages"].append("winpaths")
 
+
+def options_value():
+    """options_value is to allow building dmg, under MacOS system, build_exe, when present makes cx_freeze crashing."""
+    if sys.platform == "win32":
+        return {"build_exe": build_exe_options}
+
+
 setup(
     name="pharmaship",
     description="A ship's pharmacy inventory software.",
@@ -346,9 +353,7 @@ setup(
             'pharmaship-admin=pharmaship.manage:main'],
     },
     executables=get_exe_config(),
-    options={
-        "build_exe": build_exe_options,
-        },
+    options=options_value(),
     # metadata to display on PyPI
     author="Matthieu Morin",
     author_email="morinmatthieu@gmail.com",
