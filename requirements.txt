@@ -14,3 +14,4 @@ PyPDF2==1.26.0
 cx-Freeze==6.1
 
 Sphinx==3.0.4
+sphinx-rtd-theme==0.4.3
