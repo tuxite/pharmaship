@@ -196,7 +196,7 @@ class AppWindow(Gtk.ApplicationWindow):
         popover = Gtk.Popover.new_from_model(self.mode_button, menu)
         self.mode_button.set_popover(popover)
         self.mode_button.props.width_request = 120
-        self.mode_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
+        self.mode_button.get_style_context().add_class("suggested-action")
         hb.pack_start(self.mode_button)
 
         # Save button
