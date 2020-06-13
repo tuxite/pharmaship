@@ -64,13 +64,20 @@ class View:
         self.scrolled.add(self.grid)
 
         # Header
-        label = Gtk.Label("Location", xalign=0)
+        label = Gtk.Label(_("Location"), xalign=0)
         label.set_hexpand(True)
         label.get_style_context().add_class("header-cell")
         self.grid.attach(label, 0, 0, 1, 1)
-        label = Gtk.Label("", xalign=0)
-        label.get_style_context().add_class("header-cell")
-        self.grid.attach(label, 1, 0, 1, 1)
+
+        # Add location button on header bar
+        box = Gtk.Box()
+        box.get_style_context().add_class("header-cell-box")
+        btn = Gtk.Button(_("New Location"))
+        btn.set_relief(Gtk.ReliefStyle.NONE)
+        btn.get_style_context().add_class("header-cell-btn")
+        btn.connect("clicked", self.dialog_add)
+        box.add(btn)
+        self.grid.attach(box, 1, 0, 1, 1)
 
         location_list = self.params.locations
 
