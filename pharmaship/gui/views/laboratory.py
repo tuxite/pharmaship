@@ -26,12 +26,17 @@ NC_TEXT_TEMPLATE = "<span foreground='darkred' weight='bold' style='normal'>{0} 
 
 
 class View:
-    def __init__(self, window):
+    def __init__(self, window, chosen=None):
         self.window = window
         self.params = window.params
         self.builder = window.builder
         # For recording the open equipments in the grid
         self.toggled = False
+
+        self.chosen = None
+        self.row_widget_num = None
+        if isinstance(chosen, int):
+            self.chosen = chosen
 
     def refresh_grid(self):
         # Get present scroll position
@@ -49,6 +54,8 @@ class View:
 
         # Reset toggled value
         self.toggled = False
+        self.chosen = None
+        self.row_widget_num = None
 
         # Re-create the Grid and attach it to the viewport
         grid = self.create_grid(toggle_row_num)
@@ -101,6 +108,10 @@ class View:
             # all construction is done, call toggle_article function.
             if toggle_row_num and toggle_row_num == i:
                 toggle_equipment = equipment
+            if self.chosen and self.chosen == equipment["id"]:
+                toggle_equipment = equipment
+                toggle_row_num = i
+                self.row_widget_num = i
 
             box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
             button = Gtk.Button()
@@ -220,8 +231,22 @@ class View:
         # No overlay of the scrollbar
         self.scrolled.props.overlay_scrolling = False
         self.window.layout.pack_start(self.scrolled, True, True, 0)
+
         grid = self.create_grid()
-        self.scrolled.add(grid)
+
+        viewport = Gtk.Viewport()
+        viewport.add(grid)
+
+        self.scrolled.add(viewport)
+
+        vadjust = viewport.get_vadjustment()
+        grid.set_focus_vadjustment(vadjust)
+
+        self.window.layout.show_all()
+
+        # Change Gtk Alignment if a widget is selected
+        if self.row_widget_num:
+            self.scrolled.connect("draw", utils.set_focus, self.row_widget_num)
 
     def dialog_use(self, source, article):
         builder = Gtk.Builder.new_from_file(utils.get_template("article_use.glade"))

@@ -60,9 +60,7 @@ def error_field_changed(source):
         source.get_style_context().remove_class("error-textview")
 
     # Remove this signal
-    signal_id = GObject.signal_lookup("changed", source.__class__)
-    handler_id = GObject.signal_handler_find(source, GObject.SignalMatchType.ID, signal_id, 0, None, 0, 0)
-    source.disconnect(handler_id)
+    disconnect_signal(source, "changed")
 
 
 def set_errors(form, builder, fields):
@@ -273,6 +271,27 @@ def open_file(filename):
             os.startfile(filename)
         else:
             subprocess.call(('xdg-open', filename))
+
+
+def disconnect_signal(source, signal):
+    signal_id = GObject.signal_lookup(signal, source.__class__)
+    handler_id = GObject.signal_handler_find(source, GObject.SignalMatchType.ID, signal_id, 0, None, 0, 0)
+    source.disconnect(handler_id)
+
+
+def set_focus(source, event, row_num):
+    viewport = source.get_children()[0]
+    grid = viewport.get_children()[0]
+    vadjust = viewport.get_vadjustment()
+    # Get the corresponding widget
+    widget = grid.get_child_at(0, row_num)
+    widget.set_can_focus(True)
+    widget.grab_focus()
+    # Put this widget on top of the view
+    vadjust.set_value(widget.get_allocation().y)
+
+    # Disconnect this signal otherwise the view is unusable
+    disconnect_signal(source, "draw")
 
 
 def ButtonWithImage(image_name, btn_class=None, tooltip=None, action=None, connect=None, data=None):

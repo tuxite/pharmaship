@@ -11,10 +11,12 @@
         <item>
             <attribute name="label" translatable="yes">Medicines</attribute>
             <attribute name="action">app.medicines</attribute>
+            <attribute name="target" type="i">0</attribute>
         </item>
         <item>
             <attribute name="label" translatable="yes">Equipment</attribute>
             <attribute name="action">app.equipment</attribute>
+            <attribute name="target" type="i">0</attribute>
         </item>
         <item>
             <attribute name="label" translatable="yes">First Aid Kits</attribute>
@@ -27,10 +29,12 @@
         <item>
             <attribute name="label" translatable="yes">Laboratory</attribute>
             <attribute name="action">app.laboratory</attribute>
+            <attribute name="target" type="i">0</attribute>
         </item>
         <item>
             <attribute name="label" translatable="yes">Telemedical</attribute>
             <attribute name="action">app.telemedical</attribute>
+            <attribute name="target" type="i">0</attribute>
         </item>
     </section>
     <!-- <section>
