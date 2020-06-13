@@ -515,6 +515,9 @@ class Application(Gtk.Application):
 
         # Get window parameters
         window_size = self.window.get_size()
+        # Position is not reliable on Wayland
+        window_position = self.window.get_position()
+        log.debug(window_position)
         mode = self.window.mode
 
         self.window.destroy()
