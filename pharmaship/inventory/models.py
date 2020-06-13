@@ -160,7 +160,7 @@ class BaseItem(models.Model):
     name = models.CharField(_("Name"), max_length=100)  # Brand Name. Example: Doliprane for INN Paracétamol
     exp_date = models.DateField(_("Expiration Date"), blank=True, null=True)
     used = models.BooleanField(default=False)
-    transactions = GenericRelation(QtyTransaction)
+    transactions = GenericRelation(QtyTransaction, related_query_name='transactions')
     remark = models.CharField(_("Remark"), max_length=256, blank=True, null=True)
 
     def __str__(self):  # noqa: D105
