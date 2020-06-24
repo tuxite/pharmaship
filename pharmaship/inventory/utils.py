@@ -1,6 +1,5 @@
 # -*- coding: utf-8; -*-
 """Utility functions for model data handling."""
-import datetime
 import copy
 
 from pathlib import PurePath

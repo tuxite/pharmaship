@@ -12,3 +12,4 @@ Reference
 
    inventory/models
    inventory/utils
+   inventory/import_data
