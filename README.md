@@ -33,11 +33,6 @@ In the virtual environment:
 
 > All dependencies should install normally
 
-Prepare the database:
-
-    $ pharmaship-admin migrate
-    $ pharmaship-admin populate
-
 Then launch the graphical interface:
 
     $ pharmaship
