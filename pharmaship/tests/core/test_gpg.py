@@ -74,7 +74,7 @@ class GPGTestCase(TestCase):
         # Add Pharmaship Key
         key = settings.PHARMASHIP_DATA / "pharmaship.pub"
         key_obj = key.open()
-        with self.assertLogs(log, level='DEBUG') as cm:
+        with self.assertLogs(log, level='DEBUG'):
             self.km.add_key(key_obj)
 
         output = [{
@@ -89,7 +89,7 @@ class GPGTestCase(TestCase):
         # Add Pharmaship Key
         key = settings.PHARMASHIP_DATA / "pharmaship.pub"
         key_obj = key.open()
-        with self.assertLogs(log, level='DEBUG') as cm:
+        with self.assertLogs(log, level='DEBUG'):
             self.km.add_key(key_obj)
 
         fingerprint = "86A7CC93CA482E093C28E5C236A33034D31E80F6"
