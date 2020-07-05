@@ -1,25 +1,35 @@
 # -*- coding: utf-8 -*-
+"""Parser for Equipment data."""
 import datetime
 
 from django.utils.translation import gettext as _
-from django.contrib.contenttypes.models import ContentType
 
 from pharmaship.core.utils import log
 
 from pharmaship.inventory import models
-from pharmaship.inventory.utils import req_qty_element
+from pharmaship.inventory.utils import req_qty_element, get_quantity
 # from purchase.models import Item
 
 
 # Pre-treatment function
 def parser(params):
-    """Parses the database to render a list of
-    MoleculeGroup > Molecule > Medicine.
+    """Parse the database to render a dict of EquipmentGroup/Equipment/Article.
 
-    allowance_list: list of allowance objects used as a filter.
-    location_list: list of Location objects.
+    Process database data and set flags on articles missing, expired or \
+    reaching near expiry.
 
-    Returns the list of value and the list of groups.
+    Only equipements with :class:`pharmaship.inventory.models.EquipmentReqQty`\
+    are listed.
+
+    Data is sorted by :class:`pharmaship.inventory.models.EquipmentGroup`.
+
+    See ``pharmaship/schemas/parsers/equipment.json`` for details.
+
+    :param object params: Global Parameters of the application \
+    (:class:`pharmaship.gui.view.GlobalParameters`)
+
+    :return: Dictionnary with list of Equipment by EquimentGroup.
+    :rtype: dict(list)
     """
     allowance_list = params.allowances
     location_list = params.locations
@@ -61,12 +71,22 @@ def parser(params):
 
 
 def parser_element(equipment, data, warning_delay, today=datetime.date.today()):
-    """Parses the database to render a list of
-    Equipment > Article.
+    """Parse the database to render a list of Equipment > Article.
 
-    equipment: an Equipment object
+    :param models.Equipment equipment: Equipment to parse
+    :param dict data: Common data for parsing. Following keys must be present:
 
-    Returns the formatted information with articles.
+        * ``qty_transactions``: QuerySet of \
+        :class:`pharmaship.inventory.models.QtyTransaction`
+        * ``locations``: formatted list of \
+        :class:`pharmaship.inventory.models.Location`
+
+    :param datetime.date warning_delay: Date from which warning flag must be \
+    set
+    :param datetime.date today: Date from which expired flag must be set.
+
+    :return: Formatted information with articles.
+    :rtype: dict
     """
     # ordered_items = data["ordered_items"]
     qty_transactions = data["qty_transactions"]
@@ -114,12 +134,13 @@ def parser_element(equipment, data, warning_delay, today=datetime.date.today()):
         item_dict['nc_packaging'] = article.nc_packaging
         # Expiration date
         item_dict['exp_date'] = article.exp_date
-        element_dict['exp_dates'].append(article.exp_date)
+        if article.exp_date:
+            element_dict['exp_dates'].append(article.exp_date)
         # Check if the article is expired or not and if the expiry is within
         # the user-defined period
         # Consider "today" as already passed (that is why we use <= operator)
-        item_dict['expired'] = None
-        item_dict['warning'] = None
+        item_dict['expired'] = False
+        item_dict['warning'] = False
         if article.exp_date and article.exp_date <= warning_date:
             item_dict['warning'] = True
             element_dict['has_date_warning'] = True
@@ -133,7 +154,8 @@ def parser_element(equipment, data, warning_delay, today=datetime.date.today()):
             item_dict['location'] = {
                 "sequence": [_("Unassigned")],
                 "id": None,
-                "parent": None
+                "parent": None,
+                "rescue_bag": None
             }
             location_display = _("Unassigned")
         else:
@@ -144,13 +166,7 @@ def parser_element(equipment, data, warning_delay, today=datetime.date.today()):
                     if location_display not in element_dict['locations']:
                         element_dict['locations'].append(location_display)
         # Quantity
-        item_dict['quantity'] = 0
-        for transaction in qty_transactions:
-            if transaction.object_id == article.id:
-                if transaction.transaction_type in [1, 8]:
-                    item_dict['quantity'] = transaction.value
-                else:
-                    item_dict['quantity'] -= transaction.value
+        item_dict['quantity'] = get_quantity(qty_transactions, article.id)
 
         if item_dict['quantity'] < 0:
             log.warning("Article (ID: %s) with negative quantity (%s)", item_dict["id"], item_dict["quantity"])

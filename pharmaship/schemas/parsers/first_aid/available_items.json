@@ -1,0 +1,46 @@
+{
+  "data": {
+    "type": "list",
+    "schema": {
+      "type": "dict",
+      "schema": {
+        "id": {
+          "type": "integer",
+          "min": 0
+        },
+        "name": {
+          "type": "string"
+        },
+        "exp_date": {
+          "type": "date",
+          "nullable": true
+        },
+        "quantity": {
+          "type": "integer",
+          "min": 0
+        },
+        "type": {
+          "type": "integer",
+          "min": 0
+        },
+        "nc": {
+          "type": "dict",
+          "schema": {
+            "composition": {
+              "type": "string",
+              "nullable": true
+            },
+            "molecule": {
+              "type": "string",
+              "nullable": true
+            },
+            "packaging": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

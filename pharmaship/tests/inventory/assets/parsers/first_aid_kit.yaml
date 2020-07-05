@@ -1,0 +1,673 @@
+- model: inventory.moleculegroup
+  pk: 1
+  fields:
+    name: Cardiologie
+    order: 1
+- model: inventory.moleculegroup
+  pk: 6
+  fields:
+    name: Pneumologie
+    order: 6
+- model: inventory.moleculegroup
+  pk: 7
+  fields:
+    name: Infectiologie - Parasitologie
+    order: 7
+
+
+- model: inventory.equipmentgroup
+  pk: 2
+  fields:
+    name: "Pansements et mat\xE9riel de suture"
+    order: 2
+- model: inventory.equipmentgroup
+  pk: 7
+  fields:
+    name: "Mat\xE9riel d'immobilisation et de contention"
+    order: 7
+
+
+- model: inventory.allowance
+  pk: 0
+  fields:
+    name: Orphan
+    author: Pharmaship
+    signature: system
+    date: 2020-04-21
+    version: '1'
+    additional: false
+    active: false
+- model: inventory.allowance
+  pk: 1
+  fields:
+    name: Test Allowance
+    author: Pharmaship
+    signature: system
+    date: 2020-04-21
+    version: '1'
+    additional: false
+    active: true
+- model: inventory.allowance
+  pk: 2
+  fields:
+    name: Test Allowance Add
+    author: Pharmaship
+    signature: system
+    date: 2020-04-21
+    version: '1'
+    additional: true
+    active: true
+
+- model: inventory.location
+  pk: 0
+  fields:
+    name: Unassigned
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 20
+    tree_id: 4
+    level: 0
+- model: inventory.location
+  pk: 100
+  fields:
+    name: Hospital
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 20
+    tree_id: 4
+    level: 0
+- model: inventory.location
+  pk: 110
+  fields:
+    name: First Aid Kit A
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 20
+    tree_id: 4
+    level: 0
+- model: inventory.location
+  pk: 111
+  fields:
+    name: First Aid Kit B
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 20
+    tree_id: 4
+    level: 0
+
+
+
+- model: inventory.firstaidkit
+  pk: 1
+  fields:
+    name: First Aid Kit A
+    location: 110
+- model: inventory.firstaidkit
+  pk: 2
+  fields:
+    name: First Aid Kit B
+    location: 111
+
+
+
+- fields:
+    composition: 300 mg
+    dosage_form: 6
+    group:
+    - Cardiologie
+    medicine_list: 0
+    name: "Acide ac\xE9tylsalicylique"
+    remark: null
+    roa: 1
+  pk: 1
+  model: inventory.molecule
+- fields:
+    composition: 200 mg
+    dosage_form: 6
+    group:
+    - Pneumologie
+    medicine_list: 0
+    name: "Ac\xE9tylcyst\xE9ine"
+    remark: null
+    roa: 1
+  pk: 2
+  model: inventory.molecule
+- fields:
+    composition: 500 mg - 62,5 mg
+    dosage_form: 1
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Amoxicilline - Acide Clavulanique
+    remark: null
+    roa: 1
+  pk: 3
+  model: inventory.molecule
+
+
+
+- model: inventory.equipment
+  pk: 1
+  fields:
+    name: Attelle cervico-thoracique
+    packaging: "unit\xE9"
+    group: 7
+    consumable: false
+    perishable: false
+    remark: "type Ferno KED\xAE"
+    picture: attelle-cervico-thoracique.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 2
+  fields:
+    name: "Compresse de gaze st\xE9rile"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "Taille moyenne (7,5 \xD7 7,5 cm)"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 3
+  fields:
+    name: "Bande de cr\xEApe (10 cm)"
+    packaging: rouleau 4 m
+    group: 2
+    consumable: true
+    perishable: false
+    remark: "type Velpeau\xAE"
+    picture: bande-de-crepe-10-cm.jpg
+    tag: []
+
+
+
+- model: inventory.firstaidkitreqqty
+  pk: 1
+  fields:
+    allowance: 1
+    required_quantity: 30
+    content_type: ["inventory", "molecule"]
+    object_id: 1
+- model: inventory.firstaidkitreqqty
+  pk: 2
+  fields:
+    allowance: 1
+    required_quantity: 50
+    content_type: ["inventory", "molecule"]
+    object_id: 2
+- model: inventory.firstaidkitreqqty
+  pk: 3
+  fields:
+    allowance: 1
+    required_quantity: 120
+    content_type: ["inventory", "molecule"]
+    object_id: 3
+- model: inventory.firstaidkitreqqty
+  pk: 4
+  fields:
+    allowance: 2
+    required_quantity: 20
+    content_type: ["inventory", "molecule"]
+    object_id: 3
+
+- model: inventory.firstaidkitreqqty
+  pk: 5
+  fields:
+    allowance: 1
+    required_quantity: 1
+    content_type: ["inventory", "equipment"]
+    object_id: 1
+- model: inventory.firstaidkitreqqty
+  pk: 6
+  fields:
+    allowance: 1
+    required_quantity: 200
+    content_type: ["inventory", "equipment"]
+    object_id: 2
+- model: inventory.firstaidkitreqqty
+  pk: 7
+  fields:
+    allowance: 1
+    required_quantity: 5
+    content_type: ["inventory", "equipment"]
+    object_id: 3
+- model: inventory.firstaidkitreqqty
+  pk: 8
+  fields:
+    allowance: 2
+    required_quantity: 50
+    content_type: ["inventory", "equipment"]
+    object_id: 2
+
+
+
+- model: inventory.medicine
+  pk: 1
+  fields:
+    name: "Acide ac\xE9tylsalicylique"
+    exp_date: 2020-07-31
+    used: false
+    remark: ''
+    location: 100
+    parent: 1
+    nc_molecule: ''
+    nc_composition: ''
+- model: inventory.medicine
+  pk: 2
+  fields:
+    name: "Asp\xE9gic 1000"
+    exp_date: 2020-09-30
+    used: false
+    remark: ''
+    location: 100
+    parent: 1
+    nc_molecule: ''
+    nc_composition: 1000 mg
+- model: inventory.medicine
+  pk: 3
+  fields:
+    name: "Mucomyst 200 mg"
+    exp_date: 2020-10-31
+    used: false
+    remark: ''
+    location: 100
+    parent: 2
+    nc_molecule: ''
+    nc_composition: ''
+- model: inventory.medicine
+  pk: 4
+  fields:
+    name: "Mucomyst 200 mg"
+    exp_date: 2021-01-31
+    used: false
+    remark: ''
+    location: 0
+    parent: 2
+    nc_molecule: ''
+    nc_composition: ''
+- model: inventory.medicine
+  pk: 5
+  fields:
+    name: "Augmentin"
+    exp_date: 2022-01-31
+    used: false
+    remark: ''
+    location: 100
+    parent: 3
+    nc_molecule: ''
+    nc_composition: ''
+
+
+- model: inventory.article
+  pk: 1
+  fields:
+    name: Atelle KED
+    exp_date: null
+    used: false
+    remark: 'sac vert'
+    location: 100
+    parent: 1
+    nc_packaging: ''
+- model: inventory.article
+  pk: 2
+  fields:
+    name: "Compresse de gaze st\xE9rile"
+    exp_date: 2020-09-30
+    used: false
+    remark: ''
+    location: 100
+    parent: 2
+    nc_packaging: ''
+- model: inventory.article
+  pk: 3
+  fields:
+    name: "Compresse de gaze st\xE9rile"
+    exp_date: 2020-09-30
+    used: false
+    remark: ''
+    location: 100
+    parent: 2
+    nc_packaging: ''
+- model: inventory.article
+  pk: 4
+  fields:
+    name: "Bande de cr\xEApe (10 cm)"
+    exp_date: 2022-01-31
+    used: false
+    remark: ''
+    location: 100
+    parent: 3
+    nc_packaging: ''
+
+
+
+
+
+- model: inventory.qtytransaction
+  pk: 1
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 14:40:25+00:00
+    remark: null
+    value: 60
+    content_type: ['inventory', 'medicine']
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 2
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 14:40:26+00:00
+    remark: null
+    value: 40
+    content_type: ['inventory', 'medicine']
+    object_id: 2
+- model: inventory.qtytransaction
+  pk: 3
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 14:40:27+00:00
+    remark: null
+    value: 30
+    content_type: ['inventory', 'medicine']
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 4
+  fields:
+    transaction_type: 10
+    date: 2020-05-18 14:41:27+00:00
+    remark: null
+    value: 5
+    content_type: ['inventory', 'medicine']
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 5
+  fields:
+    transaction_type: 10
+    date: 2020-05-18 14:41:02+00:00
+    remark: null
+    value: 2
+    content_type: ['inventory', 'medicine']
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 6
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 14:42:27+00:00
+    remark: null
+    value: 30
+    content_type: ['inventory', 'medicine']
+    object_id: 4
+- model: inventory.qtytransaction
+  pk: 7
+  fields:
+    transaction_type: 8
+    date: 2020-05-18 14:42:28+00:00
+    remark: null
+    value: 40
+    content_type: ['inventory', 'medicine']
+    object_id: 4
+- model: inventory.qtytransaction
+  pk: 8
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 14:43:27+00:00
+    remark: null
+    value: 60
+    content_type: ['inventory', 'medicine']
+    object_id: 5
+
+- model: inventory.qtytransaction
+  pk: 9
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 15:43:27+00:00
+    remark: null
+    value: 1
+    content_type: ['inventory', 'article']
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 10
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 15:43:28+00:00
+    remark: null
+    value: 100
+    content_type: ['inventory', 'article']
+    object_id: 2
+- model: inventory.qtytransaction
+  pk: 11
+  fields:
+    transaction_type: 10
+    date: 2020-05-18 15:43:29+00:00
+    remark: null
+    value: 10
+    content_type: ['inventory', 'article']
+    object_id: 2
+- model: inventory.qtytransaction
+  pk: 12
+  fields:
+    transaction_type: 10
+    date: 2020-05-18 15:43:30+00:00
+    remark: null
+    value: 20
+    content_type: ['inventory', 'article']
+    object_id: 2
+- model: inventory.qtytransaction
+  pk: 13
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 15:43:31+00:00
+    remark: null
+    value: 150
+    content_type: ['inventory', 'article']
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 14
+  fields:
+    transaction_type: 8
+    date: 2020-05-18 15:44:32+00:00
+    remark: null
+    value: 200
+    content_type: ['inventory', 'article']
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 15
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 15:45:31+00:00
+    remark: null
+    value: 5
+    content_type: ['inventory', 'article']
+    object_id: 4
+
+
+
+- model: inventory.firstaidkititem
+  pk: 1
+  fields:
+    name: "Compresse de gaze st\xE9rile"
+    exp_date: 2020-09-30
+    used: false
+    remark: null
+    kit: 1
+    nc: null
+    content_type: ['inventory', 'equipment']
+    object_id: 2
+- model: inventory.firstaidkititem
+  pk: 2
+  fields:
+    name: "Compresse de gaze st\xE9rile"
+    exp_date: 2020-09-30
+    used: false
+    remark: null
+    kit: 2
+    nc: null
+    content_type: ['inventory', 'equipment']
+    object_id: 2
+- model: inventory.firstaidkititem
+  pk: 3
+  fields:
+    name: "Bande de cr\xEApe (10 cm)"
+    exp_date: 2020-09-30
+    used: false
+    remark: null
+    kit: 1
+    nc: null
+    content_type: ['inventory', 'equipment']
+    object_id: 3
+- model: inventory.firstaidkititem
+  pk: 4
+  fields:
+    name: "Atelle KED"
+    exp_date: null
+    used: false
+    remark: null
+    kit: 2
+    nc: null
+    content_type: ['inventory', 'equipment']
+    object_id: 1
+
+- model: inventory.firstaidkititem
+  pk: 5
+  fields:
+    name: "Acide ac\xE9tylsalicylique"
+    exp_date: 2020-07-31
+    used: false
+    remark: null
+    kit: 2
+    nc: null
+    content_type: ['inventory', 'molecule']
+    object_id: 1
+- model: inventory.firstaidkititem
+  pk: 6
+  fields:
+    name: "Mucomyst 200 mg"
+    exp_date: 2020-10-31
+    used: false
+    remark: null
+    kit: 1
+    nc: null
+    content_type: ['inventory', 'molecule']
+    object_id: 2
+- model: inventory.firstaidkititem
+  pk: 7
+  fields:
+    name: "Mucomyst 200 mg"
+    exp_date: 2020-10-31
+    used: false
+    remark: null
+    kit: 2
+    nc: null
+    content_type: ['inventory', 'molecule']
+    object_id: 2
+- model: inventory.firstaidkititem
+  pk: 8
+  fields:
+    name: "Augmentin"
+    exp_date: 2022-01-31
+    used: false
+    remark: null
+    kit: 1
+    nc: null
+    content_type: ['inventory', 'molecule']
+    object_id: 3
+
+
+- model: inventory.qtytransaction
+  pk: 16
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 15:45:31+00:00
+    remark: null
+    value: 10
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 17
+  fields:
+    transaction_type: 2
+    date: 2020-05-20 15:45:32+00:00
+    remark: null
+    value: 1
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 18
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 15:45:33+00:00
+    remark: null
+    value: 15
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 2
+- model: inventory.qtytransaction
+  pk: 19
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 15:45:34+00:00
+    remark: null
+    value: 1
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 20
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 15:45:35+00:00
+    remark: null
+    value: 1
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 4
+- model: inventory.qtytransaction
+  pk: 21
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 15:46:35+00:00
+    remark: null
+    value: 10
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 5
+- model: inventory.qtytransaction
+  pk: 22
+  fields:
+    transaction_type: 2
+    date: 2020-05-20 15:47:35+00:00
+    remark: null
+    value: 2
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 5
+- model: inventory.qtytransaction
+  pk: 23
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 15:47:36+00:00
+    remark: null
+    value: 20
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 6
+- model: inventory.qtytransaction
+  pk: 23
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 15:47:39+00:00
+    remark: null
+    value: 20
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 7
+- model: inventory.qtytransaction
+  pk: 23
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 15:48:36+00:00
+    remark: null
+    value: 28
+    content_type: ['inventory', 'firstaidkititem']
+    object_id: 8
+
+
+

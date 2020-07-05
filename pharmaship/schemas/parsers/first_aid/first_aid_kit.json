@@ -1,0 +1,16 @@
+{
+  "id": {
+    "type": "integer",
+    "min": 0
+  },
+  "name": {
+    "type": "string"
+  },
+  "location_id": {
+    "type": "integer",
+    "min": 0
+  },
+  "elements": {
+    "type": "list"
+  }
+}
