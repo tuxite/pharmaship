@@ -240,11 +240,15 @@ def required_quantity(data, tar, allowance):
 
 
 class DataImport:
-    """Class to import allowance inside the inventory module."""
+    """Class to import allowance inside the inventory module.
 
-    def __init__(self, tar, conf, key):
+    :param tarfile.TarFile tar: Tarfile data to import.
+    :param dict conf: Validated package configuration (not used).
+    :param dict key: GPG key data used for signing the package archive.
+    """
+
+    def __init__(self, tar, conf, key):  # noqa: D107
         self.tar = tar
-        self.conf = conf
         self.key = key
         self.data = []
         self.module_name = __name__.split('.')[-2]
