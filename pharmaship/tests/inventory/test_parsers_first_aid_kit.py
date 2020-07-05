@@ -284,7 +284,6 @@ class ParserMethodTestCase(TestCase):
     def test_parser(self):
         kits = models.FirstAidKit.objects.all()
         output = first_aid.parser(self.params, kits)
-        log.debug(output)
 
         self.assertIsInstance(output, list)
 
