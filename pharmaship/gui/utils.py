@@ -45,6 +45,18 @@ def grid_replace(old_widget, new_widget):
     return new_widget
 
 
+def grid_row_class(grid, row_num, width, add=True):
+    """Change the class of a row in the grod."""
+    if add:
+        for i in range(width):
+            widget = grid.get_child_at(i, row_num)
+            widget.get_style_context().add_class("active-row")
+    else:
+        for i in range(width):
+            widget = grid.get_child_at(i, row_num)
+            widget.get_style_context().remove_class("active-row")
+
+
 def error_field_changed(source):
     if isinstance(source, Gtk.Entry):
         source.set_icon_from_icon_name(1, None)

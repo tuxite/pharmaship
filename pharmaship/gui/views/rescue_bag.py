@@ -416,12 +416,18 @@ class View:
     def toggle_item(self, source, grid, element, row_num, bag_id=0):
         # If already toggled, destroy the toggled part
         if self.toggled[bag_id] and self.toggled[bag_id][0] > 0:
+            # Remove the active-row CSS class of the parent item
+            utils.grid_row_class(grid, self.toggled[bag_id][0] - 1, 5, False)
+
             for i in range(self.toggled[bag_id][1] - self.toggled[bag_id][0] + 1):
                 grid.remove_row(self.toggled[bag_id][0])
             # No need to recreate the widget, we just want to hide
             if row_num + 1 == self.toggled[bag_id][0]:
                 self.toggled[bag_id] = False
                 return True
+
+        # Add the active-row CSS class
+        utils.grid_row_class(grid, row_num, 5)
 
         # Need to create the content
         new_row = row_num + 1

@@ -244,3 +244,8 @@
   color: #333;
   background-color: #eee;
 }
+
+.active-row {
+  color: #000;
+  background-color: #fce94f;
+}
