@@ -36,7 +36,9 @@ class View:
         self.stack = self.builder.get_object("stack")
 
         # For recording the open equipments in the grid
-        self.toggled = False
+        self.toggled = {
+            0: False
+        }
 
         self.children = {}
 
@@ -58,11 +60,11 @@ class View:
 
         # Toggle item
         toggle_row_num = None
-        if self.toggled:
-            toggle_row_num = self.toggled[0] - 1
+        if self.toggled[visible_kit_id]:
+            toggle_row_num = self.toggled[visible_kit_id][0] - 1
 
         # Reset toggled value
-        self.toggled = False
+        self.toggled[visible_kit_id] = False
 
         self.build_grid(child_builder, data[0], toggle_row_num)
 
@@ -145,6 +147,7 @@ class View:
             btn_save = child_builder.get_object("btn-save")
             btn_save.hide()
 
+            self.toggled[kit["id"]] = False
             self.build_grid(child_builder, kit)
             self.stack.add_titled(child, "first-aid-kit-{0}".format(kit["id"]), kit["name"])
             self.children[kit["id"]] = child_builder
@@ -262,15 +265,15 @@ class View:
 
     def toggle_item(self, source, grid, element, row_num, kit_id):
         # If already toggled, destroy the toggled part
-        if self.toggled and self.toggled[0] > 0:
+        if self.toggled[kit_id] and self.toggled[kit_id][0] > 0:
             # Remove the active-row CSS class of the parent item
-            utils.grid_row_class(grid, self.toggled[0] - 1, 5, False)
+            utils.grid_row_class(grid, self.toggled[kit_id][0] - 1, 5, False)
 
-            for i in range(self.toggled[1] - self.toggled[0] + 1):
-                grid.remove_row(self.toggled[0])
+            for i in range(self.toggled[kit_id][1] - self.toggled[kit_id][0] + 1):
+                grid.remove_row(self.toggled[kit_id][0])
             # No need to recreate the widget, we just want to hide
-            if row_num + 1 == self.toggled[0]:
-                self.toggled = False
+            if row_num + 1 == self.toggled[kit_id][0]:
+                self.toggled[kit_id] = False
                 return True
 
         # Add the active-row CSS class
@@ -394,7 +397,7 @@ class View:
         grid.attach(label, 1, i, 4, 1)
 
         grid.show_all()
-        self.toggled = (new_row, i)
+        self.toggled[kit_id] = (new_row, i)
 
         query_count_all()
 
