@@ -12,8 +12,7 @@ from pharmaship.inventory.models import RescueBag, Location
 from pharmaship.inventory.forms import RescueBagForm
 from pharmaship.inventory.parsers.rescue_bag import parser
 
-from pharmaship.gui import utils
-from pharmaship.gui.utils import ButtonWithImage
+from pharmaship.gui import utils, widgets
 
 
 NC_TEXT_TEMPLATE = "<span foreground='darkred' weight='bold' style='normal'>{0} {1}</span>"
@@ -235,7 +234,7 @@ class View:
 
                 # Picture
                 picture = element["picture"]
-                btn_picture = ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+                btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
                 linked_btn.pack_end(btn_picture, False, True, 0)
             else:
                 label = Gtk.Label("", xalign=0.5)
@@ -389,7 +388,7 @@ class View:
 
                 # Picture
                 picture = element["picture"]
-                btn_picture = ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+                btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
                 linked_btn.pack_end(btn_picture, False, True, 0)
             else:
                 label = Gtk.Label("", xalign=0.5)

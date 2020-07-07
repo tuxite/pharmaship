@@ -11,8 +11,7 @@ from pharmaship.inventory import models
 from pharmaship.inventory import forms
 from pharmaship.inventory.parsers.telemedical import parser
 
-from pharmaship.gui import utils
-from pharmaship.gui.utils import ButtonWithImage, EntryMasked
+from pharmaship.gui import utils, widgets
 
 
 DATE_MASK = {
@@ -105,7 +104,7 @@ class View:
             i += 1
 
             # If toggle_row_num is defined, record first the equipment then, when
-            # all construction is done, call toggle_item function.
+            # all construction is done, call toggle_article function.
             if toggle_row_num and toggle_row_num == i:
                 toggle_equipment = equipment
             if self.chosen and self.chosen == equipment["id"]:
@@ -113,20 +112,14 @@ class View:
                 toggle_row_num = i
                 self.row_widget_num = i
 
-            box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-            button = Gtk.Button()
             label = Gtk.Label(equipment["name"], xalign=0)
             label.set_line_wrap(True)
             label.set_lines(1)
             label.set_line_wrap_mode(2)
-            button.add(label)
-            button.set_relief(Gtk.ReliefStyle.NONE)
-            button.get_style_context().add_class("item-cell-btn")
-            # button.get_style_context().add_class("item-cell")
-            button.connect("clicked", self.toggle_item, grid, equipment, i)
-            box.pack_start(button, True, True, 0)
-            box.get_style_context().add_class("item-cell-name")
-            grid.attach(box, 0, i, 1, 1)
+            label.get_style_context().add_class("item-cell")
+            evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+            evbox.add(label)
+            grid.attach(evbox, 0, i, 1, 1)
 
             label = Gtk.Label(equipment["remark"], xalign=0)
             label.set_line_wrap(True)
@@ -134,14 +127,18 @@ class View:
             label.set_line_wrap_mode(2)
             label.get_style_context().add_class("item-cell")
             label.get_style_context().add_class("article-remark")
-            grid.attach(label, 1, i, 1, 1)
+            evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+            evbox.add(label)
+            grid.attach(evbox, 1, i, 1, 1)
 
             label = Gtk.Label(equipment["packaging"], xalign=0)
             label.get_style_context().add_class("item-cell")
             label.set_line_wrap(True)
             label.set_lines(1)
             label.set_line_wrap_mode(2)
-            grid.attach(label, 2, i, 1, 1)
+            evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+            evbox.add(label)
+            grid.attach(evbox, 2, i, 1, 1)
 
             # Get list of locations
             locations_len = len(equipment["locations"])
@@ -158,7 +155,9 @@ class View:
             label.set_lines(1)
             label.set_line_wrap_mode(2)
             label.get_style_context().add_class("item-cell")
-            grid.attach(label, 3, i, 1, 1)
+            evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+            evbox.add(label)
+            grid.attach(evbox, 3, i, 1, 1)
 
             # Get first expiry date
             date_display = ""
@@ -172,9 +171,11 @@ class View:
                 label.get_style_context().add_class("article-expired")
             elif equipment["has_date_warning"]:
                 label.get_style_context().add_class("article-warning")
-            grid.attach(label, 4, i, 1, 1)
 
-            # label = Gtk.Label("{0}/{1}".format(equipment["quantity"], equipment["required_quantity"]), xalign=0.5)
+            evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+            evbox.add(label)
+            grid.attach(evbox, 4, i, 1, 1)
+
             label = Gtk.Label(xalign=0.5)
             label.set_markup("{0}<small>/{1}</small>".format(equipment["quantity"], equipment["required_quantity"]))
             label.get_style_context().add_class("item-cell")
@@ -185,7 +186,10 @@ class View:
             # If quantity is less than required, affect corresponding style
             if equipment["quantity"] < equipment["required_quantity"]:
                 label.get_style_context().add_class("article-expired")
-            grid.attach(label, 5, i, 1, 1)
+
+            evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+            evbox.add(label)
+            grid.attach(evbox, 5, i, 1, 1)
 
             # Set tooltip to give information on allowances requirements
             tooltip_text = []
@@ -198,22 +202,24 @@ class View:
                 linked_btn = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
                 linked_btn.get_style_context().add_class("linked")
                 linked_btn.get_style_context().add_class("equipment-item-buttons")
-                # linked_btn.set_halign(Gtk.Align.END)
-                grid.attach(linked_btn, 6, i, 1, 1)
+                evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+                evbox.add(linked_btn)
+                grid.attach(evbox, 6, i, 1, 1)
 
                 # Picture
-
                 picture = equipment["picture"]
-                btn_picture = ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+                btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
                 linked_btn.pack_end(btn_picture, False, True, 0)
             else:
                 label = Gtk.Label("", xalign=0.5)
                 label.get_style_context().add_class("item-cell")
-                grid.attach(label, 6, i, 1, 1)
+                evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+                evbox.add(label)
+                grid.attach(evbox, 6, i, 1, 1)
 
         # Toggle if active
         if toggle_row_num and toggle_equipment:
-            self.toggle_item(source=None, grid=grid, equipment=toggle_equipment, row_num=toggle_row_num)
+            self.toggle_article(source=None, grid=grid, equipment=toggle_equipment, row_num=toggle_row_num)
 
         query_count_all()
 
@@ -299,7 +305,7 @@ class View:
 
         # exp_date = builder.get_object("exp_date")
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, EntryMasked(mask=DATE_MASK))
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
         # exp_date.connect("activate", self.response_modify, dialog, article, builder)
         builder.expose_object("exp_date", exp_date)
         date_display = article["exp_date"].strftime("%Y-%m-%d")
@@ -382,7 +388,7 @@ class View:
 
         # Expiry date input mask workaround
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, EntryMasked(mask=DATE_MASK))
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
         # exp_date.connect("activate", self.response_add, dialog, equipment, builder)
         builder.expose_object("exp_date", exp_date)
 
@@ -564,7 +570,7 @@ class View:
         # Refresh the list!
         self.refresh_grid()
 
-    def toggle_item(self, source, grid, equipment, row_num):
+    def toggle_article(self, source, grid, equipment, row_num):
         # If already toggled, destroy the toggled part
         if self.toggled and self.toggled[0] > 0:
             for i in range(self.toggled[1] - self.toggled[0] + 1):
@@ -676,13 +682,13 @@ class View:
 
             # Use
             if equipment["consumable"]:
-                btn_use = ButtonWithImage("edit-redo-symbolic", tooltip=_("Use"), connect=self.dialog_use, data=article)
+                btn_use = widgets.ButtonWithImage("edit-redo-symbolic", tooltip=_("Use"), connect=self.dialog_use, data=article)
                 linked_btn.pack_end(btn_use, False, True, 0)
             # Modify
-            btn_modify = ButtonWithImage("document-edit-symbolic", tooltip=_("Modify"), connect=self.dialog_modify, data=article)
+            btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip=_("Modify"), connect=self.dialog_modify, data=article)
             linked_btn.pack_end(btn_modify, False, True, 0)
             # Delete
-            btn_delete = ButtonWithImage("edit-delete-symbolic", tooltip=_("Delete"), connect=self.dialog_delete, data=article)
+            btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip=_("Delete"), connect=self.dialog_delete, data=article)
             btn_delete.get_style_context().add_class("article-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 
