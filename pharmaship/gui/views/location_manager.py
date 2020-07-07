@@ -10,8 +10,7 @@ from pharmaship.core.utils import log, query_count_all
 from pharmaship.inventory.models import Location
 from pharmaship.inventory.forms import LocationForm
 
-from pharmaship.gui import utils
-from pharmaship.gui.utils import ButtonWithImage
+from pharmaship.gui import utils, widgets
 
 
 class View:
@@ -48,11 +47,11 @@ class View:
         linked_btn.get_style_context().add_class("medicine-item-buttons")
 
         # Modify
-        btn_modify = ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=item)
+        btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=item)
         linked_btn.pack_end(btn_modify, False, True, 0)
         # Delete
         if item["id"] > 100:
-            btn_delete = ButtonWithImage("edit-delete-symbolic", tooltip="Delete", connect=self.dialog_delete, data=item)
+            btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip="Delete", connect=self.dialog_delete, data=item)
             btn_delete.get_style_context().add_class("medicine-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 

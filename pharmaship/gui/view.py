@@ -22,7 +22,7 @@ from django.conf import settings
 from pharmaship.core.utils import log, end_of_month, add_months, get_content_types, query_count_all
 from pharmaship.core.config import read_config, write_config
 
-from pharmaship.gui import views, export, utils
+from pharmaship.gui import views, export, utils, widgets
 
 from pharmaship.inventory import models
 from pharmaship.inventory.utils import get_location_list
@@ -176,7 +176,7 @@ class AppWindow(Gtk.ApplicationWindow):
         builder = Gtk.Builder.new_from_file(utils.get_template("settings_menu.xml"))
         menu = builder.get_object("app-menu")
 
-        button = utils.ButtonWithImage("open-menu-symbolic", btn_class=Gtk.MenuButton)
+        button = widgets.ButtonWithImage("open-menu-symbolic", btn_class=Gtk.MenuButton)
         popover = Gtk.Popover.new_from_model(button, menu)
         button.set_popover(popover)
         hb.pack_end(button)
@@ -200,7 +200,7 @@ class AppWindow(Gtk.ApplicationWindow):
         hb.pack_start(self.mode_button)
 
         # Save button
-        button = utils.ButtonWithImage("document-save-as-symbolic", tooltip=_("Export as PDF"), action="app.save")
+        button = widgets.ButtonWithImage("document-save-as-symbolic", tooltip=_("Export as PDF"), action="app.save")
         hb.pack_start(button)
         self.builder.expose_object("hb-btn-save", button)
 
@@ -282,7 +282,6 @@ class AppWindow(Gtk.ApplicationWindow):
             return False
 
         self.actions.activate_action(item_type, GLib.Variant("i", item["id"]))
-
 
     # Expiry date check management
     def create_hb_date_button(self):
