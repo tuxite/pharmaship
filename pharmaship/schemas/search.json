@@ -1,0 +1,65 @@
+{
+  "data": {
+    "type": "list",
+    "schema": {
+      "type": "dict",
+      "schema": {
+        "id": {
+          "type": "integer",
+          "min": 0
+        },
+        "parent_name": {
+          "type": "string"
+        },
+        "details": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "other_names": {
+          "type": "list",
+          "nullable": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "locations": {
+          "type": "list",
+          "nullable": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "list",
+          "schema": {
+            "type": "dict",
+            "schema": {
+              "label": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string",
+                "allowed": [
+                  "medicines",
+                  "equipment",
+                  "laboratory",
+                  "telemedical"
+                ]
+              }
+            }
+          }
+        },
+        "quantity": {
+          "type": "integer",
+          "min": 0
+        },
+        "required": {
+          "type": "integer",
+          "min": 0
+        }
+      }
+    }
+  }
+}

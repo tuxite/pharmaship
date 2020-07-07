@@ -13,6 +13,7 @@ Reference
    inventory/models
    inventory/utils
    inventory/import_data
+   inventory/search
 
    inventory/parsers/equipment
    inventory/parsers/medicines
