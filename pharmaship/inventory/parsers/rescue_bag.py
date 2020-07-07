@@ -200,6 +200,7 @@ def create_molecule(item, required=None):
     :rtype: dict
     """
     result = {
+        "id": item.id,
         "name": str(item),
         "required_quantity": 0,
         "quantity": 0,
@@ -235,6 +236,7 @@ def create_equipment(item, required):
     :rtype: dict
     """
     result = {
+        "id": item.id,
         "name": str(item),
         "required_quantity": 0,
         "quantity": 0,

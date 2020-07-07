@@ -1,4 +1,8 @@
 {
+  "id": {
+    "type": "integer",
+    "min": 0
+  },
   "name": {
     "type": "string"
   },
