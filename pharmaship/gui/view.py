@@ -488,7 +488,6 @@ class Application(Gtk.Application):
             self.window = AppWindow(application=self, params=self.params, actions=self)
             self.window.set_size_request(800, 600)
 
-        self.window.mode_button.set_label(_("Dashboard"))
         self.on_dashboard(None, None)
         self.window.show_all()
 
