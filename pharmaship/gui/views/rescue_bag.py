@@ -335,7 +335,7 @@ class View:
             label.set_lines(1)
             label.set_line_wrap_mode(2)
             label.get_style_context().add_class("item-cell")
-            evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
             evbox.add(label)
             grid.attach(evbox, 0, i, 1, 1)
 
@@ -345,7 +345,7 @@ class View:
             label.set_line_wrap_mode(2)
             label.get_style_context().add_class("item-cell")
             label.get_style_context().add_class("article-remark")
-            evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
             evbox.add(label)
             grid.attach(evbox, 1, i, 1, 1)
 
@@ -360,7 +360,7 @@ class View:
                 label.get_style_context().add_class("article-expired")
             elif element["has_date_warning"]:
                 label.get_style_context().add_class("article-warning")
-            evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
             evbox.add(label)
             grid.attach(evbox, 2, i, 1, 1)
 
@@ -370,7 +370,7 @@ class View:
             # Change style if equipment has articles with non-conformity
             if element["has_nc"]:
                 label.get_style_context().add_class("item-nc-quantity")
-            evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
             evbox.add(label)
             grid.attach(evbox, 3, i, 1, 1)
 
@@ -385,7 +385,7 @@ class View:
                 linked_btn = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
                 linked_btn.get_style_context().add_class("linked")
                 linked_btn.get_style_context().add_class("equipment-item-buttons")
-                evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+                evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
                 evbox.add(linked_btn)
                 grid.attach(evbox, 4, i, 1, 1)
 
@@ -396,7 +396,7 @@ class View:
             else:
                 label = Gtk.Label("", xalign=0.5)
                 label.get_style_context().add_class("item-cell")
-                evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+                evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
                 evbox.add(label)
                 grid.attach(evbox, 4, i, 1, 1)
 
