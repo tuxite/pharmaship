@@ -11,8 +11,6 @@ from django.conf import settings
 
 from pharmaship.core.utils import log
 
-from pharmaship.settings.forms import VesselSettingsForm
-
 from pharmaship.gui import utils
 
 
