@@ -1,281 +1,224 @@
-# #-#-#-#-#  django.po (pharmaship-mm-01)  #-#-#-#-#
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# #-#-#-#-#  com.devmaretique.pharmaship.po.bak (pharmaship-mm-01)  #-#-#-#-#
-# #-#-#-#-#  django.po (pharmaship-mm-01)  #-#-#-#-#
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-# #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Matthieu Morin <morinmatthieu@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
-"#-#-#-#-#  django.po (pharmaship-mm-01)  #-#-#-#-#\n"
-"Project-Id-Version: pharmaship-mm-01\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-25 08:43+0000\n"
-"PO-Revision-Date: 2020-05-25 10:46+0200\n"
+"MIME-Version: 1.0\n"
+"Project-Id-Version: Pharmaship-MM-01\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: French - France <pharmaship@devmaretique.com>\n"
 "Language: fr_FR\n"
-"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"PO-Revision-Date: 2020-07-08 11:40+0800\n"
 "X-Generator: Gtranslator 3.36.0\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.po.bak (pharmaship-mm-01)  #-#-#-#-#\n"
-"#-#-#-#-#  django.po (pharmaship-mm-01)  #-#-#-#-#\n"
-"Project-Id-Version: pharmaship-mm-01\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-22 19:49+0000\n"
-"PO-Revision-Date: 2020-05-22 22:00+0200\n"
-"Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
-"Language-Team: French - France <pharmaship@devmaretique.com>\n"
-"Language: fr_FR\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"X-Generator: Gtranslator 3.36.0\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-25 10:43+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 
-#: core/import_data.py:217
+#: pharmaship/core/import_data.py:275
 msgid "A module to update is not installed. Check logs for details."
 msgstr ""
 "Un module à mettre à jour n'est pas installé. Consultez les journaux pour "
 "les détails."
 
-#: gui/templates/settings_menu.xml:37
+#: pharmaship/gui/templates/settings_menu.xml:60
 msgid "About"
 msgstr "À propos"
 
-#: gui/templates/about_dialog.glade:7
+#: pharmaship/gui/templates/about_dialog.glade:7
 msgid "About Pharmaship"
 msgstr "À propos de Pharmaship"
 
-#: gui/views/equipment.py:596 gui/views/first_aid_kits.py:292
-#: gui/views/medicines.py:591 gui/views/telemedical.py:571
+#: pharmaship/gui/views/equipment.py:631
+#: pharmaship/gui/views/first_aid_kits.py:304
+#: pharmaship/gui/views/medicines.py:628
+#: pharmaship/gui/views/telemedical.py:615
+#: pharmaship/gui/templates/dashboard.glade:1287
 msgid "Actions"
 msgstr "Actions"
 
 #: pharmaship/gui/views/allowance_manager.py:112
-#: gui/views/allowance_manager.py:112 gui/views/allowance_manager.py:113
 msgid "Active"
 msgstr "Active"
 
-#: gui/templates/location_add.glade:7
+#: pharmaship/gui/templates/location_add.glade:7
 msgid "Add a location"
 msgstr "Ajouter un emplacement"
 
-#: pharmaship/gui/views/medicines.py:678 gui/views/medicines.py:678
-#: gui/views/medicines.py:680
+#: pharmaship/gui/views/medicines.py:717
+#: pharmaship/gui/templates/medicine_add.glade:12
 msgid "Add a medicine"
 msgstr "Ajouter un médicament"
 
-#: gui/templates/medicine_add.glade:195
+#: pharmaship/gui/templates/medicine_add.glade:195
 msgid "Add a medicine for molecule:"
 msgstr "Ajouter un médicament pour le principe actif :"
 
-#: gui/views/equipment.py:687 gui/views/first_aid_kits.py:368
-#: gui/views/telemedical.py:662
+#: pharmaship/gui/views/equipment.py:722
+#: pharmaship/gui/views/first_aid_kits.py:385
+#: pharmaship/gui/views/telemedical.py:706
 msgid "Add an article"
 msgstr "Ajouter l'article"
 
-#: gui/templates/article_add.glade:195
+#: pharmaship/gui/templates/article_add.glade:194
 msgid "Add an article for equipment:"
 msgstr "Ajouter un article pour le matériel :"
 
-#: pharmaship/gui/views/laboratory.py:344
-#: pharmaship/gui/views/laboratory.py:364 gui/views/laboratory.py:364
-#: gui/views/laboratory.py:362
+#: pharmaship/gui/views/laboratory.py:370
+#: pharmaship/gui/templates/article_add.glade:47
 msgid "Add the article"
 msgstr "Ajouter l'article"
 
-#: gui/templates/location_add.glade:43
+#: pharmaship/gui/templates/location_add.glade:43
 msgid "Add the location"
 msgstr "Ajouter l'emplacement"
 
-#: gui/templates/medicine_add.glade:48
+#: pharmaship/gui/templates/medicine_add.glade:48
 msgid "Add the medicine"
 msgstr "Ajouter le médicament"
 
-#: gui/templates/subitem_add.glade:53
+#: pharmaship/gui/templates/subitem_add.glade:53
 msgid "Add this item"
 msgstr "Ajouter cet item"
 
-#: gui/templates/vessel_settings.glade:398
+#: pharmaship/gui/templates/vessel_settings.glade:398
 msgid "Address:"
 msgstr "Adresse :"
 
-#: inventory/rescue_bag/utils.py:16
+#: pharmaship/gui/views/rescue_bag.py:134
+#: pharmaship/inventory/parsers/rescue_bag.py:54
 msgid "All Rescue Bags"
 msgstr "Tous les sacs"
 
-#: pharmaship/gui/views/rescue_bag.py:135
-#: pharmaship/gui/views/rescue_bag.py:132 gui/views/rescue_bag.py:132
-msgid "All rescue bags"
-msgstr "Tous les sacs"
-
-#: pharmaship/gui/view.py:501 pharmaship/gui/view.py:511 gui/view.py:475
-#: gui/main_view.py:457 gui/main_view.py:453
+#: pharmaship/gui/view.py:576 pharmaship/gui/templates/settings_menu.xml:10
 msgid "Allowance Manager"
 msgstr "Gestionnaire de dotation"
 
-#: gui/views/vessel_settings.py:26
+#: pharmaship/gui/templates/allowance_manager.glade:77
 msgid "Allowances"
 msgstr "Dotations médicales"
 
-#: inventory/constants.py:28
+#: pharmaship/inventory/constants.py:28
 msgid "Ampoule"
 msgstr "Ampoule"
 
-#: purchase/constants.py:8
+#: pharmaship/gui/templates/db_export_error.glade:13
+msgid "An error occurred during the database export!"
+msgstr "Une erreur est survenue pendant l'exportation de la base de données !"
+
+#: pharmaship/purchase/constants.py:9
 msgid "Approved"
 msgstr "Approuvé"
 
-#: gui/templates/about_dialog.glade:12
+#: pharmaship/gui/templates/about_dialog.glade:12
 msgid "Association Dévelopement de Solutions Marétiques"
 msgstr "Association Dévelopement de Solutions Marétiques"
 
 #: pharmaship/gui/views/allowance_manager.py:109
-#: gui/views/allowance_manager.py:109 gui/views/allowance_manager.py:110
 msgid "Author"
 msgstr "Auteur"
 
 #: pharmaship/gui/reports/medicines.html:7
-#: pharmaship/gui/reports/medicines.html:51 gui/reports/medicines.html:51
-#: gui/templates/reports/medicines.html:51
 msgid "Brand name or Generic"
 msgstr "Nom commercial ou générique"
 
-#: inventory/constants.py:76
+#: pharmaship/inventory/constants.py:76
 msgid "Buccal"
 msgstr "Buccale"
 
-#: gui/templates/vessel_settings.glade:118
+#: pharmaship/gui/templates/vessel_settings.glade:118
 msgid "Call Sign:"
 msgstr "Indicatif d'appel :"
 
-#: purchase/constants.py:13
+#: pharmaship/purchase/constants.py:14
 msgid "Cancelled"
 msgstr "Annulé"
 
-#: inventory/constants.py:29
+#: pharmaship/inventory/constants.py:29
 msgid "Capsule"
 msgstr "Gélule"
 
-#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (pharmaship-mm-01)  #-#-#-#-#
-#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
-#. Header row
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Header row
-#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
-#. Header row
-#: gui/views/equipment.py:575 gui/views/first_aid_kits.py:275
-#: gui/views/medicines.py:570 gui/views/rescue_bag.py:424
-#: gui/views/telemedical.py:550
+#: pharmaship/gui/views/equipment.py:610
+#: pharmaship/gui/views/first_aid_kits.py:287
+#: pharmaship/gui/views/medicines.py:607 pharmaship/gui/views/rescue_bag.py:437
+#: pharmaship/gui/views/telemedical.py:594
 msgid "Commercial Name"
 msgstr "Nom commercial"
 
-#: inventory/models.py:288
+#: pharmaship/inventory/models.py:288
 msgid "Composition:"
 msgstr "Compmosition :"
 
-#: core/import_data.py:205
+#: pharmaship/core/import_data.py:262
 msgid "Configuration file incorrect. "
 msgstr "Fichier de configuration incorrect."
 
-#: core/import_data.py:197
+#: pharmaship/core/import_data.py:253
 msgid "Configuration not found."
 msgstr "Configuration introuvable."
 
-#: pharmaship/gui/templates/dashboard_detail.glade:58
+#: pharmaship/gui/templates/dashboard_detail.glade:60
 msgid "Copy as text"
 msgstr "Copier comme texte"
 
-#: pharmaship/gui/views/dashboard.py:48 pharmaship/gui/views/dashboard.py:53
-#: pharmaship/gui/views/dashboard.py:58
+#: pharmaship/gui/views/dashboard.py:47 pharmaship/gui/views/dashboard.py:52
+#: pharmaship/gui/views/dashboard.py:57
 msgid "Current/Required quantity"
 msgstr "Quantité actuelle/requise"
 
-#: pharmaship/gui/view.py:423 pharmaship/gui/view.py:474
-#: pharmaship/gui/view.py:419 pharmaship/gui/view.py:469
-#: pharmaship/gui/view.py:429 pharmaship/gui/view.py:479 gui/view.py:393
-#: gui/view.py:443 gui/main_view.py:375 gui/main_view.py:425
-#: gui/main_view.py:371 gui/main_view.py:421
+#: pharmaship/gui/view.py:549 pharmaship/gui/templates/mode_menu.xml:6
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: purchase/models.py:38
+#: pharmaship/purchase/models.py:42
 msgid "Date of Creation"
 msgstr "Date de création"
 
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Delete
 #: pharmaship/gui/views/allowance_manager.py:320
-#: pharmaship/gui/views/equipment.py:674 pharmaship/gui/views/medicines.py:669
-#: pharmaship/gui/views/telemedical.py:660
-#: pharmaship/gui/views/equipment.py:673 gui/views/allowance_manager.py:324
-#: gui/views/equipment.py:673 gui/views/medicines.py:669
-#: gui/views/telemedical.py:660 gui/views/equipment.py:678
-#: gui/views/medicines.py:671 gui/views/telemedical.py:653
-#: gui/views/allowance_manager.py:325
+#: pharmaship/gui/views/equipment.py:713 pharmaship/gui/views/medicines.py:708
+#: pharmaship/gui/views/telemedical.py:697
 msgid "Delete"
 msgstr "Supprimer"
 
-#: gui/templates/location_delete.glade:7
+#: pharmaship/gui/templates/location_delete.glade:7
 msgid "Delete a location"
 msgstr "Supprimer un emplacement"
 
-#: gui/templates/article_delete.glade:7 gui/templates/medicine_delete.glade:7
-#: gui/templates/subitem_delete.glade:7
+#: pharmaship/gui/templates/article_delete.glade:7
+#: pharmaship/gui/templates/medicine_delete.glade:7
+#: pharmaship/gui/templates/subitem_delete.glade:7
 msgid "Delete a medicine"
 msgstr "Supprimer un médicament"
 
-#: gui/templates/rescue_bag_dialog.glade:7
+#: pharmaship/gui/templates/rescue_bag_dialog.glade:7
 msgid "Delete rescue bags"
 msgstr "Supprimer des sacs d'intervention"
 
-#: gui/views/allowance_manager.py:265
+#: pharmaship/gui/views/allowance_manager.py:260
 msgid "Delete these rescue bags"
 msgstr "Supprimer ces sacs d'intervention"
 
-#: gui/templates/article_delete.glade:43
+#: pharmaship/gui/templates/article_delete.glade:43
 msgid "Delete this article"
 msgstr "Supprimer cet article"
 
-#: gui/templates/subitem_delete.glade:43
+#: pharmaship/gui/templates/subitem_delete.glade:43
 msgid "Delete this item"
 msgstr "Supprimer cet item"
 
-#: gui/templates/medicine_delete.glade:43
+#: pharmaship/gui/templates/medicine_delete.glade:43
 msgid "Delete this medicine"
 msgstr "Supprimer ce médicament"
 
 #: pharmaship/gui/views/allowance_manager.py:257
-#: gui/views/allowance_manager.py:261 gui/views/allowance_manager.py:262
+#: pharmaship/gui/templates/rescue_bag_dialog.glade:42
 msgid "Delete this rescue bag"
 msgstr "Supprimer ce sac d'intervention"
 
-#: inventory/constants.py:79
+#: pharmaship/inventory/constants.py:79
 msgid "Dental"
 msgstr "Dentaire"
 
@@ -283,89 +226,99 @@ msgstr "Dentaire"
 msgid "Details"
 msgstr "Détails"
 
-#: gui/templates/settings_menu.xml:37
+#: pharmaship/gui/templates/settings_menu.xml:37
 msgid "Developer"
 msgstr "Développement"
 
-#: gui/templates/medicine_add.glade:263
+#: pharmaship/gui/templates/medicine_add.glade:263
 msgid "Different composition:"
 msgstr "Composition différente :"
 
-#: gui/templates/medicine_add.glade:252
+#: pharmaship/gui/templates/medicine_add.glade:252
 msgid "Different molecule:"
 msgstr "Principe actif différent :"
 
-#: gui/templates/article_add.glade:252
+#: pharmaship/gui/templates/article_add.glade:251
 msgid "Different packaging:"
 msgstr "Conditionnement différent :"
 
-#: gui/templates/location_delete.glade:76
+#: pharmaship/gui/templates/location_delete.glade:76
 msgid "Do you want to delete the following location?"
 msgstr "Voulez-vous supprimer l'emplacement suivant ?"
 
-#: inventory/models.py:288
+#: pharmaship/inventory/models.py:288
 msgid "Dosage Form:"
 msgstr "Forme :"
 
-#: pharmaship/gui/view.py:237 pharmaship/gui/view.py:247 gui/view.py:214
-#: gui/main_view.py:208 gui/main_view.py:204
+#: pharmaship/gui/view.py:308
 msgid "Double-click on expiry date"
-msgstr "Double-cliquez sur la date d'dxpiration"
+msgstr "Double-cliquez sur la date d'expiration"
 
-#: purchase/constants.py:6
+#: pharmaship/purchase/constants.py:7
 msgid "Draft"
 msgstr "Brouillon"
 
-#: gui/templates/vessel_settings.glade:250
+#: pharmaship/gui/templates/vessel_settings.glade:250
 msgid "E-mail:"
 msgstr "Courriel :"
 
-#: pharmaship/gui/templates/dashboard_detail.glade:72
+#: pharmaship/gui/templates/dashboard_detail.glade:74
 msgid "Edit as CSV"
 msgstr "Éditer en CSV"
 
-#: pharmaship/gui/views/rescue_bag.py:517
-#: pharmaship/gui/views/rescue_bag.py:514 gui/views/rescue_bag.py:514
+#: pharmaship/gui/views/rescue_bag.py:529
 msgid "Edit this item in the dedicated view"
 msgstr "Mettre à jour dans l'inventaire dédié"
 
-#: pharmaship/gui/view.py:253 pharmaship/gui/view.py:263 gui/view.py:230
-#: gui/main_view.py:224 gui/main_view.py:220
+#: pharmaship/gui/view.py:324
 msgid "End of month"
 msgstr "Fin du mois"
 
-#: pharmaship/gui/view.py:524 pharmaship/gui/view.py:534 gui/view.py:498
-#: gui/main_view.py:480 gui/main_view.py:476
+#: pharmaship/gui/view.py:597 pharmaship/gui/templates/dashboard.glade:392
+#: pharmaship/gui/templates/mode_menu.xml:17 pharmaship/inventory/search.py:238
 msgid "Equipment"
 msgstr "Matériel"
 
-#: gui/templates/article_add.glade:184
+#: pharmaship/gui/templates/article_add.glade:183
 msgid "Equipment (Packaging)"
 msgstr "Matériel (conditionnement)"
 
-#: pharmaship/gui/export/equipment.py:46 pharmaship/gui/export/equipment.py:49
-#: gui/export/equipment.py:49 gui/export/equipment.py:54
+#: pharmaship/gui/export/equipment.py:46
 msgid "Equipment Inventory"
 msgstr "Inventaire de l'équipement médical"
 
+#: pharmaship/gui/templates/db_export_error.glade:7
+msgid "Error"
+msgstr "Erreur"
+
 #. Brand Name. Example: Doliprane for INN Paracétamol
-#: inventory/models.py:161
+#: pharmaship/inventory/models.py:161
 msgid "Expiration Date"
 msgstr "Date d'expiration"
 
-#: gui/templates/reports/equipment.html:55
-#: gui/templates/reports/first_aid_kits.html:14
-#: gui/templates/reports/laboratory.html:55
-#: gui/templates/reports/medicines.html:57
-#: gui/templates/reports/rescue_bag.html:16
-#: gui/templates/reports/rescue_bag_all.html:11
-#: gui/templates/reports/telemedical.html:55 gui/views/equipment.py:81
-#: gui/views/equipment.py:588 gui/views/first_aid_kits.py:159
-#: gui/views/first_aid_kits.py:284 gui/views/laboratory.py:81
-#: gui/views/medicines.py:79 gui/views/medicines.py:583
-#: gui/views/rescue_bag.py:148 gui/views/rescue_bag.py:305
-#: gui/views/rescue_bag.py:433 gui/views/telemedical.py:80
-#: gui/views/telemedical.py:563
+#: pharmaship/gui/reports/equipment.html:11
+#: pharmaship/gui/reports/export_perished.html:13
+#: pharmaship/gui/reports/export_perished.html:49
+#: pharmaship/gui/reports/export_perished.html:82
+#: pharmaship/gui/reports/export_perished.html:107
+#: pharmaship/gui/reports/export_perished.html:140
+#: pharmaship/gui/reports/first_aid_kits.html:14
+#: pharmaship/gui/reports/laboratory.html:11
+#: pharmaship/gui/reports/medicines.html:13
+#: pharmaship/gui/reports/rescue_bag.html:16
+#: pharmaship/gui/reports/rescue_bag_all.html:11
+#: pharmaship/gui/reports/telemedical.html:11
+#: pharmaship/gui/views/dashboard.py:48 pharmaship/gui/views/dashboard.py:53
+#: pharmaship/gui/views/dashboard.py:58 pharmaship/gui/views/dashboard.py:426
+#: pharmaship/gui/views/equipment.py:86 pharmaship/gui/views/equipment.py:623
+#: pharmaship/gui/views/first_aid_kits.py:163
+#: pharmaship/gui/views/first_aid_kits.py:296
+#: pharmaship/gui/views/laboratory.py:85 pharmaship/gui/views/medicines.py:84
+#: pharmaship/gui/views/medicines.py:620 pharmaship/gui/views/rescue_bag.py:150
+#: pharmaship/gui/views/rescue_bag.py:310
+#: pharmaship/gui/views/rescue_bag.py:446
+#: pharmaship/gui/views/telemedical.py:85
+#: pharmaship/gui/views/telemedical.py:607
 msgid "Expiry"
 msgstr "Expiration"
 
@@ -373,124 +326,97 @@ msgstr "Expiration"
 msgid "Expiry date check set to:"
 msgstr "Dates d'expiration vérifiée au :"
 
-#: inventory/forms.py:79 inventory/forms.py:176 inventory/models.py:308
+#: pharmaship/inventory/forms.py:79 pharmaship/inventory/forms.py:176
+#: pharmaship/inventory/models.py:308
 msgid "Expiry date must be provided."
 msgstr "La date d'expiration doit être renseignée."
 
-#: gui/templates/subitem_modify.glade:115
+#: pharmaship/gui/templates/subitem_modify.glade:115
 msgid "Expiry date:"
 msgstr "Date d'expiration :"
 
-#: gui/main_view.py:246
+#: pharmaship/gui/view.py:350
 #, python-brace-format
 msgid "Expiry up to: {0}"
 msgstr "Expiration jusqu'au : {0}"
 
-#: gui/templates/article_add.glade:138 gui/templates/medicine_add.glade:138
+#: pharmaship/gui/templates/article_add.glade:137
+#: pharmaship/gui/templates/medicine_add.glade:138
 msgid "Expiry:"
 msgstr "Expiration :"
 
-#: gui/templates/db_export.glade:38
+#: pharmaship/gui/templates/db_export.glade:38
 msgid "Export"
 msgstr "Exporter"
 
-#: gui/templates/settings_menu.xml:44
+#: pharmaship/gui/templates/settings_menu.xml:44
 msgid "Export DB"
 msgstr "Export BDD"
 
-#: pharmaship/gui/templates/dashboard.glade:1223
+#: pharmaship/gui/templates/dashboard.glade:1227
 msgid "Export all inventories"
 msgstr "Exporter tous les inventaires"
 
-#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (pharmaship-mm-01)  #-#-#-#-#
-#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
-#. Save button
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Save button
-#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
-#. Save button
-#: gui/main_view.py:169
+#: pharmaship/gui/view.py:203
 msgid "Export as PDF"
 msgstr "Exporter en PDF"
 
-#: pharmaship/gui/templates/dashboard.glade:1238
+#: pharmaship/gui/templates/dashboard.glade:1242
 msgid "Export missing items"
 msgstr "Exporter les items manquants"
 
-#: pharmaship/gui/templates/dashboard.glade:1253
+#: pharmaship/gui/templates/dashboard.glade:1257
 msgid "Export perished items"
 msgstr "Exporter les items périmés"
 
-#: gui/templates/db_export.glade:8
+#: pharmaship/gui/templates/db_export.glade:8
 msgid "Export the Pharmaship database"
 msgstr "Exporter la base de données de Pharmaship"
 
-#: core/import_data.py:149 core/import_data.py:153 core/import_data.py:160
-#: core/import_data.py:164
+#: pharmaship/core/import_data.py:183 pharmaship/core/import_data.py:187
+#: pharmaship/core/import_data.py:194 pharmaship/core/import_data.py:198
 msgid "File impossible to read. See detailled log."
 msgstr "Fichier impossible à lire. Consultez les journaux."
 
-#: gui/templates/allowance_manager.glade:297
+#: pharmaship/gui/templates/allowance_manager.glade:297
 msgid "File:"
 msgstr "Fichier :"
 
-#: pharmaship/gui/view.py:538 pharmaship/gui/view.py:548 gui/view.py:512
-#: gui/main_view.py:494 gui/main_view.py:490
+#: pharmaship/gui/view.py:611 pharmaship/gui/templates/dashboard.glade:784
+#: pharmaship/gui/templates/mode_menu.xml:22
 msgid "First Aid Kits"
 msgstr "Trousses de secours"
 
 #: pharmaship/gui/export/first_aid_kits.py:46
-#: pharmaship/gui/export/first_aid_kits.py:49 gui/export/first_aid_kits.py:49
-#: gui/export/first_aid_kits.py:54
 msgid "First Aid Kits Inventory"
 msgstr "Inventaire des trousses de secours"
 
 #: pharmaship/gui/reports/header.html:35
-#: pharmaship/gui/reports/equipment.html:33
-#: pharmaship/gui/reports/header.html:33
-#: pharmaship/gui/reports/laboratory.html:33
-#: pharmaship/gui/reports/medicines.html:33
-#: pharmaship/gui/reports/telemedical.html:33 gui/reports/equipment.html:33
-#: gui/reports/header.html:33 gui/reports/laboratory.html:33
-#: gui/reports/medicines.html:33 gui/reports/telemedical.html:33
-#: gui/templates/reports/equipment.html:33 gui/templates/reports/header.html:33
-#: gui/templates/reports/laboratory.html:33
-#: gui/templates/reports/medicines.html:33
-#: gui/templates/reports/telemedical.html:33
+#: pharmaship/gui/templates/vessel_settings.glade:156
 msgid "Flag:"
 msgstr "Pavillon :"
 
 #: pharmaship/gui/reports/export_missing.html:10
 #: pharmaship/gui/reports/export_perished.html:10
 #: pharmaship/gui/reports/medicines.html:9
-#: pharmaship/gui/reports/medicines.html:53 gui/reports/medicines.html:53
-#: gui/templates/reports/medicines.html:53
 msgid "Form - Dosage"
 msgstr "Forme - Composition"
 
-#: gui/views/medicines.py:73
+#: pharmaship/gui/views/medicines.py:78
 msgid "Form/Dosage"
 msgstr "Forme - Composition"
 
-#: purchase/constants.py:12
+#: pharmaship/purchase/constants.py:13
 msgid "Fully Received"
 msgstr "Reçu entièrement"
 
 #: pharmaship/gui/reports/header.html:21
-#: pharmaship/gui/reports/equipment.html:21
-#: pharmaship/gui/reports/laboratory.html:21
-#: pharmaship/gui/reports/medicines.html:21
-#: pharmaship/gui/reports/telemedical.html:21 gui/reports/equipment.html:21
-#: gui/reports/header.html:21 gui/reports/laboratory.html:21
-#: gui/reports/medicines.html:21 gui/reports/telemedical.html:21
-#: gui/templates/reports/equipment.html:21 gui/templates/reports/header.html:21
-#: gui/templates/reports/laboratory.html:21
-#: gui/templates/reports/medicines.html:21
-#: gui/templates/reports/telemedical.html:21
 msgid "Generated by Pharmaship on"
 msgstr "Généré par Pharmaship le"
 
-#: gui/templates/allowance_manager.glade:118
+#: pharmaship/gui/templates/allowance_manager.glade:118
 msgid ""
 "Has a laboratory?\n"
 "<i>Example: POCramé</i>"
@@ -498,7 +424,7 @@ msgstr ""
 "Possède un laboratoire ?\n"
 "<i>Exemple : POCramé</i>"
 
-#: gui/templates/allowance_manager.glade:221
+#: pharmaship/gui/templates/allowance_manager.glade:221
 msgid ""
 "Has a telemedical equipment?\n"
 "<i>Example: Marlink case</i>"
@@ -506,60 +432,60 @@ msgstr ""
 "Possède un équipement télémédical ?\n"
 "<i>Exemple : valise Marlink</i>"
 
-#: gui/templates/vessel_settings.glade:79
+#: pharmaship/gui/templates/vessel_settings.glade:79
 msgid "IMO Number:"
 msgstr "Numéro OMI :"
 
 #: pharmaship/gui/reports/medicines.html:7
-#: pharmaship/gui/reports/medicines.html:51 gui/reports/medicines.html:51
-#: gui/templates/reports/medicines.html:51
 msgid "INN"
 msgstr "DCI"
 
 #: pharmaship/gui/views/allowance_manager.py:409
-#: gui/views/allowance_manager.py:413 gui/views/allowance_manager.py:414
+#: pharmaship/gui/templates/allowance_manager.glade:337
+#: pharmaship/gui/templates/allowance_manager.glade:365
+#: pharmaship/gui/templates/db_import.glade:48
 msgid "Import"
 msgstr "Importation"
 
-#: gui/templates/settings_menu.xml:48
+#: pharmaship/gui/templates/settings_menu.xml:48
 msgid "Import DB"
 msgstr "Importer BDD"
 
-#: gui/templates/db_import.glade:18
+#: pharmaship/gui/templates/db_import.glade:18
 msgid "Import a Pharmaship database"
 msgstr "Importer une base de données Pharmaship"
 
-#: core/import_data.py:242
+#: pharmaship/core/import_data.py:307
 #, python-brace-format
 msgid "Import of module {0} failed. See detailed logs."
 msgstr "Échec de l'importation du module {0}. Consultez les journaux."
 
-#: core/import_data.py:245
+#: pharmaship/core/import_data.py:310
 #, python-brace-format
 msgid "Import of module {0} succeeded."
 msgstr "Module {0} importé avec succès."
 
-#: core/import_data.py:250
+#: pharmaship/core/import_data.py:315
 msgid "Import success."
 msgstr "Succès de l'importation."
 
-#: inventory/constants.py:9
+#: pharmaship/inventory/constants.py:9
 msgid "In"
 msgstr "Ajouté"
 
-#: inventory/constants.py:73
+#: pharmaship/inventory/constants.py:73
 msgid "Inhalation"
 msgstr "Inhalation"
 
-#: purchase/models.py:41
+#: pharmaship/purchase/models.py:45
 msgid "Instructions"
 msgstr "Instructions"
 
-#: core/import_data.py:192
+#: pharmaship/core/import_data.py:248
 msgid "Integrity check failed. Check logs."
 msgstr "Échec de la vérification d'intégrité. Consultez les journaux."
 
-#: pharmaship/gui/utils.py:351
+#: pharmaship/gui/widgets/entry.py:72
 msgid "Invalid date input"
 msgstr "Saisie de date invalide"
 
@@ -568,27 +494,28 @@ msgstr "Saisie de date invalide"
 msgid "Item"
 msgstr "Item"
 
-#: purchase/models.py:43
+#: pharmaship/purchase/models.py:47
 msgid "Item Type"
 msgstr "Type d'item"
 
-#: core/gpg.py:33
+#: pharmaship/core/gpg.py:48
 msgid "Key already added"
 msgstr "Clé déjà ajotuée"
 
-#: core/gpg.py:65
+#: pharmaship/core/gpg.py:114
 msgid "Key not found!"
 msgstr "Clé introuvable !"
 
-#: core/gpg.py:68
+#: pharmaship/core/gpg.py:117
 msgid "Key removed"
 msgstr "Clé retirée"
 
-#: core/gpg.py:38
+#: pharmaship/core/gpg.py:53
 msgid "Key successfully added"
 msgstr "Clé ajoutée avec succès"
 
-#: gui/templates/mode_menu.xml:28
+#: pharmaship/gui/view.py:635 pharmaship/gui/templates/dashboard.glade:981
+#: pharmaship/gui/templates/mode_menu.xml:30 pharmaship/inventory/search.py:247
 msgid "Laboratory"
 msgstr "Laboratoire"
 
@@ -596,65 +523,69 @@ msgstr "Laboratoire"
 msgid "Laboratory Inventory"
 msgstr "Inventaire du laboratoire"
 
-#: gui/templates/settings_menu.xml:20
+#: pharmaship/gui/templates/settings_menu.xml:20
 msgid "Language"
 msgstr "Langue"
 
 #: pharmaship/gui/reports/export_missing.html:12
 #: pharmaship/gui/reports/export_perished.html:11
 #: pharmaship/gui/reports/medicines.html:10
-#: pharmaship/gui/reports/medicines.html:54 gui/reports/medicines.html:54
-#: gui/templates/reports/medicines.html:54
 msgid "List"
 msgstr "Liste"
 
-#: inventory/constants.py:20
+#: pharmaship/inventory/constants.py:20
 msgid "List I"
 msgstr "Liste I"
 
-#: inventory/constants.py:21
+#: pharmaship/inventory/constants.py:21
 msgid "List II"
 msgstr "Liste II"
 
-#: gui/templates/reports/equipment.html:56
-#: gui/templates/reports/laboratory.html:56
-#: gui/templates/reports/medicines.html:58
-#: gui/templates/reports/telemedical.html:56 gui/views/equipment.py:78
-#: gui/views/equipment.py:584 gui/views/laboratory.py:78
-#: gui/views/medicines.py:76 gui/views/medicines.py:579
-#: gui/views/telemedical.py:77 gui/views/telemedical.py:559
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Header
+#: pharmaship/gui/reports/equipment.html:12
+#: pharmaship/gui/reports/laboratory.html:12
+#: pharmaship/gui/reports/medicines.html:14
+#: pharmaship/gui/reports/telemedical.html:12
+#: pharmaship/gui/views/equipment.py:83 pharmaship/gui/views/equipment.py:619
+#: pharmaship/gui/views/laboratory.py:82
+#: pharmaship/gui/views/location_manager.py:66
+#: pharmaship/gui/views/medicines.py:81 pharmaship/gui/views/medicines.py:616
+#: pharmaship/gui/views/telemedical.py:82
+#: pharmaship/gui/views/telemedical.py:603
 msgid "Location"
 msgstr "Emplacement"
 
-#: pharmaship/gui/view.py:483 pharmaship/gui/view.py:493 gui/view.py:457
-#: gui/main_view.py:439 gui/main_view.py:435
+#: pharmaship/gui/view.py:558 pharmaship/gui/templates/settings_menu.xml:6
 msgid "Location Manager"
 msgstr "Gestionnaire d'emplacement"
 
-#: gui/templates/article_add.glade:163 gui/templates/first_aid_kit.glade:73
-#: gui/templates/medicine_add.glade:163 gui/templates/rescue_bag.glade:73
+#: pharmaship/gui/templates/article_add.glade:162
+#: pharmaship/gui/templates/first_aid_kit.glade:73
+#: pharmaship/gui/templates/medicine_add.glade:163
+#: pharmaship/gui/templates/rescue_bag.glade:73
 msgid "Location:"
 msgstr "Emplacement :"
 
-#: gui/templates/vessel_settings.glade:130
+#: pharmaship/gui/view.py:256
+#, python-brace-format
+msgid "Locations: {0}"
+msgstr "Emplacements : {0}"
+
+#: pharmaship/gui/templates/vessel_settings.glade:130
 msgid "MMSI:"
 msgstr "MMSI :"
 
-#: gui/templates/reports/equipment.html:40 gui/templates/reports/header.html:40
-#: gui/templates/reports/laboratory.html:40
-#: gui/templates/reports/medicines.html:40
-#: gui/templates/reports/telemedical.html:40
-#| msgid "Allowances"
+#: pharmaship/gui/reports/header.html:42
 msgid "Medical Allowances:"
 msgstr "Dotations médicales :"
 
-#: pharmaship/gui/export/medicines.py:45 pharmaship/gui/export/medicines.py:48
-#: gui/export/medicines.py:48 gui/export/medicines.py:53
+#: pharmaship/gui/export/medicines.py:45
 msgid "Medicine Inventory"
 msgstr "Inventaire des médicaments"
 
-#: pharmaship/gui/view.py:510 pharmaship/gui/view.py:520 gui/view.py:484
-#: gui/main_view.py:466 gui/main_view.py:462
+#: pharmaship/gui/view.py:585 pharmaship/gui/templates/dashboard.glade:195
+#: pharmaship/gui/templates/mode_menu.xml:12 pharmaship/inventory/search.py:160
 msgid "Medicines"
 msgstr "Médicaments"
 
@@ -664,37 +595,24 @@ msgstr "Médicaments"
 #: pharmaship/gui/reports/medicines.html:11
 #: pharmaship/gui/reports/rescue_bag_all.html:9
 #: pharmaship/gui/reports/telemedical.html:9
-#: pharmaship/gui/reports/equipment.html:53
-#: pharmaship/gui/reports/laboratory.html:53
-#: pharmaship/gui/reports/medicines.html:55
-#: pharmaship/gui/reports/telemedical.html:53 gui/reports/equipment.html:53
-#: gui/reports/first_aid_kits.html:12 gui/reports/laboratory.html:53
-#: gui/reports/medicines.html:55 gui/reports/rescue_bag_all.html:9
-#: gui/reports/telemedical.html:53 gui/templates/reports/equipment.html:53
-#: gui/templates/reports/first_aid_kits.html:12
-#: gui/templates/reports/laboratory.html:53
-#: gui/templates/reports/medicines.html:55
-#: gui/templates/reports/rescue_bag_all.html:9
-#: gui/templates/reports/telemedical.html:53
 msgid "Min. Quantity"
 msgstr "Quantité min."
 
-#: pharmaship/gui/views/dashboard.py:33 pharmaship/gui/views/dashboard.py:377
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Missing = required - current quantity
+#: pharmaship/gui/views/dashboard.py:32 pharmaship/gui/views/dashboard.py:423
 msgid "Missing"
 msgstr "Manquant"
 
 #: pharmaship/gui/export/dashboard.py:189
-#| msgid "Min. Quantity"
 msgid "Missing Items"
 msgstr "Items manquants"
 
 #: pharmaship/gui/reports/export_missing.html:35
-#| msgid "Min. Quantity"
 msgid "Missing equipment"
 msgstr "Matériel manquant"
 
 #: pharmaship/gui/reports/export_missing.html:62
-#| msgid "First Aid Kits"
 msgid "Missing first aid kits items"
 msgstr "Items de trousses de secours manquants"
 
@@ -703,309 +621,333 @@ msgid "Missing laboratory equipment"
 msgstr "Équipement de laboratoire manquant"
 
 #: pharmaship/gui/reports/export_missing.html:4
-#| msgid "Medicines"
 msgid "Missing medicines"
 msgstr "Médicaments manquants"
 
-#: pharmaship/gui/views/dashboard.py:48 pharmaship/gui/views/dashboard.py:53
-#: pharmaship/gui/views/dashboard.py:58
+#: pharmaship/gui/views/dashboard.py:47 pharmaship/gui/views/dashboard.py:52
+#: pharmaship/gui/views/dashboard.py:57
 msgid "Missing quantity"
 msgstr "Quantité manquante"
 
 #: pharmaship/gui/reports/export_missing.html:109
-#| msgid "Telemedical Equipment Inventory"
 msgid "Missing telemedical equipment"
 msgstr "Équipement télémédical manquant"
 
 #: pharmaship/gui/templates/dashboard.glade:46
-#: pharmaship/gui/templates/dashboard.glade:242
-#: pharmaship/gui/templates/dashboard.glade:438
-#: pharmaship/gui/templates/dashboard.glade:634
-#: pharmaship/gui/templates/dashboard.glade:830
-#: pharmaship/gui/templates/dashboard.glade:1026
+#: pharmaship/gui/templates/dashboard.glade:243
+#: pharmaship/gui/templates/dashboard.glade:440
+#: pharmaship/gui/templates/dashboard.glade:636
+#: pharmaship/gui/templates/dashboard.glade:832
+#: pharmaship/gui/templates/dashboard.glade:1029
 msgid "Missing:"
 msgstr "Manquant :"
 
-#: gui/templates/vessel_settings.glade:302
+#: pharmaship/gui/templates/vessel_settings.glade:302
 msgid "Mobile:"
 msgstr "Mobile :"
 
-#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
-#. Modify
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Modify
-#: gui/views/equipment.py:675 gui/views/medicines.py:668
-#: gui/views/telemedical.py:650
+#: pharmaship/gui/views/equipment.py:710 pharmaship/gui/views/medicines.py:705
+#: pharmaship/gui/views/telemedical.py:694
 msgid "Modify"
 msgstr "Modifier"
 
-#: gui/views/equipment.py:270 gui/views/laboratory.py:283
-#: gui/views/telemedical.py:260
+#: pharmaship/gui/views/equipment.py:298 pharmaship/gui/views/laboratory.py:291
+#: pharmaship/gui/views/telemedical.py:290
 msgid "Modify the article"
 msgstr "Modifier l'article"
 
-#: gui/templates/subitem_modify.glade:127
+#: pharmaship/gui/templates/subitem_modify.glade:127
 msgid "Modify the following item:"
 msgstr "Modifier l'item suivant :"
 
-#: gui/templates/subitem_modify.glade:48
+#: pharmaship/gui/templates/subitem_modify.glade:48
 msgid "Modify the item"
 msgstr "Modifier l'item"
 
-#: gui/views/medicines.py:254
+#: pharmaship/gui/views/medicines.py:287
 msgid "Modify the medicine"
 msgstr "Modifier le médicament"
 
-#: gui/views/location_manager.py:156
+#: pharmaship/gui/views/location_manager.py:161
 msgid "Modify this location"
 msgstr "Modifier cet emplacement"
 
-#: core/import_data.py:227
+#: pharmaship/core/import_data.py:292
 msgid "Module import error. See detailed log."
 msgstr "Erreur d'importation de module. Consultez les journaux."
 
-#: gui/templates/medicine_add.glade:184
+#: pharmaship/gui/templates/medicine_add.glade:184
 msgid "Molecule (Forme Composition)"
 msgstr "Principe active (forme composition)"
 
-#: inventory/constants.py:78
+#: pharmaship/inventory/constants.py:78
 msgid "Mouthwash"
 msgstr "Bain de bouche"
 
-#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (pharmaship-mm-01)  #-#-#-#-#
-#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
-#. Header
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Header
-#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
-#. Header
-#: gui/templates/reports/equipment.html:51
-#: gui/templates/reports/first_aid_kits.html:10
-#: gui/templates/reports/laboratory.html:51
-#: gui/templates/reports/rescue_bag.html:13
-#: gui/templates/reports/rescue_bag_all.html:7
-#: gui/templates/reports/telemedical.html:51 gui/views/allowance_manager.py:104
-#: gui/views/allowance_manager.py:322 gui/views/equipment.py:66
-#: gui/views/first_aid_kits.py:154 gui/views/laboratory.py:66
-#: gui/views/medicines.py:66 gui/views/rescue_bag.py:138
-#: gui/views/rescue_bag.py:295 gui/views/telemedical.py:65
-#: inventory/models.py:123 inventory/models.py:160 inventory/models.py:421
-#: inventory/models.py:463 purchase/models.py:36
+#: pharmaship/gui/reports/equipment.html:7
+#: pharmaship/gui/reports/export_missing.html:8
+#: pharmaship/gui/reports/export_missing.html:39
+#: pharmaship/gui/reports/export_missing.html:88
+#: pharmaship/gui/reports/export_missing.html:113
+#: pharmaship/gui/reports/export_perished.html:8
+#: pharmaship/gui/reports/export_perished.html:46
+#: pharmaship/gui/reports/export_perished.html:104
+#: pharmaship/gui/reports/export_perished.html:137
+#: pharmaship/gui/reports/first_aid_kits.html:10
+#: pharmaship/gui/reports/laboratory.html:7
+#: pharmaship/gui/reports/rescue_bag.html:13
+#: pharmaship/gui/reports/rescue_bag_all.html:7
+#: pharmaship/gui/reports/telemedical.html:7
+#: pharmaship/gui/views/allowance_manager.py:103
+#: pharmaship/gui/views/allowance_manager.py:317
+#: pharmaship/gui/views/dashboard.py:413 pharmaship/gui/views/equipment.py:71
+#: pharmaship/gui/views/first_aid_kits.py:158
+#: pharmaship/gui/views/laboratory.py:70 pharmaship/gui/views/medicines.py:71
+#: pharmaship/gui/views/rescue_bag.py:140
+#: pharmaship/gui/views/rescue_bag.py:300
+#: pharmaship/gui/views/telemedical.py:70 pharmaship/inventory/models.py:123
+#: pharmaship/inventory/models.py:160 pharmaship/inventory/models.py:421
+#: pharmaship/inventory/models.py:464 pharmaship/purchase/models.py:40
 msgid "Name"
 msgstr "Nom"
 
-#: pharmaship/gui/views/dashboard.py:58
+#: pharmaship/gui/views/dashboard.py:57
 msgid "Name (Details)"
 msgstr "Nom (détails)"
 
-#: pharmaship/gui/views/dashboard.py:48
+#: pharmaship/gui/views/dashboard.py:47
 msgid "Name (Dosage Form - Composition)"
 msgstr "Nom (Forme - Composition)"
 
-#: pharmaship/gui/views/dashboard.py:53
+#: pharmaship/gui/views/dashboard.py:52
 msgid "Name (Packaging)"
 msgstr "Nom (Conditionnement)"
 
-#: pharmaship/gui/views/dashboard.py:54 pharmaship/gui/views/dashboard.py:55
+#: pharmaship/gui/views/dashboard.py:53 pharmaship/gui/views/dashboard.py:54
 msgid "Name [Equipment] (Packaging)"
 msgstr "Nom [Équipement] (Conditionnement)"
 
-#: pharmaship/gui/views/dashboard.py:49 pharmaship/gui/views/dashboard.py:50
+#: pharmaship/gui/views/dashboard.py:48 pharmaship/gui/views/dashboard.py:49
 msgid "Name [INN] (Dosage Form - Composition)"
 msgstr "Nom [DCI] (Forme - Composition)"
 
-#: pharmaship/gui/views/dashboard.py:59 pharmaship/gui/views/dashboard.py:60
+#: pharmaship/gui/views/dashboard.py:58 pharmaship/gui/views/dashboard.py:59
 msgid "Name [Parent]"
 msgstr "Nom [Parent]"
 
-#: gui/templates/article_add.glade:88 gui/templates/first_aid_kit.glade:39
-#: gui/templates/location_add.glade:91 gui/templates/medicine_add.glade:88
-#: gui/templates/rescue_bag.glade:39 gui/templates/vessel_settings.glade:372
+#: pharmaship/gui/templates/article_add.glade:87
+#: pharmaship/gui/templates/first_aid_kit.glade:39
+#: pharmaship/gui/templates/location_add.glade:91
+#: pharmaship/gui/templates/medicine_add.glade:88
+#: pharmaship/gui/templates/rescue_bag.glade:39
+#: pharmaship/gui/templates/vessel_settings.glade:372
 msgid "Name:"
 msgstr "Nom :"
 
-#: inventory/constants.py:22
+#: pharmaship/inventory/constants.py:22
 msgid "Narcotics"
 msgstr "Stupéfiants"
 
-#: pharmaship/gui/views/dashboard.py:35
+#: pharmaship/gui/views/dashboard.py:34
 msgid "Near expiry"
 msgstr "Échéance proche"
 
 #: pharmaship/gui/templates/dashboard.glade:70
-#: pharmaship/gui/templates/dashboard.glade:266
-#: pharmaship/gui/templates/dashboard.glade:462
-#: pharmaship/gui/templates/dashboard.glade:658
-#: pharmaship/gui/templates/dashboard.glade:854
-#: pharmaship/gui/templates/dashboard.glade:1050
+#: pharmaship/gui/templates/dashboard.glade:267
+#: pharmaship/gui/templates/dashboard.glade:464
+#: pharmaship/gui/templates/dashboard.glade:660
+#: pharmaship/gui/templates/dashboard.glade:856
+#: pharmaship/gui/templates/dashboard.glade:1053
 msgid "Near expiry:"
 msgstr "Échéance proche :"
 
-#: inventory/constants.py:74
+#: pharmaship/inventory/constants.py:74
 msgid "Nebulization"
 msgstr "Nébulisation"
 
-#: gui/views/location_manager.py:39
+#: pharmaship/gui/views/location_manager.py:37
+#: pharmaship/gui/views/location_manager.py:74
 msgid "New Location"
 msgstr "Nouvel emplacement"
 
-#: core/gpg.py:77
+#: pharmaship/gui/view.py:228
+msgid "No result found. Try again!"
+msgstr "Aucun résultat. Un nouvel essai ?"
+
+#: pharmaship/core/gpg.py:133
 msgid "No signature found."
 msgstr "Signature introuvable."
 
-#: inventory/models.py:442
+#: pharmaship/gui/views/dashboard.py:429 pharmaship/inventory/models.py:442
 msgid "Non conformity"
 msgstr "Non-conformité"
 
-#: gui/templates/article_add.glade:278
+#: pharmaship/gui/templates/article_add.glade:277
 msgid "Non-compliant article"
 msgstr "Article non conforme"
 
-#: gui/views/medicines.py:615 gui/views/rescue_bag.py:464
+#: pharmaship/gui/views/dashboard.py:124
+#: pharmaship/gui/views/first_aid_kits.py:330
+#: pharmaship/gui/views/medicines.py:652 pharmaship/gui/views/rescue_bag.py:477
 msgid "Non-compliant composition:"
 msgstr "Composition non conforme :"
 
-#: gui/templates/subitem_modify.glade:229
+#: pharmaship/gui/templates/subitem_modify.glade:229
 msgid "Non-compliant item"
 msgstr "Item non conforme"
 
-#: gui/templates/medicine_add.glade:302
+#: pharmaship/gui/templates/medicine_add.glade:302
 msgid "Non-compliant medicine"
 msgstr "Médicament non conforme"
 
-#: gui/views/medicines.py:613 gui/views/rescue_bag.py:466
+#: pharmaship/gui/views/dashboard.py:126
+#: pharmaship/gui/views/first_aid_kits.py:332
+#: pharmaship/gui/views/medicines.py:650 pharmaship/gui/views/rescue_bag.py:479
 msgid "Non-compliant molecule:"
 msgstr "Principe actif non conforme :"
 
-#: gui/views/equipment.py:618 gui/views/laboratory.py:630
-#: gui/views/rescue_bag.py:462 gui/views/telemedical.py:593
+#: pharmaship/gui/views/dashboard.py:122 pharmaship/gui/views/equipment.py:653
+#: pharmaship/gui/views/first_aid_kits.py:328
+#: pharmaship/gui/views/laboratory.py:644
+#: pharmaship/gui/views/rescue_bag.py:475
+#: pharmaship/gui/views/telemedical.py:637
 msgid "Non-compliant packaging:"
 msgstr "Conditionnement non conforme :"
 
-#: pharmaship/gui/views/dashboard.py:36
+#: pharmaship/gui/views/dashboard.py:35
 msgid "Non-conform"
 msgstr "Non conforme"
 
-#: inventory/models.py:302
+#: pharmaship/inventory/models.py:302
 msgid "Non-conform Composition"
 msgstr "Composition non conforme"
 
 #. Fields for non-conformity compatibility
-#: inventory/models.py:301
+#: pharmaship/inventory/models.py:301
 msgid "Non-conform Molecule"
 msgstr "Principe active non conforme"
 
 #. Fields for non-conformity compatibility
-#: inventory/models.py:401
+#: pharmaship/inventory/models.py:401
 msgid "Non-conform Packaging"
 msgstr "Conditionnement non conforme"
 
 #: pharmaship/gui/templates/dashboard.glade:82
-#: pharmaship/gui/templates/dashboard.glade:278
-#: pharmaship/gui/templates/dashboard.glade:474
-#: pharmaship/gui/templates/dashboard.glade:670
-#: pharmaship/gui/templates/dashboard.glade:866
-#: pharmaship/gui/templates/dashboard.glade:1062
+#: pharmaship/gui/templates/dashboard.glade:279
+#: pharmaship/gui/templates/dashboard.glade:476
+#: pharmaship/gui/templates/dashboard.glade:672
+#: pharmaship/gui/templates/dashboard.glade:868
+#: pharmaship/gui/templates/dashboard.glade:1065
 msgid "Non-conformities:"
 msgstr "Non-conformités :"
 
-#: pharmaship/gui/views/dashboard.py:50 pharmaship/gui/views/dashboard.py:55
-#: pharmaship/gui/views/dashboard.py:60
+#: pharmaship/gui/views/dashboard.py:49 pharmaship/gui/views/dashboard.py:54
+#: pharmaship/gui/views/dashboard.py:59
 msgid "Non-conformity"
 msgstr "Non-conformité"
 
-#: gui/templates/subitem_modify.glade:202
+#: pharmaship/gui/templates/subitem_modify.glade:202
 msgid "Non-conformity:"
 msgstr "Non-conformité :"
 
-#: inventory/constants.py:19
+#: pharmaship/inventory/constants.py:19
 msgid "None"
 msgstr "Non listé"
 
-#: gui/templates/allowance_manager.glade:147
+#: pharmaship/gui/templates/allowance_manager.glade:147
 msgid "Number of First Aid Kits:"
 msgstr "Nombre de trousses de secours :"
 
-#: gui/templates/allowance_manager.glade:172
+#: pharmaship/gui/templates/allowance_manager.glade:172
 msgid "Number of Rescue Bags:"
 msgstr "Nombre de sacs d'intervention :"
 
-#: inventory/constants.py:84
+#: pharmaship/inventory/constants.py:84
 msgid "Ocular"
 msgstr "Oculaire"
 
-#: gui/templates/settings_menu.xml:40
+#: pharmaship/gui/templates/settings_menu.xml:40
 msgid "Open log"
 msgstr "Ouvrir journal"
 
-#: inventory/constants.py:65
+#: pharmaship/inventory/constants.py:65
 msgid "Oral"
 msgstr "Orale"
 
-#: purchase/constants.py:10
+#: pharmaship/purchase/constants.py:11
 msgid "Ordered"
 msgstr "Commandé"
 
-#: pharmaship/gui/utils.py:204 pharmaship/gui/utils.py:202
-#: pharmaship/gui/utils.py:201 gui/utils.py:201 gui/utils.py:214
+#: pharmaship/gui/utils.py:212 pharmaship/inventory/constants.py:13
 msgid "Other"
 msgstr "Autre"
 
-#: core/import_data.py:208
+#: pharmaship/gui/view.py:250
+#, python-brace-format
+msgid "Other names: {0}"
+msgstr "Autres noms : {0}"
+
+#: pharmaship/core/import_data.py:265
 msgid "Package Author"
 msgstr "Auteur du paquet"
 
-#: core/import_data.py:210
+#: pharmaship/core/import_data.py:267
 msgid "Package Date"
 msgstr "Date du paquet"
 
-#: core/import_data.py:209
+#: pharmaship/core/import_data.py:266
 msgid "Package Version"
 msgstr "Version du paquet"
 
-#: gui/views/equipment.py:74 gui/views/laboratory.py:74
-#: gui/views/telemedical.py:73
+#: pharmaship/gui/reports/export_missing.html:40
+#: pharmaship/gui/reports/export_missing.html:89
+#: pharmaship/gui/reports/export_missing.html:114
+#: pharmaship/gui/reports/export_perished.html:47
+#: pharmaship/gui/reports/export_perished.html:105
+#: pharmaship/gui/reports/export_perished.html:138
+#: pharmaship/gui/views/equipment.py:79 pharmaship/gui/views/laboratory.py:78
+#: pharmaship/gui/views/telemedical.py:78
 msgid "Packaging"
 msgstr "Conditionnement"
 
-#: inventory/models.py:389
+#: pharmaship/inventory/models.py:389
 msgid "Packaging:"
 msgstr "Conditionnement :"
 
-#: gui/templates/location_add.glade:79
+#: pharmaship/gui/templates/location_add.glade:79
 msgid "Parent:"
 msgstr "Parent :"
 
-#: inventory/constants.py:67
+#: pharmaship/inventory/constants.py:67
 msgid "Parenteral"
 msgstr "Paréntérale"
 
-#: purchase/constants.py:11
+#: pharmaship/purchase/constants.py:12
 msgid "Partially Received"
 msgstr "Partiellement reçu"
 
-#: purchase/constants.py:7
+#: pharmaship/purchase/constants.py:8
 msgid "Pending Approval"
 msgstr "En attente d'approbation"
 
-#: pharmaship/gui/utils.py:203 pharmaship/gui/views/dashboard.py:33
-#: pharmaship/gui/views/dashboard.py:34 pharmaship/gui/utils.py:201
-#: pharmaship/gui/utils.py:200 gui/utils.py:200 gui/utils.py:213
+#: pharmaship/gui/utils.py:211 pharmaship/gui/views/dashboard.py:33
+#: pharmaship/inventory/constants.py:11
 msgid "Perished"
 msgstr "Périmé"
 
 #: pharmaship/gui/export/dashboard.py:306
-#| msgid "Perished"
 msgid "Perished Items"
 msgstr "Items périmés"
 
 #: pharmaship/gui/reports/export_perished.html:42
-#| msgid "Telemedical Equipment Inventory"
 msgid "Perished equipment"
 msgstr "Matériel périmé"
 
 #: pharmaship/gui/reports/export_perished.html:76
-#| msgid "First Aid Kits"
 msgid "Perished first aid kits items"
 msgstr "Items des trousses de secours périmés"
 
@@ -1014,147 +956,151 @@ msgid "Perished laboratory equipment"
 msgstr "Équipement de laboratoire périmé"
 
 #: pharmaship/gui/reports/export_perished.html:4
-#| msgid "Add the medicine"
 msgid "Perished medicines"
 msgstr "Médicaments périmés"
 
 #: pharmaship/gui/reports/export_perished.html:133
-#| msgid "Telemedical Equipment Inventory"
 msgid "Perished telemedical equipment"
 msgstr "Équipement télémédical périmé"
 
 #: pharmaship/gui/templates/dashboard.glade:58
-#: pharmaship/gui/templates/dashboard.glade:254
-#: pharmaship/gui/templates/dashboard.glade:450
-#: pharmaship/gui/templates/dashboard.glade:646
-#: pharmaship/gui/templates/dashboard.glade:842
-#: pharmaship/gui/templates/dashboard.glade:1038
+#: pharmaship/gui/templates/dashboard.glade:255
+#: pharmaship/gui/templates/dashboard.glade:452
+#: pharmaship/gui/templates/dashboard.glade:648
+#: pharmaship/gui/templates/dashboard.glade:844
+#: pharmaship/gui/templates/dashboard.glade:1041
 msgid "Perished:"
 msgstr "Périmé :"
 
-#: gui/templates/vessel_settings.glade:276
+#: pharmaship/gui/templates/vessel_settings.glade:276
 msgid "Phone:"
 msgstr "Téléphone :"
 
-#: inventory/constants.py:12
+#: pharmaship/inventory/constants.py:12
 msgid "Physical Count"
 msgstr "Inventaire"
 
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Create the widget
-#: pharmaship/gui/utils.py:231
+#: pharmaship/gui/utils.py:241
 msgid "Picture"
 msgstr "Image"
 
 #: pharmaship/gui/views/allowance_manager.py:370
-#: gui/views/allowance_manager.py:374 gui/views/allowance_manager.py:375
 msgid "Please select a file."
 msgstr "Merci de sélectionner un fichier."
 
-#: purchase/models.py:42
+#: pharmaship/purchase/models.py:46
 msgid "Port of Delivery"
 msgstr "Port de livraison"
 
 #: pharmaship/gui/reports/header.html:36
-#: pharmaship/gui/reports/equipment.html:34
-#: pharmaship/gui/reports/header.html:34
-#: pharmaship/gui/reports/laboratory.html:34
-#: pharmaship/gui/reports/medicines.html:34
-#: pharmaship/gui/reports/telemedical.html:34 gui/reports/equipment.html:34
-#: gui/reports/header.html:34 gui/reports/laboratory.html:34
-#: gui/reports/medicines.html:34 gui/reports/telemedical.html:34
-#: gui/templates/reports/equipment.html:34 gui/templates/reports/header.html:34
-#: gui/templates/reports/laboratory.html:34
-#: gui/templates/reports/medicines.html:34
-#: gui/templates/reports/telemedical.html:34
+#: pharmaship/gui/templates/vessel_settings.glade:169
 msgid "Port of Registry:"
 msgstr "Port d'attache :"
 
-#: inventory/constants.py:34
+#: pharmaship/inventory/constants.py:34
 msgid "Powder"
 msgstr "Poudre"
 
-#: gui/templates/reports/equipment.html:54
-#: gui/templates/reports/first_aid_kits.html:13
-#: gui/templates/reports/laboratory.html:54
-#: gui/templates/reports/medicines.html:56
-#: gui/templates/reports/rescue_bag.html:15
-#: gui/templates/reports/rescue_bag_all.html:10
-#: gui/templates/reports/telemedical.html:54 gui/views/equipment.py:84
-#: gui/views/equipment.py:592 gui/views/first_aid_kits.py:163
-#: gui/views/first_aid_kits.py:288 gui/views/laboratory.py:84
-#: gui/views/medicines.py:82 gui/views/medicines.py:587
-#: gui/views/rescue_bag.py:152 gui/views/rescue_bag.py:309
-#: gui/views/rescue_bag.py:437 gui/views/telemedical.py:83
-#: gui/views/telemedical.py:567
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Format: xx/yy (current qty/required qty)
+#: pharmaship/gui/reports/equipment.html:10
+#: pharmaship/gui/reports/export_perished.html:12
+#: pharmaship/gui/reports/export_perished.html:48
+#: pharmaship/gui/reports/export_perished.html:81
+#: pharmaship/gui/reports/export_perished.html:106
+#: pharmaship/gui/reports/export_perished.html:139
+#: pharmaship/gui/reports/first_aid_kits.html:13
+#: pharmaship/gui/reports/laboratory.html:10
+#: pharmaship/gui/reports/medicines.html:12
+#: pharmaship/gui/reports/rescue_bag.html:15
+#: pharmaship/gui/reports/rescue_bag_all.html:10
+#: pharmaship/gui/reports/telemedical.html:10
+#: pharmaship/gui/views/dashboard.py:48 pharmaship/gui/views/dashboard.py:49
+#: pharmaship/gui/views/dashboard.py:53 pharmaship/gui/views/dashboard.py:54
+#: pharmaship/gui/views/dashboard.py:58 pharmaship/gui/views/dashboard.py:59
+#: pharmaship/gui/views/dashboard.py:418 pharmaship/gui/views/equipment.py:89
+#: pharmaship/gui/views/equipment.py:627
+#: pharmaship/gui/views/first_aid_kits.py:167
+#: pharmaship/gui/views/first_aid_kits.py:300
+#: pharmaship/gui/views/laboratory.py:88 pharmaship/gui/views/medicines.py:87
+#: pharmaship/gui/views/medicines.py:624 pharmaship/gui/views/rescue_bag.py:154
+#: pharmaship/gui/views/rescue_bag.py:314
+#: pharmaship/gui/views/rescue_bag.py:450
+#: pharmaship/gui/views/telemedical.py:88
+#: pharmaship/gui/views/telemedical.py:611
 msgid "Quantity"
 msgstr "Quantité"
 
-#: gui/templates/article_add.glade:111 gui/templates/article_use.glade:113
-#: gui/templates/medicine_add.glade:111 gui/templates/medicine_use.glade:113
-#: gui/templates/subitem_add.glade:93 gui/templates/subitem_modify.glade:88
-#: gui/templates/subitem_use.glade:113
+#: pharmaship/gui/templates/article_add.glade:110
+#: pharmaship/gui/templates/article_use.glade:113
+#: pharmaship/gui/templates/medicine_add.glade:111
+#: pharmaship/gui/templates/medicine_use.glade:113
+#: pharmaship/gui/templates/subitem_add.glade:93
+#: pharmaship/gui/templates/subitem_modify.glade:88
+#: pharmaship/gui/templates/subitem_use.glade:113
 msgid "Quantity:"
 msgstr "Quantité :"
 
-#: purchase/constants.py:9
+#: pharmaship/purchase/constants.py:10
 msgid "Quoted"
 msgstr "Coté"
 
-#: gui/templates/article_delete.glade:129
-#: gui/templates/medicine_delete.glade:129
-#: gui/templates/subitem_delete.glade:129
+#: pharmaship/gui/templates/article_delete.glade:129
+#: pharmaship/gui/templates/medicine_delete.glade:129
+#: pharmaship/gui/templates/subitem_delete.glade:129
 msgid "Reason:"
 msgstr "Raison :"
 
-#: inventory/constants.py:81
+#: pharmaship/inventory/constants.py:81
 msgid "Rectal"
 msgstr "Rectale"
 
-#: purchase/models.py:37
+#: pharmaship/purchase/models.py:41
 msgid "Reference"
 msgstr "Référence"
 
-#: gui/templates/article_use.glade:139 gui/templates/medicine_use.glade:139
-#: gui/templates/subitem_add.glade:120 gui/templates/subitem_use.glade:139
+#: pharmaship/gui/templates/article_use.glade:139
+#: pharmaship/gui/templates/medicine_use.glade:139
+#: pharmaship/gui/templates/subitem_add.glade:120
+#: pharmaship/gui/templates/subitem_use.glade:139
 msgid "Remaining:"
 msgstr "Reste :"
 
-#: gui/templates/reports/equipment.html:52
-#: gui/templates/reports/first_aid_kits.html:11
-#: gui/templates/reports/laboratory.html:52
-#: gui/templates/reports/rescue_bag.html:14
-#: gui/templates/reports/rescue_bag_all.html:8
-#: gui/templates/reports/telemedical.html:52 gui/views/rescue_bag.py:143
-#: gui/views/rescue_bag.py:300 inventory/models.py:164
+#: pharmaship/gui/reports/equipment.html:8
+#: pharmaship/gui/reports/export_missing.html:11
+#: pharmaship/gui/reports/export_missing.html:41
+#: pharmaship/gui/reports/export_missing.html:67
+#: pharmaship/gui/reports/export_missing.html:90
+#: pharmaship/gui/reports/export_missing.html:115
+#: pharmaship/gui/reports/first_aid_kits.html:11
+#: pharmaship/gui/reports/laboratory.html:8
+#: pharmaship/gui/reports/rescue_bag.html:14
+#: pharmaship/gui/reports/rescue_bag_all.html:8
+#: pharmaship/gui/reports/telemedical.html:8
+#: pharmaship/gui/views/rescue_bag.py:145
+#: pharmaship/gui/views/rescue_bag.py:305 pharmaship/inventory/models.py:164
 msgid "Remark"
 msgstr "Remarque"
 
-#: gui/templates/article_add.glade:211 gui/templates/medicine_add.glade:211
-#: gui/templates/subitem_add.glade:149 gui/templates/subitem_modify.glade:141
+#: pharmaship/gui/templates/article_add.glade:210
+#: pharmaship/gui/templates/medicine_add.glade:211
+#: pharmaship/gui/templates/subitem_add.glade:149
+#: pharmaship/gui/templates/subitem_modify.glade:141
 msgid "Remark:"
 msgstr "Remarque :"
 
-#: pharmaship/gui/views/equipment.py:68 pharmaship/gui/views/equipment.py:576
-#: pharmaship/gui/views/first_aid_kits.py:282
-#: pharmaship/gui/views/laboratory.py:68 pharmaship/gui/views/medicines.py:573
-#: pharmaship/gui/views/rescue_bag.py:432
-#: pharmaship/gui/views/telemedical.py:68
-#: pharmaship/gui/views/telemedical.py:562
-#: pharmaship/gui/views/first_aid_kits.py:278
-#: pharmaship/gui/views/rescue_bag.py:429 pharmaship/gui/views/equipment.py:575
-#: gui/views/equipment.py:68 gui/views/equipment.py:575
-#: gui/views/first_aid_kits.py:278 gui/views/laboratory.py:68
-#: gui/views/medicines.py:573 gui/views/rescue_bag.py:429
-#: gui/views/telemedical.py:68 gui/views/telemedical.py:562
-#: gui/views/equipment.py:70 gui/views/equipment.py:580
-#: gui/views/first_aid_kits.py:280 gui/views/laboratory.py:70
-#: gui/views/medicines.py:575 gui/views/telemedical.py:69
-#: gui/views/telemedical.py:555
+#: pharmaship/gui/views/equipment.py:75 pharmaship/gui/views/equipment.py:615
+#: pharmaship/gui/views/first_aid_kits.py:292
+#: pharmaship/gui/views/laboratory.py:74 pharmaship/gui/views/medicines.py:612
+#: pharmaship/gui/views/rescue_bag.py:442
+#: pharmaship/gui/views/telemedical.py:74
+#: pharmaship/gui/views/telemedical.py:599
 msgid "Remarks"
 msgstr "Remarques"
 
-#: purchase/models.py:39
+#: pharmaship/purchase/models.py:43
 msgid "Requested Date"
 msgstr "Date demandée"
 
@@ -1163,183 +1109,166 @@ msgstr "Date demandée"
 #: pharmaship/gui/reports/export_missing.html:68
 #: pharmaship/gui/reports/export_missing.html:91
 #: pharmaship/gui/reports/export_missing.html:116
-#| msgid "Quantity:"
 msgid "Requested Quantity"
 msgstr "Quantité demandée"
 
 #: pharmaship/gui/export/rescue_bag.py:45
-#: pharmaship/gui/export/rescue_bag.py:48 gui/export/rescue_bag.py:48
-#: gui/export/rescue_bag.py:55
 msgid "Rescue Bag Inventory"
 msgstr "Inventaire des sacs d'intervention"
 
-#: pharmaship/gui/view.py:550 pharmaship/gui/view.py:560 gui/view.py:524
-#: gui/main_view.py:506 gui/main_view.py:502
+#: pharmaship/gui/view.py:623 pharmaship/gui/templates/mode_menu.xml:26
 msgid "Rescue Bags"
 msgstr "Sacs d'intervention"
 
-#: pharmaship/gui/templates/dashboard.glade:586
+#: pharmaship/gui/templates/dashboard.glade:588
 msgid "Rescue bags"
 msgstr "Sacs d'intervention"
 
 #: pharmaship/gui/reports/export_missing.html:9
 #: pharmaship/gui/reports/export_perished.html:9
 #: pharmaship/gui/reports/medicines.html:8
-#: pharmaship/gui/reports/medicines.html:52 gui/reports/medicines.html:52
-#: gui/templates/reports/medicines.html:52
 msgid "Route of Administration"
 msgstr "Voie d'administration"
 
-#: gui/views/medicines.py:70
+#: pharmaship/gui/views/medicines.py:75
 msgid "Route of administration"
 msgstr "Voie d'administration"
 
-#: gui/main_view.py:152
+#: pharmaship/gui/view.py:186
 msgid "Search something..."
 msgstr "Rechercher quelque chose..."
 
-#: gui/templates/db_import.glade:79
+#: pharmaship/gui/templates/db_import.glade:79
 msgid "Select a database file to import."
 msgstr "Sélectionner un fichier de base de données à importer."
 
-#: gui/templates/db_export.glade:69
+#: pharmaship/gui/templates/db_export.glade:69
 msgid "Select a folder where to export the database."
 msgstr "Sélectionner un dossier où exporter la base de données."
 
-#: gui/templates/allowance_manager.glade:312
+#: pharmaship/gui/templates/allowance_manager.glade:312
 msgid "Select an allowance package"
 msgstr "Sélectionner un fichier de dotation"
 
 #: pharmaship/gui/views/allowance_manager.py:256
-#: gui/views/allowance_manager.py:260 gui/views/allowance_manager.py:261
 msgid "Select the rescue bag to delete."
 msgstr "Sélectionner le sac d'intervention à supprimer."
 
-#: gui/templates/rescue_bag_dialog.glade:73
-msgid "Select the {0} rescue bag(s) to delete."
-msgstr "Sélectionner les {0} sacs d'intervention à supprimer."
-
-#: gui/views/allowance_manager.py:264
+#: pharmaship/gui/views/allowance_manager.py:259
+#: pharmaship/gui/templates/rescue_bag_dialog.glade:73
 #, python-brace-format
 msgid "Select the {0} rescue bags to delete."
 msgstr "Sélectionner les {0} sacs d'intervention à supprimer."
 
-#: inventory/constants.py:14
-msgid "Send to a First Aid Kit"
-msgstr "Vers une trousse de secours"
-
-#: inventory/constants.py:14
+#: pharmaship/inventory/constants.py:14
 msgid "Sent to First Aid Kit"
 msgstr "Envoyé vers une trousse de secours"
 
-#: gui/main_view.py:444
+#: pharmaship/gui/view.py:567
 msgid "Settings"
 msgstr "Paramètres navire"
 
-#: gui/templates/vessel_settings.glade:433
+#: pharmaship/gui/templates/vessel_settings.glade:433
 msgid "Shipowner/manager information"
 msgstr "Informations Armateur/Opérateur"
 
 #: pharmaship/gui/reports/header.html:34
-#: pharmaship/gui/reports/equipment.html:32
-#: pharmaship/gui/reports/header.html:32
-#: pharmaship/gui/reports/laboratory.html:32
-#: pharmaship/gui/reports/medicines.html:32
-#: pharmaship/gui/reports/telemedical.html:32 gui/reports/equipment.html:32
-#: gui/reports/header.html:32 gui/reports/laboratory.html:32
-#: gui/reports/medicines.html:32 gui/reports/telemedical.html:32
-#: gui/templates/reports/equipment.html:32 gui/templates/reports/header.html:32
-#: gui/templates/reports/laboratory.html:32
-#: gui/templates/reports/medicines.html:32
-#: gui/templates/reports/telemedical.html:32
 msgid "Shipowner:"
 msgstr "Propriétaire :"
 
-#: core/gpg.py:94
+#: pharmaship/core/gpg.py:150
 msgid "Signature not in the keyring."
 msgstr "Signature absente du porte-clés."
 
-#: core/import_data.py:172
+#: pharmaship/core/import_data.py:213
 msgid "Signature not validated. See detailled log."
 msgstr "Signature invalide. Consultez les journaux."
 
-#: core/import_data.py:184
+#: pharmaship/core/import_data.py:240
 msgid "Signed data is not a valid Tar file. Check logs."
 msgstr ""
 "Les données signées ne constituent pas un fichier tar valide. Consultez les "
 "journaux."
 
-#: core/gpg.py:29
+#: pharmaship/core/gpg.py:43
 msgid "Something went wrong! See detailed logs."
 msgstr "Quelque chose s'est mal passé ! Consultez les journaux."
 
-#: purchase/models.py:40
+#: pharmaship/purchase/models.py:44
 msgid "Status"
 msgstr "Statut"
 
-#: inventory/constants.py:68
+#: pharmaship/inventory/constants.py:68
 msgid "Subcutaneous"
 msgstr "Sous-cutanée"
 
-#: inventory/constants.py:77
+#: pharmaship/inventory/constants.py:77
 msgid "Sublingual"
 msgstr "Sublinguale"
 
-#: gui/templates/subitem_add.glade:17 gui/templates/subitem_modify.glade:12
+#: pharmaship/gui/templates/db_export_dialog.glade:7
+#: pharmaship/gui/templates/db_import_dialog.glade:7
+msgid "Success"
+msgstr "Succès"
+
+#: pharmaship/gui/templates/subitem_add.glade:17
+#: pharmaship/gui/templates/subitem_modify.glade:12
 msgid "Supply the first aid kit"
 msgstr "Compléter la trousse de secours"
 
-#: gui/templates/subitem_add.glade:132
+#: pharmaship/gui/templates/subitem_add.glade:132
 msgid "Supply the first aid kit from the following item:"
 msgstr "Compléter la trousse de secours avec l'item suivant :"
 
-#: inventory/constants.py:32
+#: pharmaship/inventory/constants.py:32
 msgid "Suppository"
 msgstr "Suppositoire"
 
-#: pharmaship/gui/view.py:257 pharmaship/gui/view.py:267 gui/view.py:234
-#: gui/main_view.py:228 gui/main_view.py:224
+#: pharmaship/gui/view.py:328
 msgid "T + 2 months"
 msgstr "T + 2 mois"
 
-#: pharmaship/gui/view.py:261 pharmaship/gui/view.py:271 gui/view.py:238
-#: gui/main_view.py:232 gui/main_view.py:228
+#: pharmaship/gui/view.py:332
 msgid "T + 4 months"
 msgstr "T + 4 mois"
 
-#: inventory/constants.py:27
+#: pharmaship/inventory/constants.py:27
 msgid "Tablet"
 msgstr "Comprimé"
 
-#: core/import_data.py:237
+#: pharmaship/core/import_data.py:302
 msgid "Target module has no update method. See detailed log."
 msgstr ""
 "Le module cible n'a pas de fonction d'importation. Consultez les journaux."
 
-#: pharmaship/gui/view.py:576 pharmaship/gui/view.py:586 gui/view.py:550
-#: gui/main_view.py:532 gui/main_view.py:528
+#: pharmaship/gui/view.py:649 pharmaship/gui/templates/dashboard.glade:1178
+#: pharmaship/gui/templates/mode_menu.xml:35 pharmaship/inventory/search.py:256
 msgid "Telemedical"
 msgstr "Télémédical"
 
 #: pharmaship/gui/export/telemedical.py:46
-#: pharmaship/gui/export/laboratory.py:49
-#: pharmaship/gui/export/telemedical.py:49 gui/export/laboratory.py:49
-#: gui/export/telemedical.py:49 gui/export/laboratory.py:60
-#: gui/export/telemedical.py:60
 msgid "Telemedical Equipment Inventory"
 msgstr "Inventaire du matériel télémédical"
 
-#: gui/templates/rescue_bag_dialog.glade:116
+#: pharmaship/gui/templates/db_export_dialog.glade:12
+msgid "The database was exported with success."
+msgstr "La base de données a été exportée avec succès."
+
+#: pharmaship/gui/templates/db_import_dialog.glade:12
+msgid "The database was imported with success."
+msgstr "La base de données a été importée avec succès."
+
+#: pharmaship/gui/templates/rescue_bag_dialog.glade:116
 msgid "The items contained in the bags deleted will not be deleted."
 msgstr "Les items des sacs supprimés ne seront pas supprimés."
 
-#: gui/templates/location_delete.glade:103
-#: gui/templates/rescue_bag_dialog.glade:99
+#: pharmaship/gui/templates/location_delete.glade:103
+#: pharmaship/gui/templates/rescue_bag_dialog.glade:99
 msgid "This action is not recoverable."
 msgstr "Cette action n'est pas annulable."
 
-#: gui/templates/article_delete.glade:105
-#: gui/templates/subitem_delete.glade:105
+#: pharmaship/gui/templates/article_delete.glade:105
+#: pharmaship/gui/templates/subitem_delete.glade:105
 msgid ""
 "This action is not recoverable. The article will be deleted from the "
 "database."
@@ -1347,7 +1276,7 @@ msgstr ""
 "Cette action n'est pas annulable. L'article sera supprimé de la base de "
 "données."
 
-#: gui/templates/medicine_delete.glade:105
+#: pharmaship/gui/templates/medicine_delete.glade:105
 msgid ""
 "This action is not recoverable. The medicine will be deleted from the "
 "database."
@@ -1355,176 +1284,178 @@ msgstr ""
 "Cette action n'est pas annulable. Le médicament sera supprimé de la base de "
 "données."
 
-#: inventory/constants.py:70
+#: pharmaship/inventory/constants.py:70
 msgid "Topical"
 msgstr "Locale"
 
-#: inventory/constants.py:71
+#: pharmaship/inventory/constants.py:71
 msgid "Transdermal"
 msgstr "Transdermique"
 
-#: inventory/models.py:146
+#: pharmaship/inventory/models.py:146
 msgid "Type"
 msgstr "Type"
 
-#: inventory/medicines/utils.py:142 inventory/medicines/utils.py:146
-#: inventory/laboratory/utils.py:129 inventory/laboratory/utils.py:133
-#: inventory/equipment/utils.py:130 inventory/equipment/utils.py:134
-#: inventory/telemedical/utils.py:128 inventory/telemedical/utils.py:132
+#: pharmaship/inventory/parsers/equipment.py:155
+#: pharmaship/inventory/parsers/equipment.py:160
+#: pharmaship/inventory/parsers/telemedical.py:145
+#: pharmaship/inventory/parsers/telemedical.py:149
+#: pharmaship/inventory/parsers/laboratory.py:145
+#: pharmaship/inventory/parsers/laboratory.py:149
+#: pharmaship/inventory/parsers/medicines.py:165
+#: pharmaship/inventory/parsers/medicines.py:170
 msgid "Unassigned"
 msgstr "Non assigné"
 
-#: pharmaship/gui/views/rescue_bag.py:515
-#: pharmaship/gui/views/rescue_bag.py:512 gui/views/rescue_bag.py:512
+#: pharmaship/gui/views/rescue_bag.py:527
 msgid "Update in the equipment view"
 msgstr "Mettre à jour dans l'inventaire du matériel"
 
-#: pharmaship/gui/views/rescue_bag.py:512
-#: pharmaship/gui/views/rescue_bag.py:509 gui/views/rescue_bag.py:509
+#: pharmaship/gui/views/rescue_bag.py:523
 msgid "Update in the medicine view"
 msgstr "Mettre à jour dans l'inventaire des médicaments"
 
-#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
-#. Use
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Use
-#: gui/views/equipment.py:672 gui/views/medicines.py:665
-#: gui/views/telemedical.py:647
+#: pharmaship/gui/views/equipment.py:707 pharmaship/gui/views/medicines.py:702
+#: pharmaship/gui/views/telemedical.py:691
 msgid "Use"
 msgstr "Utiliser"
 
-#: gui/templates/article_use.glade:17 gui/templates/medicine_use.glade:17
-#: gui/templates/subitem_use.glade:17
+#: pharmaship/gui/templates/article_use.glade:17
+#: pharmaship/gui/templates/medicine_use.glade:17
+#: pharmaship/gui/templates/subitem_use.glade:17
 msgid "Use a medicine"
 msgstr "Utiliser un médicament"
 
-#: gui/templates/article_use.glade:52 gui/templates/medicine_use.glade:52
-#: gui/templates/subitem_use.glade:52
+#: pharmaship/gui/templates/article_use.glade:52
+#: pharmaship/gui/templates/medicine_use.glade:52
+#: pharmaship/gui/templates/subitem_use.glade:52
 msgid "Use it!"
 msgstr "Utilisons-le !"
 
-#: inventory/constants.py:10
+#: pharmaship/inventory/constants.py:10
 msgid "Used"
 msgstr "Utilisé"
 
-#: inventory/constants.py:82
+#: pharmaship/gui/templates/settings_menu.xml:56
+msgid "User Manual"
+msgstr "Manuel de l'utilisateur"
+
+#: pharmaship/inventory/constants.py:82
 msgid "Vaginal"
 msgstr "Vaginale"
 
-#: inventory/models.py:149
+#: pharmaship/inventory/models.py:149
 msgid "Value"
 msgstr "Valeur"
 
 #: pharmaship/gui/views/allowance_manager.py:106
-#: gui/views/allowance_manager.py:106 gui/views/allowance_manager.py:107
 msgid "Version"
 msgstr "Version"
 
-#: gui/templates/settings_menu.xml:14
+#: pharmaship/gui/templates/settings_menu.xml:14
 msgid "Vessel Settings"
 msgstr "Paramètres navire"
 
-#: gui/templates/vessel_settings.glade:331
+#: pharmaship/gui/templates/vessel_settings.glade:331
 msgid "Vessel contact information"
 msgstr "Informations de contact du navire"
 
-#: gui/templates/vessel_settings.glade:209
+#: pharmaship/gui/templates/vessel_settings.glade:209
 msgid "Vessel identification"
 msgstr "Identification du navire"
 
-#: gui/templates/vessel_settings.glade:53
+#: pharmaship/gui/templates/vessel_settings.glade:53
 msgid "Vessel name:"
 msgstr "Nom du navire :"
 
-#: gui/templates/allowance_manager.glade:255
+#: pharmaship/gui/templates/allowance_manager.glade:255
 msgid "Vessel pharmacy"
 msgstr "Pharmacie navire"
 
 #: pharmaship/gui/reports/header.html:33
-#: pharmaship/gui/reports/equipment.html:31
-#: pharmaship/gui/reports/header.html:31
-#: pharmaship/gui/reports/laboratory.html:31
-#: pharmaship/gui/reports/medicines.html:31
-#: pharmaship/gui/reports/telemedical.html:31
-#: gui/templates/reports/equipment.html:31 gui/templates/reports/header.html:31
-#: gui/templates/reports/laboratory.html:31
-#: gui/templates/reports/medicines.html:31
-#: gui/templates/reports/telemedical.html:31
 msgid "Vessel:"
 msgstr "Navire :"
 
-#: gui/views/equipment.py:207 gui/views/first_aid_kits.py:240
-#: gui/views/rescue_bag.py:235 gui/views/rescue_bag.py:389
-#: gui/views/telemedical.py:197
+#: pharmaship/gui/views/equipment.py:219
+#: pharmaship/gui/views/first_aid_kits.py:244
+#: pharmaship/gui/views/rescue_bag.py:238
+#: pharmaship/gui/views/rescue_bag.py:394
+#: pharmaship/gui/views/telemedical.py:211
 msgid "View picture"
 msgstr "Voir l'image"
 
-#: gui/templates/allowance_manager.glade:197
+#: pharmaship/gui/templates/allowance_manager.glade:197
 msgid "Warning delay for expiry check:"
 msgstr "Délai d'alerte avant expiration :"
 
-#: gui/templates/article_delete.glade:75
+#: pharmaship/gui/templates/article_delete.glade:75
 msgid "You are going to delete the following article:"
 msgstr "Vous allez supprimer l'article suivant :"
 
-#: gui/templates/subitem_delete.glade:75
+#: pharmaship/gui/templates/subitem_delete.glade:75
 msgid "You are going to delete the following item:"
 msgstr "Vous allez supprimer l'item suivant :"
 
-#: gui/templates/medicine_delete.glade:75
+#: pharmaship/gui/templates/medicine_delete.glade:75
 msgid "You are going to delete the following medicine:"
 msgstr "Vous allez supprimer le médicament suivant :"
 
-#: gui/templates/article_use.glade:84
+#: pharmaship/gui/templates/article_use.glade:84
 msgid "You are going to use the following article:"
 msgstr "Vous allez utiliser l'article suivant :"
 
-#: gui/templates/subitem_use.glade:84
+#: pharmaship/gui/templates/subitem_use.glade:84
 msgid "You are going to use the following item:"
 msgstr "Vous allez utiliser l'item suivant :"
 
-#: gui/templates/medicine_use.glade:84
+#: pharmaship/gui/templates/medicine_use.glade:84
 msgid "You are going to use the following medicine:"
 msgstr "Vous allez utiliser le médicament :"
 
-#: pharmaship/gui/views/dashboard.py:25
+#: pharmaship/gui/views/dashboard.py:24
 msgid "equipment"
 msgstr "matériel"
 
-#: pharmaship/gui/views/dashboard.py:28
+#: pharmaship/gui/views/dashboard.py:27
 msgid "first aid kits items"
 msgstr "éléments des trousses de secours"
 
-#: pharmaship/gui/views/dashboard.py:106
+#: pharmaship/gui/views/dashboard.py:105
 #, python-brace-format
 msgid "in {0} days"
 msgstr "dans {0} jours"
 
-#: gui/templates/article_delete.glade:88 gui/templates/article_use.glade:97
-#: gui/templates/location_delete.glade:88
-#: gui/templates/medicine_delete.glade:88 gui/templates/medicine_use.glade:97
-#: gui/templates/subitem_delete.glade:88 gui/templates/subitem_modify.glade:174
-#: gui/templates/subitem_use.glade:97
+#: pharmaship/gui/templates/article_delete.glade:88
+#: pharmaship/gui/templates/article_use.glade:97
+#: pharmaship/gui/templates/location_delete.glade:88
+#: pharmaship/gui/templates/medicine_delete.glade:88
+#: pharmaship/gui/templates/medicine_use.glade:97
+#: pharmaship/gui/templates/subitem_delete.glade:88
+#: pharmaship/gui/templates/subitem_modify.glade:174
+#: pharmaship/gui/templates/subitem_use.glade:97
 msgid "label"
 msgstr "label"
 
-#: pharmaship/gui/views/dashboard.py:26
+#: pharmaship/gui/views/dashboard.py:25
 msgid "laboratory equipment"
 msgstr "équipement de laboratoire"
 
-#: pharmaship/gui/views/dashboard.py:24
+#: pharmaship/gui/views/dashboard.py:23
 msgid "molecules"
 msgstr "principes actifs"
 
-#: pharmaship/gui/views/dashboard.py:29
+#: pharmaship/gui/views/dashboard.py:28
 msgid "rescue bags items"
 msgstr "éléments des sacs d'intervention"
 
-#: pharmaship/gui/views/dashboard.py:27
+#: pharmaship/gui/views/dashboard.py:26
 msgid "telemedical equipment"
 msgstr "matériel télémédical"
 
-#: pharmaship/gui/views/dashboard.py:107
+#: pharmaship/gui/views/dashboard.py:106
 #, python-brace-format
 msgid "{0} days ago"
 msgstr "il y a {0} jours"
+

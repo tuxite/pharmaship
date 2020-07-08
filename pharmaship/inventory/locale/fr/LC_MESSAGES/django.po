@@ -1,15 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 # Matthieu Morin <morinmatthieu@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Pharmaship-MM-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-25 08:43+0000\n"
-"PO-Revision-Date: 2020-05-04 18:33+0200\n"
+"POT-Creation-Date: 2020-07-08 03:27+0000\n"
+"PO-Revision-Date: 2020-07-08 11:43+0800\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: French - France <pharmaship@devmaretique.com>\n"
 "Language: fr_FR\n"
@@ -40,10 +37,9 @@ msgid "Other"
 msgstr "Autre"
 
 #: pharmaship/inventory/constants.py:14
-#, fuzzy
 #| msgid "Send to a First Aid Kit"
 msgid "Sent to First Aid Kit"
-msgstr "Vers une trousse de secours"
+msgstr "Transféré vers une trousse de secours"
 
 #: pharmaship/inventory/constants.py:19
 msgid "None"
@@ -191,17 +187,33 @@ msgstr "Conditionnement non conforme"
 msgid "Non conformity"
 msgstr "Non-conformité"
 
-#: pharmaship/inventory/parsers/equipment.py:134
-#: pharmaship/inventory/parsers/equipment.py:138
-#: pharmaship/inventory/parsers/laboratory.py:129
-#: pharmaship/inventory/parsers/laboratory.py:133
-#: pharmaship/inventory/parsers/medicines.py:146
-#: pharmaship/inventory/parsers/medicines.py:150
-#: pharmaship/inventory/parsers/telemedical.py:128
-#: pharmaship/inventory/parsers/telemedical.py:132
+#: pharmaship/inventory/parsers/equipment.py:155
+#: pharmaship/inventory/parsers/equipment.py:160
+#: pharmaship/inventory/parsers/laboratory.py:145
+#: pharmaship/inventory/parsers/laboratory.py:149
+#: pharmaship/inventory/parsers/medicines.py:165
+#: pharmaship/inventory/parsers/medicines.py:170
+#: pharmaship/inventory/parsers/telemedical.py:145
+#: pharmaship/inventory/parsers/telemedical.py:149
 msgid "Unassigned"
 msgstr "Non assigné"
 
-#: pharmaship/inventory/parsers/rescue_bag.py:16
+#: pharmaship/inventory/parsers/rescue_bag.py:54
 msgid "All Rescue Bags"
 msgstr "Tous les sacs d'intervention"
+
+#: pharmaship/inventory/search.py:160
+msgid "Medicines"
+msgstr "Médicaments"
+
+#: pharmaship/inventory/search.py:238
+msgid "Equipment"
+msgstr "Matériel"
+
+#: pharmaship/inventory/search.py:247
+msgid "Laboratory"
+msgstr "Laboratoire"
+
+#: pharmaship/inventory/search.py:256
+msgid "Telemedical"
+msgstr "Télémédical"

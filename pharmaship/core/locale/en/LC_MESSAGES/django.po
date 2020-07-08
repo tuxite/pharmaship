@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-25 08:43+0000\n"
+"POT-Creation-Date: 2020-07-08 03:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,93 +18,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: pharmaship/core/gpg.py:28
+#: pharmaship/core/gpg.py:43
 msgid "Something went wrong! See detailed logs."
 msgstr ""
 
-#: pharmaship/core/gpg.py:33
+#: pharmaship/core/gpg.py:48
 msgid "Key already added"
 msgstr ""
 
-#: pharmaship/core/gpg.py:38
+#: pharmaship/core/gpg.py:53
 msgid "Key successfully added"
 msgstr ""
 
-#: pharmaship/core/gpg.py:68
+#: pharmaship/core/gpg.py:114
 msgid "Key not found!"
 msgstr ""
 
-#: pharmaship/core/gpg.py:71
+#: pharmaship/core/gpg.py:117
 msgid "Key removed"
 msgstr ""
 
-#: pharmaship/core/gpg.py:81
+#: pharmaship/core/gpg.py:133
 msgid "No signature found."
 msgstr ""
 
-#: pharmaship/core/gpg.py:98
+#: pharmaship/core/gpg.py:150
 msgid "Signature not in the keyring."
 msgstr ""
 
-#: pharmaship/core/import_data.py:115 pharmaship/core/import_data.py:119
-#: pharmaship/core/import_data.py:126 pharmaship/core/import_data.py:130
+#: pharmaship/core/import_data.py:183 pharmaship/core/import_data.py:187
+#: pharmaship/core/import_data.py:194 pharmaship/core/import_data.py:198
 msgid "File impossible to read. See detailled log."
 msgstr ""
 
-#: pharmaship/core/import_data.py:138
+#: pharmaship/core/import_data.py:213
 msgid "Signature not validated. See detailled log."
 msgstr ""
 
-#: pharmaship/core/import_data.py:150
+#: pharmaship/core/import_data.py:240
 msgid "Signed data is not a valid Tar file. Check logs."
 msgstr ""
 
-#: pharmaship/core/import_data.py:158
+#: pharmaship/core/import_data.py:248
 msgid "Integrity check failed. Check logs."
 msgstr ""
 
-#: pharmaship/core/import_data.py:163
+#: pharmaship/core/import_data.py:253
 msgid "Configuration not found."
 msgstr ""
 
-#: pharmaship/core/import_data.py:171
+#: pharmaship/core/import_data.py:262
 msgid "Configuration file incorrect. "
 msgstr ""
 
-#: pharmaship/core/import_data.py:174
+#: pharmaship/core/import_data.py:265
 msgid "Package Author"
 msgstr ""
 
-#: pharmaship/core/import_data.py:175
+#: pharmaship/core/import_data.py:266
 msgid "Package Version"
 msgstr ""
 
-#: pharmaship/core/import_data.py:176
+#: pharmaship/core/import_data.py:267
 msgid "Package Date"
 msgstr ""
 
-#: pharmaship/core/import_data.py:184
+#: pharmaship/core/import_data.py:275
 msgid "A module to update is not installed. Check logs for details."
 msgstr ""
 
-#: pharmaship/core/import_data.py:194
+#: pharmaship/core/import_data.py:292
 msgid "Module import error. See detailed log."
 msgstr ""
 
-#: pharmaship/core/import_data.py:204
+#: pharmaship/core/import_data.py:302
 msgid "Target module has no update method. See detailed log."
 msgstr ""
 
-#: pharmaship/core/import_data.py:209
+#: pharmaship/core/import_data.py:307
 #, python-brace-format
 msgid "Import of module {0} failed. See detailed logs."
 msgstr ""
 
-#: pharmaship/core/import_data.py:212
+#: pharmaship/core/import_data.py:310
 #, python-brace-format
 msgid "Import of module {0} succeeded."
 msgstr ""
 
-#: pharmaship/core/import_data.py:217
+#: pharmaship/core/import_data.py:315
 msgid "Import success."
 msgstr ""
