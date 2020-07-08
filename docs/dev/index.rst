@@ -6,6 +6,5 @@ Development
 
    python_env
    translate
-   build_win
-   win_installer
+   build_win_installer
    build_deb
