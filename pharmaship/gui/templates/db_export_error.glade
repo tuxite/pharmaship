@@ -10,7 +10,7 @@
     <property name="type_hint">dialog</property>
     <property name="message_type">error</property>
     <property name="buttons">close</property>
-    <property name="text" translatable="yes">An error occurred during the databse export!</property>
+    <property name="text" translatable="yes">An error occurred during the database export!</property>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can_focus">False</property>

@@ -131,7 +131,7 @@ class View:
         top_grid.destroy()
 
         self.build_full_grid(child_builder, data["all"])
-        self.stack.add_titled(child, "all", _("All rescue bags"))
+        self.stack.add_titled(child, "all", _("All Rescue Bags"))
         self.children[0] = child_builder
 
     def build_full_grid(self, builder, data, toggle_row_num=None):
