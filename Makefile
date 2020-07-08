@@ -18,6 +18,8 @@ pot:
 	rm ${LOCALE_FOLDER}/gui.pot
 	rm ${LOCALE_FOLDER}/code.pot
 
+messages: messages-fr messages-en
+
 messages-fr:
 	# Create backup
 	cp ${LOCALE_FOLDER_FR}/com.devmaretique.pharmaship.po ${LOCALE_FOLDER_FR}/com.devmaretique.pharmaship.po.bak
