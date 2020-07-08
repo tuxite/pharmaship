@@ -55,7 +55,18 @@ class DatabaseImport:
         self.params.refresh()
 
         dialog.destroy()
+        self.success_dialog()
         return True
+
+    def success_dialog(self):
+        """Show a Gtk.MessageDialog to inform the DB copy went fine."""
+        builder = Gtk.Builder.new_from_file(utils.get_template("db_import_dialog.glade"))
+        dialog = builder.get_object("dialog")
+
+        dialog.set_transient_for(self.window)
+        dialog.run()
+
+        dialog.destroy()
 
 
 class DatabaseExport:
@@ -92,7 +103,30 @@ class DatabaseExport:
             shutil.copy(db_filename, filename)
         except OSError as error:
             log.exception("File impossible to save: %s. %s", filename, error)
+            self.error_dialog(error)
             return False
 
         dialog.destroy()
+        self.success_dialog()
         return True
+
+    def success_dialog(self):
+        """Show a Gtk.MessageDialog to inform the DB backup went fine."""
+        builder = Gtk.Builder.new_from_file(utils.get_template("db_export_dialog.glade"))
+        dialog = builder.get_object("dialog")
+
+        dialog.set_transient_for(self.window)
+        dialog.run()
+
+        dialog.destroy()
+
+    def error_dialog(self, error):
+        """Show a Gtk.MessageDialog to inform about the error."""
+        builder = Gtk.Builder.new_from_file(utils.get_template("db_export_dialog.glade"))
+        dialog = builder.get_object("dialog")
+        dialog.props.secondary_text = error
+
+        dialog.set_transient_for(self.window)
+        dialog.run()
+
+        dialog.destroy()
