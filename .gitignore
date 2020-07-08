@@ -151,6 +151,7 @@ docs/build/
 *.exe
 *.gpg
 *.kbx
+*.bak
 
 old/
 documents/
