@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pharmaship-MM-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-08 03:27+0000\n"
+"POT-Creation-Date: 2020-07-08 04:06+0000\n"
 "PO-Revision-Date: 2020-07-08 11:43+0800\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: French - France <pharmaship@devmaretique.com>\n"
@@ -37,7 +37,6 @@ msgid "Other"
 msgstr "Autre"
 
 #: pharmaship/inventory/constants.py:14
-#| msgid "Send to a First Aid Kit"
 msgid "Sent to First Aid Kit"
 msgstr "Transféré vers une trousse de secours"
 
