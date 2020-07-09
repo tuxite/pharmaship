@@ -1,0 +1,2 @@
+opt/venvs/pharmaship/bin/pharmaship usr/bin/pharmaship
+opt/venvs/pharmaship/bin/pharmaship-admin usr/bin/pharmaship-admin

@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with python-virtualenv
+
+override_dh_installdocs:
+	PYTHONPATH=. python3 setup.py build_sphinx
+	dh_installdocs
+
+override_dh_virtualenv:
+	dh_virtualenv -S --python python3
+
+override_dh_install:
+	mkdir -p debian/tmp/usr/share/icons/hicolor/scalable/apps
+	cp pharmaship/gui/pharmaship_icon.svg debian/tmp/usr/share/icons/hicolor/scalable/apps/pharmaship.svg
+	dh_install

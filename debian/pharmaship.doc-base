@@ -1,0 +1,9 @@
+Document: pharmaship
+Title: Pharmaship Documentation
+Author: Matthieu Morin <morinmatthieu@gmail.com>
+Abstract: This documentation gives an introduction to Pharmaship.
+Section: Programming/Python
+
+Format: HTML
+Index: /usr/share/doc/pharmaship/html/index.html
+Files: /usr/share/doc/pharmaship/html/*.html
