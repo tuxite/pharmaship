@@ -10,7 +10,7 @@
     <property name="program_name">Pharmaship</property>
     <property name="version">proof of concept</property>
     <property name="copyright" translatable="yes">Association Dévelopement de Solutions Marétiques</property>
-    <property name="website">https://devmaretique.com</property>
+    <property name="website">https://pharmaship.devmaretique.com</property>
     <property name="authors">Matthieu Morin
 Hugues Desvaux</property>
     <property name="logo">../logo.svg</property>
