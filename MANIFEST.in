@@ -1,6 +1,5 @@
 include LICENSE
 include README.md
-include INSTALL.md
 include TODO.md
 
 include Makefile
@@ -20,6 +19,12 @@ recursive-include pharmaship/gui *.mo
 recursive-include pharmaship/gui *.gresource
 
 recursive-include pharmaship/schemas *.json
+
+# Documentation
+recursive-include docs *.rst
+recursive-include docs *.png
+recursive-include docs *.svg
+include docs/conf.py
 
 # Installer
 recursive-include bin *.nsi
