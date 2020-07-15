@@ -1,0 +1,72 @@
+{
+  "molecules": {
+    "type": "dict",
+    "keysrules": {
+      "type": "integer",
+      "min": 0
+    },
+    "valuesrules": {
+      "type": "dict",
+      "schema": {
+        "additional": {
+          "type": "integer",
+          "min": 0
+        },
+        "maximum": {
+          "type": "integer",
+          "min": 0
+        },
+        "detail": {
+          "type": "list",
+          "nullable": true,
+          "schema": {
+            "type": "dict",
+            "schema": {
+              "name": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": ["integer", "string"]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "equipments": {
+    "type": "dict",
+    "keysrules": {
+      "type": "integer",
+      "min": 0
+    },
+    "valuesrules": {
+      "type": "dict",
+      "schema": {
+        "additional": {
+          "type": "integer",
+          "min": 0
+        },
+        "maximum": {
+          "type": "integer",
+          "min": 0
+        },
+        "detail": {
+          "type": "list",
+          "nullable": true,
+          "schema": {
+            "type": "dict",
+            "schema": {
+              "name": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": ["integer", "string"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

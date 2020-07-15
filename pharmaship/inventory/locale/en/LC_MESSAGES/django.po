@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-25 08:43+0000\n"
+"POT-Creation-Date: 2020-07-08 04:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,17 +188,33 @@ msgstr ""
 msgid "Non conformity"
 msgstr ""
 
-#: pharmaship/inventory/parsers/equipment.py:134
-#: pharmaship/inventory/parsers/equipment.py:138
-#: pharmaship/inventory/parsers/laboratory.py:129
-#: pharmaship/inventory/parsers/laboratory.py:133
-#: pharmaship/inventory/parsers/medicines.py:146
-#: pharmaship/inventory/parsers/medicines.py:150
-#: pharmaship/inventory/parsers/telemedical.py:128
-#: pharmaship/inventory/parsers/telemedical.py:132
+#: pharmaship/inventory/parsers/equipment.py:155
+#: pharmaship/inventory/parsers/equipment.py:160
+#: pharmaship/inventory/parsers/laboratory.py:145
+#: pharmaship/inventory/parsers/laboratory.py:149
+#: pharmaship/inventory/parsers/medicines.py:165
+#: pharmaship/inventory/parsers/medicines.py:170
+#: pharmaship/inventory/parsers/telemedical.py:145
+#: pharmaship/inventory/parsers/telemedical.py:149
 msgid "Unassigned"
 msgstr ""
 
-#: pharmaship/inventory/parsers/rescue_bag.py:16
+#: pharmaship/inventory/parsers/rescue_bag.py:54
 msgid "All Rescue Bags"
+msgstr ""
+
+#: pharmaship/inventory/search.py:160
+msgid "Medicines"
+msgstr ""
+
+#: pharmaship/inventory/search.py:238
+msgid "Equipment"
+msgstr ""
+
+#: pharmaship/inventory/search.py:247
+msgid "Laboratory"
+msgstr ""
+
+#: pharmaship/inventory/search.py:256
+msgid "Telemedical"
 msgstr ""

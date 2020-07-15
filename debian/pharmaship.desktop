@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Pharmaship
+Comment=A ship's pharmacy management software.
+GenericName=Pharmacy Software
+Exec=/usr/bin/pharmaship
+Icon=pharmaship
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;Utility;
+MimeType=text/plain;
+StartupWMClass=atom

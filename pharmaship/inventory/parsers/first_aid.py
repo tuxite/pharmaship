@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
+"""Utility functions for parsing/serializing First Aid Kit related data."""
 import datetime
 import copy
-
-from django.utils.translation import gettext as _
 
 from pharmaship.core.utils import log
 
@@ -11,8 +10,18 @@ from pharmaship.inventory import models
 
 
 def get_required(params):
-    # Get required quantities
-    req_qty_list = models.FirstAidKitReqQty.objects.filter(allowance__in=params.allowances).select_related('allowance')
+    """Get required quantities.
+
+    :param object params: Global Parameters of the application \
+    (:class:`pharmaship.gui.view.GlobalParameters`)
+
+    :return: A dictionary of required quantities sorted by type (molecule or \
+    equipment) and subsequent item ID.
+    :rtype: dict
+    """
+    req_qty_list = models.FirstAidKitReqQty.objects.filter(
+        allowance__in=params.allowances
+        ).select_related('allowance')
     required_quantities = {
         "molecules": {},
         "equipments": {},
@@ -48,7 +57,15 @@ def get_required(params):
 
 
 def get_transactions(content_type, items):
-    """Get transactions for selected `items`."""
+    """Get transactions for selected `items`.
+
+    :param int content_type: ID of ContentType of items
+    :param list items: List of items ID
+
+    :return: Dictionary of compiled quantities for each item. Dict keys are \
+    items ID.
+    :rtype: dict
+    """
     transactions = models.QtyTransaction.objects.filter(
         content_type_id=content_type,
         object_id__in=items
@@ -68,6 +85,16 @@ def get_transactions(content_type, items):
 
 
 def create_molecule(item, content_type, required=None):
+    """Return a dictionary of a molecule.
+
+    :param models.Molecule item: A Molecule instance.
+    :param int content_type: ContentType ID of Molecule model.
+    :param required: Dictionary of required quantities for molecules \
+    (keys are Molecule ID).
+
+    :return: Dictionary of parsed Molecule data
+    :rtype: dict
+    """
     result = {
         "name": str(item),
         "required_quantity": 0,
@@ -99,6 +126,16 @@ def create_molecule(item, content_type, required=None):
 
 
 def create_equipment(item, content_type, required):
+    """Return a dictionary of an equipment.
+
+    :param models.Equipment item: An Equipment instance.
+    :param int content_type: ContentType ID of Molecule model.
+    :param required: Dictionary of required quantities for equipments \
+    (keys are Molecule ID).
+
+    :return: Dictionary of parsed Equipment data
+    :rtype: dict
+    """
     result = {
         "name": str(item),
         "required_quantity": 0,
@@ -130,6 +167,17 @@ def create_equipment(item, content_type, required):
 
 
 def get_available_medicines(element, content_type_id, qty_transactions):
+    """Get the list of available medicines (in "chest") for a given molecule.
+
+    :param models.Molecule element: A Molecule instance
+    :param int content_type_id: ContentType ID of Medicine model.
+    :param dict qty_transactions: Dictionary of compiled quantities. \
+    This dictionary is obtained from :py:func:`get_transactions`.
+
+    :return: A list of available medicines for the selected molecule with \
+    quantities available.
+    :rtype: dict
+    """
     result = []
 
     for item in element.medicines.all():
@@ -154,6 +202,17 @@ def get_available_medicines(element, content_type_id, qty_transactions):
 
 
 def get_available_articles(element, content_type_id, qty_transactions):
+    """Get the list of available articles (in "chest") for a given equipment.
+
+    :param models.Molecule element: An Equipment instance
+    :param int content_type_id: ContentType ID of Article model.
+    :param dict qty_transactions: Dictionary of compiled quantities. \
+    This dictionary is obtained from :py:func:`get_transactions`.
+
+    :return: A list of available articles for the selected equipment with \
+    quantities available.
+    :rtype: dict
+    """
     result = []
 
     for item in element.articles.all():
@@ -177,6 +236,17 @@ def get_available_articles(element, content_type_id, qty_transactions):
 
 
 def get_subitems(params, kit, common):
+    """Get the list of items currently in a First Aid Kit instance.
+
+    :param object params: Global Parameters of the application \
+    (:class:`pharmaship.gui.view.GlobalParameters`)
+    :param models.FirstAidKit kit: First Aid Kit instance.
+    :param dict common: Dictionary of all parsed and available elements.
+
+    :return: ``common`` dictionary with additional key containing the list of \
+    First Aid Kit items.
+    :rtype: dict
+    """
     warning_delay = params.setting.expire_date_warning_delay
     today = params.today
     # Compute once the warning date from warning_delay days
@@ -234,6 +304,23 @@ def get_subitems(params, kit, common):
 
 
 def merge_elements(elements_dict):
+    """Merge elements of each dictionary key into a unique list.
+
+    :param dict elements_dict: Input dictionary. It must have the following \
+    keys:
+
+      * ``molecules``
+      * ``equipments``
+
+    :return: A list of all values of the dictionary, without the keys.
+    :rtype: list
+
+    :Example:
+
+    >>> data = {"molecules": {1: "A", 2: "B"}, "equipments": {8: "C", 9: "D"}}
+    >>> merge_elements(data)
+    ["A", "B", "C", "D"]
+    """
     result = []
 
     for k, element in elements_dict["molecules"].items():
@@ -244,8 +331,53 @@ def merge_elements(elements_dict):
 
     return result
 
-# Pre-treatment function
+
 def parser(params, kits=None):
+    """Parse the database to render a list of Kits with their contents.
+
+    This function processes database data and sets flags on articles missing, \
+    expired or reaching near expiry.
+
+    It parses also the available items in "chest" according to the required \
+    elements (Molecules and Equipments).
+
+    Only elements with :class:`pharmaship.inventory.models.FirstAidKitReqQty`\
+    are listed.
+
+    See ``pharmaship/schemas/parsers/first_aid`` for details.
+
+    Resumed architecture of the method:
+
+        1. Get required quantities: :py:func:`get_required`
+        2. Get transactions :py:func:`get_transactions`:
+
+            * for articles of required equipments;
+            * for medicines of required molecules.
+
+        3. Parse each molecule:
+
+            * Create the molecule dictionary: :py:func:`create_molecule`
+            * Add the available medicines: :py:func:`get_available_medicines`
+
+        3. Parse each equipment:
+
+            * Create the equipment dictionary: :py:func:`create_equipment`
+            * Add the available articles: :py:func:`get_available_articless`
+
+        4. Create kits dictionaries:
+
+            * Get the contents \
+            (:class:`pharmaship.inventory.models.FirstAidKitItem`): \
+            :py:func:`get_subitems`
+            * Merge the contents: :py:func:`merge_elements`
+
+    :param object params: Global Parameters of the application \
+    (:class:`pharmaship.gui.view.GlobalParameters`)
+    :param django.db.models.query.QuerySet kits: List of First Aid Kits.
+
+    :return: Dictionnary of First Aid Kits.
+    :rtype: list(dict)
+    """
     result = []
 
     if kits is None:
@@ -276,7 +408,11 @@ def parser(params, kits=None):
     }
 
     for molecule in molecule_list:
-        element = create_molecule(molecule, params.content_types["molecule"], required["molecules"])
+        element = create_molecule(
+            item=molecule,
+            content_type=params.content_types["molecule"],
+            required=required["molecules"]
+            )
         element["available"] = get_available_medicines(
             content_type_id=params.content_types["medicine"],
             element=molecule,
@@ -286,7 +422,11 @@ def parser(params, kits=None):
         common["molecules"][molecule.id] = element
 
     for equipment in equipment_list:
-        element = create_equipment(equipment, params.content_types["equipment"], required["equipments"])
+        element = create_equipment(
+            item=equipment,
+            content_type=params.content_types["equipment"],
+            required=required["equipments"]
+            )
         element["available"] = get_available_articles(
             content_type_id=params.content_types["article"],
             element=equipment,

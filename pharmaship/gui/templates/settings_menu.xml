@@ -53,6 +53,10 @@
     </section>
     <section>
       <item>
+        <attribute name="label" translatable="yes">User Manual</attribute>
+        <attribute name="action">app.doc</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">About</attribute>
         <attribute name="action">app.about</attribute>
       </item>

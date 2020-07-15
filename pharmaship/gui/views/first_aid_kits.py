@@ -13,8 +13,7 @@ from pharmaship.inventory import models
 from pharmaship.inventory import forms
 from pharmaship.inventory.parsers.first_aid import parser
 
-from pharmaship.gui import utils
-from pharmaship.gui.utils import ButtonWithImage, EntryMasked
+from pharmaship.gui import utils, widgets
 
 
 DATE_MASK = {
@@ -37,7 +36,9 @@ class View:
         self.stack = self.builder.get_object("stack")
 
         # For recording the open equipments in the grid
-        self.toggled = False
+        self.toggled = {
+            0: False
+        }
 
         self.children = {}
 
@@ -59,11 +60,11 @@ class View:
 
         # Toggle item
         toggle_row_num = None
-        if self.toggled:
-            toggle_row_num = self.toggled[0] - 1
+        if self.toggled[visible_kit_id]:
+            toggle_row_num = self.toggled[visible_kit_id][0] - 1
 
         # Reset toggled value
-        self.toggled = False
+        self.toggled[visible_kit_id] = False
 
         self.build_grid(child_builder, data[0], toggle_row_num)
 
@@ -146,6 +147,7 @@ class View:
             btn_save = child_builder.get_object("btn-save")
             btn_save.hide()
 
+            self.toggled[kit["id"]] = False
             self.build_grid(child_builder, kit)
             self.stack.add_titled(child, "first-aid-kit-{0}".format(kit["id"]), kit["name"])
             self.children[kit["id"]] = child_builder
@@ -183,20 +185,15 @@ class View:
             if toggle_row_num and toggle_row_num == i:
                 toggle_item = element
 
-            box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-            button = Gtk.Button()
             label = Gtk.Label(element["name"], xalign=0)
             label.set_line_wrap(True)
             label.set_lines(1)
             label.set_line_wrap_mode(2)
-            button.add(label)
-            button.set_relief(Gtk.ReliefStyle.NONE)
-            button.get_style_context().add_class("item-cell-btn")
-            # button.get_style_context().add_class("item-cell")
-            button.connect("clicked", self.toggle_item, grid, element, i, data["id"])
-            box.pack_start(button, True, True, 0)
-            box.get_style_context().add_class("item-cell-name")
-            grid.attach(box, 0, i, 2, 1)
+            label.get_style_context().add_class("item-cell")
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, data["id"])
+            evbox.add(label)
+            grid.attach(evbox, 0, i, 2, 1)
+
 
             date_display = ""
             if len(element["exp_dates"]) > 0 and None not in element["exp_dates"]:
@@ -209,7 +206,9 @@ class View:
                 label.get_style_context().add_class("article-expired")
             elif element["has_date_warning"]:
                 label.get_style_context().add_class("article-warning")
-            grid.attach(label, 2, i, 1, 1)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, data["id"])
+            evbox.add(label)
+            grid.attach(evbox, 2, i, 1, 1)
 
             label = Gtk.Label(xalign=0.5)
             label.set_markup("{0}<small>/{1}</small>".format(element["quantity"], element["required_quantity"]))
@@ -221,7 +220,9 @@ class View:
             # If quantity is less than required, affect corresponding style
             if element["quantity"] < element["required_quantity"]:
                 label.get_style_context().add_class("article-expired")
-            grid.attach(label, 3, i, 1, 1)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, data["id"])
+            evbox.add(label)
+            grid.attach(evbox, 3, i, 1, 1)
 
             # Set tooltip to give information on allowances requirements
             tooltip_text = []
@@ -234,17 +235,20 @@ class View:
                 linked_btn = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
                 linked_btn.get_style_context().add_class("linked")
                 linked_btn.get_style_context().add_class("equipment-item-buttons")
-                # linked_btn.set_halign(Gtk.Align.END)
-                grid.attach(linked_btn, 4, i, 1, 1)
+                evbox = widgets.EventBox(element, self.toggle_item, 5, i, data["id"])
+                evbox.add(linked_btn)
+                grid.attach(evbox, 4, i, 1, 1)
 
                 # Picture
                 picture = element["picture"]
-                btn_picture = ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+                btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
                 linked_btn.pack_end(btn_picture, False, True, 0)
             else:
                 label = Gtk.Label("", xalign=0.5)
                 label.get_style_context().add_class("item-cell")
-                grid.attach(label, 4, i, 1, 1)
+                evbox = widgets.EventBox(element, self.toggle_item, 5, i, data["id"])
+                evbox.add(label)
+                grid.attach(evbox, 4, i, 1, 1)
 
         # Toggle if active
         if toggle_row_num and toggle_item:
@@ -261,13 +265,19 @@ class View:
 
     def toggle_item(self, source, grid, element, row_num, kit_id):
         # If already toggled, destroy the toggled part
-        if self.toggled and self.toggled[0] > 0:
-            for i in range(self.toggled[1] - self.toggled[0] + 1):
-                grid.remove_row(self.toggled[0])
+        if self.toggled[kit_id] and self.toggled[kit_id][0] > 0:
+            # Remove the active-row CSS class of the parent item
+            utils.grid_row_class(grid, self.toggled[kit_id][0] - 1, 5, False)
+
+            for i in range(self.toggled[kit_id][1] - self.toggled[kit_id][0] + 1):
+                grid.remove_row(self.toggled[kit_id][0])
             # No need to recreate the widget, we just want to hide
-            if row_num + 1 == self.toggled[0]:
-                self.toggled = False
+            if row_num + 1 == self.toggled[kit_id][0]:
+                self.toggled[kit_id] = False
                 return True
+
+        # Add the active-row CSS class
+        utils.grid_row_class(grid, row_num, 5)
 
         # Need to create the content
         new_row = row_num + 1
@@ -357,13 +367,13 @@ class View:
             grid.attach(linked_btn, 4, i, 1, 1)
 
             # Use
-            btn_use = ButtonWithImage("edit-redo-symbolic", tooltip="Use", connect=self.dialog_use, data=item)
+            btn_use = widgets.ButtonWithImage("edit-redo-symbolic", tooltip="Use", connect=self.dialog_use, data=item)
             linked_btn.pack_end(btn_use, False, True, 0)
             # Modify
-            btn_modify = ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=(item, element["perishable"]))
+            btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=(item, element["perishable"]))
             linked_btn.pack_end(btn_modify, False, True, 0)
             # Delete
-            btn_delete = ButtonWithImage("edit-delete-symbolic", tooltip="Delete", connect=self.dialog_delete, data=item)
+            btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip="Delete", connect=self.dialog_delete, data=item)
             btn_delete.get_style_context().add_class("article-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 
@@ -387,7 +397,7 @@ class View:
         grid.attach(label, 1, i, 4, 1)
 
         grid.show_all()
-        self.toggled = (new_row, i)
+        self.toggled[kit_id] = (new_row, i)
 
         query_count_all()
 
@@ -684,7 +694,7 @@ class View:
         quantity.set_value(item["quantity"])
 
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, EntryMasked(mask=DATE_MASK))
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
         # exp_date.connect("activate", self.response_modify, dialog, item, perishable, builder)
         builder.expose_object("exp_date", exp_date)
         date_display = item["exp_date"].strftime("%Y-%m-%d")

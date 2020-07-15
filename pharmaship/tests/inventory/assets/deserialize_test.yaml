@@ -1,0 +1,1138 @@
+- model: inventory.moleculegroup
+  pk: 1
+  fields:
+    name: Cardiologie
+    order: 1
+- model: inventory.moleculegroup
+  pk: 2
+  fields:
+    name: "Gastro-ent\xE9rologie"
+    order: 2
+- model: inventory.moleculegroup
+  pk: 3
+  fields:
+    name: "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    order: 3
+- model: inventory.moleculegroup
+  pk: 4
+  fields:
+    name: Psychiatrie - Neurologie
+    order: 4
+- model: inventory.moleculegroup
+  pk: 5
+  fields:
+    name: Allergologie
+    order: 5
+- model: inventory.moleculegroup
+  pk: 6
+  fields:
+    name: Pneumologie
+    order: 6
+- model: inventory.moleculegroup
+  pk: 7
+  fields:
+    name: Infectiologie - Parasitologie
+    order: 7
+- model: inventory.moleculegroup
+  pk: 8
+  fields:
+    name: "Gyn\xE9cologie"
+    order: 8
+- model: inventory.moleculegroup
+  pk: 9
+  fields:
+    name: "R\xE9animation"
+    order: 9
+- model: inventory.moleculegroup
+  pk: 10
+  fields:
+    name: Dermatologie
+    order: 10
+- model: inventory.moleculegroup
+  pk: 11
+  fields:
+    name: Ophtalmologie
+    order: 11
+- model: inventory.moleculegroup
+  pk: 12
+  fields:
+    name: Oto-rhino-Laryngologie - Stomatologie
+    order: 12
+- model: inventory.moleculegroup
+  pk: 13
+  fields:
+    name: "Anesth\xE9siques locaux"
+    order: 13
+- model: inventory.moleculegroup
+  pk: 14
+  fields:
+    name: "Pr\xE9vention et traitement du paludisme"
+    order: 14
+- model: inventory.moleculegroup
+  pk: 15
+  fields:
+    name: Accidents d'exposition au sang
+    order: 15
+
+- fields:
+    composition: 3% - 4.5 g
+    dosage_form: 10
+    group:
+    - Ophtalmologie
+    medicine_list: 1
+    name: Aciclovir
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: 18 mg, 12 mg - unidose 10 mL
+    dosage_form: 100
+    group:
+    - Ophtalmologie
+    medicine_list: 0
+    name: Acide Borique - Borate de Sodium
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: buvable 1 g/10 mL
+    dosage_form: 2
+    group:
+    - "Gyn\xE9cologie"
+    medicine_list: 1
+    name: Acide Tranexamique
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 300 mg
+    dosage_form: 6
+    group:
+    - Cardiologie
+    medicine_list: 0
+    name: "Acide ac\xE9tylsalicylique"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 250 mg
+    dosage_form: 1
+    group:
+    - Ophtalmologie
+    medicine_list: 1
+    name: "Ac\xE9tazolamide"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 200 mg
+    dosage_form: 6
+    group:
+    - Pneumologie
+    medicine_list: 0
+    name: "Ac\xE9tylcyst\xE9ine"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 400 mg
+    dosage_form: 1
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Albendazole
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 200 mg
+    dosage_form: 1
+    group:
+    - Cardiologie
+    medicine_list: 1
+    name: Amiodarone
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 150 mg/3 mL
+    dosage_form: 2
+    group:
+    - Cardiologie
+    medicine_list: 1
+    name: Amiodarone
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 500 mg
+    dosage_form: 3
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Amoxicilline
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 500 mg - 62,5 mg
+    dosage_form: 1
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Amoxicilline - Acide Clavulanique
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 0.80 g, 0.80 mg - Flacon 4 ml
+    dosage_form: 57
+    group:
+    - Oto-rhino-Laryngologie - Stomatologie
+    medicine_list: 0
+    name: "Amyl\xE9ine Chlorhydrate - L\xE9vomenthol"
+    remark: null
+    roa: 33
+  model: inventory.molecule
+- fields:
+    composition: 250 mg, 100 mg
+    dosage_form: 1
+    group:
+    - "Pr\xE9vention et traitement du paludisme"
+    medicine_list: 1
+    name: Atovaquone - Proguanil
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 0,5 mg/1 ml
+    dosage_form: 2
+    group:
+    - Cardiologie
+    medicine_list: 1
+    name: Atropine
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 0.5% - 10 mL
+    dosage_form: 101
+    group:
+    - Ophtalmologie
+    medicine_list: 1
+    name: Atropine
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: 50 mg
+    dosage_form: 1
+    group:
+    - Cardiologie
+    medicine_list: 1
+    name: "At\xE9nolol"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 250 mg
+    dosage_form: 1
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Azithromycine
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: "125 mL - \xC9mulsion 10%"
+    dosage_form: 91
+    group:
+    - Dermatologie
+    medicine_list: 0
+    name: Benzoate de benzyle
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 1.4% - 500 mL
+    dosage_form: 50
+    group:
+    - "R\xE9animation"
+    medicine_list: 0
+    name: Bicarbonate de Sodium
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 0.1% - 15 g
+    dosage_form: 11
+    group:
+    - Dermatologie
+    medicine_list: 1
+    name: "B\xE9tam\xE9thasone"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 300 mg/200 mg/400 mg
+    dosage_form: 7
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 0
+    name: "Carragh\xE9nates - Dioxyde titane - Oxyde de zinc"
+    remark: null
+    roa: 40
+  model: inventory.molecule
+- fields:
+    composition: 20 g
+    dosage_form: 11
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 0
+    name: "Carragh\xE9nates - Dioxyde titane - Oxyde de zinc - Lidoca\xEEne 2%"
+    remark: null
+    roa: 40
+  model: inventory.molecule
+- fields:
+    composition: 1 g/3.5 mL
+    dosage_form: 2
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Ceftriaxone
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 0.2% - Unidose 5 mL
+    dosage_form: 52
+    group:
+    - Dermatologie
+    medicine_list: 0
+    name: Chlorhexidine
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 0.5% - Flacon 125 mL
+    dosage_form: 54
+    group:
+    - Dermatologie
+    medicine_list: 0
+    name: Chlorhexidine
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 0.5 mL, 0.5 g - flacon 100 mL
+    dosage_form: 56
+    group:
+    - Oto-rhino-Laryngologie - Stomatologie
+    medicine_list: 0
+    name: Chlorhexidine - Chlorobutanol
+    remark: null
+    roa: 32
+  model: inventory.molecule
+- fields:
+    composition: 600 mg
+    dosage_form: 1
+    group:
+    - "R\xE9animation"
+    medicine_list: 0
+    name: Chlorure de Potassium
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 0.9% - 500 mL
+    dosage_form: 50
+    group:
+    - "R\xE9animation"
+    medicine_list: 0
+    name: Chlorure de sodium
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 0.3% - 5 mL
+    dosage_form: 101
+    group:
+    - Ophtalmologie
+    medicine_list: 1
+    name: Ciprofloxacine
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: 1 mg
+    dosage_form: 1
+    group:
+    - "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    medicine_list: 1
+    name: Colchicine
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 5 mg
+    dosage_form: 1
+    group:
+    - Allergologie
+    medicine_list: 2
+    name: Desloratadine
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 0.267 mg, 1.333 mg - unidose
+    dosage_form: 103
+    group:
+    - Ophtalmologie
+    medicine_list: 1
+    name: "Dexam\xE9thasone - Oxytetracycline"
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: 5 mg
+    dosage_form: 1
+    group:
+    - Psychiatrie - Neurologie
+    medicine_list: 1
+    name: "Diaz\xE9pam"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 10 mg/2 mL
+    dosage_form: 2
+    group:
+    - Psychiatrie - Neurologie
+    medicine_list: 1
+    name: "Diaz\xE9pam"
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 50 mg
+    dosage_form: 1
+    group:
+    - Psychiatrie - Neurologie
+    medicine_list: 0
+    name: Dimenhydrinate
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 3g
+    dosage_form: 6
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 0
+    name: Diosmectite
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 20 mL
+    dosage_form: 2
+    group:
+    - "R\xE9animation"
+    medicine_list: 0
+    name: "Eau pour pr\xE9paration injectable"
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 150 mg LP
+    dosage_form: 8
+    group:
+    - "Gyn\xE9cologie"
+    medicine_list: 0
+    name: Econazole
+    remark: null
+    roa: 41
+  model: inventory.molecule
+- fields:
+    composition: 30 g
+    dosage_form: 11
+    group:
+    - Dermatologie
+    medicine_list: 0
+    name: Econazole
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 5 mg
+    dosage_form: 1
+    group:
+    - Psychiatrie - Neurologie
+    medicine_list: 1
+    name: Escitalopram
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 0.5% - 0.4 mL
+    dosage_form: 100
+    group:
+    - Ophtalmologie
+    medicine_list: 0
+    name: "Fluoresce\xEFne"
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: 20 mg/2 ml
+    dosage_form: 2
+    group:
+    - Cardiologie
+    medicine_list: 2
+    name: "Furos\xE9mide"
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 160 mg/2 mL
+    dosage_form: 2
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Gentamicine
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 5% - 500 mL
+    dosage_form: 50
+    group:
+    - "R\xE9animation"
+    medicine_list: 0
+    name: Glucose
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 30% - 10 mL
+    dosage_form: 2
+    group:
+    - "R\xE9animation"
+    medicine_list: 0
+    name: Glucose hypertonique
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 0.1% - 0.6 mL
+    dosage_form: 101
+    group:
+    - Ophtalmologie
+    medicine_list: 0
+    name: Hexamidine
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: 10 mg, 0.5 mg, 300 mg/100 mL - Flacon 250 mL
+    dosage_form: 53
+    group:
+    - Dermatologie
+    medicine_list: 0
+    name: "Hexamidine - Chlorhexidine - Chlorocr\xE9sol"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: suspension 460 mg, 400 mg
+    dosage_form: 6
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 0
+    name: "Hydroxydes d'aluminium et de magn\xE9sium"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 25 mg
+    dosage_form: 1
+    group:
+    - Psychiatrie - Neurologie
+    medicine_list: 1
+    name: Hydroxyzine
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 500 mL
+    dosage_form: 50
+    group:
+    - "R\xE9animation"
+    medicine_list: 0
+    name: "Hydroxy\xE9thylamidon 130 000"
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 0.1% - 0.35 mL
+    dosage_form: 100
+    group:
+    - Ophtalmologie
+    medicine_list: 1
+    name: "Indom\xE9tacine"
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: 0.5 mg/2 mL
+    dosage_form: 94
+    group:
+    - Pneumologie
+    medicine_list: 1
+    name: Ipratropium bromure
+    remark: null
+    roa: 21
+  model: inventory.molecule
+- fields:
+    composition: 2% - 10 mL
+    dosage_form: 101
+    group:
+    - Ophtalmologie
+    medicine_list: 1
+    name: Isopto-pilocarpine
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: 20 mg
+    dosage_form: 1
+    group:
+    - Cardiologie
+    medicine_list: 2
+    name: Isosorbide dinitrate
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 3 mg
+    dosage_form: 1
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 2
+    name: Ivermectine
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 100 mg LP
+    dosage_form: 1
+    group:
+    - "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    medicine_list: 2
+    name: "K\xE9toprof\xE8ne"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 100 mg/2 mL
+    dosage_form: 2
+    group:
+    - "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    medicine_list: 2
+    name: "K\xE9toprof\xE8ne"
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 150 mg, 300 mg
+    dosage_form: 1
+    group:
+    - Accidents d'exposition au sang
+    medicine_list: 1
+    name: Lamivudine - Zidovudine
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 130 mL
+    dosage_form: 94
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 0
+    name: "Lavement hydrog\xE9nophosphates"
+    remark: null
+    roa: 40
+  model: inventory.molecule
+- fields:
+    composition: 500 mg
+    dosage_form: 1
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Levofloxacine
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 1% - flacon 20 mL
+    dosage_form: 51
+    group:
+    - "Anesth\xE9siques locaux"
+    medicine_list: 2
+    name: "Lidoca\xEFne"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 5%
+    dosage_form: 93
+    group:
+    - "Anesth\xE9siques locaux"
+    medicine_list: 2
+    name: "Lidoca\xEFne - Priloca\xEFne"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 200 mg, 50 mg
+    dosage_form: 1
+    group:
+    - Accidents d'exposition au sang
+    medicine_list: 0
+    name: Lopinavir - Ritonavir
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 50 mg/2 mL
+    dosage_form: 2
+    group:
+    - Psychiatrie - Neurologie
+    medicine_list: 1
+    name: Loxapine
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 4g
+    dosage_form: 6
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 0
+    name: Macrogol 4000
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 100 mL (lotion 0.5%)
+    dosage_form: 91
+    group:
+    - Dermatologie
+    medicine_list: 0
+    name: Malathion
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: "200 \xB5g"
+    dosage_form: 1
+    group:
+    - "Gyn\xE9cologie"
+    medicine_list: 1
+    name: Misoprostol
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 10 mg/1 mL
+    dosage_form: 2
+    group:
+    - "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    medicine_list: 9
+    name: Morphine chlorhydrate
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 2% - 15 g
+    dosage_form: 10
+    group:
+    - Dermatologie
+    medicine_list: 1
+    name: Mupirocine
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 40 mg/2 mL
+    dosage_form: 2
+    group:
+    - Allergologie
+    medicine_list: 1
+    name: "M\xE9thylprednisolone"
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 7.5 mg
+    dosage_form: 5
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 2
+    name: "M\xE9topimazine"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 500 mg
+    dosage_form: 1
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: "M\xE9tronidazole"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 0.4 mg/1 mL
+    dosage_form: 2
+    group:
+    - "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    medicine_list: 1
+    name: Naloxone
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 10 mg
+    dosage_form: 1
+    group:
+    - Cardiologie
+    medicine_list: 1
+    name: Nitrendipine
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 1.5 mg - unidose 0.5 mL
+    dosage_form: 55
+    group:
+    - Oto-rhino-Laryngologie - Stomatologie
+    medicine_list: 1
+    name: Ofloxacine
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 20 mg
+    dosage_form: 1
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 2
+    name: "Om\xE9prazole"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 4 mg/2 mL
+    dosage_form: 2
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 1
+    name: Ondansetron
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 75 mg
+    dosage_form: 3
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Oseltamivir
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 1.6 mg/0.4 mL
+    dosage_form: 100
+    group:
+    - Ophtalmologie
+    medicine_list: 1
+    name: Oxybuprocaine chlorhydrate
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: 500 mg
+    dosage_form: 5
+    group:
+    - "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    medicine_list: 0
+    name: "Parac\xE9tamol"
+    remark: null
+    roa: 31
+  model: inventory.molecule
+- fields:
+    composition: 500 mg
+    dosage_form: 3
+    group:
+    - "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    medicine_list: 0
+    name: "Parac\xE9tamol"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 80 mg
+    dosage_form: 5
+    group:
+    - "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    medicine_list: 0
+    name: Phloroglucinol
+    remark: null
+    roa: 31
+  model: inventory.molecule
+- fields:
+    composition: 16 g/15 mL
+    dosage_form: 55
+    group:
+    - Oto-rhino-Laryngologie - Stomatologie
+    medicine_list: 0
+    name: "Ph\xE9nazone - Lidoca\xEFne"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 320 mg, 40 mg
+    dosage_form: 1
+    group:
+    - "Pr\xE9vention et traitement du paludisme"
+    medicine_list: 1
+    name: "Pip\xE9raquine - Art\xE9nimol"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 20 mg
+    dosage_form: 5
+    group:
+    - Allergologie
+    medicine_list: 1
+    name: Prednisolone
+    remark: null
+    roa: 31
+  model: inventory.molecule
+- fields:
+    composition: 250 mg/2 mL
+    dosage_form: 2
+    group:
+    - "Pr\xE9vention et traitement du paludisme"
+    medicine_list: 1
+    name: Quinine
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 100 mg
+    dosage_form: 3
+    group:
+    - "Gastro-ent\xE9rologie"
+    medicine_list: 2
+    name: "Rac\xE9cadotril"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 1 000 000 UI/100 g - tube de 5 g
+    dosage_form: 103
+    group:
+    - Ophtalmologie
+    medicine_list: 1
+    name: Rifamycine
+    remark: null
+    roa: 50
+  model: inventory.molecule
+- fields:
+    composition: "100 \xB5g/dose (200 doses)"
+    dosage_form: 91
+    group:
+    - Pneumologie
+    medicine_list: 1
+    name: Salbutamol
+    remark: null
+    roa: 20
+  model: inventory.molecule
+- fields:
+    composition: 7 g
+    dosage_form: 6
+    group:
+    - "R\xE9animation"
+    medicine_list: 0
+    name: "Solut\xE9 de r\xE9hydratation orale"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 50 g
+    dosage_form: 11
+    group:
+    - Dermatologie
+    medicine_list: 0
+    name: Sulfadiazine argentique
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: NaCl 9% - 5 mL
+    dosage_form: 94
+    group:
+    - Oto-rhino-Laryngologie - Stomatologie
+    medicine_list: 0
+    name: "S\xE9rum physiologique"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 0.5 mg/1 mL
+    dosage_form: 2
+    group:
+    - Pneumologie
+    medicine_list: 1
+    name: Terbutaline
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 5 mg/2 mL
+    dosage_form: 94
+    group:
+    - Pneumologie
+    medicine_list: 1
+    name: Terbutaline
+    remark: null
+    roa: 21
+  model: inventory.molecule
+- fields:
+    composition: 'type : Core Malaria, Now ICT Malaria, Palutop + 4'
+    dosage_form: 92
+    group:
+    - "Pr\xE9vention et traitement du paludisme"
+    medicine_list: 0
+    name: "Test de D\xE9tection Rapide de Plasmodium dans le sang par immuno-chromatographie\
+      \ HRP2 et Pan-LDH"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 90 mg
+    dosage_form: 1
+    group:
+    - Cardiologie
+    medicine_list: 1
+    name: Ticagrelor
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: orodispersible 50 mg
+    dosage_form: 1
+    group:
+    - "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    medicine_list: 1
+    name: Tramadol
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 0,15 mg/dose
+    dosage_form: 91
+    group:
+    - Cardiologie
+    medicine_list: 2
+    name: Trinitrine
+    remark: null
+    roa: 31
+  model: inventory.molecule
+- fields:
+    composition: 0.5 mL
+    dosage_form: 40
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 0
+    name: "Vaccin Dipht\xE9rie, T\xE9tanos, Poliomy\xE9lite (inactiv\xE9 adsorb\xE9\
+      )"
+    remark: null
+    roa: 5
+  model: inventory.molecule
+- fields:
+    composition: 500 mg
+    dosage_form: 1
+    group:
+    - Infectiologie - Parasitologie
+    medicine_list: 1
+    name: Valaciclovir
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: 20 g
+    dosage_form: 10
+    group:
+    - Dermatologie
+    medicine_list: 0
+    name: "Vaseline st\xE9rilis\xE9e"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 500 mg/10 mL
+    dosage_form: 55
+    group:
+    - Oto-rhino-Laryngologie - Stomatologie
+    medicine_list: 0
+    name: "Xyl\xE8ne"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 7.5 mg
+    dosage_form: 1
+    group:
+    - Psychiatrie - Neurologie
+    medicine_list: 1
+    name: Zopiclone
+    remark: null
+    roa: 1
+  model: inventory.molecule
+- fields:
+    composition: IP > 30
+    dosage_form: 11
+    group:
+    - Dermatologie
+    medicine_list: 0
+    name: "\xC9cran solaire"
+    remark: null
+    roa: 10
+  model: inventory.molecule
+- fields:
+    composition: 10 000 UI antiXa/1 mL
+    dosage_form: 40
+    group:
+    - Cardiologie
+    medicine_list: 1
+    name: "\xC9noxaparine sodique"
+    remark: null
+    roa: 6
+  model: inventory.molecule
+- fields:
+    composition: 1 mg/1 ml
+    dosage_form: 2
+    group:
+    - Cardiologie
+    medicine_list: 1
+    name: "\xC9pin\xE9phrine"
+    remark: null
+    roa: 5
+  model: inventory.molecule

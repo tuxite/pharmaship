@@ -186,6 +186,7 @@
                 <property name="receives_default">True</property>
                 <property name="hexpand">True</property>
                 <property name="action_name">app.medicines</property>
+                <property name="action_target">0</property>
                 <property name="relief">none</property>
                 <child>
                   <object class="GtkLabel">
@@ -382,6 +383,7 @@
                 <property name="receives_default">True</property>
                 <property name="hexpand">True</property>
                 <property name="action_name">app.equipment</property>
+                <property name="action_target">0</property>
                 <property name="relief">none</property>
                 <child>
                   <object class="GtkLabel">
@@ -970,6 +972,7 @@
                 <property name="receives_default">True</property>
                 <property name="hexpand">True</property>
                 <property name="action_name">app.laboratory</property>
+                <property name="action_target">0</property>
                 <property name="relief">none</property>
                 <child>
                   <object class="GtkLabel">
@@ -1166,6 +1169,7 @@
                 <property name="receives_default">True</property>
                 <property name="hexpand">True</property>
                 <property name="action_name">app.telemedical</property>
+                <property name="action_target">0</property>
                 <property name="relief">none</property>
                 <child>
                   <object class="GtkLabel">

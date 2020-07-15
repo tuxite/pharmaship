@@ -1,0 +1,8353 @@
+- model: inventory.allowance
+  pk: 0
+  fields:
+    name: Orphan
+    author: Pharmaship
+    signature: system
+    date: 2020-04-21
+    version: '1'
+    additional: false
+    active: false
+- model: inventory.allowance
+  pk: 1
+  fields:
+    name: Dotation A - 25 marins
+    author: Pharmaship
+    signature: D31E80F6
+    date: 2020-04-20
+    version: 12.0a
+    additional: false
+    active: true
+- model: inventory.allowance
+  pk: 2
+  fields:
+    name: CMA CGM
+    author: SSE
+    signature: D31E80F6
+    date: 2020-04-24
+    version: V12
+    additional: false
+    active: true
+- model: inventory.allowance
+  pk: 3
+  fields:
+    name: GSMU
+    author: Pharmaship
+    signature: D31E80F6
+    date: 2020-04-24
+    version: '2018'
+    additional: false
+    active: true
+- model: inventory.allowance
+  pk: 4
+  fields:
+    name: Marlink Telemed
+    author: Marlink
+    signature: D31E80F6
+    date: 2020-04-24
+    version: '0.1'
+    additional: false
+    active: true
+- model: inventory.allowance
+  pk: 5
+  fields:
+    name: "POCram\xE9"
+    author: SSE
+    signature: D31E80F6
+    date: 2020-04-24
+    version: '0.1'
+    additional: false
+    active: true
+- model: inventory.allowance
+  pk: 6
+  fields:
+    name: Dotation B - 25 marins - zone paludisme
+    author: Pharmaship
+    signature: a
+    date: 2020-05-27
+    version: '1'
+    additional: false
+    active: false
+- model: inventory.allowance
+  pk: 7
+  fields:
+    name: Dotation B - 25 marins - sans paludisme
+    author: Pharmaship
+    signature: D31E80F6
+    date: 2020-05-27
+    version: '1'
+    additional: false
+    active: false
+- model: inventory.moleculegroup
+  pk: 1
+  fields:
+    name: Cardiologie
+    order: 1
+- model: inventory.moleculegroup
+  pk: 2
+  fields:
+    name: "Gastro-ent\xE9rologie"
+    order: 2
+- model: inventory.moleculegroup
+  pk: 3
+  fields:
+    name: "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    order: 3
+- model: inventory.moleculegroup
+  pk: 4
+  fields:
+    name: Psychiatrie - Neurologie
+    order: 4
+- model: inventory.moleculegroup
+  pk: 5
+  fields:
+    name: Allergologie
+    order: 5
+- model: inventory.moleculegroup
+  pk: 6
+  fields:
+    name: Pneumologie
+    order: 6
+- model: inventory.moleculegroup
+  pk: 7
+  fields:
+    name: Infectiologie - Parasitologie
+    order: 7
+- model: inventory.moleculegroup
+  pk: 8
+  fields:
+    name: "Gyn\xE9cologie"
+    order: 8
+- model: inventory.moleculegroup
+  pk: 9
+  fields:
+    name: "R\xE9animation"
+    order: 9
+- model: inventory.moleculegroup
+  pk: 10
+  fields:
+    name: Dermatologie
+    order: 10
+- model: inventory.moleculegroup
+  pk: 11
+  fields:
+    name: Ophtalmologie
+    order: 11
+- model: inventory.moleculegroup
+  pk: 12
+  fields:
+    name: Oto-rhino-Laryngologie - Stomatologie
+    order: 12
+- model: inventory.moleculegroup
+  pk: 13
+  fields:
+    name: "Anesth\xE9siques locaux"
+    order: 13
+- model: inventory.moleculegroup
+  pk: 14
+  fields:
+    name: "Pr\xE9vention et traitement du paludisme"
+    order: 14
+- model: inventory.moleculegroup
+  pk: 15
+  fields:
+    name: Accidents d'exposition au sang
+    order: 15
+- model: inventory.equipmentgroup
+  pk: 1
+  fields:
+    name: "Mat\xE9riel de r\xE9animation"
+    order: 1
+- model: inventory.equipmentgroup
+  pk: 2
+  fields:
+    name: "Pansements et mat\xE9riel de suture"
+    order: 2
+- model: inventory.equipmentgroup
+  pk: 3
+  fields:
+    name: Instruments
+    order: 3
+- model: inventory.equipmentgroup
+  pk: 4
+  fields:
+    name: "Mat\xE9riel d'examen et de surveillance m\xE9dicale"
+    order: 4
+- model: inventory.equipmentgroup
+  pk: 5
+  fields:
+    name: "Mat\xE9riel d'injection, de perfusion, de ponction et de sondage"
+    order: 5
+- model: inventory.equipmentgroup
+  pk: 6
+  fields:
+    name: "Mat\xE9riel m\xE9dical g\xE9n\xE9ral"
+    order: 6
+- model: inventory.equipmentgroup
+  pk: 7
+  fields:
+    name: "Mat\xE9riel d'immobilisation et de contention"
+    order: 7
+- model: inventory.equipmentgroup
+  pk: 8
+  fields:
+    name: Documentation
+    order: 8
+- model: inventory.equipmentgroup
+  pk: 9
+  fields:
+    name: Trousse de premiers secours
+    order: 9
+- model: inventory.equipmentgroup
+  pk: 10
+  fields:
+    name: "Mat\xE9riel de t\xE9l\xE9consultation cardiologique"
+    order: 10
+- model: inventory.equipmentgroup
+  pk: 11
+  fields:
+    name: "D\xE9sinfection - D\xE9sinsectisation - Protection"
+    order: 11
+- model: inventory.equipmentgroup
+  pk: 12
+  fields:
+    name: Lutte antiparasitaire
+    order: 12
+- model: inventory.equipmentgroup
+  pk: 13
+  fields:
+    name: Autre
+    order: 13
+- model: inventory.location
+  pk: 0
+  fields:
+    name: Unassigned
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 20
+    tree_id: 4
+    level: 0
+- model: inventory.location
+  pk: 10
+  fields:
+    name: Laboratory
+    parent: 100
+    is_rescue_bag: false
+    lft: 14
+    rght: 15
+    tree_id: 4
+    level: 1
+- model: inventory.location
+  pk: 20
+  fields:
+    name: Telemedical
+    parent: 100
+    is_rescue_bag: false
+    lft: 18
+    rght: 19
+    tree_id: 4
+    level: 1
+- model: inventory.location
+  pk: 100
+  fields:
+    name: Hospital
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 20
+    tree_id: 4
+    level: 0
+- model: inventory.location
+  pk: 101
+  fields:
+    name: Rescue Bag
+    parent: 100
+    is_rescue_bag: true
+    lft: 16
+    rght: 17
+    tree_id: 4
+    level: 1
+- model: inventory.location
+  pk: 102
+  fields:
+    name: Ship's Office
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 2
+    tree_id: 1
+    level: 0
+- model: inventory.location
+  pk: 103
+  fields:
+    name: Engine Room
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 6
+    tree_id: 3
+    level: 0
+- model: inventory.location
+  pk: 104
+  fields:
+    name: ECR
+    parent: 103
+    is_rescue_bag: false
+    lft: 2
+    rght: 3
+    tree_id: 3
+    level: 1
+- model: inventory.location
+  pk: 105
+  fields:
+    name: A1
+    parent: 100
+    is_rescue_bag: false
+    lft: 2
+    rght: 7
+    tree_id: 4
+    level: 1
+- model: inventory.location
+  pk: 106
+  fields:
+    name: T1
+    parent: 105
+    is_rescue_bag: false
+    lft: 3
+    rght: 4
+    tree_id: 4
+    level: 2
+- model: inventory.location
+  pk: 107
+  fields:
+    name: T2
+    parent: 105
+    is_rescue_bag: false
+    lft: 5
+    rght: 6
+    tree_id: 4
+    level: 2
+- model: inventory.location
+  pk: 108
+  fields:
+    name: A2
+    parent: 100
+    is_rescue_bag: false
+    lft: 8
+    rght: 13
+    tree_id: 4
+    level: 1
+- model: inventory.location
+  pk: 109
+  fields:
+    name: T1
+    parent: 108
+    is_rescue_bag: false
+    lft: 9
+    rght: 10
+    tree_id: 4
+    level: 2
+- model: inventory.location
+  pk: 110
+  fields:
+    name: T2
+    parent: 108
+    is_rescue_bag: false
+    lft: 11
+    rght: 12
+    tree_id: 4
+    level: 2
+- model: inventory.location
+  pk: 111
+  fields:
+    name: Magasin
+    parent: 103
+    is_rescue_bag: false
+    lft: 4
+    rght: 5
+    tree_id: 3
+    level: 1
+- model: inventory.qtytransaction
+  pk: 1
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 14:40:25.650043+00:00
+    remark: null
+    value: 20
+    content_type: 19
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 4
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 14:44:10.909543+00:00
+    remark: null
+    value: 2
+    content_type: 25
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 7
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 20:57:38.772552+00:00
+    remark: null
+    value: 1
+    content_type: 25
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 8
+  fields:
+    transaction_type: 2
+    date: 2020-05-18 21:06:28.743141+00:00
+    remark: null
+    value: 1
+    content_type: 25
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 10
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 21:08:37.735432+00:00
+    remark: null
+    value: 100
+    content_type: 25
+    object_id: 5
+- model: inventory.qtytransaction
+  pk: 11
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 21:24:23.796929+00:00
+    remark: null
+    value: 30
+    content_type: 19
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 12
+  fields:
+    transaction_type: 1
+    date: 2020-05-19 09:54:19.476373+00:00
+    remark: null
+    value: 5
+    content_type: 25
+    object_id: 6
+- model: inventory.qtytransaction
+  pk: 13
+  fields:
+    transaction_type: 1
+    date: 2020-05-19 09:55:09.364144+00:00
+    remark: null
+    value: 1
+    content_type: 25
+    object_id: 7
+- model: inventory.qtytransaction
+  pk: 14
+  fields:
+    transaction_type: 1
+    date: 2020-05-19 13:38:20.507025+00:00
+    remark: null
+    value: 60
+    content_type: 19
+    object_id: 4
+- model: inventory.qtytransaction
+  pk: 15
+  fields:
+    transaction_type: 1
+    date: 2020-05-19 13:38:30.641138+00:00
+    remark: null
+    value: 5
+    content_type: 22
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 16
+  fields:
+    transaction_type: 10
+    date: 2020-05-19 13:38:30.646114+00:00
+    remark: ''
+    value: 5
+    content_type: 19
+    object_id: 4
+- model: inventory.qtytransaction
+  pk: 17
+  fields:
+    transaction_type: 1
+    date: 2020-05-19 13:43:46.171973+00:00
+    remark: null
+    value: 5
+    content_type: 22
+    object_id: 2
+- model: inventory.qtytransaction
+  pk: 18
+  fields:
+    transaction_type: 10
+    date: 2020-05-19 13:43:46.176268+00:00
+    remark: ''
+    value: 5
+    content_type: 19
+    object_id: 4
+- model: inventory.qtytransaction
+  pk: 19
+  fields:
+    transaction_type: 1
+    date: 2020-05-19 13:54:53.712748+00:00
+    remark: null
+    value: 5
+    content_type: 22
+    object_id: 3
+- model: inventory.qtytransaction
+  pk: 20
+  fields:
+    transaction_type: 10
+    date: 2020-05-19 13:54:53.718081+00:00
+    remark: null
+    value: 5
+    content_type: 19
+    object_id: 4
+- model: inventory.qtytransaction
+  pk: 21
+  fields:
+    transaction_type: 1
+    date: 2020-05-19 14:06:16.940863+00:00
+    remark: null
+    value: 5
+    content_type: 25
+    object_id: 8
+- model: inventory.qtytransaction
+  pk: 22
+  fields:
+    transaction_type: 1
+    date: 2020-05-19 14:08:23.074052+00:00
+    remark: null
+    value: 1
+    content_type: 22
+    object_id: 4
+- model: inventory.qtytransaction
+  pk: 23
+  fields:
+    transaction_type: 10
+    date: 2020-05-19 14:08:23.079771+00:00
+    remark: ''
+    value: 1
+    content_type: 25
+    object_id: 8
+- model: inventory.qtytransaction
+  pk: 24
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 14:52:36.189799+00:00
+    remark: null
+    value: 1
+    content_type: 25
+    object_id: 9
+- model: inventory.qtytransaction
+  pk: 25
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 14:52:46.020798+00:00
+    remark: null
+    value: 1
+    content_type: 25
+    object_id: 10
+- model: inventory.qtytransaction
+  pk: 26
+  fields:
+    transaction_type: 1
+    date: 2020-05-20 19:05:26.548160+00:00
+    remark: null
+    value: 10
+    content_type: 19
+    object_id: 5
+- model: inventory.qtytransaction
+  pk: 27
+  fields:
+    transaction_type: 1
+    date: 2020-05-21 15:14:24.434275+00:00
+    remark: null
+    value: 5
+    content_type: 25
+    object_id: 11
+- model: inventory.qtytransaction
+  pk: 28
+  fields:
+    transaction_type: 1
+    date: 2020-05-21 15:15:19.148849+00:00
+    remark: null
+    value: 1
+    content_type: 22
+    object_id: 5
+- model: inventory.qtytransaction
+  pk: 29
+  fields:
+    transaction_type: 10
+    date: 2020-05-21 15:15:19.154823+00:00
+    remark: null
+    value: 1
+    content_type: 25
+    object_id: 11
+- model: inventory.qtytransaction
+  pk: 30
+  fields:
+    transaction_type: 1
+    date: 2020-05-21 15:22:14.865456+00:00
+    remark: null
+    value: 1
+    content_type: 22
+    object_id: 6
+- model: inventory.qtytransaction
+  pk: 31
+  fields:
+    transaction_type: 10
+    date: 2020-05-21 15:22:14.870553+00:00
+    remark: null
+    value: 1
+    content_type: 25
+    object_id: 11
+- model: inventory.qtytransaction
+  pk: 32
+  fields:
+    transaction_type: 2
+    date: 2020-05-21 15:22:35.058659+00:00
+    remark: null
+    value: 1
+    content_type: 22
+    object_id: 5
+- model: inventory.qtytransaction
+  pk: 33
+  fields:
+    transaction_type: 1
+    date: 2020-05-21 15:24:19.214986+00:00
+    remark: null
+    value: 2
+    content_type: 25
+    object_id: 12
+- model: inventory.qtytransaction
+  pk: 34
+  fields:
+    transaction_type: 1
+    date: 2020-05-24 13:32:34.866728+00:00
+    remark: null
+    value: 3
+    content_type: 25
+    object_id: 13
+- model: inventory.qtytransaction
+  pk: 35
+  fields:
+    transaction_type: 1
+    date: 2020-05-24 13:47:45.713148+00:00
+    remark: null
+    value: 20
+    content_type: 25
+    object_id: 14
+- model: inventory.qtytransaction
+  pk: 36
+  fields:
+    transaction_type: 1
+    date: 2020-05-24 13:48:04.499682+00:00
+    remark: null
+    value: 50
+    content_type: 25
+    object_id: 15
+- model: inventory.qtytransaction
+  pk: 37
+  fields:
+    transaction_type: 8
+    date: 2020-05-27 11:55:17.834249+00:00
+    remark: null
+    value: 1
+    content_type: 25
+    object_id: 5
+- model: inventory.qtytransaction
+  pk: 38
+  fields:
+    transaction_type: 1
+    date: 2020-06-09 16:16:49.399813+00:00
+    remark: null
+    value: 64
+    content_type: 19
+    object_id: 6
+- model: inventory.molecule
+  pk: 1
+  fields:
+    name: Aciclovir
+    roa: 50
+    dosage_form: 10
+    composition: 3% - 4.5 g
+    medicine_list: 1
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 2
+  fields:
+    name: Acide Borique - Borate de Sodium
+    roa: 50
+    dosage_form: 100
+    composition: 18 mg, 12 mg - unidose 10 mL
+    medicine_list: 0
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 3
+  fields:
+    name: Acide Tranexamique
+    roa: 1
+    dosage_form: 2
+    composition: buvable 1 g/10 mL
+    medicine_list: 1
+    group: 8
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 4
+  fields:
+    name: "Acide ac\xE9tylsalicylique"
+    roa: 1
+    dosage_form: 6
+    composition: 300 mg
+    medicine_list: 0
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 5
+  fields:
+    name: "Ac\xE9tazolamide"
+    roa: 1
+    dosage_form: 1
+    composition: 250 mg
+    medicine_list: 1
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 6
+  fields:
+    name: "Ac\xE9tylcyst\xE9ine"
+    roa: 1
+    dosage_form: 6
+    composition: 200 mg
+    medicine_list: 0
+    group: 6
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 7
+  fields:
+    name: Albendazole
+    roa: 1
+    dosage_form: 1
+    composition: 400 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 8
+  fields:
+    name: Amiodarone
+    roa: 1
+    dosage_form: 1
+    composition: 200 mg
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 9
+  fields:
+    name: Amiodarone
+    roa: 5
+    dosage_form: 2
+    composition: 150 mg/3 mL
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 10
+  fields:
+    name: Amoxicilline
+    roa: 1
+    dosage_form: 3
+    composition: 500 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 11
+  fields:
+    name: Amoxicilline - Acide Clavulanique
+    roa: 1
+    dosage_form: 1
+    composition: 500 mg - 62,5 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 12
+  fields:
+    name: "Amyl\xE9ine Chlorhydrate - L\xE9vomenthol"
+    roa: 33
+    dosage_form: 57
+    composition: 0.80 g, 0.80 mg - Flacon 4 ml
+    medicine_list: 0
+    group: 12
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 13
+  fields:
+    name: Atovaquone - Proguanil
+    roa: 1
+    dosage_form: 1
+    composition: 250 mg, 100 mg
+    medicine_list: 1
+    group: 14
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 14
+  fields:
+    name: Atropine
+    roa: 5
+    dosage_form: 2
+    composition: 0,5 mg/1 ml
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 15
+  fields:
+    name: Atropine
+    roa: 50
+    dosage_form: 101
+    composition: 0.5% - 10 mL
+    medicine_list: 1
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 16
+  fields:
+    name: "At\xE9nolol"
+    roa: 1
+    dosage_form: 1
+    composition: 50 mg
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 17
+  fields:
+    name: Azithromycine
+    roa: 1
+    dosage_form: 1
+    composition: 250 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 18
+  fields:
+    name: Benzoate de benzyle
+    roa: 10
+    dosage_form: 91
+    composition: "125 mL - \xC9mulsion 10%"
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 19
+  fields:
+    name: Bicarbonate de Sodium
+    roa: 5
+    dosage_form: 50
+    composition: 1.4% - 500 mL
+    medicine_list: 0
+    group: 9
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 20
+  fields:
+    name: "B\xE9tam\xE9thasone"
+    roa: 10
+    dosage_form: 11
+    composition: 0.1% - 15 g
+    medicine_list: 1
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 21
+  fields:
+    name: "Carragh\xE9nates - Dioxyde titane - Oxyde de zinc"
+    roa: 40
+    dosage_form: 7
+    composition: 300 mg/200 mg/400 mg
+    medicine_list: 0
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 22
+  fields:
+    name: "Carragh\xE9nates - Dioxyde titane - Oxyde de zinc - Lidoca\xEEne 2%"
+    roa: 40
+    dosage_form: 11
+    composition: 20 g
+    medicine_list: 0
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 23
+  fields:
+    name: Ceftriaxone
+    roa: 5
+    dosage_form: 2
+    composition: 1 g/3.5 mL
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 24
+  fields:
+    name: Chlorhexidine
+    roa: 10
+    dosage_form: 52
+    composition: 0.2% - Unidose 5 mL
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 25
+  fields:
+    name: Chlorhexidine
+    roa: 10
+    dosage_form: 54
+    composition: 0.5% - Flacon 125 mL
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 26
+  fields:
+    name: Chlorhexidine - Chlorobutanol
+    roa: 32
+    dosage_form: 56
+    composition: 0.5 mL, 0.5 g - flacon 100 mL
+    medicine_list: 0
+    group: 12
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 27
+  fields:
+    name: Chlorure de Potassium
+    roa: 1
+    dosage_form: 1
+    composition: 600 mg
+    medicine_list: 0
+    group: 9
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 28
+  fields:
+    name: Chlorure de sodium
+    roa: 5
+    dosage_form: 50
+    composition: 0.9% - 500 mL
+    medicine_list: 0
+    group: 9
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 29
+  fields:
+    name: Ciprofloxacine
+    roa: 50
+    dosage_form: 101
+    composition: 0.3% - 5 mL
+    medicine_list: 1
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 30
+  fields:
+    name: Colchicine
+    roa: 1
+    dosage_form: 1
+    composition: 1 mg
+    medicine_list: 1
+    group: 3
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 31
+  fields:
+    name: Desloratadine
+    roa: 1
+    dosage_form: 1
+    composition: 5 mg
+    medicine_list: 2
+    group: 5
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 32
+  fields:
+    name: "Dexam\xE9thasone - Oxytetracycline"
+    roa: 50
+    dosage_form: 103
+    composition: 0.267 mg, 1.333 mg - unidose
+    medicine_list: 1
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 33
+  fields:
+    name: "Diaz\xE9pam"
+    roa: 1
+    dosage_form: 1
+    composition: 5 mg
+    medicine_list: 1
+    group: 4
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 34
+  fields:
+    name: "Diaz\xE9pam"
+    roa: 5
+    dosage_form: 2
+    composition: 10 mg/2 mL
+    medicine_list: 1
+    group: 4
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 35
+  fields:
+    name: Dimenhydrinate
+    roa: 1
+    dosage_form: 1
+    composition: 50 mg
+    medicine_list: 0
+    group: 4
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 36
+  fields:
+    name: Diosmectite
+    roa: 1
+    dosage_form: 6
+    composition: 3g
+    medicine_list: 0
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 37
+  fields:
+    name: "Eau pour pr\xE9paration injectable"
+    roa: 5
+    dosage_form: 2
+    composition: 20 mL
+    medicine_list: 0
+    group: 9
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 38
+  fields:
+    name: Econazole
+    roa: 41
+    dosage_form: 8
+    composition: 150 mg LP
+    medicine_list: 0
+    group: 8
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 39
+  fields:
+    name: Econazole
+    roa: 10
+    dosage_form: 11
+    composition: 30 g
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 40
+  fields:
+    name: Escitalopram
+    roa: 1
+    dosage_form: 1
+    composition: 5 mg
+    medicine_list: 1
+    group: 4
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 41
+  fields:
+    name: "Fluoresce\xEFne"
+    roa: 50
+    dosage_form: 100
+    composition: 0.5% - 0.4 mL
+    medicine_list: 0
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 42
+  fields:
+    name: "Furos\xE9mide"
+    roa: 5
+    dosage_form: 2
+    composition: 20 mg/2 ml
+    medicine_list: 2
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 43
+  fields:
+    name: Gentamicine
+    roa: 5
+    dosage_form: 2
+    composition: 160 mg/2 mL
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 44
+  fields:
+    name: Glucose
+    roa: 5
+    dosage_form: 50
+    composition: 5% - 500 mL
+    medicine_list: 0
+    group: 9
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 45
+  fields:
+    name: Glucose hypertonique
+    roa: 5
+    dosage_form: 2
+    composition: 30% - 10 mL
+    medicine_list: 0
+    group: 9
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 46
+  fields:
+    name: Hexamidine
+    roa: 50
+    dosage_form: 101
+    composition: 0.1% - 0.6 mL
+    medicine_list: 0
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 47
+  fields:
+    name: "Hexamidine - Chlorhexidine - Chlorocr\xE9sol"
+    roa: 10
+    dosage_form: 53
+    composition: 10 mg, 0.5 mg, 300 mg/100 mL - Flacon 250 mL
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 48
+  fields:
+    name: "Hydroxydes d'aluminium et de magn\xE9sium"
+    roa: 1
+    dosage_form: 6
+    composition: suspension 460 mg, 400 mg
+    medicine_list: 0
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 49
+  fields:
+    name: Hydroxyzine
+    roa: 1
+    dosage_form: 1
+    composition: 25 mg
+    medicine_list: 1
+    group: 4
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 50
+  fields:
+    name: "Hydroxy\xE9thylamidon 130 000"
+    roa: 5
+    dosage_form: 50
+    composition: 500 mL
+    medicine_list: 0
+    group: 9
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 51
+  fields:
+    name: "Indom\xE9tacine"
+    roa: 50
+    dosage_form: 100
+    composition: 0.1% - 0.35 mL
+    medicine_list: 1
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 52
+  fields:
+    name: Ipratropium bromure
+    roa: 21
+    dosage_form: 94
+    composition: 0.5 mg/2 mL
+    medicine_list: 1
+    group: 6
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 53
+  fields:
+    name: Isopto-pilocarpine
+    roa: 50
+    dosage_form: 101
+    composition: 2% - 10 mL
+    medicine_list: 1
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 54
+  fields:
+    name: Isosorbide dinitrate
+    roa: 1
+    dosage_form: 1
+    composition: 20 mg
+    medicine_list: 2
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 55
+  fields:
+    name: Ivermectine
+    roa: 1
+    dosage_form: 1
+    composition: 3 mg
+    medicine_list: 2
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 56
+  fields:
+    name: "K\xE9toprof\xE8ne"
+    roa: 1
+    dosage_form: 1
+    composition: 100 mg LP
+    medicine_list: 2
+    group: 3
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 57
+  fields:
+    name: "K\xE9toprof\xE8ne"
+    roa: 5
+    dosage_form: 2
+    composition: 100 mg/2 mL
+    medicine_list: 2
+    group: 3
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 58
+  fields:
+    name: Lamivudine - Zidovudine
+    roa: 1
+    dosage_form: 1
+    composition: 150 mg, 300 mg
+    medicine_list: 1
+    group: 15
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 59
+  fields:
+    name: "Lavement hydrog\xE9nophosphates"
+    roa: 40
+    dosage_form: 94
+    composition: 130 mL
+    medicine_list: 0
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 60
+  fields:
+    name: Levofloxacine
+    roa: 1
+    dosage_form: 1
+    composition: 500 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 61
+  fields:
+    name: "Lidoca\xEFne"
+    roa: 10
+    dosage_form: 51
+    composition: 1% - flacon 20 mL
+    medicine_list: 2
+    group: 13
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 62
+  fields:
+    name: "Lidoca\xEFne - Priloca\xEFne"
+    roa: 10
+    dosage_form: 93
+    composition: 5%
+    medicine_list: 2
+    group: 13
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 63
+  fields:
+    name: Lopinavir - Ritonavir
+    roa: 1
+    dosage_form: 1
+    composition: 200 mg, 50 mg
+    medicine_list: 0
+    group: 15
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 64
+  fields:
+    name: Loxapine
+    roa: 5
+    dosage_form: 2
+    composition: 50 mg/2 mL
+    medicine_list: 1
+    group: 4
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 65
+  fields:
+    name: Macrogol 4000
+    roa: 1
+    dosage_form: 6
+    composition: 4g
+    medicine_list: 0
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 66
+  fields:
+    name: Malathion
+    roa: 10
+    dosage_form: 91
+    composition: 100 mL (lotion 0.5%)
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 67
+  fields:
+    name: Misoprostol
+    roa: 1
+    dosage_form: 1
+    composition: "200 \xB5g"
+    medicine_list: 1
+    group: 8
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 68
+  fields:
+    name: Morphine chlorhydrate
+    roa: 5
+    dosage_form: 2
+    composition: 10 mg/1 mL
+    medicine_list: 9
+    group: 3
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 69
+  fields:
+    name: Mupirocine
+    roa: 10
+    dosage_form: 10
+    composition: 2% - 15 g
+    medicine_list: 1
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 70
+  fields:
+    name: "M\xE9thylprednisolone"
+    roa: 5
+    dosage_form: 2
+    composition: 40 mg/2 mL
+    medicine_list: 1
+    group: 5
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 71
+  fields:
+    name: "M\xE9topimazine"
+    roa: 1
+    dosage_form: 5
+    composition: 7.5 mg
+    medicine_list: 2
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 72
+  fields:
+    name: "M\xE9tronidazole"
+    roa: 1
+    dosage_form: 1
+    composition: 500 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 73
+  fields:
+    name: Naloxone
+    roa: 5
+    dosage_form: 2
+    composition: 0.4 mg/1 mL
+    medicine_list: 1
+    group: 3
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 74
+  fields:
+    name: Nitrendipine
+    roa: 1
+    dosage_form: 1
+    composition: 10 mg
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 75
+  fields:
+    name: Ofloxacine
+    roa: 10
+    dosage_form: 55
+    composition: 1.5 mg - unidose 0.5 mL
+    medicine_list: 1
+    group: 12
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 76
+  fields:
+    name: "Om\xE9prazole"
+    roa: 1
+    dosage_form: 1
+    composition: 20 mg
+    medicine_list: 2
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 77
+  fields:
+    name: Ondansetron
+    roa: 5
+    dosage_form: 2
+    composition: 4 mg/2 mL
+    medicine_list: 1
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 78
+  fields:
+    name: Oseltamivir
+    roa: 1
+    dosage_form: 3
+    composition: 75 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 79
+  fields:
+    name: Oxybuprocaine chlorhydrate
+    roa: 50
+    dosage_form: 100
+    composition: 1.6 mg/0.4 mL
+    medicine_list: 1
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 80
+  fields:
+    name: "Parac\xE9tamol"
+    roa: 31
+    dosage_form: 5
+    composition: 500 mg
+    medicine_list: 0
+    group: 3
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 81
+  fields:
+    name: "Parac\xE9tamol"
+    roa: 1
+    dosage_form: 3
+    composition: 500 mg
+    medicine_list: 0
+    group: 3
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 82
+  fields:
+    name: Phloroglucinol
+    roa: 31
+    dosage_form: 5
+    composition: 80 mg
+    medicine_list: 0
+    group: 3
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 83
+  fields:
+    name: "Ph\xE9nazone - Lidoca\xEFne"
+    roa: 10
+    dosage_form: 55
+    composition: 16 g/15 mL
+    medicine_list: 0
+    group: 12
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 84
+  fields:
+    name: "Pip\xE9raquine - Art\xE9nimol"
+    roa: 1
+    dosage_form: 1
+    composition: 320 mg, 40 mg
+    medicine_list: 1
+    group: 14
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 85
+  fields:
+    name: Prednisolone
+    roa: 31
+    dosage_form: 5
+    composition: 20 mg
+    medicine_list: 1
+    group: 5
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 86
+  fields:
+    name: Quinine
+    roa: 5
+    dosage_form: 2
+    composition: 250 mg/2 mL
+    medicine_list: 1
+    group: 14
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 87
+  fields:
+    name: "Rac\xE9cadotril"
+    roa: 1
+    dosage_form: 3
+    composition: 100 mg
+    medicine_list: 2
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 88
+  fields:
+    name: Rifamycine
+    roa: 50
+    dosage_form: 103
+    composition: 1 000 000 UI/100 g - tube de 5 g
+    medicine_list: 1
+    group: 11
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 89
+  fields:
+    name: Salbutamol
+    roa: 20
+    dosage_form: 91
+    composition: "100 \xB5g/dose (200 doses)"
+    medicine_list: 1
+    group: 6
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 90
+  fields:
+    name: "Solut\xE9 de r\xE9hydratation orale"
+    roa: 1
+    dosage_form: 6
+    composition: 7 g
+    medicine_list: 0
+    group: 9
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 91
+  fields:
+    name: Sulfadiazine argentique
+    roa: 10
+    dosage_form: 11
+    composition: 50 g
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 92
+  fields:
+    name: "S\xE9rum physiologique"
+    roa: 10
+    dosage_form: 94
+    composition: NaCl 9% - 5 mL
+    medicine_list: 0
+    group: 12
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 93
+  fields:
+    name: Terbutaline
+    roa: 5
+    dosage_form: 2
+    composition: 0.5 mg/1 mL
+    medicine_list: 1
+    group: 6
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 94
+  fields:
+    name: Terbutaline
+    roa: 21
+    dosage_form: 94
+    composition: 5 mg/2 mL
+    medicine_list: 1
+    group: 6
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 95
+  fields:
+    name: "Test de D\xE9tection Rapide de Plasmodium dans le sang par immuno-chromatographie\
+      \ HRP2 et Pan-LDH"
+    roa: 10
+    dosage_form: 92
+    composition: 'type : Core Malaria, Now ICT Malaria, Palutop + 4'
+    medicine_list: 0
+    group: 14
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 96
+  fields:
+    name: Ticagrelor
+    roa: 1
+    dosage_form: 1
+    composition: 90 mg
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 97
+  fields:
+    name: Tramadol
+    roa: 1
+    dosage_form: 1
+    composition: orodispersible 50 mg
+    medicine_list: 1
+    group: 3
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 98
+  fields:
+    name: Trinitrine
+    roa: 31
+    dosage_form: 91
+    composition: 0,15 mg/dose
+    medicine_list: 2
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 99
+  fields:
+    name: "Vaccin Dipht\xE9rie, T\xE9tanos, Poliomy\xE9lite (inactiv\xE9 adsorb\xE9\
+      )"
+    roa: 5
+    dosage_form: 40
+    composition: 0.5 mL
+    medicine_list: 0
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 100
+  fields:
+    name: Valaciclovir
+    roa: 1
+    dosage_form: 1
+    composition: 500 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 101
+  fields:
+    name: "Vaseline st\xE9rilis\xE9e"
+    roa: 10
+    dosage_form: 10
+    composition: 20 g
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 102
+  fields:
+    name: "Xyl\xE8ne"
+    roa: 10
+    dosage_form: 55
+    composition: 500 mg/10 mL
+    medicine_list: 0
+    group: 12
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 103
+  fields:
+    name: Zopiclone
+    roa: 1
+    dosage_form: 1
+    composition: 7.5 mg
+    medicine_list: 1
+    group: 4
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 104
+  fields:
+    name: "\xC9cran solaire"
+    roa: 10
+    dosage_form: 11
+    composition: IP > 30
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 105
+  fields:
+    name: "\xC9noxaparine sodique"
+    roa: 6
+    dosage_form: 40
+    composition: 10 000 UI antiXa/1 mL
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 106
+  fields:
+    name: "\xC9pin\xE9phrine"
+    roa: 5
+    dosage_form: 2
+    composition: 1 mg/1 ml
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 107
+  fields:
+    name: "Ac\xE9tylleucine"
+    roa: 1
+    dosage_form: 1
+    composition: 500 mg
+    medicine_list: 0
+    group: 4
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 108
+  fields:
+    name: Propranolol
+    roa: 1
+    dosage_form: 1
+    composition: 40 mg
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 109
+  fields:
+    name: "Acool \xE9thylique"
+    roa: 1
+    dosage_form: 54
+    composition: 99.5% - 500 mL
+    medicine_list: 0
+    group: 4
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 110
+  fields:
+    name: Beclomethasone
+    roa: 20
+    dosage_form: 91
+    composition: "250 \xB5g/dose (200 doses)"
+    medicine_list: 1
+    group: 6
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 111
+  fields:
+    name: Calcium gluconate
+    roa: 1
+    dosage_form: 5
+    composition: 1 g
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 112
+  fields:
+    name: Calcium gluconate
+    roa: 10
+    dosage_form: 10
+    composition: gel 2% - tube 25 g
+    medicine_list: 0
+    group: 10
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 113
+  fields:
+    name: Cefuroxime
+    roa: 5
+    dosage_form: 50
+    composition: 750 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 114
+  fields:
+    name: "Charbon activ\xE9"
+    roa: 1
+    dosage_form: 9
+    composition: 50 g
+    medicine_list: 0
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 115
+  fields:
+    name: "M\xE9toclopramide"
+    roa: 5
+    dosage_form: 2
+    composition: 10 mg/2 mL
+    medicine_list: 1
+    group: 2
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 116
+  fields:
+    name: "M\xE9tronidazole"
+    roa: 40
+    dosage_form: 7
+    composition: 1 g
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 117
+  fields:
+    name: Phytomenadione
+    roa: 5
+    dosage_form: 2
+    composition: 10 mg/1 mL
+    medicine_list: 0
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 118
+  fields:
+    name: "\xC9rythromycine"
+    roa: 1
+    dosage_form: 1
+    composition: 500 mg
+    medicine_list: 1
+    group: 7
+    remark: null
+    tag: []
+- model: inventory.molecule
+  pk: 119
+  fields:
+    name: "\xC9noxaparine sodique"
+    roa: 6
+    dosage_form: 40
+    composition: 8 000 UI antiXa/1 mL
+    medicine_list: 1
+    group: 1
+    remark: null
+    tag: []
+- model: inventory.medicine
+  pk: 1
+  fields:
+    name: "Acide ac\xE9tylsalicylique"
+    exp_date: 2020-07-31
+    used: false
+    remark: ''
+    location: 106
+    parent: 4
+    nc_molecule: ''
+    nc_composition: ''
+- model: inventory.medicine
+  pk: 3
+  fields:
+    name: "Asp\xE9gic 1000"
+    exp_date: 2020-09-30
+    used: false
+    remark: ''
+    location: 106
+    parent: 4
+    nc_molecule: ''
+    nc_composition: 1000 mg
+- model: inventory.medicine
+  pk: 4
+  fields:
+    name: Chlorhexidine Giphar
+    exp_date: 2021-01-31
+    used: false
+    remark: ''
+    location: 107
+    parent: 24
+    nc_molecule: ''
+    nc_composition: ''
+- model: inventory.medicine
+  pk: 5
+  fields:
+    name: Amiodarone
+    exp_date: 2020-04-30
+    used: false
+    remark: ''
+    location: 107
+    parent: 8
+    nc_molecule: ''
+    nc_composition: ''
+- model: inventory.medicine
+  pk: 6
+  fields:
+    name: Doliprane 500
+    exp_date: 2023-02-28
+    used: false
+    remark: ''
+    location: 110
+    parent: 81
+    nc_molecule: ''
+    nc_composition: ''
+- model: inventory.moleculereqqty
+  pk: 1009
+  fields:
+    allowance: 3
+    required_quantity: 30
+    base: 10
+- model: inventory.moleculereqqty
+  pk: 1010
+  fields:
+    allowance: 3
+    required_quantity: 30
+    base: 14
+- model: inventory.moleculereqqty
+  pk: 1011
+  fields:
+    allowance: 3
+    required_quantity: 5
+    base: 117
+- model: inventory.moleculereqqty
+  pk: 1012
+  fields:
+    allowance: 3
+    required_quantity: 200
+    base: 81
+- model: inventory.moleculereqqty
+  pk: 1013
+  fields:
+    allowance: 3
+    required_quantity: 5
+    base: 73
+- model: inventory.moleculereqqty
+  pk: 1014
+  fields:
+    allowance: 3
+    required_quantity: 40
+    base: 68
+- model: inventory.moleculereqqty
+  pk: 1015
+  fields:
+    allowance: 3
+    required_quantity: 5
+    base: 110
+- model: inventory.moleculereqqty
+  pk: 1016
+  fields:
+    allowance: 3
+    required_quantity: 20
+    base: 111
+- model: inventory.moleculereqqty
+  pk: 1017
+  fields:
+    allowance: 3
+    required_quantity: 5
+    base: 112
+- model: inventory.moleculereqqty
+  pk: 1018
+  fields:
+    allowance: 3
+    required_quantity: 10
+    base: 113
+- model: inventory.moleculereqqty
+  pk: 1019
+  fields:
+    allowance: 3
+    required_quantity: 2
+    base: 114
+- model: inventory.moleculereqqty
+  pk: 1020
+  fields:
+    allowance: 3
+    required_quantity: 5
+    base: 34
+- model: inventory.moleculereqqty
+  pk: 1021
+  fields:
+    allowance: 3
+    required_quantity: 30
+    base: 118
+- model: inventory.moleculereqqty
+  pk: 1022
+  fields:
+    allowance: 3
+    required_quantity: 10
+    base: 116
+- model: inventory.moleculereqqty
+  pk: 1023
+  fields:
+    allowance: 3
+    required_quantity: 3
+    base: 109
+- model: inventory.moleculereqqty
+  pk: 1024
+  fields:
+    allowance: 3
+    required_quantity: 1
+    base: 41
+- model: inventory.moleculereqqty
+  pk: 1025
+  fields:
+    allowance: 3
+    required_quantity: 13
+    base: 42
+- model: inventory.moleculereqqty
+  pk: 1026
+  fields:
+    allowance: 3
+    required_quantity: 30
+    base: 115
+- model: inventory.moleculereqqty
+  pk: 1027
+  fields:
+    allowance: 3
+    required_quantity: 5
+    base: 89
+- model: inventory.moleculereqqty
+  pk: 1028
+  fields:
+    allowance: 3
+    required_quantity: 10
+    base: 28
+- model: inventory.moleculereqqty
+  pk: 1029
+  fields:
+    allowance: 3
+    required_quantity: 90
+    base: 90
+- model: inventory.moleculereqqty
+  pk: 1030
+  fields:
+    allowance: 3
+    required_quantity: 5
+    base: 79
+- model: inventory.moleculereqqty
+  pk: 1031
+  fields:
+    allowance: 3
+    required_quantity: 5
+    base: 88
+- model: inventory.moleculereqqty
+  pk: 1032
+  fields:
+    allowance: 3
+    required_quantity: 3
+    base: 50
+- model: inventory.moleculereqqty
+  pk: 1033
+  fields:
+    allowance: 2
+    required_quantity: 28
+    base: 108
+- model: inventory.moleculereqqty
+  pk: 1034
+  fields:
+    allowance: 2
+    required_quantity: 30
+    base: 107
+- model: inventory.moleculereqqty
+  pk: 1035
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 4
+- model: inventory.moleculereqqty
+  pk: 1036
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 14
+- model: inventory.moleculereqqty
+  pk: 1037
+  fields:
+    allowance: 1
+    required_quantity: 60
+    base: 36
+- model: inventory.moleculereqqty
+  pk: 1038
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 42
+- model: inventory.moleculereqqty
+  pk: 1039
+  fields:
+    allowance: 1
+    required_quantity: 120
+    base: 48
+- model: inventory.moleculereqqty
+  pk: 1040
+  fields:
+    allowance: 1
+    required_quantity: 40
+    base: 65
+- model: inventory.moleculereqqty
+  pk: 1041
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 77
+- model: inventory.moleculereqqty
+  pk: 1042
+  fields:
+    allowance: 1
+    required_quantity: 100
+    base: 81
+- model: inventory.moleculereqqty
+  pk: 1043
+  fields:
+    allowance: 1
+    required_quantity: 32
+    base: 80
+- model: inventory.moleculereqqty
+  pk: 1044
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 98
+- model: inventory.moleculereqqty
+  pk: 1045
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 106
+- model: inventory.moleculereqqty
+  pk: 1046
+  fields:
+    allowance: 1
+    required_quantity: 60
+    base: 54
+- model: inventory.moleculereqqty
+  pk: 1047
+  fields:
+    allowance: 1
+    required_quantity: 28
+    base: 74
+- model: inventory.moleculereqqty
+  pk: 1048
+  fields:
+    allowance: 1
+    required_quantity: 28
+    base: 16
+- model: inventory.moleculereqqty
+  pk: 1049
+  fields:
+    allowance: 1
+    required_quantity: 60
+    base: 96
+- model: inventory.moleculereqqty
+  pk: 1050
+  fields:
+    allowance: 1
+    required_quantity: 30
+    base: 8
+- model: inventory.moleculereqqty
+  pk: 1051
+  fields:
+    allowance: 1
+    required_quantity: 3
+    base: 9
+- model: inventory.moleculereqqty
+  pk: 1052
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 105
+- model: inventory.moleculereqqty
+  pk: 1053
+  fields:
+    allowance: 1
+    required_quantity: 24
+    base: 21
+- model: inventory.moleculereqqty
+  pk: 1054
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 22
+- model: inventory.moleculereqqty
+  pk: 1055
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 59
+- model: inventory.moleculereqqty
+  pk: 1056
+  fields:
+    allowance: 1
+    required_quantity: 16
+    base: 71
+- model: inventory.moleculereqqty
+  pk: 1057
+  fields:
+    allowance: 1
+    required_quantity: 60
+    base: 87
+- model: inventory.moleculereqqty
+  pk: 1058
+  fields:
+    allowance: 1
+    required_quantity: 28
+    base: 76
+- model: inventory.moleculereqqty
+  pk: 1059
+  fields:
+    allowance: 1
+    required_quantity: 30
+    base: 82
+- model: inventory.moleculereqqty
+  pk: 1060
+  fields:
+    allowance: 1
+    required_quantity: 40
+    base: 30
+- model: inventory.moleculereqqty
+  pk: 1061
+  fields:
+    allowance: 1
+    required_quantity: 60
+    base: 56
+- model: inventory.moleculereqqty
+  pk: 1062
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 57
+- model: inventory.moleculereqqty
+  pk: 1063
+  fields:
+    allowance: 1
+    required_quantity: 60
+    base: 97
+- model: inventory.moleculereqqty
+  pk: 1064
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 68
+- model: inventory.moleculereqqty
+  pk: 1065
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 73
+- model: inventory.moleculereqqty
+  pk: 1066
+  fields:
+    allowance: 1
+    required_quantity: 30
+    base: 35
+- model: inventory.moleculereqqty
+  pk: 1067
+  fields:
+    allowance: 1
+    required_quantity: 30
+    base: 49
+- model: inventory.moleculereqqty
+  pk: 1068
+  fields:
+    allowance: 1
+    required_quantity: 42
+    base: 103
+- model: inventory.moleculereqqty
+  pk: 1069
+  fields:
+    allowance: 1
+    required_quantity: 28
+    base: 40
+- model: inventory.moleculereqqty
+  pk: 1070
+  fields:
+    allowance: 1
+    required_quantity: 40
+    base: 33
+- model: inventory.moleculereqqty
+  pk: 1071
+  fields:
+    allowance: 1
+    required_quantity: 6
+    base: 34
+- model: inventory.moleculereqqty
+  pk: 1072
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 64
+- model: inventory.moleculereqqty
+  pk: 1073
+  fields:
+    allowance: 1
+    required_quantity: 14
+    base: 31
+- model: inventory.moleculereqqty
+  pk: 1074
+  fields:
+    allowance: 1
+    required_quantity: 40
+    base: 85
+- model: inventory.moleculereqqty
+  pk: 1075
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 70
+- model: inventory.moleculereqqty
+  pk: 1076
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 6
+- model: inventory.moleculereqqty
+  pk: 1077
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 89
+- model: inventory.moleculereqqty
+  pk: 1078
+  fields:
+    allowance: 1
+    required_quantity: 8
+    base: 93
+- model: inventory.moleculereqqty
+  pk: 1079
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 94
+- model: inventory.moleculereqqty
+  pk: 1080
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 52
+- model: inventory.moleculereqqty
+  pk: 1081
+  fields:
+    allowance: 1
+    required_quantity: 48
+    base: 10
+- model: inventory.moleculereqqty
+  pk: 1082
+  fields:
+    allowance: 1
+    required_quantity: 96
+    base: 11
+- model: inventory.moleculereqqty
+  pk: 1083
+  fields:
+    allowance: 1
+    required_quantity: 12
+    base: 17
+- model: inventory.moleculereqqty
+  pk: 1084
+  fields:
+    allowance: 1
+    required_quantity: 6
+    base: 23
+- model: inventory.moleculereqqty
+  pk: 1085
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 43
+- model: inventory.moleculereqqty
+  pk: 1086
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 60
+- model: inventory.moleculereqqty
+  pk: 1087
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 72
+- model: inventory.moleculereqqty
+  pk: 1088
+  fields:
+    allowance: 1
+    required_quantity: 42
+    base: 100
+- model: inventory.moleculereqqty
+  pk: 1089
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 7
+- model: inventory.moleculereqqty
+  pk: 1090
+  fields:
+    allowance: 1
+    required_quantity: 24
+    base: 55
+- model: inventory.moleculereqqty
+  pk: 1091
+  fields:
+    allowance: 1
+    required_quantity: 60
+    base: 78
+- model: inventory.moleculereqqty
+  pk: 1092
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 99
+- model: inventory.moleculereqqty
+  pk: 1093
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 38
+- model: inventory.moleculereqqty
+  pk: 1094
+  fields:
+    allowance: 1
+    required_quantity: 8
+    base: 67
+- model: inventory.moleculereqqty
+  pk: 1095
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 3
+- model: inventory.moleculereqqty
+  pk: 1096
+  fields:
+    allowance: 1
+    required_quantity: 40
+    base: 90
+- model: inventory.moleculereqqty
+  pk: 1097
+  fields:
+    allowance: 1
+    required_quantity: 6
+    base: 28
+- model: inventory.moleculereqqty
+  pk: 1098
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 19
+- model: inventory.moleculereqqty
+  pk: 1099
+  fields:
+    allowance: 1
+    required_quantity: 3
+    base: 44
+- model: inventory.moleculereqqty
+  pk: 1100
+  fields:
+    allowance: 1
+    required_quantity: 3
+    base: 50
+- model: inventory.moleculereqqty
+  pk: 1101
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 45
+- model: inventory.moleculereqqty
+  pk: 1102
+  fields:
+    allowance: 1
+    required_quantity: 30
+    base: 27
+- model: inventory.moleculereqqty
+  pk: 1103
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 37
+- model: inventory.moleculereqqty
+  pk: 1104
+  fields:
+    allowance: 1
+    required_quantity: 48
+    base: 24
+- model: inventory.moleculereqqty
+  pk: 1105
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 25
+- model: inventory.moleculereqqty
+  pk: 1106
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 47
+- model: inventory.moleculereqqty
+  pk: 1107
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 101
+- model: inventory.moleculereqqty
+  pk: 1108
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 91
+- model: inventory.moleculereqqty
+  pk: 1109
+  fields:
+    allowance: 1
+    required_quantity: 3
+    base: 39
+- model: inventory.moleculereqqty
+  pk: 1110
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 104
+- model: inventory.moleculereqqty
+  pk: 1111
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 66
+- model: inventory.moleculereqqty
+  pk: 1112
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 18
+- model: inventory.moleculereqqty
+  pk: 1113
+  fields:
+    allowance: 1
+    required_quantity: 3
+    base: 69
+- model: inventory.moleculereqqty
+  pk: 1114
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 20
+- model: inventory.moleculereqqty
+  pk: 1115
+  fields:
+    allowance: 1
+    required_quantity: 24
+    base: 2
+- model: inventory.moleculereqqty
+  pk: 1116
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 46
+- model: inventory.moleculereqqty
+  pk: 1117
+  fields:
+    allowance: 1
+    required_quantity: 24
+    base: 32
+- model: inventory.moleculereqqty
+  pk: 1118
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 88
+- model: inventory.moleculereqqty
+  pk: 1119
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 29
+- model: inventory.moleculereqqty
+  pk: 1120
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 51
+- model: inventory.moleculereqqty
+  pk: 1121
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 1
+- model: inventory.moleculereqqty
+  pk: 1122
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 15
+- model: inventory.moleculereqqty
+  pk: 1123
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 53
+- model: inventory.moleculereqqty
+  pk: 1124
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 79
+- model: inventory.moleculereqqty
+  pk: 1125
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 41
+- model: inventory.moleculereqqty
+  pk: 1126
+  fields:
+    allowance: 1
+    required_quantity: 24
+    base: 5
+- model: inventory.moleculereqqty
+  pk: 1127
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 92
+- model: inventory.moleculereqqty
+  pk: 1128
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 102
+- model: inventory.moleculereqqty
+  pk: 1129
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 83
+- model: inventory.moleculereqqty
+  pk: 1130
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 75
+- model: inventory.moleculereqqty
+  pk: 1131
+  fields:
+    allowance: 1
+    required_quantity: 12
+    base: 26
+- model: inventory.moleculereqqty
+  pk: 1132
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 12
+- model: inventory.moleculereqqty
+  pk: 1133
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 61
+- model: inventory.moleculereqqty
+  pk: 1134
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 62
+- model: inventory.moleculereqqty
+  pk: 1135
+  fields:
+    allowance: 1
+    required_quantity: 25
+    base: 95
+- model: inventory.moleculereqqty
+  pk: 1136
+  fields:
+    allowance: 1
+    required_quantity: 12
+    base: 84
+- model: inventory.moleculereqqty
+  pk: 1137
+  fields:
+    allowance: 1
+    required_quantity: 12
+    base: 86
+- model: inventory.moleculereqqty
+  pk: 1138
+  fields:
+    allowance: 1
+    required_quantity: 12
+    base: 13
+- model: inventory.moleculereqqty
+  pk: 1139
+  fields:
+    allowance: 1
+    required_quantity: 6
+    base: 58
+- model: inventory.moleculereqqty
+  pk: 1140
+  fields:
+    allowance: 1
+    required_quantity: 12
+    base: 63
+- model: inventory.moleculereqqty
+  pk: 1141
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 4
+- model: inventory.moleculereqqty
+  pk: 1142
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 14
+- model: inventory.moleculereqqty
+  pk: 1143
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 106
+- model: inventory.moleculereqqty
+  pk: 1144
+  fields:
+    allowance: 6
+    required_quantity: 4
+    base: 42
+- model: inventory.moleculereqqty
+  pk: 1145
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 98
+- model: inventory.moleculereqqty
+  pk: 1146
+  fields:
+    allowance: 6
+    required_quantity: 60
+    base: 54
+- model: inventory.moleculereqqty
+  pk: 1147
+  fields:
+    allowance: 6
+    required_quantity: 28
+    base: 74
+- model: inventory.moleculereqqty
+  pk: 1148
+  fields:
+    allowance: 6
+    required_quantity: 4
+    base: 119
+- model: inventory.moleculereqqty
+  pk: 1149
+  fields:
+    allowance: 6
+    required_quantity: 40
+    base: 48
+- model: inventory.moleculereqqty
+  pk: 1150
+  fields:
+    allowance: 6
+    required_quantity: 60
+    base: 36
+- model: inventory.moleculereqqty
+  pk: 1151
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 65
+- model: inventory.moleculereqqty
+  pk: 1152
+  fields:
+    allowance: 6
+    required_quantity: 12
+    base: 21
+- model: inventory.moleculereqqty
+  pk: 1153
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 22
+- model: inventory.moleculereqqty
+  pk: 1154
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 59
+- model: inventory.moleculereqqty
+  pk: 1155
+  fields:
+    allowance: 6
+    required_quantity: 16
+    base: 71
+- model: inventory.moleculereqqty
+  pk: 1156
+  fields:
+    allowance: 6
+    required_quantity: 40
+    base: 87
+- model: inventory.moleculereqqty
+  pk: 1157
+  fields:
+    allowance: 6
+    required_quantity: 7
+    base: 76
+- model: inventory.moleculereqqty
+  pk: 1158
+  fields:
+    allowance: 6
+    required_quantity: 16
+    base: 80
+- model: inventory.moleculereqqty
+  pk: 1159
+  fields:
+    allowance: 6
+    required_quantity: 100
+    base: 81
+- model: inventory.moleculereqqty
+  pk: 1160
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 82
+- model: inventory.moleculereqqty
+  pk: 1161
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 56
+- model: inventory.moleculereqqty
+  pk: 1162
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 57
+- model: inventory.moleculereqqty
+  pk: 1163
+  fields:
+    allowance: 6
+    required_quantity: 30
+    base: 97
+- model: inventory.moleculereqqty
+  pk: 1164
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 68
+- model: inventory.moleculereqqty
+  pk: 1165
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 73
+- model: inventory.moleculereqqty
+  pk: 1166
+  fields:
+    allowance: 6
+    required_quantity: 30
+    base: 35
+- model: inventory.moleculereqqty
+  pk: 1167
+  fields:
+    allowance: 6
+    required_quantity: 30
+    base: 49
+- model: inventory.moleculereqqty
+  pk: 1168
+  fields:
+    allowance: 6
+    required_quantity: 6
+    base: 34
+- model: inventory.moleculereqqty
+  pk: 1169
+  fields:
+    allowance: 6
+    required_quantity: 5
+    base: 64
+- model: inventory.moleculereqqty
+  pk: 1170
+  fields:
+    allowance: 6
+    required_quantity: 14
+    base: 31
+- model: inventory.moleculereqqty
+  pk: 1171
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 85
+- model: inventory.moleculereqqty
+  pk: 1172
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 6
+- model: inventory.moleculereqqty
+  pk: 1173
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 89
+- model: inventory.moleculereqqty
+  pk: 1174
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 94
+- model: inventory.moleculereqqty
+  pk: 1175
+  fields:
+    allowance: 6
+    required_quantity: 8
+    base: 93
+- model: inventory.moleculereqqty
+  pk: 1176
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 52
+- model: inventory.moleculereqqty
+  pk: 1177
+  fields:
+    allowance: 6
+    required_quantity: 36
+    base: 10
+- model: inventory.moleculereqqty
+  pk: 1178
+  fields:
+    allowance: 6
+    required_quantity: 48
+    base: 11
+- model: inventory.moleculereqqty
+  pk: 1179
+  fields:
+    allowance: 6
+    required_quantity: 12
+    base: 17
+- model: inventory.moleculereqqty
+  pk: 1180
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 60
+- model: inventory.moleculereqqty
+  pk: 1181
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 72
+- model: inventory.moleculereqqty
+  pk: 1182
+  fields:
+    allowance: 6
+    required_quantity: 24
+    base: 55
+- model: inventory.moleculereqqty
+  pk: 1183
+  fields:
+    allowance: 6
+    required_quantity: 42
+    base: 100
+- model: inventory.moleculereqqty
+  pk: 1184
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 38
+- model: inventory.moleculereqqty
+  pk: 1185
+  fields:
+    allowance: 6
+    required_quantity: 8
+    base: 67
+- model: inventory.moleculereqqty
+  pk: 1186
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 3
+- model: inventory.moleculereqqty
+  pk: 1187
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 90
+- model: inventory.moleculereqqty
+  pk: 1188
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 37
+- model: inventory.moleculereqqty
+  pk: 1189
+  fields:
+    allowance: 6
+    required_quantity: 32
+    base: 24
+- model: inventory.moleculereqqty
+  pk: 1190
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 25
+- model: inventory.moleculereqqty
+  pk: 1191
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 47
+- model: inventory.moleculereqqty
+  pk: 1192
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 101
+- model: inventory.moleculereqqty
+  pk: 1193
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 91
+- model: inventory.moleculereqqty
+  pk: 1194
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 39
+- model: inventory.moleculereqqty
+  pk: 1195
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 69
+- model: inventory.moleculereqqty
+  pk: 1196
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 20
+- model: inventory.moleculereqqty
+  pk: 1197
+  fields:
+    allowance: 6
+    required_quantity: 24
+    base: 2
+- model: inventory.moleculereqqty
+  pk: 1198
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 46
+- model: inventory.moleculereqqty
+  pk: 1199
+  fields:
+    allowance: 6
+    required_quantity: 12
+    base: 32
+- model: inventory.moleculereqqty
+  pk: 1200
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 88
+- model: inventory.moleculereqqty
+  pk: 1201
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 53
+- model: inventory.moleculereqqty
+  pk: 1202
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 79
+- model: inventory.moleculereqqty
+  pk: 1203
+  fields:
+    allowance: 6
+    required_quantity: 5
+    base: 41
+- model: inventory.moleculereqqty
+  pk: 1204
+  fields:
+    allowance: 6
+    required_quantity: 24
+    base: 5
+- model: inventory.moleculereqqty
+  pk: 1205
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 92
+- model: inventory.moleculereqqty
+  pk: 1206
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 83
+- model: inventory.moleculereqqty
+  pk: 1207
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 75
+- model: inventory.moleculereqqty
+  pk: 1208
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 26
+- model: inventory.moleculereqqty
+  pk: 1209
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 12
+- model: inventory.moleculereqqty
+  pk: 1210
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 61
+- model: inventory.moleculereqqty
+  pk: 1211
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 62
+- model: inventory.moleculereqqty
+  pk: 1212
+  fields:
+    allowance: 6
+    required_quantity: 12
+    base: 84
+- model: inventory.moleculereqqty
+  pk: 1213
+  fields:
+    allowance: 6
+    required_quantity: 12
+    base: 86
+- model: inventory.moleculereqqty
+  pk: 1214
+  fields:
+    allowance: 6
+    required_quantity: 12
+    base: 13
+- model: inventory.moleculereqqty
+  pk: 1215
+  fields:
+    allowance: 6
+    required_quantity: 25
+    base: 95
+- model: inventory.moleculereqqty
+  pk: 1216
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 4
+- model: inventory.moleculereqqty
+  pk: 1217
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 14
+- model: inventory.moleculereqqty
+  pk: 1218
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 106
+- model: inventory.moleculereqqty
+  pk: 1219
+  fields:
+    allowance: 7
+    required_quantity: 4
+    base: 42
+- model: inventory.moleculereqqty
+  pk: 1220
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 98
+- model: inventory.moleculereqqty
+  pk: 1221
+  fields:
+    allowance: 7
+    required_quantity: 60
+    base: 54
+- model: inventory.moleculereqqty
+  pk: 1222
+  fields:
+    allowance: 7
+    required_quantity: 28
+    base: 74
+- model: inventory.moleculereqqty
+  pk: 1223
+  fields:
+    allowance: 7
+    required_quantity: 4
+    base: 119
+- model: inventory.moleculereqqty
+  pk: 1224
+  fields:
+    allowance: 7
+    required_quantity: 40
+    base: 48
+- model: inventory.moleculereqqty
+  pk: 1225
+  fields:
+    allowance: 7
+    required_quantity: 60
+    base: 36
+- model: inventory.moleculereqqty
+  pk: 1226
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 65
+- model: inventory.moleculereqqty
+  pk: 1227
+  fields:
+    allowance: 7
+    required_quantity: 12
+    base: 21
+- model: inventory.moleculereqqty
+  pk: 1228
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 22
+- model: inventory.moleculereqqty
+  pk: 1229
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 59
+- model: inventory.moleculereqqty
+  pk: 1230
+  fields:
+    allowance: 7
+    required_quantity: 16
+    base: 71
+- model: inventory.moleculereqqty
+  pk: 1231
+  fields:
+    allowance: 7
+    required_quantity: 40
+    base: 87
+- model: inventory.moleculereqqty
+  pk: 1232
+  fields:
+    allowance: 7
+    required_quantity: 7
+    base: 76
+- model: inventory.moleculereqqty
+  pk: 1233
+  fields:
+    allowance: 7
+    required_quantity: 16
+    base: 80
+- model: inventory.moleculereqqty
+  pk: 1234
+  fields:
+    allowance: 7
+    required_quantity: 100
+    base: 81
+- model: inventory.moleculereqqty
+  pk: 1235
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 82
+- model: inventory.moleculereqqty
+  pk: 1236
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 56
+- model: inventory.moleculereqqty
+  pk: 1237
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 57
+- model: inventory.moleculereqqty
+  pk: 1238
+  fields:
+    allowance: 7
+    required_quantity: 30
+    base: 97
+- model: inventory.moleculereqqty
+  pk: 1239
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 68
+- model: inventory.moleculereqqty
+  pk: 1240
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 73
+- model: inventory.moleculereqqty
+  pk: 1241
+  fields:
+    allowance: 7
+    required_quantity: 30
+    base: 35
+- model: inventory.moleculereqqty
+  pk: 1242
+  fields:
+    allowance: 7
+    required_quantity: 30
+    base: 49
+- model: inventory.moleculereqqty
+  pk: 1243
+  fields:
+    allowance: 7
+    required_quantity: 6
+    base: 34
+- model: inventory.moleculereqqty
+  pk: 1244
+  fields:
+    allowance: 7
+    required_quantity: 5
+    base: 64
+- model: inventory.moleculereqqty
+  pk: 1245
+  fields:
+    allowance: 7
+    required_quantity: 14
+    base: 31
+- model: inventory.moleculereqqty
+  pk: 1246
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 85
+- model: inventory.moleculereqqty
+  pk: 1247
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 6
+- model: inventory.moleculereqqty
+  pk: 1248
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 89
+- model: inventory.moleculereqqty
+  pk: 1249
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 94
+- model: inventory.moleculereqqty
+  pk: 1250
+  fields:
+    allowance: 7
+    required_quantity: 8
+    base: 93
+- model: inventory.moleculereqqty
+  pk: 1251
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 52
+- model: inventory.moleculereqqty
+  pk: 1252
+  fields:
+    allowance: 7
+    required_quantity: 36
+    base: 10
+- model: inventory.moleculereqqty
+  pk: 1253
+  fields:
+    allowance: 7
+    required_quantity: 48
+    base: 11
+- model: inventory.moleculereqqty
+  pk: 1254
+  fields:
+    allowance: 7
+    required_quantity: 12
+    base: 17
+- model: inventory.moleculereqqty
+  pk: 1255
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 60
+- model: inventory.moleculereqqty
+  pk: 1256
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 72
+- model: inventory.moleculereqqty
+  pk: 1257
+  fields:
+    allowance: 7
+    required_quantity: 24
+    base: 55
+- model: inventory.moleculereqqty
+  pk: 1258
+  fields:
+    allowance: 7
+    required_quantity: 42
+    base: 100
+- model: inventory.moleculereqqty
+  pk: 1259
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 38
+- model: inventory.moleculereqqty
+  pk: 1260
+  fields:
+    allowance: 7
+    required_quantity: 8
+    base: 67
+- model: inventory.moleculereqqty
+  pk: 1261
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 3
+- model: inventory.moleculereqqty
+  pk: 1262
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 90
+- model: inventory.moleculereqqty
+  pk: 1263
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 37
+- model: inventory.moleculereqqty
+  pk: 1264
+  fields:
+    allowance: 7
+    required_quantity: 32
+    base: 24
+- model: inventory.moleculereqqty
+  pk: 1265
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 25
+- model: inventory.moleculereqqty
+  pk: 1266
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 47
+- model: inventory.moleculereqqty
+  pk: 1267
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 101
+- model: inventory.moleculereqqty
+  pk: 1268
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 91
+- model: inventory.moleculereqqty
+  pk: 1269
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 39
+- model: inventory.moleculereqqty
+  pk: 1270
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 69
+- model: inventory.moleculereqqty
+  pk: 1271
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 20
+- model: inventory.moleculereqqty
+  pk: 1272
+  fields:
+    allowance: 7
+    required_quantity: 24
+    base: 2
+- model: inventory.moleculereqqty
+  pk: 1273
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 46
+- model: inventory.moleculereqqty
+  pk: 1274
+  fields:
+    allowance: 7
+    required_quantity: 12
+    base: 32
+- model: inventory.moleculereqqty
+  pk: 1275
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 88
+- model: inventory.moleculereqqty
+  pk: 1276
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 53
+- model: inventory.moleculereqqty
+  pk: 1277
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 79
+- model: inventory.moleculereqqty
+  pk: 1278
+  fields:
+    allowance: 7
+    required_quantity: 5
+    base: 41
+- model: inventory.moleculereqqty
+  pk: 1279
+  fields:
+    allowance: 7
+    required_quantity: 24
+    base: 5
+- model: inventory.moleculereqqty
+  pk: 1280
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 92
+- model: inventory.moleculereqqty
+  pk: 1281
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 83
+- model: inventory.moleculereqqty
+  pk: 1282
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 75
+- model: inventory.moleculereqqty
+  pk: 1283
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 26
+- model: inventory.moleculereqqty
+  pk: 1284
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 12
+- model: inventory.moleculereqqty
+  pk: 1285
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 61
+- model: inventory.moleculereqqty
+  pk: 1286
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 62
+- model: inventory.equipment
+  pk: 1
+  fields:
+    name: Abaisse langue
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: false
+    remark: usage unique
+    picture: abaisse-langue.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 2
+  fields:
+    name: "Agrafeuse \xE0 peau"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "Usage unique. Type 3M Precise\xAE"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 3
+  fields:
+    name: "Aiguille sertie courbe \xE0 fil synth\xE9tique n\xB03/0 - 2 D\xE9c/Met"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "non r\xE9sorbable. Type Filapeau\xAE"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 4
+  fields:
+    name: "Aiguille sertie courbe \xE0 fil synth\xE9tique n\xB04/0 - 1,5 D\xE9c/Met"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "non r\xE9sorbable. Type Filapeau\xAE"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 5
+  fields:
+    name: "Aiguille \xE0 injection intra-musculaire st\xE9rile (21G - 0,8 \xD7 40)"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 6
+  fields:
+    name: "Aiguille \xE0 injection intra-veineuse st\xE9rile (23G - 0,6 \xD7 25)"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 7
+  fields:
+    name: "Aiguille \xE0 injection sous-cutan\xE9e st\xE9rile (25G - 0,5 \xD7 16)"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 8
+  fields:
+    name: "Aiguille \xE0 injection st\xE9rile (19G - 1,1 \xD7 40) trocart"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 9
+  fields:
+    name: "Appareil d'enregistrement ambulatoire et \xE9v\xE9nementiel de trac\xE9\
+      s ECG"
+    packaging: "unit\xE9"
+    group: 10
+    consumable: false
+    perishable: false
+    remark: "Comprenant : le branchement au r\xE9seau INMARSAT ou \xE0 la HF avec\
+      \ une solution d'envoi de mail et le mat\xE9riel permettant d'effectuer les\
+      \ 12 d\xE9rivations 12 pistes."
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 10
+  fields:
+    name: "Aspirateur de mucosit\xE9 fonctionnant \xE0 pied, \xE0 main ou de fa\xE7\
+      on automatique, avec tuyau d'aspiration"
+    packaging: "unit\xE9"
+    group: 1
+    consumable: false
+    perishable: false
+    remark: "type Ambu\xAE Twin Pump"
+    picture: aspirateur-de-mucosite-fonctionnant-a-pied-a-main-ou-de-facon-autom_MbGoiTW.jpeg
+    tag: []
+- model: inventory.equipment
+  pk: 11
+  fields:
+    name: Attelle cervico-thoracique
+    packaging: "unit\xE9"
+    group: 7
+    consumable: false
+    perishable: false
+    remark: "type Ferno KED\xAE"
+    picture: attelle-cervico-thoracique.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 12
+  fields:
+    name: "Attelle compl\xE8te de jambe"
+    packaging: "unit\xE9"
+    group: 7
+    consumable: false
+    perishable: false
+    remark: Avec attaches rapides velcro
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 13
+  fields:
+    name: "Attelle en aluminium mall\xE9able pour doigt"
+    packaging: "unit\xE9"
+    group: 7
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 14
+  fields:
+    name: "Attelle/orth\xE8se rigide poignet/main"
+    packaging: "unit\xE9"
+    group: 7
+    consumable: false
+    perishable: false
+    remark: "type Axmed\xAE ou L\xE9pine\xAE (mod\xE8le bilat\xE9ral)"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 15
+  fields:
+    name: "Bande adh\xE9sive \xE9lastique (10 cm)"
+    packaging: rouleau
+    group: 7
+    consumable: true
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 16
+  fields:
+    name: "Bande auto-adh\xE9sive (10 cm)"
+    packaging: rouleau 4 m
+    group: 2
+    consumable: true
+    perishable: false
+    remark: "type Coheban\xAE"
+    picture: bande-auto-adhesive-10-cm.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 17
+  fields:
+    name: "Bande de cr\xEApe (10 cm)"
+    packaging: rouleau 4 m
+    group: 2
+    consumable: true
+    perishable: false
+    remark: "type Velpeau\xAE"
+    picture: bande-de-crepe-10-cm.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 18
+  fields:
+    name: Bande de gaze tubulaire avec applicateur
+    packaging: rouleau 5 m
+    group: 2
+    consumable: true
+    perishable: true
+    remark: pour pansement de doigt
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 19
+  fields:
+    name: "Bandelettes r\xE9actives pour examen d'urines"
+    packaging: flacon
+    group: 4
+    consumable: true
+    perishable: true
+    remark: "Pour recherche de prot\xE9ines, glucose, sang, ac\xE9tone, nitrites,\
+      \ leucocytes"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 20
+  fields:
+    name: "Bandelettes r\xE9actives pour glyc\xE9mie capillaire"
+    packaging: "bo\xEEte"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: "compatible avec le lecteur de glyc\xE9mie"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 21
+  fields:
+    name: "Bassin de commodit\xE9"
+    packaging: "unit\xE9"
+    group: 6
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 22
+  fields:
+    name: "Bistouri lame n\xB011"
+    packaging: "unit\xE9"
+    group: 3
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 23
+  fields:
+    name: "Bistouri lame n\xB015"
+    packaging: "unit\xE9"
+    group: 3
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 24
+  fields:
+    name: "Blouse chirurgicale st\xE9rile"
+    packaging: "unit\xE9"
+    group: 6
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 25
+  fields:
+    name: "Bon de commande pr\xE9-imprim\xE9 Dotation A"
+    packaging: "unit\xE9"
+    group: 8
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 26
+  fields:
+    name: "Brosse \xE0 antisepsie"
+    packaging: "unit\xE9"
+    group: 6
+    consumable: true
+    perishable: false
+    remark: usage unique
+    picture: brosse-a-antisepsie.png
+    tag: []
+- model: inventory.equipment
+  pk: 27
+  fields:
+    name: "Cahier m\xE9dical"
+    packaging: "unit\xE9"
+    group: 8
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 28
+  fields:
+    name: Cannes anglaises
+    packaging: paire
+    group: 7
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 29
+  fields:
+    name: "Canule oro-pharyng\xE9e taille 4 (adulte)"
+    packaging: "unit\xE9"
+    group: 1
+    consumable: true
+    perishable: true
+    remark: "type Guedel\xAE"
+    picture: canule-oro-pharyngee-taille-4-adulte.JPG
+    tag: []
+- model: inventory.equipment
+  pk: 30
+  fields:
+    name: Canule rectale
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 31
+  fields:
+    name: "Cath\xE9ter intra-veineux court 16G"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 32
+  fields:
+    name: "Cath\xE9ter intra-veineux court 18G"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 33
+  fields:
+    name: "Cath\xE9ter intra-veineux court 20G"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 34
+  fields:
+    name: "Champ adh\xE9sif transparent (10 cm \xD7 14 cm)"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: "Pour fixation de cath\xE9ter"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 35
+  fields:
+    name: "Ciment d'obturation temporaire de longue dur\xE9e, \xE0 l'oxyde de zinc/eug\xE9\
+      nol renforc\xE9 de r\xE9sine"
+    packaging: "unit\xE9"
+    group: 3
+    consumable: true
+    perishable: true
+    remark: "type Dentsply Sirona IRM\xAE"
+    picture: ciment-dobturation-temporaire-de-longue-duree-a-loxyde-de-zinceugenol-renforce-de-resine.png
+    tag: []
+- model: inventory.equipment
+  pk: 36
+  fields:
+    name: Ciseaux universels
+    packaging: "unit\xE9"
+    group: 3
+    consumable: false
+    perishable: false
+    remark: type Jesco
+    picture: ciseaux-universels.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 37
+  fields:
+    name: "Civi\xE8re polyvalente treuillable"
+    packaging: "unit\xE9"
+    group: 7
+    consumable: false
+    perishable: false
+    remark: "type Bellisle\xAE avec dispositif de contention"
+    picture: civiere-polyvalente-treuillable.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 38
+  fields:
+    name: Collecteur d'aiguilles
+    packaging: "unit\xE9"
+    group: 6
+    consumable: true
+    perishable: false
+    remark: "Capacit\xE9 : 0,45 L"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 39
+  fields:
+    name: Collier pour immobilisation cervicale rigide
+    packaging: set de 3 tailles
+    group: 7
+    consumable: false
+    perishable: false
+    remark: "set de 3 tailles ou r\xE9glable"
+    picture: collier-pour-immobilisation-cervicale-rigide.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 40
+  fields:
+    name: "Compresse de gaze non st\xE9rile"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 41
+  fields:
+    name: "Compresse de gaze st\xE9rile"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "Taille moyenne (7,5 \xD7 7,5 cm)"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 42
+  fields:
+    name: "Compresses hydrogel 20 cm \xD7 20 cm"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "type BurnAid\xAE"
+    picture: compresses-hydrogel-20-cm-20-cm.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 43
+  fields:
+    name: "Compresses hydrogel 40 cm \xD7 55 cm"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "type BurnAid\xAE"
+    picture: compresses-hydrogel-40-cm-55-cm.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 44
+  fields:
+    name: "Comprim\xE9s chlor\xE9s pour st\xE9rilisation de l'eau"
+    packaging: "unit\xE9"
+    group: 11
+    consumable: true
+    perishable: true
+    remark: "Quantit\xE9 en fonction de la capacit\xE9 des r\xE9servoirs d'eau et\
+      \ permettant d'obtenir en cas de contamination av\xE9r\xE9e par un micro-organisme,\
+      \ une concentration de chlore de 5 mg/L d'eau."
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 45
+  fields:
+    name: Coton hydrophile
+    packaging: paquet de 100 g
+    group: 2
+    consumable: true
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 46
+  fields:
+    name: "Coussin h\xE9mostatique"
+    packaging: "unit\xE9"
+    group: 9
+    consumable: true
+    perishable: false
+    remark: "type CHUT\xAE"
+    picture: coussin-hemostatique.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 47
+  fields:
+    name: Couverture de survie
+    packaging: "unit\xE9"
+    group: 6
+    consumable: true
+    perishable: false
+    remark: usage unique
+    picture: couverture-de-survie.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 48
+  fields:
+    name: "Drap st\xE9rile pour br\xFBl\xE9"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "taille 0,7 \xD7 2,5 m, type M\xE9talline\xAE"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 49
+  fields:
+    name: "D\xE9fibrillateur Automatis\xE9 Externe"
+    packaging: "unit\xE9"
+    group: 1
+    consumable: false
+    perishable: true
+    remark: "avec 2 sets d'\xE9lectrodes et 1 tapis isolant"
+    picture: defibrillateur-automatise-externe.png
+    tag: []
+- model: inventory.equipment
+  pk: 50
+  fields:
+    name: "D\xE9tergent d\xE9sinfectant de surface"
+    packaging: litre
+    group: 11
+    consumable: true
+    perishable: true
+    remark: "type Anios\xAE"
+    picture: detergent-desinfectant-de-surface.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 51
+  fields:
+    name: Eau de Javel
+    packaging: "bouteille-concentr\xE9e \xE0 9,6 % ou pastilles chlor\xE9es \xE0 1,5\
+      \ g"
+    group: 11
+    consumable: true
+    perishable: true
+    remark: "Pour application cutan\xE9e ou d\xE9sinfection des surfaces."
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 52
+  fields:
+    name: "Fiche d'observation m\xE9dicale"
+    packaging: "unit\xE9"
+    group: 8
+    consumable: false
+    perishable: false
+    remark: "pour t\xE9l\xE9consultation"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 53
+  fields:
+    name: "Gants d'examen non st\xE9riles"
+    packaging: paire
+    group: 6
+    consumable: true
+    perishable: false
+    remark: taille M et L
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 54
+  fields:
+    name: "Gants d'examen non st\xE9riles (taille L)"
+    packaging: "bo\xEEte de 100"
+    group: 6
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 55
+  fields:
+    name: "Gants d'examen non st\xE9riles (taille M)"
+    packaging: "bo\xEEte de 100"
+    group: 6
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 56
+  fields:
+    name: "Gants de chirurgie poudr\xE9s st\xE9riles (taille 7 \xBD)"
+    packaging: paire
+    group: 6
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 57
+  fields:
+    name: "Gants de chirurgie poudr\xE9s st\xE9riles (taille 8 \xBD)"
+    packaging: paire
+    group: 6
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 58
+  fields:
+    name: Garrot en caoutchouc pour voie veineuse
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 59
+  fields:
+    name: Gel antiseptique hydroalcoolique pour la peau saine
+    packaging: flacon 500 mL
+    group: 6
+    consumable: true
+    perishable: true
+    remark: pour antisepsie des mains
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 60
+  fields:
+    name: Gel antiseptique hydroalcoolique pour la peau saine
+    packaging: flacon 75 mL
+    group: 9
+    consumable: true
+    perishable: true
+    remark: pour antisepsie des mains
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 61
+  fields:
+    name: "Guide des sp\xE9cialit\xE9s pharmaceutiques"
+    packaging: "unit\xE9"
+    group: 8
+    consumable: false
+    perishable: false
+    remark: "type Vidal de la famille - Guide de l'autom\xE9dication"
+    picture: guide-des-specialites-pharmaceutiques.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 62
+  fields:
+    name: "Guide m\xE9dical de bord"
+    packaging: "unit\xE9"
+    group: 8
+    consumable: false
+    perishable: false
+    remark: null
+    picture: guide-medical-de-bord.png
+    tag: []
+- model: inventory.equipment
+  pk: 63
+  fields:
+    name: Housse mortuaire
+    packaging: "unit\xE9"
+    group: 6
+    consumable: true
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 64
+  fields:
+    name: Insecticide liquide
+    packaging: "unit\xE9"
+    group: 11
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 65
+  fields:
+    name: "Insufflateur manuel avec r\xE9servoir \xE0 oxyg\xE8ne"
+    packaging: "unit\xE9"
+    group: 1
+    consumable: false
+    perishable: false
+    remark: "Ballon auto remplisseur \xE0 valve unidirectionnelle type Ambu\xAE"
+    picture: insufflateur-manuel-avec-reservoir-a-oxygene.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 66
+  fields:
+    name: "Jeu d'\xE9lectrodes pour d\xE9fibrillateur"
+    packaging: set
+    group: 1
+    consumable: true
+    perishable: true
+    remark: compatible avec DAE
+    picture: jeu-delectrodes-pour-defibrillateur.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 67
+  fields:
+    name: "Lampe spot pour \xE9clairage du champ op\xE9ratoire"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 68
+  fields:
+    name: "Lampe stylo avec capuchon pour lumi\xE8re bleue"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: "pour recherche corps \xE9tranger oculaire"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 69
+  fields:
+    name: "Lancette ophtalmique en \xE9ponge triangulaire"
+    packaging: "unit\xE9"
+    group: 3
+    consumable: true
+    perishable: true
+    remark: "Usage unique. Pour ablation corps \xE9tranger corn\xE9en."
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 70
+  fields:
+    name: "Lancettes capillaires s\xE9curis\xE9es"
+    packaging: "bo\xEEte"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: "conditionn\xE9es \xE0 l'unit\xE9 et non en barillet"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 71
+  fields:
+    name: "Lecteur de glyc\xE9mie capillaire"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 72
+  fields:
+    name: Loupe incassable
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 73
+  fields:
+    name: "Masque a\xE9rosol pour n\xE9bulisation de m\xE9dicaments (adulte) avec\
+      \ tubulure"
+    packaging: "unit\xE9"
+    group: 1
+    consumable: true
+    perishable: false
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 74
+  fields:
+    name: Masque facial de chirurgie
+    packaging: "unit\xE9"
+    group: 6
+    consumable: true
+    perishable: true
+    remark: Usage unique. Type FFP2 EN149
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 75
+  fields:
+    name: Masque facial pour insufflateur manuel, taille 5 (adulte)
+    packaging: "unit\xE9"
+    group: 1
+    consumable: true
+    perishable: false
+    remark: usage unique
+    picture: masque-facial-pour-insufflateur-manuel-taille-5-adulte.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 76
+  fields:
+    name: "Masque \xE0 oxyg\xE8ne \xE0 haute concentration (adulte) avec tubulure"
+    packaging: "unit\xE9"
+    group: 1
+    consumable: true
+    perishable: false
+    remark: usage unique
+    picture: masque-a-oxygene-a-haute-concentration-adulte-avec-tubulure.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 77
+  fields:
+    name: "M\xE8che de gaze st\xE9rile (2 cm x 5 m)"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 78
+  fields:
+    name: "N\xE9cessaire \xE0 perfusion"
+    packaging: "set st\xE9rile"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: Tubulure avec site d'injection et robinet 3 voies
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 79
+  fields:
+    name: "N\xE9opynamine forte sumithrine"
+    packaging: "unit\xE9"
+    group: 11
+    consumable: true
+    perishable: true
+    remark: "type APAR\xAE, a\xE9rosol 125 g/200 mL. Nettoyage poux, gale, ..."
+    picture: neopynamine-forte-sumithrine.jpeg
+    tag: []
+- model: inventory.equipment
+  pk: 80
+  fields:
+    name: "Orth\xE8se de cheville rigide"
+    packaging: "unit\xE9"
+    group: 7
+    consumable: false
+    perishable: false
+    remark: "type Active Axmed\xAE (mod\xE8le bilat\xE9ral)"
+    picture: orthese-de-cheville-rigide.png
+    tag: []
+- model: inventory.equipment
+  pk: 81
+  fields:
+    name: Otoscope multi-usages (oreilles-nez)
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 82
+  fields:
+    name: "Oxyg\xE8ne m\xE9dical (portable)"
+    packaging: bouteille de 5 L - 200 bar
+    group: 1
+    consumable: false
+    perishable: true
+    remark: "bouteille munie d'un robinet avec manod\xE9tenteur-d\xE9bitm\xE8tre de\
+      \ 0 \xE0 15 L/min et prises normalis\xE9es"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 83
+  fields:
+    name: "Oxym\xE8tre de pouls"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 84
+  fields:
+    name: "Pansement absorbant st\xE9rile (type am\xE9ricain)"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "15 cm \xD7 20 cm"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 85
+  fields:
+    name: "Pansement adh\xE9sif st\xE9rile \xE9tanche"
+    packaging: "bo\xEEte"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: Assortiment de 3 tailles
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 86
+  fields:
+    name: "Pince h\xE9mostatique \xE0 griffes"
+    packaging: "unit\xE9"
+    group: 3
+    consumable: true
+    perishable: false
+    remark: type Halstead
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 87
+  fields:
+    name: Poche collectrice d'urines
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: false
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 88
+  fields:
+    name: "Potence \xE0 perfusion"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 89
+  fields:
+    name: "Pr\xE9servatifs"
+    packaging: "unit\xE9"
+    group: 6
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 90
+  fields:
+    name: Rasoir
+    packaging: "unit\xE9"
+    group: 3
+    consumable: true
+    perishable: false
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 91
+  fields:
+    name: "Registre de m\xE9dicaments"
+    packaging: "unit\xE9"
+    group: 8
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 92
+  fields:
+    name: Sac d'intervention
+    packaging: "unit\xE9"
+    group: 6
+    consumable: false
+    perishable: false
+    remark: "Pour transport du mat\xE9riel d'urgence et de r\xE9animation."
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 93
+  fields:
+    name: "Sac de D\xE9chet d'Activit\xE9s de Soins \xE0 Risques Infectieux (DASRI)"
+    packaging: rouleau de 25
+    group: 6
+    consumable: true
+    perishable: false
+    remark: taille 20 L
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 94
+  fields:
+    name: Sac en plastique
+    packaging: "unit\xE9"
+    group: 6
+    consumable: false
+    perishable: false
+    remark: "petite dimension pour conservation dans la glace de pi\xE8ces anatomiques\
+      \ d'amputation"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 95
+  fields:
+    name: Seringue 10mL
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 96
+  fields:
+    name: Seringue 5 mL
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 97
+  fields:
+    name: "Set H\xE9morragie"
+    packaging: "unit\xE9"
+    group: 3
+    consumable: true
+    perishable: true
+    remark: "Comprenant : garrot Tourniquet, pansement compressif, bande granul\xE9\
+      s h\xE9mostatiques (type Chito-SAM\xAE). Set type 4BC\xAE."
+    picture: set-hemorragie.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 98
+  fields:
+    name: "Set de sondage ur\xE9tral"
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: "type Hartmann MediSet\xAE Sondage Urinaire"
+    picture: set-de-sondage-uretral.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 99
+  fields:
+    name: "Set dentaire st\xE9rile"
+    packaging: "set st\xE9rile"
+    group: 3
+    consumable: true
+    perishable: true
+    remark: "Usage unique. Type DentaNurse\xAE. Comprenant : 1 miroir, 1 pr\xE9celle,\
+      \ 1 sonde n\xB06, 1 \xE9carteur, 1 spatule de bouche, 1 bloc \xE0 spatuler."
+    picture: set-dentaire-sterile.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 100
+  fields:
+    name: "Set \xE0 pansement"
+    packaging: "set st\xE9rile"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "Comprenant : 1 paire de ciseaux droits \xE0 bouts pointus, 1 champ st\xE9\
+      rile non trou\xE9, 1 pince Kocher, 1 pince anatomique \xE0 mors fins, 1 pince\
+      \ \xE0 diss\xE9quer \xE0 griffes et des compresses st\xE9riles"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 101
+  fields:
+    name: "Set \xE0 suture st\xE9rile"
+    packaging: "set st\xE9rile"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "Comprenant : 1 porte aiguille m\xE9tallique, 1 ciseau 10 cm, 1 pince\
+      \ \xE0 griffe m\xE9tallique, 5 compresses 5 cm \xD7 5 cm, 1 champ trou\xE9,\
+      \ 1 champ non trou\xE9."
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 102
+  fields:
+    name: Sonde d'aspiration buccale
+    packaging: "unit\xE9"
+    group: 1
+    consumable: true
+    perishable: true
+    remark: CH26
+    picture: sonde-daspiration-buccale.png
+    tag: []
+- model: inventory.equipment
+  pk: 103
+  fields:
+    name: Sonde urinaire de Foley (16-40 cm)
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: sonde-urinaire-de-foley-16-40-cm.png
+    tag: []
+- model: inventory.equipment
+  pk: 104
+  fields:
+    name: Sonde urinaire de Foley (18-40 cm)
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: sonde-urinaire-de-foley-18-40-cm.png
+    tag: []
+- model: inventory.equipment
+  pk: 105
+  fields:
+    name: Sparadrap
+    packaging: rouleau
+    group: 2
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 106
+  fields:
+    name: "Sp\xE9culum auriculaire universel"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: "Usage unique. Diam\xE8tre 4 mm"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 107
+  fields:
+    name: "St\xE9thoscope"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 108
+  fields:
+    name: Suspensoir avec sangles
+    packaging: "unit\xE9"
+    group: 7
+    consumable: false
+    perishable: false
+    remark: "taille m\xE9diane"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 109
+  fields:
+    name: "Sutures cutan\xE9es adh\xE9sives (6 mm \xD7 75 mm)"
+    packaging: pochette de 3
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "type 3M Steri-Strip\xAE"
+    picture: sutures-cutanees-adhesives-6-mm-75-mm.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 110
+  fields:
+    name: Tapis isolant pour DAE
+    packaging: "unit\xE9"
+    group: 1
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 111
+  fields:
+    name: "Tensiom\xE8tre"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: "automatique \xE0 brassard hum\xE9ral"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 112
+  fields:
+    name: "Test de Diagnostic Rapide des angines \xE0 Streptocoque groupe A"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: "type Streptatest\xAE"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 113
+  fields:
+    name: Test de grossesse
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 114
+  fields:
+    name: "Thermom\xE8tre hypothermique"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: "mesure jusqu'\xE0 25\xB0 C"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 115
+  fields:
+    name: "Thermom\xE8tre m\xE9dical digital"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: "\xE0 utilisation axillaire, buccale et rectale"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 116
+  fields:
+    name: "Trocart pour drainage urinaire percutan\xE9"
+    packaging: "set st\xE9rile"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: "cath\xE9ter sus-pubien"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 117
+  fields:
+    name: "Tulle gras (10 cm \xD7 10 cm)"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: null
+    picture: tulle-gras-10-cm-10-cm.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 118
+  fields:
+    name: Urinal pour homme
+    packaging: "unit\xE9"
+    group: 6
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 119
+  fields:
+    name: "Vessie \xE0 glace en caoutchouc"
+    packaging: "unit\xE9"
+    group: 6
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 120
+  fields:
+    name: "\xC9charpe de contention et d'immobilisation \xE9paule-bras"
+    packaging: "unit\xE9"
+    group: 7
+    consumable: false
+    perishable: false
+    remark: "type Axmed\xAE"
+    picture: echarpe-de-contention-et-dimmobilisation-epaule-bras.png
+    tag: []
+- model: inventory.equipment
+  pk: 121
+  fields:
+    name: "\xC9pingle de s\xFBret\xE9"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: false
+    remark: null
+    picture: epingle-de-surete.jpg
+    tag: []
+- model: inventory.equipment
+  pk: 122
+  fields:
+    name: "\xD4te-agrafe"
+    packaging: "unit\xE9"
+    group: 2
+    consumable: true
+    perishable: true
+    remark: "Usage unique. Type 3M Precise\xAE"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 123
+  fields:
+    name: "Bombes r\xE9pulsives (anti-moustique)"
+    packaging: flacon
+    group: 11
+    consumable: true
+    perishable: true
+    remark: Type "Cinq sur cinq"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 124
+  fields:
+    name: "Canule oro-pharyng\xE9e taille 2 (adulte)"
+    packaging: "unit\xE9"
+    group: 1
+    consumable: true
+    perishable: true
+    remark: "type Guedel\xAE"
+    picture: canule-oro-pharyngee-taille-2-adulte.JPG
+    tag: []
+- model: inventory.equipment
+  pk: 125
+  fields:
+    name: "Canule oro-pharyng\xE9e taille 3 (adulte)"
+    packaging: "unit\xE9"
+    group: 1
+    consumable: true
+    perishable: true
+    remark: "type Guedel\xAE"
+    picture: canule-oro-pharyngee-taille-3-adulte.JPG
+    tag: []
+- model: inventory.equipment
+  pk: 126
+  fields:
+    name: Chresylol sodique
+    packaging: litre
+    group: 12
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 127
+  fields:
+    name: "Fumigator au trioxym\xE9thyl\xE8ne n\xB03"
+    packaging: "unit\xE9"
+    group: 12
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 128
+  fields:
+    name: Lames pour microscope
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 129
+  fields:
+    name: "Pi\xE8ge \xE0 rats classique"
+    packaging: "unit\xE9"
+    group: 12
+    consumable: true
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 130
+  fields:
+    name: "Pi\xE8ge \xE0 rats empoisonn\xE9"
+    packaging: "unit\xE9"
+    group: 12
+    consumable: true
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 131
+  fields:
+    name: "Poubelle pour d\xE9chets hospitaliers"
+    packaging: "unit\xE9"
+    group: 6
+    consumable: false
+    perishable: false
+    remark: Contenance 25 L
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 132
+  fields:
+    name: "Poudre insecticide \xE0 base de HCH ou de Pyr\xE8thre"
+    packaging: "unit\xE9"
+    group: 12
+    consumable: true
+    perishable: true
+    remark: "Quantit\xE9 en fonction de la taille du navire"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 133
+  fields:
+    name: "Test de d\xE9tection rapide de Troponine I dans le sang"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: "Test immunochromatographique en une \xE9tape"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 134
+  fields:
+    name: "Oxyg\xE8ne m\xE9dical (fixe)"
+    packaging: bouteille de 40 L - 200 bar
+    group: 1
+    consumable: false
+    perishable: true
+    remark: "Pour fournir deux patients en m\xEAme temps. Bouteille munie d'un robinet\
+      \ avec manod\xE9tenteur-d\xE9bitm\xE8tre de 0 \xE0 15 L/min et prises normalis\xE9\
+      es."
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 135
+  fields:
+    name: Seringue 2 mL
+    packaging: "unit\xE9"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: usage unique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 136
+  fields:
+    name: Set de lavement
+    packaging: "set st\xE9rile"
+    group: 5
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 137
+  fields:
+    name: "Suppl\xE9ment du code IMDG"
+    packaging: "unit\xE9"
+    group: 8
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 138
+  fields:
+    name: Chargeur pour appareil ECG
+    packaging: "unit\xE9"
+    group: 10
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 139
+  fields:
+    name: Cordon Reset noir
+    packaging: "unit\xE9"
+    group: 10
+    consumable: false
+    perishable: false
+    remark: "pour la r\xE9initialisation \xE9ventuelle de l\u2019appareil"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 140
+  fields:
+    name: Cordon patient pour ECG
+    packaging: "unit\xE9"
+    group: 10
+    consumable: false
+    perishable: false
+    remark: "avec 3 brins \xE9quip\xE9s de fiches bananes 4 mm"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 141
+  fields:
+    name: Hub 4 ports USB
+    packaging: "unit\xE9"
+    group: 13
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 142
+  fields:
+    name: Pinces pour membres
+    packaging: set de 3 pinces
+    group: 10
+    consumable: false
+    perishable: true
+    remark: 'pinces de couleur : rouge, jaune et vert'
+    picture: pinces-pour-membres.png
+    tag: []
+- model: inventory.equipment
+  pk: 143
+  fields:
+    name: "Spirom\xE8tre"
+    packaging: "unit\xE9"
+    group: 13
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 144
+  fields:
+    name: Tablette tactile
+    packaging: "unit\xE9"
+    group: 13
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 145
+  fields:
+    name: "Turbine pour spirom\xE8tre"
+    packaging: "unit\xE9"
+    group: 13
+    consumable: true
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 146
+  fields:
+    name: Valise de transport
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 147
+  fields:
+    name: Vaporisateur d'eau
+    packaging: "unit\xE9"
+    group: 4
+    consumable: false
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 148
+  fields:
+    name: Webcam
+    packaging: "unit\xE9"
+    group: 13
+    consumable: false
+    perishable: false
+    remark: USB, HD
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 149
+  fields:
+    name: "Test de D\xE9tection Rapide de Plasmodium dans le sang par immuno-chromatographie\
+      \ HRP2 et Pan-LDH"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: 'type : Core Malaria, Now ICT Malaria, Palutop + 4'
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 150
+  fields:
+    name: "Test de d\xE9pistage de drogues"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 151
+  fields:
+    name: "Test de d\xE9tection de D-dim\xE8res"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: Pour le diagnostic d'une douleur thoracique
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 152
+  fields:
+    name: "Test de d\xE9tection de la Dengue"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 153
+  fields:
+    name: "Test de d\xE9tection de la grippe (influenzavirus)"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: "Pour d\xE9tection d'une infection pulmonaire"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 154
+  fields:
+    name: "Test de d\xE9tection de l\xE9gionelle"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: "Pour d\xE9tection d'une infection pulmonaire"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 155
+  fields:
+    name: "Test de d\xE9tection de pneumocoque"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: "Pour d\xE9tection d'une infection pulmonaire"
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 156
+  fields:
+    name: "Test de d\xE9tection de rotavirus, adeno-norovirus"
+    packaging: "unit\xE9"
+    group: 4
+    consumable: true
+    perishable: true
+    remark: Pour le diagnostic d'une douleur digestive
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 157
+  fields:
+    name: Gel antiseptique hydroalcoolique pour la peau saine
+    packaging: flacon 100 mL
+    group: 6
+    consumable: true
+    perishable: true
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.equipment
+  pk: 158
+  fields:
+    name: "Bon de commande pr\xE9-imprim\xE9 Dotation B"
+    packaging: "unit\xE9"
+    group: 8
+    consumable: true
+    perishable: false
+    remark: null
+    picture: ''
+    tag: []
+- model: inventory.article
+  pk: 1
+  fields:
+    name: Twinpump
+    exp_date: null
+    used: false
+    remark: jaune
+    location: 100
+    parent: 10
+    nc_packaging: ''
+- model: inventory.article
+  pk: 3
+  fields:
+    name: "Bandelettes r\xE9actives pour examen d'urines"
+    exp_date: 2025-03-31
+    used: true
+    remark: ''
+    location: 100
+    parent: 19
+    nc_packaging: ''
+- model: inventory.article
+  pk: 5
+  fields:
+    name: Multistix
+    exp_date: 2020-10-31
+    used: false
+    remark: ''
+    location: 100
+    parent: 19
+    nc_packaging: ''
+- model: inventory.article
+  pk: 6
+  fields:
+    name: "Canule oro-pharyng\xE9e taille 4 (adulte)"
+    exp_date: 2022-03-31
+    used: false
+    remark: ''
+    location: 100
+    parent: 29
+    nc_packaging: ''
+- model: inventory.article
+  pk: 7
+  fields:
+    name: "T\xE9l\xE9cardia"
+    exp_date: 2021-06-30
+    used: false
+    remark: ''
+    location: 20
+    parent: 9
+    nc_packaging: ''
+- model: inventory.article
+  pk: 8
+  fields:
+    name: Coheban
+    exp_date: 2022-03-31
+    used: false
+    remark: ''
+    location: 109
+    parent: 16
+    nc_packaging: ''
+- model: inventory.article
+  pk: 9
+  fields:
+    name: Martek
+    exp_date: 2023-05-31
+    used: false
+    remark: ''
+    location: 102
+    parent: 49
+    nc_packaging: ''
+- model: inventory.article
+  pk: 10
+  fields:
+    name: Martek
+    exp_date: 2023-05-31
+    used: false
+    remark: ''
+    location: 104
+    parent: 49
+    nc_packaging: ''
+- model: inventory.article
+  pk: 11
+  fields:
+    name: "Coussin h\xE9mostatique"
+    exp_date: null
+    used: false
+    remark: ''
+    location: 110
+    parent: 46
+    nc_packaging: sachet
+- model: inventory.article
+  pk: 12
+  fields:
+    name: Coheban
+    exp_date: 2021-05-31
+    used: false
+    remark: ''
+    location: 101
+    parent: 16
+    nc_packaging: sachet de 3
+- model: inventory.article
+  pk: 13
+  fields:
+    name: "Canule oro-pharyng\xE9e taille 3 (adulte)"
+    exp_date: 2020-04-30
+    used: false
+    remark: ''
+    location: 107
+    parent: 125
+    nc_packaging: ''
+- model: inventory.article
+  pk: 14
+  fields:
+    name: "Test de d\xE9pistage de drogues"
+    exp_date: 2020-03-31
+    used: false
+    remark: ''
+    location: 10
+    parent: 150
+    nc_packaging: ''
+- model: inventory.article
+  pk: 15
+  fields:
+    name: "Lancettes capillaires s\xE9curis\xE9es"
+    exp_date: 2020-05-31
+    used: false
+    remark: ''
+    location: 20
+    parent: 70
+    nc_packaging: ''
+- model: inventory.equipmentreqqty
+  pk: 1354
+  fields:
+    allowance: 3
+    required_quantity: 1
+    base: 137
+- model: inventory.equipmentreqqty
+  pk: 1355
+  fields:
+    allowance: 3
+    required_quantity: 10
+    base: 96
+- model: inventory.equipmentreqqty
+  pk: 1356
+  fields:
+    allowance: 3
+    required_quantity: 100
+    base: 135
+- model: inventory.equipmentreqqty
+  pk: 1357
+  fields:
+    allowance: 3
+    required_quantity: 6
+    base: 30
+- model: inventory.equipmentreqqty
+  pk: 1358
+  fields:
+    allowance: 3
+    required_quantity: 10
+    base: 76
+- model: inventory.equipmentreqqty
+  pk: 1359
+  fields:
+    allowance: 3
+    required_quantity: 2
+    base: 124
+- model: inventory.equipmentreqqty
+  pk: 1360
+  fields:
+    allowance: 3
+    required_quantity: 2
+    base: 125
+- model: inventory.equipmentreqqty
+  pk: 1361
+  fields:
+    allowance: 3
+    required_quantity: 2
+    base: 29
+- model: inventory.equipmentreqqty
+  pk: 1362
+  fields:
+    allowance: 3
+    required_quantity: 100
+    base: 5
+- model: inventory.equipmentreqqty
+  pk: 1363
+  fields:
+    allowance: 3
+    required_quantity: 10
+    base: 32
+- model: inventory.equipmentreqqty
+  pk: 1364
+  fields:
+    allowance: 3
+    required_quantity: 2
+    base: 65
+- model: inventory.equipmentreqqty
+  pk: 1365
+  fields:
+    allowance: 3
+    required_quantity: 1
+    base: 136
+- model: inventory.equipmentreqqty
+  pk: 1366
+  fields:
+    allowance: 3
+    required_quantity: 2
+    base: 82
+- model: inventory.equipmentreqqty
+  pk: 1367
+  fields:
+    allowance: 3
+    required_quantity: 1
+    base: 134
+- model: inventory.equipmentreqqty
+  pk: 1368
+  fields:
+    allowance: 3
+    required_quantity: 10
+    base: 78
+- model: inventory.equipmentreqqty
+  pk: 1391
+  fields:
+    allowance: 2
+    required_quantity: 2
+    base: 92
+- model: inventory.equipmentreqqty
+  pk: 1392
+  fields:
+    allowance: 2
+    required_quantity: 200
+    base: 74
+- model: inventory.equipmentreqqty
+  pk: 1393
+  fields:
+    allowance: 2
+    required_quantity: 6
+    base: 24
+- model: inventory.equipmentreqqty
+  pk: 1394
+  fields:
+    allowance: 2
+    required_quantity: 2
+    base: 93
+- model: inventory.equipmentreqqty
+  pk: 1395
+  fields:
+    allowance: 2
+    required_quantity: 50
+    base: 128
+- model: inventory.equipmentreqqty
+  pk: 1396
+  fields:
+    allowance: 2
+    required_quantity: 20
+    base: 123
+- model: inventory.equipmentreqqty
+  pk: 1397
+  fields:
+    allowance: 2
+    required_quantity: 10
+    base: 133
+- model: inventory.equipmentreqqty
+  pk: 1398
+  fields:
+    allowance: 2
+    required_quantity: 1
+    base: 131
+- model: inventory.equipmentreqqty
+  pk: 1399
+  fields:
+    allowance: 2
+    required_quantity: 15
+    base: 129
+- model: inventory.equipmentreqqty
+  pk: 1400
+  fields:
+    allowance: 2
+    required_quantity: 4
+    base: 130
+- model: inventory.equipmentreqqty
+  pk: 1401
+  fields:
+    allowance: 2
+    required_quantity: 1
+    base: 132
+- model: inventory.equipmentreqqty
+  pk: 1402
+  fields:
+    allowance: 2
+    required_quantity: 3
+    base: 127
+- model: inventory.equipmentreqqty
+  pk: 1403
+  fields:
+    allowance: 2
+    required_quantity: 2
+    base: 126
+- model: inventory.equipmentreqqty
+  pk: 1470
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 49
+- model: inventory.equipmentreqqty
+  pk: 1471
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 82
+- model: inventory.equipmentreqqty
+  pk: 1472
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 65
+- model: inventory.equipmentreqqty
+  pk: 1473
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 75
+- model: inventory.equipmentreqqty
+  pk: 1474
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 29
+- model: inventory.equipmentreqqty
+  pk: 1475
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 10
+- model: inventory.equipmentreqqty
+  pk: 1476
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 102
+- model: inventory.equipmentreqqty
+  pk: 1477
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 76
+- model: inventory.equipmentreqqty
+  pk: 1478
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 73
+- model: inventory.equipmentreqqty
+  pk: 1479
+  fields:
+    allowance: 1
+    required_quantity: 200
+    base: 40
+- model: inventory.equipmentreqqty
+  pk: 1480
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 100
+- model: inventory.equipmentreqqty
+  pk: 1481
+  fields:
+    allowance: 1
+    required_quantity: 100
+    base: 41
+- model: inventory.equipmentreqqty
+  pk: 1482
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 85
+- model: inventory.equipmentreqqty
+  pk: 1483
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 84
+- model: inventory.equipmentreqqty
+  pk: 1484
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 45
+- model: inventory.equipmentreqqty
+  pk: 1485
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 17
+- model: inventory.equipmentreqqty
+  pk: 1486
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 16
+- model: inventory.equipmentreqqty
+  pk: 1487
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 18
+- model: inventory.equipmentreqqty
+  pk: 1488
+  fields:
+    allowance: 1
+    required_quantity: 24
+    base: 121
+- model: inventory.equipmentreqqty
+  pk: 1489
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 105
+- model: inventory.equipmentreqqty
+  pk: 1490
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 77
+- model: inventory.equipmentreqqty
+  pk: 1491
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 117
+- model: inventory.equipmentreqqty
+  pk: 1492
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 43
+- model: inventory.equipmentreqqty
+  pk: 1493
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 42
+- model: inventory.equipmentreqqty
+  pk: 1494
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 48
+- model: inventory.equipmentreqqty
+  pk: 1495
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 109
+- model: inventory.equipmentreqqty
+  pk: 1496
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 2
+- model: inventory.equipmentreqqty
+  pk: 1497
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 122
+- model: inventory.equipmentreqqty
+  pk: 1498
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 101
+- model: inventory.equipmentreqqty
+  pk: 1499
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 3
+- model: inventory.equipmentreqqty
+  pk: 1500
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 4
+- model: inventory.equipmentreqqty
+  pk: 1501
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 36
+- model: inventory.equipmentreqqty
+  pk: 1502
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 90
+- model: inventory.equipmentreqqty
+  pk: 1503
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 69
+- model: inventory.equipmentreqqty
+  pk: 1504
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 22
+- model: inventory.equipmentreqqty
+  pk: 1505
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 23
+- model: inventory.equipmentreqqty
+  pk: 1506
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 86
+- model: inventory.equipmentreqqty
+  pk: 1507
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 97
+- model: inventory.equipmentreqqty
+  pk: 1508
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 99
+- model: inventory.equipmentreqqty
+  pk: 1509
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 35
+- model: inventory.equipmentreqqty
+  pk: 1510
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 111
+- model: inventory.equipmentreqqty
+  pk: 1511
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 107
+- model: inventory.equipmentreqqty
+  pk: 1512
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 83
+- model: inventory.equipmentreqqty
+  pk: 1513
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 114
+- model: inventory.equipmentreqqty
+  pk: 1514
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 115
+- model: inventory.equipmentreqqty
+  pk: 1515
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 71
+- model: inventory.equipmentreqqty
+  pk: 1516
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 70
+- model: inventory.equipmentreqqty
+  pk: 1517
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 20
+- model: inventory.equipmentreqqty
+  pk: 1518
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 19
+- model: inventory.equipmentreqqty
+  pk: 1519
+  fields:
+    allowance: 1
+    required_quantity: 25
+    base: 112
+- model: inventory.equipmentreqqty
+  pk: 1520
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 113
+- model: inventory.equipmentreqqty
+  pk: 1521
+  fields:
+    allowance: 1
+    required_quantity: 50
+    base: 1
+- model: inventory.equipmentreqqty
+  pk: 1522
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 68
+- model: inventory.equipmentreqqty
+  pk: 1523
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 72
+- model: inventory.equipmentreqqty
+  pk: 1524
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 81
+- model: inventory.equipmentreqqty
+  pk: 1525
+  fields:
+    allowance: 1
+    required_quantity: 250
+    base: 106
+- model: inventory.equipmentreqqty
+  pk: 1526
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 67
+- model: inventory.equipmentreqqty
+  pk: 1527
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 5
+- model: inventory.equipmentreqqty
+  pk: 1528
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 6
+- model: inventory.equipmentreqqty
+  pk: 1529
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 7
+- model: inventory.equipmentreqqty
+  pk: 1530
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 8
+- model: inventory.equipmentreqqty
+  pk: 1531
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 31
+- model: inventory.equipmentreqqty
+  pk: 1532
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 32
+- model: inventory.equipmentreqqty
+  pk: 1533
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 33
+- model: inventory.equipmentreqqty
+  pk: 1534
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 95
+- model: inventory.equipmentreqqty
+  pk: 1535
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 96
+- model: inventory.equipmentreqqty
+  pk: 1536
+  fields:
+    allowance: 1
+    required_quantity: 5
+    base: 78
+- model: inventory.equipmentreqqty
+  pk: 1537
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 58
+- model: inventory.equipmentreqqty
+  pk: 1538
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 34
+- model: inventory.equipmentreqqty
+  pk: 1539
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 88
+- model: inventory.equipmentreqqty
+  pk: 1540
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 98
+- model: inventory.equipmentreqqty
+  pk: 1541
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 103
+- model: inventory.equipmentreqqty
+  pk: 1542
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 104
+- model: inventory.equipmentreqqty
+  pk: 1543
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 87
+- model: inventory.equipmentreqqty
+  pk: 1544
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 116
+- model: inventory.equipmentreqqty
+  pk: 1545
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 30
+- model: inventory.equipmentreqqty
+  pk: 1546
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 92
+- model: inventory.equipmentreqqty
+  pk: 1547
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 59
+- model: inventory.equipmentreqqty
+  pk: 1548
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 55
+- model: inventory.equipmentreqqty
+  pk: 1549
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 54
+- model: inventory.equipmentreqqty
+  pk: 1550
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 56
+- model: inventory.equipmentreqqty
+  pk: 1551
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 57
+- model: inventory.equipmentreqqty
+  pk: 1552
+  fields:
+    allowance: 1
+    required_quantity: 10
+    base: 74
+- model: inventory.equipmentreqqty
+  pk: 1553
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 24
+- model: inventory.equipmentreqqty
+  pk: 1554
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 26
+- model: inventory.equipmentreqqty
+  pk: 1555
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 38
+- model: inventory.equipmentreqqty
+  pk: 1556
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 93
+- model: inventory.equipmentreqqty
+  pk: 1557
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 118
+- model: inventory.equipmentreqqty
+  pk: 1558
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 21
+- model: inventory.equipmentreqqty
+  pk: 1559
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 119
+- model: inventory.equipmentreqqty
+  pk: 1560
+  fields:
+    allowance: 1
+    required_quantity: 4
+    base: 47
+- model: inventory.equipmentreqqty
+  pk: 1561
+  fields:
+    allowance: 1
+    required_quantity: 100
+    base: 89
+- model: inventory.equipmentreqqty
+  pk: 1562
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 63
+- model: inventory.equipmentreqqty
+  pk: 1563
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 94
+- model: inventory.equipmentreqqty
+  pk: 1564
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 13
+- model: inventory.equipmentreqqty
+  pk: 1565
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 14
+- model: inventory.equipmentreqqty
+  pk: 1566
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 120
+- model: inventory.equipmentreqqty
+  pk: 1567
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 12
+- model: inventory.equipmentreqqty
+  pk: 1568
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 28
+- model: inventory.equipmentreqqty
+  pk: 1569
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 80
+- model: inventory.equipmentreqqty
+  pk: 1570
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 39
+- model: inventory.equipmentreqqty
+  pk: 1571
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 11
+- model: inventory.equipmentreqqty
+  pk: 1572
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 37
+- model: inventory.equipmentreqqty
+  pk: 1573
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 15
+- model: inventory.equipmentreqqty
+  pk: 1574
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 108
+- model: inventory.equipmentreqqty
+  pk: 1575
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 91
+- model: inventory.equipmentreqqty
+  pk: 1576
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 25
+- model: inventory.equipmentreqqty
+  pk: 1577
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 61
+- model: inventory.equipmentreqqty
+  pk: 1578
+  fields:
+    allowance: 1
+    required_quantity: 20
+    base: 52
+- model: inventory.equipmentreqqty
+  pk: 1579
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 62
+- model: inventory.equipmentreqqty
+  pk: 1580
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 27
+- model: inventory.equipmentreqqty
+  pk: 1581
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 9
+- model: inventory.equipmentreqqty
+  pk: 1582
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 51
+- model: inventory.equipmentreqqty
+  pk: 1583
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 50
+- model: inventory.equipmentreqqty
+  pk: 1584
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 64
+- model: inventory.equipmentreqqty
+  pk: 1585
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 79
+- model: inventory.equipmentreqqty
+  pk: 1586
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 44
+- model: inventory.equipmentreqqty
+  pk: 1587
+  fields:
+    allowance: 1
+    required_quantity: 2
+    base: 66
+- model: inventory.equipmentreqqty
+  pk: 1588
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 110
+- model: inventory.equipmentreqqty
+  pk: 1592
+  fields:
+    allowance: 1
+    required_quantity: 1
+    base: 46
+- model: inventory.equipmentreqqty
+  pk: 1611
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 82
+- model: inventory.equipmentreqqty
+  pk: 1612
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 65
+- model: inventory.equipmentreqqty
+  pk: 1613
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 75
+- model: inventory.equipmentreqqty
+  pk: 1614
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 29
+- model: inventory.equipmentreqqty
+  pk: 1615
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 10
+- model: inventory.equipmentreqqty
+  pk: 1616
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 102
+- model: inventory.equipmentreqqty
+  pk: 1617
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 76
+- model: inventory.equipmentreqqty
+  pk: 1618
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 73
+- model: inventory.equipmentreqqty
+  pk: 1619
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 49
+- model: inventory.equipmentreqqty
+  pk: 1620
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 66
+- model: inventory.equipmentreqqty
+  pk: 1621
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 110
+- model: inventory.equipmentreqqty
+  pk: 1622
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 100
+- model: inventory.equipmentreqqty
+  pk: 1623
+  fields:
+    allowance: 6
+    required_quantity: 200
+    base: 40
+- model: inventory.equipmentreqqty
+  pk: 1624
+  fields:
+    allowance: 6
+    required_quantity: 20
+    base: 41
+- model: inventory.equipmentreqqty
+  pk: 1625
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 85
+- model: inventory.equipmentreqqty
+  pk: 1626
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 84
+- model: inventory.equipmentreqqty
+  pk: 1627
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 17
+- model: inventory.equipmentreqqty
+  pk: 1628
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 16
+- model: inventory.equipmentreqqty
+  pk: 1629
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 18
+- model: inventory.equipmentreqqty
+  pk: 1630
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 105
+- model: inventory.equipmentreqqty
+  pk: 1631
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 77
+- model: inventory.equipmentreqqty
+  pk: 1632
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 117
+- model: inventory.equipmentreqqty
+  pk: 1633
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 42
+- model: inventory.equipmentreqqty
+  pk: 1634
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 43
+- model: inventory.equipmentreqqty
+  pk: 1635
+  fields:
+    allowance: 6
+    required_quantity: 4
+    base: 109
+- model: inventory.equipmentreqqty
+  pk: 1636
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 2
+- model: inventory.equipmentreqqty
+  pk: 1637
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 122
+- model: inventory.equipmentreqqty
+  pk: 1638
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 36
+- model: inventory.equipmentreqqty
+  pk: 1639
+  fields:
+    allowance: 6
+    required_quantity: 5
+    base: 90
+- model: inventory.equipmentreqqty
+  pk: 1640
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 69
+- model: inventory.equipmentreqqty
+  pk: 1641
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 22
+- model: inventory.equipmentreqqty
+  pk: 1642
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 86
+- model: inventory.equipmentreqqty
+  pk: 1643
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 97
+- model: inventory.equipmentreqqty
+  pk: 1644
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 111
+- model: inventory.equipmentreqqty
+  pk: 1645
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 83
+- model: inventory.equipmentreqqty
+  pk: 1646
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 115
+- model: inventory.equipmentreqqty
+  pk: 1647
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 114
+- model: inventory.equipmentreqqty
+  pk: 1648
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 71
+- model: inventory.equipmentreqqty
+  pk: 1649
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 70
+- model: inventory.equipmentreqqty
+  pk: 1650
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 20
+- model: inventory.equipmentreqqty
+  pk: 1651
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 19
+- model: inventory.equipmentreqqty
+  pk: 1652
+  fields:
+    allowance: 6
+    required_quantity: 25
+    base: 112
+- model: inventory.equipmentreqqty
+  pk: 1653
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 113
+- model: inventory.equipmentreqqty
+  pk: 1654
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 68
+- model: inventory.equipmentreqqty
+  pk: 1655
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 72
+- model: inventory.equipmentreqqty
+  pk: 1656
+  fields:
+    allowance: 6
+    required_quantity: 5
+    base: 7
+- model: inventory.equipmentreqqty
+  pk: 1657
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 5
+- model: inventory.equipmentreqqty
+  pk: 1658
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 8
+- model: inventory.equipmentreqqty
+  pk: 1659
+  fields:
+    allowance: 6
+    required_quantity: 5
+    base: 96
+- model: inventory.equipmentreqqty
+  pk: 1660
+  fields:
+    allowance: 6
+    required_quantity: 5
+    base: 95
+- model: inventory.equipmentreqqty
+  pk: 1661
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 30
+- model: inventory.equipmentreqqty
+  pk: 1662
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 92
+- model: inventory.equipmentreqqty
+  pk: 1663
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 157
+- model: inventory.equipmentreqqty
+  pk: 1664
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 54
+- model: inventory.equipmentreqqty
+  pk: 1665
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 55
+- model: inventory.equipmentreqqty
+  pk: 1666
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 56
+- model: inventory.equipmentreqqty
+  pk: 1667
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 57
+- model: inventory.equipmentreqqty
+  pk: 1668
+  fields:
+    allowance: 6
+    required_quantity: 10
+    base: 74
+- model: inventory.equipmentreqqty
+  pk: 1669
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 26
+- model: inventory.equipmentreqqty
+  pk: 1670
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 38
+- model: inventory.equipmentreqqty
+  pk: 1671
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 93
+- model: inventory.equipmentreqqty
+  pk: 1672
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 47
+- model: inventory.equipmentreqqty
+  pk: 1673
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 94
+- model: inventory.equipmentreqqty
+  pk: 1674
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 13
+- model: inventory.equipmentreqqty
+  pk: 1675
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 14
+- model: inventory.equipmentreqqty
+  pk: 1676
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 120
+- model: inventory.equipmentreqqty
+  pk: 1677
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 12
+- model: inventory.equipmentreqqty
+  pk: 1678
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 80
+- model: inventory.equipmentreqqty
+  pk: 1679
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 39
+- model: inventory.equipmentreqqty
+  pk: 1680
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 11
+- model: inventory.equipmentreqqty
+  pk: 1681
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 37
+- model: inventory.equipmentreqqty
+  pk: 1682
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 15
+- model: inventory.equipmentreqqty
+  pk: 1683
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 91
+- model: inventory.equipmentreqqty
+  pk: 1684
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 158
+- model: inventory.equipmentreqqty
+  pk: 1685
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 61
+- model: inventory.equipmentreqqty
+  pk: 1686
+  fields:
+    allowance: 6
+    required_quantity: 5
+    base: 52
+- model: inventory.equipmentreqqty
+  pk: 1687
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 62
+- model: inventory.equipmentreqqty
+  pk: 1688
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 44
+- model: inventory.equipmentreqqty
+  pk: 1689
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 51
+- model: inventory.equipmentreqqty
+  pk: 1690
+  fields:
+    allowance: 6
+    required_quantity: 2
+    base: 50
+- model: inventory.equipmentreqqty
+  pk: 1691
+  fields:
+    allowance: 6
+    required_quantity: 1
+    base: 46
+- model: inventory.equipmentreqqty
+  pk: 1692
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 82
+- model: inventory.equipmentreqqty
+  pk: 1693
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 65
+- model: inventory.equipmentreqqty
+  pk: 1694
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 75
+- model: inventory.equipmentreqqty
+  pk: 1695
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 29
+- model: inventory.equipmentreqqty
+  pk: 1696
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 10
+- model: inventory.equipmentreqqty
+  pk: 1697
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 102
+- model: inventory.equipmentreqqty
+  pk: 1698
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 76
+- model: inventory.equipmentreqqty
+  pk: 1699
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 73
+- model: inventory.equipmentreqqty
+  pk: 1700
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 49
+- model: inventory.equipmentreqqty
+  pk: 1701
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 66
+- model: inventory.equipmentreqqty
+  pk: 1702
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 110
+- model: inventory.equipmentreqqty
+  pk: 1703
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 100
+- model: inventory.equipmentreqqty
+  pk: 1704
+  fields:
+    allowance: 7
+    required_quantity: 200
+    base: 40
+- model: inventory.equipmentreqqty
+  pk: 1705
+  fields:
+    allowance: 7
+    required_quantity: 20
+    base: 41
+- model: inventory.equipmentreqqty
+  pk: 1706
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 85
+- model: inventory.equipmentreqqty
+  pk: 1707
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 84
+- model: inventory.equipmentreqqty
+  pk: 1708
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 17
+- model: inventory.equipmentreqqty
+  pk: 1709
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 16
+- model: inventory.equipmentreqqty
+  pk: 1710
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 18
+- model: inventory.equipmentreqqty
+  pk: 1711
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 105
+- model: inventory.equipmentreqqty
+  pk: 1712
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 77
+- model: inventory.equipmentreqqty
+  pk: 1713
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 117
+- model: inventory.equipmentreqqty
+  pk: 1714
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 42
+- model: inventory.equipmentreqqty
+  pk: 1715
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 43
+- model: inventory.equipmentreqqty
+  pk: 1716
+  fields:
+    allowance: 7
+    required_quantity: 4
+    base: 109
+- model: inventory.equipmentreqqty
+  pk: 1717
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 2
+- model: inventory.equipmentreqqty
+  pk: 1718
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 122
+- model: inventory.equipmentreqqty
+  pk: 1719
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 36
+- model: inventory.equipmentreqqty
+  pk: 1720
+  fields:
+    allowance: 7
+    required_quantity: 5
+    base: 90
+- model: inventory.equipmentreqqty
+  pk: 1721
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 69
+- model: inventory.equipmentreqqty
+  pk: 1722
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 22
+- model: inventory.equipmentreqqty
+  pk: 1723
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 86
+- model: inventory.equipmentreqqty
+  pk: 1724
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 97
+- model: inventory.equipmentreqqty
+  pk: 1725
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 111
+- model: inventory.equipmentreqqty
+  pk: 1726
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 83
+- model: inventory.equipmentreqqty
+  pk: 1727
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 115
+- model: inventory.equipmentreqqty
+  pk: 1728
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 114
+- model: inventory.equipmentreqqty
+  pk: 1729
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 71
+- model: inventory.equipmentreqqty
+  pk: 1730
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 70
+- model: inventory.equipmentreqqty
+  pk: 1731
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 20
+- model: inventory.equipmentreqqty
+  pk: 1732
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 19
+- model: inventory.equipmentreqqty
+  pk: 1733
+  fields:
+    allowance: 7
+    required_quantity: 25
+    base: 112
+- model: inventory.equipmentreqqty
+  pk: 1734
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 113
+- model: inventory.equipmentreqqty
+  pk: 1735
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 68
+- model: inventory.equipmentreqqty
+  pk: 1736
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 72
+- model: inventory.equipmentreqqty
+  pk: 1737
+  fields:
+    allowance: 7
+    required_quantity: 5
+    base: 7
+- model: inventory.equipmentreqqty
+  pk: 1738
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 5
+- model: inventory.equipmentreqqty
+  pk: 1739
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 8
+- model: inventory.equipmentreqqty
+  pk: 1740
+  fields:
+    allowance: 7
+    required_quantity: 5
+    base: 96
+- model: inventory.equipmentreqqty
+  pk: 1741
+  fields:
+    allowance: 7
+    required_quantity: 5
+    base: 95
+- model: inventory.equipmentreqqty
+  pk: 1742
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 30
+- model: inventory.equipmentreqqty
+  pk: 1743
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 92
+- model: inventory.equipmentreqqty
+  pk: 1744
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 157
+- model: inventory.equipmentreqqty
+  pk: 1745
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 54
+- model: inventory.equipmentreqqty
+  pk: 1746
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 55
+- model: inventory.equipmentreqqty
+  pk: 1747
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 56
+- model: inventory.equipmentreqqty
+  pk: 1748
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 57
+- model: inventory.equipmentreqqty
+  pk: 1749
+  fields:
+    allowance: 7
+    required_quantity: 10
+    base: 74
+- model: inventory.equipmentreqqty
+  pk: 1750
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 26
+- model: inventory.equipmentreqqty
+  pk: 1751
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 38
+- model: inventory.equipmentreqqty
+  pk: 1752
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 93
+- model: inventory.equipmentreqqty
+  pk: 1753
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 47
+- model: inventory.equipmentreqqty
+  pk: 1754
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 94
+- model: inventory.equipmentreqqty
+  pk: 1755
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 13
+- model: inventory.equipmentreqqty
+  pk: 1756
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 14
+- model: inventory.equipmentreqqty
+  pk: 1757
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 120
+- model: inventory.equipmentreqqty
+  pk: 1758
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 12
+- model: inventory.equipmentreqqty
+  pk: 1759
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 80
+- model: inventory.equipmentreqqty
+  pk: 1760
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 39
+- model: inventory.equipmentreqqty
+  pk: 1761
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 11
+- model: inventory.equipmentreqqty
+  pk: 1762
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 37
+- model: inventory.equipmentreqqty
+  pk: 1763
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 15
+- model: inventory.equipmentreqqty
+  pk: 1764
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 91
+- model: inventory.equipmentreqqty
+  pk: 1765
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 158
+- model: inventory.equipmentreqqty
+  pk: 1766
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 61
+- model: inventory.equipmentreqqty
+  pk: 1767
+  fields:
+    allowance: 7
+    required_quantity: 5
+    base: 52
+- model: inventory.equipmentreqqty
+  pk: 1768
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 62
+- model: inventory.equipmentreqqty
+  pk: 1769
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 44
+- model: inventory.equipmentreqqty
+  pk: 1770
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 51
+- model: inventory.equipmentreqqty
+  pk: 1771
+  fields:
+    allowance: 7
+    required_quantity: 2
+    base: 50
+- model: inventory.equipmentreqqty
+  pk: 1772
+  fields:
+    allowance: 7
+    required_quantity: 1
+    base: 46
+- model: inventory.equipmentreqqty
+  pk: 1773
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 138
+- model: inventory.equipmentreqqty
+  pk: 1774
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 139
+- model: inventory.equipmentreqqty
+  pk: 1775
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 140
+- model: inventory.equipmentreqqty
+  pk: 1776
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 53
+- model: inventory.equipmentreqqty
+  pk: 1777
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 60
+- model: inventory.equipmentreqqty
+  pk: 1778
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 141
+- model: inventory.equipmentreqqty
+  pk: 1779
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 142
+- model: inventory.equipmentreqqty
+  pk: 1780
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 143
+- model: inventory.equipmentreqqty
+  pk: 1781
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 144
+- model: inventory.equipmentreqqty
+  pk: 1782
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 149
+- model: inventory.equipmentreqqty
+  pk: 1783
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 150
+- model: inventory.equipmentreqqty
+  pk: 1784
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 151
+- model: inventory.equipmentreqqty
+  pk: 1785
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 152
+- model: inventory.equipmentreqqty
+  pk: 1786
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 153
+- model: inventory.equipmentreqqty
+  pk: 1787
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 154
+- model: inventory.equipmentreqqty
+  pk: 1788
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 155
+- model: inventory.equipmentreqqty
+  pk: 1789
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 156
+- model: inventory.equipmentreqqty
+  pk: 1790
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 145
+- model: inventory.equipmentreqqty
+  pk: 1791
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 146
+- model: inventory.equipmentreqqty
+  pk: 1792
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 147
+- model: inventory.equipmentreqqty
+  pk: 1793
+  fields:
+    allowance: 0
+    required_quantity: 0
+    base: 148
+- model: inventory.firstaidkit
+  pk: 1
+  fields:
+    name: Cuisine
+    location: 100
+- model: inventory.firstaidkit
+  pk: 2
+  fields:
+    name: ECR
+    location: 100
+- model: inventory.firstaidkit
+  pk: 3
+  fields:
+    name: Ship's Office
+    location: 100
+- model: inventory.firstaidkitreqqty
+  pk: 73
+  fields:
+    allowance: 1
+    required_quantity: 10
+    content_type: 8
+    object_id: 41
+- model: inventory.firstaidkitreqqty
+  pk: 74
+  fields:
+    allowance: 1
+    required_quantity: 1
+    content_type: 8
+    object_id: 46
+- model: inventory.firstaidkitreqqty
+  pk: 75
+  fields:
+    allowance: 1
+    required_quantity: 1
+    content_type: 8
+    object_id: 17
+- model: inventory.firstaidkitreqqty
+  pk: 76
+  fields:
+    allowance: 1
+    required_quantity: 1
+    content_type: 8
+    object_id: 16
+- model: inventory.firstaidkitreqqty
+  pk: 77
+  fields:
+    allowance: 1
+    required_quantity: 1
+    content_type: 8
+    object_id: 85
+- model: inventory.firstaidkitreqqty
+  pk: 78
+  fields:
+    allowance: 1
+    required_quantity: 1
+    content_type: 8
+    object_id: 60
+- model: inventory.firstaidkitreqqty
+  pk: 79
+  fields:
+    allowance: 1
+    required_quantity: 4
+    content_type: 8
+    object_id: 53
+- model: inventory.firstaidkitreqqty
+  pk: 80
+  fields:
+    allowance: 1
+    required_quantity: 2
+    content_type: 11
+    object_id: 24
+- model: inventory.firstaidkitreqqty
+  pk: 81
+  fields:
+    allowance: 6
+    required_quantity: 10
+    content_type: 8
+    object_id: 41
+- model: inventory.firstaidkitreqqty
+  pk: 82
+  fields:
+    allowance: 6
+    required_quantity: 1
+    content_type: 8
+    object_id: 46
+- model: inventory.firstaidkitreqqty
+  pk: 83
+  fields:
+    allowance: 6
+    required_quantity: 1
+    content_type: 8
+    object_id: 17
+- model: inventory.firstaidkitreqqty
+  pk: 84
+  fields:
+    allowance: 6
+    required_quantity: 1
+    content_type: 8
+    object_id: 16
+- model: inventory.firstaidkitreqqty
+  pk: 85
+  fields:
+    allowance: 6
+    required_quantity: 1
+    content_type: 8
+    object_id: 85
+- model: inventory.firstaidkitreqqty
+  pk: 86
+  fields:
+    allowance: 6
+    required_quantity: 1
+    content_type: 8
+    object_id: 60
+- model: inventory.firstaidkitreqqty
+  pk: 87
+  fields:
+    allowance: 6
+    required_quantity: 4
+    content_type: 8
+    object_id: 53
+- model: inventory.firstaidkitreqqty
+  pk: 88
+  fields:
+    allowance: 6
+    required_quantity: 2
+    content_type: 11
+    object_id: 24
+- model: inventory.firstaidkitreqqty
+  pk: 89
+  fields:
+    allowance: 7
+    required_quantity: 10
+    content_type: 8
+    object_id: 41
+- model: inventory.firstaidkitreqqty
+  pk: 90
+  fields:
+    allowance: 7
+    required_quantity: 1
+    content_type: 8
+    object_id: 46
+- model: inventory.firstaidkitreqqty
+  pk: 91
+  fields:
+    allowance: 7
+    required_quantity: 1
+    content_type: 8
+    object_id: 17
+- model: inventory.firstaidkitreqqty
+  pk: 92
+  fields:
+    allowance: 7
+    required_quantity: 1
+    content_type: 8
+    object_id: 16
+- model: inventory.firstaidkitreqqty
+  pk: 93
+  fields:
+    allowance: 7
+    required_quantity: 1
+    content_type: 8
+    object_id: 85
+- model: inventory.firstaidkitreqqty
+  pk: 94
+  fields:
+    allowance: 7
+    required_quantity: 1
+    content_type: 8
+    object_id: 60
+- model: inventory.firstaidkitreqqty
+  pk: 95
+  fields:
+    allowance: 7
+    required_quantity: 4
+    content_type: 8
+    object_id: 53
+- model: inventory.firstaidkitreqqty
+  pk: 96
+  fields:
+    allowance: 7
+    required_quantity: 2
+    content_type: 11
+    object_id: 24
+- model: inventory.firstaidkititem
+  pk: 1
+  fields:
+    name: Chlorhexidine Giphar
+    exp_date: 2021-01-31
+    used: false
+    remark: null
+    kit: 1
+    nc: null
+    content_type: 11
+    object_id: 24
+- model: inventory.firstaidkititem
+  pk: 2
+  fields:
+    name: Chlorhexidine Giphar
+    exp_date: 2021-01-31
+    used: false
+    remark: null
+    kit: 2
+    nc: null
+    content_type: 11
+    object_id: 24
+- model: inventory.firstaidkititem
+  pk: 3
+  fields:
+    name: Chlorhexidine Giphar
+    exp_date: 2020-01-31
+    used: false
+    remark: ''
+    kit: 3
+    nc: ''
+    content_type: 11
+    object_id: 24
+- model: inventory.firstaidkititem
+  pk: 4
+  fields:
+    name: Coheban
+    exp_date: 2022-03-31
+    used: false
+    remark: null
+    kit: 1
+    nc: null
+    content_type: 8
+    object_id: 16
+- model: inventory.firstaidkititem
+  pk: 5
+  fields:
+    name: "Coussin h\xE9mostatique"
+    exp_date: null
+    used: true
+    remark: null
+    kit: 1
+    nc: 'Yes'
+    content_type: 8
+    object_id: 46
+- model: inventory.firstaidkititem
+  pk: 6
+  fields:
+    name: "Coussin h\xE9mostatique"
+    exp_date: null
+    used: false
+    remark: null
+    kit: 1
+    nc: '{"packaging": "sachet"}'
+    content_type: 8
+    object_id: 46
+- model: inventory.rescuebag
+  pk: 1
+  fields:
+    name: Rescue Bag
+    location: 101
+- model: inventory.rescuebagreqqty
+  pk: 147
+  fields:
+    allowance: 3
+    required_quantity: 1
+    content_type: 8
+    object_id: 82
+- model: inventory.rescuebagreqqty
+  pk: 148
+  fields:
+    allowance: 2
+    required_quantity: 4
+    content_type: 8
+    object_id: 53
+- model: inventory.rescuebagreqqty
+  pk: 149
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 46
+- model: inventory.rescuebagreqqty
+  pk: 150
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 36
+- model: inventory.rescuebagreqqty
+  pk: 151
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 16
+- model: inventory.rescuebagreqqty
+  pk: 152
+  fields:
+    allowance: 2
+    required_quantity: 2
+    content_type: 8
+    object_id: 17
+- model: inventory.rescuebagreqqty
+  pk: 153
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 85
+- model: inventory.rescuebagreqqty
+  pk: 154
+  fields:
+    allowance: 2
+    required_quantity: 100
+    content_type: 8
+    object_id: 40
+- model: inventory.rescuebagreqqty
+  pk: 155
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 33
+- model: inventory.rescuebagreqqty
+  pk: 156
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 32
+- model: inventory.rescuebagreqqty
+  pk: 157
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 31
+- model: inventory.rescuebagreqqty
+  pk: 158
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 78
+- model: inventory.rescuebagreqqty
+  pk: 159
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 86
+- model: inventory.rescuebagreqqty
+  pk: 160
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 97
+- model: inventory.rescuebagreqqty
+  pk: 161
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 107
+- model: inventory.rescuebagreqqty
+  pk: 162
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 111
+- model: inventory.rescuebagreqqty
+  pk: 163
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 83
+- model: inventory.rescuebagreqqty
+  pk: 164
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 71
+- model: inventory.rescuebagreqqty
+  pk: 165
+  fields:
+    allowance: 2
+    required_quantity: 10
+    content_type: 8
+    object_id: 20
+- model: inventory.rescuebagreqqty
+  pk: 166
+  fields:
+    allowance: 2
+    required_quantity: 10
+    content_type: 8
+    object_id: 70
+- model: inventory.rescuebagreqqty
+  pk: 167
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 82
+- model: inventory.rescuebagreqqty
+  pk: 168
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 65
+- model: inventory.rescuebagreqqty
+  pk: 169
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 124
+- model: inventory.rescuebagreqqty
+  pk: 170
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 125
+- model: inventory.rescuebagreqqty
+  pk: 171
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 29
+- model: inventory.rescuebagreqqty
+  pk: 172
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 10
+- model: inventory.rescuebagreqqty
+  pk: 173
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 102
+- model: inventory.rescuebagreqqty
+  pk: 174
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 8
+    object_id: 76
+- model: inventory.rescuebagreqqty
+  pk: 175
+  fields:
+    allowance: 2
+    required_quantity: 2
+    content_type: 11
+    object_id: 24
+- model: inventory.rescuebagreqqty
+  pk: 176
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 11
+    object_id: 44
+- model: inventory.rescuebagreqqty
+  pk: 177
+  fields:
+    allowance: 2
+    required_quantity: 1
+    content_type: 11
+    object_id: 28
+- model: inventory.rescuebagreqqty
+  pk: 178
+  fields:
+    allowance: 1
+    required_quantity: 1
+    content_type: 8
+    object_id: 65
+- model: inventory.rescuebagreqqty
+  pk: 179
+  fields:
+    allowance: 1
+    required_quantity: 2
+    content_type: 8
+    object_id: 75
+- model: inventory.rescuebagreqqty
+  pk: 180
+  fields:
+    allowance: 1
+    required_quantity: 1
+    content_type: 8
+    object_id: 29
+- model: inventory.rescuebagreqqty
+  pk: 181
+  fields:
+    allowance: 1
+    required_quantity: 1
+    content_type: 8
+    object_id: 10
+- model: inventory.rescuebagreqqty
+  pk: 182
+  fields:
+    allowance: 1
+    required_quantity: 2
+    content_type: 8
+    object_id: 102
+- model: inventory.rescuebagreqqty
+  pk: 183
+  fields:
+    allowance: 1
+    required_quantity: 2
+    content_type: 8
+    object_id: 76
+- model: inventory.rescuebagreqqty
+  pk: 184
+  fields:
+    allowance: 6
+    required_quantity: 2
+    content_type: 8
+    object_id: 76
+- model: inventory.rescuebagreqqty
+  pk: 185
+  fields:
+    allowance: 6
+    required_quantity: 2
+    content_type: 8
+    object_id: 102
+- model: inventory.rescuebagreqqty
+  pk: 186
+  fields:
+    allowance: 6
+    required_quantity: 1
+    content_type: 8
+    object_id: 10
+- model: inventory.rescuebagreqqty
+  pk: 187
+  fields:
+    allowance: 6
+    required_quantity: 1
+    content_type: 8
+    object_id: 29
+- model: inventory.rescuebagreqqty
+  pk: 188
+  fields:
+    allowance: 6
+    required_quantity: 2
+    content_type: 8
+    object_id: 75
+- model: inventory.rescuebagreqqty
+  pk: 189
+  fields:
+    allowance: 6
+    required_quantity: 1
+    content_type: 8
+    object_id: 65
+- model: inventory.rescuebagreqqty
+  pk: 190
+  fields:
+    allowance: 7
+    required_quantity: 2
+    content_type: 8
+    object_id: 76
+- model: inventory.rescuebagreqqty
+  pk: 191
+  fields:
+    allowance: 7
+    required_quantity: 2
+    content_type: 8
+    object_id: 102
+- model: inventory.rescuebagreqqty
+  pk: 192
+  fields:
+    allowance: 7
+    required_quantity: 1
+    content_type: 8
+    object_id: 10
+- model: inventory.rescuebagreqqty
+  pk: 193
+  fields:
+    allowance: 7
+    required_quantity: 1
+    content_type: 8
+    object_id: 29
+- model: inventory.rescuebagreqqty
+  pk: 194
+  fields:
+    allowance: 7
+    required_quantity: 2
+    content_type: 8
+    object_id: 75
+- model: inventory.rescuebagreqqty
+  pk: 195
+  fields:
+    allowance: 7
+    required_quantity: 1
+    content_type: 8
+    object_id: 65
+- model: inventory.telemedicalreqqty
+  pk: 20
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 9
+- model: inventory.telemedicalreqqty
+  pk: 21
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 138
+- model: inventory.telemedicalreqqty
+  pk: 22
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 139
+- model: inventory.telemedicalreqqty
+  pk: 23
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 140
+- model: inventory.telemedicalreqqty
+  pk: 24
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 141
+- model: inventory.telemedicalreqqty
+  pk: 25
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 83
+- model: inventory.telemedicalreqqty
+  pk: 26
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 142
+- model: inventory.telemedicalreqqty
+  pk: 27
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 143
+- model: inventory.telemedicalreqqty
+  pk: 28
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 107
+- model: inventory.telemedicalreqqty
+  pk: 29
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 144
+- model: inventory.telemedicalreqqty
+  pk: 30
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 111
+- model: inventory.telemedicalreqqty
+  pk: 31
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 115
+- model: inventory.telemedicalreqqty
+  pk: 32
+  fields:
+    allowance: 4
+    required_quantity: 10
+    base: 145
+- model: inventory.telemedicalreqqty
+  pk: 33
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 148
+- model: inventory.telemedicalreqqty
+  pk: 34
+  fields:
+    allowance: 4
+    required_quantity: 50
+    base: 20
+- model: inventory.telemedicalreqqty
+  pk: 35
+  fields:
+    allowance: 4
+    required_quantity: 50
+    base: 70
+- model: inventory.telemedicalreqqty
+  pk: 36
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 71
+- model: inventory.telemedicalreqqty
+  pk: 37
+  fields:
+    allowance: 4
+    required_quantity: 1
+    base: 147
+- model: inventory.telemedicalreqqty
+  pk: 38
+  fields:
+    allowance: 4
+    required_quantity: 2
+    base: 146
+- model: inventory.laboratoryreqqty
+  pk: 12
+  fields:
+    allowance: 5
+    required_quantity: 5
+    base: 155
+- model: inventory.laboratoryreqqty
+  pk: 13
+  fields:
+    allowance: 5
+    required_quantity: 5
+    base: 154
+- model: inventory.laboratoryreqqty
+  pk: 14
+  fields:
+    allowance: 5
+    required_quantity: 5
+    base: 112
+- model: inventory.laboratoryreqqty
+  pk: 15
+  fields:
+    allowance: 5
+    required_quantity: 5
+    base: 133
+- model: inventory.laboratoryreqqty
+  pk: 16
+  fields:
+    allowance: 5
+    required_quantity: 5
+    base: 151
+- model: inventory.laboratoryreqqty
+  pk: 17
+  fields:
+    allowance: 5
+    required_quantity: 5
+    base: 149
+- model: inventory.laboratoryreqqty
+  pk: 18
+  fields:
+    allowance: 5
+    required_quantity: 5
+    base: 152
+- model: inventory.laboratoryreqqty
+  pk: 19
+  fields:
+    allowance: 5
+    required_quantity: 5
+    base: 156
+- model: inventory.laboratoryreqqty
+  pk: 20
+  fields:
+    allowance: 5
+    required_quantity: 5
+    base: 153
+- model: inventory.laboratoryreqqty
+  pk: 21
+  fields:
+    allowance: 5
+    required_quantity: 10
+    base: 150
+- model: inventory.laboratoryreqqty
+  pk: 22
+  fields:
+    allowance: 5
+    required_quantity: 1
+    base: 19

@@ -1,126 +1,8 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
+# Matthieu Morin <morinmatthieu@gmail.com>, 2020.
+#
 msgid ""
 msgstr ""
-"#-#-#-#-#  django.po (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-25 08:43+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#\n"
-"#-#-#-#-#  django.po (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-22 19:49+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#\n"
-"#-#-#-#-#  django.po (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-22 19:47+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#\n"
-"#-#-#-#-#  django.po (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 21:10+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#\n"
-"#-#-#-#-#  django.po (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-17 13:53+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-17 15:44+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-18 23:09+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-22 21:46+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-22 21:48+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-25 10:43+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-
 #: pharmaship/gui/templates/dashboard.glade:102
 #: pharmaship/gui/templates/dashboard.glade:124
 #: pharmaship/gui/templates/dashboard.glade:146
@@ -148,11 +30,16 @@ msgstr ""
 msgid "0"
 msgstr ""
 
-#: pharmaship/core/import_data.py:184
+#: pharmaship/gui/templates/search_listboxrow.glade:56
+msgid "<b>XX<small>/XX</small></b>"
+msgstr ""
+
+#: pharmaship/core/import_data.py:184 pharmaship/core/import_data.py:275
 msgid "A module to update is not installed. Check logs for details."
 msgstr ""
 
 #: pharmaship/gui/templates/settings_menu.xml:56
+#: pharmaship/gui/templates/settings_menu.xml:60
 msgid "About"
 msgstr ""
 
@@ -160,6 +47,10 @@ msgstr ""
 msgid "About Pharmaship"
 msgstr ""
 
+#: pharmaship/gui/views/equipment.py:631
+#: pharmaship/gui/views/first_aid_kits.py:304
+#: pharmaship/gui/views/medicines.py:628
+#: pharmaship/gui/views/telemedical.py:615
 #: pharmaship/gui/views/equipment.py:592
 #: pharmaship/gui/views/first_aid_kits.py:294
 #: pharmaship/gui/views/medicines.py:589
@@ -167,6 +58,7 @@ msgstr ""
 #: pharmaship/gui/views/first_aid_kits.py:290
 #: pharmaship/gui/views/equipment.py:591
 #: pharmaship/gui/templates/dashboard.glade:1283
+#: pharmaship/gui/templates/dashboard.glade:1287
 msgid "Actions"
 msgstr ""
 
@@ -178,7 +70,7 @@ msgstr ""
 msgid "Add a location"
 msgstr ""
 
-#: pharmaship/gui/views/medicines.py:678
+#: pharmaship/gui/views/medicines.py:717 pharmaship/gui/views/medicines.py:678
 #: pharmaship/gui/templates/article_add.glade:12
 #: pharmaship/gui/templates/medicine_add.glade:12
 msgid "Add a medicine"
@@ -188,6 +80,9 @@ msgstr ""
 msgid "Add a medicine for molecule:"
 msgstr ""
 
+#: pharmaship/gui/views/equipment.py:722
+#: pharmaship/gui/views/first_aid_kits.py:385
+#: pharmaship/gui/views/telemedical.py:706
 #: pharmaship/gui/views/equipment.py:683
 #: pharmaship/gui/views/first_aid_kits.py:375
 #: pharmaship/gui/views/telemedical.py:669
@@ -201,6 +96,7 @@ msgstr ""
 msgid "Add an article for equipment:"
 msgstr ""
 
+#: pharmaship/gui/views/laboratory.py:370
 #: pharmaship/gui/views/laboratory.py:344
 #: pharmaship/gui/views/laboratory.py:364
 #: pharmaship/gui/templates/article_add.glade:48
@@ -224,17 +120,20 @@ msgstr ""
 msgid "Address:"
 msgstr ""
 
+#: pharmaship/gui/views/rescue_bag.py:134
 #: pharmaship/inventory/parsers/rescue_bag.py:16
+#: pharmaship/inventory/parsers/rescue_bag.py:54
 msgid "All Rescue Bags"
 msgstr ""
 
 #: pharmaship/gui/views/rescue_bag.py:135
 #: pharmaship/gui/views/rescue_bag.py:132
+#: pharmaship/gui/views/rescue_bag.py:134
 msgid "All rescue bags"
 msgstr ""
 
-#: pharmaship/gui/view.py:501 pharmaship/gui/view.py:511
-#: pharmaship/gui/templates/settings_menu.xml:10
+#: pharmaship/gui/view.py:576 pharmaship/gui/view.py:501
+#: pharmaship/gui/view.py:511 pharmaship/gui/templates/settings_menu.xml:10
 msgid "Allowance Manager"
 msgstr ""
 
@@ -244,6 +143,10 @@ msgstr ""
 
 #: pharmaship/inventory/constants.py:28
 msgid "Ampoule"
+msgstr ""
+
+#: pharmaship/gui/templates/db_export_error.glade:13
+msgid "An error occurred during the databse export!"
 msgstr ""
 
 #: pharmaship/purchase/constants.py:9
@@ -283,6 +186,7 @@ msgstr ""
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
+#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Header row
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
@@ -293,6 +197,12 @@ msgstr ""
 #. Header row
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Header row
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Header row
+#: pharmaship/gui/views/equipment.py:610
+#: pharmaship/gui/views/first_aid_kits.py:287
+#: pharmaship/gui/views/medicines.py:607 pharmaship/gui/views/rescue_bag.py:437
+#: pharmaship/gui/views/telemedical.py:594
 #: pharmaship/gui/views/equipment.py:571
 #: pharmaship/gui/views/first_aid_kits.py:277
 #: pharmaship/gui/views/medicines.py:568 pharmaship/gui/views/rescue_bag.py:427
@@ -306,15 +216,16 @@ msgstr ""
 msgid "Composition:"
 msgstr ""
 
-#: pharmaship/core/import_data.py:171
+#: pharmaship/core/import_data.py:171 pharmaship/core/import_data.py:262
 msgid "Configuration file incorrect. "
 msgstr ""
 
-#: pharmaship/core/import_data.py:163
+#: pharmaship/core/import_data.py:163 pharmaship/core/import_data.py:253
 msgid "Configuration not found."
 msgstr ""
 
 #: pharmaship/gui/templates/dashboard_detail.glade:58
+#: pharmaship/gui/templates/dashboard_detail.glade:60
 msgid "Copy as text"
 msgstr ""
 
@@ -324,10 +235,10 @@ msgstr ""
 msgid "Current/Required quantity"
 msgstr ""
 
-#: pharmaship/gui/view.py:423 pharmaship/gui/view.py:474
-#: pharmaship/gui/view.py:419 pharmaship/gui/view.py:469
-#: pharmaship/gui/view.py:429 pharmaship/gui/view.py:479
-#: pharmaship/gui/templates/mode_menu.xml:6
+#: pharmaship/gui/view.py:549 pharmaship/gui/view.py:423
+#: pharmaship/gui/view.py:474 pharmaship/gui/view.py:419
+#: pharmaship/gui/view.py:469 pharmaship/gui/view.py:429
+#: pharmaship/gui/view.py:479 pharmaship/gui/templates/mode_menu.xml:6
 msgid "Dashboard"
 msgstr ""
 
@@ -339,6 +250,9 @@ msgstr ""
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
+#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Delete
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Delete
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
@@ -350,6 +264,8 @@ msgstr ""
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Delete
 #: pharmaship/gui/views/allowance_manager.py:320
+#: pharmaship/gui/views/equipment.py:713 pharmaship/gui/views/medicines.py:708
+#: pharmaship/gui/views/telemedical.py:697
 #: pharmaship/gui/views/equipment.py:674 pharmaship/gui/views/medicines.py:669
 #: pharmaship/gui/views/telemedical.py:660
 #: pharmaship/gui/views/equipment.py:673
@@ -424,7 +340,8 @@ msgstr ""
 msgid "Dosage Form:"
 msgstr ""
 
-#: pharmaship/gui/view.py:237 pharmaship/gui/view.py:247
+#: pharmaship/gui/view.py:308 pharmaship/gui/view.py:237
+#: pharmaship/gui/view.py:247
 msgid "Double-click on expiry date"
 msgstr ""
 
@@ -437,21 +354,26 @@ msgid "E-mail:"
 msgstr ""
 
 #: pharmaship/gui/templates/dashboard_detail.glade:72
+#: pharmaship/gui/templates/dashboard_detail.glade:74
 msgid "Edit as CSV"
 msgstr ""
 
+#: pharmaship/gui/views/rescue_bag.py:529
 #: pharmaship/gui/views/rescue_bag.py:517
 #: pharmaship/gui/views/rescue_bag.py:514
 msgid "Edit this item in the dedicated view"
 msgstr ""
 
-#: pharmaship/gui/view.py:253 pharmaship/gui/view.py:263
+#: pharmaship/gui/view.py:324 pharmaship/gui/view.py:253
+#: pharmaship/gui/view.py:263
 msgid "End of month"
 msgstr ""
 
-#: pharmaship/gui/view.py:524 pharmaship/gui/view.py:534
-#: pharmaship/gui/templates/mode_menu.xml:16
+#: pharmaship/gui/view.py:597 pharmaship/gui/view.py:524
+#: pharmaship/gui/view.py:534 pharmaship/gui/templates/mode_menu.xml:16
 #: pharmaship/gui/templates/dashboard.glade:390
+#: pharmaship/gui/templates/dashboard.glade:392
+#: pharmaship/gui/templates/mode_menu.xml:17 pharmaship/inventory/search.py:238
 msgid "Equipment"
 msgstr ""
 
@@ -462,6 +384,10 @@ msgstr ""
 
 #: pharmaship/gui/export/equipment.py:46 pharmaship/gui/export/equipment.py:49
 msgid "Equipment Inventory"
+msgstr ""
+
+#: pharmaship/gui/templates/db_export_error.glade:7
+msgid "Error"
 msgstr ""
 
 #. Brand Name. Example: Doliprane for INN Paracétamol
@@ -483,7 +409,16 @@ msgstr ""
 #: pharmaship/gui/reports/telemedical.html:11
 #: pharmaship/gui/views/dashboard.py:48 pharmaship/gui/views/dashboard.py:53
 #: pharmaship/gui/views/dashboard.py:58 pharmaship/gui/views/dashboard.py:426
-#: pharmaship/gui/views/equipment.py:79 pharmaship/gui/views/equipment.py:584
+#: pharmaship/gui/views/equipment.py:86 pharmaship/gui/views/equipment.py:623
+#: pharmaship/gui/views/first_aid_kits.py:163
+#: pharmaship/gui/views/first_aid_kits.py:296
+#: pharmaship/gui/views/laboratory.py:85 pharmaship/gui/views/medicines.py:84
+#: pharmaship/gui/views/medicines.py:620 pharmaship/gui/views/rescue_bag.py:150
+#: pharmaship/gui/views/rescue_bag.py:310
+#: pharmaship/gui/views/rescue_bag.py:446
+#: pharmaship/gui/views/telemedical.py:85
+#: pharmaship/gui/views/telemedical.py:607 pharmaship/gui/views/equipment.py:79
+#: pharmaship/gui/views/equipment.py:584
 #: pharmaship/gui/views/first_aid_kits.py:161
 #: pharmaship/gui/views/first_aid_kits.py:286
 #: pharmaship/gui/views/laboratory.py:79 pharmaship/gui/views/medicines.py:77
@@ -523,7 +458,8 @@ msgstr ""
 msgid "Expiry date:"
 msgstr ""
 
-#: pharmaship/gui/view.py:279 pharmaship/gui/view.py:289
+#: pharmaship/gui/view.py:350 pharmaship/gui/view.py:279
+#: pharmaship/gui/view.py:289
 #, python-brace-format
 msgid "Expiry up to: {0}"
 msgstr ""
@@ -543,6 +479,7 @@ msgid "Export DB"
 msgstr ""
 
 #: pharmaship/gui/templates/dashboard.glade:1223
+#: pharmaship/gui/templates/dashboard.glade:1227
 msgid "Export all inventories"
 msgstr ""
 
@@ -550,6 +487,7 @@ msgstr ""
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
+#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Save button
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
@@ -560,15 +498,20 @@ msgstr ""
 #. Save button
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Save button
-#: pharmaship/gui/view.py:202 pharmaship/gui/view.py:212
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Save button
+#: pharmaship/gui/view.py:203 pharmaship/gui/view.py:202
+#: pharmaship/gui/view.py:212
 msgid "Export as PDF"
 msgstr ""
 
 #: pharmaship/gui/templates/dashboard.glade:1238
+#: pharmaship/gui/templates/dashboard.glade:1242
 msgid "Export missing items"
 msgstr ""
 
 #: pharmaship/gui/templates/dashboard.glade:1253
+#: pharmaship/gui/templates/dashboard.glade:1257
 msgid "Export perished items"
 msgstr ""
 
@@ -578,6 +521,8 @@ msgstr ""
 
 #: pharmaship/core/import_data.py:115 pharmaship/core/import_data.py:119
 #: pharmaship/core/import_data.py:126 pharmaship/core/import_data.py:130
+#: pharmaship/core/import_data.py:183 pharmaship/core/import_data.py:187
+#: pharmaship/core/import_data.py:194 pharmaship/core/import_data.py:198
 msgid "File impossible to read. See detailled log."
 msgstr ""
 
@@ -585,9 +530,11 @@ msgstr ""
 msgid "File:"
 msgstr ""
 
-#: pharmaship/gui/view.py:538 pharmaship/gui/view.py:548
-#: pharmaship/gui/templates/mode_menu.xml:20
+#: pharmaship/gui/view.py:611 pharmaship/gui/view.py:538
+#: pharmaship/gui/view.py:548 pharmaship/gui/templates/mode_menu.xml:20
 #: pharmaship/gui/templates/dashboard.glade:782
+#: pharmaship/gui/templates/dashboard.glade:784
+#: pharmaship/gui/templates/mode_menu.xml:22
 msgid "First Aid Kits"
 msgstr ""
 
@@ -613,7 +560,7 @@ msgstr ""
 msgid "Form - Dosage"
 msgstr ""
 
-#: pharmaship/gui/views/medicines.py:71
+#: pharmaship/gui/views/medicines.py:78 pharmaship/gui/views/medicines.py:71
 msgid "Form/Dosage"
 msgstr ""
 
@@ -627,6 +574,10 @@ msgstr ""
 #: pharmaship/gui/reports/medicines.html:21
 #: pharmaship/gui/reports/telemedical.html:21
 msgid "Generated by Pharmaship on"
+msgstr ""
+
+#: pharmaship/gui/templates/search_listboxrow.glade:18
+msgid "Group:"
 msgstr ""
 
 #: pharmaship/gui/templates/allowance_manager.glade:118
@@ -665,17 +616,17 @@ msgstr ""
 msgid "Import a Pharmaship database"
 msgstr ""
 
-#: pharmaship/core/import_data.py:209
+#: pharmaship/core/import_data.py:209 pharmaship/core/import_data.py:307
 #, python-brace-format
 msgid "Import of module {0} failed. See detailed logs."
 msgstr ""
 
-#: pharmaship/core/import_data.py:212
+#: pharmaship/core/import_data.py:212 pharmaship/core/import_data.py:310
 #, python-brace-format
 msgid "Import of module {0} succeeded."
 msgstr ""
 
-#: pharmaship/core/import_data.py:217
+#: pharmaship/core/import_data.py:217 pharmaship/core/import_data.py:315
 msgid "Import success."
 msgstr ""
 
@@ -691,11 +642,12 @@ msgstr ""
 msgid "Instructions"
 msgstr ""
 
-#: pharmaship/core/import_data.py:158
+#: pharmaship/core/import_data.py:158 pharmaship/core/import_data.py:248
 msgid "Integrity check failed. Check logs."
 msgstr ""
 
-#: pharmaship/gui/utils.py:364 pharmaship/gui/utils.py:351
+#: pharmaship/gui/widgets/entry.py:72 pharmaship/gui/utils.py:364
+#: pharmaship/gui/utils.py:351
 msgid "Invalid date input"
 msgstr ""
 
@@ -708,24 +660,27 @@ msgstr ""
 msgid "Item Type"
 msgstr ""
 
-#: pharmaship/core/gpg.py:33
+#: pharmaship/core/gpg.py:33 pharmaship/core/gpg.py:48
 msgid "Key already added"
 msgstr ""
 
-#: pharmaship/core/gpg.py:68
+#: pharmaship/core/gpg.py:68 pharmaship/core/gpg.py:114
 msgid "Key not found!"
 msgstr ""
 
-#: pharmaship/core/gpg.py:71
+#: pharmaship/core/gpg.py:71 pharmaship/core/gpg.py:117
 msgid "Key removed"
 msgstr ""
 
-#: pharmaship/core/gpg.py:38
+#: pharmaship/core/gpg.py:38 pharmaship/core/gpg.py:53
 msgid "Key successfully added"
 msgstr ""
 
-#: pharmaship/gui/view.py:562 pharmaship/gui/templates/mode_menu.xml:28
+#: pharmaship/gui/view.py:635 pharmaship/gui/view.py:562
+#: pharmaship/gui/templates/mode_menu.xml:28
 #: pharmaship/gui/templates/dashboard.glade:978
+#: pharmaship/gui/templates/dashboard.glade:981
+#: pharmaship/gui/templates/mode_menu.xml:30 pharmaship/inventory/search.py:247
 msgid "Laboratory"
 msgstr ""
 
@@ -752,13 +707,21 @@ msgstr ""
 msgid "List II"
 msgstr ""
 
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Header
 #: pharmaship/gui/reports/equipment.html:12
 #: pharmaship/gui/reports/laboratory.html:12
 #: pharmaship/gui/reports/medicines.html:14
 #: pharmaship/gui/reports/telemedical.html:12
-#: pharmaship/gui/views/equipment.py:76 pharmaship/gui/views/equipment.py:580
-#: pharmaship/gui/views/laboratory.py:76 pharmaship/gui/views/medicines.py:74
-#: pharmaship/gui/views/medicines.py:577 pharmaship/gui/views/telemedical.py:76
+#: pharmaship/gui/views/equipment.py:83 pharmaship/gui/views/equipment.py:619
+#: pharmaship/gui/views/laboratory.py:82
+#: pharmaship/gui/views/location_manager.py:66
+#: pharmaship/gui/views/medicines.py:81 pharmaship/gui/views/medicines.py:616
+#: pharmaship/gui/views/telemedical.py:82
+#: pharmaship/gui/views/telemedical.py:603 pharmaship/gui/views/equipment.py:76
+#: pharmaship/gui/views/equipment.py:580 pharmaship/gui/views/laboratory.py:76
+#: pharmaship/gui/views/medicines.py:74 pharmaship/gui/views/medicines.py:577
+#: pharmaship/gui/views/telemedical.py:76
 #: pharmaship/gui/views/telemedical.py:566
 #: pharmaship/gui/reports/equipment.html:56
 #: pharmaship/gui/reports/laboratory.html:56
@@ -768,8 +731,8 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: pharmaship/gui/view.py:483 pharmaship/gui/view.py:493
-#: pharmaship/gui/templates/settings_menu.xml:6
+#: pharmaship/gui/view.py:558 pharmaship/gui/view.py:483
+#: pharmaship/gui/view.py:493 pharmaship/gui/templates/settings_menu.xml:6
 msgid "Location Manager"
 msgstr ""
 
@@ -779,6 +742,15 @@ msgstr ""
 #: pharmaship/gui/templates/rescue_bag.glade:73
 #: pharmaship/gui/templates/article_add.glade:162
 msgid "Location:"
+msgstr ""
+
+#: pharmaship/gui/templates/search_listboxrow.glade:100
+msgid "Locations: "
+msgstr ""
+
+#: pharmaship/gui/view.py:256
+#, python-brace-format
+msgid "Locations: {0}"
 msgstr ""
 
 #: pharmaship/gui/templates/vessel_settings.glade:130
@@ -798,9 +770,11 @@ msgstr ""
 msgid "Medicine Inventory"
 msgstr ""
 
-#: pharmaship/gui/view.py:510 pharmaship/gui/view.py:520
-#: pharmaship/gui/templates/mode_menu.xml:12
+#: pharmaship/gui/view.py:585 pharmaship/gui/view.py:510
+#: pharmaship/gui/view.py:520 pharmaship/gui/templates/mode_menu.xml:12
 #: pharmaship/gui/templates/dashboard.glade:194
+#: pharmaship/gui/templates/dashboard.glade:195
+#: pharmaship/inventory/search.py:160
 msgid "Medicines"
 msgstr ""
 
@@ -817,6 +791,8 @@ msgstr ""
 msgid "Min. Quantity"
 msgstr ""
 
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Missing = required - current quantity
 #: pharmaship/gui/views/dashboard.py:32 pharmaship/gui/views/dashboard.py:423
 #: pharmaship/gui/views/dashboard.py:33 pharmaship/gui/views/dashboard.py:377
 msgid "Missing"
@@ -858,6 +834,11 @@ msgstr ""
 #: pharmaship/gui/templates/dashboard.glade:634
 #: pharmaship/gui/templates/dashboard.glade:830
 #: pharmaship/gui/templates/dashboard.glade:1026
+#: pharmaship/gui/templates/dashboard.glade:243
+#: pharmaship/gui/templates/dashboard.glade:440
+#: pharmaship/gui/templates/dashboard.glade:636
+#: pharmaship/gui/templates/dashboard.glade:832
+#: pharmaship/gui/templates/dashboard.glade:1029
 msgid "Missing:"
 msgstr ""
 
@@ -869,6 +850,7 @@ msgstr ""
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
+#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Modify
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
@@ -879,12 +861,18 @@ msgstr ""
 #. Modify
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Modify
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Modify
+#: pharmaship/gui/views/equipment.py:710 pharmaship/gui/views/medicines.py:705
+#: pharmaship/gui/views/telemedical.py:694
 #: pharmaship/gui/views/equipment.py:671 pharmaship/gui/views/medicines.py:666
 #: pharmaship/gui/views/telemedical.py:657
 #: pharmaship/gui/views/equipment.py:670
 msgid "Modify"
 msgstr ""
 
+#: pharmaship/gui/views/equipment.py:298 pharmaship/gui/views/laboratory.py:291
+#: pharmaship/gui/views/telemedical.py:290
 #: pharmaship/gui/views/equipment.py:265 pharmaship/gui/views/laboratory.py:265
 #: pharmaship/gui/views/telemedical.py:259
 #: pharmaship/gui/views/laboratory.py:281
@@ -899,15 +887,16 @@ msgstr ""
 msgid "Modify the item"
 msgstr ""
 
-#: pharmaship/gui/views/medicines.py:252
+#: pharmaship/gui/views/medicines.py:287 pharmaship/gui/views/medicines.py:252
 msgid "Modify the medicine"
 msgstr ""
 
+#: pharmaship/gui/views/location_manager.py:161
 #: pharmaship/gui/views/location_manager.py:155
 msgid "Modify this location"
 msgstr ""
 
-#: pharmaship/core/import_data.py:194
+#: pharmaship/core/import_data.py:194 pharmaship/core/import_data.py:292
 msgid "Module import error. See detailed log."
 msgstr ""
 
@@ -923,6 +912,9 @@ msgstr ""
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
+#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Header
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Header
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
@@ -949,7 +941,12 @@ msgstr ""
 #: pharmaship/gui/reports/telemedical.html:7
 #: pharmaship/gui/views/allowance_manager.py:103
 #: pharmaship/gui/views/allowance_manager.py:317
-#: pharmaship/gui/views/dashboard.py:413 pharmaship/gui/views/equipment.py:64
+#: pharmaship/gui/views/dashboard.py:413 pharmaship/gui/views/equipment.py:71
+#: pharmaship/gui/views/first_aid_kits.py:158
+#: pharmaship/gui/views/laboratory.py:70 pharmaship/gui/views/medicines.py:71
+#: pharmaship/gui/views/rescue_bag.py:140
+#: pharmaship/gui/views/rescue_bag.py:300
+#: pharmaship/gui/views/telemedical.py:70 pharmaship/gui/views/equipment.py:64
 #: pharmaship/gui/views/first_aid_kits.py:156
 #: pharmaship/gui/views/laboratory.py:64 pharmaship/gui/views/medicines.py:64
 #: pharmaship/gui/views/rescue_bag.py:141
@@ -1017,6 +1014,11 @@ msgstr ""
 #: pharmaship/gui/templates/dashboard.glade:658
 #: pharmaship/gui/templates/dashboard.glade:854
 #: pharmaship/gui/templates/dashboard.glade:1050
+#: pharmaship/gui/templates/dashboard.glade:267
+#: pharmaship/gui/templates/dashboard.glade:464
+#: pharmaship/gui/templates/dashboard.glade:660
+#: pharmaship/gui/templates/dashboard.glade:856
+#: pharmaship/gui/templates/dashboard.glade:1053
 msgid "Near expiry:"
 msgstr ""
 
@@ -1024,11 +1026,17 @@ msgstr ""
 msgid "Nebulization"
 msgstr ""
 
+#: pharmaship/gui/views/location_manager.py:37
+#: pharmaship/gui/views/location_manager.py:74
 #: pharmaship/gui/views/location_manager.py:38
 msgid "New Location"
 msgstr ""
 
-#: pharmaship/core/gpg.py:81
+#: pharmaship/gui/view.py:228
+msgid "No result found. Try again!"
+msgstr ""
+
+#: pharmaship/core/gpg.py:81 pharmaship/core/gpg.py:133
 msgid "No signature found."
 msgstr ""
 
@@ -1043,6 +1051,8 @@ msgid "Non-compliant article"
 msgstr ""
 
 #: pharmaship/gui/views/dashboard.py:124
+#: pharmaship/gui/views/first_aid_kits.py:330
+#: pharmaship/gui/views/medicines.py:652 pharmaship/gui/views/rescue_bag.py:477
 #: pharmaship/gui/views/first_aid_kits.py:320
 #: pharmaship/gui/views/medicines.py:613 pharmaship/gui/views/rescue_bag.py:467
 #: pharmaship/gui/views/dashboard.py:125 pharmaship/gui/views/rescue_bag.py:464
@@ -1058,13 +1068,20 @@ msgid "Non-compliant medicine"
 msgstr ""
 
 #: pharmaship/gui/views/dashboard.py:126
+#: pharmaship/gui/views/first_aid_kits.py:332
+#: pharmaship/gui/views/medicines.py:650 pharmaship/gui/views/rescue_bag.py:479
 #: pharmaship/gui/views/first_aid_kits.py:322
 #: pharmaship/gui/views/medicines.py:611 pharmaship/gui/views/rescue_bag.py:469
 #: pharmaship/gui/views/dashboard.py:127 pharmaship/gui/views/rescue_bag.py:466
 msgid "Non-compliant molecule:"
 msgstr ""
 
-#: pharmaship/gui/views/dashboard.py:122 pharmaship/gui/views/equipment.py:614
+#: pharmaship/gui/views/dashboard.py:122 pharmaship/gui/views/equipment.py:653
+#: pharmaship/gui/views/first_aid_kits.py:328
+#: pharmaship/gui/views/laboratory.py:644
+#: pharmaship/gui/views/rescue_bag.py:475
+#: pharmaship/gui/views/telemedical.py:637
+#: pharmaship/gui/views/equipment.py:614
 #: pharmaship/gui/views/first_aid_kits.py:318
 #: pharmaship/gui/views/laboratory.py:612
 #: pharmaship/gui/views/rescue_bag.py:465
@@ -1098,6 +1115,11 @@ msgstr ""
 #: pharmaship/gui/templates/dashboard.glade:670
 #: pharmaship/gui/templates/dashboard.glade:866
 #: pharmaship/gui/templates/dashboard.glade:1062
+#: pharmaship/gui/templates/dashboard.glade:279
+#: pharmaship/gui/templates/dashboard.glade:476
+#: pharmaship/gui/templates/dashboard.glade:672
+#: pharmaship/gui/templates/dashboard.glade:868
+#: pharmaship/gui/templates/dashboard.glade:1065
 msgid "Non-conformities:"
 msgstr ""
 
@@ -1139,20 +1161,30 @@ msgstr ""
 msgid "Ordered"
 msgstr ""
 
-#: pharmaship/gui/utils.py:204 pharmaship/gui/utils.py:202
-#: pharmaship/gui/utils.py:201 pharmaship/inventory/constants.py:13
+#: pharmaship/gui/utils.py:212 pharmaship/gui/utils.py:204
+#: pharmaship/gui/utils.py:202 pharmaship/gui/utils.py:201
+#: pharmaship/inventory/constants.py:13
 msgid "Other"
 msgstr ""
 
-#: pharmaship/core/import_data.py:174
+#: pharmaship/gui/templates/search_listboxrow.glade:84
+msgid "Other names: "
+msgstr ""
+
+#: pharmaship/gui/view.py:250
+#, python-brace-format
+msgid "Other names: {0}"
+msgstr ""
+
+#: pharmaship/core/import_data.py:174 pharmaship/core/import_data.py:265
 msgid "Package Author"
 msgstr ""
 
-#: pharmaship/core/import_data.py:176
+#: pharmaship/core/import_data.py:176 pharmaship/core/import_data.py:267
 msgid "Package Date"
 msgstr ""
 
-#: pharmaship/core/import_data.py:175
+#: pharmaship/core/import_data.py:175 pharmaship/core/import_data.py:266
 msgid "Package Version"
 msgstr ""
 
@@ -1162,13 +1194,18 @@ msgstr ""
 #: pharmaship/gui/reports/export_perished.html:47
 #: pharmaship/gui/reports/export_perished.html:105
 #: pharmaship/gui/reports/export_perished.html:138
-#: pharmaship/gui/views/equipment.py:72 pharmaship/gui/views/laboratory.py:72
-#: pharmaship/gui/views/telemedical.py:72
+#: pharmaship/gui/views/equipment.py:79 pharmaship/gui/views/laboratory.py:78
+#: pharmaship/gui/views/telemedical.py:78 pharmaship/gui/views/equipment.py:72
+#: pharmaship/gui/views/laboratory.py:72 pharmaship/gui/views/telemedical.py:72
 msgid "Packaging"
 msgstr ""
 
 #: pharmaship/inventory/models.py:389
 msgid "Packaging:"
+msgstr ""
+
+#: pharmaship/gui/templates/search_listboxrow.glade:41
+msgid "Parent Name"
 msgstr ""
 
 #: pharmaship/gui/templates/location_add.glade:79
@@ -1187,9 +1224,10 @@ msgstr ""
 msgid "Pending Approval"
 msgstr ""
 
-#: pharmaship/gui/utils.py:203 pharmaship/gui/views/dashboard.py:33
-#: pharmaship/gui/views/dashboard.py:34 pharmaship/gui/utils.py:201
-#: pharmaship/gui/utils.py:200 pharmaship/inventory/constants.py:11
+#: pharmaship/gui/utils.py:211 pharmaship/gui/views/dashboard.py:33
+#: pharmaship/gui/utils.py:203 pharmaship/gui/views/dashboard.py:34
+#: pharmaship/gui/utils.py:201 pharmaship/gui/utils.py:200
+#: pharmaship/inventory/constants.py:11
 msgid "Perished"
 msgstr ""
 
@@ -1223,6 +1261,11 @@ msgstr ""
 #: pharmaship/gui/templates/dashboard.glade:646
 #: pharmaship/gui/templates/dashboard.glade:842
 #: pharmaship/gui/templates/dashboard.glade:1038
+#: pharmaship/gui/templates/dashboard.glade:255
+#: pharmaship/gui/templates/dashboard.glade:452
+#: pharmaship/gui/templates/dashboard.glade:648
+#: pharmaship/gui/templates/dashboard.glade:844
+#: pharmaship/gui/templates/dashboard.glade:1041
 msgid "Perished:"
 msgstr ""
 
@@ -1237,6 +1280,7 @@ msgstr ""
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
+#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Create the widget
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
@@ -1245,7 +1289,10 @@ msgstr ""
 #. Create the widget
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Create the widget
-#: pharmaship/gui/utils.py:233 pharmaship/gui/utils.py:231
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Create the widget
+#: pharmaship/gui/utils.py:241 pharmaship/gui/utils.py:233
+#: pharmaship/gui/utils.py:231
 msgid "Picture"
 msgstr ""
 
@@ -1271,6 +1318,8 @@ msgstr ""
 msgid "Powder"
 msgstr ""
 
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Format: xx/yy (current qty/required qty)
 #: pharmaship/gui/reports/equipment.html:10
 #: pharmaship/gui/reports/export_perished.html:12
 #: pharmaship/gui/reports/export_perished.html:48
@@ -1286,7 +1335,16 @@ msgstr ""
 #: pharmaship/gui/views/dashboard.py:48 pharmaship/gui/views/dashboard.py:49
 #: pharmaship/gui/views/dashboard.py:53 pharmaship/gui/views/dashboard.py:54
 #: pharmaship/gui/views/dashboard.py:58 pharmaship/gui/views/dashboard.py:59
-#: pharmaship/gui/views/dashboard.py:418 pharmaship/gui/views/equipment.py:82
+#: pharmaship/gui/views/dashboard.py:418 pharmaship/gui/views/equipment.py:89
+#: pharmaship/gui/views/equipment.py:627
+#: pharmaship/gui/views/first_aid_kits.py:167
+#: pharmaship/gui/views/first_aid_kits.py:300
+#: pharmaship/gui/views/laboratory.py:88 pharmaship/gui/views/medicines.py:87
+#: pharmaship/gui/views/medicines.py:624 pharmaship/gui/views/rescue_bag.py:154
+#: pharmaship/gui/views/rescue_bag.py:314
+#: pharmaship/gui/views/rescue_bag.py:450
+#: pharmaship/gui/views/telemedical.py:88
+#: pharmaship/gui/views/telemedical.py:611 pharmaship/gui/views/equipment.py:82
 #: pharmaship/gui/views/equipment.py:588
 #: pharmaship/gui/views/first_aid_kits.py:165
 #: pharmaship/gui/views/first_aid_kits.py:290
@@ -1357,6 +1415,8 @@ msgstr ""
 #: pharmaship/gui/reports/rescue_bag.html:14
 #: pharmaship/gui/reports/rescue_bag_all.html:8
 #: pharmaship/gui/reports/telemedical.html:8
+#: pharmaship/gui/views/rescue_bag.py:145
+#: pharmaship/gui/views/rescue_bag.py:305
 #: pharmaship/gui/views/rescue_bag.py:146
 #: pharmaship/gui/views/rescue_bag.py:303
 #: pharmaship/gui/reports/equipment.html:52
@@ -1375,7 +1435,13 @@ msgstr ""
 msgid "Remark:"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:68 pharmaship/gui/views/equipment.py:576
+#: pharmaship/gui/views/equipment.py:75 pharmaship/gui/views/equipment.py:615
+#: pharmaship/gui/views/first_aid_kits.py:292
+#: pharmaship/gui/views/laboratory.py:74 pharmaship/gui/views/medicines.py:612
+#: pharmaship/gui/views/rescue_bag.py:442
+#: pharmaship/gui/views/telemedical.py:74
+#: pharmaship/gui/views/telemedical.py:599 pharmaship/gui/views/equipment.py:68
+#: pharmaship/gui/views/equipment.py:576
 #: pharmaship/gui/views/first_aid_kits.py:282
 #: pharmaship/gui/views/laboratory.py:68 pharmaship/gui/views/medicines.py:573
 #: pharmaship/gui/views/rescue_bag.py:432
@@ -1403,12 +1469,14 @@ msgstr ""
 msgid "Rescue Bag Inventory"
 msgstr ""
 
-#: pharmaship/gui/view.py:550 pharmaship/gui/view.py:560
-#: pharmaship/gui/templates/mode_menu.xml:24
+#: pharmaship/gui/view.py:623 pharmaship/gui/view.py:550
+#: pharmaship/gui/view.py:560 pharmaship/gui/templates/mode_menu.xml:24
+#: pharmaship/gui/templates/mode_menu.xml:26
 msgid "Rescue Bags"
 msgstr ""
 
 #: pharmaship/gui/templates/dashboard.glade:586
+#: pharmaship/gui/templates/dashboard.glade:588
 msgid "Rescue bags"
 msgstr ""
 
@@ -1419,11 +1487,12 @@ msgstr ""
 msgid "Route of Administration"
 msgstr ""
 
-#: pharmaship/gui/views/medicines.py:68
+#: pharmaship/gui/views/medicines.py:75 pharmaship/gui/views/medicines.py:68
 msgid "Route of administration"
 msgstr ""
 
-#: pharmaship/gui/view.py:185 pharmaship/gui/view.py:195
+#: pharmaship/gui/view.py:186 pharmaship/gui/view.py:185
+#: pharmaship/gui/view.py:195
 msgid "Search something..."
 msgstr ""
 
@@ -1453,7 +1522,8 @@ msgstr ""
 msgid "Sent to First Aid Kit"
 msgstr ""
 
-#: pharmaship/gui/view.py:492 pharmaship/gui/view.py:502
+#: pharmaship/gui/view.py:567 pharmaship/gui/view.py:492
+#: pharmaship/gui/view.py:502
 msgid "Settings"
 msgstr ""
 
@@ -1470,19 +1540,19 @@ msgstr ""
 msgid "Shipowner:"
 msgstr ""
 
-#: pharmaship/core/gpg.py:98
+#: pharmaship/core/gpg.py:98 pharmaship/core/gpg.py:150
 msgid "Signature not in the keyring."
 msgstr ""
 
-#: pharmaship/core/import_data.py:138
+#: pharmaship/core/import_data.py:138 pharmaship/core/import_data.py:213
 msgid "Signature not validated. See detailled log."
 msgstr ""
 
-#: pharmaship/core/import_data.py:150
+#: pharmaship/core/import_data.py:150 pharmaship/core/import_data.py:240
 msgid "Signed data is not a valid Tar file. Check logs."
 msgstr ""
 
-#: pharmaship/core/gpg.py:28
+#: pharmaship/core/gpg.py:28 pharmaship/core/gpg.py:43
 msgid "Something went wrong! See detailed logs."
 msgstr ""
 
@@ -1498,6 +1568,11 @@ msgstr ""
 msgid "Sublingual"
 msgstr ""
 
+#: pharmaship/gui/templates/db_export_dialog.glade:7
+#: pharmaship/gui/templates/db_import_dialog.glade:7
+msgid "Success"
+msgstr ""
+
 #: pharmaship/gui/templates/subitem_add.glade:17
 #: pharmaship/gui/templates/subitem_modify.glade:12
 msgid "Supply the first aid kit"
@@ -1511,11 +1586,13 @@ msgstr ""
 msgid "Suppository"
 msgstr ""
 
-#: pharmaship/gui/view.py:257 pharmaship/gui/view.py:267
+#: pharmaship/gui/view.py:328 pharmaship/gui/view.py:257
+#: pharmaship/gui/view.py:267
 msgid "T + 2 months"
 msgstr ""
 
-#: pharmaship/gui/view.py:261 pharmaship/gui/view.py:271
+#: pharmaship/gui/view.py:332 pharmaship/gui/view.py:261
+#: pharmaship/gui/view.py:271
 msgid "T + 4 months"
 msgstr ""
 
@@ -1523,13 +1600,15 @@ msgstr ""
 msgid "Tablet"
 msgstr ""
 
-#: pharmaship/core/import_data.py:204
+#: pharmaship/core/import_data.py:204 pharmaship/core/import_data.py:302
 msgid "Target module has no update method. See detailed log."
 msgstr ""
 
-#: pharmaship/gui/view.py:576 pharmaship/gui/view.py:586
-#: pharmaship/gui/templates/mode_menu.xml:32
+#: pharmaship/gui/view.py:649 pharmaship/gui/view.py:576
+#: pharmaship/gui/view.py:586 pharmaship/gui/templates/mode_menu.xml:32
 #: pharmaship/gui/templates/dashboard.glade:1174
+#: pharmaship/gui/templates/dashboard.glade:1178
+#: pharmaship/gui/templates/mode_menu.xml:35 pharmaship/inventory/search.py:256
 msgid "Telemedical"
 msgstr ""
 
@@ -1537,6 +1616,14 @@ msgstr ""
 #: pharmaship/gui/export/laboratory.py:49
 #: pharmaship/gui/export/telemedical.py:49
 msgid "Telemedical Equipment Inventory"
+msgstr ""
+
+#: pharmaship/gui/templates/db_export_dialog.glade:12
+msgid "The database was exported with success."
+msgstr ""
+
+#: pharmaship/gui/templates/db_import_dialog.glade:12
+msgid "The database was imported with success."
 msgstr ""
 
 #: pharmaship/gui/templates/rescue_bag_dialog.glade:116
@@ -1581,14 +1668,24 @@ msgstr ""
 #: pharmaship/inventory/parsers/laboratory.py:133
 #: pharmaship/inventory/parsers/medicines.py:146
 #: pharmaship/inventory/parsers/medicines.py:150
+#: pharmaship/inventory/parsers/equipment.py:155
+#: pharmaship/inventory/parsers/equipment.py:160
+#: pharmaship/inventory/parsers/telemedical.py:145
+#: pharmaship/inventory/parsers/telemedical.py:149
+#: pharmaship/inventory/parsers/laboratory.py:145
+#: pharmaship/inventory/parsers/laboratory.py:149
+#: pharmaship/inventory/parsers/medicines.py:165
+#: pharmaship/inventory/parsers/medicines.py:170
 msgid "Unassigned"
 msgstr ""
 
+#: pharmaship/gui/views/rescue_bag.py:527
 #: pharmaship/gui/views/rescue_bag.py:515
 #: pharmaship/gui/views/rescue_bag.py:512
 msgid "Update in the equipment view"
 msgstr ""
 
+#: pharmaship/gui/views/rescue_bag.py:523
 #: pharmaship/gui/views/rescue_bag.py:512
 #: pharmaship/gui/views/rescue_bag.py:509
 msgid "Update in the medicine view"
@@ -1598,6 +1695,7 @@ msgstr ""
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
+#. #-#-#-#-#  com.devmaretique.pharmaship.po.bak (PACKAGE VERSION)  #-#-#-#-#
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Use
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
@@ -1608,6 +1706,10 @@ msgstr ""
 #. Use
 #. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
 #. Use
+#. #-#-#-#-#  com.devmaretique.pharmaship.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Use
+#: pharmaship/gui/views/equipment.py:707 pharmaship/gui/views/medicines.py:702
+#: pharmaship/gui/views/telemedical.py:691
 #: pharmaship/gui/views/equipment.py:668 pharmaship/gui/views/medicines.py:663
 #: pharmaship/gui/views/telemedical.py:654
 #: pharmaship/gui/views/equipment.py:667
@@ -1628,6 +1730,10 @@ msgstr ""
 
 #: pharmaship/inventory/constants.py:10
 msgid "Used"
+msgstr ""
+
+#: pharmaship/gui/templates/settings_menu.xml:56
+msgid "User Manual"
 msgstr ""
 
 #: pharmaship/inventory/constants.py:82
@@ -1671,9 +1777,13 @@ msgstr ""
 msgid "Vessel:"
 msgstr ""
 
+#: pharmaship/gui/views/equipment.py:219
+#: pharmaship/gui/views/first_aid_kits.py:244
+#: pharmaship/gui/views/rescue_bag.py:238
+#: pharmaship/gui/views/rescue_bag.py:394
+#: pharmaship/gui/views/telemedical.py:211
 #: pharmaship/gui/views/equipment.py:202
 #: pharmaship/gui/views/first_aid_kits.py:242
-#: pharmaship/gui/views/rescue_bag.py:238
 #: pharmaship/gui/views/rescue_bag.py:392
 #: pharmaship/gui/views/telemedical.py:196
 #: pharmaship/gui/views/first_aid_kits.py:238

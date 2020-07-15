@@ -10,8 +10,7 @@ from pharmaship.core.utils import log, query_count_all
 from pharmaship.inventory.models import Location
 from pharmaship.inventory.forms import LocationForm
 
-from pharmaship.gui import utils
-from pharmaship.gui.utils import ButtonWithImage
+from pharmaship.gui import utils, widgets
 
 
 class View:
@@ -48,11 +47,11 @@ class View:
         linked_btn.get_style_context().add_class("medicine-item-buttons")
 
         # Modify
-        btn_modify = ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=item)
+        btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=item)
         linked_btn.pack_end(btn_modify, False, True, 0)
         # Delete
         if item["id"] > 100:
-            btn_delete = ButtonWithImage("edit-delete-symbolic", tooltip="Delete", connect=self.dialog_delete, data=item)
+            btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip="Delete", connect=self.dialog_delete, data=item)
             btn_delete.get_style_context().add_class("medicine-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 
@@ -64,13 +63,20 @@ class View:
         self.scrolled.add(self.grid)
 
         # Header
-        label = Gtk.Label("Location", xalign=0)
+        label = Gtk.Label(_("Location"), xalign=0)
         label.set_hexpand(True)
         label.get_style_context().add_class("header-cell")
         self.grid.attach(label, 0, 0, 1, 1)
-        label = Gtk.Label("", xalign=0)
-        label.get_style_context().add_class("header-cell")
-        self.grid.attach(label, 1, 0, 1, 1)
+
+        # Add location button on header bar
+        box = Gtk.Box()
+        box.get_style_context().add_class("header-cell-box")
+        btn = Gtk.Button(_("New Location"))
+        btn.set_relief(Gtk.ReliefStyle.NONE)
+        btn.get_style_context().add_class("header-cell-btn")
+        btn.connect("clicked", self.dialog_add)
+        box.add(btn)
+        self.grid.attach(box, 1, 0, 1, 1)
 
         location_list = self.params.locations
 

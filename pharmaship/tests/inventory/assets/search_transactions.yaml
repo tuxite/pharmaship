@@ -1,0 +1,109 @@
+- model: inventory.moleculegroup
+  pk: 1
+  fields:
+    name: Cardiologie
+    order: 1
+
+- model: inventory.allowance
+  pk: 0
+  fields:
+    name: Orphan
+    author: Pharmaship
+    signature: system
+    date: 2020-04-21
+    version: '1'
+    additional: false
+    active: false
+
+- model: inventory.location
+  pk: 0
+  fields:
+    name: Unassigned
+    parent: null
+    is_rescue_bag: false
+    lft: 1
+    rght: 20
+    tree_id: 4
+    level: 0
+
+- fields:
+    composition: 300 mg
+    dosage_form: 6
+    group:
+    - Cardiologie
+    medicine_list: 0
+    name: "Acide ac\xE9tylsalicylique"
+    remark: null
+    roa: 1
+  pk: 1
+  model: inventory.molecule
+
+- model: inventory.medicine
+  pk: 1
+  fields:
+    name: "Acide ac\xE9tylsalicylique"
+    exp_date: 2020-07-31
+    used: false
+    remark: ''
+    location: 0
+    parent: 1
+    nc_molecule: ''
+    nc_composition: ''
+
+
+- model: inventory.qtytransaction
+  pk: 1
+  fields:
+    transaction_type: 1
+    date: 2020-05-18 14:40:25+00:00
+    remark: null
+    value: 60
+    content_type: ['inventory', 'medicine']
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 2
+  fields:
+    transaction_type: 2
+    date: 2020-05-18 14:40:30+00:00
+    remark: null
+    value: 30
+    content_type: ['inventory', 'medicine']
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 3
+  fields:
+    transaction_type: 4
+    date: 2020-05-18 14:40:35+00:00
+    remark: null
+    value: 5
+    content_type: ['inventory', 'medicine']
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 4
+  fields:
+    transaction_type: 8
+    date: 2020-05-18 14:40:40+00:00
+    remark: null
+    value: 32
+    content_type: ['inventory', 'medicine']
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 5
+  fields:
+    transaction_type: 9
+    date: 2020-05-18 14:40:45+00:00
+    remark: null
+    value: 3
+    content_type: ['inventory', 'medicine']
+    object_id: 1
+- model: inventory.qtytransaction
+  pk: 6
+  fields:
+    transaction_type: 10
+    date: 2020-05-18 14:40:50+00:00
+    remark: null
+    value: 12
+    content_type: ['inventory', 'medicine']
+    object_id: 1
+
+

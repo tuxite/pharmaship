@@ -22,10 +22,11 @@ from django.conf import settings
 from pharmaship.core.utils import log, end_of_month, add_months, get_content_types, query_count_all
 from pharmaship.core.config import read_config, write_config
 
-from pharmaship.gui import views, export, utils
+from pharmaship.gui import views, export, utils, widgets
 
 from pharmaship.inventory import models
 from pharmaship.inventory.utils import get_location_list
+from pharmaship.inventory import search
 
 # Language support
 try:
@@ -131,9 +132,9 @@ class GlobalParameters:
 
 
 class AppWindow(Gtk.ApplicationWindow):
-    def __init__(self, params, *args, **kwargs):
+    def __init__(self, params, actions, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
+        self.actions = actions
         self.params = params
 
         # Set the window title
@@ -175,17 +176,17 @@ class AppWindow(Gtk.ApplicationWindow):
         builder = Gtk.Builder.new_from_file(utils.get_template("settings_menu.xml"))
         menu = builder.get_object("app-menu")
 
-        button = utils.ButtonWithImage("open-menu-symbolic", btn_class=Gtk.MenuButton)
+        button = widgets.ButtonWithImage("open-menu-symbolic", btn_class=Gtk.MenuButton)
         popover = Gtk.Popover.new_from_model(button, menu)
         button.set_popover(popover)
         hb.pack_end(button)
 
         # Search bar
-        searchbar = Gtk.SearchEntry()
-        searchbar.set_placeholder_text(_("Search something..."))
-        searchbar.props.width_request = 300
-        searchbar.connect("activate", self.on_search)
-        hb.pack_end(searchbar)
+        self.searchbar = Gtk.SearchEntry()
+        self.searchbar.set_placeholder_text(_("Search something..."))
+        self.searchbar.connect("activate", self.on_search)
+        self.searchbar.props.width_request = 300
+        hb.pack_end(self.searchbar)
 
         # Mode button
         builder = Gtk.Builder.new_from_file(utils.get_template("mode_menu.xml"))
@@ -195,11 +196,11 @@ class AppWindow(Gtk.ApplicationWindow):
         popover = Gtk.Popover.new_from_model(self.mode_button, menu)
         self.mode_button.set_popover(popover)
         self.mode_button.props.width_request = 120
-        self.mode_button.get_style_context().add_class(Gtk.STYLE_CLASS_SUGGESTED_ACTION)
+        self.mode_button.get_style_context().add_class("suggested-action")
         hb.pack_start(self.mode_button)
 
         # Save button
-        button = utils.ButtonWithImage("document-save-as-symbolic", tooltip=_("Export as PDF"), action="app.save")
+        button = widgets.ButtonWithImage("document-save-as-symbolic", tooltip=_("Export as PDF"), action="app.save")
         hb.pack_start(button)
         self.builder.expose_object("hb-btn-save", button)
 
@@ -208,9 +209,79 @@ class AppWindow(Gtk.ApplicationWindow):
         self.expiry_date_button_label()
 
     def on_search(self, source):
-        log.info("Search self.ApplicationWindow!")
-        search_text = source.get_text()
-        log.debug("Searched for: %s", search_text)
+        search_text = source.get_text().strip()
+        if len(search_text) < 2:
+            return False
+        search_result = search.search(search_text, self.params)
+
+        # Create a Popover with ListBox
+        main_builder = Gtk.Builder.new_from_file(utils.get_template("search_popover.glade"))
+        popover = main_builder.get_object("popover")
+        popover.set_relative_to(self.searchbar)
+        popover.get_style_context().add_class("popover-search")
+        popover.props.width_request = self.searchbar.props.width_request
+
+        listbox = main_builder.get_object("listbox")
+
+        if len(search_result) == 0:
+            row = Gtk.ListBoxRow()
+            label = Gtk.Label(_("No result found. Try again!"))
+            row.add(label)
+            listbox.add(row)
+            listbox.set_selection_mode(0)
+            popover.show_all()
+            scrolled = main_builder.get_object("scrolled")
+            scrolled.set_min_content_height(-1)
+            scrolled.set_max_content_height(-1)
+            return True
+
+        for item in search_result:
+            builder = Gtk.Builder.new_from_file(utils.get_template("search_listboxrow.glade"))
+            row = Gtk.ListBoxRow()
+            box = builder.get_object("box")
+            row.add(box)
+            listbox.add(row)
+            parent_name = builder.get_object("parent_name")
+            parent_name_text = "<b>{0}</b> ({1})".format(item["parent_name"], item["details"])
+            parent_name.set_markup(parent_name_text)
+            other_names = builder.get_object("other_names")
+            if item["other_names"]:
+                other_names_text = ", ".join(item["other_names"])
+                other_names.set_text(_("Other names: {0}").format(other_names_text))
+            else:
+                other_names.destroy()
+            locations = builder.get_object("locations")
+            if item["locations"]:
+                locations_text = ", ".join(item["locations"])
+                locations.set_text(_("Locations: {0}").format(locations_text))
+            else:
+                locations.destroy()
+
+            quantity_text = "<b>{0}<small>/{1}</small></b>".format(item["quantity"], item["required"])
+            quantity = builder.get_object("quantity")
+            quantity.set_markup(quantity_text)
+
+            group = builder.get_object("group")
+            group.set_text(item["group"])
+
+            # Type
+            box = builder.get_object("type-box")
+            for item_type in item["type"]:
+                btn = Gtk.LinkButton("", item_type["label"])
+                # Remove the "pseudo" tooltip showing nothing but existing...
+                btn.set_tooltip_text(None)
+                btn.connect("activate-link", self.search_click, item, item_type["name"])
+                box.pack_start(btn, True, True, 0)
+
+        popover.show_all()
+
+    def search_click(self, source, item, item_type):
+        """Open the related view of the item clicked."""
+        if item_type not in self.actions.list_actions():
+            log.warning("Action %s not registered.", item_type)
+            return False
+
+        self.actions.activate_action(item_type, GLib.Variant("i", item["id"]))
 
     # Expiry date check management
     def create_hb_date_button(self):
@@ -332,11 +403,11 @@ class Application(Gtk.Application):
         action.connect("activate", self.on_dashboard)
         self.add_action(action)
 
-        action = Gio.SimpleAction.new("medicines", None)
+        action = Gio.SimpleAction.new("medicines", GLib.VariantType.new("i"))
         action.connect("activate", self.on_medicines)
         self.add_action(action)
 
-        action = Gio.SimpleAction.new("equipment", None)
+        action = Gio.SimpleAction.new("equipment", GLib.VariantType.new("i"))
         action.connect("activate", self.on_equipment)
         self.add_action(action)
 
@@ -348,14 +419,14 @@ class Application(Gtk.Application):
         action.connect("activate", self.on_rescue_bag)
         self.add_action(action)
 
-        action = Gio.SimpleAction.new("laboratory", None)
+        action = Gio.SimpleAction.new("laboratory", GLib.VariantType.new("i"))
         action.connect("activate", self.on_laboratory)
         action.set_enabled(False)
         self.add_action(action)
         if self.setting.has_laboratory:
             action.set_enabled(True)
 
-        action = Gio.SimpleAction.new("telemedical", None)
+        action = Gio.SimpleAction.new("telemedical", GLib.VariantType.new("i"))
         action.connect("activate", self.on_telemedical)
         action.set_enabled(False)
         self.add_action(action)
@@ -368,10 +439,6 @@ class Application(Gtk.Application):
 
         action = Gio.SimpleAction.new("about", None)
         action.connect("activate", self.on_about)
-        self.add_action(action)
-
-        action = Gio.SimpleAction.new("search", None)
-        action.connect("activate", self.on_search)
         self.add_action(action)
 
         action = Gio.SimpleAction.new("save", None)
@@ -417,10 +484,9 @@ class Application(Gtk.Application):
         if not self.window:
             # Windows are associated with the application
             # when the last one is closed the application shuts down
-            self.window = AppWindow(application=self, params=self.params)
+            self.window = AppWindow(application=self, params=self.params, actions=self)
             self.window.set_size_request(800, 600)
 
-        self.window.mode_button.set_label(_("Dashboard"))
         self.on_dashboard(None, None)
         self.window.show_all()
 
@@ -447,13 +513,22 @@ class Application(Gtk.Application):
 
         # Get window parameters
         window_size = self.window.get_size()
+        # Position is not reliable on Wayland
+        window_position = self.window.get_position()
+        log.debug(window_position)
         mode = self.window.mode
+
         self.window.destroy()
-        self.window = AppWindow(application=self, params=self.params)
+        self.window = AppWindow(application=self, params=self.params, actions=self)
         self.window.set_size_request(800, 600)
 
         self.set_mode(mode)
         self.window.set_default_size(*window_size)
+
+        self.window.move(
+            x=window_position[0],
+            y=window_position[1]
+        )
 
         self.window.show_all()
 
@@ -511,13 +586,11 @@ class Application(Gtk.Application):
 
         self.clear_layout()
 
-        view = views.medicines.View(self.window)
+        view = views.medicines.View(self.window, param.get_int32())
         view.create_main_layout()
 
         # Set headbar button action
         self.window.refresh_view = view.refresh_grid
-
-        self.window.layout.show_all()
 
     def on_equipment(self, action, param):
         self.window.mode = "equipment"
@@ -525,7 +598,7 @@ class Application(Gtk.Application):
 
         self.clear_layout()
 
-        view = views.equipment.View(self.window)
+        view = views.equipment.View(self.window, param.get_int32())
         view.create_main_layout()
 
         # Set headbar button action
@@ -563,7 +636,7 @@ class Application(Gtk.Application):
 
         self.clear_layout()
 
-        view = views.laboratory.View(self.window)
+        view = views.laboratory.View(self.window, param.get_int32())
         view.create_main_layout()
 
         # Set headbar button action
@@ -577,16 +650,13 @@ class Application(Gtk.Application):
 
         self.clear_layout()
 
-        view = views.telemedical.View(self.window)
+        view = views.telemedical.View(self.window, param.get_int32())
         view.create_main_layout()
 
         # Set headbar button action
         self.window.refresh_view = view.refresh_grid
 
         self.window.layout.show_all()
-
-    def on_search(self, action, param):
-        log.info("Search!")
 
     def db_export(self, action, param):
         cls = views.developers.DatabaseExport(self.window)

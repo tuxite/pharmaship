@@ -1,0 +1,35 @@
+Source: pharmaship
+Section: utils
+Priority: optional
+Maintainer: Matthieu Morin <morinmatthieu@gmail.com>
+Build-Depends: debhelper-compat (= 12),
+               dh-python,
+               dh-virtualenv,
+               python3-all (>= 3.6),
+               python3-setuptools,
+               python3-docutils,
+               python3-sphinx,
+Standards-Version: 4.5.0
+Rules-Requires-Root: no
+Homepage: http://pharmaship.devmaretique.com/
+Testsuite: autopkgtest-pkg-python
+Vcs-Git: https://github.com/tuxite/pharmaship.git
+Vcs-Browser: https://github.com/tuxite/pharmaship
+X-Python3-Version: >= 3.6
+
+Package: pharmaship
+Architecture: all
+Depends:
+  python3-gnupg,
+  python3-gi,
+  python3-munch,
+  python3-cerberus,
+  python3-coloredlogs,
+  python3-pypdf2,
+  weasyprint,
+  ${misc:Depends}
+Description: A ship's pharmacy inventory software
+ Pharmaship allows the management of a merchant ship pharmacy, including
+ maintining the inventories of medicines, medical equipment, first aid kits,
+ rescue bags, telemedical and laboratory equipment.
+ .

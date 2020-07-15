@@ -1,0 +1,27 @@
+{
+  "data": {
+    "type": "dict",
+    "keysrules": {
+      "type": "integer",
+      "min": 0
+    },
+    "valuesrules": {
+      "type": "dict",
+      "schema": {
+        "name": {
+          "type": "string"
+        },
+        "location_id": {
+          "type": "integer",
+          "min": 100
+        },
+        "elements": {
+          "type": "list",
+          "schema": {
+            "type": "dict"
+          }
+        }
+      }
+    }
+  }
+}

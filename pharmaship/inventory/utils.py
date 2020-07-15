@@ -1,6 +1,5 @@
 # -*- coding: utf-8; -*-
 """Utility functions for model data handling."""
-import datetime
 import copy
 
 from pathlib import PurePath
@@ -10,6 +9,29 @@ import django.utils.text
 from mptt.utils import get_cached_trees
 
 from pharmaship.inventory import models
+
+
+def get_quantity(transaction_list, item_id):
+    """Get the item quantity from a transaction list.
+
+    Transactions of type 1 ("in") or 8 ("stock count") are setters.
+    Other types are decreasing the value.
+
+    :param django.db.models.query.QuerySet transaction_list: List of \
+    transactions :class:`pharmaship.inventory.models.QtyTransaction`.
+    :param int item_id: ID of item
+
+    :return: Quantity of item
+    :rtype: int
+    """
+    result = 0
+    for transaction in transaction_list:
+        if transaction.object_id == item_id:
+            if transaction.transaction_type in [1, 8]:
+                result = transaction.value
+            else:
+                result -= transaction.value
+    return result
 
 
 def req_qty_element(element, req_qty_list):

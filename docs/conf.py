@@ -44,7 +44,13 @@ extensions = [
   'sphinx.ext.coverage',
   'sphinx.ext.autosummary',
   'sphinx.ext.autosectionlabel',
+  'sphinx.ext.intersphinx',
 ]
+
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'django': ('http://docs.djangoproject.com/en/dev/', 'http://docs.djangoproject.com/en/dev/_objects/')
+    }
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

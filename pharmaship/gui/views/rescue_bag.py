@@ -2,7 +2,7 @@
 """RescueBag GTK view."""
 import gi
 gi.require_version("Gtk", "3.0")  # noqa: E402
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 
 from django.utils.translation import gettext as _
 
@@ -12,8 +12,7 @@ from pharmaship.inventory.models import RescueBag, Location
 from pharmaship.inventory.forms import RescueBagForm
 from pharmaship.inventory.parsers.rescue_bag import parser
 
-from pharmaship.gui import utils
-from pharmaship.gui.utils import ButtonWithImage
+from pharmaship.gui import utils, widgets
 
 
 NC_TEXT_TEMPLATE = "<span foreground='darkred' weight='bold' style='normal'>{0} {1}</span>"
@@ -132,7 +131,7 @@ class View:
         top_grid.destroy()
 
         self.build_full_grid(child_builder, data["all"])
-        self.stack.add_titled(child, "all", _("All rescue bags"))
+        self.stack.add_titled(child, "all", _("All Rescue Bags"))
         self.children[0] = child_builder
 
     def build_full_grid(self, builder, data, toggle_row_num=None):
@@ -171,20 +170,14 @@ class View:
             if toggle_row_num and toggle_row_num == i:
                 toggle_item = element
 
-            box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-            button = Gtk.Button()
             label = Gtk.Label(element["name"], xalign=0)
             label.set_line_wrap(True)
             label.set_lines(1)
             label.set_line_wrap_mode(2)
-            button.add(label)
-            button.set_relief(Gtk.ReliefStyle.NONE)
-            button.get_style_context().add_class("item-cell-btn")
-            # button.get_style_context().add_class("item-cell")
-            button.connect("clicked", self.toggle_item, grid, element, i)
-            box.pack_start(button, True, True, 0)
-            box.get_style_context().add_class("item-cell-name")
-            grid.attach(box, 0, i, 1, 1)
+            label.get_style_context().add_class("item-cell")
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+            evbox.add(label)
+            grid.attach(evbox, 0, i, 1, 1)
 
             label = Gtk.Label(element["remark"], xalign=0)
             label.set_line_wrap(True)
@@ -192,7 +185,9 @@ class View:
             label.set_line_wrap_mode(2)
             label.get_style_context().add_class("item-cell")
             label.get_style_context().add_class("article-remark")
-            grid.attach(label, 1, i, 1, 1)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+            evbox.add(label)
+            grid.attach(evbox, 1, i, 1, 1)
 
             date_display = ""
             if len(element["exp_dates"]) > 0 and None not in element["exp_dates"]:
@@ -205,7 +200,9 @@ class View:
                 label.get_style_context().add_class("article-expired")
             elif element["has_date_warning"]:
                 label.get_style_context().add_class("article-warning")
-            grid.attach(label, 2, i, 1, 1)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+            evbox.add(label)
+            grid.attach(evbox, 2, i, 1, 1)
 
             label = Gtk.Label(xalign=0.5)
             label.set_markup("{0}<small>/{1}</small>".format(element["quantity"], element["required_quantity"]))
@@ -217,7 +214,9 @@ class View:
             # If quantity is less than required, affect corresponding style
             if element["quantity"] < element["required_quantity"]:
                 label.get_style_context().add_class("article-expired")
-            grid.attach(label, 3, i, 1, 1)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+            evbox.add(label)
+            grid.attach(evbox, 3, i, 1, 1)
 
             # Set tooltip to give information on allowances requirements
             tooltip_text = []
@@ -230,17 +229,20 @@ class View:
                 linked_btn = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
                 linked_btn.get_style_context().add_class("linked")
                 linked_btn.get_style_context().add_class("article-item-buttons")
-                # linked_btn.set_halign(Gtk.Align.END)
-                grid.attach(linked_btn, 4, i, 1, 1)
+                evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+                evbox.add(linked_btn)
+                grid.attach(evbox, 4, i, 1, 1)
 
                 # Picture
                 picture = element["picture"]
-                btn_picture = ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+                btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
                 linked_btn.pack_end(btn_picture, False, True, 0)
             else:
                 label = Gtk.Label("", xalign=0.5)
                 label.get_style_context().add_class("item-cell")
-                grid.attach(label, 4, i, 1, 1)
+                evbox = widgets.EventBox(element, self.toggle_item, 5, i)
+                evbox.add(label)
+                grid.attach(evbox, 4, i, 1, 1)
 
         # Toggle if active
         if toggle_row_num and toggle_item:
@@ -328,20 +330,14 @@ class View:
             if toggle_row_num and toggle_row_num == i:
                 toggle_item = element
 
-            box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-            button = Gtk.Button()
             label = Gtk.Label(element["name"], xalign=0)
             label.set_line_wrap(True)
             label.set_lines(1)
             label.set_line_wrap_mode(2)
-            button.add(label)
-            button.set_relief(Gtk.ReliefStyle.NONE)
-            button.get_style_context().add_class("item-cell-btn")
-            # button.get_style_context().add_class("item-cell")
-            button.connect("clicked", self.toggle_item, grid, element, i, bag.id)
-            box.pack_start(button, True, True, 0)
-            box.get_style_context().add_class("item-cell-name")
-            grid.attach(box, 0, i, 1, 1)
+            label.get_style_context().add_class("item-cell")
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
+            evbox.add(label)
+            grid.attach(evbox, 0, i, 1, 1)
 
             label = Gtk.Label(element["remark"], xalign=0)
             label.set_line_wrap(True)
@@ -349,7 +345,9 @@ class View:
             label.set_line_wrap_mode(2)
             label.get_style_context().add_class("item-cell")
             label.get_style_context().add_class("article-remark")
-            grid.attach(label, 1, i, 1, 1)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
+            evbox.add(label)
+            grid.attach(evbox, 1, i, 1, 1)
 
             date_display = ""
             if len(element["exp_dates"]) > 0 and None not in element["exp_dates"]:
@@ -362,7 +360,9 @@ class View:
                 label.get_style_context().add_class("article-expired")
             elif element["has_date_warning"]:
                 label.get_style_context().add_class("article-warning")
-            grid.attach(label, 2, i, 1, 1)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
+            evbox.add(label)
+            grid.attach(evbox, 2, i, 1, 1)
 
             label = Gtk.Label(element["quantity"], xalign=0.5)
             label.get_style_context().add_class("item-cell")
@@ -370,8 +370,9 @@ class View:
             # Change style if equipment has articles with non-conformity
             if element["has_nc"]:
                 label.get_style_context().add_class("item-nc-quantity")
-            # If quantity is less than required, affect corresponding style
-            grid.attach(label, 3, i, 1, 1)
+            evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
+            evbox.add(label)
+            grid.attach(evbox, 3, i, 1, 1)
 
             # Set tooltip to give information on allowances requirements
             tooltip_text = []
@@ -384,17 +385,20 @@ class View:
                 linked_btn = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
                 linked_btn.get_style_context().add_class("linked")
                 linked_btn.get_style_context().add_class("equipment-item-buttons")
-                # linked_btn.set_halign(Gtk.Align.END)
-                grid.attach(linked_btn, 4, i, 1, 1)
+                evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
+                evbox.add(linked_btn)
+                grid.attach(evbox, 4, i, 1, 1)
 
                 # Picture
                 picture = element["picture"]
-                btn_picture = ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+                btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
                 linked_btn.pack_end(btn_picture, False, True, 0)
             else:
                 label = Gtk.Label("", xalign=0.5)
                 label.get_style_context().add_class("item-cell")
-                grid.attach(label, 4, i, 1, 1)
+                evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
+                evbox.add(label)
+                grid.attach(evbox, 4, i, 1, 1)
 
         # Toggle if active
         if toggle_row_num and toggle_item:
@@ -412,12 +416,18 @@ class View:
     def toggle_item(self, source, grid, element, row_num, bag_id=0):
         # If already toggled, destroy the toggled part
         if self.toggled[bag_id] and self.toggled[bag_id][0] > 0:
+            # Remove the active-row CSS class of the parent item
+            utils.grid_row_class(grid, self.toggled[bag_id][0] - 1, 5, False)
+
             for i in range(self.toggled[bag_id][1] - self.toggled[bag_id][0] + 1):
                 grid.remove_row(self.toggled[bag_id][0])
             # No need to recreate the widget, we just want to hide
             if row_num + 1 == self.toggled[bag_id][0]:
                 self.toggled[bag_id] = False
                 return True
+
+        # Add the active-row CSS class
+        utils.grid_row_class(grid, row_num, 5)
 
         # Need to create the content
         new_row = row_num + 1
@@ -509,9 +519,11 @@ class View:
         button.get_style_context().add_class("article-btn-add")
         if element["type"] == "molecule":
             button.set_action_name("app.medicines")
+            button.set_action_target_value(GLib.Variant("i", element["id"]))
             label = Gtk.Label(_("Update in the medicine view"), xalign=0)
         elif element["type"] == "equipment":
             button.set_action_name("app.equipment")
+            button.set_action_target_value(GLib.Variant("i", element["id"]))
             label = Gtk.Label(_("Update in the equipment view"), xalign=0)
         else:
             label = Gtk.Label(_("Edit this item in the dedicated view"), xalign=0)

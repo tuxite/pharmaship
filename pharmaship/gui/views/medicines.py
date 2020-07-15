@@ -12,7 +12,7 @@ from pharmaship.inventory import forms
 from pharmaship.inventory.parsers.medicines import parser
 
 from pharmaship.gui import utils
-from pharmaship.gui.utils import ButtonWithImage, EntryMasked
+from pharmaship.gui import widgets
 
 
 DATE_MASK = {
@@ -26,12 +26,17 @@ NC_TEXT_TEMPLATE = "<span foreground='darkred' weight='bold' style='normal'>{0} 
 
 
 class View:
-    def __init__(self, window):
+    def __init__(self, window, chosen=None):
         self.window = window
         self.params = window.params
         self.builder = window.builder
         # For recording the open molecules in the grid
         self.toggled = False
+
+        self.chosen = None
+        self.row_widget_num = None
+        if isinstance(chosen, int):
+            self.chosen = chosen
 
     def refresh_grid(self):
         # Get present scroll position
@@ -49,6 +54,8 @@ class View:
 
         # Reset toggled value
         self.toggled = False
+        self.chosen = None
+        self.row_widget_num = None
 
         # Re-create the Grid and attach it to the viewport
         grid = self.create_grid(toggle_row_num)
@@ -108,32 +115,34 @@ class View:
                 # when all construction is done, call toggle_medicine function.
                 if toggle_row_num and toggle_row_num == i:
                     toggle_molecule = molecule
+                if self.chosen and self.chosen == molecule["id"]:
+                    toggle_molecule = molecule
+                    toggle_row_num = i
+                    self.row_widget_num = i
 
-                box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-                button = Gtk.Button()
                 label = Gtk.Label(molecule["name"], xalign=0)
                 label.set_line_wrap(True)
                 label.set_lines(1)
                 label.set_line_wrap_mode(2)
-                button.add(label)
-                button.set_relief(Gtk.ReliefStyle.NONE)
-                button.get_style_context().add_class("item-cell-btn")
-                # button.get_style_context().add_class("item-cell")
-                button.connect("clicked", self.toggle_medicine, grid, molecule, i)
-                box.pack_start(button, True, True, 0)
-                box.get_style_context().add_class("item-cell-name")
-                grid.attach(box, 0, i, 1, 1)
+                label.get_style_context().add_class("item-cell")
+                evbox = widgets.EventBox(molecule, self.toggle_medicine, 7, i)
+                evbox.add(label)
+                grid.attach(evbox, 0, i, 1, 1)
 
                 label = Gtk.Label(molecule["roa"], xalign=0)
                 label.get_style_context().add_class("item-cell")
-                grid.attach(label, 1, i, 1, 1)
+                evbox = widgets.EventBox(molecule, self.toggle_medicine, 7, i)
+                evbox.add(label)
+                grid.attach(evbox, 1, i, 1, 1)
 
                 label = Gtk.Label("{0} ({1})".format(molecule["dosage_form"], molecule["composition"]), xalign=0)
                 label.get_style_context().add_class("item-cell")
                 label.set_line_wrap(True)
                 label.set_lines(1)
                 label.set_line_wrap_mode(2)
-                grid.attach(label, 2, i, 1, 1)
+                evbox = widgets.EventBox(molecule, self.toggle_medicine, 7, i)
+                evbox.add(label)
+                grid.attach(evbox, 2, i, 1, 1)
 
                 # Get list of locations
                 locations_len = len(molecule["locations"])
@@ -150,7 +159,9 @@ class View:
                 label.set_lines(1)
                 label.set_line_wrap_mode(2)
                 label.get_style_context().add_class("item-cell")
-                grid.attach(label, 3, i, 1, 1)
+                evbox = widgets.EventBox(molecule, self.toggle_medicine, 7, i)
+                evbox.add(label)
+                grid.attach(evbox, 3, i, 1, 1)
 
                 # Get first expiry date
                 date_display = ""
@@ -158,16 +169,22 @@ class View:
                     date_display = min(molecule["exp_dates"]).strftime("%Y-%m-%d")
 
                 label = Gtk.Label(date_display, xalign=0.5)
+                # label.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+                # label.connect('button-press-event', utils.widget_clicked, molecule, self.toggle_medicine)
                 label.get_style_context().add_class("item-cell")
                 label.get_style_context().add_class("text-mono")
                 if molecule["has_date_expired"]:
                     label.get_style_context().add_class("medicine-expired")
                 elif molecule["has_date_warning"]:
                     label.get_style_context().add_class("medicine-warning")
-                grid.attach(label, 4, i, 1, 1)
+                evbox = widgets.EventBox(molecule, self.toggle_medicine, 7, i)
+                evbox.add(label)
+                grid.attach(evbox, 4, i, 1, 1)
 
                 # label = Gtk.Label("{0}/{1}".format(molecule["quantity"], molecule["required_quantity"]), xalign=0.5)
                 label = Gtk.Label(xalign=0.5)
+                # label.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
+                # label.connect('button-release-event', utils.widget_clicked, molecule, self.toggle_medicine)
                 label.set_markup("{0}<small>/{1}</small>".format(molecule["quantity"], molecule["required_quantity"]))
                 label.get_style_context().add_class("item-cell")
                 label.get_style_context().add_class("text-mono")
@@ -177,7 +194,9 @@ class View:
                 # If quantity is less than required, affect corresponding style
                 if molecule["quantity"] < molecule["required_quantity"]:
                     label.get_style_context().add_class("medicine-expired")
-                grid.attach(label, 5, i, 1, 1)
+                evbox = widgets.EventBox(molecule, self.toggle_medicine, 7, i)
+                evbox.add(label)
+                grid.attach(evbox, 5, i, 1, 1)
 
                 # Set tooltip to give information on allowances requirements
                 tooltip_text = []
@@ -188,7 +207,9 @@ class View:
                 # Empty item for styling purpose
                 label = Gtk.Label("", xalign=0.5)
                 label.get_style_context().add_class("item-cell")
-                grid.attach(label, 6, i, 1, 1)
+                evbox = widgets.EventBox(molecule, self.toggle_medicine, 7, i)
+                evbox.add(label)
+                grid.attach(evbox, 6, i, 1, 1)
 
         # Toggle if active
         if toggle_row_num and toggle_molecule:
@@ -205,8 +226,22 @@ class View:
         # No overlay of the scrollbar
         self.scrolled.props.overlay_scrolling = False
         self.window.layout.pack_start(self.scrolled, True, True, 0)
+
         grid = self.create_grid()
-        self.scrolled.add(grid)
+
+        viewport = Gtk.Viewport()
+        viewport.add(grid)
+
+        self.scrolled.add(viewport)
+
+        vadjust = viewport.get_vadjustment()
+        grid.set_focus_vadjustment(vadjust)
+
+        self.window.layout.show_all()
+
+        # Change Gtk Alignment if a widget is selected
+        if self.row_widget_num:
+            self.scrolled.connect("draw", utils.set_focus, self.row_widget_num)
 
     def dialog_use(self, source, medicine):
         builder = Gtk.Builder.new_from_file(utils.get_template("medicine_use.glade"))
@@ -267,7 +302,7 @@ class View:
 
         # exp_date = builder.get_object("exp_date")
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, EntryMasked(mask=DATE_MASK))
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
         builder.expose_object("exp_date", exp_date)
         date_display = medicine["exp_date"].strftime("%Y-%m-%d")
         exp_date.get_buffer().set_text(date_display, len(date_display))
@@ -353,7 +388,7 @@ class View:
 
         # Expiry date input mask workaround
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, EntryMasked(mask=DATE_MASK))
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
         # exp_date.connect("activate", self.response_add, dialog, molecule, builder)
         builder.expose_object("exp_date", exp_date)
 
@@ -545,16 +580,20 @@ class View:
         self.refresh_grid()
 
     def toggle_medicine(self, source, grid, molecule, row_num):
-        # log.info("Molecule clicked: %s", molecule)
-
         # If already toggled, destroy the toggled part
         if self.toggled and self.toggled[0] > 0:
+            # Remove the active-row CSS class of the parent item
+            utils.grid_row_class(grid, self.toggled[0] - 1, 7, False)
+
             for i in range(self.toggled[1] - self.toggled[0] + 1):
                 grid.remove_row(self.toggled[0])
             # No need to recreate the widget, we just want to hide
             if row_num + 1 == self.toggled[0]:
                 self.toggled = False
                 return True
+
+        # Add the active-row CSS class
+        utils.grid_row_class(grid, row_num, 7)
 
         # Need to create the content
         new_row = row_num + 1
@@ -660,13 +699,13 @@ class View:
             grid.attach(linked_btn, 6, i, 1, 1)
 
             # Use
-            btn_use = ButtonWithImage("edit-redo-symbolic", tooltip=_("Use"), connect=self.dialog_use, data=medicine)
+            btn_use = widgets.ButtonWithImage("edit-redo-symbolic", tooltip=_("Use"), connect=self.dialog_use, data=medicine)
             linked_btn.pack_end(btn_use, False, True, 0)
             # Modify
-            btn_modify = ButtonWithImage("document-edit-symbolic", tooltip=_("Modify"), connect=self.dialog_modify, data=medicine)
+            btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip=_("Modify"), connect=self.dialog_modify, data=medicine)
             linked_btn.pack_end(btn_modify, False, True, 0)
             # Delete
-            btn_delete = ButtonWithImage("edit-delete-symbolic", tooltip=_("Delete"), connect=self.dialog_delete, data=medicine)
+            btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip=_("Delete"), connect=self.dialog_delete, data=medicine)
             btn_delete.get_style_context().add_class("medicine-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 

@@ -2,11 +2,9 @@
 """Utilities for Pharmaship GUI."""
 import gi
 gi.require_version("Gtk", "3.0")  # noqa: E402
-from gi.repository import Gtk, Gio, GObject, GdkPixbuf
+from gi.repository import Gtk, GObject, GdkPixbuf
 
 import os.path
-import re
-import datetime
 import platform
 import subprocess
 
@@ -47,6 +45,18 @@ def grid_replace(old_widget, new_widget):
     return new_widget
 
 
+def grid_row_class(grid, row_num, width, add=True):
+    """Change the class of a row in the grod."""
+    if add:
+        for i in range(width):
+            widget = grid.get_child_at(i, row_num)
+            widget.get_style_context().add_class("active-row")
+    else:
+        for i in range(width):
+            widget = grid.get_child_at(i, row_num)
+            widget.get_style_context().remove_class("active-row")
+
+
 def error_field_changed(source):
     if isinstance(source, Gtk.Entry):
         source.set_icon_from_icon_name(1, None)
@@ -60,9 +70,7 @@ def error_field_changed(source):
         source.get_style_context().remove_class("error-textview")
 
     # Remove this signal
-    signal_id = GObject.signal_lookup("changed", source.__class__)
-    handler_id = GObject.signal_handler_find(source, GObject.SignalMatchType.ID, signal_id, 0, None, 0, 0)
-    source.disconnect(handler_id)
+    disconnect_signal(source, "changed")
 
 
 def set_errors(form, builder, fields):
@@ -275,104 +283,22 @@ def open_file(filename):
             subprocess.call(('xdg-open', filename))
 
 
-def ButtonWithImage(image_name, btn_class=None, tooltip=None, action=None, connect=None, data=None):
-    if btn_class:
-        button = btn_class()
-    else:
-        button = Gtk.Button()
-
-    if tooltip and isinstance(tooltip, str):
-        button.set_tooltip_text(tooltip)
-
-    icon = Gio.ThemedIcon(name=image_name)
-    image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
-    button.add(image)
-    if action and isinstance(action, str):
-        button.set_action_name(action)
-
-    if connect:
-        button.connect("clicked", connect, data)
-    return button
+def disconnect_signal(source, signal):
+    signal_id = GObject.signal_lookup(signal, source.__class__)
+    handler_id = GObject.signal_handler_find(source, GObject.SignalMatchType.ID, signal_id, 0, None, 0, 0)
+    source.disconnect(handler_id)
 
 
-# Custom Gtk widgets
-# class ListBoxRowWithData(Gtk.ListBoxRow):
-#     def __init__(self, data):
-#         super(Gtk.ListBoxRow, self).__init__()
-#         self.data = data
-#         self.show = False
+def set_focus(source, event, row_num):
+    viewport = source.get_children()[0]
+    grid = viewport.get_children()[0]
+    vadjust = viewport.get_vadjustment()
+    # Get the corresponding widget
+    widget = grid.get_child_at(0, row_num)
+    widget.set_can_focus(True)
+    widget.grab_focus()
+    # Put this widget on top of the view
+    vadjust.set_value(widget.get_allocation().y)
 
-
-class EntryMasked(Gtk.Entry, Gtk.Editable):
-    """Gtk.Entry with text mask implementation."""
-    def __init__(self, mask, activate_cb=None):
-        super().__init__()
-        self.mask = mask
-        self.mask_text = mask["format"]
-        self.mask_length = len(mask["format"])
-
-        if "allowed_chars" not in mask:
-            self.allowed = None
-        else:
-            self.allowed = mask["allowed_chars"]
-
-        # Activate callback (as this parameter is not accessible from the
-        # parent object.
-        if activate_cb:
-            if isinstance(activate_cb, tuple):
-                self.connect("activate", *activate_cb)
-            else:
-                self.connect("activate", activate_cb)
-
-    def add_one_more(self, text, length, character):
-        if (length + 1) > self.mask_length:
-            return text
-
-        if self.mask_text[length] == "_":
-            return text + character
-
-        text += self.mask_text[length]
-        return self.add_one_more(text, length + 1, character)
-
-    def do_insert_text(self, new_text, length, position):
-
-        previous_text = self.get_text()
-        previous_length = len(previous_text)
-
-        added_text = ""
-        for i in range(length):
-            if self.allowed and new_text[i] not in self.allowed:
-                continue
-
-            if (previous_length + i + 1) > self.mask_length:
-                return position
-
-            added_text += self.add_one_more(added_text, previous_length + i, new_text[i])
-
-        # Final modification
-        self.get_buffer().insert_text(position, added_text, len(added_text))
-
-        # Check regex and change style if invalid
-        self.set_icon_from_icon_name(1, None)
-        self.set_icon_tooltip_markup(1, None)
-        self.get_style_context().remove_class("error")
-        # if len(previous_text + added_text) == self.mask_length:
-        if len(self.get_text()) == self.mask_length:
-            if not self.check_value(previous_text + added_text):
-                self.get_style_context().add_class("error")
-                self.set_icon_from_icon_name(1, "error")
-                self.set_icon_tooltip_markup(1, _("Invalid date input"))
-        return position + len(added_text)
-
-    def check_value(self, text):
-        if "regex" in self.mask and self.mask["regex"] is not None:
-            return re.match(self.mask["regex"], text)
-
-        if "datetime" in self.mask and self.mask["datetime"] is not None:
-            try:
-                datetime.datetime.strptime(text, self.mask["datetime"])
-            except ValueError:
-                return False
-
-        # Nothing special...
-        return True
+    # Disconnect this signal otherwise the view is unusable
+    disconnect_signal(source, "draw")

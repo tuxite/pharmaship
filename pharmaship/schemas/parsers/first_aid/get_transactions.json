@@ -1,0 +1,13 @@
+{
+  "data": {
+    "type": "dict",
+    "keysrules": {
+      "type": "integer",
+      "min": 0
+    },
+    "valuesrules": {
+      "type": "integer",
+      "min": 0
+    }
+  }
+}

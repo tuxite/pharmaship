@@ -12,3 +12,12 @@ Reference
 
    inventory/models
    inventory/utils
+   inventory/import_data
+   inventory/search
+
+   inventory/parsers/equipment
+   inventory/parsers/medicines
+   inventory/parsers/laboratory
+   inventory/parsers/telemedical
+   inventory/parsers/rescue_bag
+   inventory/parsers/first_aid

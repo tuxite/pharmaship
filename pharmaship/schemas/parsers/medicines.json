@@ -1,0 +1,132 @@
+{
+  "data": {
+    "type": "list",
+    "schema": {
+      "type": "dict",
+      "schema": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "roa": {
+          "type": "string"
+        },
+        "dosage_form": {
+          "type": "string"
+        },
+        "medicine_list": {
+          "type": "string",
+          "nullable": true
+        },
+        "composition": {
+          "type": "string"
+        },
+        "remark": {
+          "type": "string",
+          "nullable": true
+        },
+        "tag": {},
+        "locations": {
+          "type": "list",
+          "schema": {
+            "type": "string"
+          }
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "required_quantity": {
+          "type": "integer"
+        },
+        "allowance": {},
+        "medicines": {
+          "type": "list",
+          "schema": {
+            "type": "dict",
+            "schema": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "exp_date": {
+                "type": "date"
+              },
+              "nc_composition": {
+                "type": "string",
+                "nullable": true
+              },
+              "nc_molecule": {
+                "type": "string",
+                "nullable": true
+              },
+              "expired": {
+                "type": "boolean"
+              },
+              "warning": {
+                "type": "boolean"
+              },
+              "location": {
+                "type": "dict",
+                "schema": {
+                  "sequence": {
+                    "type": "list",
+                    "schema": {
+                      "type": "string"
+                    }
+                  },
+                  "id": {
+                    "type": "integer"
+                  },
+                  "parent": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "rescue_bag": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "molecule": {
+                "type": "dict",
+                "schema": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "remark": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        },
+        "exp_dates": {
+          "type": "list",
+          "schema": {
+            "type": "date"
+          }
+        },
+        "has_nc": {
+          "type": "boolean"
+        },
+        "has_date_warning": {
+          "type": "boolean"
+        },
+        "has_date_expired": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

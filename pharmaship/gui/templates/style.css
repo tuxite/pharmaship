@@ -195,3 +195,57 @@
 .dashboard-section {
   color: royalblue;
 }
+
+.popover-search {
+  padding: .5em;
+}
+
+.search-other-names {
+  font-style: italic;
+  font-size: 10pt;
+  /* color: gray; */
+}
+
+.search-group {
+  color: @insensitive_fg_color;
+  font-size: 10pt;
+}
+
+.search-item-type {
+  font-variant: small-caps;
+  font-size: 10pt;
+  color: darkblue;
+}
+
+.header-cell-box {
+  font-weight: bold;
+  padding: .3em;
+  color: #eee;
+  background-color: #333;
+  border-bottom: solid 1px white;
+}
+
+.header-cell-btn {
+  padding: .2em;
+  padding-left: .5em;
+  padding-right: .5em;
+  color: #eee;
+  background-color: #333;
+  margin: 0;
+  border: 1px solid #eee;
+}
+
+.header-cell-btn:hover {
+  color: #333;
+  background-color: #eee;
+}
+
+.clickable-row {
+  color: #333;
+  background-color: #eee;
+}
+
+.active-row {
+  color: #000;
+  background-color: #fce94f;
+}

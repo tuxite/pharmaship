@@ -151,12 +151,20 @@ docs/build/
 *.exe
 *.gpg
 *.kbx
+*.bak
 
 old/
 documents/
 backups/
 allowances/
-deb/
 
 bin/private*
 bin/openpgp*
+
+# Debian packaging
+debian/*.substvars
+debian/*.debhelper
+debian/debhelper-build-stamp
+debian/pharmaship
+debian/files
+debian/tmp

@@ -1,0 +1,52 @@
+- model: inventory.moleculegroup
+  pk: 1
+  fields:
+    name: Cardiologie
+    order: 1
+
+- fields:
+    composition: 300 mg
+    dosage_form: 6
+    group:
+    - Cardiologie
+    medicine_list: 0
+    name: "Acide ac\xE9tylsalicylique"
+    remark: null
+    roa: 1
+  model: inventory.molecule
+
+- model: inventory.medicine
+  pk: 1
+  fields:
+    name: "Acide ac\xE9tylsalicylique"
+    exp_date: 2020-07-31
+    used: false
+    remark: ''
+    location: 1
+    parent: 1
+    nc_molecule: ''
+    nc_composition: ''
+
+- model: inventory.medicine
+  pk: 2
+  fields:
+    name: "Aspégic 1000"
+    exp_date: 2020-10-31
+    used: false
+    remark: ''
+    location: 2
+    parent: 1
+    nc_molecule: ''
+    nc_composition: '1000 mg'
+
+- model: inventory.medicine
+  pk: 2
+  fields:
+    name: "Kardégic"
+    exp_date: 2020-12-31
+    used: false
+    remark: ''
+    location: 3
+    parent: 1
+    nc_molecule: ''
+    nc_composition: ''

@@ -1,0 +1,119 @@
+{
+  "id": {
+    "type": "integer",
+    "min": 0
+  },
+  "name": {
+    "type": "string"
+  },
+  "required_quantity": {
+    "type": "integer",
+    "min": 0
+  },
+  "quantity": {
+    "type": "integer",
+    "min": 0
+  },
+  "allowance": {
+    "type": "list",
+    "nullable": true,
+    "schema": {
+      "type": "dict",
+      "schema": {
+        "name": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": ["integer", "string"]
+        }
+      }
+    }
+  },
+  "remark": {
+    "type": "string",
+    "nullable": true
+  },
+  "picture": {
+    "type": "image_field",
+    "nullable": true
+  },
+  "contents": {
+    "type": "list",
+    "schema": {
+      "type": "dict",
+      "schema": {
+        "name": {
+          "type": "string"
+        },
+        "exp_date": {
+          "type": "date",
+          "nullable": true
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "warning": {
+          "type": "boolean"
+        },
+        "expired": {
+          "type": "boolean"
+        },
+        "remark": {
+          "type": "string",
+          "nullable": true
+        },
+        "location": {
+          "type": "integer"
+        },
+        "nc": {
+          "type": "dict",
+          "schema": {
+            "composition": {
+              "type": "string",
+              "nullable": true
+            },
+            "molecule": {
+              "type": "string",
+              "nullable": true
+            },
+            "packaging": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "consumable": {
+    "type": "boolean"
+  },
+  "perishable": {
+    "type": "boolean"
+  },
+  "exp_dates": {
+    "type": "list",
+    "schema": {
+      "type": "date"
+    }
+  },
+  "has_nc": {
+    "type": "boolean"
+  },
+  "has_date_warning": {
+    "type": "boolean"
+  },
+  "has_date_expired": {
+    "type": "boolean"
+  },
+  "locations": {
+    "type": "list",
+    "schema": {
+      "type": "integer"
+    }
+  },
+  "type": {
+      "type": "string",
+      "allowed": ["molecule", "equipment"]
+    }
+}

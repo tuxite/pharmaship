@@ -1,21 +1,10 @@
 Development
 ===========
 
-Set-up Python Environment
--------------------------
+.. toctree::
+   :maxdepth: 2
 
-
-Build on Windows
-----------------
-
-
-Translate
----------
-
-
-Create Windows Installer
-------------------------
-
-
-Create Debian package
----------------------
+   python_env
+   translate
+   build_win_installer
+   build_deb

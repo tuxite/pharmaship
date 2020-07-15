@@ -1,22 +1,33 @@
 # -*- coding: utf-8; -*-
 """Import methods for Inventory application."""
-import os.path
+# import os.path
 import json
 
-from django.utils.translation import ugettext as _
-from django.core import serializers as core_serializers
+from pathlib import PurePath
+
+from django.core import serializers
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 
 from pharmaship.inventory import models
-from pharmaship.inventory import serializers
+# from pharmaship.inventory import serializers
 
 from pharmaship.core.utils import log, query_count_all
 
 
 def pictures_files(members):
+    """Change the picture path in TarInfo instance.
+
+    :param list(tarfile.TarInfo) members: files in the tar file.
+
+    :return: An iterator with tar file members containing ``pictures`` as\
+    first path part.
+    """
     for tarinfo in members:
-        path_strings = os.path.split(tarinfo.name)
+        path_strings = PurePath(tarinfo.name).parts
+        if len(path_strings) < 2:
+            continue
+
         if path_strings[0] == "pictures":
             # Modify the path of the picture to manage later the full path
             tarinfo.name = path_strings[1]
@@ -24,6 +35,14 @@ def pictures_files(members):
 
 
 def update_allowance(allowance, key):
+    """Update or create an allowance instance from serialized allowance data.
+
+    :param models.Allowance allowance: Up-to-date Allowance instance.
+    :param str key: GPG key ID used for signing the package archive.
+
+    :return: the updated (or create) allowance instance
+    :rtype: models.Allowance
+    """
     log.debug("Allowance name: %s", allowance.name)
 
     allowance_dict = allowance.__dict__
@@ -44,7 +63,14 @@ def update_allowance(allowance, key):
 
 
 def get_file(filename, tar):
-    """Extract `filename` from `tar` file."""
+    """Extract a file from a tar archive.
+
+    :param str filename: Filename to extract from tar file.
+    :param tarfile.TarFile tar: tar file instance.
+
+    :return: Content of the file or ``False`` if the file cannot be accessed.
+    :rtype: bytes or bool
+    """
     try:
         fdesc = tar.extractfile(filename)
     except KeyError:
@@ -55,12 +81,22 @@ def get_file(filename, tar):
 
 
 def get_model(data):
+    """Return the related ContentType from `data`.
+
+    :param dict data: Dictionnary containing at least following keys:
+
+      * ``app_label``: the application name,
+      * ``name``: the name of the model
+
+    :return: The Django ContentType instance or ``None`` if it does not exist.
+    :rtype: django.contrib.contenttypes.models.ContentType or None
+    """
     try:
         ct = ContentType.objects.get_by_natural_key(
             app_label=data["app_label"],
             model=data["name"]
         )
-    except ContentType.objects.DoesNotExist:
+    except ContentType.DoesNotExist:
         log.error("ContentType not found.")
         log.debug(data)
         return None
@@ -68,18 +104,65 @@ def get_model(data):
 
 
 def get_base(type, content, model=None):
+    """Return a model instance according to the type and model if provided.
+
+    If the `model` is not provided, it is retrieved from the `type` structure.
+    On some `model` (ie: :class:`pharmaship.inventory.models.RescueBagReqQty`),
+    the type can be either :class:`pharmaship.inventory.models.Equipment` or
+    :class:`pharmaship.inventory.models.Molecule`.
+
+    :param type: Model class of base field (Django internal).
+    :type type: models.Equipment or models.Molecule
+    :param dict content: Dictionnary with all natural key fields for the\
+    related base.
+    :param model: Model class of base item to serialize.
+    :type model: models.Equipment or models.Molecule
+
+    :return: A model instance or ``None`` if not found.
+    :rtype: models.Equipment or models.Molecule or None
+    """
     if not model:
-        model = type.field.related_model
-    instance = model.objects.get_by_natural_key(**content)
+        try:
+            model = type.field.related_model
+        except AttributeError as error:
+            log.error("Model class not found: %s", error)
+            return None
+    try:
+        instance = model.objects.get_by_natural_key(**content)
+    except model.DoesNotExist:
+        log.error("%s instance does not exist.", model)
+        log.debug(content)
+        return None
     return instance
 
 
 def deserialize_json_file(data, tar, allowance):
+    """Deserialize a JSON file contained in the tar file.
+
+    :param dict data: Dictionnary with filename and model related. The \
+    following keys must be present:
+
+      * ``filename``: the name of the JSON file to extract from the tar \
+      archive;
+      * ``model``: the class of model to deserialize \
+      (ie: :class:`pharmaship.inventory.models.MoleculeReqQty`).
+
+    :param tarfile.TarFile tar: tar file archive containing the file to extract
+    :param allowance: allowance instance to rattach
+    :type allowance: models.Allowance
+
+    :return: List of `model` instances.
+    :rtype: list
+    """
     content = get_file(data["filename"], tar)
     if not content:
         return False
 
-    item_data = json.loads(content)
+    try:
+        item_data = json.loads(content)
+    except json.decoder.JSONDecodeError as error:
+        log.error("Corrupted JSON file: %s", error)
+        return False
 
     objects = []
     for item in item_data:
@@ -98,6 +181,11 @@ def deserialize_json_file(data, tar, allowance):
                 model=ct.model_class()
                 )
 
+        if not base:
+            log.error("Base for item not found.")
+            log.debug(item)
+            return False
+
         instance = data["model"](
             allowance=allowance,
             base=base,
@@ -110,12 +198,32 @@ def deserialize_json_file(data, tar, allowance):
 
 
 def required_quantity(data, tar, allowance):
+    """Update the required quantities for deserialized items.
+
+    After successful deserialization, delete all related required quantity for
+    the selected allowance. Then create all deserialized objects.
+
+    :param dict data: Dictionnary with filename and model related. The \
+    following keys must be present:
+
+      * ``filename``: the name of the JSON file to extract from the tar \
+      archive;
+      * ``model``: the class of model to deserialize \
+      (ie: :class:`pharmaship.inventory.models.MoleculeReqQty`).
+
+    :param tarfile.TarFile tar: tar file archive containing the file to extract
+    :param allowance: allowance instance to rattach
+    :type allowance: models.Allowance
+
+    :return: ``True`` if there is no error, ``False`` otherwise.
+    :rtype: bool
+    """
     log.debug("Updating required quantities for %s", data["filename"])
-    # deserialized_list = deserialize_file(data["filename"], tar)
+
     deserialized_list = deserialize_json_file(data, tar, allowance)
 
     if deserialized_list is False:
-        log.error("Error when deserializing file: %", data["filename"])
+        log.error("Error when deserializing file: %s", data["filename"])
         return False
 
     # As we are sure that the deserialization went fine,
@@ -132,21 +240,38 @@ def required_quantity(data, tar, allowance):
 
 
 class DataImport:
-    """Class to import allowance inside the inventory module."""
+    """Class to import allowance inside the inventory module.
 
-    def __init__(self, tar, conf, key):
+    :param tarfile.TarFile tar: Tarfile data to import.
+    :param dict conf: Validated package configuration (not used).
+    :param dict key: GPG key data used for signing the package archive.
+    """
+
+    def __init__(self, tar, conf, key):  # noqa: D107
         self.tar = tar
-        self.conf = conf
         self.key = key
         self.data = []
         self.module_name = __name__.split('.')[-2]
 
     def import_allowance(self):
+        """Import an Allowance from a YAML file.
+
+        Update the :class:`pharmaship.inventory.models.Allowance` info or
+        create it from scratch.
+
+        :return: Allowance instance or ``False`` in case of import error.
+        :rtype: models.Allowance or bool
+        """
         content = get_file("inventory/allowance.yaml", self.tar)
         if not content:
             return False
 
-        deserialized_allowance = core_serializers.deserialize("yaml", content)
+        try:
+            deserialized_allowance = serializers.deserialize("yaml", content)
+            deserialized_allowance = list(deserialized_allowance)
+        except serializers.base.DeserializationError as error:
+            log.error("Cannot deserialize allowance: %s", error)
+            return False
 
         for allowance in deserialized_allowance:
             obj = update_allowance(allowance.object, self.key['keyid'][-8:])
@@ -155,11 +280,24 @@ class DataImport:
         return obj
 
     def import_molecule(self):
+        """Import Molecule objects from a YAML file.
+
+        Use Django's update_or_create method for
+        :class:`pharmaship.inventory.models.Molecule`.
+
+        :return: ``True`` if successful import, ``False`` otherwise.
+        :rtype: bool
+        """
         content = get_file("inventory/molecule_obj.yaml", self.tar)
         if not content:
             return False
 
-        deserialized_list = core_serializers.deserialize("yaml", content)
+        try:
+            deserialized_list = serializers.deserialize("yaml", content)
+            deserialized_list = list(deserialized_list)
+        except serializers.base.DeserializationError as error:
+            log.error("Cannot deserialize molecule objects: %s", error)
+            return False
 
         for molecule in deserialized_list:
             # Unique: (name, roa, dosage_form, composition)
@@ -193,11 +331,24 @@ class DataImport:
         return True
 
     def import_equipment(self):
+        """Import Equipment objects from a YAML file.
+
+        Use Django's update_or_create method for
+        :class:`pharmaship.inventory.models.Equipment`.
+
+        :return: ``True`` if successful import, ``False`` otherwise.
+        :rtype: bool
+        """
         content = get_file("inventory/equipment_obj.yaml", self.tar)
         if not content:
             return False
 
-        deserialized_list = core_serializers.deserialize("yaml", content)
+        try:
+            deserialized_list = serializers.deserialize("yaml", content)
+            deserialized_list = list(deserialized_list)
+        except serializers.base.DeserializationError as error:
+            log.error("Cannot deserialize equipment objects: %s", error)
+            return False
 
         for equipment in deserialized_list:
             # Unique: (name, packaging, perishable, consumable)
@@ -226,27 +377,34 @@ class DataImport:
     def update(self):
         """Launch the importation.
 
-        :model:`Molecule` and :mod:`Equipment` objects with
-        no allowance (orphan) are stored for further treatment.
-        :model:`Molecule` and :mod:`Equipment` are updated
-        or added (if their pk cannot be determined).
+        Import first the :class:`pharmaship.inventory.models.Allowance`.
+        Then, import all :class:`pharmaship.inventory.models.Molecule` and
+        :class:`pharmaship.inventory.models.Equipment` objects (update or
+        create them).
 
-        :model:`Allowance` object is updated or created by the
-        same process.
+        When this is done, parse each JSON file for required quantities:
 
-        :model:`MoleculeReqQty` and
-        :model:`EquipmentReqQty` are erased for the allowance
-        and re-created.
+        * :class:`pharmaship.inventory.models.MoleculeReqQty`
+        * :class:`pharmaship.inventory.models.EquipmentReqQty`
+        * :class:`pharmaship.inventory.models.RescueBagReqQty`
+        * :class:`pharmaship.inventory.models.FirstAidKitReqQty`
+        * :class:`pharmaship.inventory.models.LaboratoryReqQty`
+        * :class:`pharmaship.inventory.models.TelemedicalReqQty`
 
-        Finally, the new orphan molecules are affected to a special
-        allowance with 0 as required quantity.
+        :class:`pharmaship.inventory.models.Molecule` and
+        :class:`pharmaship.inventory.models.Equipment` objects without
+        required quantity after import are affected to the default
+        :class:`pharmaship.inventory.models.Allowance` (``id=0``) with a
+        required quantity of 0.
+
+        :return: ``True`` if import successful, ``False`` otherwise.
+        :rtype: bool
         """
         log.info("Inventory import...")
 
         # Detecting objects without allowance (orphan)
         self.no_allowance = models.Allowance.objects.get(pk=0)
         query_count_all()
-        self.files = self.tar.getnames()
 
         allowance = self.import_allowance()
         if not allowance:
@@ -266,32 +424,32 @@ class DataImport:
             {
                 "filename": "inventory/molecule_reqqty.json",
                 "model": models.MoleculeReqQty,
-                "serializer": serializers.MoleculeReqQtySerializer
+                # "serializer": serializers.MoleculeReqQtySerializer
             },
             {
                 "filename": "inventory/equipment_reqqty.json",
                 "model": models.EquipmentReqQty,
-                "serializer": serializers.EquipmentReqQtySerializer
+                # "serializer": serializers.EquipmentReqQtySerializer
             },
             {
                 "filename": "inventory/telemedical_reqqty.json",
                 "model": models.TelemedicalReqQty,
-                "serializer": serializers.TelemedicalReqQtySerializer
+                # "serializer": serializers.TelemedicalReqQtySerializer
             },
             {
                 "filename": "inventory/laboratory_reqqty.json",
                 "model": models.LaboratoryReqQty,
-                "serializer": serializers.LaboratoryReqQtySerializer
+                # "serializer": serializers.LaboratoryReqQtySerializer
             },
             {
                 "filename": "inventory/rescue_bag_reqqty.json",
                 "model": models.RescueBagReqQty,
-                "serializer": serializers.RescueBagReqQtySerializer
+                # "serializer": serializers.RescueBagReqQtySerializer
             },
             {
                 "filename": "inventory/first_aid_kit_reqqty.json",
                 "model": models.FirstAidKitReqQty,
-                "serializer": serializers.FirstAidKitReqQtySerializer
+                # "serializer": serializers.FirstAidKitReqQtySerializer
             },
         ]
 
