@@ -4,7 +4,10 @@
   * orphelins si `req_qty` supprimée
   * dotation désactivée
 * Traduction de l'interface sous Windows ? (locale)
-
+* Vessel settings
+  * ajouter fonction responsable des soins à bord
+  * son nom
+  * ajout de signature (png ou electronique ?)
 * Dashboard/Liste des médicaments arrivant à expiration : date (dans xx jours)
 
 # Fonctionnalités

@@ -1,13 +1,9 @@
 User Manual
 ===========
 
-First run
----------
+.. toctree::
+   :maxdepth: 2
 
-* Configure your vessel
+   installation
+   update
 
-* Configure your allowances
-
-
-Import/update allowances
-------------------------
