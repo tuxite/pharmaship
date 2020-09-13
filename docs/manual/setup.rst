@@ -44,6 +44,6 @@ the same way. To erase, click on the cross button, then validate on the sub wind
 
 Once all your locations are set up, you may proceed with updates of medicines.
 
-Initial inventory of medicines
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Initial inventory
+~~~~~~~~~~~~~~~~~
 
