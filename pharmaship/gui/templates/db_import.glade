@@ -7,9 +7,9 @@
       <mime-type>application/vnd.sqlite3</mime-type>
     </mime-types>
     <patterns>
-      <pattern>.sqlite3</pattern>
-      <pattern>.db</pattern>
-      <pattern>.bak</pattern>
+      <pattern>*.sqlite3</pattern>
+      <pattern>*.db</pattern>
+      <pattern>*.bak</pattern>
     </patterns>
   </object>
   <object class="GtkFileChooserDialog" id="dialog">
