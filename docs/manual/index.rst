@@ -5,5 +5,8 @@ User Manual
    :maxdepth: 2
 
    installation
-   update
+   setup
+   use
+   backup
+   trouble
 

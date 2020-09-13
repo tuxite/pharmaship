@@ -1,5 +1,5 @@
-Update your inventory
----------------------
+Setup your inventory
+--------------------
 
 When you install from scratch, and need to configure your database, before entering any medicines in there, you first
 need to configure your location, the shelve and drawer names you will use to tell to pharmaship where are stored your medical stuffs.
@@ -44,6 +44,6 @@ the same way. To erase, click on the cross button, then validate on the sub wind
 
 Once all your locations are set up, you may proceed with updates of medicines.
 
-Update medicines
-~~~~~~~~~~~~~~~~
+Initial inventory of medicines
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
