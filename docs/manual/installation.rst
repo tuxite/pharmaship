@@ -50,7 +50,7 @@ Allowances
 ++++++++++
 
 You should have allowances packets in your possession, if not you may download some from `Pharmaship/Allowance <https://www.dsm.com/pharmaship/allowances>`_.
-These files look like *A_type_version.tar.gz*, where *type* can be *GSMU* for instance, and *version* is the revision number.
+These files look like *A_type_version.tar.asc*, where *type* can be *GSMU* for instance, and *version* is the revision number.
 
 .. note:: These files are encrypted, using GnuPG public and private keys for signature validation from authors of packets. This is to ensure origin of data, and prove its integrity.
 
