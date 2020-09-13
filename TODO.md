@@ -1,20 +1,38 @@
 # Interface
-* `DateMask`: validation si seulement année-mois (et date à fin de mois)
+* `DateMask`: validation si seulement année-mois (et date à fin de mois ---> Non !)
 * Lister les items sans dotation:
   * orphelins si `req_qty` supprimée
   * dotation désactivée
+  * et si emplacement supprimé ?
+  
 * Traduction de l'interface sous Windows ? (locale)
+
 * Vessel settings
   * ajouter fonction responsable des soins à bord
-  * son nom
+  * + son nom
   * ajout de signature (png ou electronique ?)
+  
 * Dashboard/Liste des médicaments arrivant à expiration : date (dans xx jours)
+
+* Add theme for MACOS under GTK+ 'cause it is ugly on a MBP
 
 # Fonctionnalités
 * Export liste des médicaments à commander (txt, xlsx ?)
   * Multi modèle (templates)
+  
 * Affichage tableau de bord
   * Histogramme des expirations par mois ?
+
+* Histogramme des durées moyennes de péremption
+  * Durée de validité normal
+  * taux de remplacement
+  * taux de consommation
+  * durée effective de péremption
+  -> but voir si on nous envoie des presque périmés systématiquement
+  -> voir quels sont les médicaments effectivement consommés
+
+* Afficher les contacts CCMM
+  
 * Sources officielles
 
 # Code
