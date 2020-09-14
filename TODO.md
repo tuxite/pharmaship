@@ -32,6 +32,9 @@
   -> voir quels sont les médicaments effectivement consommés
 
 * Afficher les contacts CCMM
+
+* ajouter une interface web : la possibilité de broadcaster en réseau l'application, et de modifier les inventaires
+  -> analyser au préalable les risques de modifs involontaires, vérrouillage des accès config, identification...
   
 * Sources officielles
 
