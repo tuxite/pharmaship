@@ -21,4 +21,3 @@ Search functionality
 
 Dashboard
 ~~~~~~~~~
-
