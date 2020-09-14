@@ -1,8 +1,11 @@
 Daily use of Pharmaship
 -----------------------
 
-Generate requisition
+Set the expiry date
 ~~~~~~~~~~~~~~~~~~~
+
+Generate requisition
+~~~~~~~~~~~~~~~~~~~~
 
 Generate inventory
 ~~~~~~~~~~~~~~~~~~
@@ -10,8 +13,8 @@ Generate inventory
 Take out medicines
 ~~~~~~~~~~~~~~~~~~
 
-Make inventory
-~~~~~~~~~~~~~~
+Update inventory
+~~~~~~~~~~~~~~~~
 
 Search functionality
 ~~~~~~~~~~~~~~~~~~~~

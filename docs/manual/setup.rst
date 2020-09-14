@@ -60,6 +60,7 @@ In any software window, click on the blue button, whatever it says, then *Equipm
    :alt: Equipment Menu
 
 As there is no equipment already setup, you should arrive on the following page, showing an empty list of equipment.
+Equipments are coming from allowances you inserted during configuration step.
 
 .. image:: ../_static/manual/setup/equipmentpage.png
    :width: 600px
@@ -68,3 +69,36 @@ As there is no equipment already setup, you should arrive on the following page,
 
 .. TODO: liste d'équipement, ajouter : batterie de 9V, en spare, Lithium.
 
+When clicking on one line, it opens the named equipment inventory list as per below.
+
+.. image:: ../_static/manual/setup/equipmentinventory.png
+   :width: 600px
+   :align: center
+   :alt: Equipment Inventory
+
+To add an item, click on *add an article*. It will open the following sub-window.
+
+.. warning:: Shall an equipment be non compliant, it should be for a packaging issue. In the bottom of the window, you can comment the non compliant reason. For medicines, it can be molecules, or concentration issue, but you will be able to specify too.
+
+.. image:: ../_static/manual/setup/additemfilled.png
+   :width: 600px
+   :align: center
+   :alt: Add Item Filled
+
+Once your article is filled correctly, click on *add the article*. You can see below your article is registered.
+
+.. image:: ../_static/manual/setup/equipmentinventoryfilled.png
+   :width: 600px
+   :align: center
+   :alt: Equipment Inventory Filled
+
+Shall you click again on the line title (in yellow), it will reduce it, and you will see that there is location, expiry
+date and quantity which change.
+
+.. image:: ../_static/manual/setup/equipmentlist.png
+   :width: 600px
+   :align: center
+   :alt: Equipment List
+
+Do the same for all your equipment and medicines... Then you may proceed to backup menu, in order to avoid having doing
+it again! :-)
