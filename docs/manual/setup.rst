@@ -9,14 +9,14 @@ need to configure your location, the shelve and drawer names you will use to tel
 Configure your locations
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: ../_static/manual/update/locationmanager.png
+.. image:: ../_static/manual/setup/locationmanager.png
    :width: 600px
    :align: center
    :alt: Allowance Manager Button
 
 In any software window, open *Configuration Menu* then *Location Manager*.
 
-.. image:: ../_static/manual/update/locationmanagerinfo.png
+.. image:: ../_static/manual/setup/locationmanagerinfo.png
    :width: 600px
    :align: center
    :alt: Allowance Manager Info
@@ -28,7 +28,7 @@ there, simply click on *new location* button, located either in the top right co
 of the window. On the sub window which opens, select **hospital** as *parent* location, for a drawer in hospital, and
 put a name, like **Desk Drawer**. Click on *Add the location*.
 
-.. image:: ../_static/manual/update/locationmanageradd.png
+.. image:: ../_static/manual/setup/locationmanageradd.png
    :width: 600px
    :align: center
    :alt: Allowance Manager Add
@@ -37,7 +37,7 @@ Now it has been added, you can see that it appears in the list of locations - lu
 We can easily delete, or modify it with the button on the right end of its line, and to update, it appears exactly on
 the same way. To erase, click on the cross button, then validate on the sub window.
 
-.. image:: ../_static/manual/update/locationmanagerupdate.png
+.. image:: ../_static/manual/setup/locationmanagerupdate.png
    :width: 600px
    :align: center
    :alt: Allowance Manager Update
@@ -46,4 +46,25 @@ Once all your locations are set up, you may proceed with updates of medicines.
 
 Initial inventory
 ~~~~~~~~~~~~~~~~~
+
+Well, this might not be the funniest part, but new software for maintaining stock, and managing requisition, often
+means complete new inventory. So, here we are. It's time.
+
+Let's make a step by step example. To Update *equipment* first, let's go into its page.
+
+In any software window, click on the blue button, whatever it says, then *Equipment*.
+
+.. image:: ../_static/manual/setup/equipmentmenu.png
+   :width: 600px
+   :align: center
+   :alt: Equipment Menu
+
+As there is no equipment already setup, you should arrive on the following page, showing an empty list of equipment.
+
+.. image:: ../_static/manual/setup/equipmentpage.png
+   :width: 600px
+   :align: center
+   :alt: Equipment Page
+
+.. TODO: liste d'équipement, ajouter : batterie de 9V, en spare, Lithium.
 
