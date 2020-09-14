@@ -32,3 +32,10 @@ version, simply go on *Configuration* menu, then *Developer* and click on *Impor
    :width: 600px
    :align: center
    :alt: Import Backup Database Menu
+
+A sub-window is opening, asking you where to load your file from, select your backed up file.
+Then validate on the confirmation Window.
+
+.. Note:: In case of new installation of *Pharmaship*, there is absolutely no need for any kind of configuration. Once installation is done, directly recover your backup and simply check that there is no mistake in configuration.
+
+.. Todo: Vesssel configuration is not exported / imported during backup operation ?

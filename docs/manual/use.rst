@@ -19,3 +19,6 @@ Update inventory
 Search functionality
 ~~~~~~~~~~~~~~~~~~~~
 
+Dashboard
+~~~~~~~~~
+

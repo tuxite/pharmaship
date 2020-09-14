@@ -9,6 +9,8 @@ Depending on your system, you will have to use the following installer that you 
 
 Once successfully installed, you will be able to execute it for the first time and set all parameters.
 
+.. Note:: In case of new installation of *Pharmaship*, there is absolutely no need for any kind of configuration. Once installation is done, directly recover your backup and simply check that there is no mistake in configuration.
+
 Configure your vessel
 ~~~~~~~~~~~~~~~~~~~~~
 
