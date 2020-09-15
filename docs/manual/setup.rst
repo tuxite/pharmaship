@@ -67,8 +67,6 @@ Equipments are coming from allowances you inserted during configuration step.
    :align: center
    :alt: Equipment Page
 
-.. TODO: liste d'équipement, ajouter : batterie de 9V, en spare, Lithium.
-
 When clicking on one line, it opens the named equipment inventory list as per below.
 
 .. image:: ../_static/manual/setup/equipmentinventory.png

@@ -20,8 +20,6 @@ A sub-window is opening, asking you where to save your file, for instance, on De
    :align: center
    :alt: Save Backup
 
-.. TODO: L'adresse d'enregistrement des backup n'est pas prise en compte, au moins sous MacOS, ça part directement dans le dossier src de pharmaship.
-
 Import Data Base
 ~~~~~~~~~~~~~~~~
 
@@ -37,5 +35,3 @@ A sub-window is opening, asking you where to load your file from, select your ba
 Then validate on the confirmation Window.
 
 .. Note:: In case of new installation of *Pharmaship*, there is absolutely no need for any kind of configuration. Once installation is done, directly recover your backup and simply check that there is no mistake in configuration.
-
-.. Todo: Vesssel configuration is not exported / imported during backup operation ?

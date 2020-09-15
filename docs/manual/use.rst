@@ -64,8 +64,6 @@ quantity, and there is no color in that case.
    :align: center
    :alt: A Open
 
-.. Todo: Médicines. sur les pages d'inventaire, fixer la colonne du haut pour toujours la voir.
-
 B - Color in orange
 +++++++++++++++++++
 
@@ -80,8 +78,6 @@ expire at the date composed with *Expiry up to* date + *Warning delay for expiry
 There is no *Orange color* on *Quantity* column, meaning there is no immediate way to know if you will still have enough
 items, but as we will see in Generate requisition below, it will be re-ordered.
 
-.. Todo: faire la même chose que le rouge, pour vérifier le besoin de recommander, ou non, si item en quantité suffisante.
-
 C - Color in blue
 +++++++++++++++++
 
@@ -92,8 +88,6 @@ be compliant with regulation.
    :width: 600px
    :align: center
    :alt: C Open
-
-.. Todo: ne pas compter les non compliant en stock, sauf s'il n'y a que ça. Peut-être mettre les non compliant entre () genre un 10(20)/30 comme ça visuellement, on sait qu'on en a des bons, et des pas bons, et même combien.
 
 Generate requisition
 ~~~~~~~~~~~~~~~~~~~~
@@ -113,8 +107,6 @@ My interval between 2 requisitions is 2 months. So, next requisition will be rec
 
 By this way, I will order all medicines that will expire until May 30th + 60 days => July 30th.
 And during month of July, I will be able to order for the 2 next months again...
-
-.. Todo: Ce serait bien de pouvoir dire, pour finir cliquez sur générer le bon de commande et tous les items ci-dessus seront commandés automatiquement...
 
 From the page *Dashboard*, click on the down direction arrow in order to generate a full inventory of your hospital
 items. You may send this list to your medical locker contractor, and he will prepare you a requisition with only missing
@@ -144,8 +136,6 @@ it looks.
 
 Take out items
 ~~~~~~~~~~~~~~
-
-.. Todo: Les médicaments devraient être comptés par boites et pas individuellement. Je sors une boite de paracétamol et pas 9 comprimés de paracétamol. (surtout, je ne remets pas une boite entammée
 
 In order to manage smoothly your stock, without having to make full inventory every time, a good way to do is to record
 every single take out of medicine / material every time you do it.
@@ -184,8 +174,6 @@ and save your changes.
    :width: 600px
    :align: center
    :alt: Modification Window
-
-.. Todo: Mettre en place une fonction "stock control". Qui permettrait par exemple d'afficher une case à cocher a chaque item, si checker et ok, on décoche la case, si on modifie quelque chose la case se décoche également. Ainsi on peut suivre qu'on a rien oublié de vérifier en faisant l'inventaire et même faire un historique des inventaires réalisés.
 
 Search functionality
 ~~~~~~~~~~~~~~~~~~~~
