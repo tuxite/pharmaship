@@ -7,5 +7,4 @@ Additionnal configuration in `setup.cfg` file.
 
 from setuptools import setup
 
-
 setup()
