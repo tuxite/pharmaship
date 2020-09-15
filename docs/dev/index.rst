@@ -12,6 +12,12 @@ Development
 La documentation de programmation devrait s'inscrire dans un ordre spécifique:
 
 * Participer à pharmaship
+
+  * Les retours d'expériene
+  * Participer au code
+  * Participer à la traduction
+  * promouvoir *Pharmaship*
+
 * Convention de développement
 
   * Utilisation de GitHub
