@@ -249,3 +249,9 @@
   color: #000;
   background-color: #fce94f;
 }
+
+.tmas-tel {
+  font-size: 14pt;
+  font-weight: bold;
+  text-decoration: none;
+}
