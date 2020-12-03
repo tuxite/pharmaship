@@ -9,7 +9,7 @@ script:
   - cp manage.py  appimage/AppDir/usr/src -r
   - cp pharmaship appimage/AppDir/usr/src/pharmaship -r
   # Install application dependencies
-  - python3 -m pip install --system --ignore-installed --prefix=/usr --root=appimage/AppDir -r requirements.txt
+  - sudo -H python3 -m pip install --system --ignore-installed --prefix=/usr --root=appimage/AppDir -r requirements.txt
 
   # Copy MIME
   - mkdir -p appimage/AppDir/usr/share/mime
