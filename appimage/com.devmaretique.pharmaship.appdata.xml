@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>com.devmaretique.pharmaship</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-2.0+</project_license>
+	<name>Pharmaship</name>
+	<summary>A ship's pharmacy inventory software</summary>
+	<description>
+		<p>Manage the medicines, medical equipment, rescue bags, telemedical cases... at a glance.</p>
+	</description>
+	<launchable type="desktop-id">com.devmaretique.pharmaship.desktop</launchable>
+	<url type="homepage">https://pharmaship.readthedocs.io</url>
+
+	<provides>
+		<id>com.devmaretique.pharmaship.desktop</id>
+	</provides>
+</component>
