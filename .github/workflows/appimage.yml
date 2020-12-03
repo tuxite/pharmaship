@@ -2,7 +2,7 @@
 
 name: Build AppImage
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
@@ -29,8 +29,8 @@ jobs:
       - name: install dependencies
         run: |
           sudo apt update
-          sudo apt install python3
-      
+          sudo apt install python3 python3-jsonpath-rw
+
       # Runs the AppImage builder
       - name: Build AppImage
         uses: AppImageCrafters/build-appimage-action@master
