@@ -29,7 +29,7 @@ jobs:
       - name: install dependencies
         run: |
           sudo apt update
-          sudo apt install python3 python3-jsonpath-rw libgirepository1.0-dev
+          sudo apt install python3 python3-jsonpath-rw libgirepository1.0-dev python3-cairocffi
 
       # Runs the AppImage builder
       - name: Build AppImage
