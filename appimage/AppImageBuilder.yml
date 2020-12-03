@@ -1,20 +1,19 @@
 version: 1
 script:
-  - cd appimage
   # Remove any previous build
-  - rm -rf AppDir | true
+  - rm -rf appimage/AppDir | true
   # Make usr and icons dirs
-  - mkdir -p AppDir/usr/src
+  - mkdir -p appimage/AppDir/usr/src
   # Copy the python application code into the AppDir
-  - cp ../launcher.py  AppDir/usr/src -r
-  - cp ../manage.py  AppDir/usr/src -r
-  - cp ../pharmaship AppDir/usr/src/pharmaship -r
+  - cp launcher.py  appimage/AppDir/usr/src -r
+  - cp manage.py  appimage/AppDir/usr/src -r
+  - cp pharmaship appimage/AppDir/usr/src/pharmaship -r
   # Install application dependencies
-  - python3 -m pip install --system --ignore-installed --prefix=/usr --root=AppDir -r ../requirements.txt
+  - python3 -m pip install --system --ignore-installed --prefix=/usr --root=appimage/AppDir -r requirements.txt
 
   # Copy MIME
-  - mkdir -p AppDir/usr/share/mime
-  - cp /usr/share/mime AppDir/usr/share -r
+  - mkdir -p appimage/AppDir/usr/share/mime
+  - cp /usr/share/mime appimage/AppDir/usr/share -r
   # - update-mime-database AppDir/usr/share/mime
 
   # Copy theme
@@ -22,18 +21,18 @@ script:
   # - cp /usr/share/themes/Adwaita AppDir/usr/themes -r
 
   # AppStream
-  - mkdir -p AppDir/usr/share/metainfo
-  - cp com.devmaretique.pharmaship.appdata.xml AppDir/usr/share/metainfo -r
+  - mkdir -p appimage/AppDir/usr/share/metainfo
+  - cp appimage/com.devmaretique.pharmaship.appdata.xml appimage/AppDir/usr/share/metainfo -r
 
   # Desktop Entry
-  - mkdir -p AppDir/usr/share/icons
-  - cp ../pharmaship/gui/pharmaship_icon.svg AppDir/usr/share/icons/pharmaship.svg
-  - mkdir -p AppDir/usr/share/applications
-  - cp com.devmaretique.pharmaship.desktop AppDir/usr/share/applications -r
+  - mkdir -p appimage/AppDir/usr/share/icons
+  - cp pharmaship/gui/pharmaship_icon.svg appimage/AppDir/usr/share/icons/pharmaship.svg
+  - mkdir -p appimage/AppDir/usr/share/applications
+  - cp appimage/com.devmaretique.pharmaship.desktop appimage/AppDir/usr/share/applications -r
 
 
 AppDir:
-  path: ./AppDir
+  path: ./appimage/AppDir
 
   app_info:
     id: com.devmaretique.pharmaship
