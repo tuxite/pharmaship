@@ -1,5 +1,6 @@
 version: 1
 script:
+  - cd appimage
   # Remove any previous build
   - rm -rf AppDir | true
   # Make usr and icons dirs
