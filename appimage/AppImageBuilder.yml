@@ -8,8 +8,6 @@ script:
   - cp launcher.py  appimage/AppDir/usr/src -r
   - cp manage.py  appimage/AppDir/usr/src -r
   - cp pharmaship appimage/AppDir/usr/src/pharmaship -r
-  # Install application dependencies
-  - sudo -H python3 -m pip install --system --ignore-installed --prefix=/usr --root=appimage/AppDir -r requirements.txt
 
   # Copy MIME
   - mkdir -p appimage/AppDir/usr/share/mime
@@ -33,6 +31,9 @@ script:
 
 AppDir:
   path: ./appimage/AppDir
+  after_bundle:
+    # Install application dependencies
+    - python3 -m pip install --system --ignore-installed --prefix=/usr --root=appimage/AppDir -r appimage/requirements.txt
 
   app_info:
     id: com.devmaretique.pharmaship
@@ -56,6 +57,14 @@ AppDir:
       - python3-gi
       - python3-pil
       - python3-gnupg
+      - python3-django-mptt
+      - python3-djangorestframework
+      - python3-pypdf2
+      - python3-cerberus
+      - python3-coloredlogs
+      - python3-munch
+      - python3-yaml
+      - python3-tz
       - weasyprint
       - librsvg2-common
       - libgtk-3-common
