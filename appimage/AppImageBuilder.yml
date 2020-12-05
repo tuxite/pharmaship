@@ -33,7 +33,7 @@ AppDir:
   path: ./appimage/AppDir
   after_bundle:
     # Install application dependencies
-    - sudo -H python3 -m pip install --system --ignore-installed --prefix=/usr --root=appimage/AppDir -r appimage/requirements.txt
+    - sudo -H $APPDIR/usr/bin/python3 -m pip install --system --ignore-installed --prefix=/usr --root=appimage/AppDir -r appimage/requirements.txt
 
   app_info:
     id: com.devmaretique.pharmaship
