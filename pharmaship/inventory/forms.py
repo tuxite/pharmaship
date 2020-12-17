@@ -21,9 +21,12 @@ class AddMedicineForm(forms.ModelForm):
 
     remark = forms.CharField(max_length=256, required=False)
 
+    packing_combo_id = forms.IntegerField(min_value=0)
+    packing_content = forms.IntegerField(min_value=1)
+
     class Meta:  # noqa: D106
         model = pharmaship.inventory.models.Medicine
-        exclude = ['used', 'location', 'parent']
+        exclude = ['used', 'location', 'parent', 'packing_name']
 
 
 class ModifyMedicineForm(forms.ModelForm):
@@ -40,9 +43,12 @@ class ModifyMedicineForm(forms.ModelForm):
 
     remark = forms.CharField(max_length=256, required=False)
 
+    packing_combo_id = forms.IntegerField(min_value=0)
+    packing_content = forms.IntegerField(min_value=1)
+
     class Meta:  # noqa: D106
         model = pharmaship.inventory.models.Medicine
-        exclude = ['used', 'location', 'parent']
+        exclude = ['used', 'location', 'parent', 'packing_name']
 
 
 class AddArticleForm(forms.ModelForm):

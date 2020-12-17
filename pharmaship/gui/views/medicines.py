@@ -5,6 +5,8 @@ from gi.repository import Gtk
 
 from django.utils.translation import gettext as _
 
+from pluralizer import Pluralizer
+
 from pharmaship.core.utils import log, query_count_all
 
 from pharmaship.inventory import models
@@ -13,6 +15,7 @@ from pharmaship.inventory.parsers.medicines import parser
 
 from pharmaship.gui import utils
 from pharmaship.gui import widgets
+from pharmaship.gui.utils import first_lower
 
 
 DATE_MASK = {
@@ -23,7 +26,6 @@ DATE_MASK = {
 }
 
 NC_TEXT_TEMPLATE = "<span foreground='darkred' weight='bold' style='normal'>{0} {1}</span>"
-
 
 class View:
     def __init__(self, window, chosen=None):
@@ -244,31 +246,44 @@ class View:
             self.scrolled.connect("draw", utils.set_focus, self.row_widget_num)
 
     def dialog_use(self, source, medicine):
+        pluralizer = Pluralizer()
+
         builder = Gtk.Builder.new_from_file(utils.get_template("medicine_use.glade"))
         dialog = builder.get_object("dialog")
+
+        # Get packing
+        quantity = medicine["quantity"]
+        form = first_lower(medicine["molecule"]["dosage_form"])
+
+        if medicine["packing"]:
+            quantity /= medicine["packing"]["content"]
+            form = medicine["packing"]["name"]
 
         # Set the current values
         name = builder.get_object("name")
         name.set_text("{0} ({1})".format(medicine["name"], medicine["exp_date"]))
 
         remaining = builder.get_object("remaining")
-        remaining.set_value(medicine["quantity"])
+        remaining.set_value(quantity)
 
         remaining_adjustment = builder.get_object("remaining_adjustment")
         remaining_adjustment.set_lower(0)
-        remaining_adjustment.set_upper(medicine["quantity"])
+        remaining_adjustment.set_upper(quantity)
 
         quantity_adjustment = builder.get_object("quantity_adjustment")
         quantity_adjustment.set_lower(0)
-        quantity_adjustment.set_upper(medicine["quantity"])
+        quantity_adjustment.set_upper(quantity)
 
-        # quantity = builder.get_object("quantity")
-        # quantity.connect("value-changed", self.medicine_quantity_changed, medicine["quantity"], remaining)
+        label = builder.get_object("consumed_packing")
+        label.set_text(pluralizer.pluralize(form, 0))
+
+        label = builder.get_object("remaining_packing")
+        label.set_text(pluralizer.pluralize(form, quantity))
 
         builder.connect_signals({
             "on-response": (self.response_use, dialog, medicine, builder),
             "on-cancel": (utils.dialog_destroy, dialog),
-            "quantity-changed": (utils.item_quantity_changed, remaining)
+            "quantity-changed": (utils.item_quantity_changed, builder)
         })
 
         dialog.set_transient_for(self.window)
@@ -277,6 +292,8 @@ class View:
         dialog.destroy()
 
     def dialog_modify(self, source, medicine):
+        pluralizer = Pluralizer()
+
         builder = Gtk.Builder.new_from_file(utils.get_template("medicine_add.glade"))
         dialog = builder.get_object("dialog")
 
@@ -296,9 +313,6 @@ class View:
         # Set the current values
         name = builder.get_object("name")
         name.set_text(medicine["name"])
-
-        quantity = builder.get_object("quantity")
-        quantity.set_value(medicine["quantity"])
 
         # exp_date = builder.get_object("exp_date")
         exp_date = builder.get_object("exp_date_raw")
@@ -322,10 +336,50 @@ class View:
             nc_expander = builder.get_object("nc_expander")
             nc_expander.set_expanded(True)
 
+        # Packing set-up
+        active = None
+        content = 1
+        if medicine["packing"]:
+            active = medicine["packing"]["id"]
+            content = medicine["packing"]["content"]
+
+        packing_quantity = medicine["quantity"]/content
+
+        packing_combo = builder.get_object("packing_combo")
+        utils.packing_combo(
+            combo=packing_combo,
+            default=first_lower(medicine["molecule"]["dosage_form"]),
+            active=active,
+            num=packing_quantity
+            )
+
+        packing_content = builder.get_object("packing_content")
+        packing_content.set_value(content)
+
+        quantity = builder.get_object("quantity")
+        quantity.set_value(packing_quantity)
+
+        label = builder.get_object("packing_form")
+        label.set_text(
+            pluralizer.pluralize(
+                first_lower(medicine["molecule"]["dosage_form"]),
+                packing_quantity
+                )
+            )
+
+        utils.toggle_packing(packing_combo, builder)
+
         # Connect signals
         builder.connect_signals({
             "on-response": (self.response_modify, dialog, medicine, builder),
-            "on-cancel": (utils.dialog_destroy, dialog)
+            "on-cancel": (utils.dialog_destroy, dialog),
+            "on-packing-change": (utils.toggle_packing, builder),
+            "on-quantity-change": (
+                utils.update_packing_combo,
+                builder,
+                medicine["molecule"]["dosage_form"],
+                ),
+            "on-content-change": (utils.update_packing_form, builder),
         })
 
         dialog.set_transient_for(self.window)
@@ -361,11 +415,13 @@ class View:
         dialog = builder.get_object("dialog")
 
         label = builder.get_object("molecule")
-        label.set_text("{0} ({1} - {2})".format(molecule["name"], molecule["dosage_form"], molecule["composition"]))
+        label.set_text("{0} ({1} - {2})".format(molecule["name"], first_lower(molecule["dosage_form"]), molecule["composition"]))
 
         # Check if molecule has previous locations to input the latest one as
         # default to ease the input
         active_location = None
+        active_packing_content = 0
+        active_packing_name = 0
         molecule_obj = models.Molecule.objects.get(id=molecule["id"])
         try:
             latest_medicine = molecule_obj.medicines.latest("exp_date")
@@ -374,13 +430,38 @@ class View:
 
         if latest_medicine:
             active_location = latest_medicine.location.id
-            log.debug("Found last location: %s", active_location)
+            active_packing_name = latest_medicine.packing_name
+            active_packing_content = latest_medicine.packing_content
+
         location_combo = builder.get_object("location")
         utils.location_combo(
             combo=location_combo,
             locations=self.params.locations,
             active=active_location
             )
+
+        # Packing set-up
+        pluralizer = Pluralizer()
+
+        label = builder.get_object("packing_form")
+        label.set_text(
+            pluralizer.pluralize(
+                first_lower(molecule["dosage_form"]),
+                active_packing_content
+                )
+            )
+
+        packing_combo = builder.get_object("packing_combo")
+        utils.packing_combo(
+            combo=packing_combo,
+            default=molecule["dosage_form"],
+            active=active_packing_name
+            )
+
+        packing_content = builder.get_object("packing_content")
+        packing_content.set_value(active_packing_content)
+
+        utils.toggle_packing(packing_combo, builder)
 
         # By default name = molecule name
         name = builder.get_object("name")
@@ -389,14 +470,20 @@ class View:
         # Expiry date input mask workaround
         exp_date = builder.get_object("exp_date_raw")
         exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
-        # exp_date.connect("activate", self.response_add, dialog, molecule, builder)
         builder.expose_object("exp_date", exp_date)
 
         # Connect signals
         builder.connect_signals({
             # "on-entry-activate": (self.response_add, dialog, molecule, builder),
             "on-response": (self.response_add, dialog, molecule, builder),
-            "on-cancel": (utils.dialog_destroy, dialog)
+            "on-cancel": (utils.dialog_destroy, dialog),
+            "on-packing-change": (utils.toggle_packing, builder),
+            "on-quantity-change": (
+                utils.update_packing_combo,
+                builder,
+                molecule["dosage_form"],
+                ),
+            "on-content-change": (utils.update_packing_form, builder),
         })
 
         query_count_all()
@@ -416,10 +503,12 @@ class View:
                 "remark"
             ],
             "combobox": [
-                "location"
+                "location",
+                "packing_combo"
             ],
             "spinbutton": [
-                "quantity"
+                "quantity",
+                "packing_content"
             ],
             "textview": []
         }
@@ -432,6 +521,10 @@ class View:
         if cleaned_data is None:
             return
 
+        packing_content = cleaned_data['packing_content']
+        if cleaned_data['packing_combo_id'] >= 20:
+            packing_content = int(cleaned_data['packing_combo_id']/10)
+
         # Add the medicine
         medicine = models.Medicine.objects.create(
             name=cleaned_data['name'],
@@ -440,12 +533,18 @@ class View:
             nc_composition=cleaned_data['nc_composition'],
             nc_molecule=cleaned_data['nc_molecule'],
             parent_id=cleaned_data['parent_id'],
-            remark=cleaned_data['remark']
+            remark=cleaned_data['remark'],
+            packing_name=cleaned_data['packing_combo_id'],
+            packing_content=packing_content
             )
         # Add the quantity
+        quantity = cleaned_data["quantity"]
+        if cleaned_data['packing_combo_id'] > 0:
+            quantity *= packing_content
+
         models.QtyTransaction.objects.create(
             transaction_type=1,
-            value=cleaned_data["quantity"],
+            value=quantity,
             content_object=medicine
             )
 
@@ -466,10 +565,12 @@ class View:
                 "remark"
             ],
             "combobox": [
-                "location"
+                "location",
+                "packing_combo"
             ],
             "spinbutton": [
-                "quantity"
+                "quantity",
+                "packing_content"
             ],
             "textview": []
         }
@@ -485,6 +586,11 @@ class View:
         medicine_obj.location_id = cleaned_data['location_id']
         medicine_obj.remark = cleaned_data['remark']
 
+        medicine_obj.packing_name = cleaned_data['packing_combo_id']
+        medicine_obj.packing_content = cleaned_data['packing_content']
+        if cleaned_data['packing_combo_id'] >= 20:
+            medicine_obj.packing_content = int(cleaned_data['packing_combo_id']/10)
+
         # if cleaned_data['nc_composition']:
         medicine_obj.nc_composition = cleaned_data['nc_composition']
         # if cleaned_data['nc_molecule']:
@@ -492,11 +598,18 @@ class View:
 
         medicine_obj.save()
 
-        if cleaned_data["quantity"] != medicine['quantity']:
+        quantity = cleaned_data["quantity"]
+
+        if cleaned_data['packing_combo_id'] >= 20:
+            quantity *= int(cleaned_data['packing_combo_id']/10)
+        elif cleaned_data['packing_combo_id'] > 0:
+            quantity *= cleaned_data['packing_content']
+
+        if quantity != medicine['quantity']:
             # Add the quantity (transaction type STOCK COUNT)
             models.QtyTransaction.objects.create(
                 transaction_type=8,
-                value=cleaned_data["quantity"],
+                value=quantity,
                 content_object=medicine_obj
                 )
 
@@ -512,7 +625,7 @@ class View:
         # Get response
 
         reason_combo = builder.get_object("reason")
-        reason = utils.get_reason(reason_combo)
+        reason = utils.get_combo_value(reason_combo)
 
         if reason is None:
             reason_combo.get_style_context().add_class("error-combobox")
@@ -562,6 +675,11 @@ class View:
 
         # Get the object
         medicine_obj = models.Medicine.objects.get(id=medicine['id'])
+
+        # Adapt the quantity to the paking if any
+        if medicine_obj.packing_name > 0:
+            quantity *= medicine_obj.packing_content
+
         if medicine["quantity"] == quantity:
             medicine_obj.used = True
             medicine_obj.save()
@@ -578,6 +696,7 @@ class View:
         dialog.destroy()
         # Refresh the list!
         self.refresh_grid()
+
 
     def toggle_medicine(self, source, grid, molecule, row_num):
         # If already toggled, destroy the toggled part
@@ -652,6 +771,8 @@ class View:
                 remark_text.append(NC_TEXT_TEMPLATE.format(_("Non-compliant composition:"), medicine["nc_composition"]))
             if medicine["remark"]:
                 remark_text.append(medicine["remark"])
+            if medicine["packing"]:
+                remark_text.append(get_packing_text(medicine))
 
             label = Gtk.Label(xalign=0)
             label.set_markup("\n".join(remark_text))
@@ -732,3 +853,38 @@ class View:
         self.toggled = (new_row, i)
 
         query_count_all()
+
+
+def get_packing_text(medicine):
+    # XX [box|...] of YY <dosage_form>
+    data = medicine["packing"]
+
+    if data is None:
+        return None
+
+    pluralizer = Pluralizer()
+
+    if data["id"] >= 20:
+        template = _("{quantity} {packing_name} of {dosage_form}")
+    else:
+        template = _("{quantity} {packing_name} of {packing_content} {dosage_form}")
+
+    quantity = medicine["quantity"]/data["content"]
+
+    plural_packing = pluralizer.pluralize(
+        data["name"],
+        quantity
+        )
+    plural_dosage_form = pluralizer.pluralize(
+        first_lower(medicine["molecule"]["dosage_form"]),
+        data["content"]
+        )
+
+    result = template.format(
+        quantity=str(quantity).rstrip("0").rstrip("."),
+        packing_name=plural_packing,
+        packing_content=data["content"],
+        dosage_form=plural_dosage_form
+    )
+
+    return result

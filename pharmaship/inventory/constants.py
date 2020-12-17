@@ -83,3 +83,12 @@ DRUG_ROA_CHOICES = (
 
     (50, _('Ocular'))
 )
+
+# Packing choices for medicines
+PACKING_CHOICES = (
+    (0, 'default'),
+    (10, _('box')),
+    (11, _('set')),
+    (20, _('pair')),
+    (120, _('dozen')),
+)

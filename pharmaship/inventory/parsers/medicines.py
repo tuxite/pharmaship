@@ -188,8 +188,19 @@ def parser_element(molecule, data, warning_delay, today):
         # Add the molecule_id in case of reverse search
         item_dict['molecule'] = {
             "id": molecule.id,
-            "name": molecule_name_string
+            "name": molecule_name_string,
+            "dosage_form": molecule.get_dosage_form_display()
             }
+
+        # Packing
+        if medicine.packing_name > 0:
+            item_dict['packing'] = {
+                "id": medicine.packing_name,
+                "name": medicine.get_packing_name_display(),
+                "content": medicine.packing_content
+            }
+        else:
+            item_dict['packing'] = None
 
         # Remark
         item_dict['remark'] = medicine.remark

@@ -8,6 +8,8 @@ import os.path
 import platform
 import subprocess
 
+from pluralizer import Pluralizer
+
 from django.utils.translation import gettext as _
 from django.conf import settings
 
@@ -15,6 +17,7 @@ from weasyprint import HTML, CSS
 from weasyprint.fonts import FontConfiguration
 
 from pharmaship.core.utils import log
+from pharmaship.inventory import constants
 
 
 def get_template(filename):
@@ -153,13 +156,30 @@ def dialog_destroy(source, dialog):
     dialog.destroy()
 
 
-def item_quantity_changed(source, remaining):
+def item_quantity_changed(source, builder):
+    pluralizer = Pluralizer()
+
     quantity = source.get_value()
 
     result = source.get_adjustment().get_upper() - quantity
     if result < 0:
         return False
+
+    remaining = builder.get_object("remaining")
     remaining.set_value(result)
+
+    # Adapt plural forms of labels
+    consumed_label = builder.get_object("consumed_packing")
+    consumed_label.set_text(pluralizer.pluralize(
+        consumed_label.get_text(),
+        source.get_value()
+        ))
+
+    remaining_label = builder.get_object("remaining_packing")
+    remaining_label.set_text(pluralizer.pluralize(
+        remaining_label.get_text(),
+        result
+        ))
 
     return True
 
@@ -222,14 +242,16 @@ def reason_combo(combo, expired=False):
     else:
         combo.set_active(1)
 
-def get_reason(reason_combo):
-    reason = None
-    tree_iter = reason_combo.get_active_iter()
-    if tree_iter is not None:
-        model = reason_combo.get_model()
-        reason = model[tree_iter][0]
 
-    return reason
+def get_combo_value(combo):
+    """Return active value in a Gtk.ComboBox."""
+    value = None
+    tree_iter = combo.get_active_iter()
+    if tree_iter is not None:
+        model = combo.get_model()
+        value = model[tree_iter][0]
+
+    return value
 
 
 def picture_frame(source, picture):
@@ -302,3 +324,78 @@ def set_focus(source, event, row_num):
 
     # Disconnect this signal otherwise the view is unusable
     disconnect_signal(source, "draw")
+
+
+def first_lower(s):
+    """Lower the first letter of a string."""
+    if not s:  # Added to handle case where s == None
+        return
+    else:
+        return s[0].lower() + s[1:]
+
+
+def packing_combo(combo, default=None, active=0, num=1):
+    pluralizer = Pluralizer()
+    # Packing name combox box setup
+    store = Gtk.ListStore(int, str)
+
+    active_index = 0
+
+    if default:
+        text = pluralizer.pluralize(first_lower(default), num)
+        store.append([0, text])
+
+    index = 1
+    for item in constants.PACKING_CHOICES[1:]:
+        text = pluralizer.pluralize(str(item[1]), num)
+        store.append([item[0], text])
+
+        if active and item[0] == active:
+            active_index = index
+
+        index += 1
+
+    combo.set_model(store)
+    renderer_text = Gtk.CellRendererText()
+    combo.clear()
+    combo.pack_start(renderer_text, True)
+    combo.add_attribute(renderer_text, "text", 1)
+    combo.set_active(active_index)
+
+
+def toggle_packing(source, builder):
+    active = get_combo_value(source)
+
+    items = ["packing_of-label", "packing_form", "packing_content"]
+
+    if active == 0:
+        for item in items:
+            builder.get_object(item).hide()
+    elif active >= 20:
+        # Show/hide elements
+        for item in items[:-1]:
+            builder.get_object(item).show()
+        builder.get_object(items[-1]).hide()
+        # Adapt plural form
+        builder.get_object("packing_content").set_value(int(active/10))
+    else:
+        for item in items:
+            builder.get_object(item).show()
+
+
+def update_packing_form(source, builder):
+    pluralizer = Pluralizer()
+    obj = builder.get_object("packing_form")
+    plural = pluralizer.pluralize(
+        obj.get_text(),
+        source.get_value()
+        )
+
+    obj.set_text(plural)
+
+
+def update_packing_combo(source, builder, default):
+    num = source.get_value()
+    combo = builder.get_object("packing_combo")
+    active = get_combo_value(combo)
+    packing_combo(combo, default, active, num)
