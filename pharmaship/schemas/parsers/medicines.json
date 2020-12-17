@@ -101,12 +101,30 @@
                   },
                   "name": {
                     "type": "string"
+                  },
+                  "dosage_form": {
+                    "type": "string"
                   }
                 }
               },
               "remark": {
                 "type": "string",
                 "nullable": true
+              },
+              "packing": {
+                "type": "dict",
+                "nullable": true,
+                "schema": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "integer"
+                  }
+                }
               }
             }
           }
