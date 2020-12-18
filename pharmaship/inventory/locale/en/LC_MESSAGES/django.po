@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-08 04:06+0000\n"
+"POT-Creation-Date: 2020-12-18 22:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,6 +68,10 @@ msgstr ""
 
 #: pharmaship/inventory/constants.py:29
 msgid "Capsule"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:31
+msgid "Sachet"
 msgstr ""
 
 #: pharmaship/inventory/constants.py:32
@@ -134,13 +138,29 @@ msgstr ""
 msgid "Ocular"
 msgstr ""
 
-#: pharmaship/inventory/forms.py:79 pharmaship/inventory/forms.py:176
-#: pharmaship/inventory/models.py:308
+#: pharmaship/inventory/constants.py:94
+msgid "box"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:95
+msgid "set"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:96
+msgid "pair"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:97
+msgid "dozen"
+msgstr ""
+
+#: pharmaship/inventory/forms.py:88 pharmaship/inventory/forms.py:188
+#: pharmaship/inventory/models.py:277
 msgid "Expiry date must be provided."
 msgstr ""
 
 #: pharmaship/inventory/models.py:123 pharmaship/inventory/models.py:160
-#: pharmaship/inventory/models.py:421 pharmaship/inventory/models.py:464
+#: pharmaship/inventory/models.py:355 pharmaship/inventory/models.py:398
 msgid "Name"
 msgstr ""
 
@@ -160,31 +180,35 @@ msgstr ""
 msgid "Remark"
 msgstr ""
 
-#: pharmaship/inventory/models.py:288
+#: pharmaship/inventory/models.py:167
+msgid "Quantity per pack"
+msgstr ""
+
+#: pharmaship/inventory/models.py:257
 msgid "Dosage Form:"
 msgstr ""
 
-#: pharmaship/inventory/models.py:288
+#: pharmaship/inventory/models.py:257
 msgid "Composition:"
 msgstr ""
 
-#: pharmaship/inventory/models.py:301
+#: pharmaship/inventory/models.py:270
 msgid "Non-conform Molecule"
 msgstr ""
 
-#: pharmaship/inventory/models.py:302
+#: pharmaship/inventory/models.py:271
 msgid "Non-conform Composition"
 msgstr ""
 
-#: pharmaship/inventory/models.py:389
+#: pharmaship/inventory/models.py:323
 msgid "Packaging:"
 msgstr ""
 
-#: pharmaship/inventory/models.py:401
+#: pharmaship/inventory/models.py:335
 msgid "Non-conform Packaging"
 msgstr ""
 
-#: pharmaship/inventory/models.py:442
+#: pharmaship/inventory/models.py:376
 msgid "Non conformity"
 msgstr ""
 
