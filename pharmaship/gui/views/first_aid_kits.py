@@ -786,7 +786,7 @@ class View:
         invalid = False
         # Get response
         reason_combo = builder.get_object("reason")
-        reason = utils.get_reason(reason_combo)
+        reason = utils.get_combo_value(reason_combo)
 
         if reason is None:
             reason_combo.get_style_context().add_class("error-combobox")
