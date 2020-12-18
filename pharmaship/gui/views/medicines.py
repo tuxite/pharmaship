@@ -250,6 +250,7 @@ class View:
 
         builder = Gtk.Builder.new_from_file(utils.get_template("medicine_use.glade"))
         dialog = builder.get_object("dialog")
+        dialog.set_title(_("Use a medicine"))
 
         # Get packing
         quantity = medicine["quantity"]
@@ -296,6 +297,7 @@ class View:
 
         builder = Gtk.Builder.new_from_file(utils.get_template("medicine_add.glade"))
         dialog = builder.get_object("dialog")
+        dialog.set_title(_("Modify a medicine"))
 
         label = builder.get_object("molecule")
         label.set_text(medicine["molecule"]["name"])
@@ -390,6 +392,7 @@ class View:
     def dialog_delete(self, source, medicine):
         builder = Gtk.Builder.new_from_file(utils.get_template("medicine_delete.glade"))
         dialog = builder.get_object("dialog")
+        dialog.set_title(_("Delete a medicine"))
 
         # Set the current values
         name = builder.get_object("name")
@@ -413,6 +416,7 @@ class View:
     def dialog_add(self, source, molecule):
         builder = Gtk.Builder.new_from_file(utils.get_template("medicine_add.glade"))
         dialog = builder.get_object("dialog")
+        dialog.set_title(_("Add a medicine"))
 
         label = builder.get_object("molecule")
         label.set_text("{0} ({1} - {2})".format(molecule["name"], first_lower(molecule["dosage_form"]), molecule["composition"]))
