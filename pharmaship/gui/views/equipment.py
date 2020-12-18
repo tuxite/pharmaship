@@ -5,6 +5,8 @@ from gi.repository import Gtk
 
 from django.utils.translation import gettext as _
 
+from pluralizer import Pluralizer
+
 from pharmaship.core.utils import log, query_count_all
 
 from pharmaship.inventory import models
@@ -13,6 +15,7 @@ from pharmaship.inventory.parsers.equipment import parser
 
 from pharmaship.gui import utils
 from pharmaship.gui import widgets
+from pharmaship.gui.utils import first_lower
 
 
 DATE_MASK = {
@@ -258,28 +261,45 @@ class View:
             self.scrolled.connect("draw", utils.set_focus, self.row_widget_num)
 
     def dialog_use(self, source, article):
+        pluralizer = Pluralizer()
+
         builder = Gtk.Builder.new_from_file(utils.get_template("article_use.glade"))
         dialog = builder.get_object("dialog")
+        dialog.set_title(_("Use an article"))
+
+        # Get packing
+        quantity = article["quantity"]
+        form = first_lower(article["equipment"]["packaging"])
+
+        if article["packing"]:
+            quantity /= article["packing"]["content"]
+            form = article["packing"]["name"]
 
         # Set the current values
         name = builder.get_object("name")
         name.set_text("{0} ({1})".format(article["name"], article["exp_date"]))
 
         remaining = builder.get_object("remaining")
-        remaining.set_value(article["quantity"])
+        remaining.set_value(quantity)
 
         remaining_adjustment = builder.get_object("remaining_adjustment")
         remaining_adjustment.set_lower(0)
-        remaining_adjustment.set_upper(article["quantity"])
+        remaining_adjustment.set_upper(quantity)
 
         quantity_adjustment = builder.get_object("quantity_adjustment")
         quantity_adjustment.set_lower(0)
-        quantity_adjustment.set_upper(article["quantity"])
+        quantity_adjustment.set_upper(quantity)
+
+        label = builder.get_object("consumed_packing")
+        label.set_text(pluralizer.pluralize(form, 0))
+
+        label = builder.get_object("remaining_packing")
+        label.set_text(pluralizer.pluralize(form, quantity))
 
         builder.connect_signals({
             "on-response": (self.response_use, dialog, article, builder),
             "on-cancel": (utils.dialog_destroy, dialog),
-            "quantity-changed": (utils.item_quantity_changed, remaining)
+            "quantity-changed": (utils.item_quantity_changed, builder)
         })
 
         dialog.set_transient_for(self.window)
@@ -288,8 +308,11 @@ class View:
         dialog.destroy()
 
     def dialog_modify(self, source, article):
+        pluralizer = Pluralizer()
+
         builder = Gtk.Builder.new_from_file(utils.get_template("article_add.glade"))
         dialog = builder.get_object("dialog")
+        dialog.set_title(_("Modify an article"))
 
         label = builder.get_object("equipment")
         label.set_text(article["equipment"]["name"])
@@ -308,13 +331,9 @@ class View:
         name = builder.get_object("name")
         name.set_text(article["name"])
 
-        quantity = builder.get_object("quantity")
-        quantity.set_value(article["quantity"])
-
-        # exp_date = builder.get_object("exp_date")
         exp_date = builder.get_object("exp_date_raw")
         exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
-        # exp_date.connect("activate", self.response_modify, dialog, article, builder)
+
         builder.expose_object("exp_date", exp_date)
         if article["exp_date"]:
             date_display = article["exp_date"].strftime("%Y-%m-%d")
@@ -330,10 +349,50 @@ class View:
             nc_expander = builder.get_object("nc_expander")
             nc_expander.set_expanded(True)
 
+        # Packing set-up
+        active = None
+        content = 1
+        if article["packing"]:
+            active = article["packing"]["id"]
+            content = article["packing"]["content"]
+
+        packing_quantity = article["quantity"]/content
+
+        packing_combo = builder.get_object("packing_combo")
+        utils.packing_combo(
+            combo=packing_combo,
+            default=first_lower(article["equipment"]["packaging"]),
+            active=active,
+            num=packing_quantity
+            )
+
+        packing_content = builder.get_object("packing_content")
+        packing_content.set_value(content)
+
+        quantity = builder.get_object("quantity")
+        quantity.set_value(packing_quantity)
+
+        label = builder.get_object("packing_form")
+        label.set_text(
+            pluralizer.pluralize(
+                first_lower(article["equipment"]["packaging"]),
+                packing_quantity
+                )
+            )
+
+        utils.toggle_packing(packing_combo, builder)
+
         # Connect signals
         builder.connect_signals({
             "on-response": (self.response_modify, dialog, article, builder),
-            "on-cancel": (utils.dialog_destroy, dialog)
+            "on-cancel": (utils.dialog_destroy, dialog),
+            "on-packing-change": (utils.toggle_packing, builder),
+            "on-quantity-change": (
+                utils.update_packing_combo,
+                builder,
+                article["equipment"]["packaging"],
+                ),
+            "on-content-change": (utils.update_packing_form, builder),
         })
 
         dialog.set_transient_for(self.window)
@@ -342,9 +401,9 @@ class View:
         dialog.destroy()
 
     def dialog_delete(self, source, article):
-
         builder = Gtk.Builder.new_from_file(utils.get_template("article_delete.glade"))
         dialog = builder.get_object("dialog")
+        dialog.set_title(_("Delete an article"))
 
         # Set the current values
         name = builder.get_object("name")
@@ -367,6 +426,7 @@ class View:
     def dialog_add(self, source, equipment):
         builder = Gtk.Builder.new_from_file(utils.get_template("article_add.glade"))
         dialog = builder.get_object("dialog")
+        dialog.set_title(_("Add an article"))
 
         label = builder.get_object("equipment")
         label.set_text("{0} ({1})".format(equipment["name"], equipment["packaging"]))
@@ -374,23 +434,48 @@ class View:
         # Check if equipment has previous locations to input the latest one as
         # default to ease the input
         active_location = None
+        active_packing_content = 0
+        active_packing_name = 0
         equipment_obj = models.Equipment.objects.get(id=equipment["id"])
         try:
             latest_article = equipment_obj.articles.latest("exp_date")
         except models.Article.DoesNotExist:
             latest_article = None
-        # except ObjectDoesNotExist:
-        #     latest_article = None
 
         if latest_article:
             active_location = latest_article.location.id
-            log.debug("Found last location: %s", active_location)
+            active_packing_name = latest_article.packing_name
+            active_packing_content = latest_article.packing_content
+
         location_combo = builder.get_object("location")
         utils.location_combo(
             combo=location_combo,
             locations=self.params.locations,
             active=active_location
             )
+
+        # Packing set-up
+        pluralizer = Pluralizer()
+
+        label = builder.get_object("packing_form")
+        label.set_text(
+            pluralizer.pluralize(
+                first_lower(equipment["packaging"]),
+                active_packing_content
+                )
+            )
+
+        packing_combo = builder.get_object("packing_combo")
+        utils.packing_combo(
+            combo=packing_combo,
+            default=equipment["packaging"],
+            active=active_packing_name
+            )
+
+        packing_content = builder.get_object("packing_content")
+        packing_content.set_value(active_packing_content)
+
+        utils.toggle_packing(packing_combo, builder)
 
         # By default name = equipment name
         name = builder.get_object("name")
@@ -399,17 +484,19 @@ class View:
         # Expiry date input mask workaround
         exp_date = builder.get_object("exp_date_raw")
         exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
-        # exp_date.connect("activate", self.response_add, dialog, equipment, builder)
         builder.expose_object("exp_date", exp_date)
 
         # Connect signals
-        # builder.connect_signals({
-        #     "on_entry_activate": (self.response_add, dialog, equipment, builder)
-        # })
-
         builder.connect_signals({
             "on-response": (self.response_add, dialog, equipment, builder),
-            "on-cancel": (utils.dialog_destroy, dialog)
+            "on-cancel": (utils.dialog_destroy, dialog),
+            "on-packing-change": (utils.toggle_packing, builder),
+            "on-quantity-change": (
+                utils.update_packing_combo,
+                builder,
+                equipment["packaging"],
+                ),
+            "on-content-change": (utils.update_packing_form, builder),
         })
 
         query_count_all()
@@ -428,10 +515,12 @@ class View:
                 "remark"
             ],
             "combobox": [
-                "location"
+                "location",
+                "packing_combo"
             ],
             "spinbutton": [
-                "quantity"
+                "quantity",
+                "packing_content"
             ],
             "textview": []
         }
@@ -445,6 +534,10 @@ class View:
         if cleaned_data is None:
             return
 
+        packing_content = cleaned_data['packing_content']
+        if cleaned_data['packing_combo_id'] >= 20:
+            packing_content = int(cleaned_data['packing_combo_id']/10)
+
         # Add the article
         article = models.Article.objects.create(
             name=cleaned_data['name'],
@@ -452,12 +545,19 @@ class View:
             location_id=cleaned_data['location_id'],
             nc_packaging=cleaned_data['nc_packaging'],
             parent_id=cleaned_data['parent_id'],
-            remark=cleaned_data['remark']
+            remark=cleaned_data['remark'],
+            packing_name=cleaned_data['packing_combo_id'],
+            packing_content=packing_content
             )
+        # Add the quantity
+        quantity = cleaned_data["quantity"]
+        if cleaned_data['packing_combo_id'] > 0:
+            quantity *= packing_content
+
         # Add the quantity
         models.QtyTransaction.objects.create(
             transaction_type=1,
-            value=cleaned_data["quantity"],
+            value=quantity,
             content_object=article
             )
 
@@ -477,10 +577,12 @@ class View:
                 "remark"
             ],
             "combobox": [
-                "location"
+                "location",
+                "packing_combo"
             ],
             "spinbutton": [
-                "quantity"
+                "quantity",
+                "packing_content"
             ],
             "textview": []
         }
@@ -496,15 +598,27 @@ class View:
         article_obj.location_id = cleaned_data['location_id']
         article_obj.remark = cleaned_data['remark']
 
+        article_obj.packing_name = cleaned_data['packing_combo_id']
+        article_obj.packing_content = cleaned_data['packing_content']
+        if cleaned_data['packing_combo_id'] >= 20:
+            article_obj.packing_content = int(cleaned_data['packing_combo_id']/10)
+
         article_obj.nc_packaging = cleaned_data['nc_packaging']
 
         article_obj.save()
 
-        if cleaned_data["quantity"] != article['quantity']:
+        quantity = cleaned_data["quantity"]
+
+        if cleaned_data['packing_combo_id'] >= 20:
+            quantity *= int(cleaned_data['packing_combo_id']/10)
+        elif cleaned_data['packing_combo_id'] > 0:
+            quantity *= cleaned_data['packing_content']
+
+        if quantity != article['quantity']:
             # Add the quantity (transaction type STOCK COUNT)
             models.QtyTransaction.objects.create(
                 transaction_type=8,
-                value=cleaned_data["quantity"],
+                value=quantity,
                 content_object=article_obj
                 )
 
@@ -519,7 +633,7 @@ class View:
         invalid = False
         # Get response
         reason_combo = builder.get_object("reason")
-        reason = utils.get_reason(reason_combo)
+        reason = utils.get_combo_value(reason_combo)
 
         if reason is None:
             reason_combo.get_style_context().add_class("error-combobox")
@@ -569,6 +683,11 @@ class View:
 
         # Get the object
         article_obj = models.Article.objects.get(id=article['id'])
+
+        # Adapt the quantity to the paking if any
+        if article_obj.packing_name > 0:
+            quantity *= article_obj.packing_content
+
         if article["quantity"] == quantity:
             article_obj.used = True
             article_obj.save()
@@ -653,6 +772,8 @@ class View:
                 remark_text.append(NC_TEXT_TEMPLATE.format(_("Non-compliant packaging:"), article["nc_packaging"]))
             if article["remark"]:
                 remark_text.append(article["remark"])
+            if article["packing"]:
+                remark_text.append(get_packing_text(article))
 
             label = Gtk.Label(xalign=0)
             label.set_markup("\n".join(remark_text))
@@ -737,3 +858,38 @@ class View:
         self.toggled = (new_row, i)
         # log.info("Size %s, %s", linked_btn.get_preferred_size().minimum_size.width, linked_btn.get_preferred_size().natural_size.width)
         query_count_all()
+
+
+def get_packing_text(article):
+    # XX [box|...] of YY <dosage_form>
+    data = article["packing"]
+
+    if data is None:
+        return None
+
+    pluralizer = Pluralizer()
+
+    if data["id"] >= 20:
+        template = _("{quantity} {packing_name} of {packaging}")
+    else:
+        template = _("{quantity} {packing_name} of {packing_content} {packaging}")
+
+    quantity = article["quantity"]/data["content"]
+
+    plural_packing = pluralizer.pluralize(
+        data["name"],
+        quantity
+        )
+    plural_packaging = pluralizer.pluralize(
+        first_lower(article["equipment"]["packaging"]),
+        data["content"]
+        )
+
+    result = template.format(
+        quantity=str(quantity).rstrip("0").rstrip("."),
+        packing_name=plural_packing,
+        packing_content=data["content"],
+        packaging=plural_packaging
+    )
+
+    return result

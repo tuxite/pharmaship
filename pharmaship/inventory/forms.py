@@ -66,6 +66,9 @@ class AddArticleForm(forms.ModelForm):
 
     remark = forms.CharField(max_length=256, required=False)
 
+    packing_combo_id = forms.IntegerField(min_value=0)
+    packing_content = forms.IntegerField(min_value=1)
+
     def clean(self):
         """Check that a date is correct if needed by the model.
 
@@ -88,7 +91,7 @@ class AddArticleForm(forms.ModelForm):
 
     class Meta:  # noqa: D106
         model = pharmaship.inventory.models.Article
-        exclude = ['used', 'location', 'parent']
+        exclude = ['used', 'location', 'parent', 'packing_name']
 
 
 class ModifyArticleForm(forms.ModelForm):
@@ -104,9 +107,12 @@ class ModifyArticleForm(forms.ModelForm):
 
     remark = forms.CharField(max_length=256, required=False)
 
+    packing_combo_id = forms.IntegerField(min_value=0)
+    packing_content = forms.IntegerField(min_value=1)
+
     class Meta:  # noqa: D106
         model = pharmaship.inventory.models.Article
-        exclude = ['used', 'location', 'parent']
+        exclude = ['used', 'location', 'parent', 'packing_name']
 
 
 class LocationForm(forms.ModelForm):
