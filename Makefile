@@ -111,8 +111,8 @@ win64: win64_freeze win64_prepare win64_inst
 
 patch_weasyprint:
 # Patching Weasyprint for freezing
-patch -i bin/weasyprint.patch venv/lib/python3.8/site-packages/weasyprint/__init__.py
+	patch -i bin/weasyprint.patch venv/lib/python3.8/site-packages/weasyprint/__init__.py
 
 patch_cairosvg:
 # Patching CairoSVG for freezing
-patch -i bin/cairosvg.patch venv/lib/python3.8/site-packages/cairosvg/__init__.py
+	patch -i bin/cairosvg.patch venv/lib/python3.8/site-packages/cairosvg/__init__.py
