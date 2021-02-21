@@ -2,7 +2,7 @@
 
 name: Build Windows 64 Installer
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
@@ -28,20 +28,20 @@ jobs:
       - name: Setup MSYS2/MingW64 environment
       - uses: msys2/setup-msys2@v2
           with:
-          update: true
-          install: >-
-            git
-            patch
-            mingw-w64-x86_64-python-pip
-            mingw-w64-x86_64-gcc
-            mingw-w64-x86_64-python-cairo
-            mingw-w64-x86_64-gobject-introspection
-            mingw-w64-x86_64-python-pillow
-            mingw-w64-x86_64-gnupg
-            mingw-w64-x86-64-zlib
-            mingw-w64-x86_64-gtk3
-            mingw-w64-x86_64-make
-            mingw-w64-x86_64-nsis
+            update: true
+            install: >-
+              git
+              patch
+              mingw-w64-x86_64-python-pip
+              mingw-w64-x86_64-gcc
+              mingw-w64-x86_64-python-cairo
+              mingw-w64-x86_64-gobject-introspection
+              mingw-w64-x86_64-python-pillow
+              mingw-w64-x86_64-gnupg
+              mingw-w64-x86-64-zlib
+              mingw-w64-x86_64-gtk3
+              mingw-w64-x86_64-make
+              mingw-w64-x86_64-nsis
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Retrieve Pharmaship sources
       - uses: actions/checkout@v2
@@ -67,7 +67,3 @@ jobs:
         with:
           name: WindowsInstaller
           path: './bin/pharmaship_setup_x64.exe'
-      
-      
-      
-            
