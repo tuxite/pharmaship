@@ -126,6 +126,10 @@ def collect_dist_info(packages):
         distrib = pkg_resources.get_distribution(pkg)
         for req in distrib.requires():
             dirs.extend(collect_dist_info(req.key))
+
+        if distrib.egg_info is None:
+            continue
+
         dirs.append((
             distrib.egg_info,
             PurePath('lib') / PurePath(distrib.egg_info).name
