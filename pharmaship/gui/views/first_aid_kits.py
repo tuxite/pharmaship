@@ -381,13 +381,23 @@ class View:
         grid.insert_row(i)
 
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        # Button add from stock
+        button = Gtk.Button()
+        label = Gtk.Label(_("Transfer an article from stock"), xalign=0)
+        button.add(label)
+        button.set_relief(Gtk.ReliefStyle.NONE)
+        button.get_style_context().add_class("article-btn-add")
+        button.connect("clicked", self.dialog_add_from_stock, element)
+        box.add(button)
+        # Button add new
         button = Gtk.Button()
         label = Gtk.Label(_("Add an article"), xalign=0)
         button.add(label)
         button.set_relief(Gtk.ReliefStyle.NONE)
-        button.get_style_context().add_class("article-btn-add")
-        button.connect("clicked", self.dialog_add, element)
+        button.get_style_context().add_class("article-btn-add-alt")
+        button.connect("clicked", self.dialog_add_new, element)
         box.add(button)
+
         box.get_style_context().add_class("article-item-cell-add")
         grid.attach(box, 0, i, 1, 1)
 
@@ -401,8 +411,37 @@ class View:
 
         query_count_all()
 
-    def dialog_add(self, source, item):
-        builder = Gtk.Builder.new_from_file(utils.get_template("subitem_add.glade"))
+
+    def dialog_add_new(self, source, item):
+        builder = Gtk.Builder.new_from_file(utils.get_template("subitem_add_new.glade"))
+        dialog = builder.get_object("dialog")
+        dialog.set_title(_("Add an item"))
+
+        # Preset item name
+        label = builder.get_object("name")
+        label.set_text(item["name"])
+        # Expiry date input mask workaround
+        exp_date = builder.get_object("exp_date_raw")
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
+        exp_date.connect("activate", self.response_add_new, dialog, item, builder)
+        builder.expose_object("exp_date", exp_date)
+
+        # Connect signals
+        builder.connect_signals({
+            "on-response": (self.response_add_new, dialog, item, builder),
+            "on-cancel": (utils.dialog_destroy, dialog)
+        })
+
+        query_count_all()
+
+        dialog.set_transient_for(self.window)
+        dialog.run()
+
+        dialog.destroy()
+
+
+    def dialog_add_from_stock(self, source, item):
+        builder = Gtk.Builder.new_from_file(utils.get_template("subitem_add_from_stock.glade"))
         dialog = builder.get_object("dialog")
 
         combobox = builder.get_object("item")
@@ -422,7 +461,7 @@ class View:
 
         # Connect signals
         builder.connect_signals({
-            "on-response": (self.response_add, dialog, item, builder),
+            "on-response": (self.response_add_from_stock, dialog, item, builder),
             "on-cancel": (utils.dialog_destroy, dialog)
         })
 
@@ -487,7 +526,66 @@ class View:
         combo.add_attribute(renderer_text, "text", 1)
         combo.set_active(active_index)
 
-    def response_add(self, source, dialog, item, builder):
+    def response_add_new(self, source, dialog, item, builder):
+        fields = {
+            "entry": [
+                "name",
+                "remark",
+                "nc",
+                "exp_date"
+            ],
+            "spinbutton": [
+                "quantity",
+            ]
+        }
+
+        cleaned_data = utils.get_form_data(
+            form_class=forms.AddNewSubitemForm,
+            builder=builder,
+            fields=fields,
+            data={"perishable": item["perishable"]}
+            )
+        if cleaned_data is None:
+            return
+
+        # Get the FirstAidKit instance
+        try:
+            id = int(self.stack.get_visible_child_name().split("-")[-1])
+        except ValueError as error:
+            log.error("First aid kit ID cannot be found! %s", error)
+            return
+
+        try:
+            first_aid_kit = models.FirstAidKit.objects.get(id=id)
+        except models.FirstAidKit.DoesNotExist as error:
+            log.error("First aid kit cannot be found! Wrong ID. %s", error)
+            return
+
+        # Create a duplicate of the reference article/medicine
+        article = models.FirstAidKitItem.objects.create(
+            name=cleaned_data["name"],
+            exp_date=cleaned_data["exp_date"],
+            kit=first_aid_kit,
+            nc=cleaned_data["nc"],
+            remark=cleaned_data["remark"],
+            content_type_id=item["parent"]["type"],
+            object_id=item["parent"]["id"]
+        )
+
+        # Create a quantity transaction for FirstAidKitItem
+        models.QtyTransaction.objects.create(
+            transaction_type=1,
+            value=cleaned_data["quantity"],
+            content_object=article
+            )
+
+        dialog.destroy()
+
+        query_count_all()
+
+        self.refresh_grid()
+
+    def response_add_from_stock(self, source, dialog, item, builder):
         fields = {
             "entry": [
                 "remark",

@@ -85,6 +85,10 @@ DRUG_ROA_CHOICES = (
 )
 
 # Packing choices for medicines
+# ID value is important as starting >= 20 it defines the packing content.
+# ie.. "pair" means 2 ==> [ID] 20/10 = 2
+# "dozen" means 12 ==> [ID] 120/10 = 12
+# ID values above 20 are divided by 10 and truncated (ie.: 3.9 means 3).
 PACKING_CHOICES = (
     (0, 'default'),
     (10, _('box')),

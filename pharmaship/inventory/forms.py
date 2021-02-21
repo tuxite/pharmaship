@@ -159,6 +159,39 @@ class AddSubitemForm(forms.Form):
     remark = forms.CharField(max_length=256, required=False)
 
 
+class AddNewSubitemForm(forms.Form):
+    """Form used to add a new `FirstAidKitItem`."""
+
+    name = forms.CharField(max_length=100)
+    quantity = forms.IntegerField(min_value=1)
+    exp_date = forms.DateField(required=False)
+    remark = forms.CharField(max_length=256, required=False)
+    nc = forms.CharField(max_length=256, required=False)
+
+    # For exp_date required field validation
+    perishable = forms.BooleanField(required=False)
+
+    def clean(self):
+        """Check that a date is correct if needed by the model.
+
+        This method completes the standard validation method and adds a
+        conditional check of the date through the `perishable` attribute.
+        If `True`, an `exp_date` must be present and correct.
+        """
+        cleaned_data = super().clean()
+
+        if not cleaned_data.get("perishable"):
+            return cleaned_data
+
+        if not cleaned_data.get("exp_date"):
+            self.add_error(
+                "exp_date",
+                forms.ValidationError(
+                    _('Expiry date must be provided.'),
+                    code='required')
+                    )
+
+
 class ModifySubitemForm(forms.Form):
     """Form used to modify a `FirstAidKitItem`."""
 

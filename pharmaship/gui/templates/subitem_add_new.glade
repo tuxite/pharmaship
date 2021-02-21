@@ -11,6 +11,8 @@
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">Supply the first aid kit</property>
     <property name="modal">True</property>
+    <property name="default-width">400</property>
+    <property name="default-height">320</property>
     <property name="type-hint">normal</property>
     <child internal-child="vbox">
       <object class="GtkBox">
@@ -41,7 +43,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_response">
-                <property name="label" translatable="yes">Modify the item</property>
+                <property name="label" translatable="yes">Add this item</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
@@ -98,6 +100,7 @@
                     <property name="adjustment">quantity_adjustment</property>
                     <property name="numeric">True</property>
                     <property name="update-policy">if-valid</property>
+                    <signal name="activate" handler="on-response" swapped="no"/>
                   </object>
                   <packing>
                     <property name="left-attach">1</property>
@@ -108,21 +111,12 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="label" translatable="yes">Expiry date:</property>
-                  </object>
-                  <packing>
-                    <property name="left-attach">0</property>
-                    <property name="top-attach">3</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">Modify the following item:</property>
+                    <property name="label" translatable="yes">Supply the first aid kit from the following item:</property>
                     <property name="xalign">0</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="left-attach">0</property>
@@ -154,26 +148,50 @@
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">end</property>
+                    <property name="label" translatable="yes">Name:</property>
+                  </object>
+                  <packing>
+                    <property name="left-attach">0</property>
+                    <property name="top-attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="name">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="max-width-chars">100</property>
+                  </object>
+                  <packing>
+                    <property name="left-attach">1</property>
+                    <property name="top-attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">end</property>
+                    <property name="label" translatable="yes">Expiry:</property>
+                  </object>
+                  <packing>
+                    <property name="left-attach">0</property>
+                    <property name="top-attach">3</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkEntry" id="exp_date_raw">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
+                    <property name="activates-default">True</property>
                     <signal name="activate" handler="on-response" swapped="no"/>
                   </object>
                   <packing>
                     <property name="left-attach">1</property>
                     <property name="top-attach">3</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="name">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">label</property>
-                  </object>
-                  <packing>
-                    <property name="left-attach">0</property>
-                    <property name="top-attach">1</property>
-                    <property name="width">2</property>
                   </packing>
                 </child>
               </object>
