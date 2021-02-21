@@ -32,16 +32,17 @@ jobs:
           install: >-
             git
             patch
-            mingw-w64-x86_64-python-pip
             mingw-w64-x86_64-gcc
-            mingw-w64-x86_64-python-cairo
-            mingw-w64-x86_64-gobject-introspection
-            mingw-w64-x86_64-python-pillow
+            mingw-w64-x86_64-make
             mingw-w64-x86_64-gnupg
             mingw-w64-x86_64-zlib
             mingw-w64-x86_64-gtk3
-            mingw-w64-x86_64-make
+            mingw-w64-x86_64-gobject-introspection
             mingw-w64-x86_64-nsis
+            mingw-w64-x86_64-python-pip
+            mingw-w64-x86_64-python-virtualenv
+            mingw-w64-x86_64-python-pillow
+            mingw-w64-x86_64-python-cairo
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Retrieve Pharmaship sources
         uses: actions/checkout@v2
