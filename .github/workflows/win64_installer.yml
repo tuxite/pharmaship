@@ -38,7 +38,7 @@ jobs:
             mingw-w64-x86_64-gobject-introspection
             mingw-w64-x86_64-python-pillow
             mingw-w64-x86_64-gnupg
-            mingw-w64-x86-64-zlib
+            mingw-w64-x86_64-zlib
             mingw-w64-x86_64-gtk3
             mingw-w64-x86_64-make
             mingw-w64-x86_64-nsis
