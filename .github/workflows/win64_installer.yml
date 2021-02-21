@@ -38,6 +38,7 @@ jobs:
             mingw-w64-x86_64-zlib
             mingw-w64-x86_64-gtk3
             mingw-w64-x86_64-gobject-introspection
+            mingw-w64-x86_64-adwaita-icon-theme
             mingw-w64-x86_64-nsis
             mingw-w64-x86_64-python-pip
             mingw-w64-x86_64-python-virtualenv
