@@ -118,7 +118,7 @@ Section "Pharmaship software" SecPharmaship
   File /r "..\build\win64\share"
   File /r "..\build\win64\lib"
   File /r "..\build\win64\etc"
-  
+
   ;Store installation folder
   WriteRegStr HKCU "Software\${APPNAME}" "" $INSTDIR
 
@@ -152,9 +152,9 @@ Section "Pharmaship software" SecPharmaship
 SectionEnd
 
 SectionGroup "Allowances" SecAllowances
-  
-  
-  
+
+
+
   ;Run allowance installation scripts
   Section "!Dotation A - 25 pers"
     !insertmacro Allowance "allowance_dotation-a-25-marins_120a.tar.asc"
@@ -207,13 +207,13 @@ FunctionEnd
 Section UnInstall
   SetDetailsPrint "both"
 
-  RMDir /r "$INSTDIR}\lib"
-  RMDir /r "$INSTDIR}\share"
-  RMDir /r "$INSTDIR}\etc"
-  RMDir /r "$INSTDIR}\allowances"
+  RMDir /r "$INSTDIR\lib"
+  RMDir /r "$INSTDIR\share"
+  RMDir /r "$INSTDIR\etc"
+  RMDir /r "$INSTDIR\allowances"
 
   !insertmacro UNINSTALL.LOG_UNINSTALL "$INSTDIR"
-  !insertmacro UNINSTALL.LOG_UNINSTALL "$LOCALAPPDATA\${APPNAME}"
+  ; !insertmacro UNINSTALL.LOG_UNINSTALL "$LOCALAPPDATA\${APPNAME}"
   !insertmacro UNINSTALL.LOG_END_UNINSTALL
 
   DeleteRegKey /ifempty ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}"

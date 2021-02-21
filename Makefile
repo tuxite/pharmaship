@@ -81,18 +81,38 @@ icon:
 gresource:
 	glib-compile-resources --sourcedir=${GUI_FOLDER} --target=${GUI_FOLDER}/templates/resources.gresource ${GUI_FOLDER}/resources.gresource.xml
 
-win64:
+win64_freeze:
 ifeq ($(OS),Windows_NT)     # is Windows_NT on XP, 2000, 7, Vista, 10...
 	# Build the Windows packages with cx_Freeze
-	..\venv4\bin\python setup.py build
+	venv\bin\python setup_win.py build
+else
+	echo "Not on Windows. Aborting."
+endif
+
+win64_prepare:
+ifeq ($(OS),Windows_NT)
 	# Find and remove DLL duplicates
-	./bin/jdupes.exe -r -S -j build/win64 > duplicates.json
-	..\venv4\bin\python ./bin/deduplicate.py
+	./bin/jdupes.exe -r -S -j -o name -X onlyext:dll,DLL build/win64 > duplicates.json
+	venv\bin\python ./bin/deduplicate.py
 	# Remove unecessary locale and dic files
-	..\venv4\bin\python ./bin/remove_locale.py
+	venv\bin\python ./bin/remove_locale.py
 else
 	echo "Not on Windows. Aborting."
 endif
 
 win64_inst:
+ifeq ($(OS),Windows_NT)
 	makensis ./bin/installer.nsi
+else
+	echo "Not on Windows. Aborting."
+endif
+
+win64: win64_freeze win64_prepare win64_inst
+
+patch_weasyprint:
+# Patching Weasyprint for freezing
+patch -i bin/weasyprint.patch venv/lib/python3.8/site-packages/weasyprint/__init__.py
+
+patch_cairosvg:
+# Patching CairoSVG for freezing
+patch -i bin/cairosvg.patch venv/lib/python3.8/site-packages/cairosvg/__init__.py

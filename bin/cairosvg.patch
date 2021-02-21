@@ -1,0 +1,11 @@
+--- venv/lib/python3.8/site-packages/cairosvg/__init__.py	2021-02-21 14:10:59 +0000
++++ bin/cairosvg/__init__.py	2021-02-21 15:00:25 +0000
+@@ -15,7 +15,8 @@
+     else:
+         # Frozen with something else (py2exe, etc.)
+         # See https://github.com/Kozea/WeasyPrint/pull/269
+-        ROOT = Path(os.path.dirname(sys.executable))
++        # ROOT = Path(os.path.dirname(sys.executable))
++        ROOT = Path(os.path.dirname(sys.executable)) / "lib" / "cairosvg"
+ else:
+     ROOT = Path(os.path.dirname(__file__))

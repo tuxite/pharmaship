@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """Setup file for Pharmaship.
 
-A WeasyPrint file must be edited for cx_Freeze:
+WeasyPrint/CairoSVG files must be edited for cx_Freeze:
+(handled in Makefile using patches)
 
 weasyprint/__init__.py:
 
@@ -44,7 +45,6 @@ import pkg_resources
 import os
 
 from pathlib import Path, PurePath
-
 from setuptools import find_packages
 from cx_Freeze import setup, Executable
 
@@ -83,13 +83,13 @@ GDBUS_WIN = [
 EXECUTABLE_WIN = [
     Executable(
         script="launcher.py",
-        targetName="pharmaship.exe",
+        target_name="pharmaship.exe",
         base="Win32GUI",
         icon="bin/pharmaship.ico"
     ),
     Executable(
         script="manage.py",
-        targetName="pharmaship-admin.exe",
+        target_name="pharmaship-admin.exe",
         base="Console",
     )
 ]
@@ -97,13 +97,13 @@ EXECUTABLE_WIN = [
 EXECUTABLE = [
     Executable(
         script="launcher.py",
-        targetName="pharmaship",
+        target_name="pharmaship",
         base=None,
         icon="bin/pharmaship.ico"
     ),
     Executable(
         script="manage.py",
-        targetName="pharmaship-admin",
+        target_name="pharmaship-admin",
         base="Console",
     )
 ]
@@ -224,6 +224,35 @@ def collect_icons():
     return files
 
 
+def collect_missing_python():
+    """Return the list of missing python files.
+
+    Sadly, cx_Freeze does not take in account folders without __init__.py file.
+    """
+    missing = [
+        # (module_name, missing_folder)
+        ("weasyprint", "formatting_structure"),
+    ]
+
+    files = []
+
+    for _module in missing:
+        __module_name = _module[0]
+        distrib = pkg_resources.get_distribution(__module_name)
+        module_path = Path(distrib.location) / __module_name / _module[1]
+
+        files = []
+        dest_path = PurePath("lib") / __module_name / _module[1]
+
+        for file in module_path.glob('*.py'):
+            filename = module_path / file
+            if not filename.is_file():
+                continue
+            files.append((filename, dest_path / filename.name))
+
+    return files
+
+
 def get_collected_files():
     """Return the list of data files to copy in the bundle."""
     collected_files = []
@@ -234,6 +263,7 @@ def get_collected_files():
             *collect_files(GDBUS_WIN),
             *collect_files(GNUPG_WIN),
             *collect_files(DLL_WIN),
+            *collect_missing_python(),
             # cairocffi generated files
             *cairocffi_files(),
             # Pillow.libs
@@ -251,6 +281,7 @@ def get_collected_files():
     else:
         collected_files = [
             *collect_dist_info(DISTRIBUTIONS),
+            *collect_missing_python(),
             # cairocffi generated files
             *cairocffi_files(),
             # Pillow.libs
@@ -325,8 +356,8 @@ REQUIRED_PACKAGES = [
     "PyPDF2"
 ]
 if sys.platform == "win32":
-    REQUIRED_PACKAGES.append("winpaths")
-    build_exe_options["packages"].append("winpaths")
+    REQUIRED_PACKAGES.append("winpath")
+    build_exe_options["packages"].append("winpath")
 
 setup(
     name="pharmaship",

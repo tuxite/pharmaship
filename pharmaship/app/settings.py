@@ -18,8 +18,8 @@ from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if sys.platform == "win32":
-    import winpaths
-    USERDATA_DIR = Path(winpaths.get_local_appdata())
+    import winpath
+    USERDATA_DIR = Path(winpath.get_local_appdata())
 else:
     USERDATA_DIR = Path.home() / ".pharmaship"
 USERDATA_DIR.mkdir(parents=True, exist_ok=True)

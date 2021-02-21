@@ -3,7 +3,7 @@
      # Advanced Uninstall Log NSIS header
      # Version 1.0 2007-01-31
      # By Red Wine (http://nsis.sf.net/User:Red_Wine)
-     
+
      # Usage: See included examples Uninstall_Log_Default_UI.nsi - Uninstall_Log_Modern_UI.nsi
 
 !verbose push
@@ -143,7 +143,7 @@
 !macro INTERACTIVE_UNINSTALL
   !verbose push
      !verbose ${UNINST_LOG_VERBOSE}
-     
+
      !ifdef INTERACTIVE_UNINSTALL
         !error "INTERACTIVE_UNINSTALL is already defined"
      !endif
@@ -263,7 +263,7 @@
         StrCmp "$unlog_tmp_3" "$R9" end
         IfErrors +2
         goto read
-        ClearErrors 
+        ClearErrors
         StrCmp "$R9" "${UNINST_EXE}" isfile
         StrCmp "$R9" "${UNINST_DAT}" isfile
         IfFileExists "$R9\*.*" msgdir
@@ -425,7 +425,7 @@
         ${uninstall.log_install} "${UNLOG_PART}${ID}" "${EXCLU_LIST}" "$OUTDIR"
         ${uninstall.log_mergeID} "${UNLOG_PART}${ID}"
 
-   !undef ID ${__LINE__}
+   !undef ID
 
   !verbose pop
 !macroend
@@ -434,4 +434,3 @@
 
 !verbose pop
      ;_____________________________ HEADER FILE END ____________________________
-
