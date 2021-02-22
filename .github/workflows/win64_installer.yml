@@ -52,7 +52,7 @@ jobs:
       # Install jdupes from original Github repo releases
       # Use 1.19.1 release
       - name: Install jdupes
-      - run: |
+        run: |
           wget -c -O "jdupes.zip" "https://github.com/jbruchon/jdupes/releases/download/v1.19.1/jdupes-1.19.1-win64.zip"
           unzip -j "jdupes.zip" "*/jdupes.exe" -d "./bin"
           rm jdupes.zip
