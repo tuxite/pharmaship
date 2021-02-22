@@ -50,6 +50,7 @@ from cx_Freeze import setup, Executable
 
 
 SEARCH_PATHS = os.getenv("PATH", os.defpath).split(os.pathsep)
+MINGW_ROOT = Path(os.getenv("MINGW_PREFIX"))
 
 DISTRIBUTIONS = [
     "rest-framework-generic-relations",
@@ -208,9 +209,7 @@ def collect_icons():
     # TODO: list only necessary icons
     files = []
 
-    import os
-    print(os.environ)
-    path = Path(os.getenv("MINGW_PREFIX")) / "share/icons/Adwaita"
+    path = MINGW_ROOT / "share/icons/Adwaita"
     # path = Path(r"C:\msys64\mingw64\share\icons\Adwaita")
     dest = PurePath("share/icons/Adwaita")
 
@@ -276,14 +275,14 @@ def get_collected_files():
             # Pillow.libs
             *pillow_libs_files(),
             # GLib schemas
-            (r"C:\msys64\mingw64\share\glib-2.0\schemas", r"share\glib-2.0\schemas"),
+            (MINGW_ROOT / "share/glib-2.0/schemas", r"share\glib-2.0\schemas"),
             # Namespaces
-            (r"C:\msys64\mingw64\lib\girepository-1.0", r"lib\girepository-1.0"),
+            (MINGW_ROOT / "lib/girepository-1.0", r"lib\girepository-1.0"),
             # GdkPixbuf loaders
-            (r"C:\msys64\mingw64\lib\gdk-pixbuf-2.0", r"lib\gdk-pixbuf-2.0"),
+            (MINGW_ROOT / "lib/gdk-pixbuf-2.0", r"lib\gdk-pixbuf-2.0"),
             # FontConfig
-            (r"C:\msys64\mingw64\share\fontconfig", r"share\fontconfig"),
-            (r"C:\msys64\mingw64\etc\fonts", r"etc\fonts"),
+            (MINGW_ROOT / "share/fontconfig", r"share\fontconfig"),
+            (MINGW_ROOT / "etc/fonts", r"etc\fonts"),
         ]
     else:
         collected_files = [
