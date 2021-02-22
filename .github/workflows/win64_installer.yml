@@ -78,7 +78,7 @@ jobs:
         run: |
           mkdir allowances
           cd allowances
-          wget -c -O "allowances.tar.xz" "https://cloud.devmaretique.com/s/HCCfx2fztttt5ii"
+          wget -c -O "allowances.tar.xz" "https://cloud.devmaretique.com/s/HCCfx2fztttt5ii/download"
           tar -xvf allowances.tar.xz
           cd ..
       # Generate installer
