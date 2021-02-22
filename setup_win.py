@@ -208,7 +208,10 @@ def collect_icons():
     # TODO: list only necessary icons
     files = []
 
-    path = Path(r"C:\msys64\mingw64\share\icons\Adwaita")
+    import os
+    print(os.environ)
+    path = Path(os.getenv("MINGW_PREFIX")) / "mingw64/share/icons/Adwaita"
+    # path = Path(r"C:\msys64\mingw64\share\icons\Adwaita")
     dest = PurePath("share/icons/Adwaita")
 
     for file in path.glob("**/*symbolic.*"):
