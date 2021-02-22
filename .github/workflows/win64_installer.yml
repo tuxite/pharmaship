@@ -63,6 +63,10 @@ jobs:
           venv/bin/python -m pip install -r requirements.txt
           venv/bin/python -m pip install winpath
           venv/bin/python -m pip install cx_Freeze
+          venv/bin/python -m pip install pywin32
+          rm -rf venv/lib/python3.8/site-packages/setuptools*
+          rm -rf venv/lib/python3.8/site-packages/pip*
+          rm -rf venv/lib/python3.8/site-packages/wheel*
       # Patch CairoSVG and Weasyprint for freezing
       - name: Path CairoSVG and Weasyprint
         run: |
