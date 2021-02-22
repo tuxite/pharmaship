@@ -32,6 +32,8 @@ jobs:
           install: >-
             git
             patch
+            wget
+            unzip
             mingw-w64-x86_64-gcc
             mingw-w64-x86_64-make
             mingw-w64-x86_64-gnupg
@@ -47,6 +49,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Retrieve Pharmaship sources
         uses: actions/checkout@v2
+      # Install jdupes from original Github repo releases
+      # Use 1.19.1 release
+      - name: Install jdupes
+      - run: |
+          wget -c -O "jdupes.zip" "https://github.com/jbruchon/jdupes/releases/download/v1.19.1/jdupes-1.19.1-win64.zip"
+          unzip -j "jdupes.zip" "*/jdupes.exe" -d "./bin"
+          rm jdupes.zip
       # Prepare virtualenv and install python dependencies
       - name: Prepare Python environment
         run: |
