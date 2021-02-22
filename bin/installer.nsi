@@ -164,17 +164,17 @@ SectionGroup "Allowances" SecAllowances
     !insertmacro Allowance "allowance_gsmu_2018.tar.asc"
   SectionEnd
 
-  Section /o "CMA CGM V12"
-    !insertmacro Allowance "allowance_cma-cgm_v12.tar.asc"
-  SectionEnd
+  ; Section /o "CMA CGM V12"
+  ;   !insertmacro Allowance "allowance_cma-cgm_v12.tar.asc"
+  ; SectionEnd
 
-  Section /o "MARLINK"
-    !insertmacro Allowance "allowance_marlink-telemed_01.tar.asc"
-  SectionEnd
-
-  Section /o "POCrame"
-    !insertmacro Allowance "allowance_pocrame_01.tar.asc"
-  SectionEnd
+  ; Section /o "MARLINK"
+  ;   !insertmacro Allowance "allowance_marlink-telemed_01.tar.asc"
+  ; SectionEnd
+  ;
+  ; Section /o "POCrame"
+  ;   !insertmacro Allowance "allowance_pocrame_01.tar.asc"
+  ; SectionEnd
 
 SectionGroupEnd
 

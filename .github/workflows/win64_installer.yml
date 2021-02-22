@@ -34,6 +34,7 @@ jobs:
             patch
             wget
             unzip
+            tar
             mingw-w64-x86_64-gcc
             mingw-w64-x86_64-make
             mingw-w64-x86_64-gnupg
@@ -72,6 +73,14 @@ jobs:
         run: |
           mingw32-make patch_cairosvg
           mingw32-make patch_weasyprint
+      # Load allowances to be embedeed in the installer
+      - name: Fetch allowances signed files
+        run: |
+          mkdir allowances
+          cd allowances
+          wget -c -O "allowances.tar.xz" "https://cloud.devmaretique.com/s/HCCfx2fztttt5ii"
+          tar -xvf allowances.tar.xz
+          cd ..
       # Generate installer
       - name: Build installer
         run: |
