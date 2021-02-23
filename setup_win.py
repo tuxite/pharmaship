@@ -230,6 +230,30 @@ def collect_icons():
     return files
 
 
+def collect_missing_modules(missing, dest):
+    """Return the list of missing python files.
+
+    Sadly, cx_Freeze does not take in account folders without __init__.py file.
+    """
+    files = []
+
+    for _module in missing:
+        __module_name = _module[0]
+        distrib = pkg_resources.get_distribution(__module_name)
+        submodules = _module[1].split(".")
+        module_path = Path(distrib.location) / __module_name / "/".join(submodules)
+
+        dest_path = dest / __module_name / "/".join(submodules)
+
+        for file in module_path.glob('*.py'):
+            filename = module_path / file
+            if not filename.is_file():
+                continue
+            files.append((filename, dest_path / filename.name))
+
+    return files
+
+
 def collect_missing_python():
     """Return the list of missing python files.
 
@@ -240,22 +264,23 @@ def collect_missing_python():
         ("weasyprint", "formatting_structure"),
     ]
 
-    files = []
+    files = collect_missing_modules(missing, PurePath("lib"))
+    return files
 
-    for _module in missing:
-        __module_name = _module[0]
-        distrib = pkg_resources.get_distribution(__module_name)
-        module_path = Path(distrib.location) / __module_name / _module[1]
 
-        files = []
-        dest_path = PurePath("lib") / __module_name / _module[1]
+def collect_missing_python_zip():
+    """Return the list of missing python files for library.zip.
 
-        for file in module_path.glob('*.py'):
-            filename = module_path / file
-            if not filename.is_file():
-                continue
-            files.append((filename, dest_path / filename.name))
+    Sadly, cx_Freeze does not take in account folders without __init__.py file.
+    """
+    missing = [
+        # (module_name, missing_folder)
+        ("django", "core.management.commands"),
+        ("django", "contrib.auth.management.commands"),
+        ("django", "contrib.contenttypes.management.commands"),
+    ]
 
+    files = collect_missing_modules(missing, PurePath("."))
     return files
 
 
@@ -318,6 +343,7 @@ build_exe_options = {
         "django",
         "pytz",
         ],
+    "zip_includes": collect_missing_python_zip(),
     "packages": [
         "statistics",
         "gi",
