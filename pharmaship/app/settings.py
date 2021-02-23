@@ -19,7 +19,7 @@ from pathlib import Path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if sys.platform == "win32":
     import winpath
-    USERDATA_DIR = Path(winpath.get_local_appdata())
+    USERDATA_DIR = Path(winpath.get_local_appdata()) / "pharmaship"
 else:
     USERDATA_DIR = Path.home() / ".pharmaship"
 USERDATA_DIR.mkdir(parents=True, exist_ok=True)
