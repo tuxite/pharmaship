@@ -22,7 +22,9 @@ Unicode True
 ;--------------------------------
 ;Include Modern UI
 !include "MUI2.nsh"
-
+;Includes for custom page and logic
+!include "nsDialogs.nsh"
+!include "LogicLib.nsh"
 ;--------------------------------
 ;Include Advanced Uninstall Log NSIS Header
 !include "AdvUninstLog.nsh"
@@ -68,6 +70,7 @@ Var StartMenuFolder
 
 !insertmacro MUI_UNPAGE_WELCOME
 !insertmacro MUI_UNPAGE_CONFIRM
+UninstPage custom un.DeleteUserData un.DeleteUserDataLeave ;Custom page
 !insertmacro MUI_UNPAGE_INSTFILES
 !insertmacro MUI_UNPAGE_FINISH
 
@@ -203,8 +206,12 @@ Function .onInstSuccess
 FunctionEnd
 
 ;--------------------------------
-;Uninstaller Section
-Section UnInstall
+; Uninstaller Section
+Var Dialog
+Var Checkbox
+Var Checkbox_State
+
+Section Uninstall
   SetDetailsPrint "both"
 
   RMDir /r "$INSTDIR\lib"
@@ -213,12 +220,16 @@ Section UnInstall
   RMDir /r "$INSTDIR\allowances"
 
   !insertmacro UNINSTALL.LOG_UNINSTALL "$INSTDIR"
-  ; !insertmacro UNINSTALL.LOG_UNINSTALL "$LOCALAPPDATA\${APPNAME}"
   !insertmacro UNINSTALL.LOG_END_UNINSTALL
 
   DeleteRegKey /ifempty ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}"
 
   Delete "$INSTDIR\pharmaship.ico"
+
+  # Delete user data if checkbox checked
+  ${If} $Checkbox_State == ${BST_CHECKED}
+		RMDir /r "$LOCALAPPDATA\pharmaship"
+	${EndIf}
 
   # Last $INSTDIR files to delete
   Delete "$INSTDIR\Uninstall.exe"
@@ -241,4 +252,32 @@ SectionEnd
 
 Function UN.onInit
   !insertmacro UNINSTALL.LOG_BEGIN_UNINSTALL
+FunctionEnd
+
+; Function un.DeleteUserData
+Function un.DeleteUserData
+
+	nsDialogs::Create 1018
+	Pop $Dialog
+
+	${If} $Dialog == error
+		Abort
+	${EndIf}
+
+	${NSD_CreateCheckbox} 0 30u 100% 10u "&Delete user data (including inventories)"
+	Pop $Checkbox
+
+	${If} $Checkbox_State == ${BST_CHECKED}
+		${NSD_Check} $Checkbox
+	${EndIf}
+
+	# alternative for the above ${If}:
+	#${NSD_SetState} $Checkbox_State
+
+	nsDialogs::Show
+
+FunctionEnd
+
+Function un.DeleteUserDataLeave
+    ${NSD_GetState} $Checkbox $Checkbox_State
 FunctionEnd
