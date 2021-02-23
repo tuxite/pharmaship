@@ -5,7 +5,7 @@ import os
 import django
 
 
-def main():
+def main():  # noqa: D103
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pharmaship.app.settings')
 
     # Need to setup Django first to register our Apps
