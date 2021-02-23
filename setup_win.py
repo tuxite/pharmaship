@@ -300,14 +300,14 @@ def get_collected_files():
             # Pillow.libs
             *pillow_libs_files(),
             # GLib schemas
-            (MINGW_ROOT / "share/glib-2.0/schemas", r"share\glib-2.0\schemas"),
+            (MINGW_ROOT / "share/glib-2.0/schemas", "share/glib-2.0/schemas"),
             # Namespaces
-            (MINGW_ROOT / "lib/girepository-1.0", r"lib\girepository-1.0"),
+            (MINGW_ROOT / "lib/girepository-1.0", "lib/girepository-1.0"),
             # GdkPixbuf loaders
-            (MINGW_ROOT / "lib/gdk-pixbuf-2.0", r"lib\gdk-pixbuf-2.0"),
+            (MINGW_ROOT / "lib/gdk-pixbuf-2.0", "lib/gdk-pixbuf-2.0"),
             # FontConfig
-            (MINGW_ROOT / "share/fontconfig", r"share\fontconfig"),
-            (MINGW_ROOT / "etc/fonts", r"etc\fonts"),
+            (MINGW_ROOT / "share/fontconfig", "share/fontconfig"),
+            (MINGW_ROOT / "etc/fonts", "etc/fonts"),
         ]
     else:
         collected_files = [
