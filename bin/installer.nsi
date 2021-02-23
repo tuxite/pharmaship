@@ -38,13 +38,13 @@ Icon "pharmaship.ico"
 OutFile "pharmaship_setup_x64.exe"
 ShowInstDetails show
 ShowUninstDetails show
+BrandingText "Développement de Solutions Marétiques"
+ManifestSupportedOS Win10
 
 ;Default installation folder
-InstallDir "$LOCALAPPDATA\${APPNAME}"
+InstallDir "$LOCALAPPDATA\Programs\${APPNAME}"
 
 ;Get installation folder from registry if available
-
-;InstallDir "$PROGRAMFILES\${APP_NAME}"
 InstallDirRegKey ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "InstallDir"
 
 ;Request application privileges for Windows Vista
@@ -127,7 +127,7 @@ Section "Pharmaship software" SecPharmaship
 
   # Start Menu
   !insertmacro MUI_STARTMENU_WRITE_BEGIN 0 ;This macro sets $StartMenuFolder and skips to MUI_STARTMENU_WRITE_END if the "Don't create shortcuts" checkbox is checked...
-    CreateDirectory "$SMPrograms\$StartMenuFolder"
+    CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Pharmaship.lnk" "$INSTDIR\pharmaship.exe"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
@@ -155,9 +155,6 @@ Section "Pharmaship software" SecPharmaship
 SectionEnd
 
 SectionGroup "Allowances" SecAllowances
-
-
-
   ;Run allowance installation scripts
   Section "!Dotation A - 25 pers"
     !insertmacro Allowance "allowance_dotation-a-25-marins_120a.tar.asc"
@@ -174,7 +171,7 @@ SectionGroup "Allowances" SecAllowances
   ; Section /o "MARLINK"
   ;   !insertmacro Allowance "allowance_marlink-telemed_01.tar.asc"
   ; SectionEnd
-  ;
+
   ; Section /o "POCrame"
   ;   !insertmacro Allowance "allowance_pocrame_01.tar.asc"
   ; SectionEnd
@@ -238,7 +235,7 @@ Section Uninstall
   !insertmacro MUI_STARTMENU_WRITE_BEGIN 0 ;This macro sets $StartMenuFolder and skips to MUI_STARTMENU_WRITE_END if the "Don't create shortcuts" checkbox is checked...
     Delete "$SMPROGRAMS\$StartMenuFolder\Pharmaship.lnk"
     Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
-    RMDir "$SMPrograms\$StartMenuFolder"
+    RMDir "$SMPROGRAMS\$StartMenuFolder"
   !insertmacro MUI_STARTMENU_WRITE_END
 
   # Delete shortcut if any
