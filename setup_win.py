@@ -254,34 +254,59 @@ def collect_missing_modules(missing, dest):
     return files
 
 
-def collect_missing_python():
-    """Return the list of missing python files.
+def missing_init_for_cxfreeze():
+    """Write an empty __init__.py file if it does not exist.
 
-    Sadly, cx_Freeze does not take in account folders without __init__.py file.
+    This is due to cxFreeze skipping folders without this file.
     """
     missing = [
         # (module_name, missing_folder)
         ("weasyprint", "formatting_structure"),
-    ]
-
-    files = collect_missing_modules(missing, PurePath("lib"))
-    return files
-
-
-def collect_missing_python_zip():
-    """Return the list of missing python files for library.zip.
-
-    Sadly, cx_Freeze does not take in account folders without __init__.py file.
-    """
-    missing = [
-        # (module_name, missing_folder)
         ("django", "core.management.commands"),
         ("django", "contrib.auth.management.commands"),
         ("django", "contrib.contenttypes.management.commands"),
     ]
 
-    files = collect_missing_modules(missing, PurePath("."))
-    return files
+    for _module in missing:
+        __module_name = _module[0]
+        distrib = pkg_resources.get_distribution(__module_name)
+        submodules = _module[1].split(".")
+        init_path = Path(distrib.location) / __module_name / "/".join(submodules) / "__init__.py"
+
+        if not init_path.exists():
+            init_path.write_text("")
+
+    return
+
+
+# def collect_missing_python():
+#     """Return the list of missing python files.
+#
+#     Sadly, cx_Freeze does not take in account folders without __init__.py file.
+#     """
+#     missing = [
+#         # (module_name, missing_folder)
+#         ("weasyprint", "formatting_structure"),
+#     ]
+#
+#     files = collect_missing_modules(missing, PurePath("lib"))
+#     return files
+#
+#
+# def collect_missing_python_zip():
+#     """Return the list of missing python files for library.zip.
+#
+#     Sadly, cx_Freeze does not take in account folders without __init__.py file.
+#     """
+#     missing = [
+#         # (module_name, missing_folder)
+#         ("django", "core.management.commands"),
+#         ("django", "contrib.auth.management.commands"),
+#         ("django", "contrib.contenttypes.management.commands"),
+#     ]
+#
+#     files = collect_missing_modules(missing, PurePath("."))
+#     return files
 
 
 def get_collected_files():
@@ -294,7 +319,7 @@ def get_collected_files():
             *collect_files(GDBUS_WIN),
             *collect_files(GNUPG_WIN),
             *collect_files(DLL_WIN),
-            *collect_missing_python(),
+            # *collect_missing_python(),
             # cairocffi generated files
             *cairocffi_files(),
             # Pillow.libs
@@ -312,7 +337,7 @@ def get_collected_files():
     else:
         collected_files = [
             *collect_dist_info(DISTRIBUTIONS),
-            *collect_missing_python(),
+            # *collect_missing_python(),
             # cairocffi generated files
             *cairocffi_files(),
             # Pillow.libs
@@ -343,7 +368,7 @@ build_exe_options = {
         "django",
         "pytz",
         ],
-    "zip_includes": collect_missing_python_zip(),
+    # "zip_includes": collect_missing_python_zip(),
     "packages": [
         "statistics",
         "gi",
@@ -389,6 +414,7 @@ REQUIRED_PACKAGES = [
 ]
 if sys.platform == "win32":
     REQUIRED_PACKAGES.append("winpath")
+    missing_init_for_cxfreeze()
     build_exe_options["packages"].append("winpath")
 
 setup(
