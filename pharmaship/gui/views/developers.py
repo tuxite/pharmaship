@@ -6,6 +6,8 @@ from gi.repository import Gtk
 import shutil
 import datetime
 
+from pathlib import Path
+
 from django.utils.translation import gettext as _
 from django.conf import settings
 
@@ -100,7 +102,7 @@ class DatabaseExport:
         db_filename = settings.DATABASES['default']['NAME']
 
         try:
-            shutil.copy(db_filename, filename)
+            shutil.copy(db_filename, (Path(path) / filename))
         except OSError as error:
             log.exception("File impossible to save: %s. %s", filename, error)
             self.error_dialog(error)

@@ -7,7 +7,7 @@ from pathlib import Path
 from django.core.management.base import BaseCommand
 
 
-def main():
+def main():  # noqa: D103
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pharmaship.app.settings')
 
     from django.core.management import call_command
@@ -34,7 +34,9 @@ class Command(BaseCommand):
     help = "Graphical user interface for Pharmaship."
 
     def handle(self, *args, **options):  # noqa: D102
-        os.environ.setdefault('FONTCONFIG_PATH', str(Path('etc/fonts').resolve()))
+        os.environ.setdefault(
+            'FONTCONFIG_PATH', str(Path('etc/fonts').resolve())
+            )
 
         from pharmaship.gui.view import Application
         app = Application()

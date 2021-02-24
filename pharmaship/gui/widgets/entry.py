@@ -14,6 +14,13 @@ class EntryMasked(Gtk.Entry, Gtk.Editable):
     """Gtk.Entry with text mask implementation."""
 
     def __init__(self, mask, activate_cb=None):
+        """Superclass Gtk.Entry and Gtk.Editable classes.
+
+        :param dict mask: Mask information to use for validating input.
+
+        :param object activate_cb: Callback function to connect to the widget.
+
+        """
         super().__init__()
         self.mask = mask
         self.mask_text = mask["format"]
@@ -55,7 +62,11 @@ class EntryMasked(Gtk.Entry, Gtk.Editable):
             if (previous_length + i + 1) > self.mask_length:
                 return position
 
-            added_text += self.add_one_more(added_text, previous_length + i, new_text[i])
+            added_text += self.add_one_more(
+                text=added_text,
+                length=previous_length + i,
+                character=new_text[i]
+                )
 
         # Final modification
         self.get_buffer().insert_text(position, added_text, len(added_text))

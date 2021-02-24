@@ -223,41 +223,6 @@ class MoleculeManager(models.Manager):
             dosage_form=dosage_form,
             composition=composition
             )
-    #
-    # def missing(self):
-    #     """Return the quantity to order to meet the requirement."""
-    #     inventory_settings = Settings.objects.latest('id')
-    #     exp_delay = pharmaship.inventory.utils.delay(inventory_settings.expire_date_warning_delay)
-    #     # Selection of available ReqQty
-    #     allowance_list = inventory_settings.allowance.all()
-    #     req_qty_list = MoleculeReqQty.objects.filter(allowance__in=allowance_list).prefetch_related('base', 'allowance').order_by('base')
-    #     # Molecule list
-    #     molecule_list = Molecule.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('medicine_set').order_by('name')
-    #     # Medicine quantity transaction list
-    #     qty_transaction_list = QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(Medicine))
-    #
-    #     result_list = []
-    #     # Selection of the current quantities
-    #     for molecule in molecule_list:
-    #         current_qty = 0
-    #         for medicine in molecule.medicine_set.all():
-    #             # Do not add quantity if any non-conformity of medicine (near) expired.
-    #             if medicine.nc_molecule or medicine.nc_composition or medicine.exp_date <= exp_delay:
-    #                 continue
-    #             # Add quantity for other ones
-    #             for transaction in qty_transaction_list:
-    #                 if transaction.object_id == medicine.id:
-    #                     current_qty += transaction.value
-    #
-    #         # Then, parse required quantities
-    #         required_qty = pharmaship.inventory.utils.req_qty_element(molecule, req_qty_list)
-    #
-    #         # Finally, add the molecule with new attribute if current < required
-    #         if current_qty < required_qty:
-    #             molecule.missing = (required_qty - current_qty)
-    #             result_list.append(molecule)
-    #
-    #     return result_list
 
 
 class Molecule(models.Model):
@@ -327,41 +292,6 @@ class EquipmentManager(models.Manager):
             consumable=consumable,
             perishable=perishable
             )
-
-    # def missing(self):
-    #     """Return the quantity to order to meet the requirement."""
-    #     inventory_settings = Settings.objects.latest('id')
-    #     exp_delay = pharmaship.inventory.utils.delay(inventory_settings.expire_date_warning_delay)
-    #     # Selection of available ReqQty
-    #     allowance_list = inventory_settings.allowance.all()
-    #     req_qty_list = EquipmentReqQty.objects.filter(allowance__in=allowance_list).prefetch_related('base', 'allowance').order_by('base')
-    #     # Equipement list
-    #     equipment_list = Equipment.objects.filter(allowances__in=allowance_list).distinct().prefetch_related('article_set').order_by('name')
-    #     # Article quantity transaction list
-    #     qty_transaction_list = QtyTransaction.objects.filter(content_type=ContentType.objects.get_for_model(Article))
-    #
-    #     result_list = []
-    #     # Selection of the current quantities
-    #     for equipment in equipment_list:
-    #         current_qty = 0
-    #         for article in equipment.article_set.all():
-    #             # Do not add quantity if any non-conformity of article (near) expired.
-    #             if article.nc_packaging or article.exp_date <= exp_delay:
-    #                 continue
-    #             # Add quantity for other ones
-    #             for transaction in qty_transaction_list:
-    #                 if transaction.object_id == article.id:
-    #                     current_qty += transaction.value
-    #
-    #         # Then, parse required quantities
-    #         required_qty = pharmaship.inventory.utils.req_qty_element(equipment, req_qty_list)
-    #
-    #         # Finally, add the equipment with new attribute if current < required
-    #         if current_qty < required_qty:
-    #             equipment.missing = (required_qty - current_qty)
-    #             result_list.append(equipment)
-    #
-    #     return result_list
 
 
 class Equipment(models.Model):
