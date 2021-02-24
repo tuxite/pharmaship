@@ -14,7 +14,7 @@
 !define UPDATEURL "http://pharmaship.devmaretique.com/releases" # "Product Updates" link
 !define ABOUTURL "http://devmaretique.com" # "Publisher" link
 
-!define INSTDIR_REG_ROOT "HKLM"
+!define INSTDIR_REG_ROOT "HKCU"
 !define INSTDIR_REG_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APPNAME}"
 
 Unicode True
@@ -76,6 +76,7 @@ UninstPage custom un.DeleteUserData un.DeleteUserDataLeave ;Custom page
 
 ;Allowance macro
 !macro Allowance filename
+  SetDetailsPrint "both"
   CreateDirectory $INSTDIR\allowances
   File "/oname=$INSTDIR\allowances\${filename}" "..\allowances\${filename}"
   nsExec::ExecToLog '"$INSTDIR\pharmaship-admin.exe" "import" "$INSTDIR\allowances\${filename}"'
@@ -113,14 +114,20 @@ Section "Pharmaship software" SecPharmaship
 
   SectionIn RO
 
+  SetDetailsPrint "both"
+
   !insertmacro UNINSTALL.LOG_OPEN_INSTALL
     File "..\build\win64\"
     File "pharmaship.ico"
   !insertmacro UNINSTALL.LOG_CLOSE_INSTALL
 
+  SetDetailsPrint "textonly"
+
   File /r "..\build\win64\share"
   File /r "..\build\win64\lib"
   File /r "..\build\win64\etc"
+
+  SetDetailsPrint "both"
 
   ;Store installation folder
   WriteRegStr HKCU "Software\${APPNAME}" "" $INSTDIR
@@ -209,11 +216,13 @@ Var Checkbox
 Var Checkbox_State
 
 Section Uninstall
-  SetDetailsPrint "both"
+  SetDetailsPrint "textonly"
 
   RMDir /r "$INSTDIR\lib"
   RMDir /r "$INSTDIR\share"
   RMDir /r "$INSTDIR\etc"
+
+  SetDetailsPrint "textonly"
   RMDir /r "$INSTDIR\allowances"
 
   !insertmacro UNINSTALL.LOG_UNINSTALL "$INSTDIR"
