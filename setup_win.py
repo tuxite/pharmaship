@@ -114,7 +114,10 @@ EXCLUDE_ICONS = [
     "emblems",
     "emotes",
     "legacy",
-    "status"
+    "status",
+    "categories",
+    "devices",
+    "places",
 ]
 
 
