@@ -206,20 +206,6 @@ def parser_element(molecule, data, warning_delay, today):
         # Remark
         item_dict['remark'] = medicine.remark
 
-        # Check if medicine is opened
-        quantity_rest = item_dict['quantity'] % medicine.packing_content
-        if medicine.packing_name > 0 and quantity_rest != 0:
-            log.info("[%s] Opened box, adding additional row.", medicine.name)
-
-            item_dict_partA = copy.deepcopy(item_dict)
-            item_dict_partA["quantity"] = quantity_rest
-            item_dict_partA["remark"] = _("Opened {0}").format(item_dict['packing']["name"])
-            item_dict_partA['packing'] = None
-
-            element_dict['medicines'].append(item_dict_partA)
-
-            item_dict['quantity'] -= quantity_rest
-
         # Adding the medicine dict to the list
         element_dict['medicines'].append(item_dict)
 

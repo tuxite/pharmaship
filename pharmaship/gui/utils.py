@@ -12,12 +12,14 @@ from pluralizer import Pluralizer
 
 from django.utils.translation import gettext as _
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 
 from weasyprint import HTML, CSS
 from weasyprint.fonts import FontConfiguration
 
 from pharmaship.core.utils import log
 from pharmaship.inventory import constants
+from pharmaship.inventory import models
 
 
 def get_template(filename):
@@ -399,3 +401,54 @@ def update_packing_combo(source, builder, default):
     combo = builder.get_object("packing_combo")
     active = get_combo_value(combo)
     packing_combo(combo, default, active, num)
+
+
+def check_object_content(article, removed_quantity):
+    """Check the remaining quantity again packing type and content.
+
+    The remaining quantity must be a multiple of the packing_content value.
+    """
+    if article["packing"]["id"] == 0:
+        return False
+
+    new_quantity = article["quantity"] - removed_quantity
+    if new_quantity % article["packing"]["content"] == 0:
+        return False
+
+    return True
+
+
+def split_object(parsed_object, removed_quantity):
+    ct = ContentType.objects.get_for_id(parsed_object["type"])
+    obj = ct.get_object_for_this_type(pk=parsed_object["id"])
+    # Create the duplicate object
+    obj.pk = None
+    if obj.remark:
+        obj.remark += "\n"
+    obj.remark += _("Opened {0}").format(obj.get_packing_name_display())
+    obj.packing_content = 1
+    obj.packing_name = 0
+    obj.save()
+
+    new_quantity = parsed_object["quantity"] - removed_quantity
+
+    new_obj_quantity = new_quantity % parsed_object["packing"]["content"]
+    new_obj_quantity += removed_quantity
+
+    # Add a QtyTransaction for the new object (full packing_content)
+    models.QtyTransaction.objects.create(
+        transaction_type=1,
+        value=new_obj_quantity,
+        object_id=obj.pk,
+        content_type_id=parsed_object["type"]
+        )
+
+    # Remove the quantity in the parent object
+    models.QtyTransaction.objects.create(
+        transaction_type=9,
+        value=new_obj_quantity,
+        object_id=parsed_object["id"],
+        content_type_id=parsed_object["type"]
+        )
+
+    return obj.pk

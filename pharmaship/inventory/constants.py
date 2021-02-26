@@ -6,12 +6,12 @@ from django.utils.translation import gettext_lazy as _
 # Constants
 # Transaction type values
 TRANSACTION_TYPE_CHOICES = (
-    (1, _('In')),
-    (2, _('Used')),
-    (4, _('Perished')),
-    (8, _('Physical Count')),
-    (9, _('Other')),
-    (10, _('Sent to First Aid Kit'))
+    (1, _('In')),  # positive
+    (2, _('Used')),  # negative
+    (4, _('Perished')),  # negative
+    (8, _('Physical Count')),  # positive
+    (9, _('Other')),  # negative
+    (10, _('Sent to First Aid Kit'))  # negative
 )
 
 # Medicine "dangerosity" list values

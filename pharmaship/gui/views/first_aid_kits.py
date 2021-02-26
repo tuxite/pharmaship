@@ -623,6 +623,7 @@ class View:
 
         if selected is None:
             return
+
         # Create a duplicate of the reference article/medicine
         article = models.FirstAidKitItem.objects.create(
             name=selected["name"],
@@ -640,12 +641,18 @@ class View:
             content_object=article
             )
 
-        # Create a quantity transaction for reference article/medicine
+        # Create a new reference article/medicine for "opened" box if necessary
+        if utils.check_object_content(selected, cleaned_data["quantity"]):
+            object_id = utils.split_object(selected, cleaned_data["quantity"])
+        else:
+            object_id = cleaned_data["item_id"]
+
+        # Create a quantity transaction for the reference article/medicine
         models.QtyTransaction.objects.create(
             transaction_type=10,
             value=cleaned_data["quantity"],
-            object_id=cleaned_data["item_id"],
-            content_type_id=element["type"]
+            object_id=object_id,
+            content_type_id=selected["type"]
             )
 
         dialog.destroy()
