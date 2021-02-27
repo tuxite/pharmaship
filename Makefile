@@ -56,7 +56,12 @@ mo:
 	cp ${LOCALE_FOLDER_EN}/com.devmaretique.pharmaship.po ${LOCALE_FOLDER_EN}/django.po
 
 	# Generate .mo files
-	python manage.py compilemessages -l fr -l en
+ifeq ($(OS),Windows_NT)
+	venv\bin\python manage.py compilemessages -l fr -l en
+else
+		python manage.py compilemessages -l fr -l en
+endif
+
 	msgfmt ${LOCALE_FOLDER_FR}/com.devmaretique.pharmaship.po
 	msgfmt ${LOCALE_FOLDER_EN}/com.devmaretique.pharmaship.po
 
