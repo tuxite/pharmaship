@@ -196,6 +196,15 @@ def get_available_medicines(element, content_type_id, qty_transactions):
         if item.id in qty_transactions:
             item_dict["quantity"] = qty_transactions[item.id]
 
+        if item.packing_name > 0:
+            item_dict['packing'] = {
+                "id": item.packing_name,
+                "name": item.get_packing_name_display(),
+                "content": item.packing_content
+            }
+        else:
+            item_dict['packing'] = None
+
         result.append(item_dict)
 
     return result
@@ -229,6 +238,15 @@ def get_available_articles(element, content_type_id, qty_transactions):
 
         if item.id in qty_transactions:
             item_dict["quantity"] = qty_transactions[item.id]
+
+        if item.packing_name > 0:
+            item_dict['packing'] = {
+                "id": item.packing_name,
+                "name": item.get_packing_name_display(),
+                "content": item.packing_content
+            }
+        else:
+            item_dict['packing'] = None
 
         result.append(item_dict)
 

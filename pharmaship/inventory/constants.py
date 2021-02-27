@@ -6,12 +6,12 @@ from django.utils.translation import gettext_lazy as _
 # Constants
 # Transaction type values
 TRANSACTION_TYPE_CHOICES = (
-    (1, _('In')),
-    (2, _('Used')),
-    (4, _('Perished')),
-    (8, _('Physical Count')),
-    (9, _('Other')),
-    (10, _('Sent to First Aid Kit'))
+    (1, _('In')),  # positive
+    (2, _('Used')),  # negative
+    (4, _('Perished')),  # negative
+    (8, _('Physical Count')),  # positive
+    (9, _('Other')),  # negative
+    (10, _('Sent to First Aid Kit'))  # negative
 )
 
 # Medicine "dangerosity" list values
@@ -27,10 +27,10 @@ DRUG_FORM_CHOICES = (
     (1, _('Tablet')),
     (2, _('Ampoule')),
     (3, _('Capsule')),
-    (5, 'Lyophilisat oral'),
-    (6, 'Sachet'),
+    (5, _('Oral Lyophilisate')),
+    (6, _('Sachet')),
     (7, _('Suppository')),
-    (8, 'Capsule'),
+    (8, _('Vial')),
     (9, _('Powder')),
     (10, 'Tube pommade'),
     (11, 'Tube crème'),
@@ -48,11 +48,11 @@ DRUG_FORM_CHOICES = (
     (56, 'Solution'),
     (57, 'Solution gingivale'),
 
-    (90, 'Bouteille'),
-    (91, 'Flacon'),
+    (90, _('Bottle')),
+    (91, _('Flacon')),
     (92, 'Dispositif'),
     (93, 'Pansement adhésif cutané'),
-    (94, 'Unidose'),
+    (94, _('Unidose')),
 
     (100, 'Collyre unidose'),
     (101, 'Collyre flacon'),
@@ -82,4 +82,17 @@ DRUG_ROA_CHOICES = (
     (41, _('Vaginal')),
 
     (50, _('Ocular'))
+)
+
+# Packing choices for medicines
+# ID value is important as starting >= 20 it defines the packing content.
+# ie.. "pair" means 2 ==> [ID] 20/10 = 2
+# "dozen" means 12 ==> [ID] 120/10 = 12
+# ID values above 20 are divided by 10 and truncated (ie.: 3.9 means 3).
+PACKING_CHOICES = (
+    (0, 'default'),
+    (10, _('box')),
+    (11, _('set')),
+    (20, _('pair')),
+    (120, _('dozen')),
 )

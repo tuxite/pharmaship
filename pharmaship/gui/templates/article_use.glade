@@ -14,8 +14,13 @@
   </object>
   <object class="GtkDialog" id="dialog">
     <property name="can_focus">False</property>
+    <property name="margin_left">5</property>
+    <property name="margin_right">5</property>
+    <property name="margin_top">5</property>
+    <property name="margin_bottom">5</property>
     <property name="title" translatable="yes">Use a medicine</property>
     <property name="modal">True</property>
+    <property name="default_height">225</property>
     <property name="type_hint">dialog</property>
     <child type="titlebar">
       <placeholder/>
@@ -81,19 +86,21 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="label" translatable="yes">You are going to use the following article:</property>
                 <property name="xalign">0</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">2</property>
+                <property name="width">3</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="name">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="label" translatable="yes">label</property>
                 <property name="xalign">0</property>
                 <style>
@@ -103,7 +110,7 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">2</property>
+                <property name="width">3</property>
               </packing>
             </child>
             <child>
@@ -123,6 +130,7 @@
               <object class="GtkSpinButton" id="quantity">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
                 <property name="adjustment">quantity_adjustment</property>
                 <property name="numeric">True</property>
                 <signal name="value-changed" handler="quantity-changed" swapped="no"/>
@@ -150,12 +158,36 @@
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
                 <property name="editable">False</property>
                 <property name="adjustment">remaining_adjustment</property>
                 <property name="numeric">True</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="consumed_packing">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">label</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="remaining_packing">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">label</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
                 <property name="top_attach">3</property>
               </packing>
             </child>

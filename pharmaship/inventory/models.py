@@ -163,6 +163,10 @@ class BaseItem(models.Model):
     transactions = GenericRelation(QtyTransaction, related_query_name='transactions')
     remark = models.CharField(_("Remark"), max_length=256, blank=True, null=True)
 
+    # Packing
+    packing_content = models.PositiveIntegerField(_("Quantity per pack"), default=1)
+    packing_name = models.PositiveIntegerField(choices=constants.PACKING_CHOICES, default=0)
+
     def __str__(self):  # noqa: D105
         return "{0} (exp: {1})".format(self.name, self.exp_date)
 

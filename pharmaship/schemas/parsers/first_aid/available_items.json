@@ -39,6 +39,21 @@
               "nullable": true
             }
           }
+        },
+        "packing": {
+          "type": "dict",
+          "nullable": true,
+          "schema": {
+            "name": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "content": {
+              "type": "integer"
+            }
+          }
         }
       }
     }

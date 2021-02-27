@@ -21,9 +21,12 @@ class AddMedicineForm(forms.ModelForm):
 
     remark = forms.CharField(max_length=256, required=False)
 
+    packing_combo_id = forms.IntegerField(min_value=0)
+    packing_content = forms.IntegerField(min_value=1)
+
     class Meta:  # noqa: D106
         model = pharmaship.inventory.models.Medicine
-        exclude = ['used', 'location', 'parent']
+        exclude = ['used', 'location', 'parent', 'packing_name']
 
 
 class ModifyMedicineForm(forms.ModelForm):
@@ -40,9 +43,12 @@ class ModifyMedicineForm(forms.ModelForm):
 
     remark = forms.CharField(max_length=256, required=False)
 
+    packing_combo_id = forms.IntegerField(min_value=0)
+    packing_content = forms.IntegerField(min_value=1)
+
     class Meta:  # noqa: D106
         model = pharmaship.inventory.models.Medicine
-        exclude = ['used', 'location', 'parent']
+        exclude = ['used', 'location', 'parent', 'packing_name']
 
 
 class AddArticleForm(forms.ModelForm):
@@ -59,6 +65,9 @@ class AddArticleForm(forms.ModelForm):
     nc_packaging = forms.CharField(max_length=100, required=False)
 
     remark = forms.CharField(max_length=256, required=False)
+
+    packing_combo_id = forms.IntegerField(min_value=0)
+    packing_content = forms.IntegerField(min_value=1)
 
     def clean(self):
         """Check that a date is correct if needed by the model.
@@ -82,7 +91,7 @@ class AddArticleForm(forms.ModelForm):
 
     class Meta:  # noqa: D106
         model = pharmaship.inventory.models.Article
-        exclude = ['used', 'location', 'parent']
+        exclude = ['used', 'location', 'parent', 'packing_name']
 
 
 class ModifyArticleForm(forms.ModelForm):
@@ -98,9 +107,12 @@ class ModifyArticleForm(forms.ModelForm):
 
     remark = forms.CharField(max_length=256, required=False)
 
+    packing_combo_id = forms.IntegerField(min_value=0)
+    packing_content = forms.IntegerField(min_value=1)
+
     class Meta:  # noqa: D106
         model = pharmaship.inventory.models.Article
-        exclude = ['used', 'location', 'parent']
+        exclude = ['used', 'location', 'parent', 'packing_name']
 
 
 class LocationForm(forms.ModelForm):
@@ -145,6 +157,39 @@ class AddSubitemForm(forms.Form):
     item_id = forms.IntegerField(min_value=1)
     quantity = forms.IntegerField(min_value=1)
     remark = forms.CharField(max_length=256, required=False)
+
+
+class AddNewSubitemForm(forms.Form):
+    """Form used to add a new `FirstAidKitItem`."""
+
+    name = forms.CharField(max_length=100)
+    quantity = forms.IntegerField(min_value=1)
+    exp_date = forms.DateField(required=False)
+    remark = forms.CharField(max_length=256, required=False)
+    nc = forms.CharField(max_length=256, required=False)
+
+    # For exp_date required field validation
+    perishable = forms.BooleanField(required=False)
+
+    def clean(self):
+        """Check that a date is correct if needed by the model.
+
+        This method completes the standard validation method and adds a
+        conditional check of the date through the `perishable` attribute.
+        If `True`, an `exp_date` must be present and correct.
+        """
+        cleaned_data = super().clean()
+
+        if not cleaned_data.get("perishable"):
+            return cleaned_data
+
+        if not cleaned_data.get("exp_date"):
+            self.add_error(
+                "exp_date",
+                forms.ValidationError(
+                    _('Expiry date must be provided.'),
+                    code='required')
+                    )
 
 
 class ModifySubitemForm(forms.Form):

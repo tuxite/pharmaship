@@ -11,6 +11,12 @@
   padding-right: 1em;
 }
 
+.article-btn-add-alt {
+  color: gray;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
 .header-cell {
   font-weight: bold;
   padding: .5em;

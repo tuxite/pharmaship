@@ -14,6 +14,7 @@ from pharmaship.gui.view import GlobalParameters
 from pharmaship.inventory import models
 from pharmaship.inventory import parsers
 
+
 class ParserMethodTestCase(TestCase):
     """Tests for `inventory.parsers` methods.
 
