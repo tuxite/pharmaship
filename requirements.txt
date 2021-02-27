@@ -5,6 +5,7 @@ django
 djangorestframework
 munch
 pillow
+pluralizer
 pyaml
 pygobject
 pypdf2
