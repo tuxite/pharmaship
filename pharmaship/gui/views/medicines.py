@@ -15,17 +15,11 @@ from pharmaship.inventory.parsers.medicines import parser
 
 from pharmaship.gui import utils
 from pharmaship.gui import widgets
-from pharmaship.gui.utils import first_lower
+from pharmaship.gui.utils import first_lower, get_date_mask
 
-
-DATE_MASK = {
-    "format": "____-__-__",
-    "regex": None,
-    "datetime": "%Y-%m-%d",
-    "allowed_chars": "0123456789"
-}
 
 NC_TEXT_TEMPLATE = "<span foreground='darkred' weight='bold' style='normal'>{0} {1}</span>"
+
 
 class View:
     def __init__(self, window, chosen=None):
@@ -318,7 +312,10 @@ class View:
 
         # exp_date = builder.get_object("exp_date")
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(
+            mask=get_date_mask(self.params.setting),
+            activate_cb=(self.response_modify, dialog, medicine, builder)
+            ))
         builder.expose_object("exp_date", exp_date)
         date_display = medicine["exp_date"].strftime("%Y-%m-%d")
         exp_date.get_buffer().set_text(date_display, len(date_display))
@@ -473,12 +470,14 @@ class View:
 
         # Expiry date input mask workaround
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(
+            mask=get_date_mask(self.params.setting),
+            activate_cb=(self.response_add, dialog, molecule, builder)
+            ))
         builder.expose_object("exp_date", exp_date)
 
         # Connect signals
         builder.connect_signals({
-            # "on-entry-activate": (self.response_add, dialog, molecule, builder),
             "on-response": (self.response_add, dialog, molecule, builder),
             "on-cancel": (utils.dialog_destroy, dialog),
             "on-packing-change": (utils.toggle_packing, builder),

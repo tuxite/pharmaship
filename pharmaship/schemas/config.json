@@ -79,6 +79,10 @@
         "type": "integer",
         "min": 1,
         "default": 1
+      },
+      "default_end_of_month": {
+        "type": "boolean",
+        "default": "false"
       }
     }
   }

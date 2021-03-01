@@ -22,6 +22,17 @@ from pharmaship.inventory import constants
 from pharmaship.inventory import models
 
 
+DATE_MASK = {
+    "format": "____-__-__",
+    "regex": None,
+    "datetime": "%Y-%m-%d",
+    "allowed_chars": "0123456789",
+    "min-length": 6,
+    "min-datetime": "%Y-%m",
+    "default-day": None
+}
+
+
 def get_template(filename):
     """Return GUI file path."""
     return os.path.join(settings.PHARMASHIP_GUI, filename)
@@ -452,3 +463,16 @@ def split_object(parsed_object, removed_quantity):
         )
 
     return obj.pk
+
+
+def get_date_mask(config):
+    """Return the date mask for custom Gtk EntryMasked.
+
+    Get the default day parameter in Pharmaship user configuration.
+    """
+    if config.default_end_of_month:
+        DATE_MASK["default-day"] = "endofmonth"
+    else:
+        DATE_MASK["default-day"] = None
+
+    return DATE_MASK

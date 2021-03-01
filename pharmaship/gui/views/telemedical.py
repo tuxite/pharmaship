@@ -305,8 +305,10 @@ class View:
 
         # exp_date = builder.get_object("exp_date")
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
-        # exp_date.connect("activate", self.response_modify, dialog, article, builder)
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(
+            mask=utils.get_date_mask(self.params.setting),
+            activate_cb=(self.response_modify, dialog, article, builder)
+            ))
         builder.expose_object("exp_date", exp_date)
         date_display = article["exp_date"].strftime("%Y-%m-%d")
         exp_date.get_buffer().set_text(date_display, len(date_display))
@@ -388,8 +390,10 @@ class View:
 
         # Expiry date input mask workaround
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
-        # exp_date.connect("activate", self.response_add, dialog, equipment, builder)
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(
+            mask=utils.get_date_mask(self.params.setting),
+            activate_cb=(self.response_add, dialog, equipment, builder)
+            ))
         builder.expose_object("exp_date", exp_date)
 
         # Connect signals

@@ -15,15 +15,8 @@ from pharmaship.inventory.parsers.equipment import parser
 
 from pharmaship.gui import utils
 from pharmaship.gui import widgets
-from pharmaship.gui.utils import first_lower
+from pharmaship.gui.utils import first_lower, get_date_mask
 
-
-DATE_MASK = {
-    "format": "____-__-__",
-    "regex": None,
-    "datetime": "%Y-%m-%d",
-    "allowed_chars": "0123456789"
-}
 
 NC_TEXT_TEMPLATE = "<span foreground='darkred' weight='bold' style='normal'>{0} {1}</span>"
 
@@ -332,7 +325,10 @@ class View:
         name.set_text(article["name"])
 
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(
+            mask=get_date_mask(self.params.setting),
+            activate_cb=(self.response_modify, dialog, article, builder)
+            ))
 
         builder.expose_object("exp_date", exp_date)
         if article["exp_date"]:
@@ -483,7 +479,10 @@ class View:
 
         # Expiry date input mask workaround
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(
+            mask=get_date_mask(self.params.setting),
+            activate_cb=(self.response_add, dialog, equipment, builder)
+            ))
         builder.expose_object("exp_date", exp_date)
 
         # Connect signals

@@ -14,13 +14,6 @@ from pharmaship.inventory.parsers.laboratory import parser
 from pharmaship.gui import utils, widgets
 
 
-DATE_MASK = {
-    "format": "____-__-__",
-    "regex": None,
-    "datetime": "%Y-%m-%d",
-    "allowed_chars": "0123456789"
-}
-
 NC_TEXT_TEMPLATE = "<span foreground='darkred' weight='bold' style='normal'>{0} {1}</span>"
 
 
@@ -306,8 +299,10 @@ class View:
 
         # Expiration date widget custom
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
-        exp_date.connect("activate", self.response_modify, dialog, article, builder)
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(
+            mask=utils.get_date_mask(self.params.setting),
+            activate_cb=(self.response_modify, dialog, article, builder)
+            ))
         builder.expose_object("exp_date", exp_date)
 
         if article["exp_date"]:
@@ -394,8 +389,10 @@ class View:
 
         # Expiration date widget custom
         exp_date = builder.get_object("exp_date_raw")
-        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(mask=DATE_MASK))
-        exp_date.connect("activate", self.response_add, dialog, equipment, builder)
+        exp_date = utils.grid_replace(exp_date, widgets.EntryMasked(
+            mask=utils.get_date_mask(self.params.setting),
+            activate_cb=(self.response_add, dialog, equipment, builder)
+            ))
         builder.expose_object("exp_date", exp_date)
 
         # Connect signals

@@ -134,10 +134,7 @@ class InventorySettingsForm(forms.Form):
     first_aid_kit = forms.IntegerField(min_value=1)
     has_laboratory = forms.BooleanField(required=False)
     has_telemedical = forms.BooleanField(required=False)
-
-    # class Meta:  # noqa: D106
-    #     model = pharmaship.inventory.models.Settings
-    #     exclude = ['allowance', ]
+    default_end_of_month = forms.BooleanField(required=False)
 
 
 class FirstAidKitForm(forms.Form):

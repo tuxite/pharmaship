@@ -79,6 +79,9 @@ class View:
         switch.set_active(self.setting.has_laboratory)
         switch = self.builder.get_object("has_telemedical")
         switch.set_active(self.setting.has_telemedical)
+        switch = self.builder.get_object("default_end_of_month")
+        switch.set_active(self.setting.default_end_of_month)
+
         entry = self.builder.get_object("first_aid_kit")
         entry.set_value(self.setting.first_aid_kit)
         entry = self.builder.get_object("rescue_bag")
@@ -156,7 +159,8 @@ class View:
             ],
             "switch": [
                 "has_laboratory",
-                "has_telemedical"
+                "has_telemedical",
+                "default_end_of_month"
             ]
         }
 

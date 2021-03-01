@@ -6,6 +6,7 @@ inventory:
   has_laboratory: true
   has_telemedical: true
   rescue_bag: 1
+  default_end_of_month: false
 vessel:
   address: 'La Rochelle
 
