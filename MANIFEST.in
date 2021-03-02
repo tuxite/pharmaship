@@ -30,11 +30,10 @@ include docs/conf.py
 recursive-include bin *.nsi
 recursive-include bin *.nsh
 recursive-include bin *.sh
-recursive-include bin *.exe
 recursive-include bin *.py
 
 include bin/pharmaship_installer.bmp
 include bin/pharmaship-sign
 include bin/pharmaship.ico
-include bin/launcher.py
-include bin/manage.py
+include launcher.py
+include manage.py
