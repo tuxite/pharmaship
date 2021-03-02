@@ -496,8 +496,9 @@ class Application(Gtk.Application):
     def on_about(self, action, param):
         builder = Gtk.Builder.new_from_file(utils.get_template("about_dialog.glade"))
         about_dialog = builder.get_object("about-dialog")
+        # Set version
+        about_dialog.set_version(settings.PHARMASHIP_VERSION)
         about_dialog.set_transient_for(self.window)
-        # Gtk.AboutDialog(transient_for=self.window, modal=True)
         about_dialog.present()
 
     def on_quit(self, action, param):
