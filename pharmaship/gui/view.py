@@ -479,6 +479,10 @@ class Application(Gtk.Application):
         action.connect("activate", self.open_log)
         self.add_action(action)
 
+        action = Gio.SimpleAction.new("open_config", None)
+        action.connect("activate", self.open_config)
+        self.add_action(action)
+
     def do_activate(self):
         # We only allow a single window and raise any existing ones
         if not self.window:
@@ -669,6 +673,10 @@ class Application(Gtk.Application):
 
     def open_log(self, action, param):
         self.open_file(settings.PHARMASHIP_LOG)
+
+    def open_config(self, action, param):
+        """Open the configuration YAML file."""
+        self.open_file(settings.PHARMASHIP_CONF)
 
     def on_save(self, action, param):
         # Get the adequate class
