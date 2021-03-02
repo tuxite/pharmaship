@@ -134,7 +134,10 @@ class EntryMasked(Gtk.Entry, Gtk.Editable):
 
         if "datetime" in self.mask and "min-datetime" in self.mask:
             text = text.strip("-/.")
-            temp_date = datetime.datetime.strptime(text, self.mask["min-datetime"])
+            try:
+                temp_date = datetime.datetime.strptime(text, self.mask["min-datetime"])
+            except ValueError:
+                return self.set_invalid_style()
 
             if "default-day" in self.mask and \
                self.mask["default-day"] == "endofmonth":
