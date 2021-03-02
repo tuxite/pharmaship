@@ -1,7 +1,34 @@
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url('fonts/sourcesanspro/SourceSansPro-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SourceSansPro';
+    src: url('fonts/sourcesanspro/SourceSansPro-Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url('fonts/sourcecodepro/SourceCodePro-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url('fonts/sourcecodepro/SourceCodePro-Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'SourceSansPro', sans-serif;
   font-size: 10pt;
   text-decoration: none;
   list-style: none;
@@ -13,15 +40,13 @@
 
 body {
   padding-top: 30px;
-  font-family: sans-serif;
+  font-family: 'SourceSansPro', sans-serif;
   font-size: 12px;
 }
 
 table {
-  border-width: .5mm;
+  border: 1pt solid black;
   border-spacing: .5mm;
-  border-style: solid;
-  border-color: black;
   border-collapse: collapse;
   clear: both;
   margin-top: 0.5cm;
@@ -30,20 +55,18 @@ table {
 }
 
 table tr.border td, table th {
-  border-width: thin;
-  border-style: solid;
-  border-color: #aaf;
+  border: .5pt solid #aaa;
 }
 
 table td {
   border-bottom: none;
   border-top: none;
-  border-left: 1pt solid #aaa;
+  border-left: .5pt solid #aaa;
   padding: .5em;
 }
 
 tr.group {
-  background: #FFFF00;
+  background: #f6d32d;
   font-weight: 700;
 }
 
@@ -67,6 +90,7 @@ h1#title {
   margin: 0 auto;
   bookmark-level: none;
   font-size: 16pt;
+  font-family: 'SourceSansPro';
   margin-bottom: 5mm;
 }
 
@@ -78,13 +102,13 @@ div#allowance {
 
 .nc {
   font-style: italic;
-  color: darkred;
+  color: #a51d2d;
 }
 
 .nc-bg,
 .medicine-expired,
 .article-expired {
-  background-color: darkred;
+  background-color: #a51d2d;
   color: white;
   font-weight: 700;
 }
@@ -92,7 +116,7 @@ div#allowance {
 .medicine-warning,
 .article-warning {
   color: black;
-  background-color: orange;
+  background-color: #ff7800;
   font-weight: 700;
 }
 
@@ -133,7 +157,7 @@ div.page-break {
 h2.bag-title,
 h2.kit-title {
   margin-top: 1cm;
-  color: darkblue;
+  color: #1a5fb4;
 }
 
 td.fill {
@@ -145,7 +169,7 @@ td.nowrap {
 }
 
 .mono {
-  font-family: monospace;
+  font-family: 'SourceCodePro', monospace;
 }
 
 .section {

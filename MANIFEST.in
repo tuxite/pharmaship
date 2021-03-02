@@ -17,6 +17,9 @@ recursive-include pharmaship/gui *.xml
 recursive-include pharmaship/gui *.po
 recursive-include pharmaship/gui *.mo
 recursive-include pharmaship/gui *.gresource
+recursive-include pharmaship/gui *.ttf
+recursive-include pharmaship/gui *.otf
+recursive-include pharmaship/gui *.txt
 
 recursive-include pharmaship/schemas *.json
 

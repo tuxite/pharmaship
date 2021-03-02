@@ -31,12 +31,20 @@ def export_pdf(html_string, filename):
         )
 
     font_config = FontConfiguration()
-    html = HTML(string=html_string)
-    css = CSS(string=css_string, font_config=font_config)
+    html = HTML(
+        string=html_string,
+        base_url=str(settings.PHARMASHIP_REPORTS)
+        )
+    css = CSS(
+        string=css_string,
+        font_config=font_config,
+        base_url=str(settings.PHARMASHIP_REPORTS)
+        )
     html.write_pdf(
         target=tmp_file.name,
         stylesheets=[css],
-        font_config=font_config)
+        font_config=font_config
+        )
 
     query_count_all()
 
