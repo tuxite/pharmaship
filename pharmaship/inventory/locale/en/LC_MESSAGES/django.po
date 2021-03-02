@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-24 23:50+0000\n"
+"POT-Creation-Date: 2021-03-02 14:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -174,13 +174,13 @@ msgstr ""
 msgid "dozen"
 msgstr ""
 
-#: pharmaship/inventory/forms.py:88 pharmaship/inventory/forms.py:190
-#: pharmaship/inventory/forms.py:221 pharmaship/inventory/models.py:312
+#: pharmaship/inventory/forms.py:88 pharmaship/inventory/forms.py:187
+#: pharmaship/inventory/forms.py:218 pharmaship/inventory/models.py:277
 msgid "Expiry date must be provided."
 msgstr ""
 
 #: pharmaship/inventory/models.py:123 pharmaship/inventory/models.py:160
-#: pharmaship/inventory/models.py:425 pharmaship/inventory/models.py:468
+#: pharmaship/inventory/models.py:355 pharmaship/inventory/models.py:398
 msgid "Name"
 msgstr ""
 
@@ -204,31 +204,31 @@ msgstr ""
 msgid "Quantity per pack"
 msgstr ""
 
-#: pharmaship/inventory/models.py:292
+#: pharmaship/inventory/models.py:257
 msgid "Dosage Form:"
 msgstr ""
 
-#: pharmaship/inventory/models.py:292
+#: pharmaship/inventory/models.py:257
 msgid "Composition:"
 msgstr ""
 
-#: pharmaship/inventory/models.py:305
+#: pharmaship/inventory/models.py:270
 msgid "Non-conform Molecule"
 msgstr ""
 
-#: pharmaship/inventory/models.py:306
+#: pharmaship/inventory/models.py:271
 msgid "Non-conform Composition"
 msgstr ""
 
-#: pharmaship/inventory/models.py:393
+#: pharmaship/inventory/models.py:323
 msgid "Packaging:"
 msgstr ""
 
-#: pharmaship/inventory/models.py:405
+#: pharmaship/inventory/models.py:335
 msgid "Non-conform Packaging"
 msgstr ""
 
-#: pharmaship/inventory/models.py:446
+#: pharmaship/inventory/models.py:376
 msgid "Non conformity"
 msgstr ""
 
@@ -241,11 +241,6 @@ msgstr ""
 #: pharmaship/inventory/parsers/telemedical.py:145
 #: pharmaship/inventory/parsers/telemedical.py:149
 msgid "Unassigned"
-msgstr ""
-
-#: pharmaship/inventory/parsers/medicines.py:216
-#, python-brace-format
-msgid "Opened {0}"
 msgstr ""
 
 #: pharmaship/inventory/parsers/rescue_bag.py:54
