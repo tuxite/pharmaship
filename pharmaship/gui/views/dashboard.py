@@ -271,15 +271,8 @@ class View:
 
     def create_main_layout(self):
         # Create content
-        self.scrolled = Gtk.ScrolledWindow()
-        self.scrolled.props.hscrollbar_policy = Gtk.PolicyType.NEVER
-        # No overlay of the scrollbar
-        self.scrolled.props.overlay_scrolling = False
-        self.window.layout.pack_start(self.scrolled, True, True, 0)
-
         box = self.builder.get_object("box")
-        self.scrolled.add(box)
-
+        self.window.layout.pack_start(box, True, True, 0)
         self.window.layout.show_all()
 
         self.get_molecules()

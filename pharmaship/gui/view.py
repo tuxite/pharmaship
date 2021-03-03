@@ -483,6 +483,10 @@ class Application(Gtk.Application):
         action.connect("activate", self.open_config)
         self.add_action(action)
 
+        action = Gio.SimpleAction.new("contact_ccmm", None)
+        action.connect("activate", self.contact_ccmm)
+        self.add_action(action)
+
     def do_activate(self):
         # We only allow a single window and raise any existing ones
         if not self.window:
@@ -729,6 +733,11 @@ class Application(Gtk.Application):
                 os.startfile(filename)
             else:
                 subprocess.call(('xdg-open', filename))
+
+    def contact_ccmm(self, action, param):
+        """Open the system mail client to email the French TMAS."""
+        tmas_mail = "ccmm@chu-toulouse.fr"
+        self.open_file("mailto:{0}".format(tmas_mail))
 
     def gtk_style(self):
         """Add CSS styles to the application."""

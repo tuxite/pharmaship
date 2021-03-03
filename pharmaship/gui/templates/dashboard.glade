@@ -1,1408 +1,1358 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.2 -->
+<!-- Generated with glade 3.38.2 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
-  <object class="GtkFlowBox" id="box">
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkBox" id="box">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="halign">start</property>
-    <property name="valign">start</property>
-    <property name="homogeneous">True</property>
-    <property name="selection_mode">none</property>
-    <property name="activate_on_single_click">False</property>
+    <property name="can-focus">False</property>
+    <property name="orientation">vertical</property>
     <child>
-      <object class="GtkFlowBoxChild" id="medicines-child">
+      <object class="GtkScrolledWindow">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
+        <property name="can-focus">True</property>
+        <property name="hscrollbar-policy">never</property>
+        <property name="shadow-type">in</property>
+        <property name="propagate-natural-height">True</property>
         <child>
-          <object class="GtkFrame">
+          <object class="GtkViewport">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
-            <property name="label_xalign">0</property>
-            <property name="label_yalign">1</property>
-            <property name="shadow_type">in</property>
+            <property name="can-focus">False</property>
             <child>
-              <object class="GtkAlignment">
+              <object class="GtkFlowBox">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
-                <property name="left_padding">12</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <property name="homogeneous">True</property>
+                <property name="selection-mode">none</property>
+                <property name="activate-on-single-click">False</property>
                 <child>
-                  <object class="GtkGrid">
+                  <object class="GtkFlowBoxChild" id="medicines-child">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="row_homogeneous">True</property>
+                    <property name="can-focus">True</property>
                     <child>
-                      <object class="GtkLabel" id="molecules-missing-name">
+                      <object class="GtkFrame">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Missing:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="molecules-perished-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Perished:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="molecules-warning-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Near expiry:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="molecules-nc-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Non-conformities:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="molecules-missing-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">5</property>
+                        <property name="margin-end">5</property>
+                        <property name="margin-top">5</property>
+                        <property name="margin-bottom">5</property>
+                        <property name="label-xalign">0</property>
+                        <property name="label-yalign">1</property>
+                        <property name="shadow-type">in</property>
                         <child>
-                          <object class="GtkLabel" id="molecules-missing-label">
+                          <!-- n-columns=2 n-rows=4 -->
+                          <object class="GtkGrid">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="margin-start">10</property>
+                            <property name="margin-end">5</property>
+                            <property name="margin-top">5</property>
+                            <property name="margin-bottom">5</property>
+                            <property name="row-homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="molecules-missing-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Missing:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="molecules-perished-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Perished:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="molecules-warning-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Near expiry:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="molecules-nc-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Non-conformities:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="molecules-missing-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="molecules-missing-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="molecules-perished-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="molecules-perished-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="molecules-warning-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="molecules-warning-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="molecules-nc-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="molecules-nc-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="label">
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="action-name">app.medicines</property>
+                            <property name="action-target">0</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Medicines</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="dashboard-section"/>
+                            </style>
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="molecules-perished-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="molecules-perished-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="molecules-warning-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="molecules-warning-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="molecules-nc-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="molecules-nc-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
-              </object>
-            </child>
-            <child type="label">
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="hexpand">True</property>
-                <property name="action_name">app.medicines</property>
-                <property name="action_target">0</property>
-                <property name="relief">none</property>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkFlowBoxChild" id="equipment-child">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Medicines</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
+                    <property name="can-focus">True</property>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">5</property>
+                        <property name="margin-end">5</property>
+                        <property name="margin-top">5</property>
+                        <property name="margin-bottom">5</property>
+                        <property name="label-xalign">0</property>
+                        <property name="label-yalign">1</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <!-- n-columns=2 n-rows=4 -->
+                          <object class="GtkGrid">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="margin-start">10</property>
+                            <property name="margin-end">5</property>
+                            <property name="margin-top">5</property>
+                            <property name="margin-bottom">5</property>
+                            <property name="row-homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="equipment-missing-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Missing:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="equipment-perished-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Perished:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="equipment-warning-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Near expiry:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="equipment-nc-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Non-conformities:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="equipment-missing-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="equipment-missing-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="equipment-perished-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="equipment-perished-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="equipment-warning-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="equipment-warning-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="equipment-nc-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="equipment-nc-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="label">
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="action-name">app.equipment</property>
+                            <property name="action-target">0</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Equipment</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="dashboard-section"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </child>
-                <style>
-                  <class name="dashboard-section"/>
-                </style>
+                <child>
+                  <object class="GtkFlowBoxChild" id="rescuebags-child">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">5</property>
+                        <property name="margin-end">5</property>
+                        <property name="margin-top">5</property>
+                        <property name="margin-bottom">5</property>
+                        <property name="label-xalign">0</property>
+                        <property name="label-yalign">1</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <!-- n-columns=2 n-rows=4 -->
+                          <object class="GtkGrid">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="margin-start">10</property>
+                            <property name="margin-end">5</property>
+                            <property name="margin-top">5</property>
+                            <property name="margin-bottom">5</property>
+                            <property name="row-homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="rescue_bag-missing-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Missing:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="rescue_bag-perished-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Perished:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="rescue_bag-warning-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Near expiry:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="rescue_bag-nc-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Non-conformities:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="rescue_bag-missing-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="rescue_bag-missing-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="rescue_bag-perished-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="rescue_bag-perished-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="rescue_bag-warning-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="rescue_bag-warning-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="rescue_bag-nc-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="rescue_bag-nc-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="label">
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="action-name">app.rescue_bags</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Rescue bags</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="dashboard-section"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFlowBoxChild" id="firstaidkits-child">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">5</property>
+                        <property name="margin-end">5</property>
+                        <property name="margin-top">5</property>
+                        <property name="margin-bottom">5</property>
+                        <property name="label-xalign">0</property>
+                        <property name="label-yalign">1</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <!-- n-columns=2 n-rows=4 -->
+                          <object class="GtkGrid">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="margin-start">10</property>
+                            <property name="margin-end">5</property>
+                            <property name="margin-top">5</property>
+                            <property name="margin-bottom">5</property>
+                            <property name="row-homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="first_aid_kit-missing-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Missing:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="first_aid_kit-perished-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Perished:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="first_aid_kit-warning-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Near expiry:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="first_aid_kit-nc-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Non-conformities:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="first_aid_kit-missing-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="first_aid_kit-missing-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="first_aid_kit-perished-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="first_aid_kit-perished-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="first_aid_kit-warning-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="first_aid_kit-warning-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="first_aid_kit-nc-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="first_aid_kit-nc-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="label">
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="action-name">app.first_aid_kits</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">First Aid Kits</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="dashboard-section"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFlowBoxChild" id="laboratory-box-child">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">5</property>
+                        <property name="margin-end">5</property>
+                        <property name="margin-top">5</property>
+                        <property name="margin-bottom">5</property>
+                        <property name="label-xalign">0</property>
+                        <property name="label-yalign">1</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <!-- n-columns=2 n-rows=4 -->
+                          <object class="GtkGrid">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="margin-start">10</property>
+                            <property name="margin-end">5</property>
+                            <property name="margin-top">5</property>
+                            <property name="margin-bottom">5</property>
+                            <property name="row-homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="laboratory-missing-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Missing:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="laboratory-perished-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Perished:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="laboratory-warning-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Near expiry:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="laboratory-nc-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Non-conformities:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="laboratory-missing-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="laboratory-missing-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="laboratory-perished-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="laboratory-perished-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="laboratory-warning-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="laboratory-warning-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="laboratory-nc-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="laboratory-nc-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="label">
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="action-name">app.laboratory</property>
+                            <property name="action-target">0</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Laboratory</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="dashboard-section"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFlowBoxChild" id="telemedical-box-child">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">5</property>
+                        <property name="margin-end">5</property>
+                        <property name="margin-top">5</property>
+                        <property name="margin-bottom">5</property>
+                        <property name="label-xalign">0</property>
+                        <property name="label-yalign">1</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <!-- n-columns=2 n-rows=4 -->
+                          <object class="GtkGrid">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="margin-start">10</property>
+                            <property name="margin-end">5</property>
+                            <property name="margin-top">5</property>
+                            <property name="margin-bottom">5</property>
+                            <property name="row-homogeneous">True</property>
+                            <child>
+                              <object class="GtkLabel" id="telemedical-missing-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Missing:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="telemedical-perished-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Perished:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="telemedical-warning-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Near expiry:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="telemedical-nc-name">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Non-conformities:</property>
+                                <property name="xalign">1</property>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="telemedical-missing-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="telemedical-missing-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="telemedical-perished-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="telemedical-perished-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="telemedical-warning-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="telemedical-warning-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="telemedical-nc-btn">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="margin-start">5</property>
+                                <property name="margin-end">5</property>
+                                <property name="relief">none</property>
+                                <child>
+                                  <object class="GtkLabel" id="telemedical-nc-label">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label">0</property>
+                                    <property name="xalign">1</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="left-attach">1</property>
+                                <property name="top-attach">3</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="label">
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="action-name">app.telemedical</property>
+                            <property name="action-target">0</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Telemedical</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="dashboard-section"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFlowBoxChild" id="actions-child">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-start">5</property>
+                        <property name="margin-end">5</property>
+                        <property name="margin-top">5</property>
+                        <property name="margin-bottom">5</property>
+                        <property name="label-xalign">0</property>
+                        <property name="label-yalign">1</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <!-- n-columns=1 n-rows=3 -->
+                          <object class="GtkGrid">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="margin-start">5</property>
+                            <property name="margin-end">5</property>
+                            <property name="margin-top">5</property>
+                            <property name="margin-bottom">5</property>
+                            <property name="hexpand">True</property>
+                            <property name="row-spacing">5</property>
+                            <property name="column-spacing">5</property>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="label" translatable="yes">Export all inventories</property>
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="valign">start</property>
+                                <property name="hexpand">True</property>
+                                <signal name="clicked" handler="on-export-inventories" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="label" translatable="yes">Export missing items</property>
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="valign">start</property>
+                                <property name="hexpand">True</property>
+                                <signal name="clicked" handler="on-export-missing" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton">
+                                <property name="label" translatable="yes">Export perished items</property>
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="valign">start</property>
+                                <property name="hexpand">True</property>
+                                <signal name="clicked" handler="on-export-perished" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="left-attach">0</property>
+                                <property name="top-attach">2</property>
+                              </packing>
+                            </child>
+                          </object>
+                        </child>
+                        <child type="label">
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can-focus">False</property>
+                            <property name="focus-on-click">False</property>
+                            <property name="receives-default">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="relief">none</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label" translatable="yes">Actions</property>
+                                <attributes>
+                                  <attribute name="weight" value="bold"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="dashboard-section"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
         </child>
       </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
     </child>
     <child>
-      <object class="GtkFlowBoxChild" id="equipment-child">
+      <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
+        <property name="can-focus">False</property>
+        <property name="valign">end</property>
+        <property name="margin-start">5</property>
+        <property name="margin-end">5</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">5</property>
+        <property name="spacing">10</property>
         <child>
-          <object class="GtkFrame">
+          <object class="GtkLabel">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
-            <property name="label_xalign">0</property>
-            <property name="label_yalign">1</property>
-            <property name="shadow_type">in</property>
-            <child>
-              <object class="GtkAlignment">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
-                <property name="left_padding">12</property>
-                <child>
-                  <object class="GtkGrid">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="row_homogeneous">True</property>
-                    <child>
-                      <object class="GtkLabel" id="equipment-missing-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Missing:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="equipment-perished-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Perished:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="equipment-warning-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Near expiry:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="equipment-nc-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Non-conformities:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="equipment-missing-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="equipment-missing-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="equipment-perished-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="equipment-perished-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="equipment-warning-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="equipment-warning-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="equipment-nc-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="equipment-nc-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child type="label">
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="hexpand">True</property>
-                <property name="action_name">app.equipment</property>
-                <property name="action_target">0</property>
-                <property name="relief">none</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Equipment</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <style>
-                  <class name="dashboard-section"/>
-                </style>
-              </object>
-            </child>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Contact the French TMAS</property>
+            <style>
+              <class name="tmas-title"/>
+            </style>
           </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">+33 5 34 39 33 33</property>
+            <style>
+              <class name="tmas-tel"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">ccmm@chu-toulouse.fr</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="action-name">app.contact_ccmm</property>
+            <property name="relief">none</property>
+            <style>
+              <class name="tmas-tel"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
         </child>
       </object>
-    </child>
-    <child>
-      <object class="GtkFlowBoxChild" id="rescuebags-child">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <child>
-          <object class="GtkFrame">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
-            <property name="label_xalign">0</property>
-            <property name="label_yalign">1</property>
-            <property name="shadow_type">in</property>
-            <child>
-              <object class="GtkAlignment">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
-                <property name="left_padding">12</property>
-                <child>
-                  <object class="GtkGrid">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="row_homogeneous">True</property>
-                    <child>
-                      <object class="GtkLabel" id="rescue_bag-missing-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Missing:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="rescue_bag-perished-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Perished:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="rescue_bag-warning-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Near expiry:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="rescue_bag-nc-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Non-conformities:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="rescue_bag-missing-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="rescue_bag-missing-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="rescue_bag-perished-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="rescue_bag-perished-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="rescue_bag-warning-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="rescue_bag-warning-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="rescue_bag-nc-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="rescue_bag-nc-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child type="label">
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="hexpand">True</property>
-                <property name="action_name">app.rescue_bags</property>
-                <property name="relief">none</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Rescue bags</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <style>
-                  <class name="dashboard-section"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkFlowBoxChild" id="firstaidkits-child">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <child>
-          <object class="GtkFrame">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
-            <property name="label_xalign">0</property>
-            <property name="label_yalign">1</property>
-            <property name="shadow_type">in</property>
-            <child>
-              <object class="GtkAlignment">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
-                <property name="left_padding">12</property>
-                <child>
-                  <object class="GtkGrid">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="row_homogeneous">True</property>
-                    <child>
-                      <object class="GtkLabel" id="first_aid_kit-missing-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Missing:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="first_aid_kit-perished-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Perished:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="first_aid_kit-warning-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Near expiry:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="first_aid_kit-nc-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Non-conformities:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="first_aid_kit-missing-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="first_aid_kit-missing-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="first_aid_kit-perished-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="first_aid_kit-perished-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="first_aid_kit-warning-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="first_aid_kit-warning-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="first_aid_kit-nc-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="first_aid_kit-nc-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child type="label">
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="hexpand">True</property>
-                <property name="action_name">app.first_aid_kits</property>
-                <property name="relief">none</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">First Aid Kits</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <style>
-                  <class name="dashboard-section"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkFlowBoxChild" id="laboratory-box-child">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <child>
-          <object class="GtkFrame">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
-            <property name="label_xalign">0</property>
-            <property name="label_yalign">1</property>
-            <property name="shadow_type">in</property>
-            <child>
-              <object class="GtkAlignment">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
-                <property name="left_padding">12</property>
-                <child>
-                  <object class="GtkGrid">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="row_homogeneous">True</property>
-                    <child>
-                      <object class="GtkLabel" id="laboratory-missing-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Missing:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="laboratory-perished-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Perished:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="laboratory-warning-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Near expiry:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="laboratory-nc-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Non-conformities:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="laboratory-missing-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="laboratory-missing-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="laboratory-perished-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="laboratory-perished-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="laboratory-warning-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="laboratory-warning-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="laboratory-nc-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="laboratory-nc-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child type="label">
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="hexpand">True</property>
-                <property name="action_name">app.laboratory</property>
-                <property name="action_target">0</property>
-                <property name="relief">none</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Laboratory</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <style>
-                  <class name="dashboard-section"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkFlowBoxChild" id="telemedical-box-child">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <child>
-          <object class="GtkFrame">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
-            <property name="label_xalign">0</property>
-            <property name="label_yalign">1</property>
-            <property name="shadow_type">in</property>
-            <child>
-              <object class="GtkAlignment">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
-                <property name="left_padding">12</property>
-                <child>
-                  <object class="GtkGrid">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="row_homogeneous">True</property>
-                    <child>
-                      <object class="GtkLabel" id="telemedical-missing-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Missing:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="telemedical-perished-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Perished:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="telemedical-warning-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Near expiry:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="telemedical-nc-name">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Non-conformities:</property>
-                        <property name="xalign">1</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="telemedical-missing-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="telemedical-missing-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="telemedical-perished-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="telemedical-perished-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="telemedical-warning-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="telemedical-warning-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="telemedical-nc-btn">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="margin_left">5</property>
-                        <property name="margin_right">5</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkLabel" id="telemedical-nc-label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="no">0</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child type="label">
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="hexpand">True</property>
-                <property name="action_name">app.telemedical</property>
-                <property name="action_target">0</property>
-                <property name="relief">none</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Telemedical</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <style>
-                  <class name="dashboard-section"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkFlowBoxChild" id="actions-child">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <child>
-          <object class="GtkFrame">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
-            <property name="label_xalign">0</property>
-            <property name="label_yalign">1</property>
-            <property name="shadow_type">in</property>
-            <child>
-              <object class="GtkAlignment">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
-                <property name="left_padding">5</property>
-                <property name="right_padding">5</property>
-                <child>
-                  <object class="GtkGrid">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="row_spacing">5</property>
-                    <property name="column_spacing">5</property>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="label" translatable="yes">Export all inventories</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="valign">start</property>
-                        <property name="hexpand">True</property>
-                        <signal name="clicked" handler="on-export-inventories" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="label" translatable="yes">Export missing items</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="valign">start</property>
-                        <property name="hexpand">True</property>
-                        <signal name="clicked" handler="on-export-missing" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="label" translatable="yes">Export perished items</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="valign">start</property>
-                        <property name="hexpand">True</property>
-                        <signal name="clicked" handler="on-export-perished" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">2</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child type="label">
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">False</property>
-                <property name="focus_on_click">False</property>
-                <property name="receives_default">False</property>
-                <property name="hexpand">True</property>
-                <property name="relief">none</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Actions</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <style>
-                  <class name="dashboard-section"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkFlowBoxChild" id="tmas-child">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <child>
-          <object class="GtkFrame">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">5</property>
-            <property name="margin_right">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
-            <property name="label_xalign">0</property>
-            <property name="label_yalign">1</property>
-            <property name="shadow_type">in</property>
-            <child>
-              <object class="GtkAlignment">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">5</property>
-                <property name="margin_bottom">5</property>
-                <property name="left_padding">5</property>
-                <property name="right_padding">5</property>
-                <child>
-                  <object class="GtkGrid">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="row_spacing">5</property>
-                    <property name="column_spacing">5</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_left">12</property>
-                        <property name="margin_right">5</property>
-                        <property name="margin_top">5</property>
-                        <property name="margin_bottom">5</property>
-                        <property name="hexpand">True</property>
-                        <property name="label">&lt;a href="mailto:ccmm@chu-toulouse.fr"&gt;ccmm@chu-toulouse.fr&lt;/a&gt;</property>
-                        <property name="use_markup">True</property>
-                        <property name="selectable">True</property>
-                        <property name="track_visited_links">False</property>
-                        <property name="xalign">0</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_left">12</property>
-                        <property name="margin_right">5</property>
-                        <property name="margin_top">5</property>
-                        <property name="margin_bottom">5</property>
-                        <property name="hexpand">True</property>
-                        <property name="label">&lt;a href="tel:+33 5 34 39 33 33"&gt;+33 5 34 39 33 33&lt;/a&gt;</property>
-                        <property name="use_markup">True</property>
-                        <property name="selectable">True</property>
-                        <property name="track_visited_links">False</property>
-                        <property name="xalign">0</property>
-                        <style>
-                          <class name="tmas-tel"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child type="label">
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="focus_on_click">False</property>
-                <property name="receives_default">False</property>
-                <property name="hexpand">True</property>
-                <property name="relief">none</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Contact the French TMAS</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <style>
-                  <class name="dashboard-section"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
     </child>
   </object>
 </interface>

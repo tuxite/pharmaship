@@ -1,4 +1,3 @@
-
 .medicine-btn-delete,
 .article-btn-delete {
   color: darkred;
@@ -31,7 +30,6 @@
   color: #fff;
   background-color: #555;
 }
-
 
 .item-cell {
   padding: .5em;
@@ -89,7 +87,6 @@
   border-top: 1px solid black;
 }
 
-
 .text-mono {
   font-family: monospace;
 }
@@ -121,7 +118,7 @@
   font-style: italic;
 }
 
-.item-small-quantity{
+.item-small-quantity {
   color: white;
   font-weight: bold;
   background-color: darkred;
@@ -151,7 +148,6 @@
   font-size: 140%;
 }
 
-
 .popover-calendar {
   padding: 1em;
 }
@@ -159,12 +155,12 @@
 .calendar {
   /* padding: 4px 4px 4px 4px; */
 }
+
 .calendar.view {
   /* border-width: 0; */
 }
 
-
-.address-textview view border{
+.address-textview view border {
   border-color: #aaa;
   border-width: 10px;
 }
@@ -261,5 +257,10 @@
 .tmas-tel {
   font-size: 14pt;
   font-weight: bold;
-  text-decoration: none;
+}
+
+.tmas-title {
+  font-size: 14pt;
+  font-weight: bold;
+  color: #069a17;
 }
