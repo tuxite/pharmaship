@@ -19,6 +19,24 @@ from pharmaship.gui import utils, widgets
 NC_TEXT_TEMPLATE = "<span foreground='darkred' weight='bold' style='normal'>{0} {1}</span>"
 
 
+def firstaidkit_nc_json(data):
+    """Return the JSON string corresponding to non-conformity data."""
+    obj = {
+        "packaging": "",
+        "composition": "",
+        "molecule": ""
+    }
+
+    if "nc_packaging" in data:
+        obj["packaging"] = data["nc_packaging"]
+    if "nc_composition" in data:
+        obj["composition"] = data["nc_composition"]
+    if "nc_molecule" in data:
+        obj["molecule"] = data["nc_molecule"]
+
+    return json.dumps(obj)
+
+
 class View:
     def __init__(self, window):
         self.window = window
@@ -187,7 +205,6 @@ class View:
             evbox.add(label)
             grid.attach(evbox, 0, i, 2, 1)
 
-
             date_display = ""
             if len(element["exp_dates"]) > 0 and None not in element["exp_dates"]:
                 date_display = min(element["exp_dates"]).strftime("%Y-%m-%d")
@@ -311,14 +328,12 @@ class View:
             # Remark field (mainly used for non-compliance)
             remark_text = []
 
-            if item["nc"]:
-                nc_obj = json.loads(item["nc"])
-                if "packaging" in nc_obj and nc_obj["packaging"]:
-                    remark_text.append(NC_TEXT_TEMPLATE.format(_("Non-compliant packaging:"), nc_obj["packaging"]))
-                if "composition" in nc_obj and nc_obj["composition"]:
-                    remark_text.append(NC_TEXT_TEMPLATE.format(_("Non-compliant composition:"), nc_obj["composition"]))
-                if "molecule" in nc_obj and nc_obj["molecule"]:
-                    remark_text.append(NC_TEXT_TEMPLATE.format(_("Non-compliant molecule:"), nc_obj["molecule"]))
+            if item["nc"]["packaging"]:
+                remark_text.append(NC_TEXT_TEMPLATE.format(_("Non-compliant packaging:"), item["nc"]["packaging"]))
+            if item["nc"]["composition"]:
+                remark_text.append(NC_TEXT_TEMPLATE.format(_("Non-compliant composition:"), item["nc"]["composition"]))
+            if item["nc"]["molecule"]:
+                remark_text.append(NC_TEXT_TEMPLATE.format(_("Non-compliant molecule:"), item["nc"]["molecule"]))
             if item["remark"]:
                 remark_text.append(item["remark"])
 
@@ -359,7 +374,7 @@ class View:
             btn_use = widgets.ButtonWithImage("edit-redo-symbolic", tooltip="Use", connect=self.dialog_use, data=item)
             linked_btn.pack_end(btn_use, False, True, 0)
             # Modify
-            btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=(item, element["perishable"]))
+            btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=(item, element))
             linked_btn.pack_end(btn_modify, False, True, 0)
             # Delete
             btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip="Delete", connect=self.dialog_delete, data=item)
@@ -416,6 +431,14 @@ class View:
             activate_cb=(self.response_add_new, dialog, item, builder)
             ))
         builder.expose_object("exp_date", exp_date)
+
+        # Show/hide non-conformity fields according to item type
+        if item["type"] == "molecule":
+            grid = builder.get_object("nc-grid-equipment")
+            grid.hide()
+        else:
+            grid = builder.get_object("nc-grid-molecule")
+            grid.hide()
 
         # Connect signals
         builder.connect_signals({
@@ -522,7 +545,9 @@ class View:
             "entry": [
                 "name",
                 "remark",
-                "nc",
+                "nc_packaging",
+                "nc_composition",
+                "nc_molecule",
                 "exp_date"
             ],
             "spinbutton": [
@@ -557,7 +582,7 @@ class View:
             name=cleaned_data["name"],
             exp_date=cleaned_data["exp_date"],
             kit=first_aid_kit,
-            nc=cleaned_data["nc"],
+            nc=firstaidkit_nc_json(cleaned_data),
             remark=cleaned_data["remark"],
             content_type_id=item["parent"]["type"],
             object_id=item["parent"]["id"]
@@ -778,7 +803,8 @@ class View:
 
     def dialog_modify(self, source, data):
         item = data[0]
-        perishable = data[1]
+        perishable = data[1]["perishable"]
+        item_type = data[1]["type"]
 
         builder = Gtk.Builder.new_from_file(utils.get_template("subitem_modify.glade"))
         dialog = builder.get_object("dialog")
@@ -803,9 +829,19 @@ class View:
             remark = builder.get_object("remark")
             remark.set_text(item["remark"])
 
-        if item["nc"]:
-            remark = builder.get_object("nc")
-            remark.set_text(item["nc"])
+        # Show/hide non-conformity fields according to item type
+        if item_type == "molecule":
+            grid = builder.get_object("nc-grid-equipment")
+            grid.hide()
+            nc_composition = builder.get_object("nc_composition")
+            nc_composition.set_text(item["nc"]["composition"])
+            nc_molecule = builder.get_object("nc_molecule")
+            nc_molecule.set_text(item["nc"]["molecule"])
+        else:
+            grid = builder.get_object("nc-grid-molecule")
+            grid.hide()
+            nc_packaging = builder.get_object("nc_packaging")
+            nc_packaging.set_text(item["nc"]["packaging"])
 
         builder.connect_signals({
             "on-response": (self.response_modify, dialog, item, perishable, builder),
@@ -822,7 +858,9 @@ class View:
             "entry": [
                 "exp_date",
                 "remark",
-                "nc"
+                "nc_packaging",
+                "nc_composition",
+                "nc_molecule"
             ],
             "spinbutton": [
                 "quantity"
@@ -840,7 +878,7 @@ class View:
         item_obj = models.FirstAidKitItem.objects.get(id=item["id"])
         item_obj.exp_date = cleaned_data["exp_date"]
         item_obj.remark = cleaned_data["remark"]
-        item_obj.nc = cleaned_data["nc"]
+        item_obj.nc = firstaidkit_nc_json(cleaned_data)
         item_obj.save()
 
         if cleaned_data["quantity"] != item['quantity']:

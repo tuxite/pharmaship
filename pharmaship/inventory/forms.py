@@ -163,7 +163,9 @@ class AddNewSubitemForm(forms.Form):
     quantity = forms.IntegerField(min_value=1)
     exp_date = forms.DateField(required=False)
     remark = forms.CharField(max_length=256, required=False)
-    nc = forms.CharField(max_length=256, required=False)
+    nc_packaging = forms.CharField(max_length=256, required=False)
+    nc_composition = forms.CharField(max_length=256, required=False)
+    nc_molecule = forms.CharField(max_length=256, required=False)
 
     # For exp_date required field validation
     perishable = forms.BooleanField(required=False)
@@ -194,7 +196,9 @@ class ModifySubitemForm(forms.Form):
 
     quantity = forms.IntegerField(min_value=1)
     remark = forms.CharField(max_length=256, required=False)
-    nc = forms.CharField(max_length=256, required=False)
+    nc_packaging = forms.CharField(max_length=256, required=False)
+    nc_composition = forms.CharField(max_length=256, required=False)
+    nc_molecule = forms.CharField(max_length=256, required=False)
     exp_date = forms.CharField(max_length=256, required=False)
     # For exp_date required field validation
     perishable = forms.BooleanField(required=False)

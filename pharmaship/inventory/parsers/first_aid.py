@@ -2,6 +2,7 @@
 """Utility functions for parsing/serializing First Aid Kit related data."""
 import datetime
 import copy
+import json
 
 from pharmaship.core.utils import log
 
@@ -255,6 +256,35 @@ def get_available_articles(element, content_type_id, qty_transactions):
     return result
 
 
+def subitem_nc(nc_string):
+    """Return the non-conformities dict if any and flag if non-conformity."""
+    result = {
+        "packaging": "",
+        "composition": "",
+        "molecule": ""
+    }
+    has_nc = False
+
+    if not nc_string:
+        return (result, has_nc)
+
+    try:
+        data = json.loads(nc_string)
+    except json.decoder.JSONDecodeError:
+        log.exception("First Aid Kit non conformity field error.")
+        log.debug(nc_string)
+        return (result, has_nc)
+
+    for field in result.keys():
+        if field not in data:
+            continue
+        if data[field] != "":
+            result[field] = data[field]
+            has_nc = True
+
+    return result, has_nc
+
+
 def get_subitems(params, kit, common):
     """Get the list of items currently in a First Aid Kit instance.
 
@@ -286,7 +316,6 @@ def get_subitems(params, kit, common):
             "id": item.id,
             "name": item.name,
             "exp_date": item.exp_date,
-            "nc": item.nc,
             "remark": item.remark,
             "kit_id": kit.id,
             "quantity": 0,
@@ -311,12 +340,9 @@ def get_subitems(params, kit, common):
                 child['expired'] = True
                 parent['has_date_expired'] = True
 
-        # if item.nc:
-        #     log.debug(item.nc)
-        #     parent["has_nc"] = True
-
-        if utils.firstaidkit_nc(item.nc):
-            parent["has_nc"] = True
+        child["nc"], _has_nc = subitem_nc(item.nc)
+        # Avoid next subitems to erase the True has_nc
+        parent["has_nc"] |= _has_nc
 
         if item.id in qty_transactions:
             child["quantity"] = qty_transactions[item.id]
