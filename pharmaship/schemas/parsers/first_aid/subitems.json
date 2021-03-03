@@ -18,6 +18,9 @@
             "type": "integer",
             "min": 0
           },
+          "expiring_quantity": {
+            "type": "integer"
+          },
           "exp_dates": {
             "type": "list",
             "schema": {

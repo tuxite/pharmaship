@@ -476,3 +476,19 @@ def get_date_mask(config):
         DATE_MASK["default-day"] = None
 
     return DATE_MASK
+
+
+def quantity_set_style(label, item):
+    """Set label style classname according to item quantity data."""
+    classname = None
+    if item["has_nc"]:
+        classname = "item-nc-quantity"
+    # If expiring quantity will create a stock out, use the warning color
+    if item["quantity"] - item["expiring_quantity"] < item["required_quantity"]:
+        classname = "item-warning"
+    # If quantity is less than required, affect corresponding style
+    if item["quantity"] < item["required_quantity"]:
+        classname = "item-expired"
+
+    if classname:
+        label.get_style_context().add_class(classname)

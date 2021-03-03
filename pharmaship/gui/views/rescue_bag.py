@@ -208,12 +208,8 @@ class View:
             label.set_markup("{0}<small>/{1}</small>".format(element["quantity"], element["required_quantity"]))
             label.get_style_context().add_class("item-cell")
             label.get_style_context().add_class("text-mono")
-            # Change style if equipment has articles with non-conformity
-            if element["has_nc"]:
-                label.get_style_context().add_class("item-nc-quantity")
-            # If quantity is less than required, affect corresponding style
-            if element["quantity"] < element["required_quantity"]:
-                label.get_style_context().add_class("article-expired")
+            # Set style according to quantity
+            utils.quantity_set_style(label, element)
             evbox = widgets.EventBox(element, self.toggle_item, 5, i)
             evbox.add(label)
             grid.attach(evbox, 3, i, 1, 1)
@@ -367,9 +363,8 @@ class View:
             label = Gtk.Label(element["quantity"], xalign=0.5)
             label.get_style_context().add_class("item-cell")
             label.get_style_context().add_class("text-mono")
-            # Change style if equipment has articles with non-conformity
-            if element["has_nc"]:
-                label.get_style_context().add_class("item-nc-quantity")
+            # Set style according to quantity
+            utils.quantity_set_style(label, element)
             evbox = widgets.EventBox(element, self.toggle_item, 5, i, bag.id)
             evbox.add(label)
             grid.attach(evbox, 3, i, 1, 1)

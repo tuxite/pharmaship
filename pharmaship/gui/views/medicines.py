@@ -165,8 +165,7 @@ class View:
                     date_display = min(molecule["exp_dates"]).strftime("%Y-%m-%d")
 
                 label = Gtk.Label(date_display, xalign=0.5)
-                # label.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-                # label.connect('button-press-event', utils.widget_clicked, molecule, self.toggle_medicine)
+
                 label.get_style_context().add_class("item-cell")
                 label.get_style_context().add_class("text-mono")
                 if molecule["has_date_expired"]:
@@ -179,17 +178,11 @@ class View:
 
                 # label = Gtk.Label("{0}/{1}".format(molecule["quantity"], molecule["required_quantity"]), xalign=0.5)
                 label = Gtk.Label(xalign=0.5)
-                # label.add_events(Gdk.EventMask.BUTTON_PRESS_MASK)
-                # label.connect('button-release-event', utils.widget_clicked, molecule, self.toggle_medicine)
                 label.set_markup("{0}<small>/{1}</small>".format(molecule["quantity"], molecule["required_quantity"]))
                 label.get_style_context().add_class("item-cell")
                 label.get_style_context().add_class("text-mono")
-                # Change style if molecule has medicines with non-conformity
-                if molecule["has_nc"]:
-                    label.get_style_context().add_class("item-nc-quantity")
-                # If quantity is less than required, affect corresponding style
-                if molecule["quantity"] < molecule["required_quantity"]:
-                    label.get_style_context().add_class("medicine-expired")
+                # Set style according to quantity
+                utils.quantity_set_style(label, molecule)
                 evbox = widgets.EventBox(molecule, self.toggle_medicine, 7, i)
                 evbox.add(label)
                 grid.attach(evbox, 5, i, 1, 1)

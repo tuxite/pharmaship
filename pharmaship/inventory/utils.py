@@ -1,6 +1,7 @@
 # -*- coding: utf-8; -*-
 """Utility functions for model data handling."""
 import copy
+import json
 
 from pathlib import PurePath
 
@@ -8,6 +9,7 @@ import django.utils.text
 
 from mptt.utils import get_cached_trees
 
+from pharmaship.core.utils import log
 from pharmaship.inventory import models
 
 
@@ -139,3 +141,30 @@ def location_iterator(parent, items, parent_id):
             locations += location_iterator(sequence, children, item.id)
 
     return locations
+
+
+def firstaidkit_nc(raw_data):
+    """Return True if data has non-conformities inside."""
+    fields = [
+        "packaging",
+        "composition",
+        "molecule"
+    ]
+
+    if not raw_data:
+        return False
+
+    try:
+        data = json.loads(raw_data)
+    except json.decoder.JSONDecodeError:
+        log.exception("First Aid Kit non conformity field error.")
+        log.debug(raw_data)
+        return False
+
+    for field in fields:
+        if field not in data:
+            continue
+        if data[field] != "":
+            return True
+
+    return False

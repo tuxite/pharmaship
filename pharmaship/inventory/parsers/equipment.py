@@ -111,6 +111,7 @@ def parser_element(equipment, data, warning_delay, today=datetime.date.today()):
     element_dict['tag'] = equipment.tag
     # Quantity
     element_dict['quantity'] = 0
+    element_dict['expiring_quantity'] = 0
 
     element_dict['articles'] = []
     element_dict['exp_dates'] = []
@@ -174,6 +175,8 @@ def parser_element(equipment, data, warning_delay, today=datetime.date.today()):
         # Adding the article quantity to the equipment quantity
         if (equipment.perishable and article.exp_date > today) or (equipment.perishable is not True):
             element_dict['quantity'] += item_dict['quantity']
+            if item_dict['warning']:
+                element_dict['expiring_quantity'] += item_dict['quantity']
 
         # Add the molecule_id in case of reverse search
         item_dict['equipment'] = {

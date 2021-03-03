@@ -100,14 +100,16 @@
 }
 
 .medicine-expired,
-.article-expired {
+.article-expired,
+.item-expired {
   color: white;
   font-weight: bold;
   background-color: darkred;
 }
 
 .medicine-warning,
-.article-warning {
+.article-warning,
+.item-warning {
   color: black;
   font-weight: bold;
   background-color: orange;

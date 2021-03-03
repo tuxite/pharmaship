@@ -37,6 +37,9 @@
         "quantity": {
           "type": "integer"
         },
+        "expiring_quantity": {
+          "type": "integer"
+        },
         "required_quantity": {
           "type": "integer"
         },

@@ -204,6 +204,7 @@ def create_molecule(item, required=None):
         "name": str(item),
         "required_quantity": 0,
         "quantity": 0,
+        "expiring_quantity": 0,
         "allowance": [],
         "remark": item.remark,
         "picture": None,
@@ -240,6 +241,7 @@ def create_equipment(item, required):
         "name": str(item),
         "required_quantity": 0,
         "quantity": 0,
+        "expiring_quantity": 0,
         "allowance": [],
         "remark": item.remark,
         "picture": item.picture,
@@ -439,10 +441,16 @@ def merge_bags(bags, molecules, equipments):
                 continue
 
             quantity = 0
+            expiring_quantity = 0
             for item in molecule["contents"]:
+                if item["expired"]:
+                    continue
                 quantity += item["quantity"]
+                if item["warning"]:
+                    expiring_quantity += item["quantity"]
 
             molecule["quantity"] = quantity
+            molecule["expiring_quantity"] = expiring_quantity
 
             result[bag.id]["elements"].append(molecule)
 
@@ -451,10 +459,16 @@ def merge_bags(bags, molecules, equipments):
                 continue
 
             quantity = 0
+            expiring_quantity = 0
             for item in equipment["contents"]:
+                if item["expired"]:
+                    continue
                 quantity += item["quantity"]
+                if item["warning"]:
+                    expiring_quantity += item["quantity"]
 
             equipment["quantity"] = quantity
+            equipment["expiring_quantity"] = expiring_quantity
 
             result[bag.id]["elements"].append(equipment)
 

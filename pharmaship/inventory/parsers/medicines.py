@@ -118,6 +118,7 @@ def parser_element(molecule, data, warning_delay, today):
     element_dict['tag'] = molecule.tag
     # Quantity
     element_dict['quantity'] = 0
+    element_dict['expiring_quantity'] = 0
 
     element_dict['medicines'] = []
     element_dict['exp_dates'] = []
@@ -183,8 +184,10 @@ def parser_element(molecule, data, warning_delay, today):
             log.warning("Medicine (ID: %s) with negative quantity (%s)", item_dict["id"], item_dict["quantity"])
 
         # Adding the medicine quantity to the molecule quantity
-        if medicine.exp_date > today:
+        if not item_dict['expired']:
             element_dict['quantity'] += item_dict['quantity']
+            if item_dict['warning']:
+                element_dict['expiring_quantity'] += item_dict['quantity']
 
         # Add the molecule_id in case of reverse search
         item_dict['molecule'] = {

@@ -216,6 +216,7 @@ class ParserMethodTestCase(TestCase):
                 1: {
                     "exp_dates": [],
                     "quantity": 0,
+                    "expiring_quantity": 0,
                     "contents": [],
                     "has_nc": False,
                     "has_date_warning": False,
@@ -224,6 +225,7 @@ class ParserMethodTestCase(TestCase):
                 2: {
                     "exp_dates": [],
                     "quantity": 0,
+                    "expiring_quantity": 0,
                     "contents": [],
                     "has_nc": False,
                     "has_date_warning": False,
@@ -232,6 +234,7 @@ class ParserMethodTestCase(TestCase):
                 3: {
                     "exp_dates": [],
                     "quantity": 0,
+                    "expiring_quantity": 0,
                     "contents": [],
                     "has_nc": False,
                     "has_date_warning": False,
@@ -242,6 +245,7 @@ class ParserMethodTestCase(TestCase):
                 1: {
                     "exp_dates": [],
                     "quantity": 0,
+                    "expiring_quantity": 0,
                     "contents": [],
                     "has_nc": False,
                     "has_date_warning": False,
@@ -250,6 +254,7 @@ class ParserMethodTestCase(TestCase):
                 2: {
                     "exp_dates": [],
                     "quantity": 0,
+                    "expiring_quantity": 0,
                     "contents": [],
                     "has_nc": False,
                     "has_date_warning": False,
@@ -258,6 +263,7 @@ class ParserMethodTestCase(TestCase):
                 3: {
                     "exp_dates": [],
                     "quantity": 0,
+                    "expiring_quantity": 0,
                     "contents": [],
                     "has_nc": False,
                     "has_date_warning": False,

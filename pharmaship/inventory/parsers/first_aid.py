@@ -5,7 +5,7 @@ import copy
 
 from pharmaship.core.utils import log
 
-from pharmaship.inventory import models
+from pharmaship.inventory import models, utils
 # from purchase.models import Item
 
 
@@ -99,6 +99,7 @@ def create_molecule(item, content_type, required=None):
         "name": str(item),
         "required_quantity": 0,
         "quantity": 0,
+        "expiring_quantity": 0,
         "allowance": [],
         "remark": item.remark,
         "picture": None,
@@ -140,6 +141,7 @@ def create_equipment(item, content_type, required):
         "name": str(item),
         "required_quantity": 0,
         "quantity": 0,
+        "expiring_quantity": 0,
         "allowance": [],
         "remark": item.remark,
         "picture": item.picture,
@@ -309,12 +311,19 @@ def get_subitems(params, kit, common):
                 child['expired'] = True
                 parent['has_date_expired'] = True
 
-        if item.nc:
+        # if item.nc:
+        #     log.debug(item.nc)
+        #     parent["has_nc"] = True
+
+        if utils.firstaidkit_nc(item.nc):
             parent["has_nc"] = True
 
         if item.id in qty_transactions:
             child["quantity"] = qty_transactions[item.id]
-            parent["quantity"] += child["quantity"]
+            if not child["expired"]:
+                parent["quantity"] += child["quantity"]
+            if child["warning"]:
+                parent["expiring_quantity"] += child["quantity"]
 
         parent["contents"].append(child)
 

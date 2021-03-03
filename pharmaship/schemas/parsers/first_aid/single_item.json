@@ -10,6 +10,9 @@
     "type": "integer",
     "min": 0
   },
+  "expiring_quantity": {
+    "type": "integer"
+  },
   "allowance": {
     "type": "list",
     "nullable": true,

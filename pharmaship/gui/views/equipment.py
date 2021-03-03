@@ -184,12 +184,8 @@ class View:
                 label.set_markup("{0}<small>/{1}</small>".format(equipment["quantity"], equipment["required_quantity"]))
                 label.get_style_context().add_class("item-cell")
                 label.get_style_context().add_class("text-mono")
-                # Change style if equipment has articles with non-conformity
-                if equipment["has_nc"]:
-                    label.get_style_context().add_class("item-nc-quantity")
-                # If quantity is less than required, affect corresponding style
-                if equipment["quantity"] < equipment["required_quantity"]:
-                    label.get_style_context().add_class("article-expired")
+                # Set style according to quantity
+                utils.quantity_set_style(label, equipment)
 
                 evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
                 evbox.add(label)
