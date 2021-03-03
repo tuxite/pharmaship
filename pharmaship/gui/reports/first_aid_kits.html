@@ -26,13 +26,20 @@
             {% for item in element.contents %}
             <tr class="item">
                 <td class="article-name" colspan="1">{{ item.name }}</td>
-                {% if item.nc %}
-                <td class="nc" colspan="2">{{ item.nc }}</td>
-                {% elif item.remark %}
-                <td class="remark small" colspan="2">{{ item.remark }}</td>
-                {% else %}
-                <td colspan="2"></td>
-                {% endif %}
+                <td class="nc" colspan="2">
+                  {% if item.nc.packaging %}
+                    <span class="item-nc" style="display: block;">{% trans "Non-compliant packaging:" %} {{ item.nc.packaging }}</span>
+                  {% endif %}
+                  {% if item.nc.composition %}
+                    <span class="item-nc" style="display: block;">{% trans "Non-compliant composition:" %} {{ item.nc.composition }}</span>
+                  {% endif %}
+                  {% if item.nc.molecule %}
+                    <span class="item-nc" style="display: block;">{% trans "Non-compliant molecule:" %} {{ item.nc.molecule }}</span>
+                  {% endif %}
+                  {% if item.remark %}
+                  <span class="remark small" style="display: block;">{{ item.remark }}</span>
+                  {% endif %}
+                </td>
                 <td class="center mono">{{ item.quantity }}</td>
                 <td class="center mono {% if item.expired %}article-expired{% elif item.warning %}article-warning{% endif %}">{{ item.exp_date|date:"d/m/Y" }}</td>
             </tr>
