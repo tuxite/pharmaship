@@ -34,6 +34,9 @@ class View:
         if isinstance(chosen, int):
             self.chosen = chosen
 
+    def parser(self, params):
+        return parser(params)
+
     def refresh_grid(self):
         # Get present scroll position
         position = self.scrolled.get_vadjustment().get_value()
@@ -60,9 +63,7 @@ class View:
         viewport.show_all()
         viewport.get_vadjustment().set_value(position)
 
-    def create_grid(self, toggle_row_num=None):
-        grid = Gtk.Grid()
-
+    def grid_header(self, grid):
         # Header
         label = Gtk.Label(_("Name"), xalign=0)
         label.set_hexpand(True)
@@ -92,7 +93,126 @@ class View:
         label.set_size_request(125, -1)
         grid.attach(label, 6, 0, 1, 1)
 
-        data = parser(self.params)
+    def create_row(self, grid, equipment, toggle_equipment, toggle_row_num, i):
+        # If toggle_row_num is defined, record first the equipment
+        # then, when all construction is done, call toggle_article
+        # function.
+        if toggle_row_num and toggle_row_num == i:
+            toggle_equipment = equipment
+        if self.chosen and self.chosen == equipment["id"]:
+            toggle_equipment = equipment
+            toggle_row_num = i
+            self.row_widget_num = i
+
+        label = Gtk.Label(equipment["name"], xalign=0)
+        label.set_line_wrap(True)
+        label.set_lines(1)
+        label.set_line_wrap_mode(2)
+        label.get_style_context().add_class("item-cell")
+        evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+        evbox.add(label)
+        grid.attach(evbox, 0, i, 1, 1)
+
+        label = Gtk.Label(equipment["remark"], xalign=0)
+        label.set_line_wrap(True)
+        label.set_lines(1)
+        label.set_line_wrap_mode(2)
+        label.get_style_context().add_class("item-cell")
+        label.get_style_context().add_class("article-remark")
+        evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+        evbox.add(label)
+        grid.attach(evbox, 1, i, 1, 1)
+
+        label = Gtk.Label(equipment["packaging"], xalign=0)
+        label.get_style_context().add_class("item-cell")
+        label.set_line_wrap(True)
+        label.set_lines(1)
+        label.set_line_wrap_mode(2)
+        evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+        evbox.add(label)
+        grid.attach(evbox, 2, i, 1, 1)
+
+        # Get list of locations
+        locations_len = len(equipment["locations"])
+        if locations_len == 0:
+            locations_display = ""
+        elif locations_len >= 1:
+            equipment["locations"].sort()
+            locations_display = equipment["locations"][0]
+        if locations_len > 1:
+            locations_display += ", ..."
+
+        label = Gtk.Label(locations_display, xalign=0)
+        label.set_line_wrap(True)
+        label.set_lines(1)
+        label.set_line_wrap_mode(2)
+        label.get_style_context().add_class("item-cell")
+        evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+        evbox.add(label)
+        grid.attach(evbox, 3, i, 1, 1)
+
+        # Get first expiry date
+        date_display = ""
+        if len(equipment["exp_dates"]) > 0 and None not in equipment["exp_dates"]:
+            date_display = min(equipment["exp_dates"]).strftime("%Y-%m-%d")
+
+        label = Gtk.Label(date_display, xalign=0.5)
+        label.get_style_context().add_class("item-cell")
+        label.get_style_context().add_class("text-mono")
+        if equipment["has_date_expired"]:
+            label.get_style_context().add_class("article-expired")
+        elif equipment["has_date_warning"]:
+            label.get_style_context().add_class("article-warning")
+
+        evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+        evbox.add(label)
+        grid.attach(evbox, 4, i, 1, 1)
+
+        label = Gtk.Label(xalign=0.5)
+        label.set_markup("{0}<small>/{1}</small>".format(equipment["quantity"], equipment["required_quantity"]))
+        label.get_style_context().add_class("item-cell")
+        label.get_style_context().add_class("text-mono")
+        # Set style according to quantity
+        utils.quantity_set_style(label, equipment)
+
+        evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+        evbox.add(label)
+        grid.attach(evbox, 5, i, 1, 1)
+
+        # Set tooltip to give information on allowances requirements
+        tooltip_text = []
+        for item in equipment["allowance"]:
+            tooltip_text.append("<b>{0}</b> ({1})".format(item["name"], item["quantity"]))
+        label.set_tooltip_markup("\n".join(tooltip_text))
+
+        if equipment["picture"]:
+            # Button box for actions
+            linked_btn = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+            linked_btn.get_style_context().add_class("linked")
+            linked_btn.get_style_context().add_class("equipment-item-buttons")
+            evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+            evbox.add(linked_btn)
+            grid.attach(evbox, 6, i, 1, 1)
+
+            # Picture
+            picture = equipment["picture"]
+            btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+            linked_btn.pack_end(btn_picture, False, True, 0)
+        else:
+            label = Gtk.Label("", xalign=0.5)
+            label.get_style_context().add_class("item-cell")
+            evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
+            evbox.add(label)
+            grid.attach(evbox, 6, i, 1, 1)
+
+        return toggle_equipment
+
+    def create_grid(self, toggle_row_num=None):
+        grid = Gtk.Grid()
+
+        self.grid_header(grid)
+
+        data = self.parser(self.params)
 
         i = 0
         toggle_equipment = None
@@ -105,117 +225,7 @@ class View:
 
             for equipment in data[group]:
                 i += 1
-
-                # If toggle_row_num is defined, record first the equipment
-                # then, when all construction is done, call toggle_article
-                # function.
-                if toggle_row_num and toggle_row_num == i:
-                    toggle_equipment = equipment
-                if self.chosen and self.chosen == equipment["id"]:
-                    toggle_equipment = equipment
-                    toggle_row_num = i
-                    self.row_widget_num = i
-
-                label = Gtk.Label(equipment["name"], xalign=0)
-                label.set_line_wrap(True)
-                label.set_lines(1)
-                label.set_line_wrap_mode(2)
-                label.get_style_context().add_class("item-cell")
-                evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
-                evbox.add(label)
-                grid.attach(evbox, 0, i, 1, 1)
-
-                label = Gtk.Label(equipment["remark"], xalign=0)
-                label.set_line_wrap(True)
-                label.set_lines(1)
-                label.set_line_wrap_mode(2)
-                label.get_style_context().add_class("item-cell")
-                label.get_style_context().add_class("article-remark")
-                evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
-                evbox.add(label)
-                grid.attach(evbox, 1, i, 1, 1)
-
-                label = Gtk.Label(equipment["packaging"], xalign=0)
-                label.get_style_context().add_class("item-cell")
-                label.set_line_wrap(True)
-                label.set_lines(1)
-                label.set_line_wrap_mode(2)
-                evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
-                evbox.add(label)
-                grid.attach(evbox, 2, i, 1, 1)
-
-                # Get list of locations
-                locations_len = len(equipment["locations"])
-                if locations_len == 0:
-                    locations_display = ""
-                elif locations_len >= 1:
-                    equipment["locations"].sort()
-                    locations_display = equipment["locations"][0]
-                if locations_len > 1:
-                    locations_display += ", ..."
-
-                label = Gtk.Label(locations_display, xalign=0)
-                label.set_line_wrap(True)
-                label.set_lines(1)
-                label.set_line_wrap_mode(2)
-                label.get_style_context().add_class("item-cell")
-                evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
-                evbox.add(label)
-                grid.attach(evbox, 3, i, 1, 1)
-
-                # Get first expiry date
-                date_display = ""
-                if len(equipment["exp_dates"]) > 0 and None not in equipment["exp_dates"]:
-                    date_display = min(equipment["exp_dates"]).strftime("%Y-%m-%d")
-
-                label = Gtk.Label(date_display, xalign=0.5)
-                label.get_style_context().add_class("item-cell")
-                label.get_style_context().add_class("text-mono")
-                if equipment["has_date_expired"]:
-                    label.get_style_context().add_class("article-expired")
-                elif equipment["has_date_warning"]:
-                    label.get_style_context().add_class("article-warning")
-
-                evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
-                evbox.add(label)
-                grid.attach(evbox, 4, i, 1, 1)
-
-                label = Gtk.Label(xalign=0.5)
-                label.set_markup("{0}<small>/{1}</small>".format(equipment["quantity"], equipment["required_quantity"]))
-                label.get_style_context().add_class("item-cell")
-                label.get_style_context().add_class("text-mono")
-                # Set style according to quantity
-                utils.quantity_set_style(label, equipment)
-
-                evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
-                evbox.add(label)
-                grid.attach(evbox, 5, i, 1, 1)
-
-                # Set tooltip to give information on allowances requirements
-                tooltip_text = []
-                for item in equipment["allowance"]:
-                    tooltip_text.append("<b>{0}</b> ({1})".format(item["name"], item["quantity"]))
-                label.set_tooltip_markup("\n".join(tooltip_text))
-
-                if equipment["picture"]:
-                    # Button box for actions
-                    linked_btn = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-                    linked_btn.get_style_context().add_class("linked")
-                    linked_btn.get_style_context().add_class("equipment-item-buttons")
-                    evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
-                    evbox.add(linked_btn)
-                    grid.attach(evbox, 6, i, 1, 1)
-
-                    # Picture
-                    picture = equipment["picture"]
-                    btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
-                    linked_btn.pack_end(btn_picture, False, True, 0)
-                else:
-                    label = Gtk.Label("", xalign=0.5)
-                    label.get_style_context().add_class("item-cell")
-                    evbox = widgets.EventBox(equipment, self.toggle_article, 7, i)
-                    evbox.add(label)
-                    grid.attach(evbox, 6, i, 1, 1)
+                toggle_equipment = self.create_row(grid, equipment, toggle_equipment, toggle_row_num, i)
 
         # Toggle if active
         if toggle_row_num and toggle_equipment:

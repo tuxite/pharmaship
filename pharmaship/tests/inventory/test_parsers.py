@@ -124,7 +124,7 @@ class ParserMethodTestCase(TestCase):
         Use Cerberus for checking conformity.
         """
         output = parsers.laboratory.parser(self.params)
-        schema_path = settings.VALIDATOR_PATH / "parsers" / "laboratory.json"
+        schema_path = settings.VALIDATOR_PATH / "parsers" / "equipment.json"
         schema = json.loads(schema_path.read_text())
 
         group_type = TypeDefinition(
@@ -159,7 +159,7 @@ class ParserMethodTestCase(TestCase):
         Use Cerberus for checking conformity.
         """
         output = parsers.laboratory.parser(self.params)
-        schema_path = settings.VALIDATOR_PATH / "parsers" / "telemedical.json"
+        schema_path = settings.VALIDATOR_PATH / "parsers" / "equipment.json"
         schema = json.loads(schema_path.read_text())
 
         group_type = TypeDefinition(
