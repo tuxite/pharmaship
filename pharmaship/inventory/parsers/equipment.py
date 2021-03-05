@@ -178,7 +178,7 @@ def parser_element(equipment, data, warning_delay, today=datetime.date.today()):
             if item_dict['warning']:
                 element_dict['expiring_quantity'] += item_dict['quantity']
 
-        # Add the molecule_id in case of reverse search
+        # Add the equipment_id in case of reverse search
         item_dict['equipment'] = {
             "id": equipment.id,
             "name": equipment.name,
