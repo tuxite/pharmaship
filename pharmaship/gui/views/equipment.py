@@ -436,7 +436,7 @@ class View:
         # Check if equipment has previous locations to input the latest one as
         # default to ease the input
         active_location = None
-        active_packing_content = 0
+        active_packing_content = 1  # Default at least 1
         active_packing_name = 0
         equipment_obj = models.Equipment.objects.get(id=equipment["id"])
         try:
