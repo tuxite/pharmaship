@@ -170,7 +170,8 @@ def parser_element(equipment, data, warning_delay, today=datetime.date.today()):
         # Add the equipment_id in case of reverse search
         item_dict['equipment'] = {
             "id": equipment.id,
-            "name": equipment.name
+            "name": equipment.name,
+            "packaging": equipment.packaging
             }
 
         # Packing
