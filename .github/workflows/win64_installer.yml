@@ -47,6 +47,10 @@ jobs:
             mingw-w64-x86_64-python-virtualenv
             mingw-w64-x86_64-python-pillow
             mingw-w64-x86_64-python-cairo
+            mingw-w64-x86_64-python-matplotlib
+            mingw-w64-x86_64-python-numpy
+            mingw-w64-x86_64-python-pandas
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Retrieve Pharmaship sources
         uses: actions/checkout@v2
