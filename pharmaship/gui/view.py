@@ -11,6 +11,8 @@ import ctypes
 import sys
 import os
 
+from pathlib import Path
+
 import gi
 gi.require_version("Gtk", "3.0")  # noqa: E402
 from gi.repository import Gtk, Gio, Gdk, GLib
@@ -27,6 +29,10 @@ from pharmaship.gui import views, export, utils, widgets
 from pharmaship.inventory import models
 from pharmaship.inventory.utils import get_location_list
 from pharmaship.inventory import search
+
+
+# Constants
+MED_OBS_SHT = "medical_observation_sheet.{0}.pdf"
 
 # Language support
 try:
@@ -487,6 +493,10 @@ class Application(Gtk.Application):
         action.connect("activate", self.contact_ccmm)
         self.add_action(action)
 
+        action = Gio.SimpleAction.new("medical_obs", None)
+        action.connect("activate", self.medical_obs)
+        self.add_action(action)
+
     def do_activate(self):
         # We only allow a single window and raise any existing ones
         if not self.window:
@@ -741,6 +751,19 @@ class Application(Gtk.Application):
         """Open the system mail client to email the French TMAS."""
         tmas_mail = "ccmm@chu-toulouse.fr"
         self.open_file("mailto:{0}".format(tmas_mail))
+
+    def medical_obs(self, action, param):
+        """Open if available the medical observation sheet PDF."""
+        _name = MED_OBS_SHT.format(self.params.application.lang)
+        fileobj = Path(settings.PHARMASHIP_DATA / _name)
+        if fileobj.exists():
+            self.open_file(fileobj)
+        else:
+            # Fallback
+            log.warning("Med. observation sheet not available for this lang.")
+            _name = MED_OBS_SHT.format("fr")
+            fileobj = Path(settings.PHARMASHIP_DATA / _name)
+            self.open_file(fileobj)
 
     def gtk_style(self):
         """Add CSS styles to the application."""
