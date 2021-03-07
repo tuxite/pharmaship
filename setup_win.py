@@ -389,6 +389,9 @@ build_exe_options = {
         "gnupg",
         "yaml",
         "PyPDF2",
+        "matplotlib",
+        "numpy",
+        "pandas",
         "pharmaship",
         ],
     "excludes": [
@@ -413,7 +416,10 @@ REQUIRED_PACKAGES = [
     "WeasyPrint",
     "python-gnupg",
     "PyYAML",
-    "PyPDF2"
+    "PyPDF2",
+    "matplotlib",
+    "numpy",
+    "pandas",
 ]
 if sys.platform == "win32":
     REQUIRED_PACKAGES.append("winpath")

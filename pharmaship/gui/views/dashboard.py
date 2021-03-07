@@ -17,6 +17,7 @@ from pharmaship.gui import utils
 
 import pharmaship.inventory.parsers as parsers
 from pharmaship.gui.export.dashboard import Export, ExportMissing, ExportPerished
+from pharmaship.gui.plots import dispatch
 
 
 SECTIONS = {
@@ -78,7 +79,9 @@ HEADERS = {
     }
 }
 
+
 def get_header(output, section, type):
+    """Return header for CSV or text output details."""
     if output == "txt":
         res = HEADERS["txt"]
     else:
@@ -100,7 +103,9 @@ def get_header(output, section, type):
 
     return []
 
+
 def format_expiry(date):
+    """Return formatted expiry date with in/ago sentence for detailled views."""
     today = datetime.date.today()
     near = _("in {0} days")
     expired = _("{0} days ago")
@@ -116,6 +121,7 @@ def format_expiry(date):
     result = "{0} ({1})".format(date.strftime("%Y-%m-%d"), add_str)
     return result
 
+
 def format_nc(nc):
     result = []
     if nc["packaging"]:
@@ -125,6 +131,52 @@ def format_nc(nc):
     if nc["molecule"]:
         result.append("{0} {1}".format(_("Non-compliant molecule:"), nc["molecule"]))
     return ", ".join(result)
+
+
+def get_data_items(data):
+    """Return formatted dictionary for use in dashboard and plots."""
+    result = {
+        "missing": [],
+        "perished": [],
+        "warning": [],
+        "nc": [],
+        "in_range": 0,
+        "total": 0,
+        "exp_dates": [],
+    }
+
+    for group in data:
+        for element in data[group]:
+            # result["total"] += 1
+            result["exp_dates"] += element["exp_dates"]
+
+            flag = False
+
+            if element["has_nc"]:
+                result["nc"].append(element)
+                flag = True
+
+            if element["required_quantity"] > element["quantity"]:
+                result["missing"].append(element)
+                flag = True
+
+            if element["has_date_expired"]:
+                result["perished"].append(element)
+                continue
+            if element["has_date_warning"]:
+                result["warning"].append(element)
+                continue
+
+            if flag is False:
+                result["in_range"] += 1
+
+    result["total"] = result["in_range"]
+    result["total"] += len(result["nc"])
+    result["total"] += len(result["missing"])
+    result["total"] += len(result["perished"])
+    result["total"] += len(result["warning"])
+
+    return result
 
 
 class DataParser:
@@ -269,12 +321,7 @@ class View:
 
         self.data = {}
 
-    def create_main_layout(self):
-        # Create content
-        box = self.builder.get_object("box")
-        self.window.layout.pack_start(box, True, True, 0)
-        self.window.layout.show_all()
-
+    def set_layout(self, refresh=False):
         self.get_molecules()
         self.get_equipment()
         self.get_rescue_bag()
@@ -294,7 +341,20 @@ class View:
         else:
             widget.hide()
 
-        self.set_values()
+        # Set values in the different widgets
+        self.set_values(refresh=refresh)
+
+        # Add visual daashboards
+        self.graphic_condition()
+
+    def create_main_layout(self):
+        """Create the main layout for Dashboard view."""
+        # Create content
+        box = self.builder.get_object("box")
+        self.window.layout.pack_start(box, True, True, 0)
+        self.window.layout.show_all()
+
+        self.set_layout()
 
         self.builder.connect_signals({
             "on-export-inventories": (self.export_all, "inventory"),
@@ -302,6 +362,17 @@ class View:
             "on-export-perished": (self.export_all, "perished"),
         })
 
+    def refresh_dashboard(self):
+        """Refresh the dashboard data."""
+        # Remove the old graphics
+        graphicbox = self.builder.get_object("graphics")
+        for child in graphicbox.get_children():
+            # Double remove/destroy... to be sure!
+            # It seems matplotlib FigureCanvas is not destroyable?!
+            graphicbox.remove(child)
+            child.destroy()
+        # Recall the main function
+        self.set_layout(refresh=True)
 
     def export_all(self, source, type):
         export_function = None
@@ -343,7 +414,7 @@ class View:
         t = threading.Thread(target=thread_run)
         t.start()
 
-    def set_values(self):
+    def set_values(self, refresh=False):
         objects = []
         import itertools
         for item in itertools.product(SECTIONS.keys(), TYPES.keys(), WIDGETS):
@@ -357,7 +428,8 @@ class View:
             value = self.get_value(section=item[0], type=item[1])
 
             if item[-1] == "btn":
-                obj.connect("clicked", self.show_detail, item)
+                if not refresh:
+                    obj.connect("clicked", self.show_detail, item)
                 if not value:
                     obj.set_sensitive(False)
                 else:
@@ -554,160 +626,43 @@ class View:
         return list_store
 
     def get_molecules(self):
-        result = {
-            "missing": [],
-            "perished": [],
-            "warning": [],
-            "nc": []
-        }
-
         data = parsers.medicines.parser(self.params)
-
-        for group in data:
-            for element in data[group]:
-                if element["has_nc"]:
-                    result["nc"].append(element)
-                if element["required_quantity"] > element["quantity"]:
-                    result["missing"].append(element)
-                if element["has_date_expired"]:
-                    result["perished"].append(element)
-                    continue
-                if element["has_date_warning"]:
-                    result["warning"].append(element)
-                    continue
-
-        self.data["molecules"] = result
-
+        self.data["molecules"] = get_data_items(data)
         query_count_all()
 
     def get_equipment(self):
-        result = {
-            "missing": [],
-            "perished": [],
-            "warning": [],
-            "nc": []
-        }
-
         data = parsers.equipment.parser(self.params)
-
-        for group in data:
-            for element in data[group]:
-                if element["has_nc"]:
-                    result["nc"].append(element)
-                if element["required_quantity"] > element["quantity"]:
-                    result["missing"].append(element)
-                if element["has_date_expired"]:
-                    result["perished"].append(element)
-                    continue
-                if element["has_date_warning"]:
-                    result["warning"].append(element)
-                    continue
-
-        self.data["equipment"] = result
-
+        self.data["equipment"] = get_data_items(data)
         query_count_all()
 
     def get_rescue_bag(self):
-        result = {
-            "missing": [],
-            "perished": [],
-            "warning": [],
-            "nc": []
-        }
-
-        data = parsers.rescue_bag.parser(self.params)
-
-        for element in data["all"]["elements"]:
-            if element["has_nc"]:
-                result["nc"].append(element)
-            if element["required_quantity"] > element["quantity"]:
-                result["missing"].append(element)
-            if element["has_date_expired"]:
-                result["perished"].append(element)
-                continue
-            if element["has_date_warning"]:
-                result["warning"].append(element)
-                continue
-
-        self.data["rescue_bag"] = result
-
+        raw_data = parsers.rescue_bag.parser(self.params)
+        data = {"data": raw_data["all"]["elements"]}
+        self.data["rescue_bag"] = get_data_items(data)
         query_count_all()
 
     def get_first_aid_kit(self):
-        result = {
-            "missing": [],
-            "perished": [],
-            "warning": [],
-            "nc": []
-        }
-
-        data = parsers.first_aid.parser(self.params)
-
-        for kit in data:
-            for element in kit["elements"]:
-                if element["has_nc"]:
-                    result["nc"].append(element)
-                if element["required_quantity"] > element["quantity"]:
-                    result["missing"].append(element)
-                if element["has_date_expired"]:
-                    result["perished"].append(element)
-                    continue
-                if element["has_date_warning"]:
-                    result["warning"].append(element)
-                    continue
-
-        self.data["first_aid_kit"] = result
-
+        raw_data = parsers.first_aid.parser(self.params)
+        data = {}
+        for kit in raw_data:
+            data[kit["name"]] = kit["elements"]
+        self.data["first_aid_kit"] = get_data_items(data)
         query_count_all()
 
     def get_laboratory(self):
-        result = {
-            "missing": [],
-            "perished": [],
-            "warning": [],
-            "nc": []
-        }
-
-        data = parsers.laboratory.parser(self.params)
-
-        for element in data:
-            if element["has_nc"]:
-                result["nc"].append(element)
-            if element["required_quantity"] > element["quantity"]:
-                result["missing"].append(element)
-            if element["has_date_expired"]:
-                result["perished"].append(element)
-                continue
-            if element["has_date_warning"]:
-                result["warning"].append(element)
-                continue
-
-        self.data["laboratory"] = result
-
+        data = {"data": parsers.laboratory.parser(self.params)}
+        self.data["laboratory"] = get_data_items(data)
         query_count_all()
 
     def get_telemedical(self):
-        result = {
-            "missing": [],
-            "perished": [],
-            "warning": [],
-            "nc": []
-        }
-
-        data = parsers.telemedical.parser(self.params)
-
-        for element in data:
-            if element["has_nc"]:
-                result["nc"].append(element)
-            if element["required_quantity"] > element["quantity"]:
-                result["missing"].append(element)
-            if element["has_date_expired"]:
-                result["perished"].append(element)
-                continue
-            if element["has_date_warning"]:
-                result["warning"].append(element)
-                continue
-
-        self.data["telemedical"] = result
-
+        data = {"data": parsers.telemedical.parser(self.params)}
+        self.data["telemedical"] = get_data_items(data)
         query_count_all()
+
+    # Visual dashboards
+    def graphic_condition(self):
+        """Create a graph showing situation of elements per category."""
+        canvas = dispatch.figure(self.data, self.params.setting)
+        graphicbox = self.builder.get_object("graphics")
+        graphicbox.pack_start(canvas, True, True, 0)
+        graphicbox.show_all()

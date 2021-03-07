@@ -562,6 +562,9 @@ class Application(Gtk.Application):
         view = views.dashboard.View(self.window)
         view.create_main_layout()
 
+        # Set headbar button action
+        self.window.refresh_view = view.refresh_dashboard
+
     def on_location_manager(self, action, param):
         self.window.mode = "locations"
         self.window.mode_button.set_label(_("Location Manager"))

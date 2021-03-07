@@ -14,3 +14,6 @@ pytz
 pyyaml
 rest-framework-generic-relations
 weasyprint
+matplotlib
+numpy
+pandas
