@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pharmaship-MM-01\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 14:05+0000\n"
+"POT-Creation-Date: 2021-03-08 19:10+0000\n"
 "PO-Revision-Date: 2020-07-08 11:43+0800\n"
 "Last-Translator: Matthieu Morin <morinmatthieu@gmail.com>\n"
 "Language-Team: French - France <pharmaship@devmaretique.com>\n"
@@ -172,8 +172,8 @@ msgstr ""
 msgid "dozen"
 msgstr ""
 
-#: pharmaship/inventory/forms.py:88 pharmaship/inventory/forms.py:187
-#: pharmaship/inventory/forms.py:218 pharmaship/inventory/models.py:277
+#: pharmaship/inventory/forms.py:88 pharmaship/inventory/forms.py:189
+#: pharmaship/inventory/forms.py:222 pharmaship/inventory/models.py:277
 msgid "Expiry date must be provided."
 msgstr "La date d'expiration doit être renseignée"
 
@@ -230,14 +230,10 @@ msgstr "Conditionnement non conforme"
 msgid "Non conformity"
 msgstr "Non-conformité"
 
-#: pharmaship/inventory/parsers/equipment.py:155
-#: pharmaship/inventory/parsers/equipment.py:160
-#: pharmaship/inventory/parsers/laboratory.py:145
-#: pharmaship/inventory/parsers/laboratory.py:149
-#: pharmaship/inventory/parsers/medicines.py:166
-#: pharmaship/inventory/parsers/medicines.py:171
-#: pharmaship/inventory/parsers/telemedical.py:145
-#: pharmaship/inventory/parsers/telemedical.py:149
+#: pharmaship/inventory/parsers/equipment.py:156
+#: pharmaship/inventory/parsers/equipment.py:161
+#: pharmaship/inventory/parsers/medicines.py:167
+#: pharmaship/inventory/parsers/medicines.py:172
 msgid "Unassigned"
 msgstr "Non assigné"
 

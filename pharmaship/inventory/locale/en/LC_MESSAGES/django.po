@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-02 14:05+0000\n"
+"POT-Creation-Date: 2021-03-08 19:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -174,8 +174,8 @@ msgstr ""
 msgid "dozen"
 msgstr ""
 
-#: pharmaship/inventory/forms.py:88 pharmaship/inventory/forms.py:187
-#: pharmaship/inventory/forms.py:218 pharmaship/inventory/models.py:277
+#: pharmaship/inventory/forms.py:88 pharmaship/inventory/forms.py:189
+#: pharmaship/inventory/forms.py:222 pharmaship/inventory/models.py:277
 msgid "Expiry date must be provided."
 msgstr ""
 
@@ -232,14 +232,10 @@ msgstr ""
 msgid "Non conformity"
 msgstr ""
 
-#: pharmaship/inventory/parsers/equipment.py:155
-#: pharmaship/inventory/parsers/equipment.py:160
-#: pharmaship/inventory/parsers/laboratory.py:145
-#: pharmaship/inventory/parsers/laboratory.py:149
-#: pharmaship/inventory/parsers/medicines.py:166
-#: pharmaship/inventory/parsers/medicines.py:171
-#: pharmaship/inventory/parsers/telemedical.py:145
-#: pharmaship/inventory/parsers/telemedical.py:149
+#: pharmaship/inventory/parsers/equipment.py:156
+#: pharmaship/inventory/parsers/equipment.py:161
+#: pharmaship/inventory/parsers/medicines.py:167
+#: pharmaship/inventory/parsers/medicines.py:172
 msgid "Unassigned"
 msgstr ""
 
