@@ -6,7 +6,7 @@
 !define DESCRIPTION "A ship's medical chest inventory software"
 # These three must be integers
 !define VERSIONMAJOR 0
-!define VERSIONMINOR 1
+!define VERSIONMINOR 9
 !define VERSIONBUILD 0
 # These will be displayed by the "Click here for support information" link in "Add/Remove Programs"
 # It is possible to use "mailto:" links in here to open the email client
@@ -142,7 +142,7 @@ Section "Pharmaship software" SecPharmaship
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
-  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "DisplayName" "$\"${APPNAME} - ${DESCRIPTION}$\""
+  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "DisplayName" "${APPNAME} - ${DESCRIPTION}"
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\" /S"
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "InstallLocation" "$\"$INSTDIR$\""
@@ -221,6 +221,7 @@ Section Uninstall
   RMDir /r "$INSTDIR\lib"
   RMDir /r "$INSTDIR\share"
   RMDir /r "$INSTDIR\etc"
+  RMDir /r "$INSTDIR\var"
 
   SetDetailsPrint "textonly"
   RMDir /r "$INSTDIR\allowances"
