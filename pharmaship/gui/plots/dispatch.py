@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.utils.translation import gettext as _
 
+import numpy as np
+
 from pharmaship.core.utils import log
 
 from pharmaship.gui.plots import utils
@@ -39,8 +41,6 @@ def get_values(key, data):
 
 def figure(data, params):
     """Create a graph showing situation of elements per category."""
-    import numpy as np
-
     category_names = [
         {
             "name": _('Missing'),
@@ -111,9 +111,10 @@ def figure(data, params):
     ax.set_xlim(0, 1)
 
     for i in range(len(category_names)):
-        widths = data[:, i] / totals
-        wvalues = data[:, i]
-        starts = data_cum[:, i]/totals - widths
+        _values = data[:, i]
+        _values_cum = data_cum[:, i]
+        widths = np.divide(_values, totals, out=np.zeros(_values.shape, dtype=float), where=totals!=0)
+        starts = np.divide(_values_cum, totals, out=np.zeros(_values_cum.shape, dtype=float), where=totals!=0) - widths
         ax.barh(
             labels,
             widths,
@@ -125,7 +126,7 @@ def figure(data, params):
         xcenters = starts + widths / 2
 
         text_color = utils.fg_color(category_names[i]["color"])
-        for y, (x, c) in enumerate(zip(xcenters, wvalues)):
+        for y, (x, c) in enumerate(zip(xcenters, _values)):
             if c == 0:
                 continue
             ax.text(x, y, str(int(c)), ha='center', va='center',

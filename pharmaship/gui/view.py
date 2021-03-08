@@ -5,7 +5,6 @@ import datetime
 import subprocess
 import platform
 import threading
-import os.path
 import locale
 import ctypes
 import sys
