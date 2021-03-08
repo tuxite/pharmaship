@@ -369,7 +369,11 @@ def get_exe_config():
 build_exe_options = {
     "zip_include_packages": [
         "django",
+        "rest_framework",
         "pytz",
+        "numpy",
+        "matplotlib",
+        "cerberus",
         ],
     # "zip_includes": collect_missing_python_zip(),
     "packages": [
@@ -391,7 +395,7 @@ build_exe_options = {
         "PyPDF2",
         "matplotlib",
         "numpy",
-        "pandas",
+        # "pandas",
         "pharmaship",
         ],
     "excludes": [
@@ -419,7 +423,7 @@ REQUIRED_PACKAGES = [
     "PyPDF2",
     "matplotlib",
     "numpy",
-    "pandas",
+    # "pandas",
 ]
 if sys.platform == "win32":
     REQUIRED_PACKAGES.append("winpath")
@@ -431,7 +435,7 @@ setup(
     description="A ship's pharmacy inventory software.",
     long_description=Path("README.md").read_text(),
     long_description_content_type="text/markdown",
-    version="0.1",
+    version="0.9",
     packages=find_packages(),
     include_package_data=True,
     install_requires=REQUIRED_PACKAGES,
