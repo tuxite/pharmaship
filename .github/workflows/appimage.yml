@@ -23,13 +23,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Retrieve Pharmaship sources
+        uses: actions/checkout@v2
 
       # Runs a set of commands using the runners shell
-      - name: install dependencies
+      - name: Install system dependencies
         run: |
           sudo apt update
-          sudo apt install python3
+          sudo apt install python3 sudo
 
       # Runs the AppImage builder
       - name: Build AppImage
@@ -38,7 +39,8 @@ jobs:
           UPDATE_INFO: gh-releases-zsync|tuxite|pharmaship|latest|Pharmaship-*x86_64.AppImage.zsync
         with:
           recipe: appimage/AppImageBuilder.yml
-      - uses: actions/upload-artifact@v2
+      - name: Upload AppImage file
+        uses: actions/upload-artifact@v2
         with:
           name: AppImage
           path: './*.AppImage*'
