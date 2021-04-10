@@ -168,3 +168,7 @@ debian/debhelper-build-stamp
 debian/pharmaship
 debian/files
 debian/tmp
+
+# AppImage packaging
+appimage-builder-cache/
+appimage/AppDir/

@@ -9,6 +9,8 @@ script:
   - cp manage.py  appimage/AppDir/usr/src -r
   - cp pharmaship appimage/AppDir/usr/src/pharmaship -r
 
+  - python3 -m pip install --ignore-installed --prefix=/usr --root=appimage/AppDir -r appimage/requirements.txt
+
   # Copy MIME
   - mkdir -p appimage/AppDir/usr/share/mime
   - cp /usr/share/mime appimage/AppDir/usr/share -r
@@ -31,9 +33,6 @@ script:
 
 AppDir:
   path: ./appimage/AppDir
-  after_bundle:
-    # Install application dependencies
-    - sudo -H $APPDIR/usr/bin/python3 -m pip install --system --ignore-installed --prefix=/usr --root=appimage/AppDir -r appimage/requirements.txt
 
   app_info:
     id: com.devmaretique.pharmaship
@@ -41,23 +40,22 @@ AppDir:
     icon: pharmaship
     version: 0.1.0
     # Set the python executable as entry point
-    exec: usr/bin/python3
+    exec: "/usr/bin/python3"
     # Set the application main script path as argument. Use '$@' to forward CLI parameters
     exec_args: "$APPDIR/usr/src/launcher.py $@"
 
   apt:
     arch: amd64
     sources:
-      # - sourceline: 'deb [arch=amd64] http://ftp.debian.org/debian/ testing main'
-      #   key_url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x04EE7237B7D453EC'
-      - sourceline: 'deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ focal main universe'
-        key_url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3b4fe6acc0b21f32'
+      - sourceline: 'deb [arch=amd64] http://ftp.debian.org/debian/ bullseye main'
+        key_url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x04EE7237B7D453EC'
 
     include:
       - python3
       - python3-pkg-resources
       # Python dependencies
       - python3-gi
+      - python3-gi-cairo
       - python3-pil
       - python3-gnupg
       - python3-django-mptt
@@ -68,6 +66,9 @@ AppDir:
       - python3-munch
       - python3-yaml
       - python3-tz
+      - python3-matplotlib
+      - python3-pandas
+      - python3-numpy
       - weasyprint
       # GTK support
       - librsvg2-common
@@ -78,6 +79,14 @@ AppDir:
 
     exclude: []
 
+  files:
+    exclude:
+      - usr/share/man
+      - usr/share/doc/*/README.*
+      - usr/share/doc/*/changelog.*
+      - usr/share/doc/*/NEWS.*
+      - usr/share/doc/*/TODO.*
+
   runtime:
     env:
       PATH: '${APPDIR}/usr/bin:${PATH}'
@@ -86,7 +95,7 @@ AppDir:
       PYTHONHOME: '${APPDIR}/usr'
       # Path to the site-packages dir or other modules dirs
       # See https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH
-      PYTHONPATH: '${APPDIR}/usr/lib/python3.6/site-packages:${APPDIR}/usr/lib/python3.8/site-packages'
+      PYTHONPATH: '${APPDIR}/usr/lib/python3.9/site-packages:${APPDIR}/usr/lib/python3.9'
       GDK_BACKEND: 'x11'
       GTK_DATA_PREFIX: "$APPDIR"
       GTK_THEME: "Adwaita"
