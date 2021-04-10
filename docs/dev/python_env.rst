@@ -5,7 +5,7 @@ Linux
 -----
 The use of a virtual environment is strongly encouraged.
 
-Following packages are needed for ``pip install``:
+Following packages may be needed for ``pip install``:
 
     * ``libcairo-dev``
     * ``python3-dev``
@@ -15,9 +15,10 @@ Following packages are needed for ``pip install``:
 
     sudo apt install libcairo-dev python3-dev libgirepository1.0-dev
 
-After installing missing system dependencies, use a ``virtualenv``.
+After installing missing system dependencies, it is strongly recommended to use
+a virtual environment.
 
-Following packages are needed to compile GResources:
+Following packages may be needed to compile GResources:
 
     * ``libglib2.0-dev-bin`` (provides ``glib-compile-resources``)
     * ``libxml2-utils`` (provides ``xmllint``)
@@ -29,15 +30,14 @@ Following packages are needed to compile GResources:
 
 Then, in the virtual environment::
 
-    pip install pharmaship-0.1.tar.gz
+    pipenv install pharmaship-0.1.tar.gz
 
 
 *All dependencies should install normally...*
 
 Windows
 -------
-This procedure has been tested on Windows 7. On Windows 10, the use of WSL may
-ease some steps.
+This procedure has been tested on Windows 10.
 
 MSYS Environment
 ^^^^^^^^^^^^^^^^
@@ -54,61 +54,74 @@ MSYS Environment
 
 Dependencies
 ^^^^^^^^^^^^
-
-* Python 3.8 & pip::
-
-    pacman -S mingw-w64-x86_64-python-pip
-
-*This will install Python 3.8+ and associated pip.*
-
 * Install following MingW64 packages:
 
   * ``mingw-w64-x86_64-gcc``
-  * ``mingw-w64-x86_64-python-cairo``
-  * ``mingw-w64-x86_64-gobject-introspection``
-  * ``mingw-w64-x86_64-python-pillow``
+  * ``mingw-w64-x86_64-make``
   * ``mingw-w64-x86_64-gnupg``
+  * ``mingw-w64-x86_64-zlib``
+  * ``mingw-w64-x86_64-gtk3``
+  * ``mingw-w64-x86_64-gobject-introspection``
+  * ``mingw-w64-x86_64-adwaita-icon-theme``
+  * ``mingw-w64-x86_64-nsis``
+  * ``mingw-w64-x86_64-python-pip``
+  * ``mingw-w64-x86_64-python-virtualenv``
+  * ``mingw-w64-x86_64-python-pillow``
+  * ``mingw-w64-x86_64-python-cairo``
+  * ``mingw-w64-x86_64-python-matplotlib``
+  * ``mingw-w64-x86_64-python-numpy``
+  * ``mingw-w64-x86_64-python-pandas``
+
+  *This will install Python 3.9+ and associated packages necessary for Pharmaship
+  development.*
+
 
 ::
 
-  pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-python-cairo mingw-w64-x86_64-gobject-introspection mingw-w64-x86_64-python-pillow mingw-w64-x86_64-gnupg
+  pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-make mingw-w64-x86_64-gnupg mingw-w64-x86_64-zlib mingw-w64-x86_64-gtk3 mingw-w64-x86_64-gobject-introspection mingw-w64-x86_64-adwaita-icon-theme mingw-w64-x86_64-nsis mingw-w64-x86_64-python-pip mingw-w64-x86_64-python-virtualenv mingw-w64-x86_64-python-pillow mingw-w64-x86_64-python-cairo mingw-w64-x86_64-python-matplotlib mingw-w64-x86_64-python-numpy mingw-w64-x86_64-python-pandas
 
 * These dependencies may be necessary:
 
-  * ``gcc``
-  * ``libcrypt-devel``
+  * ``git``
+  * ``patch``
+  * ``wget``
+  * ``unzip``
+  * ``tar``
 
 ::
 
-  pacman -S gcc libcrypt-devel
+  pacman -S git patch wget unzip tar
 
 Create a virtual environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* Virtualenv::
-
-      pip install virtualenv
-
 * Create the project folder (assuming you are in ``C:\msys64\home\<User>``)::
 
-      mkdir project
-      cd project
-      virtualenv venv
+      mkdir pharmaship
+      cd pharmaship
 
-      . venv/bin/activate
+* Extract pharmaship archive in a folder (assuming you named it ``pharmaship``).
 
-Install Pharmaship and its python dependencies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-* Copy pharmaship archive in folder : ``C:\msys64\home\<User>\project``
+* Create the virtual environment and install dependencies::
 
-* Install pip packages::
+      virtualenv --system-site-packages venv
 
-      venv/bin/python -m pip install cx-Freeze
-      venv/bin/python -m pip install pharmaship-0.1.tar.gz
+      venv/bin/python -m pip install -r requirements.txt
+      venv/bin/python -m pip install winpath
+      venv/bin/python -m pip install cx_Freeze
+      venv/bin/python -m pip install --platform win_amd64 --only-binary=:all: --target venv/lib/python3.8/site-packages --upgrade pywin32
+
+*This will install all dependencies for Pharmaship and Windows-specific
+dependencies. In addition, it installs cx_Freeze for freezing the python
+environment in order to create the Windows installer.*
 
 First run
 ---------
 
 Then launch the graphical interface::
 
-    pharmaship
+    venv/bin/python launch.py
+
+
+Or launch additional commands with::
+
+    venv/bin/python manage.py

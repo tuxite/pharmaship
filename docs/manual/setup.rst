@@ -9,14 +9,14 @@ need to configure your location, the shelve and drawer names you will use to tel
 Configure your locations
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: ../_static/manual/setup/locationmanager.png
+.. image:: ./pics/setup/locationmanager.png
    :width: 600px
    :align: center
    :alt: Allowance Manager Button
 
 In any software window, open *Configuration Menu* then *Location Manager*.
 
-.. image:: ../_static/manual/setup/locationmanagerinfo.png
+.. image:: ./pics/setup/locationmanagerinfo.png
    :width: 600px
    :align: center
    :alt: Allowance Manager Info
@@ -28,7 +28,7 @@ there, simply click on *new location* button, located either in the top right co
 of the window. On the sub window which opens, select **hospital** as *parent* location, for a drawer in hospital, and
 put a name, like **Desk Drawer**. Click on *Add the location*.
 
-.. image:: ../_static/manual/setup/locationmanageradd.png
+.. image:: ./pics/setup/locationmanageradd.png
    :width: 600px
    :align: center
    :alt: Allowance Manager Add
@@ -37,7 +37,7 @@ Now it has been added, you can see that it appears in the list of locations - lu
 We can easily delete, or modify it with the button on the right end of its line, and to update, it appears exactly on
 the same way. To erase, click on the cross button, then validate on the sub window.
 
-.. image:: ../_static/manual/setup/locationmanagerupdate.png
+.. image:: ./pics/setup/locationmanagerupdate.png
    :width: 600px
    :align: center
    :alt: Allowance Manager Update
@@ -54,7 +54,7 @@ Let's make a step by step example. To Update *equipment* first, let's go into it
 
 In any software window, click on the blue button, whatever it says, then *Equipment*.
 
-.. image:: ../_static/manual/setup/equipmentmenu.png
+.. image:: ./pics/setup/equipmentmenu.png
    :width: 600px
    :align: center
    :alt: Equipment Menu
@@ -62,14 +62,14 @@ In any software window, click on the blue button, whatever it says, then *Equipm
 As there is no equipment already setup, you should arrive on the following page, showing an empty list of equipment.
 Equipments are coming from allowances you inserted during configuration step.
 
-.. image:: ../_static/manual/setup/equipmentpage.png
+.. image:: ./pics/setup/equipmentpage.png
    :width: 600px
    :align: center
    :alt: Equipment Page
 
 When clicking on one line, it opens the named equipment inventory list as per below.
 
-.. image:: ../_static/manual/setup/equipmentinventory.png
+.. image:: ./pics/setup/equipmentinventory.png
    :width: 600px
    :align: center
    :alt: Equipment Inventory
@@ -78,14 +78,14 @@ To add an item, click on *add an article*. It will open the following sub-window
 
 .. warning:: Shall an equipment be non compliant, it should be for a packaging issue. In the bottom of the window, you can comment the non compliant reason. For medicines, it can be molecules, or concentration issue, but you will be able to specify too.
 
-.. image:: ../_static/manual/setup/additemfilled.png
+.. image:: ./pics/setup/additemfilled.png
    :width: 600px
    :align: center
    :alt: Add Item Filled
 
 Once your article is filled correctly, click on *add the article*. You can see below your article is registered.
 
-.. image:: ../_static/manual/setup/equipmentinventoryfilled.png
+.. image:: ./pics/setup/equipmentinventoryfilled.png
    :width: 600px
    :align: center
    :alt: Equipment Inventory Filled
@@ -93,7 +93,7 @@ Once your article is filled correctly, click on *add the article*. You can see b
 Shall you click again on the line title (in yellow), it will reduce it, and you will see that there is location, expiry
 date and quantity which change.
 
-.. image:: ../_static/manual/setup/equipmentlist.png
+.. image:: ./pics/setup/equipmentlist.png
    :width: 600px
    :align: center
    :alt: Equipment List

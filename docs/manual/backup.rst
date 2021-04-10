@@ -8,14 +8,14 @@ Export Data Base
 
 Export a database is very simple. From any software window, open *Configuration Menu* then *Developer* and click on *export DB*.
 
-.. image:: ../_static/manual/backup/backupmenu.png
+.. image:: ./pics/backup/backupmenu.png
    :width: 600px
    :align: center
    :alt: Backup Database Menu
 
 A sub-window is opening, asking you where to save your file, for instance, on Desktop, or in a dedicated backups folder.
 
-.. image:: ../_static/manual/backup/savebackup.png
+.. image:: ./pics/backup/savebackup.png
    :width: 600px
    :align: center
    :alt: Save Backup
@@ -26,7 +26,7 @@ Import Data Base
 Once you want to import a database backup, for example, if you have to install pharmaship on a new computer, or a new
 version, simply go on *Configuration* menu, then *Developer* and click on *Import DB*
 
-.. image:: ../_static/manual/backup/importbackupmenu.png
+.. image:: ./pics/backup/importbackupmenu.png
    :width: 600px
    :align: center
    :alt: Import Backup Database Menu

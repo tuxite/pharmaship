@@ -31,7 +31,7 @@ Set the expiry date
 perished item (in *Dashboard*) or expiry colour coding in pages like *Medicines* are taken from there. Different uses
 may be done.
 
-.. image:: ../_static/manual/use/expirydate.png
+.. image:: ./pics/use/expirydate.png
    :width: 600px
    :align: center
    :alt: Expiry Date
@@ -44,7 +44,7 @@ Color coding
 
 Colors code is as simple as 3 colors on 2 columns are sufficients for a graphical view.
 
-.. image:: ../_static/manual/use/colorscode.png
+.. image:: ./pics/use/colorscode.png
    :width: 600px
    :align: center
    :alt: Colors code
@@ -59,7 +59,7 @@ If there is **red color** on *Quantity* column, that means you do not have any s
 but, shall you have more that one items (for example, boxes with another expiry date), you may still have the good
 quantity, and there is no color in that case.
 
-.. image:: ../_static/manual/use/aopen.png
+.. image:: ./pics/use/aopen.png
    :width: 600px
    :align: center
    :alt: A Open
@@ -70,7 +70,7 @@ B - Color in orange
 **Orange color** on *Expiry* column means the date of expiry of items on the line is not already expired, but will
 expire at the date composed with *Expiry up to* date + *Warning delay for expiry check* from *Allowance Manager*.
 
-.. image:: ../_static/manual/use/bopen.png
+.. image:: ./pics/use/bopen.png
    :width: 600px
    :align: center
    :alt: B Open
@@ -84,7 +84,7 @@ C - Color in blue
 **Blue color** on *Quantity* column means this item has any kind of non-conformity and has to be re-ordered in order to
 be compliant with regulation.
 
-.. image:: ../_static/manual/use/copen.png
+.. image:: ./pics/use/copen.png
    :width: 600px
    :align: center
    :alt: C Open
@@ -112,7 +112,7 @@ From the page *Dashboard*, click on the down direction arrow in order to generat
 items. You may send this list to your medical locker contractor, and he will prepare you a requisition with only missing
 items.
 
-.. image:: ../_static/manual/use/generatefullinventory.png
+.. image:: ./pics/use/generatefullinventory.png
    :width: 600px
    :align: center
    :alt: Generate Full Inventory
@@ -124,12 +124,12 @@ Several inventories can be generated from the software. From any specific page, 
 For example, if you are on *First Aid Kits* page, you will generate a inventory of First Aid Boxes only. Here below how
 it looks.
 
-.. image:: ../_static/manual/use/fakinventory.png
+.. image:: ./pics/use/fakinventory.png
    :width: 600px
    :align: center
    :alt: FAK inventory
 
-.. image:: ../_static/manual/use/fakpdf.png
+.. image:: ./pics/use/fakpdf.png
    :width: 600px
    :align: center
    :alt: FAK PDF
@@ -143,12 +143,12 @@ every single take out of medicine / material every time you do it.
 To do so, goes on the item you want to remove. Click on the most right button. On the sub-window which opens, edit the
 quantity you take out, and press *Use it!* button.
 
-.. image:: ../_static/manual/use/removeitem.png
+.. image:: ./pics/use/removeitem.png
    :width: 600px
    :align: center
    :alt: Remove Item
 
-.. image:: ../_static/manual/use/riwindow.png
+.. image:: ./pics/use/riwindow.png
    :width: 600px
    :align: center
    :alt: Remove Item Window
@@ -165,12 +165,12 @@ In order to update your inventory, it is as simple as making it again. Just go p
 and when clicking on the modif button, it will open the modification sub window where you can modify whatever you want
 and save your changes.
 
-.. image:: ../_static/manual/use/modif.png
+.. image:: ./pics/use/modif.png
    :width: 600px
    :align: center
    :alt: Modification Button
 
-.. image:: ../_static/manual/use/modifwindow.png
+.. image:: ./pics/use/modifwindow.png
    :width: 600px
    :align: center
    :alt: Modification Window
@@ -182,7 +182,7 @@ One of the most advance functionality is the "search function". In the top bar, 
 medicine or material, and click to [enter]. Whereever it is recorded in molécule / commercial name / item / ... it will
 be found out of there.
 
-.. image:: ../_static/manual/use/search.png
+.. image:: ./pics/use/search.png
    :width: 600px
    :align: center
    :alt: Search
@@ -203,7 +203,7 @@ detailled information about items included in this number.
 
 For exemple Perished medicines contains 2 items
 
-.. image:: ../_static/manual/use/perishedmedicines.png
+.. image:: ./pics/use/perishedmedicines.png
    :width: 600px
    :align: center
    :alt: Perished Medicines

@@ -12,7 +12,7 @@ Open log
 
 In complement of information, please do export also a log of application is possible, from *Developer/Open log* menu.
 
-.. image:: ../_static/manual/trouble/exportlog.png
+.. image:: ./pics/trouble/exportlog.png
    :width: 600px
    :align: center
    :alt: Export Log
@@ -25,7 +25,7 @@ About
 In any case, if you have no contact available, you can use about window, and conect to our website there.
 It will redirect you and you will find a contact information there.
 
-.. image:: ../_static/manual/trouble/about.png
+.. image:: ./pics/trouble/about.png
    :width: 600px
    :align: center
    :alt: About

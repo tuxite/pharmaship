@@ -5,6 +5,9 @@ Pharmaship uses pure ``gettext`` and Django's system for translation.
 
 All ``.pot``, ``.po`` and ``.mo`` file generation is handled in a ``Makefile``.
 
+The following commands must be executed in the same Python environment of
+Pharmaship (especially if you are using a virtual environment).
+
 1. Create translatable file list for gettext::
 
     make translatable
@@ -15,8 +18,8 @@ This will create a file named ``translatable_filelist`` at the project's root.
 
     make pot
 
-3. Generate the ``.po`` files for the Django project and merge them with \
-previously created ``.pot`` files::
+3. Generate the ``.po`` files for the Django project and merge them with
+   previously created ``.pot`` files::
 
     make messages
 

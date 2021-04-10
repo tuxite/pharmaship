@@ -4,9 +4,8 @@ User Manual
 .. toctree::
    :maxdepth: 2
 
-   installation
+   installation/index
    setup
    use
    backup
    trouble
-
