@@ -1,5 +1,8 @@
 # -*- coding: utf-8; -*-
-"""Inventory application REST framework serializers."""
+"""Inventory application REST framework serializers.
+
+Mainly used for exporting Allowance.
+"""
 from rest_framework import serializers
 from generic_relations.relations import GenericRelatedField
 
@@ -9,30 +12,45 @@ from pharmaship.inventory import models
 
 
 class MyGenericRelatedField(GenericRelatedField):
-    """Customized GenericRelatedField."""
-    # def get_deserializer_for_data(self, value):
-    #     log.warning(value)
+    """Generic related field used in First Aid Kits required quantity items."""
 
 
 class ContentTypeSerializer(serializers.ModelSerializer):
+    """Django ContentType serializer.
+
+    Mainly used in Recue Bag and First Aid Kit required quantity serializers.
+    """
+
     class Meta:  # noqa: D106
         model = ContentType
         fields = ["app_label", "name"]
 
 
 class EquipmentSerializer(serializers.ModelSerializer):
+    """Equipment serializer.
+
+    Mainly used in required quantity serializers.
+    """
+
     class Meta:  # noqa: D106
         model = models.Equipment
         fields = ["name", "packaging", "consumable", "perishable"]
 
 
 class MoleculeSerializer(serializers.ModelSerializer):
+    """Molecule serializer.
+
+    Mainly used in required quantity serializers.
+    """
+
     class Meta:  # noqa: D106
         model = models.Molecule
         fields = ["name", "roa", "dosage_form", "composition"]
 
 
 class EquipmentReqQtySerializer(serializers.ModelSerializer):
+    """Equipment required quantity serializer."""
+
     base = EquipmentSerializer()
 
     class Meta:  # noqa: D106
@@ -41,6 +59,8 @@ class EquipmentReqQtySerializer(serializers.ModelSerializer):
 
 
 class MoleculeReqQtySerializer(serializers.ModelSerializer):
+    """Molecule required quantity serializer."""
+
     base = MoleculeSerializer(read_only=True)
     # base = serializers.SlugRelatedField()
 
@@ -50,6 +70,8 @@ class MoleculeReqQtySerializer(serializers.ModelSerializer):
 
 
 class TelemedicalReqQtySerializer(serializers.ModelSerializer):
+    """Telemedical required quantity serializer."""
+
     base = EquipmentSerializer()
 
     class Meta:  # noqa: D106
@@ -58,6 +80,8 @@ class TelemedicalReqQtySerializer(serializers.ModelSerializer):
 
 
 class LaboratoryReqQtySerializer(serializers.ModelSerializer):
+    """Laboratory required quantity serializer."""
+
     base = EquipmentSerializer()
 
     class Meta:  # noqa: D106
@@ -66,6 +90,8 @@ class LaboratoryReqQtySerializer(serializers.ModelSerializer):
 
 
 class FirstAidKitReqQtySerializer(serializers.ModelSerializer):
+    """First Aid Kit required quantity serializer."""
+
     required_quantity = serializers.IntegerField()
     content_type = ContentTypeSerializer()
     base = MyGenericRelatedField({
@@ -79,6 +105,8 @@ class FirstAidKitReqQtySerializer(serializers.ModelSerializer):
 
 
 class RescueBagReqQtySerializer(serializers.ModelSerializer):
+    """Rescue Bag required quantity serializer."""
+
     required_quantity = serializers.IntegerField()
     content_type = ContentTypeSerializer()
     base = GenericRelatedField({

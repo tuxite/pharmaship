@@ -19,7 +19,7 @@ from django.conf import settings
 
 from rest_framework.renderers import JSONRenderer
 
-import pharmaship.inventory.models
+import pharmaship.inventory.models as models
 import pharmaship.inventory.serializers
 
 from pharmaship.core.utils import remove_yaml_pk, get_content_types
@@ -29,19 +29,33 @@ from pharmaship.core.utils import log, query_count_all
 def serialize_allowance(allowance, content_types):
     """Export an allowance using the YAML format.
 
-    To have an usable export, the broadcaster needs:
-        - the :model:`pharmaship.inventory.Allowance` selected instance,
-    And related to this instance:
-        - the :model:`pharmaship.inventory.Molecule` objects list,
-        - the :model:`pharmaship.inventory.Equipment` objects list,
-        - the :model:`pharmaship.inventory.MoleculeReqQty` objects list,
-        - the :model:`pharmaship.inventory.EquipmentReqQty` objects list,
-        - the :model:`pharmaship.inventory.RescueBagReqQty` objects list,
-        - the :model:`pharmaship.inventory.FirstAidKitReqQty` objects list,
-        - the :model:`pharmaship.inventory.TelemedicalReqQty` objects list,
-        - the :model:`pharmaship.inventory.LaboratoryReqQty` objects list.
+    To have an usable export, the user needs:
 
-    Returns a list of filenames and streams.
+      - the :mod:`pharmaship.inventory.models.Allowance` selected instance,
+
+    And related to this instance:
+
+      - the :mod:`pharmaship.inventory.models.Molecule` objects list,
+      - the :mod:`pharmaship.inventory.models.Equipment` objects list,
+      - the :mod:`pharmaship.inventory.models.MoleculeReqQty` objects list,
+      - the :mod:`pharmaship.inventory.models.EquipmentReqQty` objects list,
+      - the :mod:`pharmaship.inventory.models.RescueBagReqQty` objects list,
+      - the :mod:`pharmaship.inventory.models.FirstAidKitReqQty` objects list,
+      - the :mod:`pharmaship.inventory.models.TelemedicalReqQty` objects list,
+      - the :mod:`pharmaship.inventory.models.LaboratoryReqQty` objects list.
+
+    This function grabs all these together in a list of tuples::
+
+        [('filename.yaml', <yaml content string>)]
+
+
+    In addition, it returns the Equipment list for getting pictures if any.
+
+    :param pharmaship.inventory.models.Allowance allowance: Allowance to \
+    serialize.
+
+    :return: List of tuples filenames and streams
+    :rtype: tuple(list(tuple(str, str)), django.db.models.query.QuerySet)
     """
     log.debug("Start serialize")
 
@@ -51,15 +65,8 @@ def serialize_allowance(allowance, content_types):
     equipment_id_list = []
 
     # Required quantities for molecules
-    molecule_reqqty_list = pharmaship.inventory.models.MoleculeReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
+    molecule_reqqty_list = models.MoleculeReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
     molecule_id_list += molecule_reqqty_list.values_list("base_id", flat=True)
-    # molecule_reqqty_data = serializers.serialize(
-    #     "yaml",
-    #     molecule_reqqty_list,
-    #     fields=('base', 'required_quantity'),
-    #     use_natural_foreign_keys=True
-    #     )
-    # query_count_all()
 
     serialized = pharmaship.inventory.serializers.MoleculeReqQtySerializer(molecule_reqqty_list, many=True)
     molecule_reqqty_data = renderer.render(
@@ -69,15 +76,8 @@ def serialize_allowance(allowance, content_types):
     query_count_all()
 
     # Required quantities for equipments
-    equipment_reqqty_list = pharmaship.inventory.models.EquipmentReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
+    equipment_reqqty_list = models.EquipmentReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
     equipment_id_list += equipment_reqqty_list.values_list("base_id", flat=True)
-    # equipment_reqqty_data = serializers.serialize(
-    #     "yaml",
-    #     equipment_reqqty_list,
-    #     fields=('base', 'required_quantity'),
-    #     use_natural_foreign_keys=True
-    #     )
-    # query_count_all()
 
     serialized = pharmaship.inventory.serializers.EquipmentReqQtySerializer(equipment_reqqty_list, many=True)
     equipment_reqqty_data = renderer.render(
@@ -87,15 +87,8 @@ def serialize_allowance(allowance, content_types):
     query_count_all()
 
     # Required quantities for Laboratory
-    laboratory_reqqty_list = pharmaship.inventory.models.LaboratoryReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
+    laboratory_reqqty_list = models.LaboratoryReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
     equipment_id_list += laboratory_reqqty_list.values_list("base_id", flat=True)
-    # laboratory_reqqty_data = serializers.serialize(
-    #     "yaml",
-    #     laboratory_reqqty_list,
-    #     fields=('base', 'required_quantity'),
-    #     use_natural_foreign_keys=True
-    #     )
-    # query_count_all()
 
     serialized = pharmaship.inventory.serializers.LaboratoryReqQtySerializer(laboratory_reqqty_list, many=True)
     laboratory_reqqty_data = renderer.render(
@@ -104,17 +97,9 @@ def serialize_allowance(allowance, content_types):
         )
     query_count_all()
 
-
     # Required quantities for Telemedical
-    telemedical_reqqty_list = pharmaship.inventory.models.TelemedicalReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
+    telemedical_reqqty_list = models.TelemedicalReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
     equipment_id_list += telemedical_reqqty_list.values_list("base_id", flat=True)
-    # telemedical_reqqty_data = serializers.serialize(
-    #     "yaml",
-    #     telemedical_reqqty_list,
-    #     fields=('base', 'required_quantity'),
-    #     use_natural_foreign_keys=True
-    #     )
-    # query_count_all()
 
     serialized = pharmaship.inventory.serializers.TelemedicalReqQtySerializer(telemedical_reqqty_list, many=True)
     telemedical_reqqty_data = renderer.render(
@@ -124,7 +109,7 @@ def serialize_allowance(allowance, content_types):
     query_count_all()
 
     # Required quantities for First Aid Kit
-    first_aid_kit_reqqty_list = pharmaship.inventory.models.FirstAidKitReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
+    first_aid_kit_reqqty_list = models.FirstAidKitReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
     molecule_id_list += first_aid_kit_reqqty_list.filter(
         content_type_id=content_types["molecule"]
         ).values_list("object_id", flat=True)
@@ -140,7 +125,7 @@ def serialize_allowance(allowance, content_types):
     query_count_all()
 
     # Required quantities for Rescue Bag
-    rescue_bag_reqqty_list = pharmaship.inventory.models.RescueBagReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
+    rescue_bag_reqqty_list = models.RescueBagReqQty.objects.filter(allowance__in=[allowance]).prefetch_related("base")
     molecule_id_list += rescue_bag_reqqty_list.filter(
         content_type_id=content_types["molecule"]
         ).values_list("object_id", flat=True)
@@ -156,7 +141,7 @@ def serialize_allowance(allowance, content_types):
     query_count_all()
 
     # Equipment used by the allowance
-    equipment_list = pharmaship.inventory.models.Equipment.objects.filter(id__in=equipment_id_list).prefetch_related("group")
+    equipment_list = models.Equipment.objects.filter(id__in=equipment_id_list).prefetch_related("group")
     equipment_data = serializers.serialize(
         "yaml",
         equipment_list,
@@ -167,7 +152,7 @@ def serialize_allowance(allowance, content_types):
     query_count_all()
 
     # Molecule used by the allowance
-    molecule_list = pharmaship.inventory.models.Molecule.objects.filter(id__in=molecule_id_list).prefetch_related("group")
+    molecule_list = models.Molecule.objects.filter(id__in=molecule_id_list).prefetch_related("group")
     molecule_data = serializers.serialize(
         "yaml",
         molecule_list,
@@ -208,15 +193,32 @@ def serialize_allowance(allowance, content_types):
 
 
 def get_pictures(equipment_list):
-    """Return a list of picture paths to include in the archive."""
+    """Return a list of picture paths to include in the archive.
+
+    :param equipment_list: List of equipment for serialized allowance.
+    :type equipment_list: django.db.models.query.QuerySet
+
+    :return: List of pictures filenames.
+    :rtype: list
+    """
     # Pictures attached to equipments
-    pictures = equipment_list.exclude(picture='').values_list('picture', flat=True)
+    pictures = equipment_list.exclude(picture='').values_list(
+        'picture', flat=True)
 
     return pictures
 
 
 def get_hash(name, content=None, filename=None):
-    """Return sha256 hash and filename for MANIFEST file."""
+    """Return sha256 hash and filename for MANIFEST file.
+
+    :param str name: Name of the file to hash.
+    :param content: Content of the file to hash.
+    :type content: bytes or str
+    :param str filename: Path to the file to hash.
+
+    :return: Name and file hash in hexadecimal string.
+    :rtype: tuple(str, str)
+    """
     if content is None and filename is None:
         return None
 
@@ -238,6 +240,16 @@ def get_hash(name, content=None, filename=None):
 
 
 def create_tarinfo(name, content):
+    """Return a the TarInfo for a virtual file.
+
+    :param str name: Name of the file
+    :param content: Content of the file to add to the tar file.
+    :type content: bytes or str
+
+    :return: :class:`tarfile.TarInfo` and :class:`io.BytesIO` instance of the
+             file content.
+    :rtype: tuple
+    """
     if isinstance(content, bytes):
         f = io.BytesIO(content)
     else:
@@ -254,6 +266,13 @@ def create_tarinfo(name, content):
 
 
 def create_manifest(items):
+    """Create the data to write into the MANIFEST file.
+
+    :param list(tuple) items: list of files with their hash.
+
+    :return: Formatted string
+    :rtype: str
+    """
     content = ""
     for item in items:
         content += "{1}  {0}\n".format(item[0], item[1])
@@ -262,7 +281,14 @@ def create_manifest(items):
 
 
 def create_package_yaml(allowance):
-    """Export package info in YAML string."""
+    """Export package info in YAML string.
+
+    :param allowance: Allowance instance to export
+    :type allowance: pharmaship.inventory.models.Allowance
+
+    :return: YAML string containing Allowance data.
+    :rtype: str
+    """
     content = {
         "info": {
             "author": allowance.author,
@@ -285,6 +311,19 @@ def create_archive(allowance, file_obj):
 
     The response is a tar.gz file containing YAML files generated by the
     function `serialize_allowance`.
+
+    Pictures are added if any.
+
+    The package description file (``package.yaml``) and the ``MANIFEST`` file
+    are created at the end.
+
+    :param allowance: Allowance instance to export
+    :type allowance: pharmaship.inventory.models.Allowance
+    :param file_obj: Destination file object
+    :type file_obj: argparse.FileType or any compatible file object
+
+    :return: ``True`` if success
+    :rtype: bool
     """
     # Creating a tar.gz archive
     hashes = []
@@ -312,9 +351,11 @@ def create_archive(allowance, file_obj):
             except Exception as error:
                 log.error("Error: %s", error)
 
-            hashes.append(get_hash(PurePath("pictures", item), filename=picture_filename))
+            hashes.append(
+                get_hash(PurePath("pictures", item), filename=picture_filename)
+                )
 
-        # Add the MANIFEST
+        # Add the package description file
         package_content = create_package_yaml(allowance)
         info, f = create_tarinfo("package.yaml", package_content)
         tar.addfile(info, f)

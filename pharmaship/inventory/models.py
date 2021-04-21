@@ -47,7 +47,7 @@ class GroupManager(models.Manager):
 
 
 class MoleculeGroup(models.Model):
-    """Model for groups attached to a :model:`pharmaship.inventory.Molecule` instance."""
+    """Model for groups attached to a :mod:`pharmaship.inventory.models.Molecule` instance."""
 
     objects = GroupManager()  # For deserialization
 
@@ -66,7 +66,7 @@ class MoleculeGroup(models.Model):
 
 
 class EquipmentGroup(models.Model):
-    """Model for groups attached to a :model:`pharmaship.inventory.Equipment` instance."""
+    """Model for groups attached to a :mod:`pharmaship.inventory.models.Equipment` instance."""
 
     objects = GroupManager()  # For deserialization
 
@@ -95,8 +95,8 @@ class TagManager(models.Manager):
 
 
 class Tag(models.Model):
-    """Stores tags attached to a :model:`pharmaship.inventory.Equipment` or
-    model:`pharmaship.inventory.Molecule` instance.
+    """Stores tags attached to a :mod:`pharmaship.inventory.models.Equipment` or
+    model:`pharmaship.inventory.models.Molecule` instance.
     """
 
     objects = TagManager()  # For deserialization
@@ -116,8 +116,8 @@ class Tag(models.Model):
 
 
 class Location(MPTTModel):
-    """Stores locations attached to a :model:`pharmaship.inventory.Equipment` or
-    model:`pharmaship.inventory.Molecule` instance.
+    """Stores locations attached to a :mod:`pharmaship.inventory.models.Equipment` or
+    model:`pharmaship.inventory.models.Molecule` instance.
     """
 
     name = models.CharField(_("Name"), max_length=100)
@@ -132,8 +132,8 @@ class Location(MPTTModel):
 
 
 class QtyTransaction(models.Model):
-    """Stores a quantity transaction related to :model:`pharmaship.inventory.Article`
-    or :model:`pharmaship.inventory.Medicine`.
+    """Stores a quantity transaction related to :mod:`pharmaship.inventory.models.Article`
+    or :mod:`pharmaship.inventory.models.Medicine`.
 
     There are 5 types of transactions:
     * 1 IN: a material is added,
@@ -218,7 +218,7 @@ class BaseReqQty(models.Model):
 
 
 class MoleculeManager(models.Manager):
-    """Manager for :model:`pharmaship.inventory.Molecule`."""
+    """Manager for :mod:`pharmaship.inventory.models.Molecule`."""
 
     def get_by_natural_key(self, name, roa, dosage_form, composition):
         return self.get(
@@ -231,7 +231,7 @@ class MoleculeManager(models.Manager):
 
 class Molecule(models.Model):
     """Store molecule objects used as referent in an
-    :model:`pharmaship.inventory.Allowance`.
+    :mod:`pharmaship.inventory.models.Allowance`.
     """
 
     objects = MoleculeManager()  # For deserialization
@@ -263,7 +263,7 @@ class Molecule(models.Model):
 
 
 class Medicine(BaseChestItem):
-    """Stores a medicine object, "child" of :model:`pharmaship.inventory.Molecule`."""
+    """Stores a medicine object, "child" of :mod:`pharmaship.inventory.models.Molecule`."""
 
     parent = models.ForeignKey(Molecule, on_delete=models.CASCADE, related_name="medicines")
     # Fields for non-conformity compatibility

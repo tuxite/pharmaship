@@ -1,5 +1,59 @@
 # -*- coding: utf-8; -*-
-"""Inventory application constants."""
+"""Inventory application constants.
+
+Constants used in inventory models
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* ``TRANSACTION_TYPE_CHOICES``: Except ``1`` (input of items) and
+  ``8`` (actual count of items), all other values are negative for
+  computing the stock.
+* ``DRUG_LIST_CHOICES``: Corresponds to French medicine classification.
+* ``DRUG_FORM_CHOICES``: All available medicine galenic forms.
+* ``DRUG_ROA_CHOICES``: All medicine route of administration possibilities.
+* ``PACKING_CHOICES``: Item packaging possibilities (in example, for
+  counting by boxes, pairs...)
+
+Transaction Type Choices
+^^^^^^^^^^^^^^^^^^^^^^^^
+These values are used for computing the current stock from the quantity
+transactions.
+
+When receiving an article (thus *adding* an item), the transaction value is
+``1`` (input). The quantity is positive.
+In all other (used/perished/other...) the quantity is considered as negative.
+
+The "stock count" transaction (value ``8``) correspond to an actual counting
+of the item. There is no addition/subtraction, the item quantity is considered
+as reference.
+
+Examples::
+
+    Transaction type: 1 - Quantity: 10
+    Transaction type: 2 - Quantity:  1
+    Transaction type: 2 - Quantity:  3
+    ==> Remaning: .................  6
+
+With "stock count"::
+
+    Transaction type: 1 - Quantity: 20
+    Transaction type: 2 - Quantity:  4
+    Transaction type: 8 - Quantity:  7
+    ==> Remaning: .................  7
+
+Packing Choices
+^^^^^^^^^^^^^^^
+Numbering of choice ID is specific and important as starting >= 20 it defines
+the packing content.
+
+ID values above 20 are divided by 10 and truncated (ie.: 3.9 means 3).
+
+Examples::
+
+                         ID    Formula    Result
+  ----------------------------------------------
+  "pair" means 2         20      20/10 =>      2
+  "set of two" means 2   21      21/10 =>      2
+  "dozen" means 12      120     120/10 =>     12
+"""
 from django.utils.translation import gettext_lazy as _
 
 

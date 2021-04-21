@@ -8,34 +8,34 @@ import pharmaship.inventory.models
 
 
 class MoleculeAdmin(admin.ModelAdmin):
-    """List view for `Molecule`."""
+    """List view for Molecule items."""
 
     list_display = ('name', 'dosage_form', 'composition')
     ordering = ('name',)
 
 
 class EquipmentAdmin(admin.ModelAdmin):
-    """List view for `Equipment`."""
+    """List view for Equipment items."""
 
     list_display = ('name', 'packaging', 'remark', 'consumable', 'perishable')
     ordering = ('name',)
 
 
 class ChildAdmin(admin.ModelAdmin):
-    """List view for `Article` and `Medicine`."""
+    """List view for Article and Medicine items."""
 
     list_display = ('name', 'parent', 'get_quantity', 'exp_date', 'location')
 
 
 class GroupAdmin(admin.ModelAdmin):
-    """List view for `MoleculeGroup` and `EquipmentGroup`."""
+    """List view for Molecule and Equipment groups."""
 
     list_display = ('name', 'order')
     ordering = ('order',)
 
 
 class QtyTransactionAdmin(admin.ModelAdmin):
-    """List view for `QtyTransaction`."""
+    """List view for quantity transactions."""
 
     list_display = (
         'content_object',
@@ -47,7 +47,7 @@ class QtyTransactionAdmin(admin.ModelAdmin):
 
 
 class ReqQtyAdmin(admin.ModelAdmin):
-    """List view for all required quantity models."""
+    """List view for required quantities."""
 
     list_display = ('base', 'allowance', 'required_quantity')
     ordering = ('base', 'allowance',)
@@ -55,7 +55,7 @@ class ReqQtyAdmin(admin.ModelAdmin):
 
 
 class AllowanceAdmin(admin.ModelAdmin):
-    """List view for `Allowance`."""
+    """List view for Allowance items."""
 
     list_display = ('name', 'author', 'version', 'active')
     ordering = ('name', 'version',)
@@ -69,14 +69,14 @@ class GenericReqQtyAdmin(admin.ModelAdmin):
 
 
 class FirstAidKitItemAdmin(admin.ModelAdmin):
-    """List view for items in first aid kits."""
+    """List view for items in First Aid Kits."""
 
     list_display = ('name', 'exp_date', 'kit')
     list_filter = ('kit',)
 
 
 class RescueBagAdmin(admin.ModelAdmin):
-    """List view for `RescueBag`."""
+    """List view for :mod:`pharmaship.inventory.models.RescueBag`."""
 
     list_display = ('name', 'location')
 

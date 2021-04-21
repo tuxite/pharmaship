@@ -7,7 +7,7 @@ import pharmaship.inventory.models
 
 
 class AddMedicineForm(forms.ModelForm):
-    """Form used for adding a medicine."""
+    """Form used for adding a :mod:`pharmaship.inventory.models.Medicine`."""
 
     name = forms.CharField(max_length=100)
     quantity = forms.IntegerField(min_value=1)
@@ -30,7 +30,7 @@ class AddMedicineForm(forms.ModelForm):
 
 
 class ModifyMedicineForm(forms.ModelForm):
-    """Form used for modifying a `Medicine`."""
+    """Form used for modifying a :mod:`pharmaship.inventory.models.Medicine`."""
 
     name = forms.CharField(max_length=100)
     quantity = forms.IntegerField(min_value=1)
@@ -52,7 +52,7 @@ class ModifyMedicineForm(forms.ModelForm):
 
 
 class AddArticleForm(forms.ModelForm):
-    """Form used for adding an `Article`."""
+    """Form used for adding an :mod:`pharmaship.inventory.models.Article`."""
 
     name = forms.CharField(max_length=100)
     quantity = forms.IntegerField(min_value=1)
@@ -73,8 +73,8 @@ class AddArticleForm(forms.ModelForm):
         """Check that a date is correct if needed by the model.
 
         This method completes the standard validation method and adds a
-        conditional check of the date through the `perishable` attribute.
-        If `True`, an `exp_date` must be present and correct.
+        conditional check of the date through the ``perishable`` attribute.
+        If ``True``, an ``exp_date`` must be present and correct.
         """
         cleaned_data = super().clean()
 
@@ -95,7 +95,7 @@ class AddArticleForm(forms.ModelForm):
 
 
 class ModifyArticleForm(forms.ModelForm):
-    """Form used for modifying an `Article`."""
+    """Form used for modifying an :mod:`pharmaship.inventory.models.Article`."""
 
     name = forms.CharField(max_length=100)
     quantity = forms.IntegerField(min_value=1)
@@ -116,7 +116,7 @@ class ModifyArticleForm(forms.ModelForm):
 
 
 class LocationForm(forms.ModelForm):
-    """Form used to add a `Location`."""
+    """Form used to add a :mod:`pharmaship.inventory.models.Location`."""
 
     parent_id = forms.IntegerField(required=False)
     name = forms.CharField(max_length=100)
@@ -127,7 +127,7 @@ class LocationForm(forms.ModelForm):
 
 
 class InventorySettingsForm(forms.Form):
-    """Form used to modify the inventory `Setting`."""
+    """Form used to modify the inventory setting."""
 
     expire_date_warning_delay = forms.IntegerField(min_value=15)
     rescue_bag = forms.IntegerField(min_value=1)
@@ -138,7 +138,7 @@ class InventorySettingsForm(forms.Form):
 
 
 class FirstAidKitForm(forms.Form):
-    """Form used to modify a `FirstAidKit`."""
+    """Form used to modify a :mod:`pharmaship.inventory.models.FirstAidKit`."""
 
     name = forms.CharField(max_length=100)
     location_id = forms.IntegerField(min_value=1)
@@ -149,7 +149,7 @@ class FirstAidKitForm(forms.Form):
 
 
 class AddSubitemForm(forms.Form):
-    """Form used to add a `FirstAidKitItem`."""
+    """Form used to add a :mod:`pharmaship.inventory.models.FirstAidKitItem`."""
 
     item_id = forms.IntegerField(min_value=1)
     quantity = forms.IntegerField(min_value=1)
@@ -157,7 +157,7 @@ class AddSubitemForm(forms.Form):
 
 
 class AddNewSubitemForm(forms.Form):
-    """Form used to add a new `FirstAidKitItem`."""
+    """Form used to add a new :mod:`pharmaship.inventory.models.FirstAidKitItem`."""
 
     name = forms.CharField(max_length=100)
     quantity = forms.IntegerField(min_value=1)
@@ -174,8 +174,8 @@ class AddNewSubitemForm(forms.Form):
         """Check that a date is correct if needed by the model.
 
         This method completes the standard validation method and adds a
-        conditional check of the date through the `perishable` attribute.
-        If `True`, an `exp_date` must be present and correct.
+        conditional check of the date through the ``perishable`` attribute.
+        If ``True``, an ``exp_date`` must be present and correct.
         """
         cleaned_data = super().clean()
 
@@ -192,7 +192,7 @@ class AddNewSubitemForm(forms.Form):
 
 
 class ModifySubitemForm(forms.Form):
-    """Form used to modify a `FirstAidKitItem`."""
+    """Form used to modify a :mod:`pharmaship.inventory.models.FirstAidKitItem`."""
 
     quantity = forms.IntegerField(min_value=1)
     remark = forms.CharField(max_length=256, required=False)
@@ -207,8 +207,8 @@ class ModifySubitemForm(forms.Form):
         """Check that a date is correct if needed by the model.
 
         This method completes the standard validation method and adds a
-        conditional check of the date through the `perishable` attribute.
-        If `True`, an `exp_date` must be present and correct.
+        conditional check of the date through the ``perishable`` attribute.
+        If ``True``, an ``exp_date`` must be present and correct.
         """
         cleaned_data = super().clean()
 
@@ -225,7 +225,7 @@ class ModifySubitemForm(forms.Form):
 
 
 class RescueBagForm(forms.ModelForm):
-    """Form used to modify a `RescueBag`."""
+    """Form used to modify a :mod:`pharmaship.inventory.models.RescueBag`."""
 
     name = forms.CharField(max_length=100)
     location_id = forms.IntegerField(min_value=1)

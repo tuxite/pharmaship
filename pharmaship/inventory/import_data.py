@@ -107,9 +107,9 @@ def get_base(type, content, model=None):
     """Return a model instance according to the type and model if provided.
 
     If the `model` is not provided, it is retrieved from the `type` structure.
-    On some `model` (ie: :class:`pharmaship.inventory.models.RescueBagReqQty`),
-    the type can be either :class:`pharmaship.inventory.models.Equipment` or
-    :class:`pharmaship.inventory.models.Molecule`.
+    On some `model` (ie: :mod:`pharmaship.inventory.models.RescueBagReqQty`),
+    the type can be either :mod:`pharmaship.inventory.models.Equipment` or
+    :mod:`pharmaship.inventory.models.Molecule`.
 
     :param type: Model class of base field (Django internal).
     :type type: models.Equipment or models.Molecule
@@ -145,7 +145,7 @@ def deserialize_json_file(data, tar, allowance):
       * ``filename``: the name of the JSON file to extract from the tar \
       archive;
       * ``model``: the class of model to deserialize \
-      (ie: :class:`pharmaship.inventory.models.MoleculeReqQty`).
+      (ie: :mod:`pharmaship.inventory.models.MoleculeReqQty`).
 
     :param tarfile.TarFile tar: tar file archive containing the file to extract
     :param allowance: allowance instance to rattach
@@ -209,7 +209,7 @@ def required_quantity(data, tar, allowance):
       * ``filename``: the name of the JSON file to extract from the tar \
       archive;
       * ``model``: the class of model to deserialize \
-      (ie: :class:`pharmaship.inventory.models.MoleculeReqQty`).
+      (ie: :mod:`pharmaship.inventory.models.MoleculeReqQty`).
 
     :param tarfile.TarFile tar: tar file archive containing the file to extract
     :param allowance: allowance instance to rattach
@@ -256,7 +256,7 @@ class DataImport:
     def import_allowance(self):
         """Import an Allowance from a YAML file.
 
-        Update the :class:`pharmaship.inventory.models.Allowance` info or
+        Update the :mod:`pharmaship.inventory.models.Allowance` info or
         create it from scratch.
 
         :return: Allowance instance or ``False`` in case of import error.
@@ -283,7 +283,7 @@ class DataImport:
         """Import Molecule objects from a YAML file.
 
         Use Django's update_or_create method for
-        :class:`pharmaship.inventory.models.Molecule`.
+        :mod:`pharmaship.inventory.models.Molecule`.
 
         :return: ``True`` if successful import, ``False`` otherwise.
         :rtype: bool
@@ -334,7 +334,7 @@ class DataImport:
         """Import Equipment objects from a YAML file.
 
         Use Django's update_or_create method for
-        :class:`pharmaship.inventory.models.Equipment`.
+        :mod:`pharmaship.inventory.models.Equipment`.
 
         :return: ``True`` if successful import, ``False`` otherwise.
         :rtype: bool
@@ -377,24 +377,24 @@ class DataImport:
     def update(self):
         """Launch the importation.
 
-        Import first the :class:`pharmaship.inventory.models.Allowance`.
-        Then, import all :class:`pharmaship.inventory.models.Molecule` and
-        :class:`pharmaship.inventory.models.Equipment` objects (update or
+        Import first the :mod:`pharmaship.inventory.models.Allowance`.
+        Then, import all :mod:`pharmaship.inventory.models.Molecule` and
+        :mod:`pharmaship.inventory.models.Equipment` objects (update or
         create them).
 
         When this is done, parse each JSON file for required quantities:
 
-        * :class:`pharmaship.inventory.models.MoleculeReqQty`
-        * :class:`pharmaship.inventory.models.EquipmentReqQty`
-        * :class:`pharmaship.inventory.models.RescueBagReqQty`
-        * :class:`pharmaship.inventory.models.FirstAidKitReqQty`
-        * :class:`pharmaship.inventory.models.LaboratoryReqQty`
-        * :class:`pharmaship.inventory.models.TelemedicalReqQty`
+        * :mod:`pharmaship.inventory.models.MoleculeReqQty`
+        * :mod:`pharmaship.inventory.models.EquipmentReqQty`
+        * :mod:`pharmaship.inventory.models.RescueBagReqQty`
+        * :mod:`pharmaship.inventory.models.FirstAidKitReqQty`
+        * :mod:`pharmaship.inventory.models.LaboratoryReqQty`
+        * :mod:`pharmaship.inventory.models.TelemedicalReqQty`
 
-        :class:`pharmaship.inventory.models.Molecule` and
-        :class:`pharmaship.inventory.models.Equipment` objects without
+        :mod:`pharmaship.inventory.models.Molecule` and
+        :mod:`pharmaship.inventory.models.Equipment` objects without
         required quantity after import are affected to the default
-        :class:`pharmaship.inventory.models.Allowance` (``id=0``) with a
+        :mod:`pharmaship.inventory.models.Allowance` (``id=0``) with a
         required quantity of 0.
 
         :return: ``True`` if import successful, ``False`` otherwise.

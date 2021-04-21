@@ -19,7 +19,7 @@ def get_quantity(transaction_list, item_id):
     Other types are decreasing the value.
 
     :param django.db.models.query.QuerySet transaction_list: List of \
-    transactions :class:`pharmaship.inventory.models.QtyTransaction`.
+    transactions :mod:`pharmaship.inventory.models.QtyTransaction`.
     :param int item_id: ID of item
 
     :return: Quantity of item
@@ -39,6 +39,16 @@ def req_qty_element(element, req_qty_list):
     """Return the required quantity of an element.
 
     Use the allowance list and required quantities list.
+
+    :param element: Reference element
+    :type element: pharmaship.inventory.models.Equipment or \
+    pharmaship.inventory.models.Molecule
+    :param req_qty_list: List of quantity transactions
+    :type req_qty_list: django.db.models.query.QuerySet
+
+    :return: Computed quantity of the element and the required quantity details
+             (name and quantity of each related allowance)
+    :rtype: tuple(int, list(dict))
     """
     # Required quantity
     maximum = [0, ]
@@ -86,7 +96,10 @@ def filepath(instance, filename):
 def get_location_list(show_reserved=True):
     """Return a list of pseudo-serialized Locations.
 
-    `show_reserved`: if True, show locations with id > 100.
+    :param bool show_reserved: if ``True``, show locations with id > 100.
+
+    :return: List of serialized :mod:`pharmaship.inventory.models.Location`.
+    :rtype: list(dict)
     """
     locations = []
 
@@ -118,9 +131,13 @@ def get_location_list(show_reserved=True):
 def location_iterator(parent, items, parent_id):
     """Iterate over the Locations tree.
 
-    `parent`: sequence of parent locations
-    `items`: children to serialize
-    `parent_id`: closed parent id
+    :param list parent: Sequence of parent serialized locations
+    :param iterator items: Children to serialize (iterator of
+                           :mod:`pharmaship.inventory.models.Location`)
+    :param int parent_id: Parent Location ID
+
+    :return: List of serialized :mod:`pharmaship.inventory.models.Location`.
+    :rtype: list(dict)
     """
     locations = []
 
