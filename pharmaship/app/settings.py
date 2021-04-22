@@ -35,6 +35,8 @@ PHARMASHIP_LOCALE = Path(BASE_DIR) / "gui/locale"
 PHARMASHIP_CONF = USERDATA_DIR / "config.yaml"
 PHARMASHIP_LOG = USERDATA_DIR / 'pharmaship.log'
 
+PHARMASHIP_USER_MANUAL = PHARMASHIP_DATA / "user_manual.pdf"
+
 VALIDATOR_PATH = Path(BASE_DIR) / "schemas"
 
 PICTURES_FOLDER = USERDATA_DIR / "pictures"

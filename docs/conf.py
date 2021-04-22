@@ -31,8 +31,9 @@ copyright = '2020, Matthieu Morin, Hugues Desvaux'
 author = 'Matthieu Morin, Hugues Desvaux'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
-
+version = '0.9.0'
+release = '0.9.0'
+today_fmt = "%Y-%m-%d"
 
 # -- General configuration ---------------------------------------------------
 
@@ -72,3 +73,24 @@ html_theme = "sphinx_rtd_theme"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"] # Used for static files as image in documentation.
+
+# -- Options for LaTeX/PDF output --------------------------------------------
+latex_engine = "xelatex"
+latex_use_xindy = True
+latex_logo = "logo.pdf"
+latex_toplevel_sectioning = "chapter"
+latex_theme = "howto"
+latex_theme_options = {
+    "papersize": "a4paper"
+    }
+latex_elements = {
+    'extrapackages': r"""
+    \usepackage{fourier-otf}
+    \usepackage{isodate}
+    """,
+    # 'releasename': 'version'
+}
+latex_documents = [
+    ('manual/index', 'user_manual.tex', u'User Manual', u'', 'manual'),
+    ('dev/index', 'developer_manual.tex', u'Developer Manual', u'', 'manual'),
+]

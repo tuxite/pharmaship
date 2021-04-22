@@ -121,3 +121,8 @@ patch_weasyprint:
 patch_cairosvg:
 # Patching CairoSVG for freezing
 	patch -i bin/cairosvg.patch venv/lib/python3.8/site-packages/cairosvg/__init__.py
+
+doc_pdf:
+	# Build the user and developer manuals in PDF. xelatex needed.
+	sphinx-build -M latexpdf docs build/sphinx
+	cp build/sphinx/latex/user_manual.pdf pharmaship/data/user_manual.pdf
