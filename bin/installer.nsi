@@ -79,7 +79,7 @@ UninstPage custom un.DeleteUserData un.DeleteUserDataLeave ;Custom page
   SetDetailsPrint "both"
   CreateDirectory $INSTDIR\allowances
   File "/oname=$INSTDIR\allowances\${filename}" "..\allowances\${filename}"
-  nsExec::ExecToLog '"$INSTDIR\pharmaship-admin.exe" "import" "$INSTDIR\allowances\${filename}"'
+  nsExec::ExecToLog /OEM '"$INSTDIR\pharmaship-admin.exe" "import" "$INSTDIR\allowances\${filename}"'
 !macroend
 
 ;--------------------------------
@@ -151,13 +151,17 @@ Section "Pharmaship software" SecPharmaship
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "HelpLink" "$\"${HELPURL}$\""
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "URLUpdateInfo" "$\"${UPDATEURL}$\""
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "URLInfoAbout" "$\"${ABOUTURL}$\""
-  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "DisplayVersion" "$\"${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}$\""
+  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "DisplayVersion" "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}"
   WriteRegDWORD ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "VersionMajor" ${VERSIONMAJOR}
   WriteRegDWORD ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "VersionMinor" ${VERSIONMINOR}
 
+  ;Set environment variables to disable colored logs and reduce log message format
+  System::Call 'Kernel32::SetEnvironmentVariable(t, t)i ("NO_COLOR", "1").r0'
+  System::Call 'Kernel32::SetEnvironmentVariable(t, t)i ("COLOREDLOGS_LOG_FORMAT", "%(asctime)s - %(levelname)s - %(message)s").r0'
+  System::Call 'Kernel32::SetEnvironmentVariable(t, t)i ("COLOREDLOGS_DATE_FORMAT", "%H:%M:%S").r0'
   ;Run Pharmaship configuration scripts
-  nsExec::ExecToLog '"$INSTDIR\pharmaship-admin.exe" "migrate"'
-  nsExec::ExecToLog '"$INSTDIR\pharmaship-admin.exe" "populate"'
+  nsExec::ExecToLog /OEM '"$INSTDIR\pharmaship-admin.exe" "migrate"'
+  nsExec::ExecToLog /OEM '"$INSTDIR\pharmaship-admin.exe" "populate"'
 
 SectionEnd
 
@@ -244,7 +248,6 @@ Section Uninstall
   # Delete Start Menu
   !insertmacro MUI_STARTMENU_WRITE_BEGIN 0 ;This macro sets $StartMenuFolder and skips to MUI_STARTMENU_WRITE_END if the "Don't create shortcuts" checkbox is checked...
     Delete "$SMPROGRAMS\$StartMenuFolder\Pharmaship.lnk"
-    Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
     RMDir "$SMPROGRAMS\$StartMenuFolder"
   !insertmacro MUI_STARTMENU_WRITE_END
 
