@@ -67,7 +67,8 @@ jobs:
           virtualenv --system-site-packages venv
           venv/bin/python -m pip install -r requirements.txt
           venv/bin/python -m pip install winpath
-          venv/bin/python -m pip install cx_Freeze
+          venv/bin/python -m pip install cx-Logging
+          venv/bin/python -m pip install cx-Freeze
           venv/bin/python -m pip install --platform win_amd64 --only-binary=:all: --target venv/lib/python3.8/site-packages --upgrade pywin32
           rm -rf venv/lib/python3.8/site-packages/setuptools*
           rm -rf venv/lib/python3.8/site-packages/pip*
