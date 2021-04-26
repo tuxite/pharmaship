@@ -196,7 +196,12 @@ class View:
 
             # Picture
             picture = equipment["picture"]
-            btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+            btn_picture = widgets.ButtonWithImage(
+                "image-x-generic-symbolic.svg",
+                tooltip=_("View picture"),
+                connect=utils.picture_frame,
+                data=picture
+                )
             linked_btn.pack_end(btn_picture, False, True, 0)
         else:
             label = Gtk.Label("", xalign=0.5)
@@ -229,7 +234,12 @@ class View:
 
         # Toggle if active
         if toggle_row_num and toggle_equipment:
-            self.toggle_article(source=None, grid=grid, equipment=toggle_equipment, row_num=toggle_row_num)
+            self.toggle_article(
+                source=None,
+                grid=grid,
+                equipment=toggle_equipment,
+                row_num=toggle_row_num
+                )
 
         query_count_all()
 
@@ -262,7 +272,7 @@ class View:
     def dialog_use(self, source, article):
         pluralizer = Pluralizer()
 
-        builder = Gtk.Builder.new_from_file(utils.get_template("article_use.glade"))
+        builder = utils.get_builder("article_use.ui")
         dialog = builder.get_object("dialog")
         dialog.set_title(_("Use an article"))
 
@@ -309,7 +319,7 @@ class View:
     def dialog_modify(self, source, article):
         pluralizer = Pluralizer()
 
-        builder = Gtk.Builder.new_from_file(utils.get_template("article_add.glade"))
+        builder = utils.get_builder("article_add.ui")
         dialog = builder.get_object("dialog")
         dialog.set_title(_("Modify an article"))
 
@@ -403,7 +413,7 @@ class View:
         dialog.destroy()
 
     def dialog_delete(self, source, article):
-        builder = Gtk.Builder.new_from_file(utils.get_template("article_delete.glade"))
+        builder = utils.get_builder("article_delete.ui")
         dialog = builder.get_object("dialog")
         dialog.set_title(_("Delete an article"))
 
@@ -426,7 +436,7 @@ class View:
         dialog.destroy()
 
     def dialog_add(self, source, equipment):
-        builder = Gtk.Builder.new_from_file(utils.get_template("article_add.glade"))
+        builder = utils.get_builder("article_add.ui")
         dialog = builder.get_object("dialog")
         dialog.set_title(_("Add an article"))
 
@@ -830,13 +840,28 @@ class View:
 
             # Use
             if equipment["consumable"]:
-                btn_use = widgets.ButtonWithImage("edit-redo-symbolic", tooltip=_("Use"), connect=self.dialog_use, data=article)
+                btn_use = widgets.ButtonWithImage(
+                    "edit-redo-symbolic.svg",
+                    tooltip=_("Use"),
+                    connect=self.dialog_use,
+                    data=article
+                    )
                 linked_btn.pack_end(btn_use, False, True, 0)
             # Modify
-            btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip=_("Modify"), connect=self.dialog_modify, data=article)
+            btn_modify = widgets.ButtonWithImage(
+                "document-edit-symbolic.svg",
+                tooltip=_("Modify"),
+                connect=self.dialog_modify,
+                data=article
+                )
             linked_btn.pack_end(btn_modify, False, True, 0)
             # Delete
-            btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip=_("Delete"), connect=self.dialog_delete, data=article)
+            btn_delete = widgets.ButtonWithImage(
+                "edit-delete-symbolic.svg",
+                tooltip=_("Delete"),
+                connect=self.dialog_delete,
+                data=article
+                )
             btn_delete.get_style_context().add_class("article-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 

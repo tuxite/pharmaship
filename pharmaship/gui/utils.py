@@ -32,10 +32,22 @@ DATE_MASK = {
     "default-day": None
 }
 
+GRESOURCE_PREFIX = "/com/devmaretique/pharmaship/"
 
-def get_template(filename):
-    """Return GUI file path."""
-    return os.path.join(settings.PHARMASHIP_GUI, filename)
+
+def get_builder(resource_name):
+    """Return a Gtk.Builder from a GResource."""
+    return Gtk.Builder.new_from_resource(GRESOURCE_PREFIX + "ui/" + resource_name)
+
+
+def get_image(resource_name):
+    """Return a Gtk.Image from a GResource."""
+    return Gtk.Image.new_from_resource(GRESOURCE_PREFIX + resource_name)
+
+
+def get_icon(resource_name):
+    """Return a Gtk.Image from a GResource."""
+    return Gtk.Image.new_from_resource(GRESOURCE_PREFIX + "icons/" + resource_name)
 
 
 def grid_replace(old_widget, new_widget):

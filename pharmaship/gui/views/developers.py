@@ -23,7 +23,7 @@ class DatabaseImport:
         self.params = window.params
 
     def show_dialog(self):
-        builder = Gtk.Builder.new_from_file(utils.get_template("db_import.glade"))
+        builder = utils.get_builder("dev/db_import.ui")
         dialog = builder.get_object("dialog")
 
         builder.connect_signals({
@@ -62,7 +62,7 @@ class DatabaseImport:
 
     def success_dialog(self):
         """Show a Gtk.MessageDialog to inform the DB copy went fine."""
-        builder = Gtk.Builder.new_from_file(utils.get_template("db_import_dialog.glade"))
+        builder = utils.get_builder("dev/db_import_dialog.ui")
         dialog = builder.get_object("dialog")
 
         dialog.set_transient_for(self.window)
@@ -78,7 +78,7 @@ class DatabaseExport:
         self.params = window.params
 
     def show_dialog(self):
-        builder = Gtk.Builder.new_from_file(utils.get_template("db_export.glade"))
+        builder = utils.get_builder("dev/db_export.ui")
         dialog = builder.get_object("dialog")
 
         builder.connect_signals({
@@ -114,7 +114,7 @@ class DatabaseExport:
 
     def success_dialog(self):
         """Show a Gtk.MessageDialog to inform the DB backup went fine."""
-        builder = Gtk.Builder.new_from_file(utils.get_template("db_export_dialog.glade"))
+        builder = utils.get_builder("dev/db_export_dialog.ui")
         dialog = builder.get_object("dialog")
 
         dialog.set_transient_for(self.window)
@@ -124,7 +124,7 @@ class DatabaseExport:
 
     def error_dialog(self, error):
         """Show a Gtk.MessageDialog to inform about the error."""
-        builder = Gtk.Builder.new_from_file(utils.get_template("db_export_dialog.glade"))
+        builder = utils.get_builder("dev/db_export_error.ui")
         dialog = builder.get_object("dialog")
         dialog.props.secondary_text = error
 

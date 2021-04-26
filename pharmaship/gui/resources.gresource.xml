@@ -1,31 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/devmaretique/pharmaship/">
-    <file preprocess="xml-stripblanks">icons/error-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/document-edit-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/edit-delete-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/document-save-as-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/document-open-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/open-menu-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/object-select-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/value-increase-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/value-decrease-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/image-x-generic-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/system-search-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/edit-find-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/edit-clear-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/edit-redo-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/window-close-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/window-maximize-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/window-minimize-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/window-restore-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/checkbox-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/checkbox-checked-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/radio-checked-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/radio-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/pan-down-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/pan-end-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/pan-start-symbolic.svg</file>
-	<file preprocess="xml-stripblanks">icons/pan-up-symbolic.svg</file>
+    <!-- Icons -->
+    <file preprocess="xml-stripblanks">icons/document-edit-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/edit-delete-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/document-save-as-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/open-menu-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/object-select-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/image-x-generic-symbolic.svg</file>
+    <file preprocess="xml-stripblanks">icons/edit-redo-symbolic.svg</file>
+
+    <!-- Menus -->
+    <file preprocess="xml-stripblanks">ui/menu/settings.xml</file>
+    <file preprocess="xml-stripblanks">ui/menu/modes.xml</file>
+
+    <!-- Dialogs -->
+    <file preprocess="xml-stripblanks">ui/search_popover.ui</file>
+    <file preprocess="xml-stripblanks">ui/search_listboxrow.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/about_dialog.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/rescue_bag_dialog.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/article_add.ui</file>
+    <file preprocess="xml-stripblanks">ui/article_use.ui</file>
+    <file preprocess="xml-stripblanks">ui/article_delete.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/medicine_add.ui</file>
+    <file preprocess="xml-stripblanks">ui/medicine_use.ui</file>
+    <file preprocess="xml-stripblanks">ui/medicine_delete.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/subitem_add_from_stock.ui</file>
+    <file preprocess="xml-stripblanks">ui/subitem_add_new.ui</file>
+    <file preprocess="xml-stripblanks">ui/subitem_modify.ui</file>
+    <file preprocess="xml-stripblanks">ui/subitem_use.ui</file>
+    <file preprocess="xml-stripblanks">ui/subitem_delete.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/location_add.ui</file>
+    <file preprocess="xml-stripblanks">ui/location_delete.ui</file>
+    <!-- Views -->
+    <file preprocess="xml-stripblanks">ui/splash_screen.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/dashboard.ui</file>
+    <file preprocess="xml-stripblanks">ui/dashboard_detail.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/allowance_manager.ui</file>
+    <file preprocess="xml-stripblanks">ui/location_manager.ui</file>
+    <file preprocess="xml-stripblanks">ui/vessel_settings.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/sidebar_layout.ui</file>
+    <file preprocess="xml-stripblanks">ui/rescue_bag.ui</file>
+
+    <file preprocess="xml-stripblanks">ui/first_aid_kit.ui</file>
+
+    <!-- Developers specific UI -->
+    <file preprocess="xml-stripblanks">ui/dev/db_import.ui</file>
+    <file preprocess="xml-stripblanks">ui/dev/db_import_dialog.ui</file>
+    <file preprocess="xml-stripblanks">ui/dev/db_export.ui</file>
+    <file preprocess="xml-stripblanks">ui/dev/db_export_dialog.ui</file>
+    <file preprocess="xml-stripblanks">ui/dev/db_export_error.ui</file>
+
+    <!-- Pictures, Logos -->
+    <file alias="ui/logo.svg">logo.svg</file>
+    <file>pharmaship_icon.svg</file>
+
+    <!-- CSS -->
+    <file>style.css</file>
   </gresource>
 </gresources>

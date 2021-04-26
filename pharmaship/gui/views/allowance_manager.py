@@ -13,7 +13,7 @@ from pharmaship.inventory.forms import InventorySettingsForm
 from pharmaship.core.utils import log, query_count_all
 from pharmaship.core.import_data import Importer
 
-from pharmaship.gui.utils import get_form_data, get_template
+from pharmaship.gui.utils import get_form_data, get_builder
 
 
 class View:
@@ -23,7 +23,7 @@ class View:
 
         self.application = application
 
-        self.builder = Gtk.Builder.new_from_file(get_template("allowance_manager.glade"))
+        self.builder = get_builder("allowance_manager.ui")
 
         self.invalid = False
 
@@ -249,7 +249,7 @@ class View:
             log.debug("Number of RescueBag in database is high than requested.")
             return
 
-        builder = Gtk.Builder.new_from_file(get_template("rescue_bag_dialog.glade"))
+        builder = get_builder("rescue_bag_dialog.ui")
         dialog = builder.get_object("dialog")
 
         # Set message (showing remaining rescue bags to select for deletion)

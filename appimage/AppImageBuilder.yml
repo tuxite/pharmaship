@@ -8,6 +8,7 @@ script:
   - cp launcher.py  appimage/AppDir/usr/src -r
   - cp manage.py  appimage/AppDir/usr/src -r
   - cp pharmaship appimage/AppDir/usr/src/pharmaship -r
+  - rm -rf appimage/AppDir/usr/src/pharmaship/gui/assets
 
   - python3 -m pip install --ignore-installed --prefix=/usr --root=appimage/AppDir -r appimage/requirements.txt
 
@@ -26,7 +27,7 @@ script:
 
   # Desktop Entry
   - mkdir -p appimage/AppDir/usr/share/icons
-  - cp pharmaship/gui/pharmaship_icon.svg appimage/AppDir/usr/share/icons/pharmaship.svg
+  - cp pharmaship/gui/assets/pharmaship_icon.svg appimage/AppDir/usr/share/icons/pharmaship.svg
   - mkdir -p appimage/AppDir/usr/share/applications
   - cp appimage/com.devmaretique.pharmaship.desktop appimage/AppDir/usr/share/applications -r
 
@@ -38,7 +39,7 @@ AppDir:
     id: com.devmaretique.pharmaship
     name: Pharmaship
     icon: pharmaship
-    version: 0.1.0
+    version: 0.9.0
     # Set the python executable as entry point
     exec: "/usr/bin/python3"
     # Set the application main script path as argument. Use '$@' to forward CLI parameters

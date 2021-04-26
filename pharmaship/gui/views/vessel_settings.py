@@ -17,7 +17,7 @@ class View:
         self.window = window
         self.params = window.params
         self.vessel = self.params.vessel
-        self.builder = Gtk.Builder.new_from_file(utils.get_template("vessel_settings.glade"))
+        self.builder = utils.get_builder("vessel_settings.ui")
 
     def create_main_layout(self):
         # Create content

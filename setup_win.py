@@ -216,7 +216,7 @@ def collect_icons():
     # path = Path(r"C:\msys64\mingw64\share\icons\Adwaita")
     dest = PurePath("share/icons/Adwaita")
 
-    for file in path.glob("**/*symbolic.*"):
+    for file in path.glob("scalable/**/*symbolic.*"):
         if file.parts[-2] in EXCLUDE_ICONS:
             continue
         rel_path = file.relative_to(path)

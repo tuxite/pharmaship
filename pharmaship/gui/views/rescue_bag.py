@@ -23,7 +23,7 @@ class View:
         self.window = window
         self.params = window.params
 
-        self.builder = Gtk.Builder.new_from_file(utils.get_template("sidebar_layout.glade"))
+        self.builder = utils.get_builder("sidebar_layout.ui")
 
         self.stack = self.builder.get_object("stack")
 
@@ -122,7 +122,7 @@ class View:
         self.build_bags(data, rescue_bags)
 
     def build_full_list(self, data):
-        child_builder = Gtk.Builder.new_from_file(utils.get_template("rescue_bag.glade"))
+        child_builder = utils.get_builder("rescue_bag.ui")
         # child = child_builder.get_object("main-box")
         child = child_builder.get_object("child-scrolled")
 
@@ -231,7 +231,12 @@ class View:
 
                 # Picture
                 picture = element["picture"]
-                btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+                btn_picture = widgets.ButtonWithImage(
+                    "image-x-generic-symbolic.svg",
+                    tooltip=_("View picture"),
+                    connect=utils.picture_frame,
+                    data=picture
+                    )
                 linked_btn.pack_end(btn_picture, False, True, 0)
             else:
                 label = Gtk.Label("", xalign=0.5)
@@ -260,7 +265,7 @@ class View:
 
         for bag in bags:
             # Create a page
-            child_builder = Gtk.Builder.new_from_file(utils.get_template("rescue_bag.glade"))
+            child_builder = utils.get_builder("rescue_bag.ui")
             # child = child_builder.get_object("main-box")
             child = child_builder.get_object("child-scrolled")
 
@@ -386,7 +391,12 @@ class View:
 
                 # Picture
                 picture = element["picture"]
-                btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+                btn_picture = widgets.ButtonWithImage(
+                    "image-x-generic-symbolic.svg",
+                    tooltip=_("View picture"),
+                    connect=utils.picture_frame,
+                    data=picture
+                    )
                 linked_btn.pack_end(btn_picture, False, True, 0)
             else:
                 label = Gtk.Label("", xalign=0.5)

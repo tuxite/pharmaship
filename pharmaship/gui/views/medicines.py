@@ -235,7 +235,7 @@ class View:
     def dialog_use(self, source, medicine):
         pluralizer = Pluralizer()
 
-        builder = Gtk.Builder.new_from_file(utils.get_template("medicine_use.glade"))
+        builder = utils.get_builder("medicine_use.ui")
         dialog = builder.get_object("dialog")
         dialog.set_title(_("Use a medicine"))
 
@@ -282,7 +282,7 @@ class View:
     def dialog_modify(self, source, medicine):
         pluralizer = Pluralizer()
 
-        builder = Gtk.Builder.new_from_file(utils.get_template("medicine_add.glade"))
+        builder = utils.get_builder("medicine_add.ui")
         dialog = builder.get_object("dialog")
         dialog.set_title(_("Modify a medicine"))
 
@@ -380,7 +380,7 @@ class View:
         dialog.destroy()
 
     def dialog_delete(self, source, medicine):
-        builder = Gtk.Builder.new_from_file(utils.get_template("medicine_delete.glade"))
+        builder = utils.get_builder("medicine_delete.ui")
         dialog = builder.get_object("dialog")
         dialog.set_title(_("Delete a medicine"))
 
@@ -404,7 +404,7 @@ class View:
         dialog.destroy()
 
     def dialog_add(self, source, molecule):
-        builder = Gtk.Builder.new_from_file(utils.get_template("medicine_add.glade"))
+        builder = utils.get_builder("medicine_add.ui")
         dialog = builder.get_object("dialog")
         dialog.set_title(_("Add a medicine"))
 
@@ -816,13 +816,28 @@ class View:
             grid.attach(linked_btn, 6, i, 1, 1)
 
             # Use
-            btn_use = widgets.ButtonWithImage("edit-redo-symbolic", tooltip=_("Use"), connect=self.dialog_use, data=medicine)
+            btn_use = widgets.ButtonWithImage(
+                "edit-redo-symbolic.svg",
+                tooltip=_("Use"),
+                connect=self.dialog_use,
+                data=medicine
+                )
             linked_btn.pack_end(btn_use, False, True, 0)
             # Modify
-            btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip=_("Modify"), connect=self.dialog_modify, data=medicine)
+            btn_modify = widgets.ButtonWithImage(
+                "document-edit-symbolic.svg",
+                tooltip=_("Modify"),
+                connect=self.dialog_modify,
+                data=medicine
+                )
             linked_btn.pack_end(btn_modify, False, True, 0)
             # Delete
-            btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip=_("Delete"), connect=self.dialog_delete, data=medicine)
+            btn_delete = widgets.ButtonWithImage(
+                "edit-delete-symbolic.svg",
+                tooltip=_("Delete"),
+                connect=self.dialog_delete,
+                data=medicine
+                )
             btn_delete.get_style_context().add_class("medicine-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 

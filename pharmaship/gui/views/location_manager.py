@@ -47,11 +47,21 @@ class View:
         linked_btn.get_style_context().add_class("medicine-item-buttons")
 
         # Modify
-        btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=item)
+        btn_modify = widgets.ButtonWithImage(
+            "document-edit-symbolic.svg",
+            tooltip=_("Modify"),
+            connect=self.dialog_modify,
+            data=item
+            )
         linked_btn.pack_end(btn_modify, False, True, 0)
         # Delete
         if item["id"] > 100:
-            btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip="Delete", connect=self.dialog_delete, data=item)
+            btn_delete = widgets.ButtonWithImage(
+                "edit-delete-symbolic.svg",
+                tooltip=_("Delete"),
+                connect=self.dialog_delete,
+                data=item
+                )
             btn_delete.get_style_context().add_class("medicine-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 
@@ -122,7 +132,7 @@ class View:
         self.scrolled.show_all()
 
     def dialog_delete(self, source, data):
-        builder = Gtk.Builder.new_from_file(utils.get_template("location_delete.glade"))
+        builder = utils.get_builder("location_delete.ui")
         dialog = builder.get_object("dialog")
 
         label_string = " > ".join(data["sequence"])
@@ -141,7 +151,7 @@ class View:
         dialog.destroy()
 
     def dialog_modify(self, source, data):
-        builder = Gtk.Builder.new_from_file(utils.get_template("location_add.glade"))
+        builder = utils.get_builder("location_add.ui")
         dialog = builder.get_object("dialog")
 
         location_combo = builder.get_object("parent")
@@ -175,7 +185,7 @@ class View:
     def dialog_add(self, source):
         log.debug("Add location")
 
-        builder = Gtk.Builder.new_from_file(utils.get_template("location_add.glade"))
+        builder = utils.get_builder("location_add.ui")
         dialog = builder.get_object("dialog")
 
         location_combo = builder.get_object("parent")

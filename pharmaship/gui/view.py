@@ -145,7 +145,8 @@ class AppWindow(Gtk.ApplicationWindow):
         # Set the window title
         self.set_wmclass("Pharmaship", "Pharmaship")
         self.set_title("Pharmaship")
-        self.set_icon_from_file(utils.get_template("pharmaship_icon.png"))
+        icon = utils.get_image("pharmaship_icon.svg").get_pixbuf()
+        self.set_icon(icon)
 
         # Set default mode
         self.mode = "dashboard"
@@ -159,9 +160,8 @@ class AppWindow(Gtk.ApplicationWindow):
         self.layout = Gtk.Box(spacing=6, orientation=Gtk.Orientation.VERTICAL)
         self.add(self.layout)
 
-        # self.set_border_width(10)
-        # TEMPORARY
-        image = Gtk.Image.new_from_file(utils.get_template("home.png"))
+        # Temporary image
+        image = utils.get_image("home.png")
         self.layout.pack_start(image, True, True, 0)
 
         self.build_header_bar()
@@ -178,10 +178,10 @@ class AppWindow(Gtk.ApplicationWindow):
         self.set_title("Pharmaship")
 
         # Menu button
-        builder = Gtk.Builder.new_from_file(utils.get_template("settings_menu.xml"))
+        builder = utils.get_builder('menu/settings.xml')
         menu = builder.get_object("app-menu")
 
-        button = widgets.ButtonWithImage("open-menu-symbolic", btn_class=Gtk.MenuButton)
+        button = widgets.ButtonWithImage("open-menu-symbolic.svg", btn_class=Gtk.MenuButton)
         popover = Gtk.Popover.new_from_model(button, menu)
         button.set_popover(popover)
         hb.pack_end(button)
@@ -194,7 +194,7 @@ class AppWindow(Gtk.ApplicationWindow):
         hb.pack_end(self.searchbar)
 
         # Mode button
-        builder = Gtk.Builder.new_from_file(utils.get_template("mode_menu.xml"))
+        builder = utils.get_builder("menu/modes.xml")
         menu = builder.get_object("app-menu")
 
         self.mode_button = Gtk.MenuButton(self.mode)
@@ -205,7 +205,7 @@ class AppWindow(Gtk.ApplicationWindow):
         hb.pack_start(self.mode_button)
 
         # Save button
-        button = widgets.ButtonWithImage("document-save-as-symbolic", tooltip=_("Export as PDF"), action="app.save")
+        button = widgets.ButtonWithImage("document-save-as-symbolic.svg", tooltip=_("Export as PDF"), action="app.save")
         hb.pack_start(button)
         self.builder.expose_object("hb-btn-save", button)
 
@@ -220,7 +220,7 @@ class AppWindow(Gtk.ApplicationWindow):
         search_result = search.search(search_text, self.params)
 
         # Create a Popover with ListBox
-        main_builder = Gtk.Builder.new_from_file(utils.get_template("search_popover.glade"))
+        main_builder = utils.get_builder("search_popover.ui")
         popover = main_builder.get_object("popover")
         popover.set_relative_to(self.searchbar)
         popover.get_style_context().add_class("popover-search")
@@ -241,7 +241,7 @@ class AppWindow(Gtk.ApplicationWindow):
             return True
 
         for item in search_result:
-            builder = Gtk.Builder.new_from_file(utils.get_template("search_listboxrow.glade"))
+            builder = utils.get_builder("search_listboxrow.ui")
             row = Gtk.ListBoxRow()
             box = builder.get_object("box")
             row.add(box)
@@ -516,7 +516,7 @@ class Application(Gtk.Application):
         log.info("Initialization completed!")
 
     def on_about(self, action, param):
-        builder = Gtk.Builder.new_from_file(utils.get_template("about_dialog.glade"))
+        builder = utils.get_builder("about_dialog.ui")
         about_dialog = builder.get_object("about-dialog")
         # Set version
         about_dialog.set_version(settings.PHARMASHIP_VERSION)
@@ -735,8 +735,7 @@ class Application(Gtk.Application):
 
         def cleanup(result):
             spinner.stop()
-            icon = Gio.ThemedIcon(name="document-save-as-symbolic")
-            image = Gtk.Image.new_from_gicon(icon, Gtk.IconSize.BUTTON)
+            image = utils.get_icon("document-save-as-symbolic.svg")
             button.set_image(image)
             button.set_sensitive(True)
             t.join()
@@ -777,11 +776,7 @@ class Application(Gtk.Application):
         """Add CSS styles to the application."""
         style_provider = Gtk.CssProvider()
 
-        css = b""
-        with open(utils.get_template("style.css"), "rb") as fdesc:
-            css = fdesc.read()
-
-        style_provider.load_from_data(css)
+        style_provider.load_from_resource("/com/devmaretique/pharmaship/style.css")
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(),
             style_provider,

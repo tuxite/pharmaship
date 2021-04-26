@@ -9,21 +9,20 @@ import threading
 from pathlib import Path
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib
+from gi.repository import Gtk, GLib, Gio
 
 from pharmaship.app import settings
 
 
-TEMPLATE_REL_PATH = "pharmaship/gui/templates/splash_screen.glade"
-TEMPLATE_REL_PATH = settings.PHARMASHIP_GUI / "splash_screen.glade"
+GRESOURCE_PATH = settings.PHARMASHIP_GUI / "resources.gresource"
 
 
 def splash_screen():
     """Display a splash screen during Django initialization."""
-    template = Path(".") / "lib" / TEMPLATE_REL_PATH
-    if not template.exists():
-        template = Path(".") / TEMPLATE_REL_PATH
-    builder = Gtk.Builder.new_from_file(str(template))
+    resource = Gio.resource_load(str(GRESOURCE_PATH))
+    Gio.Resource._register(resource)
+
+    builder = Gtk.Builder.new_from_resource("/com/devmaretique/pharmaship/ui/splash_screen.ui")
     builder.set_translation_domain("com.devmaretique.pharmaship")
 
     window = builder.get_object("window")

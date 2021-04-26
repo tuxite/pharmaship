@@ -315,7 +315,7 @@ class View:
         self.window = window
         self.params = window.params
         self.vessel = self.params.vessel
-        self.builder = Gtk.Builder.new_from_file(utils.get_template("dashboard.glade"))
+        self.builder = utils.get_builder("dashboard.ui")
 
         self.warning_date = self.params.today + datetime.timedelta(days=self.params.setting.expire_date_warning_delay)
 
@@ -453,7 +453,7 @@ class View:
         return len(self.data[section][type])
 
     def show_detail(self, source, param):
-        builder = Gtk.Builder.new_from_file(utils.get_template("dashboard_detail.glade"))
+        builder = utils.get_builder("dashboard_detail.ui")
         window = builder.get_object("window")
         window.set_transient_for(self.window)
 

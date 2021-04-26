@@ -42,7 +42,7 @@ class View:
         self.window = window
         self.params = window.params
 
-        self.builder = Gtk.Builder.new_from_file(utils.get_template("sidebar_layout.glade"))
+        self.builder = utils.get_builder("sidebar_layout.ui")
 
         self.stack = self.builder.get_object("stack")
 
@@ -133,7 +133,7 @@ class View:
 
         for kit in data:
             # Create a page
-            child_builder = Gtk.Builder.new_from_file(utils.get_template("first_aid_kit.glade"))
+            child_builder = utils.get_builder("first_aid_kit.ui")
             # child = child_builder.get_object("main-box")
             child = child_builder.get_object("child-scrolled")
 
@@ -247,7 +247,12 @@ class View:
 
                 # Picture
                 picture = element["picture"]
-                btn_picture = widgets.ButtonWithImage("image-x-generic-symbolic", tooltip=_("View picture"), connect=utils.picture_frame, data=picture)
+                btn_picture = widgets.ButtonWithImage(
+                    "image-x-generic-symbolic.svg",
+                    tooltip=_("View picture"),
+                    connect=utils.picture_frame,
+                    data=picture
+                    )
                 linked_btn.pack_end(btn_picture, False, True, 0)
             else:
                 label = Gtk.Label("", xalign=0.5)
@@ -371,13 +376,28 @@ class View:
             grid.attach(linked_btn, 4, i, 1, 1)
 
             # Use
-            btn_use = widgets.ButtonWithImage("edit-redo-symbolic", tooltip="Use", connect=self.dialog_use, data=item)
+            btn_use = widgets.ButtonWithImage(
+                "edit-redo-symbolic.svg", 
+                tooltip="Use",
+                connect=self.dialog_use,
+                data=item
+                )
             linked_btn.pack_end(btn_use, False, True, 0)
             # Modify
-            btn_modify = widgets.ButtonWithImage("document-edit-symbolic", tooltip="Modify", connect=self.dialog_modify, data=(item, element))
+            btn_modify = widgets.ButtonWithImage(
+                "document-edit-symbolic.svg", 
+                tooltip="Modify",
+                connect=self.dialog_modify,
+                data=(item, element)
+                )
             linked_btn.pack_end(btn_modify, False, True, 0)
             # Delete
-            btn_delete = widgets.ButtonWithImage("edit-delete-symbolic", tooltip="Delete", connect=self.dialog_delete, data=item)
+            btn_delete = widgets.ButtonWithImage(
+                "edit-delete-symbolic.svg", 
+                tooltip="Delete",
+                connect=self.dialog_delete,
+                data=item
+                )
             btn_delete.get_style_context().add_class("article-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 
@@ -417,7 +437,7 @@ class View:
 
 
     def dialog_add_new(self, source, item):
-        builder = Gtk.Builder.new_from_file(utils.get_template("subitem_add_new.glade"))
+        builder = utils.get_builder("subitem_add_new.ui")
         dialog = builder.get_object("dialog")
         dialog.set_title(_("Add an item"))
 
@@ -455,7 +475,7 @@ class View:
 
 
     def dialog_add_from_stock(self, source, item):
-        builder = Gtk.Builder.new_from_file(utils.get_template("subitem_add_from_stock.glade"))
+        builder = utils.get_builder("subitem_add_from_stock.ui")
         dialog = builder.get_object("dialog")
 
         combobox = builder.get_object("item")
@@ -740,7 +760,7 @@ class View:
         location.set_sensitive(False)
 
     def dialog_use(self, source, item):
-        builder = Gtk.Builder.new_from_file(utils.get_template("subitem_use.glade"))
+        builder = utils.get_builder("subitem_use.ui")
         dialog = builder.get_object("dialog")
 
         # Set the current values
@@ -806,7 +826,7 @@ class View:
         perishable = data[1]["perishable"]
         item_type = data[1]["type"]
 
-        builder = Gtk.Builder.new_from_file(utils.get_template("subitem_modify.glade"))
+        builder = utils.get_builder("subitem_modify.ui")
         dialog = builder.get_object("dialog")
 
         name = builder.get_object("name")
@@ -897,7 +917,7 @@ class View:
         self.refresh_grid()
 
     def dialog_delete(self, source, item):
-        builder = Gtk.Builder.new_from_file(utils.get_template("subitem_delete.glade"))
+        builder = utils.get_builder("subitem_delete.ui")
         dialog = builder.get_object("dialog")
 
         # Set the current values

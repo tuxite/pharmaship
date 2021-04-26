@@ -1,4 +1,5 @@
 GUI_FOLDER = ./pharmaship/gui
+ASSETS_FOLDER = ${GUI_FOLDER}/assets
 LOCALE_FOLDER = ${GUI_FOLDER}/locale
 LOCALE_FOLDER_FR = ${LOCALE_FOLDER}/fr/LC_MESSAGES
 LOCALE_FOLDER_EN = ${LOCALE_FOLDER}/fr/LC_MESSAGES
@@ -6,15 +7,23 @@ LOCALE_FOLDER_EN = ${LOCALE_FOLDER}/fr/LC_MESSAGES
 all:
 	# Nothing
 
-pot:
-	xgettext --keyword=translatable -c -o ${LOCALE_FOLDER}/gui.pot ${GUI_FOLDER}/templates/*.glade
-	xgettext --keyword=translatable -j -c -L Glade -o ${LOCALE_FOLDER}/gui.pot ${GUI_FOLDER}/templates/*.xml
+translatable:
+	# Create Python translatable files list
+	find pharmaship -type f \( -name '*.py' ! -iwholename "*/migrations/*" ! -iwholename "*/tests/*" \) -print > translatable_filelist;
 
+pot: translatable
+	# Get translations from UI files
+	xgettext --keyword=translatable -c -o ${LOCALE_FOLDER}/gui.pot ${ASSETS_FOLDER}/ui/*.ui
+	# Get translations from UI Menu files
+	xgettext --keyword=translatable -j -c -L Glade -o ${LOCALE_FOLDER}/gui.pot ${ASSETS_FOLDER}/ui/menu/*.xml
+	# Get translations from Python files
 	xgettext -f translatable_filelist -L Python -c -o ${LOCALE_FOLDER}/code.pot
 
+	# Concatenate POT files
 	msgcat ${LOCALE_FOLDER}/gui.pot ${LOCALE_FOLDER}/code.pot > ${LOCALE_FOLDER}/com.devmaretique.pharmaship.pot
 	msguniq -s -o ${LOCALE_FOLDER}/com.devmaretique.pharmaship.pot ${LOCALE_FOLDER}/com.devmaretique.pharmaship.pot
 
+	# Delete unecessary POT files
 	rm ${LOCALE_FOLDER}/gui.pot
 	rm ${LOCALE_FOLDER}/code.pot
 
@@ -75,16 +84,16 @@ clean:
 	rm -rf *.mo
 	rm -rf *.pot
 	rm -rf build/
-
-translatable:
-	find pharmaship -type f \( -name '*.py' ! -iwholename "*/migrations/*" ! -iwholename "*/tests/*" \) -print > translatable_filelist;
+	rm -rf appimage-builder-cache/
+	rm translatable_filelist
 
 icon:
-	convert -background none ${GUI_FOLDER}/pharmaship_icon.svg -define icon:auto-resize bin/pharmaship.ico
-	convert -background none -size 128x128 ${GUI_FOLDER}/pharmaship_icon.svg ${GUI_FOLDER}/templates/pharmaship_icon.png
+	convert -background none ${ASSETS_FOLDER}/pharmaship_icon.svg -define icon:auto-resize bin/pharmaship.ico
+	convert -background none -size 128x128 ${ASSETS_FOLDER}/pharmaship_icon.svg ${ASSETS_FOLDER}/pharmaship_icon.png
+	convert -background white -size 150x57 ${ASSETS_FOLDER}/pharmaship_installer.svg bin/pharmaship_installer.bmp
 
 gresource:
-	glib-compile-resources --sourcedir=${GUI_FOLDER} --target=${GUI_FOLDER}/templates/resources.gresource ${GUI_FOLDER}/resources.gresource.xml
+	glib-compile-resources --sourcedir=${ASSETS_FOLDER} --target=${GUI_FOLDER}/resources.gresource ${GUI_FOLDER}/resources.gresource.xml
 
 win64_freeze:
 ifeq ($(OS),Windows_NT)     # is Windows_NT on XP, 2000, 7, Vista, 10...
@@ -126,3 +135,7 @@ doc_pdf:
 	# Build the user and developer manuals in PDF. xelatex needed.
 	sphinx-build -M latexpdf docs build/sphinx
 	cp build/sphinx/latex/user_manual.pdf pharmaship/data/user_manual.pdf
+
+build_appimage:
+	# Create Linux AppImage
+	appimage-builder --recipe appimage/AppImageBuilder.yml

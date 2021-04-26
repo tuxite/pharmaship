@@ -13,7 +13,7 @@ recursive-include pharmaship/gui *.html
 recursive-include pharmaship/gui *.css
 recursive-include pharmaship/gui *.png
 recursive-include pharmaship/gui *.svg
-recursive-include pharmaship/gui *.glade
+recursive-include pharmaship/gui *.ui
 recursive-include pharmaship/gui *.xml
 recursive-include pharmaship/gui *.po
 recursive-include pharmaship/gui *.mo

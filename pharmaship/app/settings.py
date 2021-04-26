@@ -29,7 +29,7 @@ DB_PATH = USERDATA_DIR / 'db.sqlite3'
 # Pharmaship configuration
 PHARMASHIP_VERSION = "0.9.0"
 PHARMASHIP_DATA = Path(BASE_DIR) / "data"
-PHARMASHIP_GUI = Path(BASE_DIR) / "gui/templates"
+PHARMASHIP_GUI = Path(BASE_DIR) / "gui"
 PHARMASHIP_REPORTS = Path(BASE_DIR) / "gui/reports"
 PHARMASHIP_LOCALE = Path(BASE_DIR) / "gui/locale"
 PHARMASHIP_CONF = USERDATA_DIR / "config.yaml"

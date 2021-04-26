@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-08 19:10+0000\n"
+"POT-Creation-Date: 2021-04-25 16:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgstr ""
 msgid "Missing"
 msgstr ""
 
-#: pharmaship/gui/plots/dispatch.py:50 pharmaship/gui/utils.py:244
+#: pharmaship/gui/plots/dispatch.py:50 pharmaship/gui/utils.py:256
 #: pharmaship/gui/views/dashboard.py:34
 msgid "Perished"
 msgstr ""
@@ -72,11 +72,11 @@ msgstr ""
 msgid "In range"
 msgstr ""
 
-#: pharmaship/gui/plots/dispatch.py:69 pharmaship/gui/view.py:606
+#: pharmaship/gui/plots/dispatch.py:69 pharmaship/gui/view.py:611
 msgid "Medicines"
 msgstr ""
 
-#: pharmaship/gui/plots/dispatch.py:72 pharmaship/gui/view.py:618
+#: pharmaship/gui/plots/dispatch.py:72 pharmaship/gui/view.py:623
 msgid "Equipment"
 msgstr ""
 
@@ -84,15 +84,15 @@ msgstr ""
 msgid "Rescue bags"
 msgstr ""
 
-#: pharmaship/gui/plots/dispatch.py:78 pharmaship/gui/view.py:632
+#: pharmaship/gui/plots/dispatch.py:78 pharmaship/gui/view.py:637
 msgid "First Aid Kits"
 msgstr ""
 
-#: pharmaship/gui/plots/dispatch.py:83 pharmaship/gui/view.py:670
+#: pharmaship/gui/plots/dispatch.py:83 pharmaship/gui/view.py:675
 msgid "Telemedical"
 msgstr ""
 
-#: pharmaship/gui/plots/dispatch.py:87 pharmaship/gui/view.py:656
+#: pharmaship/gui/plots/dispatch.py:87 pharmaship/gui/view.py:661
 msgid "Laboratory"
 msgstr ""
 
@@ -115,7 +115,7 @@ msgstr ""
 #: pharmaship/gui/views/dashboard.py:478 pharmaship/gui/views/equipment.py:68
 #: pharmaship/gui/views/first_aid_kits.py:169
 #: pharmaship/gui/views/medicines.py:67 pharmaship/gui/views/rescue_bag.py:140
-#: pharmaship/gui/views/rescue_bag.py:296
+#: pharmaship/gui/views/rescue_bag.py:301
 msgid "Name"
 msgstr ""
 
@@ -131,7 +131,7 @@ msgstr ""
 #: pharmaship/gui/reports/rescue_bag_all.html:8
 #: pharmaship/gui/reports/telemedical.html:8
 #: pharmaship/gui/views/rescue_bag.py:145
-#: pharmaship/gui/views/rescue_bag.py:301
+#: pharmaship/gui/views/rescue_bag.py:306
 msgid "Remark"
 msgstr ""
 
@@ -160,13 +160,13 @@ msgstr ""
 #: pharmaship/gui/views/dashboard.py:54 pharmaship/gui/views/dashboard.py:55
 #: pharmaship/gui/views/dashboard.py:59 pharmaship/gui/views/dashboard.py:60
 #: pharmaship/gui/views/dashboard.py:483 pharmaship/gui/views/equipment.py:86
-#: pharmaship/gui/views/equipment.py:751
+#: pharmaship/gui/views/equipment.py:761
 #: pharmaship/gui/views/first_aid_kits.py:178
-#: pharmaship/gui/views/first_aid_kits.py:306
+#: pharmaship/gui/views/first_aid_kits.py:311
 #: pharmaship/gui/views/medicines.py:83 pharmaship/gui/views/medicines.py:739
 #: pharmaship/gui/views/rescue_bag.py:154
-#: pharmaship/gui/views/rescue_bag.py:310
-#: pharmaship/gui/views/rescue_bag.py:445
+#: pharmaship/gui/views/rescue_bag.py:315
+#: pharmaship/gui/views/rescue_bag.py:455
 msgid "Quantity"
 msgstr ""
 
@@ -184,13 +184,13 @@ msgstr ""
 #: pharmaship/gui/reports/telemedical.html:11
 #: pharmaship/gui/views/dashboard.py:49 pharmaship/gui/views/dashboard.py:54
 #: pharmaship/gui/views/dashboard.py:59 pharmaship/gui/views/dashboard.py:491
-#: pharmaship/gui/views/equipment.py:83 pharmaship/gui/views/equipment.py:747
+#: pharmaship/gui/views/equipment.py:83 pharmaship/gui/views/equipment.py:757
 #: pharmaship/gui/views/first_aid_kits.py:174
-#: pharmaship/gui/views/first_aid_kits.py:302
+#: pharmaship/gui/views/first_aid_kits.py:307
 #: pharmaship/gui/views/medicines.py:80 pharmaship/gui/views/medicines.py:735
 #: pharmaship/gui/views/rescue_bag.py:150
-#: pharmaship/gui/views/rescue_bag.py:306
-#: pharmaship/gui/views/rescue_bag.py:441
+#: pharmaship/gui/views/rescue_bag.py:311
+#: pharmaship/gui/views/rescue_bag.py:451
 msgid "Expiry"
 msgstr ""
 
@@ -198,8 +198,8 @@ msgstr ""
 #: pharmaship/gui/reports/laboratory.html:12
 #: pharmaship/gui/reports/medicines.html:14
 #: pharmaship/gui/reports/telemedical.html:12
-#: pharmaship/gui/views/equipment.py:80 pharmaship/gui/views/equipment.py:743
-#: pharmaship/gui/views/location_manager.py:66
+#: pharmaship/gui/views/equipment.py:80 pharmaship/gui/views/equipment.py:753
+#: pharmaship/gui/views/location_manager.py:76
 #: pharmaship/gui/views/medicines.py:77 pharmaship/gui/views/medicines.py:731
 msgid "Location"
 msgstr ""
@@ -286,23 +286,23 @@ msgid "Perished telemedical equipment"
 msgstr ""
 
 #: pharmaship/gui/reports/first_aid_kits.html:31
-#: pharmaship/gui/views/dashboard.py:128 pharmaship/gui/views/equipment.py:777
-#: pharmaship/gui/views/first_aid_kits.py:332
-#: pharmaship/gui/views/rescue_bag.py:470
+#: pharmaship/gui/views/dashboard.py:128 pharmaship/gui/views/equipment.py:787
+#: pharmaship/gui/views/first_aid_kits.py:337
+#: pharmaship/gui/views/rescue_bag.py:480
 msgid "Non-compliant packaging:"
 msgstr ""
 
 #: pharmaship/gui/reports/first_aid_kits.html:34
 #: pharmaship/gui/views/dashboard.py:130
-#: pharmaship/gui/views/first_aid_kits.py:334
-#: pharmaship/gui/views/medicines.py:767 pharmaship/gui/views/rescue_bag.py:472
+#: pharmaship/gui/views/first_aid_kits.py:339
+#: pharmaship/gui/views/medicines.py:767 pharmaship/gui/views/rescue_bag.py:482
 msgid "Non-compliant composition:"
 msgstr ""
 
 #: pharmaship/gui/reports/first_aid_kits.html:37
 #: pharmaship/gui/views/dashboard.py:132
-#: pharmaship/gui/views/first_aid_kits.py:336
-#: pharmaship/gui/views/medicines.py:765 pharmaship/gui/views/rescue_bag.py:474
+#: pharmaship/gui/views/first_aid_kits.py:341
+#: pharmaship/gui/views/medicines.py:765 pharmaship/gui/views/rescue_bag.py:484
 msgid "Non-compliant molecule:"
 msgstr ""
 
@@ -342,15 +342,15 @@ msgstr ""
 msgid "Brand name or Generic"
 msgstr ""
 
-#: pharmaship/gui/utils.py:245
+#: pharmaship/gui/utils.py:257
 msgid "Other"
 msgstr ""
 
-#: pharmaship/gui/utils.py:276
+#: pharmaship/gui/utils.py:288
 msgid "Picture"
 msgstr ""
 
-#: pharmaship/gui/utils.py:439
+#: pharmaship/gui/utils.py:451
 #, python-brace-format
 msgid "Opened {0}"
 msgstr ""
@@ -398,23 +398,23 @@ msgstr ""
 msgid "Expiry up to: {0}"
 msgstr ""
 
-#: pharmaship/gui/view.py:567
+#: pharmaship/gui/view.py:572
 msgid "Dashboard"
 msgstr ""
 
-#: pharmaship/gui/view.py:579
+#: pharmaship/gui/view.py:584
 msgid "Location Manager"
 msgstr ""
 
-#: pharmaship/gui/view.py:588
+#: pharmaship/gui/view.py:593
 msgid "Settings"
 msgstr ""
 
-#: pharmaship/gui/view.py:597
+#: pharmaship/gui/view.py:602
 msgid "Allowance Manager"
 msgstr ""
 
-#: pharmaship/gui/view.py:644
+#: pharmaship/gui/view.py:649
 msgid "Rescue Bags"
 msgstr ""
 
@@ -448,7 +448,9 @@ msgid "Delete these rescue bags"
 msgstr ""
 
 #: pharmaship/gui/views/allowance_manager.py:324
-#: pharmaship/gui/views/equipment.py:839 pharmaship/gui/views/medicines.py:825
+#: pharmaship/gui/views/equipment.py:861
+#: pharmaship/gui/views/location_manager.py:61
+#: pharmaship/gui/views/medicines.py:837
 msgid "Delete"
 msgstr ""
 
@@ -537,84 +539,86 @@ msgstr ""
 msgid "Non conformity"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:72 pharmaship/gui/views/equipment.py:739
-#: pharmaship/gui/views/first_aid_kits.py:298
-#: pharmaship/gui/views/medicines.py:727 pharmaship/gui/views/rescue_bag.py:437
+#: pharmaship/gui/views/equipment.py:72 pharmaship/gui/views/equipment.py:749
+#: pharmaship/gui/views/first_aid_kits.py:303
+#: pharmaship/gui/views/medicines.py:727 pharmaship/gui/views/rescue_bag.py:447
 msgid "Remarks"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:199
-#: pharmaship/gui/views/first_aid_kits.py:250
-#: pharmaship/gui/views/rescue_bag.py:234
-#: pharmaship/gui/views/rescue_bag.py:389
+#: pharmaship/gui/views/equipment.py:201
+#: pharmaship/gui/views/first_aid_kits.py:252
+#: pharmaship/gui/views/rescue_bag.py:236
+#: pharmaship/gui/views/rescue_bag.py:396
 msgid "View picture"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:267
+#: pharmaship/gui/views/equipment.py:277
 msgid "Use an article"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:314
+#: pharmaship/gui/views/equipment.py:324
 msgid "Modify an article"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:320
+#: pharmaship/gui/views/equipment.py:330
 msgid "Modify the article"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:408
+#: pharmaship/gui/views/equipment.py:418
 msgid "Delete an article"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:431 pharmaship/gui/views/equipment.py:848
-#: pharmaship/gui/views/first_aid_kits.py:398
+#: pharmaship/gui/views/equipment.py:441 pharmaship/gui/views/equipment.py:873
+#: pharmaship/gui/views/first_aid_kits.py:418
 msgid "Add an article"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:734
-#: pharmaship/gui/views/first_aid_kits.py:293
-#: pharmaship/gui/views/medicines.py:722 pharmaship/gui/views/rescue_bag.py:432
+#: pharmaship/gui/views/equipment.py:744
+#: pharmaship/gui/views/first_aid_kits.py:298
+#: pharmaship/gui/views/medicines.py:722 pharmaship/gui/views/rescue_bag.py:442
 msgid "Commercial Name"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:755
-#: pharmaship/gui/views/first_aid_kits.py:310
+#: pharmaship/gui/views/equipment.py:765
+#: pharmaship/gui/views/first_aid_kits.py:315
 #: pharmaship/gui/views/medicines.py:743
 msgid "Actions"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:833 pharmaship/gui/views/medicines.py:819
+#: pharmaship/gui/views/equipment.py:845 pharmaship/gui/views/medicines.py:821
 msgid "Use"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:836 pharmaship/gui/views/medicines.py:822
+#: pharmaship/gui/views/equipment.py:853
+#: pharmaship/gui/views/location_manager.py:52
+#: pharmaship/gui/views/medicines.py:829
 msgid "Modify"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:878
+#: pharmaship/gui/views/equipment.py:903
 #, python-brace-format
 msgid "{quantity} {packing_name} of {packaging}"
 msgstr ""
 
-#: pharmaship/gui/views/equipment.py:880
+#: pharmaship/gui/views/equipment.py:905
 #, python-brace-format
 msgid "{quantity} {packing_name} of {packing_content} {packaging}"
 msgstr ""
 
-#: pharmaship/gui/views/first_aid_kits.py:390
+#: pharmaship/gui/views/first_aid_kits.py:410
 msgid "Transfer an article from stock"
 msgstr ""
 
-#: pharmaship/gui/views/first_aid_kits.py:422
+#: pharmaship/gui/views/first_aid_kits.py:442
 msgid "Add an item"
 msgstr ""
 
 #: pharmaship/gui/views/location_manager.py:37
-#: pharmaship/gui/views/location_manager.py:74
+#: pharmaship/gui/views/location_manager.py:84
 msgid "New Location"
 msgstr ""
 
-#: pharmaship/gui/views/location_manager.py:161
+#: pharmaship/gui/views/location_manager.py:171
 msgid "Modify this location"
 msgstr ""
 
@@ -642,16 +646,16 @@ msgstr ""
 msgid "Delete a medicine"
 msgstr ""
 
-#: pharmaship/gui/views/medicines.py:409 pharmaship/gui/views/medicines.py:834
+#: pharmaship/gui/views/medicines.py:409 pharmaship/gui/views/medicines.py:849
 msgid "Add a medicine"
 msgstr ""
 
-#: pharmaship/gui/views/medicines.py:864
+#: pharmaship/gui/views/medicines.py:879
 #, python-brace-format
 msgid "{quantity} {packing_name} of {dosage_form}"
 msgstr ""
 
-#: pharmaship/gui/views/medicines.py:866
+#: pharmaship/gui/views/medicines.py:881
 #, python-brace-format
 msgid "{quantity} {packing_name} of {packing_content} {dosage_form}"
 msgstr ""
@@ -660,15 +664,15 @@ msgstr ""
 msgid "All Rescue Bags"
 msgstr ""
 
-#: pharmaship/gui/views/rescue_bag.py:518
+#: pharmaship/gui/views/rescue_bag.py:528
 msgid "Update in the medicine view"
 msgstr ""
 
-#: pharmaship/gui/views/rescue_bag.py:522
+#: pharmaship/gui/views/rescue_bag.py:532
 msgid "Update in the equipment view"
 msgstr ""
 
-#: pharmaship/gui/views/rescue_bag.py:524
+#: pharmaship/gui/views/rescue_bag.py:534
 msgid "Edit this item in the dedicated view"
 msgstr ""
 

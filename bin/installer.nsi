@@ -53,6 +53,7 @@ RequestExecutionLevel user
 ;--------------------------------
 ;Interface Configuration
 !define MUI_HEADERIMAGE
+!define MUI_ICON "pharmaship.ico"
 !define MUI_HEADERIMAGE_BITMAP "pharmaship_installer.bmp" ; optional
 !define MUI_ABORTWARNING
 
@@ -142,15 +143,15 @@ Section "Pharmaship software" SecPharmaship
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
-  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "DisplayName" "${APPNAME} - ${DESCRIPTION}"
+  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "DisplayName" "${APPNAME}"
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "UninstallString" "$\"$INSTDIR\uninstall.exe$\""
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\" /S"
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "InstallLocation" "$\"$INSTDIR$\""
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "DisplayIcon" "$\"$INSTDIR\pharmaship.ico$\""
-  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "Publisher" "$\"${COMPANYNAME}$\""
-  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "HelpLink" "$\"${HELPURL}$\""
-  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "URLUpdateInfo" "$\"${UPDATEURL}$\""
-  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "URLInfoAbout" "$\"${ABOUTURL}$\""
+  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "Publisher" "${COMPANYNAME}"
+  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "HelpLink" "${HELPURL}"
+  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "URLUpdateInfo" "${UPDATEURL}"
+  WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "URLInfoAbout" "${ABOUTURL}"
   WriteRegStr ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "DisplayVersion" "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}"
   WriteRegDWORD ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "VersionMajor" ${VERSIONMAJOR}
   WriteRegDWORD ${INSTDIR_REG_ROOT} "${INSTDIR_REG_KEY}" "VersionMinor" ${VERSIONMINOR}
