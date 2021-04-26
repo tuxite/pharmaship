@@ -90,7 +90,7 @@ clean:
 icon:
 	convert -background none ${ASSETS_FOLDER}/pharmaship_icon.svg -define icon:auto-resize bin/pharmaship.ico
 	convert -background none -size 128x128 ${ASSETS_FOLDER}/pharmaship_icon.svg ${ASSETS_FOLDER}/pharmaship_icon.png
-	convert -background white -size 150x57 ${ASSETS_FOLDER}/pharmaship_installer.svg bin/pharmaship_installer.bmp
+	convert -background white -size 150x57 ${ASSETS_FOLDER}/pharmaship_installer.svg BMP2:bin/pharmaship_installer.bmp
 
 gresource:
 	glib-compile-resources --sourcedir=${ASSETS_FOLDER} --target=${GUI_FOLDER}/resources.gresource ${GUI_FOLDER}/resources.gresource.xml

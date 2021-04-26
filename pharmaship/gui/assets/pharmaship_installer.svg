@@ -31,8 +31,8 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="57.745284"
-     inkscape:cx="75.251482"
+     inkscape:cy="57.69743"
+     inkscape:cx="75.46142"
      inkscape:zoom="4"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -52,6 +52,18 @@
        position="39.687499,4.3234561"
        orientation="1,0"
        id="guide894" />
+    <sodipodi:guide
+       position="1.3229119,12.405864"
+       orientation="0,-1"
+       id="guide849" />
+    <sodipodi:guide
+       position="-5.9528662,5.2621233"
+       orientation="0,-1"
+       id="guide851" />
+    <sodipodi:guide
+       position="2.116666,15.08125"
+       orientation="1,0"
+       id="guide855" />
   </sodipodi:namedview>
   <metadata
      id="metadata870">
@@ -72,7 +84,7 @@
      inkscape:label="Calque 1">
     <g
        id="g1257"
-       transform="matrix(0.82886051,0,0,0.82886051,-64.25221,73.063633)">
+       transform="matrix(0.81171158,0,0,0.81171158,-61.470317,72.648555)">
       <g
          id="g1121-4"
          transform="translate(4.3913973,16.871641)">
