@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 import datetime
-
-from django.utils.translation import gettext as _
+import locale
 
 from pharmaship.core.utils import log
 
 from pharmaship.inventory import models
-from pharmaship.inventory.utils import req_qty_element, get_quantity
+from pharmaship.inventory.utils import req_qty_element
 # from purchase.models import Item
 
 from pharmaship.inventory.parsers.equipment import parser_element
@@ -60,4 +59,8 @@ def parser(params):
         element["required_quantity"], element["allowance"] = req_qty_element(equipment, req_qty_list)
         result.append(element)
 
+    result = sorted(
+        result,
+        key=lambda item: locale.strxfrm(item["name"])
+        )
     return result

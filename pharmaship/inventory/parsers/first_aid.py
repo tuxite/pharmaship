@@ -3,10 +3,11 @@
 import datetime
 import copy
 import json
+import locale
 
 from pharmaship.core.utils import log
 
-from pharmaship.inventory import models, utils
+from pharmaship.inventory import models
 # from purchase.models import Item
 
 
@@ -496,7 +497,10 @@ def parser(params, kits=None):
             "elements": []
         }
 
-        kit_dict["elements"] = merge_elements(get_subitems(params, kit, common))
+        kit_dict["elements"] = sorted(
+            merge_elements(get_subitems(params, kit, common)),
+            key=lambda item: locale.strxfrm(item["name"])
+            )
         result.append(kit_dict)
 
     return result

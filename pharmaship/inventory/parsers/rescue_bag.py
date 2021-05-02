@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Utility functions for parsing/serializing Rescue Bag related data."""
 import datetime
+import locale
 
 from django.utils.translation import gettext as _
 
@@ -73,6 +74,10 @@ def parser(params):
     # Add the molecules and equipments to the main bag
     result["all"]["elements"] = [v for k, v in molecules.items()]
     result["all"]["elements"] += [v for k, v in equipments.items()]
+    result["all"]["elements"] = sorted(
+        result["all"]["elements"],
+        key=lambda item: locale.strxfrm(item["name"])
+    )
     result = {**result, **merge_bags(rescue_bags, molecules, equipments)}
 
     return result
@@ -471,5 +476,10 @@ def merge_bags(bags, molecules, equipments):
             equipment["expiring_quantity"] = expiring_quantity
 
             result[bag.id]["elements"].append(equipment)
+
+        result[bag.id]["elements"] = sorted(
+            result[bag.id]["elements"],
+            key=lambda item: locale.strxfrm(item["name"])
+        )
 
     return result

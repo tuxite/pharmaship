@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
-import copy
+import locale
 
 from django.utils.translation import gettext as _
 
@@ -67,6 +67,12 @@ def parser(params):
             result[molecule.group] = []
 
         result[molecule.group].append(element)
+
+    for group in result:
+        result[group] = sorted(
+            result[group],
+            key=lambda item: locale.strxfrm(item["name"])
+            )
 
     return result
 

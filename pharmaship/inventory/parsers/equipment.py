@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Parser for Equipment data."""
 import datetime
+import locale
 
 from django.utils.translation import gettext as _
 
@@ -66,6 +67,12 @@ def parser(params):
             result[equipment.group] = []
 
         result[equipment.group].append(element)
+
+    for group in result:
+        result[group] = sorted(
+            result[group],
+            key=lambda item: locale.strxfrm(item["name"])
+            )
 
     return result
 
