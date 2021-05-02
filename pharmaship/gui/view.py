@@ -501,6 +501,10 @@ class Application(Gtk.Application):
             action.connect("activate", self.open_doc)
             self.add_action(action)
 
+        action = Gio.SimpleAction.new("med_guide", None)
+        action.connect("activate", self.medical_guide)
+        self.add_action(action)
+
     def do_activate(self):
         # We only allow a single window and raise any existing ones
         if not self.window:
@@ -770,6 +774,13 @@ class Application(Gtk.Application):
             log.warning("Med. observation sheet not available for this lang.")
             _name = MED_OBS_SHT.format("fr")
             fileobj = Path(settings.PHARMASHIP_DATA / _name)
+            self.open_file(fileobj)
+
+    def medical_guide(self, action, param):
+        """Open the International medical guide for ships."""
+        _name = "9789240682313_eng.pdf"
+        fileobj = Path(settings.PHARMASHIP_DATA / _name)
+        if fileobj.exists():
             self.open_file(fileobj)
 
     def gtk_style(self):
