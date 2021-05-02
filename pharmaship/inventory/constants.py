@@ -86,32 +86,32 @@ DRUG_FORM_CHOICES = (
     (7, _('Suppository')),
     (8, _('Vial')),
     (9, _('Powder')),
-    (10, 'Tube pommade'),
-    (11, 'Tube crème'),
-    (12, 'Gel buccal'),
-    (13, 'Unidose gel'),
+    (10, _('Ointment tube')),
+    (11, _('Cream tube')),
+    (12, _('Oral gel')),
+    (13, _('Unidose gel')),
 
-    (40, 'Seringue pré-remplie'),
+    (40, _('Pre-filled syringe')),
 
-    (50, 'Solution pour perfusion'),
-    (51, 'Solution injectable'),
-    (52, 'Solution acqueuse'),
-    (53, 'Solution moussante'),
-    (54, 'Solution alcoolisée'),
-    (55, 'Solution auriculaire'),
-    (56, 'Solution'),
-    (57, 'Solution gingivale'),
+    (50, _('Solution for infusion')),
+    (51, _('Solution for injection')),
+    (52, _('Aqueous solution')),
+    (53, _('Foaming solution')),
+    (54, _('Alcohol solution')),
+    (55, _('Ear solution')),
+    (56, _('Solution')),
+    (57, _('Gingival solution')),
 
     (90, _('Bottle')),
     (91, _('Flacon')),
-    (92, 'Dispositif'),
-    (93, 'Pansement adhésif cutané'),
+    (92, _('Device')),
+    (93, _('Adhesive skin dressing')),
     (94, _('Unidose')),
 
-    (100, 'Collyre unidose'),
-    (101, 'Collyre flacon'),
-    (102, 'Collutoire'),
-    (103, 'Pommade ophtalmique')
+    (100, _('Single-dose eye drops')),
+    (101, _('Eye drops bottle')),
+    (102, _('Collutory')),
+    (103, _('Ophthalmic ointment'))
 )
 
 # Route of administration possible values

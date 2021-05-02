@@ -42,8 +42,8 @@ class GroupManager(models.Manager):
     For deserialization purpose only.
     """
 
-    def get_by_natural_key(self, name):
-        return self.get(name=name)
+    def get_by_natural_key(self, name_en):
+        return self.get(name_en=name_en)
 
 
 class MoleculeGroup(models.Model):
@@ -58,11 +58,11 @@ class MoleculeGroup(models.Model):
         return "{0}. {1}".format(self.order, _(self.name))
 
     def natural_key(self):
-        return (self.name,)
+        return (self.name_en,)
 
     class Meta:  # noqa: D106
-        ordering = ("order", "name",)
-        unique_together = ('name', )
+        ordering = ("order", "name_en",)
+        unique_together = ('name_en', )
 
 
 class EquipmentGroup(models.Model):
@@ -77,11 +77,11 @@ class EquipmentGroup(models.Model):
         return "{0}. {1}".format(self.order, _(self.name))
 
     def natural_key(self):
-        return (self.name,)
+        return (self.name_en,)
 
     class Meta:  # noqa: D106
-        ordering = ("order", "name",)
-        unique_together = ('name', )
+        ordering = ("order", "name_en",)
+        unique_together = ('name_en', )
 
 
 class TagManager(models.Manager):
@@ -220,12 +220,12 @@ class BaseReqQty(models.Model):
 class MoleculeManager(models.Manager):
     """Manager for :mod:`pharmaship.inventory.models.Molecule`."""
 
-    def get_by_natural_key(self, name, roa, dosage_form, composition):
+    def get_by_natural_key(self, name_en, roa, dosage_form, composition_en):
         return self.get(
-            name=name,
+            name=name_en,
             roa=roa,
             dosage_form=dosage_form,
-            composition=composition
+            composition=composition_en
             )
 
 
@@ -250,7 +250,7 @@ class Molecule(models.Model):
         return "{0} ({2} - {1})".format(self.name, self.composition, self.get_dosage_form_display())
 
     def natural_key(self):
-        return (self.name, self.roa, self.dosage_form, self.composition)
+        return (self.name_en, self.roa, self.dosage_form, self.composition_en)
 
     def order_info(self):
         """Output a string for Purchase application."""
@@ -259,7 +259,7 @@ class Molecule(models.Model):
 
     class Meta:  # noqa: D106
         ordering = ('name', )
-        unique_together = (('name', 'roa', 'dosage_form', 'composition'),)
+        unique_together = (('name_en', 'roa', 'dosage_form', 'composition_en'),)
 
 
 class Medicine(BaseChestItem):
@@ -289,10 +289,10 @@ class EquipmentManager(models.Manager):
     For deserialization purpose only.
     """
 
-    def get_by_natural_key(self, name, packaging, consumable, perishable):
+    def get_by_natural_key(self, name_en, packaging_en, consumable, perishable):
         return self.get(
-            name=name,
-            packaging=packaging,
+            name=name_en,
+            packaging=packaging_en,
             consumable=consumable,
             perishable=perishable
             )
@@ -316,7 +316,7 @@ class Equipment(models.Model):
         return self.name
 
     def natural_key(self):
-        return (self.name, self.packaging, self.consumable, self.perishable)
+        return (self.name_en, self.packaging_en, self.consumable, self.perishable)
 
     def order_info(self):
         """Output a string for Purchase application."""
@@ -325,7 +325,7 @@ class Equipment(models.Model):
 
     class Meta:  # noqa: D106
         ordering = ('name', )
-        unique_together = (('name', 'packaging', 'consumable', 'perishable'),)
+        unique_together = (('name_en', 'packaging_en', 'consumable', 'perishable'),)
 
 
 class Article(BaseChestItem):

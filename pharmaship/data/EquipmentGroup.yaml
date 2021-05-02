@@ -1,65 +1,65 @@
 - model: inventory.equipmentgroup
-  pk: 1
   fields:
-    name: "Mat\xE9riel de r\xE9animation"
+    name_en: Resuscitation equipment
+    name_fr: Matériel de réanimation
     order: 1
 - model: inventory.equipmentgroup
-  pk: 2
   fields:
-    name: "Pansements et mat\xE9riel de suture"
+    name_en: Dressings and suture material
+    name_fr: Pansements et matériel de suture
     order: 2
 - model: inventory.equipmentgroup
-  pk: 3
   fields:
-    name: Instruments
+    name_en: Instruments
+    name_fr: Instruments
     order: 3
 - model: inventory.equipmentgroup
-  pk: 4
   fields:
-    name: "Mat\xE9riel d'examen et de surveillance m\xE9dicale"
+    name_en: Medical examination and monitoring equipment
+    name_fr: Matériel d'examen et de surveillance médicale
     order: 4
 - model: inventory.equipmentgroup
-  pk: 5
   fields:
-    name: "Mat\xE9riel d'injection, de perfusion, de ponction et de sondage"
+    name_en: Injection, infusion, puncture and catheterization equipment
+    name_fr: Matériel d'injection, de perfusion, de ponction et de sondage
     order: 5
 - model: inventory.equipmentgroup
-  pk: 6
   fields:
-    name: "Mat\xE9riel m\xE9dical g\xE9n\xE9ral"
+    name_en: General medical equipment
+    name_fr: Matériel médical général
     order: 6
 - model: inventory.equipmentgroup
-  pk: 7
   fields:
-    name: "Mat\xE9riel d'immobilisation et de contention"
+    name_en: Immobilization and restraint equipment
+    name_fr: Matériel d'immobilisation et de contention
     order: 7
 - model: inventory.equipmentgroup
-  pk: 8
   fields:
-    name: Documentation
+    name_en: Documentation
+    name_fr: Documentation
     order: 8
 - model: inventory.equipmentgroup
-  pk: 9
   fields:
-    name: Trousse de premiers secours
+    name_en: First aid kit
+    name_fr: Trousse de premiers secours
     order: 9
 - model: inventory.equipmentgroup
-  pk: 10
   fields:
-    name: "Mat\xE9riel de t\xE9l\xE9consultation cardiologique"
+    name_en: Cardiology teleconsultation equipment
+    name_fr: Matériel de téléconsultation cardiologique
     order: 10
 - model: inventory.equipmentgroup
-  pk: 11
   fields:
-    name: "D\xE9sinfection - D\xE9sinsectisation - Protection"
+    name_en: Disinfection - Disinsectisation - Protection
+    name_fr: Désinfection - Désinsectisation - Protection
     order: 11
 - model: inventory.equipmentgroup
-  pk: 12
   fields:
-    name: Lutte antiparasitaire
+    name_en: Pest control
+    name_fr: Lutte antiparasitaire
     order: 12
 - model: inventory.equipmentgroup
-  pk: 13
   fields:
-    name: Autre
+    name_en: Other
+    name_fr: Autre
     order: 13

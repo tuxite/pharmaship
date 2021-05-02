@@ -3,21 +3,22 @@
 from django.contrib import admin
 
 from mptt.admin import MPTTModelAdmin
+from modeltranslation.admin import TranslationAdmin
 
 import pharmaship.inventory.models
 
 
-class MoleculeAdmin(admin.ModelAdmin):
+class MoleculeAdmin(TranslationAdmin):
     """List view for Molecule items."""
 
-    list_display = ('name', 'dosage_form', 'composition')
+    list_display = ('name_en', 'name_fr', 'dosage_form', 'composition')
     ordering = ('name',)
 
 
-class EquipmentAdmin(admin.ModelAdmin):
+class EquipmentAdmin(TranslationAdmin):
     """List view for Equipment items."""
 
-    list_display = ('name', 'packaging', 'remark', 'consumable', 'perishable')
+    list_display = ('name_en', 'name_fr', 'packaging', 'remark', 'consumable', 'perishable')
     ordering = ('name',)
 
 
@@ -27,10 +28,10 @@ class ChildAdmin(admin.ModelAdmin):
     list_display = ('name', 'parent', 'get_quantity', 'exp_date', 'location')
 
 
-class GroupAdmin(admin.ModelAdmin):
+class GroupAdmin(TranslationAdmin):
     """List view for Molecule and Equipment groups."""
 
-    list_display = ('name', 'order')
+    list_display = ('name_en', 'name_fr', 'order')
     ordering = ('order',)
 
 

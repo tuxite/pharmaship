@@ -58,6 +58,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.auth',
@@ -163,3 +164,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_URL = '/static/'
 MEDIA_ROOT = PICTURES_FOLDER
+
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+MODELTRANSLATION_LANGUAGES = ('en', 'fr')
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('fr', 'en')

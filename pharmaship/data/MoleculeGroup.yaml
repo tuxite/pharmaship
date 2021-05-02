@@ -1,75 +1,76 @@
 - model: inventory.moleculegroup
-  pk: 1
   fields:
-    name: Cardiologie
+    name_en: Cardiology
+    name_fr: Cardiologie
     order: 1
 - model: inventory.moleculegroup
-  pk: 2
   fields:
-    name: "Gastro-ent\xE9rologie"
+    name_en: Gastroenterology
+    name_fr: Gastro-entérologie
     order: 2
 - model: inventory.moleculegroup
-  pk: 3
   fields:
-    name: "Antalgiques, antipyr\xE9tiques, antispasmodiques, anti-inflammatoires"
+    name_en: Analgesics, antipyretics, antispasmodics, anti-inflammatories
+    name_fr: Antalgiques, antipyrétiques, antispasmodiques, anti-inflammatoires
     order: 3
 - model: inventory.moleculegroup
-  pk: 4
   fields:
-    name: Psychiatrie - Neurologie
+    name_en: Psychiatry - Neurology
+    name_fr: Psychiatrie - Neurologie
     order: 4
 - model: inventory.moleculegroup
-  pk: 5
   fields:
-    name: Allergologie
+    name_en: Allergology
+    name_fr: Allergologie
     order: 5
 - model: inventory.moleculegroup
-  pk: 6
   fields:
-    name: Pneumologie
+    name_en: Pneumology
+    name_fr: Pneumologie
     order: 6
 - model: inventory.moleculegroup
-  pk: 7
   fields:
-    name: Infectiologie - Parasitologie
+    name_en: Infectiology - Parasitology
+    name_fr: Infectiologie - Parasitologie
     order: 7
 - model: inventory.moleculegroup
-  pk: 8
   fields:
-    name: "Gyn\xE9cologie"
+    name_en: Gynecology
+    name_fr: Gynécologie
     order: 8
 - model: inventory.moleculegroup
-  pk: 9
   fields:
-    name: "R\xE9animation"
+    name: Resuscitation
+    name_en: Resuscitation
+    name_fr: Réanimation
     order: 9
 - model: inventory.moleculegroup
-  pk: 10
   fields:
-    name: Dermatologie
+    name_en: Dermatology
+    name_fr: Dermatologie
     order: 10
 - model: inventory.moleculegroup
-  pk: 11
   fields:
-    name: Ophtalmologie
+    name_en: Ophthalmology
+    name_fr: Ophtalmologie
     order: 11
 - model: inventory.moleculegroup
-  pk: 12
   fields:
-    name: Oto-rhino-Laryngologie - Stomatologie
+    name_en: Otorhinolaryngology - Stomatology
+    name_fr: Oto-rhino-Laryngologie - Stomatologie
     order: 12
 - model: inventory.moleculegroup
-  pk: 13
   fields:
-    name: "Anesth\xE9siques locaux"
+    name_en: Local anesthetics
+    name_fr: Anesthésiques locaux
     order: 13
 - model: inventory.moleculegroup
-  pk: 14
   fields:
-    name: "Pr\xE9vention et traitement du paludisme"
+    name_en: Malaria prevention and treatment
+    name_fr: Prévention et traitement du paludisme
     order: 14
 - model: inventory.moleculegroup
-  pk: 15
   fields:
-    name: Accidents d'exposition au sang
+    name_en: Blood Exposure Accidents
+    name_fr: Accidents d'exposition au sang
     order: 15

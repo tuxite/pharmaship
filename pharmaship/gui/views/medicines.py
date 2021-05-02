@@ -116,7 +116,12 @@ class View:
                     toggle_row_num = i
                     self.row_widget_num = i
 
-                label = Gtk.Label(molecule["name"], xalign=0)
+                text = molecule["name"]
+                if molecule["remark"]:
+                    text += " <span foreground=\"#696969\"><i>({0})</i></span>".format(molecule["remark"])
+
+                label = Gtk.Label(xalign=0)
+                label.set_markup(text)
                 label.set_line_wrap(True)
                 label.set_lines(1)
                 label.set_line_wrap_mode(2)
