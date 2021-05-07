@@ -16,6 +16,7 @@ except ImportError:
 
 from django.core import serializers
 from django.conf import settings
+from django.utils.text import slugify
 
 from rest_framework.renderers import JSONRenderer
 
@@ -49,13 +50,14 @@ def serialize_allowance(allowance, content_types):
         [('filename.yaml', <yaml content string>)]
 
 
-    In addition, it returns the Equipment list for getting pictures if any.
+    In addition, it returns the Equipment and Molecule lists.
 
     :param pharmaship.inventory.models.Allowance allowance: Allowance to \
     serialize.
 
     :return: List of tuples filenames and streams
-    :rtype: tuple(list(tuple(str, str)), django.db.models.query.QuerySet)
+    :rtype: tuple(list(tuple(str, str)), django.db.models.query.QuerySet, \
+    django.db.models.query.QuerySet)
     """
     log.debug("Start serialize")
 
@@ -146,7 +148,15 @@ def serialize_allowance(allowance, content_types):
         "yaml",
         equipment_list,
         use_natural_foreign_keys=True,
-        fields=("name", "packaging", "consumable", "perishable", "picture", "group", "remark")
+        fields=(
+            "name_en",
+            "packaging_en",
+            "remark_en",
+            "consumable",
+            "perishable",
+            "picture",
+            "group",
+            )
         )
     log.debug("Equipment")
     query_count_all()
@@ -157,7 +167,15 @@ def serialize_allowance(allowance, content_types):
         "yaml",
         molecule_list,
         use_natural_foreign_keys=True,
-        fields=("name", "roa", "dosage_form", "composition", "medicine_list", "group", "remark")
+        fields=(
+            "name_en",
+            "composition_en",
+            "remark_en",
+            "roa",
+            "dosage_form",
+            "medicine_list",
+            "group",
+            )
         )
     log.debug("Molecule")
     query_count_all()
@@ -189,7 +207,7 @@ def serialize_allowance(allowance, content_types):
         ('inventory/rescue_bag_reqqty.json', rescue_bag_reqqty_data),
 
         ('inventory/allowance.yaml', remove_yaml_pk(allowance_data)),
-    ], equipment_list)
+    ], equipment_list, molecule_list)
 
 
 def get_pictures(equipment_list):
@@ -306,6 +324,75 @@ def create_package_yaml(allowance):
     return content_string
 
 
+def create_pot(allowance):
+    """Create of PO template file for Equipment & Molecule strings."""
+    # Get serialized Allowance data
+    content_types = get_content_types()
+    _data, equipment_list, molecule_list = serialize_allowance(allowance, content_types)
+
+    strings = []
+    for item in equipment_list:
+        strings.append(item.name)
+        strings.append(item.packaging)
+        strings.append(item.remark)
+    for item in molecule_list:
+        strings.append(item.name)
+        strings.append(item.remark)
+
+    # Remove empty strings
+    strings = list(filter(None, strings))
+    # Remove duplicates
+    strings = list(set(strings))
+    # Sort for easier translation
+    strings.sort()
+
+    # Create POT file
+    result = """msgid ""
+msgstr ""
+"Project-Id-Version: Pharmaship export\\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"\n
+"""
+    for item in strings:
+        result += "msgid \"{0}\"\n".format(item.replace("\"", "\\\""))
+        result += "msgstr \"\"\n\n"
+    return result
+
+
+def create_po(allowance, lang_code):
+    # Get serialized Allowance data
+    content_types = get_content_types()
+    _data, equipment_list, molecule_list = serialize_allowance(allowance, content_types)
+
+    strings = {}
+    for item in equipment_list:
+        strings[item.name_en] = getattr(item, "name_{0}".format(lang_code))
+        strings[item.packaging_en] = getattr(item, "packaging_{0}".format(lang_code))
+        strings[item.remark_en] = getattr(item, "remark_{0}".format(lang_code))
+    for item in molecule_list:
+        strings[item.name_en] = getattr(item, "name_{0}".format(lang_code))
+        strings[item.composition_en] = getattr(item, "composition_{0}".format(lang_code))
+        strings[item.remark_en] = getattr(item, "remark_{0}".format(lang_code))
+
+    # Create PO file
+    result = """msgid ""
+msgstr ""
+"Project-Id-Version: Pharmaship export\\n"
+"MIME-Version: 1.0\\n"
+"Language: {0}\\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"\n
+""".format(lang_code.lower())
+    for item in strings:
+        if not item:
+            continue
+        result += "msgid \"{0}\"\n".format(item.replace("\"", "\\\""))
+        result += "msgstr \"{0}\"\n\n".format(strings[item].replace("\"", "\\\""))
+    return result
+
+
 def create_archive(allowance, file_obj):
     """Create an archive from the given `Allowance` instance.
 
@@ -328,7 +415,7 @@ def create_archive(allowance, file_obj):
     # Creating a tar.gz archive
     hashes = []
 
-    serialized_data, equipment_list = serialize_allowance(
+    serialized_data, equipment_list, molecule_list = serialize_allowance(
         allowance=allowance,
         content_types=get_content_types()
         )
@@ -354,6 +441,23 @@ def create_archive(allowance, file_obj):
             hashes.append(
                 get_hash(PurePath("pictures", item), filename=picture_filename)
                 )
+
+        # Adding the translation files if any
+        # TODO: Generate MO if only PO is found...
+        mo_filename = "{0}.mo".format(slugify(allowance.name))
+        for item in settings.TRANSLATIONS_FOLDER.glob("*/LC_MESSAGES/{0}".format(mo_filename)):
+            log.debug(item)
+            relative_path = PurePath("locale", item.relative_to(settings.TRANSLATIONS_FOLDER))
+            tar.add(item, arcname=relative_path)
+            hashes.append(get_hash(relative_path, filename=item))
+            # Try to get also the PO file
+            po_filename = item.with_suffix(".po")
+            if po_filename.exists():
+                log.debug(po_filename)
+                relative_path = PurePath("locale", po_filename.relative_to(settings.TRANSLATIONS_FOLDER))
+                tar.add(po_filename, arcname=relative_path)
+                hashes.append(get_hash(relative_path, filename=po_filename))
+
 
         # Add the package description file
         package_content = create_package_yaml(allowance)

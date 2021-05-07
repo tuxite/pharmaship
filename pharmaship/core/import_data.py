@@ -65,8 +65,8 @@ def check_integrity(tar_file):
             log.error("File not in the tar file: %s", item['filename'])
             return False
 
-        m = hashlib.sha256()
-        m.update(tar_file.extractfile(item['filename']).read())
+        content = tar_file.extractfile(item['filename']).read()
+        m = hashlib.sha256(content)
         tarfile_hash = m.hexdigest()
         if tarfile_hash != item['hash']:
             log.error("File corrupted: %s", item['filename'])

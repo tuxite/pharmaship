@@ -39,10 +39,14 @@ PHARMASHIP_USER_MANUAL = PHARMASHIP_DATA / "user_manual.pdf"
 
 VALIDATOR_PATH = Path(BASE_DIR) / "schemas"
 
+# Location of pictures from imported allowances
 PICTURES_FOLDER = USERDATA_DIR / "pictures"
 PICTURES_FOLDER.mkdir(parents=True, exist_ok=True)
+# GPG keyring used for allowance import verification
 KEYRING_PATH = USERDATA_DIR / "keyring"
 KEYRING_PATH.mkdir(parents=True, exist_ok=True)
+# Location of translations from imported allowances
+TRANSLATIONS_FOLDER = USERDATA_DIR / "locale"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/

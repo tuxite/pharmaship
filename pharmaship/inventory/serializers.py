@@ -34,7 +34,7 @@ class EquipmentSerializer(serializers.ModelSerializer):
 
     class Meta:  # noqa: D106
         model = models.Equipment
-        fields = ["name", "packaging", "consumable", "perishable"]
+        fields = ["name_en", "packaging_en", "consumable", "perishable"]
 
 
 class MoleculeSerializer(serializers.ModelSerializer):
@@ -45,7 +45,7 @@ class MoleculeSerializer(serializers.ModelSerializer):
 
     class Meta:  # noqa: D106
         model = models.Molecule
-        fields = ["name", "roa", "dosage_form", "composition"]
+        fields = ["name_en", "roa", "dosage_form", "composition_en"]
 
 
 class EquipmentReqQtySerializer(serializers.ModelSerializer):

@@ -2,12 +2,14 @@
 """Import methods for Inventory application."""
 # import os.path
 import json
+import gettext
 
 from pathlib import PurePath
 
 from django.core import serializers
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
+from django.utils.text import slugify
 
 from pharmaship.inventory import models
 # from pharmaship.inventory import serializers
@@ -253,6 +255,9 @@ class DataImport:
         self.data = []
         self.module_name = __name__.split('.')[-2]
 
+        self.equipments = []
+        self.molecules = []
+
     def import_allowance(self):
         """Import an Allowance from a YAML file.
 
@@ -302,15 +307,15 @@ class DataImport:
         for molecule in deserialized_list:
             # Unique: (name, roa, dosage_form, composition)
             unique_values = {
-                'name': molecule.object.name,
+                'name_en': molecule.object.name_en,
                 'roa': molecule.object.roa,
                 'dosage_form': molecule.object.dosage_form,
-                'composition': molecule.object.composition,
+                'composition_en': molecule.object.composition_en,
             }
             molecule_dict = dict(unique_values)  # Hard copy
             molecule_dict['medicine_list'] = molecule.object.medicine_list
             molecule_dict['group'] = molecule.object.group
-            molecule_dict['remark'] = molecule.object.remark
+            molecule_dict['remark_en'] = molecule.object.remark_en
 
             # TODO: DB calls optimization
             obj, created = models.Molecule.objects.update_or_create(
@@ -327,6 +332,8 @@ class DataImport:
 
             if created:
                 log.debug("Created molecule: %s", obj)
+
+            self.molecules.append(obj)
 
         return True
 
@@ -353,15 +360,15 @@ class DataImport:
         for equipment in deserialized_list:
             # Unique: (name, packaging, perishable, consumable)
             unique_values = {
-                'name': equipment.object.name,
-                'packaging': equipment.object.packaging,
+                'name_en': equipment.object.name_en,
+                'packaging_en': equipment.object.packaging_en,
                 'perishable': equipment.object.perishable,
                 'consumable': equipment.object.consumable
             }
             equipment_dict = dict(unique_values)  # Hard copy
             equipment_dict["group"] = equipment.object.group
             equipment_dict['picture'] = equipment.object.picture
-            equipment_dict['remark'] = equipment.object.remark
+            equipment_dict['remark_en'] = equipment.object.remark_en
 
             # TODO: DB calls optimization
             obj, created = models.Equipment.objects.update_or_create(
@@ -371,6 +378,100 @@ class DataImport:
 
             if created:
                 log.debug("Created equipment: %s", obj)
+
+            self.equipments.append(obj)
+
+        return True
+
+    def import_translation(self, allowance):
+        domain = slugify(allowance.name)
+        for language in settings.LANGUAGES:
+            if language[0] == "en":
+                continue
+
+            lang = language[0].lower()
+
+            filename = "locale/{0}/LC_MESSAGES/{1}.mo".format(lang, domain)
+            content = get_file(filename, self.tar)
+            if not content:
+                log.debug("Translation for language `%s` not found.", lang)
+                continue
+
+            domain_path = settings.TRANSLATIONS_FOLDER / lang / "LC_MESSAGES" / domain
+            full_filename = domain_path.with_suffix(".mo")
+            full_filename.write_bytes(content)
+
+            trad = gettext.translation(
+                    domain=domain,
+                    localedir=settings.TRANSLATIONS_FOLDER.resolve(),
+                    languages=[lang]
+                )
+
+            _ = trad.gettext
+
+            # Update one by one...
+            to_update = []
+            for equipment in self.equipments:
+                setattr(
+                    equipment,
+                    "name_{0}".format(lang),
+                    _(equipment.name_en)
+                    )
+                setattr(
+                    equipment,
+                    "packaging_{0}".format(lang),
+                    _(equipment.packaging_en)
+                    )
+                setattr(
+                    equipment,
+                    "remark_{0}".format(lang),
+                    _(equipment.remark_en)
+                    )
+                to_update.append(equipment)
+
+            models.Equipment.objects.bulk_update(
+                to_update,
+                [
+                    "name_{0}".format(lang),
+                    "packaging_{0}".format(lang),
+                    "remark_{0}".format(lang),
+                ])
+
+            to_update = []
+            for molecule in self.molecules:
+                setattr(
+                    molecule,
+                    "name_{0}".format(lang),
+                    _(molecule.name_en)
+                    )
+                setattr(
+                    molecule,
+                    "composition_{0}".format(lang),
+                    _(molecule.composition_en)
+                    )
+                setattr(
+                    molecule,
+                    "remark_{0}".format(lang),
+                    _(molecule.remark_en)
+                    )
+                to_update.append(molecule)
+
+            models.Molecule.objects.bulk_update(
+                to_update,
+                [
+                    "name_{0}".format(lang),
+                    "composition_{0}".format(lang),
+                    "remark_{0}".format(lang),
+                ])
+
+            # Copy PO file if there is one...
+            filename = "locale/{0}/LC_MESSAGES/{1}.po".format(lang, domain)
+            content = get_file(filename, self.tar)
+            if not content:
+                log.debug("Translation file %s not found.", filename)
+            else:
+                full_filename = domain_path.with_suffix(".po")
+                full_filename.write_bytes(content)
 
         return True
 
@@ -416,6 +517,11 @@ class DataImport:
         query_count_all()
 
         if not self.import_equipment():
+            return False
+        query_count_all()
+
+        # Import translations
+        if not self.import_translation(allowance):
             return False
         query_count_all()
 
