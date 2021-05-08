@@ -2,10 +2,10 @@
   {
     "required_quantity": 2,
     "base": {
-      "name": "Chlorhexidine",
+      "name_en": "Chlorhexidine",
       "roa": 10,
       "dosage_form": 52,
-      "composition": "0.2% - Unidose 5 mL"
+      "composition_en": "0.2% - Unidose 5 mL"
     },
     "content_type": {
       "app_label": "inventory",
@@ -15,10 +15,10 @@
   {
     "required_quantity": 1,
     "base": {
-      "name": "Glucose",
+      "name_en": "Glucose",
       "roa": 5,
       "dosage_form": 50,
-      "composition": "5% - 500 mL"
+      "composition_en": "5% - 500 mL"
     },
     "content_type": {
       "app_label": "inventory",
@@ -28,10 +28,10 @@
   {
     "required_quantity": 1,
     "base": {
-      "name": "Chlorure de sodium",
+      "name_en": "Chlorure de sodium",
       "roa": 5,
       "dosage_form": 50,
-      "composition": "0.9% - 500 mL"
+      "composition_en": "0.9% - 500 mL"
     },
     "content_type": {
       "app_label": "inventory",

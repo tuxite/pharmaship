@@ -68,10 +68,10 @@ class ImportMethodTestCase(TestCase):
 
     def test_get_base(self):
         content = {
-          "name": "Glucose",
+          "name_en": "Glucose",
           "roa": 5,
           "dosage_form": 50,
-          "composition": "5% - 500 mL"
+          "composition_en": "5% - 500 mL"
         }
 
         base_type = models.MoleculeReqQty
