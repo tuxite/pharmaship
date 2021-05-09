@@ -13,6 +13,7 @@ python-gnupg
 pytz
 pyyaml
 rest-framework-generic-relations
+django-modeltranslation
 weasyprint
 matplotlib
 numpy

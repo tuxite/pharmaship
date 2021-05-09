@@ -385,6 +385,7 @@ build_exe_options = {
         "rest_framework",
         "mptt",
         "generic_relations",
+        "django-modeltranslation",
         "cairosvg",
         "weasyprint",
         "munch",
