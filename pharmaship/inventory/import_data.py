@@ -399,6 +399,7 @@ class DataImport:
 
             domain_path = settings.TRANSLATIONS_FOLDER / lang / "LC_MESSAGES" / domain
             full_filename = domain_path.with_suffix(".mo")
+            full_filename.parent.mkdir(parents=True, exist_ok=True)
             full_filename.write_bytes(content)
 
             trad = gettext.translation(
