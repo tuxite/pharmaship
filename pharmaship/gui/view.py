@@ -542,7 +542,6 @@ class Application(Gtk.Application):
         window_size = self.window.get_size()
         # Position is not reliable on Wayland
         window_position = self.window.get_position()
-        log.debug(window_position)
         mode = self.window.mode
 
         self.window.destroy()
@@ -616,7 +615,11 @@ class Application(Gtk.Application):
 
         self.clear_layout()
 
-        view = views.medicines.View(self.window, param.get_int32())
+        chosen = None
+        if type(param) is GLib.Variant:
+            chosen = param.get_int32()
+
+        view = views.medicines.View(self.window, chosen)
         view.create_main_layout()
 
         # Set headbar button action
@@ -628,7 +631,11 @@ class Application(Gtk.Application):
 
         self.clear_layout()
 
-        view = views.equipment.View(self.window, param.get_int32())
+        chosen = None
+        if type(param) is GLib.Variant:
+            chosen = param.get_int32()
+
+        view = views.equipment.View(self.window, chosen)
         view.create_main_layout()
 
         # Set headbar button action
@@ -666,7 +673,11 @@ class Application(Gtk.Application):
 
         self.clear_layout()
 
-        view = views.laboratory.View(self.window, param.get_int32())
+        chosen = None
+        if type(param) is GLib.Variant:
+            chosen = param.get_int32()
+
+        view = views.laboratory.View(self.window, chosen)
         view.create_main_layout()
 
         # Set headbar button action
@@ -680,7 +691,11 @@ class Application(Gtk.Application):
 
         self.clear_layout()
 
-        view = views.telemedical.View(self.window, param.get_int32())
+        chosen = None
+        if type(param) is GLib.Variant:
+            chosen = param.get_int32()
+
+        view = views.telemedical.View(self.window, chosen)
         view.create_main_layout()
 
         # Set headbar button action
