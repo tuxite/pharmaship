@@ -385,7 +385,7 @@ build_exe_options = {
         "rest_framework",
         "mptt",
         "generic_relations",
-        "modeltranslationn",
+        "modeltranslation",
         "cairosvg",
         "weasyprint",
         "munch",
