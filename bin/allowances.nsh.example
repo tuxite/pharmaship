@@ -1,0 +1,15 @@
+SectionGroup "Allowances" SecAllowances
+  ;Run allowance installation scripts
+  Section "!Dotation A - 25 pers"
+    !insertmacro Allowance "allowance_dotation-a-25-marins_120a.tar.asc"
+  SectionEnd
+
+  Section "!GSMU 2018"
+    !insertmacro Allowance "allowance_gsmu_2018.tar.asc"
+  SectionEnd
+
+  Section /o "MARLINK"
+    !insertmacro Allowance "allowance_marlink-telemed_01.tar.asc"
+  SectionEnd
+
+SectionGroupEnd

@@ -83,6 +83,13 @@ UninstPage custom un.DeleteUserData un.DeleteUserDataLeave ;Custom page
   nsExec::ExecToLog /OEM '"$INSTDIR\pharmaship-admin.exe" "import" "$INSTDIR\allowances\${filename}"'
 !macroend
 
+;Database macro
+!macro Database filename
+  SetDetailsPrint "both"
+  CreateDirectory $LOCALAPPDATA\pharmaship
+  File "/oname=$LOCALAPPDATA\pharmaship\db.sqlite3" "..\${filename}"
+!macroend
+
 ;--------------------------------
 ;Languages
 
@@ -105,6 +112,7 @@ LangString UNLOG_ERROR_CREATE ${LANG_ENGLISH} "Error creating ${UNINSTALL_LOG}."
 ;Language strings
 LangString DESC_SecPharmaship ${LANG_ENGLISH} "Install Pharmaship software."
 LangString DESC_SecAllowances ${LANG_ENGLISH} "Install additional allowances packages."
+LangString DESC_SecDatabase ${LANG_ENGLISH} "Install a prefilled database."
 LangString DESC_SecDesktopLnk ${LANG_ENGLISH} "Create a shortcut on the desktop."
 
 ;--------------------------------
@@ -135,9 +143,7 @@ Section "Pharmaship software" SecPharmaship
 
   # Start Menu
   !insertmacro MUI_STARTMENU_WRITE_BEGIN 0 ;This macro sets $StartMenuFolder and skips to MUI_STARTMENU_WRITE_END if the "Don't create shortcuts" checkbox is checked...
-    CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Pharmaship.lnk" "$INSTDIR\pharmaship.exe"
-    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+    CreateShortCut "$SMPROGRAMS\Pharmaship.lnk" "$INSTDIR\pharmaship.exe"
   !insertmacro MUI_STARTMENU_WRITE_END
 
   ;Create uninstaller
@@ -166,30 +172,10 @@ Section "Pharmaship software" SecPharmaship
 
 SectionEnd
 
-SectionGroup "Allowances" SecAllowances
-  ;Run allowance installation scripts
-  Section "!Dotation A - 25 pers"
-    !insertmacro Allowance "allowance_dotation-a-25-marins_120a.tar.asc"
-  SectionEnd
-
-  Section "!GSMU 2018"
-    !insertmacro Allowance "allowance_gsmu_2018.tar.asc"
-  SectionEnd
-
-  ; Section /o "CMA CGM V12"
-  ;   !insertmacro Allowance "allowance_cma-cgm_v12.tar.asc"
-  ; SectionEnd
-
-  ; Section /o "MARLINK"
-  ;   !insertmacro Allowance "allowance_marlink-telemed_01.tar.asc"
-  ; SectionEnd
-
-  ; Section /o "POCrame"
-  ;   !insertmacro Allowance "allowance_pocrame_01.tar.asc"
-  ; SectionEnd
-
-SectionGroupEnd
-
+;Include customised allowances
+!include /NONFATAL "allowances.nsh"
+;Include prefilled database if any
+!include /NONFATAL "database.nsh"
 
 Section "Desktop Shortcut" SecDesktopLnk
   CreateShortCut "$DESKTOP\Pharmaship.lnk" "$INSTDIR\pharmaship.exe"
@@ -248,8 +234,7 @@ Section Uninstall
 
   # Delete Start Menu
   !insertmacro MUI_STARTMENU_WRITE_BEGIN 0 ;This macro sets $StartMenuFolder and skips to MUI_STARTMENU_WRITE_END if the "Don't create shortcuts" checkbox is checked...
-    Delete "$SMPROGRAMS\$StartMenuFolder\Pharmaship.lnk"
-    RMDir "$SMPROGRAMS\$StartMenuFolder"
+    Delete "$SMPROGRAMS\Pharmaship.lnk"
   !insertmacro MUI_STARTMENU_WRITE_END
 
   # Delete shortcut if any

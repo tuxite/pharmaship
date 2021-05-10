@@ -1,0 +1,3 @@
+Section "Database" SecDatabase
+  !insertmacro Database "database_example.sqlite3"
+SectionEnd
