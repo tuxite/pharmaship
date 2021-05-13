@@ -82,14 +82,6 @@ jobs:
       - name: Create .mo files
         run: |
           mingw32-make mo
-      # Load allowances to be embedeed in the installer
-      - name: Fetch allowances signed files
-        run: |
-          mkdir allowances
-          cd allowances
-          wget -c -O "allowances.tar.xz" "https://cloud.devmaretique.com/s/HCCfx2fztttt5ii/download"
-          tar -xvf allowances.tar.xz
-          cd ..
       # Generate installer
       - name: Build installer
         run: |
