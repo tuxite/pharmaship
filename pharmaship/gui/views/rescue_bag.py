@@ -104,9 +104,11 @@ class View:
             for i in range(missing):
                 location = Location.objects.create(
                     name="Rescue Bag {0}".format(count + i),
-                    parent_id=0,
+                    parent_id=None,
                     is_rescue_bag=True
                 )
+                Location.objects.rebuild()
+                self.params.refresh_locations()
 
                 RescueBag.objects.create(
                     name="Rescue Bag {0}".format(count + i),
@@ -565,6 +567,8 @@ class View:
         bag.location.parent_id = cleaned_data["location_id"]
         bag.location.name = cleaned_data["name"]
         bag.location.save()
+        Location.objects.rebuild()
+        self.params.refresh_locations()
         # Save rescue bag
         bag.name = cleaned_data["name"]
         bag.save()
