@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  NO_AT_BRIDGE: 1  # Necessary for GTK3 interactive test.
+
 jobs:
   build:
 
