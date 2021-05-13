@@ -12,7 +12,7 @@ try:
         FigureCanvasGTK3Agg as FigureCanvas)
 except Exception:
     # To avoid errors when testing in Docker container
-    from matplotlib.backend_bases import FigureCanvas
+    from matplotlib.backend_bases import FigureCanvasBase as FigureCanvas
 
 from matplotlib.figure import Figure
 
