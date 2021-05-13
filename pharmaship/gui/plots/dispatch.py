@@ -7,8 +7,13 @@ from pharmaship.core.utils import log
 
 from pharmaship.gui.plots import utils
 
-from matplotlib.backends.backend_gtk3agg import (
-    FigureCanvasGTK3Agg as FigureCanvas)
+try:
+    from matplotlib.backends.backend_gtk3agg import (
+        FigureCanvasGTK3Agg as FigureCanvas)
+except TypeError:
+    # To avoid errors when testing in Docker container
+    from matplotlib.backend_bases import FigureCanvas
+
 from matplotlib.figure import Figure
 
 KEYS = [
