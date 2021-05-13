@@ -160,6 +160,8 @@ allowances/
 
 bin/private*
 bin/openpgp*
+bin/allowances.nsh
+bin/database.nsh
 
 # Debian packaging
 debian/*.substvars
