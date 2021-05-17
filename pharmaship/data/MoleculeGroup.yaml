@@ -40,7 +40,6 @@
     order: 8
 - model: inventory.moleculegroup
   fields:
-    name: Resuscitation
     name_en: Resuscitation
     name_fr: Réanimation
     order: 9
