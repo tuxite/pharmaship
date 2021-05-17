@@ -98,6 +98,7 @@ class GlobalParameters:
         self.vessel = self.config.vessel
         self.setting = self.config.inventory
         self.application = self.config.application
+        self.pluralizer = utils.get_pluralizer()
 
         self.refresh_locations()
 

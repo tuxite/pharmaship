@@ -7,6 +7,7 @@ include Makefile
 recursive-include pharmaship/data *.yaml
 recursive-include pharmaship/data *.pub
 recursive-include pharmaship/data *.pdf
+recursive-include pharmaship/data *.csv
 
 recursive-include pharmaship/gui *.py
 recursive-include pharmaship/gui *.html

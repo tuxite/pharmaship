@@ -7,6 +7,7 @@ from gi.repository import Gtk, GObject, GdkPixbuf
 import os.path
 import platform
 import subprocess
+import csv
 
 from pluralizer import Pluralizer
 
@@ -181,8 +182,30 @@ def dialog_destroy(source, dialog):
     dialog.destroy()
 
 
-def item_quantity_changed(source, builder):
+def get_pluralizer():
+    """Return a Pluralizer instance with additional rules.
+
+    :return: Pluralizer instance
+    :rtype: pluralizer.Pluralizer
+    """
+    # TODO:
+    # - Embed rules in allowance file?
     pluralizer = Pluralizer()
+
+    try:
+        with (settings.PHARMASHIP_DATA / "pluralizer_rules.csv").open() as fd:
+            rd = csv.reader(fd, delimiter="\t", quotechar='"')
+            for row in rd:
+                singular, plural = row
+                pluralizer.addIrregularRule(singular, plural)
+    except FileNotFoundError:
+        log.exception("Pluralizer file not found.")
+
+    return pluralizer
+
+
+def item_quantity_changed(source, builder):
+    pluralizer = get_pluralizer()
 
     quantity = source.get_value()
 
@@ -360,7 +383,7 @@ def first_lower(s):
 
 
 def packing_combo(combo, default=None, active=0, num=1):
-    pluralizer = Pluralizer()
+    pluralizer = get_pluralizer()
     # Packing name combox box setup
     store = Gtk.ListStore(int, str)
 
@@ -409,7 +432,7 @@ def toggle_packing(source, builder):
 
 
 def update_packing_form(source, builder):
-    pluralizer = Pluralizer()
+    pluralizer = get_pluralizer()
     obj = builder.get_object("packing_form")
     plural = pluralizer.pluralize(
         obj.get_text(),

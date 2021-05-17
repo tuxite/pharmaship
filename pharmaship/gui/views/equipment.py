@@ -5,8 +5,6 @@ from gi.repository import Gtk
 
 from django.utils.translation import gettext as _
 
-from pluralizer import Pluralizer
-
 from pharmaship.core.utils import log, query_count_all
 
 from pharmaship.inventory import models
@@ -270,7 +268,7 @@ class View:
             self.scrolled.connect("draw", utils.set_focus, self.row_widget_num)
 
     def dialog_use(self, source, article):
-        pluralizer = Pluralizer()
+        pluralizer = self.params.pluralizer
 
         builder = utils.get_builder("article_use.ui")
         dialog = builder.get_object("dialog")
@@ -317,7 +315,7 @@ class View:
         dialog.destroy()
 
     def dialog_modify(self, source, article):
-        pluralizer = Pluralizer()
+        pluralizer = self.params.pluralizer
 
         builder = utils.get_builder("article_add.ui")
         dialog = builder.get_object("dialog")
@@ -467,7 +465,7 @@ class View:
             )
 
         # Packing set-up
-        pluralizer = Pluralizer()
+        pluralizer = self.params.pluralizer
 
         label = builder.get_object("packing_form")
         label.set_text(
@@ -890,14 +888,14 @@ class View:
         query_count_all()
 
 
-def get_packing_text(article):
+def get_packing_text(article, params):
     # XX [box|...] of YY <dosage_form>
     data = article["packing"]
 
     if data is None:
         return None
 
-    pluralizer = Pluralizer()
+    pluralizer = params.pluralizer
 
     if data["id"] >= 20:
         template = _("{quantity} {packing_name} of {packaging}")
