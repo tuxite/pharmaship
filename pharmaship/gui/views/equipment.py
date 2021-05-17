@@ -740,7 +740,6 @@ class View:
 
         # Header row
         label = Gtk.Label(_("Commercial Name"), xalign=0)
-        label.set_hexpand(True)
         label.get_style_context().add_class("article-header-cell")
         grid.attach(label, 0, 0 + new_row, 1, 1)
 
@@ -773,7 +772,9 @@ class View:
             grid.insert_row(i)
 
             label = Gtk.Label(article["name"], xalign=0)
-            label.set_hexpand(True)
+            label.set_line_wrap(True)
+            label.set_lines(1)
+            label.set_line_wrap_mode(2)
             label.get_style_context().add_class("article-item-cell-name")
             label.get_style_context().add_class("article-item-cell")
             grid.attach(label, 0, i, 1, 1)
@@ -786,10 +787,13 @@ class View:
             if article["remark"]:
                 remark_text.append(article["remark"])
             if article["packing"]:
-                remark_text.append(get_packing_text(article))
+                remark_text.append(get_packing_text(article, self.params))
 
             label = Gtk.Label(xalign=0)
             label.set_markup("\n".join(remark_text))
+            label.set_line_wrap(True)
+            label.set_lines(1)
+            label.set_line_wrap_mode(2)
             label.get_style_context().add_class("article-item-cell")
             label.get_style_context().add_class("article-remark")
 
@@ -844,6 +848,7 @@ class View:
                     connect=self.dialog_use,
                     data=article
                     )
+                btn_use.set_valign(Gtk.Align.CENTER)
                 linked_btn.pack_end(btn_use, False, True, 0)
             # Modify
             btn_modify = widgets.ButtonWithImage(
@@ -852,6 +857,7 @@ class View:
                 connect=self.dialog_modify,
                 data=article
                 )
+            btn_modify.set_valign(Gtk.Align.CENTER)
             linked_btn.pack_end(btn_modify, False, True, 0)
             # Delete
             btn_delete = widgets.ButtonWithImage(
@@ -860,6 +866,7 @@ class View:
                 connect=self.dialog_delete,
                 data=article
                 )
+            btn_delete.set_valign(Gtk.Align.CENTER)
             btn_delete.get_style_context().add_class("article-btn-delete")
             linked_btn.pack_end(btn_delete, False, True, 0)
 
@@ -875,12 +882,7 @@ class View:
         button.connect("clicked", self.dialog_add, equipment)
         box.add(button)
         box.get_style_context().add_class("article-item-cell-add")
-        grid.attach(box, 0, i, 1, 1)
-
-        # Empty row for styling purpose
-        label = Gtk.Label("")
-        label.get_style_context().add_class("article-item-cell-add")
-        grid.attach(label, 1, i, 6, 1)
+        grid.attach(box, 0, i, 7, 1)
 
         grid.show_all()
         self.toggled = (new_row, i)
