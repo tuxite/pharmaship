@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-25 16:37+0000\n"
+"POT-Creation-Date: 2021-05-16 21:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,6 +90,58 @@ msgstr ""
 msgid "Powder"
 msgstr ""
 
+#: pharmaship/inventory/constants.py:89
+msgid "Ointment tube"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:90
+msgid "Cream tube"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:91
+msgid "Oral gel"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:92
+msgid "Unidose gel"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:94
+msgid "Pre-filled syringe"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:96
+msgid "Solution for infusion"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:97
+msgid "Solution for injection"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:98
+msgid "Aqueous solution"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:99
+msgid "Foaming solution"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:100
+msgid "Alcohol solution"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:101
+msgid "Ear solution"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:102
+msgid "Solution"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:103
+msgid "Gingival solution"
+msgstr ""
+
 #: pharmaship/inventory/constants.py:105
 msgid "Bottle"
 msgstr ""
@@ -98,8 +150,32 @@ msgstr ""
 msgid "Flacon"
 msgstr ""
 
+#: pharmaship/inventory/constants.py:107
+msgid "Device"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:108
+msgid "Adhesive skin dressing"
+msgstr ""
+
 #: pharmaship/inventory/constants.py:109
 msgid "Unidose"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:111
+msgid "Single-dose eye drops"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:112
+msgid "Eye drops bottle"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:113
+msgid "Collutory"
+msgstr ""
+
+#: pharmaship/inventory/constants.py:114
+msgid "Ophthalmic ointment"
 msgstr ""
 
 #: pharmaship/inventory/constants.py:119
@@ -232,14 +308,14 @@ msgstr ""
 msgid "Non conformity"
 msgstr ""
 
-#: pharmaship/inventory/parsers/equipment.py:156
-#: pharmaship/inventory/parsers/equipment.py:161
-#: pharmaship/inventory/parsers/medicines.py:167
-#: pharmaship/inventory/parsers/medicines.py:172
+#: pharmaship/inventory/parsers/equipment.py:163
+#: pharmaship/inventory/parsers/equipment.py:168
+#: pharmaship/inventory/parsers/medicines.py:173
+#: pharmaship/inventory/parsers/medicines.py:178
 msgid "Unassigned"
 msgstr ""
 
-#: pharmaship/inventory/parsers/rescue_bag.py:54
+#: pharmaship/inventory/parsers/rescue_bag.py:55
 msgid "All Rescue Bags"
 msgstr ""
 
