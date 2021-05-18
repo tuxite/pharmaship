@@ -783,11 +783,16 @@ class View:
             label = Gtk.Label(xalign=0)
             label.get_style_context().add_class("medicine-item-cell")
             sequence = medicine["location"]["sequence"]
+            if medicine["location"]["rescue_bag"]:
+                last_loc = "<span weight=\"bold\" foreground=\"royalblue\">{0}</span>".format(sequence[-1])
+            else:
+                last_loc = sequence[-1]
+
             if len(sequence) > 1:
                 parents = " > ".join(sequence[:-1])
-                location_display = "<span foreground=\"#555\">{0} > </span>{1}".format(parents, sequence[-1])
+                location_display = "<span foreground=\"#555\">{0} > </span>{1}".format(parents, last_loc)
             else:
-                location_display = sequence[0]
+                location_display = last_loc
 
             label.set_markup(location_display)
             label.set_line_wrap(True)
