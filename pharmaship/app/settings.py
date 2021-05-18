@@ -20,8 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if sys.platform == "win32":
     import winpath
     USERDATA_DIR = Path(winpath.get_local_appdata()) / "pharmaship"
-else:
+elif sys.platform == "darwin":
     USERDATA_DIR = Path.home() / ".pharmaship"
+else:
+    from xdg import xdg_data_home
+    USERDATA_DIR = xdg_data_home() / "pharmaship"
+
 USERDATA_DIR.mkdir(parents=True, exist_ok=True)
 
 DB_PATH = USERDATA_DIR / 'db.sqlite3'
