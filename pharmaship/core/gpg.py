@@ -2,7 +2,7 @@
 """Utilities for GPG signature handling."""
 import gnupg
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 
 from django.conf import settings
 
