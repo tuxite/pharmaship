@@ -16,7 +16,7 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 
 from weasyprint import HTML, CSS
-from weasyprint.fonts import FontConfiguration
+from weasyprint.text.fonts import FontConfiguration
 
 from pharmaship.core.utils import log
 from pharmaship.inventory import constants

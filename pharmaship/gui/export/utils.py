@@ -8,7 +8,7 @@ from django.utils import translation
 from django.conf import settings
 
 from weasyprint import HTML, CSS
-from weasyprint.fonts import FontConfiguration
+from weasyprint.text.fonts import FontConfiguration
 
 from pharmaship.core.utils import log, query_count_all
 
