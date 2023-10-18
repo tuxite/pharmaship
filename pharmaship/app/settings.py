@@ -23,7 +23,7 @@ if sys.platform == "win32":
 elif sys.platform == "darwin":
     USERDATA_DIR = Path.home() / ".pharmaship"
 else:
-    from xdg import xdg_data_home
+    from xdg_base_dirs import xdg_data_home
     USERDATA_DIR = xdg_data_home() / "pharmaship"
 
 USERDATA_DIR.mkdir(parents=True, exist_ok=True)

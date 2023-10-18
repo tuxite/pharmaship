@@ -17,3 +17,4 @@ django-modeltranslation
 weasyprint
 matplotlib
 numpy
+xdg_base_dirs
